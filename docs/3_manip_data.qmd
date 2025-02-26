@@ -1,0 +1,13 @@
+---
+title: "Manipulating data"
+author: Géraldine Derroire
+institute: Cirad - UnB
+date: today
+format: 
+  revealjs:
+    theme: moon
+    output-location: fragment 
+    slide-number: true
+    preview-links: true
+    chalkboard: true
+---
