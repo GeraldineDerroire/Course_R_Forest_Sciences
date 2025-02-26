@@ -1,0 +1,15 @@
+---
+title: "Untitled"
+subtitle: "subtitle"
+author: Géraldine Derroire
+institute: Cirad - UnB
+date: today
+format: 
+  revealjs:
+    theme: dark
+    output-location: fragment # to have results of a chunck displayed after a click
+    slide-number: true
+    preview-links: true
+    chalkboard: true
+---
+
