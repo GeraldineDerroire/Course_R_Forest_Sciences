@@ -6,7 +6,7 @@ institute: Cirad - UnB
 date: today
 format: 
   revealjs:
-    theme: moon
+    theme: solarized
     output-location: fragment # to have results of a chunck displayed after a click
     slide-number: true
     preview-links: true
@@ -14,5 +14,8 @@ format:
 ---
 
 ## First slide
+
+Text here
+
 
 

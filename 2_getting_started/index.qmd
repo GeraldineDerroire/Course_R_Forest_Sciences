@@ -5,9 +5,13 @@ institute: Cirad - UnB
 date: today
 format: 
   revealjs:
-    theme: moon
+    theme: blood
     output-location: fragment 
     slide-number: true
     preview-links: true
     chalkboard: true
 ---
+
+## First slide
+
+Text here
