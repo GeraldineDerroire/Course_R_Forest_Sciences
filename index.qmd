@@ -31,7 +31,7 @@ introducing everyone: who, project, expectations
 
 You will work on your own laptop
 
-<span style="color:indianred;">**Please make sure you have all the programm and packages installed before the class.**</span>
+<span style="color:indianred;">**Please make sure you have all the programs and packages installed before the class.**</span>
 
 ## Targeted audiance
 

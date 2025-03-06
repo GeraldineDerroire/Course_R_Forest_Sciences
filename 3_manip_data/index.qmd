@@ -13,3 +13,15 @@ format:
 execute:
   echo: true      
 ---
+
+FAIR (Findable, Accessible, Interoperable and Reusable data principles; https://force11.org/info/the-­fair-­data-­principles/
+
+* Metadata, sometimes referred to as data about data or a data dictionary,
+are a “centralized repository of information about data such as meaning,
+relationships to other data, origin, usage, and format” (IBM Dictionary
+of Computing, 10th edition, 1993). In Jenkins et al 2023
+
+## What about open science?
+
+sharing of data products, code, and metadata
+

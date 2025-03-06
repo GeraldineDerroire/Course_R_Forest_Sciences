@@ -2,10 +2,10 @@
 title: "Principles of reproducible science"
 author: Géraldine Derroire
 institute: Cirad - UnB
-date: today
+date: last-modified
 format: 
   revealjs:
-    theme: beige
+    theme: solarized
     output-location: fragment 
     slide-number: true
     preview-links: true
@@ -14,6 +14,139 @@ execute:
   echo: true      
 ---
 
-## First slide
+# What is reproducible science?
 
-Text here
+![](lets_talk.png)
+
+## This is not reproducible science...
+
+![](many_version.png)
+
+::: {.notes}
+Why?
+:::
+
+## This is not reproducible science either...
+
+![](not_repro.png)
+
+::: {.notes}
+Why?
+:::
+
+
+## Still not reproducible science...
+
+> "We collected data following standard protocols and analyses them using the StatForDummies software."
+
+::: {.notes}
+Why?
+:::
+
+## This is reproducible science!
+
+![](repro_science.png)
+
+
+## Some definitions - Reproducibility
+
+> "Reproducibility is a key tenet of the scientific process that dictates the <span style="color:slateblue;">reliability</span> and <span style="color:slateblue;">generality</span> of results and methods." 
+> Powers & Hampton ([2019](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/eap.1822)) *Ecological Applications*
+
+![](repro_lab.png)
+
+
+::: {.notes}
+Full reproducibility is almost impossible in natural system so computational repro
+:::
+
+## Some definitions - Computational reproducibility
+
+> "Computational reproducibility often refers to the ability to
+produce equivalent analytical outcomes from the <span style="color:slateblue;">same data set</span> using the <span style="color:slateblue;">same code</span> and <span style="color:slateblue;">software</span> as the original study."
+> Powers & Hampton ([2019](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/eap.1822)) *Ecological Applications*
+
+
+
+# Why making science reproducible?
+
+# For our future self!
+
+![](not_repro.png)
+
+# More reliable and safe
+
+* Analyses can be re-run if needed.
+* It allows detecting and correcting errors.
+
+# Transparency
+
+* Easier for others (and the future you...) to understand your work.
+
+* Requirement of journals and fundings
+
+# Rapid scientific advancement
+
+* You and other can build on previous analyses.
+
+* You can easily update your analyses when more data become available.
+
+# Increase your visibility and credibility
+
+>“An article about computational results is advertising, not scholarship. The actual scholarship* is the full software environment, code and data, that produced the result.”
+> Claerbout and Karrenbach 1992.
+
+
+# How to implement reproducible science?
+
+<!-- TO DO -->
+
+## Main principles
+
+- document (metadata, scripted analyses...)
+
+Metadata, sometimes referred to as data about data or a data dictionary Jenkins et al 2023
+
+- start from the beginning of the project
+
+- organise the workflow
+
+## Main steps
+
+<!-- This is copied pasted from Wilson et al 2017-->
+
+• Data management: saving both raw and intermediate forms, documenting all steps, creating
+tidy data amenable to analysis.
+• Software: writing, organizing, and sharing scripts and programs used in an analysis.
+• Collaboration: making it easy for existing and new collaborators to understand and contrib-
+ute to a project.
+• Project organization: organizing the digital artifacts ofa project to ease discovery and
+understanding.
+• Tracking changes: recording how various components ofyour project change over time.
+• Manuscripts: writing manuscripts in a way that leaves an audit trail and minimizes manual
+merging ofconflicts.
+
+## Main tools
+
+
+
+## Acknowledgments
+
+- cours de François Guillaumon ici :https://rdatatoolbox.github.io/chapters/course-opensci.html
+?
+
+- le papier good enough
+
+
+
+
+## Ressources
+
+- British Ecological Society (2017) *Reproducible code* Downloadable [here]( https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Reproducible-code-guide.pdf)
+
+- Bryan *et al* (2017) *Good enough practices in scientific computing Downloadable [here](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
+
+::: {.notes}
+- BES Guide: a bit detailed for now, a bit old but some usefull information
+- Good enough is very detailed, so not to read now, but good resource to have
+:::
