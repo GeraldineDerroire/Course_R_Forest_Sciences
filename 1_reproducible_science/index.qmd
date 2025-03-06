@@ -5,11 +5,13 @@ institute: Cirad - UnB
 date: today
 format: 
   revealjs:
-    theme: moon
+    theme: beige
     output-location: fragment 
     slide-number: true
     preview-links: true
     chalkboard: true
+execute:
+  echo: true      
 ---
 
 ## First slide

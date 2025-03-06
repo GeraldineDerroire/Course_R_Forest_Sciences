@@ -3,7 +3,7 @@ title: "Using R for reproductible data management and analyses in Forest Science
 subtitle: "PPG Ciências florestais - Universidade de Brasilia"
 author: Géraldine Derroire
 institute: Cirad - UnB
-date: today
+date: last-modified
 format: 
   revealjs:
     theme: solarized
@@ -11,11 +11,94 @@ format:
     slide-number: true
     preview-links: true
     chalkboard: true
+execute:
+  echo: true    
 ---
 
-## First slide
 
-Text here
+# Introduction and expectations toward this module
 
+::: {.notes}
+introducing everyone: who, project, expectations
+:::
+
+## Practical information
+
+- **Discipline** *Transferência de informações florestais* (Code: EFL360457)
+- **Credits** 4
+- **Workload** 60h (30h presential + 30h of personal work)
+- **Schedule** First semester - Wednesday 14-16h
+
+You will work on your own laptop
+
+<span style="color:indianred;">**Please make sure you have all the programm and packages installed before the class.**</span>
+
+## Targeted audiance
+
+- **Areas de concentração** 
+  * *Conservação da natureza*
+  * *Manejo florestal*
+  * *Tecnologia e utilização de recursos florestais*
+- No previous experience with R
+
+::: {.notes}
+aks about any previous exp in R, Python, other prog language
+:::
+
+## Learning outcomes
+
+::: {.incremental}
+- Define the concept of reproducible research and cite the main tools that it requires
+- Understand the basis of R and R studio (interface, packages, basic functions...)
+- Import, manipulate and export data in R
+- Apply good practices in data management
+- Organise the work in a R studio project
+:::
+
+
+## Learning outcomes
+
+::: {.incremental}
+- Use the main packages of the Tidyverse for tidy analyses
+- Choose the appropriate graphics to explore the data and create them using ggplot
+- Implement basic statistical tests in R
+- Understand and implement more advanced programming techniques (loops,
+functions...)
+- Use the tool Quarto to produce a report or a presentation with text and code
+:::
+
+# Let's make the class interactive... *não importa o idioma* 
+
+::: {.notes}
+presentation in English
+i'll talk mostly in English, don't hesitate to ask me to repeat/rephrase
+you can ask questions in portuguese
+:::
+
+## Assessment
+
+- **1/3 of the final mark** Short exercices given at the end of each class
+
+- **2/3 of the final mark** A personnal project using the tools covered in class
+
+## About the personal project
+
+Objective: assessing your ability to implement a reproductible workflow in R
+to explore and test your hypotheses. The relevance of the scientific question is **not** assessed.
+
+- Using the tools covered during the class
+
+- Doing some data exploration and basic analyses
+
+## About the personal project
+
+- You are encourage to work on your own data, but I can provide some if needed
+
+- The project will be submitted as a pdf file and a GitHub repository
+
+<span style="color:indianred;">**Let's talk about it as we go along!**</span>
+
+
+  
 
 

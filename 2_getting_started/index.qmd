@@ -10,6 +10,8 @@ format:
     slide-number: true
     preview-links: true
     chalkboard: true
+execute:
+  echo: true      
 ---
 
 ## First slide
