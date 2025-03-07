@@ -253,6 +253,8 @@ all of this will be done through Rstudio that will make everything easier
 
 ## Acknowledgments
 
+This document largely uses the following:
+
 - Course material of François Guillaumon [in French](https://rdatatoolbox.github.io/chapters/course-opensci.html)
 
 - Wilson *et al* (2017) *Good enough practices in scientific computing* Downloadable [here](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)

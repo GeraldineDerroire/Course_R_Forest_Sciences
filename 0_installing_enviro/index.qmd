@@ -1,0 +1,227 @@
+---
+title: "Software installation"
+author: Géraldine Derroire
+institute: Cirad - UnB
+date: last-modified
+format: 
+  revealjs:
+    theme: solarized
+    slide-number: true
+    preview-links: true
+    chalkboard: true
+execute:
+  echo: true   
+---
+
+# 
+
+We are going to install the following:
+
+-   R
+-   RStudio desktop
+-   git
+-   quarto
+
+In the following slides, Click on the text in blue to follow the links.
+
+This takes a bit of time, but you will just need to do it once 😉!
+
+## Install R
+
+[Install R](https://cloud.r-project.org/bin/windows/base/)
+
+![](R_logo.png){height=150px} 
+
+For those who already have R installed, please make sure that the version you are using is at least 4.0.0.
+
+For this, run the following code:
+
+```{r}
+# Get R version
+R.version.string
+```
+
+## Install RStudio
+
+[Install RStudio desktop](https://posit.co/download/rstudio-desktop/)
+
+![](RStudio_logo.png){height=150px}
+
+*Don't reinstall R.*
+
+## Installing git
+
+[Install git]((https://cloud.r-project.org/bin/windows/base/))
+
+![](git_logo.png){height=150px}
+
+## Install Quarto
+
+[Install quarto](https://quarto.org/docs/get-started/)
+
+![](quarto_logo.png){height=150px}
+
+````{=html}
+<!--
+NO NEED, built in Rstudio
+
+then install the R package **quarto** 
+by running the following code in R or RStudio
+
+```{r, eval=FALSE}
+## Install quarto package
+install.packages("quarto")
+```
+
+-->
+````
+
+# Check that the installation went well
+
+Restart your machine.
+
+Open RStudio and ran the code on the following slides.
+
+## Check R version
+
+```{r}
+# Get R version
+R.version.string
+```
+
+## Check if git is installed
+
+```{r}
+Sys.which("git")
+```
+
+## Check if quarto is installed
+
+```{r}
+Sys.which("Quarto")
+```
+
+# Configuration
+
+## Select language of R
+
+I recommend setting the language of R to English, to have more options when you look for help on the Internet.
+
+For this, run the following code in R or RStudio:
+
+```{r}
+# Set language to English
+Sys.setenv(LANG = "en")
+```
+
+*This is however optional!*
+
+## Configure RStudio
+
+::::: columns
+::: {.column width="55%"}
+I recommend not saving the workspace and the command history automatically. It is better to decide what you want to save.
+
+For this, go to **Tools \> Global Options \> General** and select the options as shown here:
+:::
+
+::: {.column width="45%"}
+![](config_rstudio.png)
+:::
+:::::
+
+## Configure git
+
+Before using git, you need to declare your name and email locally.
+
+For this, open the RStudio terminal:
+
+![](rstudio_terminal.png)
+
+and run:
+
+```{r, eval=FALSE}
+## Tell git your user name 
+git config --global user.name  "Your Name"
+
+## Tell git your email address 
+git config --global user.email "your.name@mail.com"
+```
+
+## Configure git
+
+Change the default branch name, by running the following in the RStudio terminal:
+
+```{r, eval=FALSE}
+## Rename default git branch 
+git config --global init.defaultBranch main
+```
+
+## Check git configuration
+
+In the RStudio terminal, run the following:
+
+```{r, eval=FALSE}
+## Check user name
+git config user.name
+
+## Check user email
+git config user.email
+
+## Check user name
+git config init.defaultbranch
+```
+
+## Create a GitHub account
+
+Create an account on GitHub [here](https://github.com/signup)
+
+![](github_logo.png){height=200px}
+
+## Create a GitHub SSH key
+
+To communicate with GitHub, you need a SSH key :
+
+::::: columns
+::: {.column width="55%"}
+-   Open RStudio and click on **Tools \> Global options \> Git/SVN**
+-   Click on **Create SSH Key**
+-   Select ED25519 and click on **Create**
+-   Click on **View public key** and copy it
+:::
+
+::: {.column width="45%"}
+![](create_SSH_key.png)
+:::
+:::::
+
+## Create a GitHub SSH key
+
+-   Go to the [key setting page in GitHub](https://github.com/settings/keys)
+-   Click on **New SSH key**
+-   Choose a name (e.g. My laptop) and paste your key
+-   Click on **Add SSH key**
+
+![](create_SSH_key_2.png)
+
+## Create a GitHub SSH key
+
+Check if your key is working by typing the following in the RStudio terminal:
+
+```{r, eval=FALSE}
+ssh -T git@github.com
+```
+
+You should get a message telling you that you successfully authenticated, but GitHub does not provide shell access. 👍
+
+When you first connect to GitHub, you will be asked if you want to continue connecting, answer *yes*.
+
+# You are all set!
+
+Parabens! 👏🥳💪
+
+And if you have any problem 😢, please contact me.
+
+## Acknowledgments
+
+The content of this document is largely inspired by the [FRB-Cesab guide](https://frbcesab.github.io/rsetup/) written by Nicolas Casajus.
