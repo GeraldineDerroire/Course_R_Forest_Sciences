@@ -11,8 +11,9 @@ and in Portuguese [here](https://geraldinederroire.github.io/Course_R_Forest_Sci
 # Content
 
 - [Course introduction](https://geraldinederroire.github.io/Course_R_Forest_Sciences)
+- [Principles of reproductible science](https://geraldinederroire.github.io/Course_R_Forest_Sciences/1_reproducible_science)
 
-<!--https://geraldinederroire.github.io/Course_R_Forest_Sciences/1_reproducible_science
+<!--
 
 https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started
 
