@@ -109,6 +109,10 @@ to explore and test your hypotheses. The relevance of the scientific question is
 
 <span style="color:indianred;">**Let's talk about it as we go along!**</span>
 
+## 
+
+The course material has been created using R V4.4.3 and quarto, and the code is available on [GitHub](https://github.com/GeraldineDerroire/Course_R_Forest_Sciences/tree/main).
+
 
   
 

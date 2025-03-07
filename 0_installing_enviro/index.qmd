@@ -1,5 +1,5 @@
 ---
-title: "Software installation"
+title: "Set up the working environment"
 author: Géraldine Derroire
 institute: Cirad - UnB
 date: last-modified
