@@ -37,7 +37,7 @@ Why?
 
 ## Still not reproducible science...
 
-> "We collected data following standard protocols and analyses them using the StatForDummies software."
+> "We collected data following standard protocols and analysed them using the StatForDummies software."
 
 ::: {.notes}
 Why?
@@ -46,6 +46,11 @@ Why?
 ## This is reproducible science!
 
 ![](repro_science.png)
+
+::: {.notes}
+A clear workflow from the data collection to communication of the results (paper, com...) 
+in which every step is well documented
+:::
 
 
 ## Some definitions - Reproducibility
@@ -57,7 +62,9 @@ Why?
 
 
 ::: {.notes}
-Full reproducibility is almost impossible in natural system so computational repro
+Reproducibilyu => be able to reproduce a study and come to the same results
+Full reproducibility is almost impossible in natural system so computational repro 
+=> computational repro
 :::
 
 ## Some definitions - Computational reproducibility
@@ -66,9 +73,11 @@ Full reproducibility is almost impossible in natural system so computational rep
 produce equivalent analytical outcomes from the <span style="color:slateblue;">same data set</span> using the <span style="color:slateblue;">same code</span> and <span style="color:slateblue;">software</span> as the original study."
 > Powers & Hampton ([2019](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/eap.1822)) *Ecological Applications*
 
+::: {.notes}
+So to acheive that, we need to document clearly all the steps, and make the different products available
+:::
 
-
-# Why making science reproducible?
+# Why make science reproducible?
 
 # For our future self!
 
@@ -99,52 +108,163 @@ produce equivalent analytical outcomes from the <span style="color:slateblue;">s
 
 # How to implement reproducible science?
 
-<!-- TO DO -->
-
 ## Main principles
 
-- document (metadata, scripted analyses...)
+:::: {.columns}
 
+::: {.column width="50%"}
+::: {.incremental}
+- Organise your work in a clear and standardised way
+- Document all the steps and products (metadata, scripted analyses, readme...)
+- Start from the beginning of the project
+:::
+:::
+
+::: {.column width="50%"}
+![](repro_river.png)
+:::
+
+::::
+
+::: {.notes}
 Metadata, sometimes referred to as data about data or a data dictionary Jenkins et al 2023
-
-- start from the beginning of the project
-
-- organise the workflow
+:::
 
 ## Main steps
 
-<!-- This is copied pasted from Wilson et al 2017-->
+Wilson *et al* ([2017](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)) *PLoS Computational Biology*
 
-• Data management: saving both raw and intermediate forms, documenting all steps, creating
-tidy data amenable to analysis.
-• Software: writing, organizing, and sharing scripts and programs used in an analysis.
-• Collaboration: making it easy for existing and new collaborators to understand and contrib-
-ute to a project.
-• Project organization: organizing the digital artifacts ofa project to ease discovery and
-understanding.
-• Tracking changes: recording how various components ofyour project change over time.
-• Manuscripts: writing manuscripts in a way that leaves an audit trail and minimizes manual
-merging ofconflicts.
+![](Wilson_steps.png)
+
+::: {.notes}
+Great overview of all the steps
+:::
+
+
+## Main steps - Data management
+
+::: {.incremental}
+- Save both raw and corrected data
+- Document all steps of data preparation
+- Create analysis-friendly data with metadata
+:::
+
+## Main steps - Software
+
+::: {.incremental}
+- Write scripts for all the analyses
+- Test these scripts!
+- Document the scripts (explain what they do)
+- Share the scripts 
+:::
+
+::: {.notes}
+"script" to mean "something that is executed directly as is" and "program"
+to mean "something that is explicitly compiled before being used"
+:::
+
+## Main steps - Collaboration
+
+Make it easy for other to contribute to your project by:
+
+::: {.incremental}
+- Explaining the organisation of the project
+- Sharing tasks and making to do list
+- Deciding on best way to communicate
+:::
+
+## Main steps - Project organisation
+
+::: {.incremental}
+- Organise the workflow and break it into steps
+- Organise files (script, data, docs) into standardised directories
+- Adopt a coherent and explicit naming system for files and objects
+:::
+
+## Main steps - Tracking changes
+
+::: {.incremental}
+- Backup all changes made
+- Keep track of versions 
+:::
+
+::: {.notes}
+keep track of version: know what has been changed between two versions
+:::
+
+## Main steps - Writing
+
+Integrate writing into the workflow for easy control of version and update
+
+![](quarto-process.png)
+
+::: {.notes}
+Just as for the code, we need to know how the manuscript (and its figures) was produced
+what changes were made, etc...
+:::
 
 ## Main tools
 
+![](tools_all.png)
+::: {.notes}
+many tools exist, there are the one we are going to use
+:::
+
+## Main tools
+
+![](tools_R.png)
+
+
+## Main tools
+
+![](tools_tidyverse.png)
+::: {.notes}
+collection of tools (packages) that will help us coding in R
+:::
+
+## Main tools
+
+![](tools_git.png)
+::: {.notes}
+git for version control
+:::
+
+## Main tools
+
+![](tools_github.png)
+::: {.notes}
+github for
+version control on web
+tools for collaboration and project organisation
+:::
+
+## Main tools
+
+![](tools_quarto.png)
+
+## Main tools
+
+![](tools_Rstudio.png)
+
+::: {.notes}
+all of this will be done through Rstudio that will make everything easier
+:::
 
 
 ## Acknowledgments
 
-- cours de François Guillaumon ici :https://rdatatoolbox.github.io/chapters/course-opensci.html
-?
+- Course material of François Guillaumon [in French](https://rdatatoolbox.github.io/chapters/course-opensci.html)
 
-- le papier good enough
-
+- Wilson *et al* (2017) *Good enough practices in scientific computing* Downloadable [here](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
 
 
 
-## Ressources
+
+## Resources
 
 - British Ecological Society (2017) *Reproducible code* Downloadable [here]( https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Reproducible-code-guide.pdf)
 
-- Bryan *et al* (2017) *Good enough practices in scientific computing Downloadable [here](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
+- Wilson *et al* (2017) *Good enough practices in scientific computing* Downloadable [here](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
 
 ::: {.notes}
 - BES Guide: a bit detailed for now, a bit old but some usefull information

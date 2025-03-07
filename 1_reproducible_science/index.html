@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-03-06">
+  <meta name="dcterms.date" content="2025-03-07">
   <title>Principles of reproducible science</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -342,7 +342,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-03-06</p>
+  <p class="date">2025-03-07</p>
 </section>
 <section>
 <section id="what-is-reproducible-science" class="title-slide slide level1 center">
@@ -386,7 +386,7 @@ Géraldine Derroire
 <section id="still-not-reproducible-science" class="slide level2">
 <h2>Still not reproducible science…</h2>
 <blockquote>
-<p>“We collected data following standard protocols and analyses them using the StatForDummies software.”</p>
+<p>“We collected data following standard protocols and analysed them using the StatForDummies software.”</p>
 </blockquote>
 <aside class="notes">
 <p>Why?</p>
@@ -405,7 +405,20 @@ Géraldine Derroire
 <section id="this-is-reproducible-science" class="slide level2">
 <h2>This is reproducible science!</h2>
 
-<img data-src="repro_science.png" class="r-stretch"></section>
+<img data-src="repro_science.png" class="r-stretch"><aside class="notes">
+<p>A clear workflow from the data collection to communication of the results (paper, com…) in which every step is well documented</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="some-definitions---reproducibility" class="slide level2">
 <h2>Some definitions - Reproducibility</h2>
 <blockquote>
@@ -413,7 +426,7 @@ Géraldine Derroire
 </blockquote>
 
 <img data-src="repro_lab.png" class="r-stretch"><aside class="notes">
-<p>Full reproducibility is almost impossible in natural system so computational repro</p>
+<p>Reproducibilyu =&gt; be able to reproduce a study and come to the same results Full reproducibility is almost impossible in natural system so computational repro =&gt; computational repro</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -431,9 +444,22 @@ Géraldine Derroire
 <blockquote>
 <p>“Computational reproducibility often refers to the ability to produce equivalent analytical outcomes from the <span style="color:slateblue;">same data set</span> using the <span style="color:slateblue;">same code</span> and <span style="color:slateblue;">software</span> as the original study.” Powers &amp; Hampton (<a href="https://esajournals.onlinelibrary.wiley.com/doi/10.1002/eap.1822">2019</a>) <em>Ecological Applications</em></p>
 </blockquote>
+<aside class="notes">
+<p>So to acheive that, we need to document clearly all the steps, and make the different products available</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
-<section id="why-making-science-reproducible" class="title-slide slide level1 center">
-<h1>Why making science reproducible?</h1>
+<section id="why-make-science-reproducible" class="title-slide slide level1 center">
+<h1>Why make science reproducible?</h1>
 
 </section>
 
@@ -476,39 +502,202 @@ Géraldine Derroire
 <section>
 <section id="how-to-implement-reproducible-science" class="title-slide slide level1 center">
 <h1>How to implement reproducible science?</h1>
-<!-- TO DO -->
+
 </section>
 <section id="main-principles" class="slide level2">
 <h2>Main principles</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div>
 <ul>
-<li>document (metadata, scripted analyses…)</li>
+<li class="fragment">Organise your work in a clear and standardised way</li>
+<li class="fragment">Document all the steps and products (metadata, scripted analyses, readme…)</li>
+<li class="fragment">Start from the beginning of the project</li>
 </ul>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img data-src="repro_river.png"></p>
+</div></div>
+<aside class="notes">
 <p>Metadata, sometimes referred to as data about data or a data dictionary Jenkins et al 2023</p>
-<ul>
-<li><p>start from the beginning of the project</p></li>
-<li><p>organise the workflow</p></li>
-</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="main-steps" class="slide level2">
 <h2>Main steps</h2>
-<!-- This is copied pasted from Wilson et al 2017-->
-<p>• Data management: saving both raw and intermediate forms, documenting all steps, creating tidy data amenable to analysis. • Software: writing, organizing, and sharing scripts and programs used in an analysis. • Collaboration: making it easy for existing and new collaborators to understand and contrib- ute to a project. • Project organization: organizing the digital artifacts ofa project to ease discovery and understanding. • Tracking changes: recording how various components ofyour project change over time. • Manuscripts: writing manuscripts in a way that leaves an audit trail and minimizes manual merging ofconflicts.</p>
+<p>Wilson <em>et al</em> (<a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510">2017</a>) <em>PLoS Computational Biology</em></p>
+
+<img data-src="Wilson_steps.png" class="r-stretch"><aside class="notes">
+<p>Great overview of all the steps</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="main-steps---data-management" class="slide level2">
+<h2>Main steps - Data management</h2>
+<div>
+<ul>
+<li class="fragment">Save both raw and corrected data</li>
+<li class="fragment">Document all steps of data preparation</li>
+<li class="fragment">Create analysis-friendly data with metadata</li>
+</ul>
+</div>
+</section>
+<section id="main-steps---software" class="slide level2">
+<h2>Main steps - Software</h2>
+<div>
+<ul>
+<li class="fragment">Write scripts for all the analyses</li>
+<li class="fragment">Test these scripts!</li>
+<li class="fragment">Document the scripts (explain what they do)</li>
+<li class="fragment">Share the scripts</li>
+</ul>
+</div>
+<aside class="notes">
+<p>“script” to mean “something that is executed directly as is” and “program” to mean “something that is explicitly compiled before being used”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="main-steps---collaboration" class="slide level2">
+<h2>Main steps - Collaboration</h2>
+<p>Make it easy for other to contribute to your project by:</p>
+<div>
+<ul>
+<li class="fragment">Explaining the organisation of the project</li>
+<li class="fragment">Sharing tasks and making to do list</li>
+<li class="fragment">Deciding on best way to communicate</li>
+</ul>
+</div>
+</section>
+<section id="main-steps---project-organisation" class="slide level2">
+<h2>Main steps - Project organisation</h2>
+<div>
+<ul>
+<li class="fragment">Organise the workflow and break it into steps</li>
+<li class="fragment">Organise files (script, data, docs) into standardised directories</li>
+<li class="fragment">Adopt a coherent and explicit naming system for files and objects</li>
+</ul>
+</div>
+</section>
+<section id="main-steps---tracking-changes" class="slide level2">
+<h2>Main steps - Tracking changes</h2>
+<div>
+<ul>
+<li class="fragment">Backup all changes made</li>
+<li class="fragment">Keep track of versions</li>
+</ul>
+</div>
+<aside class="notes">
+<p>keep track of version: know what has been changed between two versions</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="main-steps---writing" class="slide level2">
+<h2>Main steps - Writing</h2>
+<p>Integrate writing into the workflow for easy control of version and update</p>
+
+<img data-src="quarto-process.png" class="r-stretch"><aside class="notes">
+<p>Just as for the code, we need to know how the manuscript (and its figures) was produced what changes were made, etc…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="main-tools" class="slide level2">
 <h2>Main tools</h2>
+<p><img data-src="tools_all.png"> ::: {.notes} many tools exist, there are the one we are going to use :::</p>
+</section>
+<section id="main-tools-1" class="slide level2">
+<h2>Main tools</h2>
+
+<img data-src="tools_R.png" class="r-stretch"></section>
+<section id="main-tools-2" class="slide level2">
+<h2>Main tools</h2>
+<p><img data-src="tools_tidyverse.png"> ::: {.notes} collection of tools (packages) that will help us coding in R :::</p>
+</section>
+<section id="main-tools-3" class="slide level2">
+<h2>Main tools</h2>
+<p><img data-src="tools_git.png"> ::: {.notes} git for version control :::</p>
+</section>
+<section id="main-tools-4" class="slide level2">
+<h2>Main tools</h2>
+<p><img data-src="tools_github.png"> ::: {.notes} github for version control on web tools for collaboration and project organisation :::</p>
+</section>
+<section id="main-tools-5" class="slide level2">
+<h2>Main tools</h2>
+
+<img data-src="tools_quarto.png" class="r-stretch"></section>
+<section id="main-tools-6" class="slide level2">
+<h2>Main tools</h2>
+
+<img data-src="tools_Rstudio.png" class="r-stretch"><aside class="notes">
+<p>all of this will be done through Rstudio that will make everything easier</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="acknowledgments" class="slide level2">
 <h2>Acknowledgments</h2>
 <ul>
-<li><p>cours de François Guillaumon ici :https://rdatatoolbox.github.io/chapters/course-opensci.html ?</p></li>
-<li><p>le papier good enough</p></li>
+<li><p>Course material of François Guillaumon <a href="https://rdatatoolbox.github.io/chapters/course-opensci.html">in French</a></p></li>
+<li><p>Wilson <em>et al</em> (2017) <em>Good enough practices in scientific computing</em> Downloadable <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510">here</a></p></li>
 </ul>
 </section>
-<section id="ressources" class="slide level2">
-<h2>Ressources</h2>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
 <ul>
 <li><p>British Ecological Society (2017) <em>Reproducible code</em> Downloadable <a href="https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Reproducible-code-guide.pdf">here</a></p></li>
-<li><p>Bryan <em>et al</em> (2017) *Good enough practices in scientific computing Downloadable <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510">here</a></p></li>
+<li><p>Wilson <em>et al</em> (2017) <em>Good enough practices in scientific computing</em> Downloadable <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510">here</a></p></li>
 </ul>
 <aside class="notes">
 <ul>
