@@ -110,19 +110,6 @@ The path won't be the same for you than here, but this is ok.
 
 # Configuration
 
-## Select language of R
-
-I recommend setting the language of R to English, to have more options when you look for help on the Internet.
-
-For this, run the following code in R or RStudio:
-
-```{r}
-# Set language to English
-Sys.setenv(LANG = "en")
-```
-
-*This is however optional!*
-
 ## Configure RStudio
 
 ::::: columns

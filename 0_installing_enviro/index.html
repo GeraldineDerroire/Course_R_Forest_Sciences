@@ -510,16 +510,6 @@ install.packages("quarto")
 <h1>Configuration</h1>
 
 </section>
-<section id="select-language-of-r" class="slide level2">
-<h2>Select language of R</h2>
-<p>I recommend setting the language of R to English, to have more options when you look for help on the Internet.</p>
-<p>For this, run the following code in R or RStudio:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="co"># Set language to English</span></span>
-<span id="cb9-2"><a href=""></a><span class="fu">Sys.setenv</span>(<span class="at">LANG =</span> <span class="st">"en"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><em>This is however optional!</em></p>
-</section>
 <section id="configure-rstudio" class="slide level2">
 <h2>Configure RStudio</h2>
 <div class="columns">
@@ -537,33 +527,33 @@ install.packages("quarto")
 
 <img data-src="rstudio_terminal.png" class="r-stretch"><p>and run:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="do">## Tell git your user name </span></span>
-<span id="cb10-2"><a href=""></a>git config <span class="sc">--</span>global user.name  <span class="st">"Your Name"</span></span>
-<span id="cb10-3"><a href=""></a></span>
-<span id="cb10-4"><a href=""></a><span class="do">## Tell git your email address </span></span>
-<span id="cb10-5"><a href=""></a>git config <span class="sc">--</span>global user.email <span class="st">"your.name@mail.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="do">## Tell git your user name </span></span>
+<span id="cb9-2"><a href=""></a>git config <span class="sc">--</span>global user.name  <span class="st">"Your Name"</span></span>
+<span id="cb9-3"><a href=""></a></span>
+<span id="cb9-4"><a href=""></a><span class="do">## Tell git your email address </span></span>
+<span id="cb9-5"><a href=""></a>git config <span class="sc">--</span>global user.email <span class="st">"your.name@mail.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="configure-git-1" class="slide level2">
 <h2>Configure git</h2>
 <p>Change the default branch name, by running the following in the RStudio terminal:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="do">## Rename default git branch </span></span>
-<span id="cb11-2"><a href=""></a>git config <span class="sc">--</span>global init.defaultBranch main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="do">## Rename default git branch </span></span>
+<span id="cb10-2"><a href=""></a>git config <span class="sc">--</span>global init.defaultBranch main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="check-git-configuration" class="slide level2">
 <h2>Check git configuration</h2>
 <p>In the RStudio terminal, run the following:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="do">## Check user name</span></span>
-<span id="cb12-2"><a href=""></a>git config user.name</span>
-<span id="cb12-3"><a href=""></a></span>
-<span id="cb12-4"><a href=""></a><span class="do">## Check user email</span></span>
-<span id="cb12-5"><a href=""></a>git config user.email</span>
-<span id="cb12-6"><a href=""></a></span>
-<span id="cb12-7"><a href=""></a><span class="do">## Check user name</span></span>
-<span id="cb12-8"><a href=""></a>git config init.defaultbranch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="do">## Check user name</span></span>
+<span id="cb11-2"><a href=""></a>git config user.name</span>
+<span id="cb11-3"><a href=""></a></span>
+<span id="cb11-4"><a href=""></a><span class="do">## Check user email</span></span>
+<span id="cb11-5"><a href=""></a>git config user.email</span>
+<span id="cb11-6"><a href=""></a></span>
+<span id="cb11-7"><a href=""></a><span class="do">## Check user name</span></span>
+<span id="cb11-8"><a href=""></a>git config init.defaultbranch</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="create-a-github-account" class="slide level2">
@@ -600,7 +590,7 @@ install.packages("quarto")
 <h2>Create a GitHub SSH key</h2>
 <p>Check if your key is working by typing the following in the RStudio terminal:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>ssh <span class="sc">-</span>T git<span class="sc">@</span>github.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>ssh <span class="sc">-</span>T git<span class="sc">@</span>github.com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You should get a message telling you that you successfully authenticated, but GitHub does not provide shell access. 👍</p>
 <p>When you first connect to GitHub, you will be asked if you want to continue connecting, answer <em>yes</em>.</p>
