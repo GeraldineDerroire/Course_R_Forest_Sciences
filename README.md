@@ -10,9 +10,9 @@ and in Portuguese [here](https://geraldinederroire.github.io/Course_R_Forest_Sci
 
 # Content
 
-- [Course introduction](https://geraldinederroire.github.io/Course_R_Forest_Sciences){:target="_blank"}
-- [Set up the working environment](https://geraldinederroire.github.io/Course_R_Forest_Sciences/0_installing_enviro){:target="_blank"}
-- [Principles of reproductible science](https://geraldinederroire.github.io/Course_R_Forest_Sciences/1_reproducible_science){:target="_blank"}
+- [Course introduction](https://geraldinederroire.github.io/Course_R_Forest_Sciences)
+- [Set up the working environment](https://geraldinederroire.github.io/Course_R_Forest_Sciences/0_installing_enviro)
+- [Principles of reproductible science](https://geraldinederroire.github.io/Course_R_Forest_Sciences/1_reproducible_science)
 
 The course material has been created using quarto and R V4.4.3.
 
