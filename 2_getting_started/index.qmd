@@ -2,18 +2,388 @@
 title: "Getting started with R"
 author: Géraldine Derroire
 institute: Cirad - UnB
-date: today
+date: last-modified
 format: 
   revealjs:
-    theme: blood
+    theme: solarized
     output-location: fragment 
     slide-number: true
     preview-links: true
     chalkboard: true
+    link-external-icon: true
+    link-external-newwindow: true
+    incremental: true
 execute:
-  echo: true      
+  echo: true    
+editor: 
+  markdown: 
+    wrap: sentence
 ---
 
-## First slide
+# R and RStudio
 
-Text here
+## Let's open R
+
+![](R_logo.png){width="10%"}
+
+![](open_R.png){width="50%"}
+
+::: notes
+Talk about the meaning of free Talk about the fact that it is collaborative and about the no warranty =\> packages (collection of tools come with different level of quality =\> as for everything, be critical of what you use. But most packages are highly tested and reliable.)
+:::
+
+## What is R?
+
+-   R is a **programming language** for processing and analysing quantitative data.It is derived from the programming language S.
+
+-   R is free and **Open Source**: it is can be use, modified and distributed freely.
+
+-   R is **collaborative**: it is developed by its users.
+
+-   R is **multi-plateform**: it works on Windows, Linux and Mac.
+
+## What does R do?
+
+R allows to:
+
+-   manipulate data
+
+-   draw graphs
+
+-   perform statistical analyses
+
+-   and many other things...
+
+![](ex_graph_R.png){width="80%"}
+
+::: notes
+Other things: text mining, GIS...
+:::
+
+<!-- we are not going to work in R but in RStudio => close R -->
+
+## Why use R?
+
+-   It has many functionnalities that are constantly evolving, thanks to its community of users.
+
+-   It is widely used by the scientific community.
+
+-   A lot of help is available, in many languages.
+
+## Is it difficult?
+
+![](R_learning_curve.png){width="120%"}
+
+## Let's open RStudio
+
+![](RStudio_logo.png){width="20%"}
+
+![](RStudio_screen.png){width="80%"}
+
+=\> RStudio opens R.
+
+::: notes
+We are not going to work directly in R but in RStudio, for reason that you will discover in the coming hours, and days.
+=\> Let's close R and open RStudio.
+
+We find the same text than when we open R directly =\> RStudio opens R.
+:::
+
+## What is RStudio?
+
+RStudio is an Integrated Development Environement" (IDE): a software that provided many facilies to help programming with R.
+
+![](engine_dashboard.png)
+
+::: notes
+RStudio is also free and open source.
+:::
+
+## The console and the prompt
+
+![](console_prompt.png)
+
+The prompt is indicating that R is waiting for our instruction.
+
+::: notes
+We are going to see little by little what are the different windows of RStudio.
+Let's start with the console.
+:::
+
+## Let's try some basic commands!
+
+Write an operation in the console and click *Enter*.
+
+```{r}
+2 + 3
+```
+
+::: notes
+\[1\] indicates that the answer is the first element of the line.
+:::
+
+## Let's try some basic commands!
+
+```{r}
+5 + 9
+```
+
+::: fragment
+```{r}
+8 - 2 
+```
+:::
+
+::: fragment
+```{r}
+-2 * 4 
+```
+:::
+
+::: fragment
+```{r}
+8 / 3
+```
+:::
+
+::: fragment
+```{r}
+4^2
+```
+:::
+
+## Spaces are not important.
+
+```{r}
+1+2
+1 + 2
+1    +     2
+```
+
+## Command history
+
+The previous commands are visible in the command history.
+
+![](command_history.png){width="60%"}
+
+You can run them again by double-clicking on them or clicking on *To Console*.
+But in practice, we will not use this much...
+
+You can also use the ⬆️ or ⬇️ keys of the keyboard to navigate the command history in the console.
+
+## Let's try some more commands...
+
+```{r}
+log(-1)
+```
+
+[*NAN* means "not a number".]{.fragment}
+
+## Let's try some more commands...
+
+```{r, eval=FALSE}
+4 * 
+```
+
+[This is an unfinished command. We can finish after the +.]{.fragment}
+
+[Or press *Esc* to terminate the command line.]{.fragment}
+
+## Let's try some more commands...
+
+```{r, eval=FALSE}
+2 * x 
+```
+
+[We get an error message. Why?]{.fragment}
+
+[R doesn't know what is *x*.]{.fragment}
+
+# Objects
+
+## Basic objects
+
+Let's put something in x
+
+```{r}
+x <- 5
+```
+
+[*x* is an **object**. We assign it the value of 5, using the assignment operator **<-**]{.fragment}
+
+[⚠️ The content of *x* is not printed.
+But we can see it by typing its name in the console.]{.fragment}
+
+::: fragment
+```{r}
+x
+```
+:::
+
+[And we can use it in other commands.]{.fragment}
+
+::: fragment
+```{r}
+2 * x
+```
+:::
+
+## Where are the objects stored?
+
+Objects are store in the environment
+
+![](enviro.png){width="100%"}
+
+[⚠️ They are kept in memory throughout the session but are **not saved** when RStudio is closed.]{.fragment}
+
+## Where are the objects stored?
+
+You can see the content of the environment with the function *ls*
+
+::: fragment
+```{r}
+ls()
+```
+:::
+
+[You can remove an object from the environment using the function *rm*]{.fragment}
+
+::: fragment
+```{r}
+rm(x)
+ls()
+```
+:::
+
+[⚠️ Typing *rm()* clears all the environement!]{.fragment}
+
+
+
+## Assigning a new value to an existing object
+
+```{r}
+x <- 3
+x 
+```
+
+::: fragment
+```{r}
+x <- 9
+x
+```
+:::
+
+[Assigning a new value to an object replaces the previous value (as you can see in the environment).]{.fragment}
+
+[⚠️ Objects are not linked:]{.fragment}
+
+::: fragment
+```{r}
+y <- x
+y
+```
+:::
+
+[Modifying *x* does not modify *y*.]{.fragment}
+
+::: fragment
+```{r}
+x <- 25
+y
+```
+:::
+
+## Creating more objects
+
+```{r}
+result <- 3 * x
+```
+
+[The new object *result* is stored in the environment. It is not printed.]{.fragment}
+
+::: fragment
+```{r}
+result2 <- 4 * x
+```
+:::
+
+::: fragment
+```{r}
+result3 <- 25 * x
+```
+:::
+
+[We can name objects the way we want but...]{.fragment}
+
+::: notes
+This way of naming objects is not going to be usefull...
+:::
+
+## Naming an object
+
+Some good practices when naming an object:
+
+::: incremental
+-   Use explicit names while trying to keep names short
+-   Object name can contain letter, numbers, the symbols [ . ]{style="color:indianred;"}, [ -]{style="color:indianred;"} 
+and [ \_ ]{style="color:indianred;"}
+-   Object name cannot start with a number
+- Object names cannot contain a space
+- The case matters (upper and lower cases are not the same)
+-   Avoid accents (for encoding problems)
+:::
+
+## Naming an object
+
+Adopt a consistant naming style
+
+![](name_style.png)
+
+## Objects are not necessarly numbers
+
+Work in progress...
+
+<!-- see the course of Mélaine from slide 52 to see if there are things I want to add above-->
+
+## Type of data
+
+Work in progress...
+
+
+
+<!-- 
+
+and they don't contain necessarly only one information => type of objects
+
+or maybe after the part of wroking with RStudio so that it is not too much
+
+-->
+
+
+# Working with RStudio
+
+Work in progress...
+
+<!-- 
+les scripts, commenter les scripts...
+See cours Mélaine sur working enviro
+puis project, project organisation
+Voir aide RStudio ? et le mettre dans les ressources
+
+-->
+
+# Functions, operators, packages, etc...
+
+Work in progress...
+
+## Acknowledgments
+
+<!-- AT the end: recheck the two course to see if I have forgotten something
+
++ lister des ressources
+
++ faire des exercices pour chaque fin de session!!!!! -->
+
+<!-- Cours Juba, cours Mélaine-->
+
+## Resources

@@ -7,11 +7,11 @@
 <link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="index_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="index_files/libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-02-26">
+  <meta name="dcterms.date" content="2025-03-18">
   <title>Getting started with R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -324,7 +389,7 @@
     }
   </style>
 </head>
-<body class="quarto-dark">
+<body class="quarto-light">
   <div class="reveal">
     <div class="slides">
 
@@ -342,17 +407,497 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-02-26</p>
+  <p class="date">2025-03-18</p>
 </section>
-<section id="first-slide" class="slide level2">
-<h2>First slide</h2>
-<p>Text here</p>
+<section>
+<section id="r-and-rstudio" class="title-slide slide level1 center">
+<h1>R and RStudio</h1>
+
+</section>
+<section id="lets-open-r" class="slide level2">
+<h2>Let’s open R</h2>
+<p><img data-src="R_logo.png" style="width:10.0%"></p>
+<p><img data-src="open_R.png" style="width:50.0%"></p>
+<aside class="notes">
+<p>Talk about the meaning of free Talk about the fact that it is collaborative and about the no warranty =&gt; packages (collection of tools come with different level of quality =&gt; as for everything, be critical of what you use. But most packages are highly tested and reliable.)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-r" class="slide level2">
+<h2>What is R?</h2>
+<ul>
+<li class="fragment"><p>R is a <strong>programming language</strong> for processing and analysing quantitative data.It is derived from the programming language S.</p></li>
+<li class="fragment"><p>R is free and <strong>Open Source</strong>: it is can be use, modified and distributed freely.</p></li>
+<li class="fragment"><p>R is <strong>collaborative</strong>: it is developed by its users.</p></li>
+<li class="fragment"><p>R is <strong>multi-plateform</strong>: it works on Windows, Linux and Mac.</p></li>
+</ul>
+</section>
+<section id="what-does-r-do" class="slide level2">
+<h2>What does R do?</h2>
+<p>R allows to:</p>
+<ul>
+<li class="fragment"><p>manipulate data</p></li>
+<li class="fragment"><p>draw graphs</p></li>
+<li class="fragment"><p>perform statistical analyses</p></li>
+<li class="fragment"><p>and many other things…</p></li>
+</ul>
+
+<img data-src="ex_graph_R.png" style="width:80.0%" class="r-stretch"><aside class="notes">
+<p>Other things: text mining, GIS…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!-- we are not going to work in R but in RStudio => close R -->
+</section>
+<section id="why-use-r" class="slide level2">
+<h2>Why use R?</h2>
+<ul>
+<li class="fragment"><p>It has many functionnalities that are constantly evolving, thanks to its community of users.</p></li>
+<li class="fragment"><p>It is widely used by the scientific community.</p></li>
+<li class="fragment"><p>A lot of help is available, in many languages.</p></li>
+</ul>
+</section>
+<section id="is-it-difficult" class="slide level2">
+<h2>Is it difficult?</h2>
+
+<img data-src="R_learning_curve.png" style="width:120.0%" class="r-stretch"></section>
+<section id="lets-open-rstudio" class="slide level2">
+<h2>Let’s open RStudio</h2>
+<p><img data-src="RStudio_logo.png" style="width:20.0%"></p>
+<p><img data-src="RStudio_screen.png" style="width:80.0%"></p>
+<p>=&gt; RStudio opens R.</p>
+<aside class="notes">
+<p>We are not going to work directly in R but in RStudio, for reason that you will discover in the coming hours, and days. =&gt; Let’s close R and open RStudio.</p>
+<p>We find the same text than when we open R directly =&gt; RStudio opens R.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-rstudio" class="slide level2">
+<h2>What is RStudio?</h2>
+<p>RStudio is an Integrated Development Environement” (IDE): a software that provided many facilies to help programming with R.</p>
+
+<img data-src="engine_dashboard.png" class="r-stretch"><aside class="notes">
+<p>RStudio is also free and open source.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-console-and-the-prompt" class="slide level2">
+<h2>The console and the prompt</h2>
+
+<img data-src="console_prompt.png" class="r-stretch"><p>The prompt is indicating that R is waiting for our instruction.</p>
+<aside class="notes">
+<p>We are going to see little by little what are the different windows of RStudio. Let’s start with the console.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lets-try-some-basic-commands" class="slide level2">
+<h2>Let’s try some basic commands!</h2>
+<p>Write an operation in the console and click <em>Enter</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>[1] indicates that the answer is the first element of the line.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lets-try-some-basic-commands-1" class="slide level2">
+<h2>Let’s try some basic commands!</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="dv">5</span> <span class="sc">+</span> <span class="dv">9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="dv">8</span> <span class="sc">-</span> <span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="sc">-</span><span class="dv">2</span> <span class="sc">*</span> <span class="dv">4</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -8</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="dv">8</span> <span class="sc">/</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.666667</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="dv">4</span><span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="spaces-are-not-important." class="slide level2">
+<h2>Spaces are not important.</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="dv">1</span><span class="sc">+</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="dv">1</span>    <span class="sc">+</span>     <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+</section>
+<section id="command-history" class="slide level2">
+<h2>Command history</h2>
+<p>The previous commands are visible in the command history.</p>
+
+<img data-src="command_history.png" style="width:60.0%" class="r-stretch"><p>You can run them again by double-clicking on them or clicking on <em>To Console</em>. But in practice, we will not use this much…</p>
+<p>You can also use the ⬆️ or ⬇️ keys of the keyboard to navigate the command history in the console.</p>
+</section>
+<section id="lets-try-some-more-commands" class="slide level2">
+<h2>Let’s try some more commands…</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">log</span>(<span class="sc">-</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NaN</code></pre>
+</div>
+</div>
+<p><span class="fragment"><em>NAN</em> means “not a number”.</span></p>
+</section>
+<section id="lets-try-some-more-commands-1" class="slide level2">
+<h2>Let’s try some more commands…</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="dv">4</span> <span class="sc">*</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment">This is an unfinished command. We can finish after the +.</span></p>
+<p><span class="fragment">Or press <em>Esc</em> to terminate the command line.</span></p>
+</section>
+<section id="lets-try-some-more-commands-2" class="slide level2">
+<h2>Let’s try some more commands…</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="dv">2</span> <span class="sc">*</span> x </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment">We get an error message. Why?</span></p>
+<p><span class="fragment">R doesn’t know what is <em>x</em>.</span></p>
+</section></section>
+<section>
+<section id="objects" class="title-slide slide level1 center">
+<h1>Objects</h1>
+
+</section>
+<section id="basic-objects" class="slide level2">
+<h2>Basic objects</h2>
+<p>Let’s put something in x</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment"><em>x</em> is an <strong>object</strong>. We assign it the value of 5, using the assignment operator <strong>&lt;-</strong></span></p>
+<p><span class="fragment">⚠️ The content of <em>x</em> is not printed. But we can see it by typing its name in the console.</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">And we can use it in other commands.</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="dv">2</span> <span class="sc">*</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="where-are-the-objects-stored" class="slide level2">
+<h2>Where are the objects stored?</h2>
+<p>Objects are store in the environment</p>
+
+<img data-src="enviro.png" style="width:100.0%" class="r-stretch"><p><span class="fragment">⚠️ They are kept in memory throughout the session but are <strong>not saved</strong> when RStudio is closed.</span></p>
+</section>
+<section id="where-are-the-objects-stored-1" class="slide level2">
+<h2>Where are the objects stored?</h2>
+<p>You can see the content of the environment with the function <em>ls</em></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "x"</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">You can remove an object from the environment using the function <em>rm</em></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">rm</span>(x)</span>
+<span id="cb30-2"><a href=""></a><span class="fu">ls</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>character(0)</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">⚠️ Typing <em>rm()</em> clears all the environement!</span></p>
+</section>
+<section id="assigning-a-new-value-to-an-existing-object" class="slide level2">
+<h2>Assigning a new value to an existing object</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb32-2"><a href=""></a>x </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb34-2"><a href=""></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">Assigning a new value to an object replaces the previous value (as you can see in the environment).</span></p>
+<p><span class="fragment">⚠️ Objects are not linked:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>y <span class="ot">&lt;-</span> x</span>
+<span id="cb36-2"><a href=""></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">Modifying <em>x</em> does not modify <em>y</em>.</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">25</span></span>
+<span id="cb38-2"><a href=""></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 9</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="creating-more-objects" class="slide level2">
+<h2>Creating more objects</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>result <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="sc">*</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment">The new object <em>result</em> is stored in the environment. It is not printed.</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a>result2 <span class="ot">&lt;-</span> <span class="dv">4</span> <span class="sc">*</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a>result3 <span class="ot">&lt;-</span> <span class="dv">25</span> <span class="sc">*</span> x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<p><span class="fragment">We can name objects the way we want but…</span></p>
+<aside class="notes">
+<p>This way of naming objects is not going to be usefull…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="naming-an-object" class="slide level2">
+<h2>Naming an object</h2>
+<p>Some good practices when naming an object:</p>
+<div>
+<ul>
+<li class="fragment">Use explicit names while trying to keep names short</li>
+<li class="fragment">Object name can contain letter, numbers, the symbols <span style="color:indianred;">.</span>, <span style="color:indianred;">-</span> and <span style="color:indianred;">_</span></li>
+<li class="fragment">Object name cannot start with a number</li>
+<li class="fragment">Object names cannot contain a space</li>
+<li class="fragment">The case matters (upper and lower cases are not the same)</li>
+<li class="fragment">Avoid accents (for encoding problems)</li>
+</ul>
+</div>
+</section>
+<section id="naming-an-object-1" class="slide level2">
+<h2>Naming an object</h2>
+<p>Adopt a consistant naming style</p>
+
+<img data-src="name_style.png" class="r-stretch"></section>
+<section id="objects-are-not-necessarly-numbers" class="slide level2">
+<h2>Objects are not necessarly numbers</h2>
+<p>Work in progress…</p>
+<!-- see the course of Mélaine from slide 52 to see if there are things I want to add above-->
+</section>
+<section id="type-of-data" class="slide level2">
+<h2>Type of data</h2>
+<p>Work in progress…</p>
+<!-- 
+
+and they don't contain necessarly only one information => type of objects
+
+or maybe after the part of wroking with RStudio so that it is not too much
+
+-->
+</section></section>
+<section id="working-with-rstudio" class="title-slide slide level1 center">
+<h1>Working with RStudio</h1>
+<p>Work in progress…</p>
+<!-- 
+les scripts, commenter les scripts...
+See cours Mélaine sur working enviro
+puis project, project organisation
+Voir aide RStudio ? et le mettre dans les ressources
+
+-->
+</section>
+
+<section>
+<section id="functions-operators-packages-etc" class="title-slide slide level1 center">
+<h1>Functions, operators, packages, etc…</h1>
+<p>Work in progress…</p>
+</section>
+<section id="acknowledgments" class="slide level2">
+<h2>Acknowledgments</h2>
+<!-- AT the end: recheck the two course to see if I have forgotten something
+
++ lister des ressources
+
++ faire des exercices pour chaque fin de session!!!!! -->
+<!-- Cours Juba, cours Mélaine-->
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -565,6 +1110,82 @@ Géraldine Derroire
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
@@ -668,6 +1289,13 @@ Géraldine Derroire
             if (link.dataset.originalHref !== undefined) {
               link.href = link.dataset.originalHref;
             }
+              // target, if specified
+              link.setAttribute("target", "_blank");
+              if (link.getAttribute("rel") === null) {
+                link.setAttribute("rel", "noopener");
+              }
+              // default icon
+              link.classList.add("external");
           }
         }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
