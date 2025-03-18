@@ -9,6 +9,8 @@ format:
     slide-number: true
     preview-links: true
     chalkboard: true
+    link-external-icon: true
+    link-external-newwindow: true
 execute:
   echo: true   
 ---
@@ -22,18 +24,19 @@ We are going to install the following:
 -   git
 -   quarto
 
-In the following slides, Click on the text in blue to follow the links.
+⚠️ In the following slides, click on the text in blue to follow the links.
 
 This takes a bit of time, but you will just need to do it once 😉!
 
 ## Install R
 
-[Install R](https://cloud.r-project.org/bin/windows/base/)
+[Install R](https://cloud.r-project.org/bin/windows/base/){preview-link="false"}
 
-![](R_logo.png){height=150px} 
+![](R_logo.png){height="150px"}
+
+Accept all the default settings.
 
 For those who already have R installed, please make sure that the version you are using is at least 4.0.0.
-
 For this, run the following code:
 
 ```{r}
@@ -43,23 +46,23 @@ R.version.string
 
 ## Install RStudio
 
-[Install RStudio desktop](https://posit.co/download/rstudio-desktop/)
+[Install RStudio desktop](https://posit.co/download/rstudio-desktop/){preview-link="false"}
 
-![](RStudio_logo.png){height=150px}
+![](RStudio_logo.png){height="150px"}
 
 *Don't reinstall R.*
 
 ## Installing git
 
-[Install git]((https://cloud.r-project.org/bin/windows/base/))
+[Install git](https://git-scm.com/downloads/win){preview-link="false"}
 
-![](git_logo.png){height=150px}
+![](git_logo.png){height="150px"}
 
 ## Install Quarto
 
-[Install quarto](https://quarto.org/docs/get-started/)
+[Install quarto](https://quarto.org/docs/get-started/){preview-link="false"}
 
-![](quarto_logo.png){height=150px}
+![](quarto_logo.png){height="150px"}
 
 ````{=html}
 <!--
@@ -80,7 +83,7 @@ install.packages("quarto")
 
 Restart your machine.
 
-Open RStudio and ran the code on the following slides.
+Open RStudio and run the code on the following slides.
 
 ## Check R version
 
@@ -95,11 +98,15 @@ R.version.string
 Sys.which("git")
 ```
 
+The path won't be the same for you than here, but this is ok.
+
 ## Check if quarto is installed
 
 ```{r}
 Sys.which("Quarto")
 ```
+
+The path won't be the same for you than here, but this is ok.
 
 # Configuration
 
@@ -174,9 +181,9 @@ git config init.defaultbranch
 
 ## Create a GitHub account
 
-Create an account on GitHub [here](https://github.com/signup)
+Create an account on GitHub [here](https://github.com/signup){preview-link="false"}
 
-![](github_logo.png){height=200px}
+![](github_logo.png){height="200px"}
 
 ## Create a GitHub SSH key
 
@@ -197,7 +204,7 @@ To communicate with GitHub, you need a SSH key :
 
 ## Create a GitHub SSH key
 
--   Go to the [key setting page in GitHub](https://github.com/settings/keys)
+-   Go to the [key setting page in GitHub](https://github.com/settings/keys){preview-link="false"}
 -   Click on **New SSH key**
 -   Choose a name (e.g. My laptop) and paste your key
 -   Click on **Add SSH key**
@@ -224,4 +231,4 @@ And if you have any problem 😢, please contact me.
 
 ## Acknowledgments
 
-The content of this document is largely inspired by the [FRB-Cesab guide](https://frbcesab.github.io/rsetup/) written by Nicolas Casajus.
+The content of this document is largely inspired by the [FRB-Cesab guide](https://frbcesab.github.io/rsetup/){preview-link="false"} written by Nicolas Casajus.

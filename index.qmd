@@ -11,6 +11,8 @@ format:
     slide-number: true
     preview-links: true
     chalkboard: true
+    link-external-icon: true
+    link-external-newwindow: true
 execute:
   echo: true    
 ---
@@ -111,7 +113,7 @@ to explore and test your hypotheses. The relevance of the scientific question is
 
 ## 
 
-The course material has been created using R V4.4.3 and quarto, and the code is available on [GitHub](https://github.com/GeraldineDerroire/Course_R_Forest_Sciences/tree/main).
+The course material has been created using R V4.4.3 and quarto, and the code is available on [GitHub](https://github.com/GeraldineDerroire/Course_R_Forest_Sciences/tree/main){preview-link="false"}.
 
 
   

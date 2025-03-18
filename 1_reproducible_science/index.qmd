@@ -10,6 +10,8 @@ format:
     slide-number: true
     preview-links: true
     chalkboard: true
+    link-external-icon: true
+    link-external-newwindow: true
 execute:
   echo: true      
 ---
@@ -56,7 +58,7 @@ in which every step is well documented
 ## Some definitions - Reproducibility
 
 > "Reproducibility is a key tenet of the scientific process that dictates the <span style="color:slateblue;">reliability</span> and <span style="color:slateblue;">generality</span> of results and methods." 
-> Powers & Hampton ([2019](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/eap.1822)) *Ecological Applications*
+> Powers & Hampton ([2019](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/eap.1822){preview-link="false"}) *Ecological Applications*
 
 ![](repro_lab.png)
 
@@ -71,7 +73,7 @@ Full reproducibility is almost impossible in natural system so computational rep
 
 > "Computational reproducibility often refers to the ability to
 produce equivalent analytical outcomes from the <span style="color:slateblue;">same data set</span> using the <span style="color:slateblue;">same code</span> and <span style="color:slateblue;">software</span> as the original study."
-> Powers & Hampton ([2019](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/eap.1822)) *Ecological Applications*
+> Powers & Hampton ([2019](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/eap.1822){preview-link="false"}) *Ecological Applications*
 
 ::: {.notes}
 So to acheive that, we need to document clearly all the steps, and make the different products available
@@ -132,7 +134,7 @@ Metadata, sometimes referred to as data about data or a data dictionary Jenkins 
 
 ## Main steps
 
-Wilson *et al* ([2017](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)) *PLoS Computational Biology*
+Wilson *et al* ([2017](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510){preview-link="false"}) *PLoS Computational Biology*
 
 ![](Wilson_steps.png)
 
@@ -206,6 +208,7 @@ what changes were made, etc...
 ## Main tools
 
 ![](tools_all.png)
+
 ::: {.notes}
 many tools exist, there are the one we are going to use
 :::
@@ -218,6 +221,7 @@ many tools exist, there are the one we are going to use
 ## Main tools
 
 ![](tools_tidyverse.png)
+
 ::: {.notes}
 collection of tools (packages) that will help us coding in R
 :::
@@ -225,6 +229,7 @@ collection of tools (packages) that will help us coding in R
 ## Main tools
 
 ![](tools_git.png)
+
 ::: {.notes}
 git for version control
 :::
@@ -232,6 +237,7 @@ git for version control
 ## Main tools
 
 ![](tools_github.png)
+
 ::: {.notes}
 github for
 version control on web
@@ -255,18 +261,18 @@ all of this will be done through Rstudio that will make everything easier
 
 This document largely uses the following:
 
-- Course material of François Guillaumon [in French](https://rdatatoolbox.github.io/chapters/course-opensci.html)
+- Course material of François Guillaumon [in French](https://rdatatoolbox.github.io/chapters/course-opensci.html){preview-link="false"}
 
-- Wilson *et al* (2017) *Good enough practices in scientific computing* Downloadable [here](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
+- Wilson *et al* (2017) *Good enough practices in scientific computing* Downloadable [here](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510){preview-link="false"}
 
 
 
 
 ## Resources
 
-- British Ecological Society (2017) *Reproducible code* Downloadable [here]( https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Reproducible-code-guide.pdf)
+- British Ecological Society (2017) *Reproducible code* Downloadable [here]( https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Reproducible-code-guide.pdf){preview-link="false"}
 
-- Wilson *et al* (2017) *Good enough practices in scientific computing* Downloadable [here](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510)
+- Wilson *et al* (2017) *Good enough practices in scientific computing* Downloadable [here](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510){preview-link="false"}
 
 ::: {.notes}
 - BES Guide: a bit detailed for now, a bit old but some usefull information

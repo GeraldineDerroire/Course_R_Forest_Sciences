@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-03-07">
+  <meta name="dcterms.date" content="2025-03-18">
   <title>Using R for reproductible data management and analyses in Forest Sciences</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -343,7 +343,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-03-07</p>
+  <p class="date">2025-03-18</p>
 </section>
 <section>
 <section id="introduction-and-expectations-toward-this-module" class="title-slide slide level1 center">
@@ -477,7 +477,7 @@ Géraldine Derroire
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
-<p>The course material has been created using R V4.4.3 and quarto, and the code is available on <a href="https://github.com/GeraldineDerroire/Course_R_Forest_Sciences/tree/main">GitHub</a>.</p>
+<p>The course material has been created using R V4.4.3 and quarto, and the code is available on <a href="https://github.com/GeraldineDerroire/Course_R_Forest_Sciences/tree/main" data-preview-link="false">GitHub</a>.</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -799,6 +799,13 @@ Géraldine Derroire
             if (link.dataset.originalHref !== undefined) {
               link.href = link.dataset.originalHref;
             }
+              // target, if specified
+              link.setAttribute("target", "_blank");
+              if (link.getAttribute("rel") === null) {
+                link.setAttribute("rel", "noopener");
+              }
+              // default icon
+              link.classList.add("external");
           }
         }
       function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {

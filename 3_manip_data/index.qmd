@@ -10,6 +10,8 @@ format:
     slide-number: true
     preview-links: true
     chalkboard: true
+    link-external-icon: true
+    link-external-newwindow: true
 execute:
   echo: true      
 ---
