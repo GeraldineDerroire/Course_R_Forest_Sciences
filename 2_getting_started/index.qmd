@@ -355,7 +355,7 @@ y <- Ola!
 
 ## Mode of an object
 
-The type of object is called the *mode*.
+The type of an object is called the *mode*.
 
 We can use the function *mode* to check what is the mode of an object:
 
@@ -471,7 +471,7 @@ is.integer(x)
 
 ## Change the type of an object
 
-[But we can change the type of an object]{.fragment}
+We can change the type of an object.
 
 ::: fragment
 ```{r}
@@ -517,7 +517,7 @@ is.character(TRUE)
 
 ::: fragment
 ```{r}
-class(TRUE)
+mode(TRUE)
 ```
 :::
 
@@ -531,7 +531,7 @@ is.character("TRUE")
 
 You've done your first steps with R!
 
-Parabens 🎉
+Parabéns 🎉
 
 ::: notes
 End of the first session
