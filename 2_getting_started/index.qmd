@@ -34,9 +34,9 @@ Talk about the meaning of free Talk about the fact that it is collaborative and 
 
 ## What is R?
 
--   R is a **programming language** for processing and analysing quantitative data.It is derived from the programming language S.
+-   R is a **programming language** for processing and analysing quantitative data. It is derived from the programming language S.
 
--   R is free and **Open Source**: it is can be use, modified and distributed freely.
+-   R is free and **Open Source**: it is can be used, modified and distributed freely.
 
 -   R is **collaborative**: it is developed by its users.
 
@@ -78,7 +78,7 @@ Other things: text mining, GIS...
 
 ![](RStudio_logo.png){width="20%"}
 
-![](RStudio_screen.png){width="80%"}
+![](RStudio_screen.png){width="70%"}
 
 =\> RStudio opens R.
 
@@ -91,7 +91,7 @@ We find the same text than when we open R directly =\> RStudio opens R.
 
 ## What is RStudio?
 
-RStudio is an Integrated Development Environement" (IDE): a software that provided many facilies to help programming with R.
+RStudio is an *Integrated Development Environment* (IDE): a software that provides many facilities to help programming with R.
 
 ![](engine_dashboard.png)
 
@@ -185,7 +185,8 @@ log(-1)
 4 * 
 ```
 
-[This is an unfinished command. We can finish after the +.]{.fragment}
+[This is an unfinished command. We can finish after the +.
+![](unfinished.png){width="30%"}]{.fragment}
 
 [Or press *Esc* to terminate the command line.]{.fragment}
 
@@ -209,10 +210,9 @@ Let's put something in x
 x <- 5
 ```
 
-[*x* is an **object**. We assign it the value of 5, using the assignment operator **<-**]{.fragment}
+[*x* is an **object**. We assign it the value of 5, using the assignment operator **\<-**]{.fragment}
 
-[⚠️ The content of *x* is not printed.
-But we can see it by typing its name in the console.]{.fragment}
+[⚠️ The content of *x* is not printed. But we can see it by typing its name in the console.]{.fragment}
 
 ::: fragment
 ```{r}
@@ -257,8 +257,6 @@ ls()
 
 [⚠️ Typing *rm()* clears all the environement!]{.fragment}
 
-
-
 ## Assigning a new value to an existing object
 
 ```{r}
@@ -273,16 +271,15 @@ x
 ```
 :::
 
-[Assigning a new value to an object replaces the previous value (as you can see in the environment).]{.fragment}
+[Assigning a new value to an object replaces the previous value (as you can see in the environment).
+⚠️ Don't give the same name to several objects!]{.fragment}
 
-[⚠️ Objects are not linked:]{.fragment}
+## Objects are not linked
 
-::: fragment
 ```{r}
 y <- x
 y
 ```
-:::
 
 [Modifying *x* does not modify *y*.]{.fragment}
 
@@ -313,9 +310,12 @@ result3 <- 25 * x
 ```
 :::
 
-[We can name objects the way we want but...]{.fragment}
+[We can name objects the way we want but...🤔]{.fragment}
+
+[... calling them *result*, *result2*, *result3* is not explicit enought!]{.fragment}
 
 ::: notes
+What's wrong with the way we call them here?
 This way of naming objects is not going to be usefull...
 :::
 
@@ -323,15 +323,12 @@ This way of naming objects is not going to be usefull...
 
 Some good practices when naming an object:
 
-::: incremental
 -   Use explicit names while trying to keep names short
--   Object name can contain letter, numbers, the symbols [ . ]{style="color:indianred;"}, [ -]{style="color:indianred;"} 
-and [ \_ ]{style="color:indianred;"}
--   Object name cannot start with a number
-- Object names cannot contain a space
-- The case matters (upper and lower cases are not the same)
+-   Object names can contain letter, numbers, the symbols [.]{style="color:indianred;"}, [-]{style="color:indianred;"} and [\_]{style="color:indianred;"}
+-   Object names cannot start with a number
+-   Object names cannot contain a space
+-   The case matters (upper and lower cases are not the same)
 -   Avoid accents (for encoding problems)
-:::
 
 ## Naming an object
 
@@ -341,29 +338,230 @@ Adopt a consistant naming style
 
 ## Objects are not necessarly numbers
 
-Work in progress...
+What if we write some text in an object?
 
-<!-- see the course of Mélaine from slide 52 to see if there are things I want to add above-->
+```{r}
+y <- "Ola!"
+y
+```
 
-## Type of data
+[🤔 Why do we need the " " ?]{.fragment}
 
-Work in progress...
+::: fragment
+```{r, eval=FALSE}
+y <- Ola!
+```
+:::
 
+## Mode of an object
 
+The type of object is called the *mode*.
 
-<!-- 
+We can use the function *mode* to check what is the mode of an object:
 
-and they don't contain necessarly only one information => type of objects
+::: fragment
+```{r}
+x
+```
+:::
 
-or maybe after the part of wroking with RStudio so that it is not too much
+::: fragment
+```{r}
+mode(x)
+```
+:::
 
--->
+::: fragment
+```{r}
+mode(y)
+```
+:::
+
+## Mode of an object
+
+Here are the main modes you will use:
+
+```{r, echo=FALSE}
+mod <- data.frame(Mode = c("numeric", "character", "logical"),
+                  What = c("real number", "character string", "bolean (true/false)"),
+                  Example = c("2.3", " \"hello\" ", "true"))
+knitr::kable(mod)
+```
+
+::: notes
+But other exists: complex, raw, expression, function, list
+:::
+
+## Mode of an object
+
+🤔 What is a boolean?
+
+::: fragment
+```{r}
+test <- 2 == 3
+test
+```
+:::
+
+::: fragment
+```{r}
+mode(test)
+```
+:::
+
+::: notes
+we use == otherwise it is an assigment as is the \<-
+:::
+
+## Numeric
+
+Object of mode *numeric* can be:
+
+-   double: for any real number
+
+::: fragment
+```{r}
+x <- 1.5
+mode(x)
+typeof(x)
+```
+:::
+
+-   integer
+
+::: fragment
+```{r}
+x <- 1L
+mode(x)
+typeof(x)
+```
+:::
+
+::: notes
+The L is to specify that we want it to be integer
+:::
+
+## Check the type of an object
+
+```{r}
+x <- 1
+is.numeric(x)
+```
+
+::: fragment
+```{r}
+is.integer(x)
+```
+:::
+
+[🤔 Why?]{.fragment}
+
+::: fragment
+```{r}
+x <- 1L
+is.numeric(x)
+```
+:::
+
+::: fragment
+```{r}
+is.integer(x)
+```
+:::
+
+## Change the type of an object
+
+[But we can change the type of an object]{.fragment}
+
+::: fragment
+```{r}
+x <- 1
+is.integer(x)
+```
+:::
+
+::: fragment
+```{r}
+x <- as.integer(x)
+is.integer(x)
+```
+:::
+
+## Check and change the type of an object
+
+See also
+
+::: nonincremental
+-   *is.numeric* and *as.numeric*
+
+-   *is.integer* and *as.integer*
+
+-   *is.double* and *as.double*
+
+-   *is.character* and *as.character*
+
+-   *is.logical* and *as.logical*
+
+-   ...
+:::
+
+## Let's play a bit!
+
+🤔
+
+::: fragment
+```{r}
+is.character(TRUE)
+```
+:::
+
+::: fragment
+```{r}
+class(TRUE)
+```
+:::
+
+::: fragment
+```{r}
+is.character("TRUE")
+```
+:::
+
+## All good?
+
+You've done your first steps with R!
+
+Parabens 🎉
+
+::: notes
+End of the first session
+If still a lot of time
+=> questions?
+=> start the third session on vectors?
+:::
+
+# Questions on the last session?
+
+::: notes
+Start of the second session
+:::
+
+## Let's see if all is clear
+
+::: notes
+TO DO, add some tests
+:::
 
 
 # Working with RStudio
 
+Before going further with our exploration of R, let's get organised!
+
 Work in progress...
 
+<!-- have them create a project that they will use for the whole class-->
+
+```{=html}
 <!-- 
 les scripts, commenter les scripts...
 See cours Mélaine sur working enviro
@@ -371,19 +569,108 @@ puis project, project organisation
 Voir aide RStudio ? et le mettre dans les ressources
 
 -->
+```
+
+<!-- voir 2.4 in Juba-->
+
+# Data structure
+
+![](data_structure.png){width="120%"}
+
+## Vectors
+
+```{=html}
+<!-- what if we want to put more than a value in an object
+cf Mélaine slide 61... 
+-->
+```
+
+```{=html}
+<!-- see class Juba here, from 2.2.2
+
+https://larmarange.github.io/analyse-R/vecteurs-indexation-et-assignation.html-->
+```
+
+## Factors
+
+```{=html}
+<!--
+Class of data, that we can use for a vector
+
+par ex, si on a un vecteur de 3 couleurs => en faire un vecteur de caractères et le transformer en vecteur
+
+https://larmarange.github.io/analyse-R/facteurs-et-vecteurs-labellises.html
+
+-->
+```
+
+## Lists
+
+```{=html}
+<!-- mélaine slide 74
+
+https://larmarange.github.io/analyse-R/listes-et-tableaux-de-donnees.html
+-->
+```
+
+## Matrices
+
+<!-- mélaine slide 77-->
+
+## Arrays
+
+## Dataframes
+
+```{=html}
+<!-- mélaine slide 81
+
+But we will see this later, during the session Manipulating data-->
+```
+
+```{=html}
+<!-- 
+
+and they don't contain necessarly only one information 
+
+-->
+```
+
+<!-- prepare some ex for next time-->
 
 # Functions, operators, packages, etc...
 
 Work in progress...
 
+```{=html}
+<!-- see slides Mélaine from slide 58 for operators
+include here operation on vectors, matrix, etc...
+
+tehn from slide 69 for fonctions
+then slide 83 on fonctions
+
+et slides juba
+
+Dire que tout est des objects (see slide Mélaine on object 53)
+
+and how to get HELP -->
+```
+
 ## Acknowledgments
 
+```{=html}
 <!-- AT the end: recheck the two course to see if I have forgotten something
 
 + lister des ressources
 
 + faire des exercices pour chaque fin de session!!!!! -->
+```
 
 <!-- Cours Juba, cours Mélaine-->
 
 ## Resources
+:::
+::::
+:::::
+::::::
+:::::::
+::::::::

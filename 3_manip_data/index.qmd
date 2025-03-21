@@ -23,6 +23,8 @@ are a “centralized repository of information about data such as meaning,
 relationships to other data, origin, usage, and format” (IBM Dictionary
 of Computing, 10th edition, 1993). In Jenkins et al 2023
 
+<!-- have them work on the project they created last time-->
+
 ## What about open science?
 
 sharing of data products, code, and metadata

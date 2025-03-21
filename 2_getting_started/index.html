@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-03-18">
+  <meta name="dcterms.date" content="2025-03-21">
   <title>Getting started with R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-03-18</p>
+  <p class="date">2025-03-21</p>
 </section>
 <section>
 <section id="r-and-rstudio" class="title-slide slide level1 center">
@@ -435,8 +435,8 @@ Géraldine Derroire
 <section id="what-is-r" class="slide level2">
 <h2>What is R?</h2>
 <ul>
-<li class="fragment"><p>R is a <strong>programming language</strong> for processing and analysing quantitative data.It is derived from the programming language S.</p></li>
-<li class="fragment"><p>R is free and <strong>Open Source</strong>: it is can be use, modified and distributed freely.</p></li>
+<li class="fragment"><p>R is a <strong>programming language</strong> for processing and analysing quantitative data. It is derived from the programming language S.</p></li>
+<li class="fragment"><p>R is free and <strong>Open Source</strong>: it is can be used, modified and distributed freely.</p></li>
 <li class="fragment"><p>R is <strong>collaborative</strong>: it is developed by its users.</p></li>
 <li class="fragment"><p>R is <strong>multi-plateform</strong>: it works on Windows, Linux and Mac.</p></li>
 </ul>
@@ -481,7 +481,7 @@ Géraldine Derroire
 <section id="lets-open-rstudio" class="slide level2">
 <h2>Let’s open RStudio</h2>
 <p><img data-src="RStudio_logo.png" style="width:20.0%"></p>
-<p><img data-src="RStudio_screen.png" style="width:80.0%"></p>
+<p><img data-src="RStudio_screen.png" style="width:70.0%"></p>
 <p>=&gt; RStudio opens R.</p>
 <aside class="notes">
 <p>We are not going to work directly in R but in RStudio, for reason that you will discover in the coming hours, and days. =&gt; Let’s close R and open RStudio.</p>
@@ -500,7 +500,7 @@ Géraldine Derroire
 </section>
 <section id="what-is-rstudio" class="slide level2">
 <h2>What is RStudio?</h2>
-<p>RStudio is an Integrated Development Environement” (IDE): a software that provided many facilies to help programming with R.</p>
+<p>RStudio is an <em>Integrated Development Environment</em> (IDE): a software that provides many facilities to help programming with R.</p>
 
 <img data-src="engine_dashboard.png" class="r-stretch"><aside class="notes">
 <p>RStudio is also free and open source.</p>
@@ -656,7 +656,7 @@ Géraldine Derroire
 <div class="cell fragment">
 
 </div>
-<p><span class="fragment">This is an unfinished command. We can finish after the +.</span></p>
+<p><span class="fragment">This is an unfinished command. We can finish after the +. <img data-src="unfinished.png" style="width:30.0%"></span></p>
 <p><span class="fragment">Or press <em>Esc</em> to terminate the command line.</span></p>
 </section>
 <section id="lets-try-some-more-commands-2" class="slide level2">
@@ -763,9 +763,10 @@ Géraldine Derroire
 </div>
 </div>
 </div>
-<p><span class="fragment">Assigning a new value to an object replaces the previous value (as you can see in the environment).</span></p>
-<p><span class="fragment">⚠️ Objects are not linked:</span></p>
-<div class="fragment">
+<p><span class="fragment">Assigning a new value to an object replaces the previous value (as you can see in the environment). ⚠️ Don’t give the same name to several objects!</span></p>
+</section>
+<section id="objects-are-not-linked" class="slide level2">
+<h2>Objects are not linked</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>y <span class="ot">&lt;-</span> x</span>
 <span id="cb36-2"><a href=""></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -773,7 +774,6 @@ Géraldine Derroire
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 9</code></pre>
-</div>
 </div>
 </div>
 <p><span class="fragment">Modifying <em>x</em> does not modify <em>y</em>.</span></p>
@@ -814,9 +814,10 @@ Géraldine Derroire
 
 </div>
 </div>
-<p><span class="fragment">We can name objects the way we want but…</span></p>
+<p><span class="fragment">We can name objects the way we want but…🤔</span></p>
+<p><span class="fragment">… calling them <em>result</em>, <em>result2</em>, <em>result3</em> is not explicit enought!</span></p>
 <aside class="notes">
-<p>This way of naming objects is not going to be usefull…</p>
+<p>What’s wrong with the way we call them here? This way of naming objects is not going to be usefull…</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -832,16 +833,14 @@ Géraldine Derroire
 <section id="naming-an-object" class="slide level2">
 <h2>Naming an object</h2>
 <p>Some good practices when naming an object:</p>
-<div>
 <ul>
 <li class="fragment">Use explicit names while trying to keep names short</li>
-<li class="fragment">Object name can contain letter, numbers, the symbols <span style="color:indianred;">.</span>, <span style="color:indianred;">-</span> and <span style="color:indianred;">_</span></li>
-<li class="fragment">Object name cannot start with a number</li>
+<li class="fragment">Object names can contain letter, numbers, the symbols <span style="color:indianred;">.</span>, <span style="color:indianred;">-</span> and <span style="color:indianred;">_</span></li>
+<li class="fragment">Object names cannot start with a number</li>
 <li class="fragment">Object names cannot contain a space</li>
 <li class="fragment">The case matters (upper and lower cases are not the same)</li>
 <li class="fragment">Avoid accents (for encoding problems)</li>
 </ul>
-</div>
 </section>
 <section id="naming-an-object-1" class="slide level2">
 <h2>Naming an object</h2>
@@ -850,23 +849,373 @@ Géraldine Derroire
 <img data-src="name_style.png" class="r-stretch"></section>
 <section id="objects-are-not-necessarly-numbers" class="slide level2">
 <h2>Objects are not necessarly numbers</h2>
-<p>Work in progress…</p>
-<!-- see the course of Mélaine from slide 52 to see if there are things I want to add above-->
+<p>What if we write some text in an object?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a>y <span class="ot">&lt;-</span> <span class="st">"Ola!"</span></span>
+<span id="cb43-2"><a href=""></a>y</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Ola!"</code></pre>
+</div>
+</div>
+<p><span class="fragment">🤔 Why do we need the ” ” ?</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>y <span class="ot">&lt;-</span> Ola<span class="sc">!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
 </section>
-<section id="type-of-data" class="slide level2">
-<h2>Type of data</h2>
-<p>Work in progress…</p>
-<!-- 
-
-and they don't contain necessarly only one information => type of objects
-
-or maybe after the part of wroking with RStudio so that it is not too much
-
--->
+<section id="mode-of-an-object" class="slide level2">
+<h2>Mode of an object</h2>
+<p>The type of object is called the <em>mode</em>.</p>
+<p>We can use the function <em>mode</em> to check what is the mode of an object:</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">mode</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a><span class="fu">mode</span>(y)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="mode-of-an-object-1" class="slide level2">
+<h2>Mode of an object</h2>
+<p>Here are the main modes you will use:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Mode</th>
+<th style="text-align: left;">What</th>
+<th style="text-align: left;">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">numeric</td>
+<td style="text-align: left;">real number</td>
+<td style="text-align: left;">2.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">character</td>
+<td style="text-align: left;">character string</td>
+<td style="text-align: left;">“hello”</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">logical</td>
+<td style="text-align: left;">bolean (true/false)</td>
+<td style="text-align: left;">true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<aside class="notes">
+<p>But other exists: complex, raw, expression, function, list</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="mode-of-an-object-2" class="slide level2">
+<h2>Mode of an object</h2>
+<p>🤔 What is a boolean?</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a>test <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span></span>
+<span id="cb52-2"><a href=""></a>test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a><span class="fu">mode</span>(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>we use == otherwise it is an assigment as is the &lt;-</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="numeric" class="slide level2">
+<h2>Numeric</h2>
+<p>Object of mode <em>numeric</em> can be:</p>
+<ul>
+<li class="fragment">double: for any real number</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fl">1.5</span></span>
+<span id="cb56-2"><a href=""></a><span class="fu">mode</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="fu">typeof</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">integer</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">1</span>L</span>
+<span id="cb60-2"><a href=""></a><span class="fu">mode</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="fu">typeof</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>The L is to specify that we want it to be integer</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="check-the-type-of-an-object" class="slide level2">
+<h2>Check the type of an object</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb64-2"><a href=""></a><span class="fu">is.numeric</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="fu">is.integer</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">🤔 Why?</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">1</span>L</span>
+<span id="cb68-2"><a href=""></a><span class="fu">is.numeric</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a><span class="fu">is.integer</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="change-the-type-of-an-object" class="slide level2">
+<h2>Change the type of an object</h2>
+<p><span class="fragment">But we can change the type of an object</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb72-2"><a href=""></a><span class="fu">is.integer</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(x)</span>
+<span id="cb74-2"><a href=""></a><span class="fu">is.integer</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="check-and-change-the-type-of-an-object" class="slide level2">
+<h2>Check and change the type of an object</h2>
+<p>See also</p>
+<div>
+<ul>
+<li><p><em>is.numeric</em> and <em>as.numeric</em></p></li>
+<li><p><em>is.integer</em> and <em>as.integer</em></p></li>
+<li><p><em>is.double</em> and <em>as.double</em></p></li>
+<li><p><em>is.character</em> and <em>as.character</em></p></li>
+<li><p><em>is.logical</em> and <em>as.logical</em></p></li>
+<li><p>…</p></li>
+</ul>
+</div>
+</section>
+<section id="lets-play-a-bit" class="slide level2">
+<h2>Let’s play a bit!</h2>
+<p>🤔</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a><span class="fu">is.character</span>(<span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a><span class="fu">class</span>(<span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href=""></a><span class="fu">is.character</span>(<span class="st">"TRUE"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="all-good" class="slide level2">
+<h2>All good?</h2>
+<p>You’ve done your first steps with R!</p>
+<p>Parabens 🎉</p>
+<aside class="notes">
+<p>End of the first session If still a lot of time =&gt; questions? =&gt; start the third session on vectors?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="questions-on-the-last-session" class="title-slide slide level1 center">
+<h1>Questions on the last session?</h1>
+<aside class="notes">
+<p>Start of the second session</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lets-see-if-all-is-clear" class="slide level2">
+<h2>Let’s see if all is clear</h2>
+<aside class="notes">
+<p>TO DO, add some tests</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section id="working-with-rstudio" class="title-slide slide level1 center">
 <h1>Working with RStudio</h1>
+<p>Before going further with our exploration of R, let’s get organised!</p>
 <p>Work in progress…</p>
+<!-- have them create a project that they will use for the whole class-->
 <!-- 
 les scripts, commenter les scripts...
 See cours Mélaine sur working enviro
@@ -874,12 +1223,75 @@ puis project, project organisation
 Voir aide RStudio ? et le mettre dans les ressources
 
 -->
+<!-- voir 2.4 in Juba-->
 </section>
 
+<section>
+<section id="data-structure" class="title-slide slide level1 center">
+<h1>Data structure</h1>
+
+<img data-src="data_structure.png" style="width:120.0%" class="r-stretch"></section>
+<section id="vectors" class="slide level2">
+<h2>Vectors</h2>
+<!-- what if we want to put more than a value in an object
+cf Mélaine slide 61... 
+-->
+<!-- see class Juba here, from 2.2.2
+
+https://larmarange.github.io/analyse-R/vecteurs-indexation-et-assignation.html-->
+</section>
+<section id="factors" class="slide level2">
+<h2>Factors</h2>
+<!--
+Class of data, that we can use for a vector
+
+par ex, si on a un vecteur de 3 couleurs => en faire un vecteur de caractères et le transformer en vecteur
+
+https://larmarange.github.io/analyse-R/facteurs-et-vecteurs-labellises.html
+
+-->
+</section>
+<section id="lists" class="slide level2">
+<h2>Lists</h2>
+<!-- mélaine slide 74
+
+https://larmarange.github.io/analyse-R/listes-et-tableaux-de-donnees.html
+-->
+</section>
+<section id="matrices" class="slide level2">
+<h2>Matrices</h2>
+<!-- mélaine slide 77-->
+</section>
+<section id="arrays" class="slide level2">
+<h2>Arrays</h2>
+</section>
+<section id="dataframes" class="slide level2">
+<h2>Dataframes</h2>
+<!-- mélaine slide 81
+
+But we will see this later, during the session Manipulating data-->
+<!-- 
+
+and they don't contain necessarly only one information 
+
+-->
+<!-- prepare some ex for next time-->
+</section></section>
 <section>
 <section id="functions-operators-packages-etc" class="title-slide slide level1 center">
 <h1>Functions, operators, packages, etc…</h1>
 <p>Work in progress…</p>
+<!-- see slides Mélaine from slide 58 for operators
+include here operation on vectors, matrix, etc...
+
+tehn from slide 69 for fonctions
+then slide 83 on fonctions
+
+et slides juba
+
+Dire que tout est des objects (see slide Mélaine on object 53)
+
+and how to get HELP -->
 </section>
 <section id="acknowledgments" class="slide level2">
 <h2>Acknowledgments</h2>
@@ -892,6 +1304,7 @@ Voir aide RStudio ? et le mettre dans les ressources
 </section>
 <section id="resources" class="slide level2">
 <h2>Resources</h2>
+<p>::: :::: ::::: :::::: ::::::: ::::::::</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
