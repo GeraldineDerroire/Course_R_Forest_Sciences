@@ -34,7 +34,8 @@ Talk about the meaning of free Talk about the fact that it is collaborative and 
 
 ## What is R?
 
--   R is a **programming language** for processing and analysing quantitative data. It is derived from the programming language S.
+-   R is a **programming language** for processing and analysing quantitative data.
+    It is derived from the programming language S.
 
 -   R is free and **Open Source**: it is can be used, modified and distributed freely.
 
@@ -185,8 +186,7 @@ log(-1)
 4 * 
 ```
 
-[This is an unfinished command. We can finish after the +.
-![](unfinished.png){width="30%"}]{.fragment}
+[This is an unfinished command. We can finish after the +. ![](unfinished.png){width="30%"}]{.fragment}
 
 [Or press *Esc* to terminate the command line.]{.fragment}
 
@@ -271,8 +271,7 @@ x
 ```
 :::
 
-[Assigning a new value to an object replaces the previous value (as you can see in the environment).
-⚠️ Don't give the same name to several objects!]{.fragment}
+[Assigning a new value to an object replaces the previous value (as you can see in the environment). ⚠️ Don't give the same name to several objects!]{.fragment}
 
 ## Objects are not linked
 
@@ -533,11 +532,11 @@ You've done your first steps with R!
 
 Parabéns 🎉
 
+![](courage.png){fig-align="center"}
+
 ::: notes
-End of the first session
-If still a lot of time
-=> questions?
-=> start the third session on vectors?
+End of the first session If still a lot of time =\> questions?
+=\> start the third session on vectors?
 :::
 
 # Questions on the last session?
@@ -552,26 +551,237 @@ Start of the second session
 TO DO, add some tests
 :::
 
-
 # Working with RStudio
 
 Before going further with our exploration of R, let's get organised!
 
-Work in progress...
+## 
 
-<!-- have them create a project that they will use for the whole class-->
+🤔 Where are the object stored ?
+and the commands ?
+
+What happens when we close and restart a R session?
+
+[**We need need to save our work!**]{.fragment}
+
+::: notes
+For this we are going to use a script
+:::
+
+## Script
+
+What is a script?
+
+A script is a text file in which can can write and organise all the commands of a workflow.
+
+This is the core of our work.
+
+Saving all the commands in a script is what makes our work **reproductible**.
 
 ```{=html}
-<!-- 
-les scripts, commenter les scripts...
-See cours Mélaine sur working enviro
-puis project, project organisation
-Voir aide RStudio ? et le mettre dans les ressources
+<!--Here section 2.4 juba
 
--->
+26 Mélaine-->
 ```
 
-<!-- voir 2.4 in Juba-->
+## Let's create a new script
+
+In RStudio, click on *File \> New file \> R script*
+
+![](new_script){width="100%"}
+
+This opens a new pane in RStudio, this is the text editor where we can write the script.
+
+## Adding a command in a script and running it
+
+Let's write a command in the script.
+
+To run it, select it and click on *Run*.
+
+![](run_command){width="100%"}
+
+💡 You can also use the keyboard shortcut ***Ctrl + Enter***.
+
+You can select only one command or a group of commands.
+
+## Commenting a script
+
+It is very important to **document** your script by commenting it.
+Remember?
+
+![](not_repro.png)
+
+[Comment your code **abundantly**! Choose the language well.]{.fragment}
+
+## Commenting a script
+
+To comment a script use one or several [\#]{style="color:indianred;"}.
+
+R will ignore everything that comes after, until the end of the line.
+
+![](comments.png){width="120%"}
+
+You can comment before or at the end of a line.
+
+## Organising a script
+
+::::: columns
+::: {.column width="40%"}
+A script should include:
+
+-   a header: title, date, author
+
+-   a description of what the script does
+:::
+
+::: {.column width="60%"}
+![](script_orga.png)
+:::
+:::::
+
+-   an outline
+
+-   several sections (blocks of code)
+
+[💡 Use blank lines and indents to organise your script]{.fragment}
+
+## Blocks of code
+
+Adding [\####]{style="color:indianred;"} (4 or more) or several [----]{style="color:indianred;"}at the end of a line, create a block of code.
+
+![](script_block.png)
+
+You can fold/unfold a block of code by clicking on the grey arrow.
+
+And you can see an overview of the script by clicking on *Outline*.
+
+## Colours in a script
+
+Colours in a R script help you distinguish comments, numeric values, character strings, functions...
+
+![](script_color.png){width="80%"}
+
+💡 You can change the color theme in *Tools \> Global options \> Appearance*.
+
+## Save and open a script
+
+When there are unsaved changes in a script, it appears in blue
+
+![](unsaved_script.png){width="80%"}
+
+[To save a script, go to *File \> Save* or *File \> Save*. 💡 You can also use the shortcut *Ctrl + S* or click on 💾.]{.fragment}
+
+[To open an existing script, go *File \> Open file...*.💡 You can also use the short cut *Ctrl + O* or click on 📂.]{.fragment}
+
+## R file
+
+The script is saved as an *.R* file:
+
+*.R* files are recognised as R script by RStudio, which allows using the syntax colour code, and running the code directly.
+
+## Working directory
+
+The working directory is where R works.
+
+This is where R looks for when you want to open or save a file.
+
+To know where is the working directory:
+
+```{r}
+getwd()
+```
+
+[This gives the absolute path to the work directory]{.fragment}
+
+[You can change the working directory using the function *setwd()* to organise your work in a same folder.]{.fragment}
+
+::: fragment
+```{r, eval=FALSE}
+setwd("D:/some_other_folder")
+```
+:::
+
+::: notes
+But we will see in 5 min that there is a better way of doing this.
+:::
+
+## Problems with absolute path
+
+-   If you move your folder, the path will no longer work.
+
+-   If you give your script to someone else, they will have to manually change the path to use your script.
+
+-   If you are messy...
+
+::: fragment
+![](messy.png){width="50%"}
+:::
+
+## RStudio project
+
+We will use **RStudio projects** to organise the workflow and gather all the files related to a same workflow in a same place.
+
+A RStudio project is a folder on your computer where all the files of the project are grouped.
+
+By default, the working directory of a project is this folder.
+So no more problems with absolute path 😊! 
+
+To share a project, just share the full folder.
+
+## RStudio project
+
+To create a new RStudio project, go to *File > New project...*
+
+![](new_project.png)
+
+You can either start a new directory or associate an existing one, if you already have one.
+
+## RStudio project
+
+RStudio creates a *.Rproj* file that contains information about your project (you won't need to open it).
+
+![](Rproj.png){width="100%"}
+
+## RStudio project
+
+You can see the name of the project, and switch from one project to another in the upper right corner.
+
+You can see the path to the project folder at the top of the Console. 
+This is the working directory (try getwd to check this).
+
+![](project.png){width="100%"}
+
+
+## RStudio project
+
+When you create a new script, RStudio save it by default in the project folder.
+
+You can view the content of the project folder in the file pane.
+
+![](file_pane.png){width="100%"}
+
+## RStudio project
+
+From now on, we will always work with RStudio project.
+
+Let's create one for the course.
+
+::: notes
+Give time for them to create a project.
+:::
+
+## Organising a RStudio project
+
+
+
+
+## Organise a workflow into several scripts
+
+JUba section 5.3 sourcing
+
+Puis parler de l'organisation des projects Cesab et BES
+
+
 
 # Data structure
 
@@ -668,9 +878,7 @@ and how to get HELP -->
 <!-- Cours Juba, cours Mélaine-->
 
 ## Resources
-:::
-::::
-:::::
-::::::
-:::::::
-::::::::
+
+<!-- TO FINISH-->
+
+**RStudio** cheatsheet in [English](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf){preview-link="false"} and in [Portuguese](https://rstudio.github.io/cheatsheets/translations/portuguese/rstudio-ide_pt.pdf){preview-link="false"}

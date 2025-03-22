@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-03-21">
+  <meta name="dcterms.date" content="2025-03-22">
   <title>Getting started with R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-03-21</p>
+  <p class="date">2025-03-22</p>
 </section>
 <section>
 <section id="r-and-rstudio" class="title-slide slide level1 center">
@@ -1164,7 +1164,8 @@ Géraldine Derroire
 <h2>All good?</h2>
 <p>You’ve done your first steps with R!</p>
 <p>Parabéns 🎉</p>
-<aside class="notes">
+
+<img data-src="courage.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
 <p>End of the first session If still a lot of time =&gt; questions? =&gt; start the third session on vectors?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1211,10 +1212,193 @@ Géraldine Derroire
           display:block!important;
       }</style></aside>
 </section></section>
+<section>
 <section id="working-with-rstudio" class="title-slide slide level1 center">
 <h1>Working with RStudio</h1>
 <p>Before going further with our exploration of R, let’s get organised!</p>
-<p>Work in progress…</p>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<p>🤔 Where are the object stored ? and the commands ?</p>
+<p>What happens when we close and restart a R session?</p>
+<p><span class="fragment"><strong>We need need to save our work!</strong></span></p>
+<aside class="notes">
+<p>For this we are going to use a script</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="script" class="slide level2">
+<h2>Script</h2>
+<p>What is a script?</p>
+<p>A script is a text file in which can can write and organise all the commands of a workflow.</p>
+<p>This is the core of our work.</p>
+<p>Saving all the commands in a script is what makes our work <strong>reproductible</strong>.</p>
+<!--Here section 2.4 juba
+
+26 Mélaine-->
+</section>
+<section id="lets-create-a-new-script" class="slide level2">
+<h2>Let’s create a new script</h2>
+<p>In RStudio, click on <em>File &gt; New file &gt; R script</em></p>
+
+<img data-src="new_script.png" style="width:100.0%" class="r-stretch"><p>This opens a new pane in RStudio, this is the text editor where we can write the script.</p>
+</section>
+<section id="adding-a-command-in-a-script-and-running-it" class="slide level2">
+<h2>Adding a command in a script and running it</h2>
+<p>Let’s write a command in the script.</p>
+<p>To run it, select it and click on <em>Run</em>.</p>
+
+<img data-src="run_command.png" style="width:100.0%" class="r-stretch"><p>💡 You can also use the keyboard shortcut <strong><em>Ctrl + Enter</em></strong>.</p>
+<p>You can select only one command or a group of commands.</p>
+</section>
+<section id="commenting-a-script" class="slide level2">
+<h2>Commenting a script</h2>
+<p>It is very important to <strong>document</strong> your script by commenting it. Remember?</p>
+
+<img data-src="not_repro.png" class="r-stretch"><p><span class="fragment">Comment your code <strong>abundantly</strong>! Choose the language well.</span></p>
+</section>
+<section id="commenting-a-script-1" class="slide level2">
+<h2>Commenting a script</h2>
+<p>To comment a script use one or several <span style="color:indianred;">#</span>.</p>
+<p>R will ignore everything that comes after, until the end of the line.</p>
+
+<img data-src="comments.png" style="width:120.0%" class="r-stretch"><p>You can comment before or at the end of a line.</p>
+</section>
+<section id="organising-a-script" class="slide level2">
+<h2>Organising a script</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p>A script should include:</p>
+<ul>
+<li class="fragment"><p>a header: title, date, author</p></li>
+<li class="fragment"><p>a description of what the script does</p></li>
+</ul>
+</div><div class="column" style="width:60%;">
+<p><img data-src="script_orga.png"></p>
+</div></div>
+<ul>
+<li class="fragment"><p>an outline</p></li>
+<li class="fragment"><p>several sections (blocks of code)</p></li>
+</ul>
+<p><span class="fragment">💡 Use blank lines and indents to organise your script</span></p>
+</section>
+<section id="blocks-of-code" class="slide level2">
+<h2>Blocks of code</h2>
+<p>Adding <span style="color:indianred;">####</span> (4 or more) or several <span style="color:indianred;">—-</span>at the end of a line, create a block of code.</p>
+
+<img data-src="script_block.png" class="r-stretch"><p>You can fold/unfold a block of code by clicking on the grey arrow.</p>
+<p>And you can see an overview of the script by clicking on <em>Outline</em>.</p>
+</section>
+<section id="colours-in-a-script" class="slide level2">
+<h2>Colours in a script</h2>
+<p>Colours in a R script help you distinguish comments, numeric values, character strings, functions…</p>
+
+<img data-src="script_color.png" style="width:80.0%" class="r-stretch"><p>💡 You can change the color theme in <em>Tools &gt; Global options &gt; Appearance</em>.</p>
+</section>
+<section id="save-and-open-a-script" class="slide level2">
+<h2>Save and open a script</h2>
+<p>When there are unsaved changes in a script, it appears in blue</p>
+
+<img data-src="unsaved_script.png" style="width:80.0%" class="r-stretch"><p><span class="fragment">To save a script, go to <em>File &gt; Save</em> or <em>File &gt; Save</em>. 💡 You can also use the shortcut <em>Ctrl + S</em> or click on 💾.</span></p>
+<p><span class="fragment">To open an existing script, go <em>File &gt; Open file…</em>.💡 You can also use the short cut <em>Ctrl + O</em> or click on 📂.</span></p>
+</section>
+<section id="r-file" class="slide level2">
+<h2>R file</h2>
+<p>The script is saved as an <em>.R</em> file:</p>
+<p><em>.R</em> files are recognised as R script by RStudio, which allows using the syntax colour code, and running the code directly.</p>
+</section>
+<section id="working-directory" class="slide level2">
+<h2>Working directory</h2>
+<p>The working directory is where R works.</p>
+<p>This is where R looks for when you want to open or save a file.</p>
+<p>To know where is the working directory:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href=""></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "D:/my_R_remote/Course_R_Forest_Sciences/2_getting_started"</code></pre>
+</div>
+</div>
+<p><span class="fragment">This gives the absolute path to the work directory</span></p>
+<p><span class="fragment">You can change the working directory using the function <em>setwd()</em> to organise your work in a same folder.</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a><span class="fu">setwd</span>(<span class="st">"D:/some_other_folder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<aside class="notes">
+<p>But we will see in 5 min that there is a better way of doing this.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="problems-with-absolute-path" class="slide level2">
+<h2>Problems with absolute path</h2>
+<ul>
+<li class="fragment"><p>If you move your folder, the path will no longer work.</p></li>
+<li class="fragment"><p>If you give your script to someone else, they will have to manually change the path to use your script.</p></li>
+<li class="fragment"><p>If you are messy…</p></li>
+</ul>
+<div class="fragment">
+<p><img data-src="messy.png" style="width:50.0%"></p>
+</div>
+</section>
+<section id="rstudio-project" class="slide level2">
+<h2>RStudio project</h2>
+<p>We will use <strong>RStudio projects</strong> to organise the workflow and gather all the files related to a same workflow in a same place.</p>
+<p>A RStudio project is a folder on your computer where all the files of the project are grouped.</p>
+<p>By default, the working directory of a project is this folder. So no more problems with absolute path 😊!</p>
+<p>To share a project, just share the full folder.</p>
+</section>
+<section id="rstudio-project-1" class="slide level2">
+<h2>RStudio project</h2>
+<p>To create a new RStudio project, go to <em>File &gt; New project…</em></p>
+
+<img data-src="new_project.png" class="r-stretch"><p>You can either start a new directory or associate an existing one, if you already have one.</p>
+<p>Let’s try!</p>
+</section>
+<section id="rstudio-project-2" class="slide level2">
+<h2>RStudio project</h2>
+<p>RStudio creates a <em>.Rproj</em> file that contains information about your project (you won’t need to open it).</p>
+
+<img data-src="Rproj.png" style="width:100.0%" class="r-stretch"></section>
+<section id="rstudio-project-3" class="slide level2">
+<h2>RStudio project</h2>
+<p>You can see the name of the project, and switch from one project to another in the upper right corner.</p>
+<p>You can see the path to the project folder at the top of the Console. This is the working directory (try getwd to check this).</p>
+
+<img data-src="project.png" style="width:100.0%" class="r-stretch"></section>
+<section id="rstudio-project-4" class="slide level2">
+<h2>RStudio project</h2>
+<p>When you create a new script, RStudio save it by default in the project folder.</p>
+<p>You can view the content of the project folder in the file pane.</p>
+
+<img data-src="file_pane.png" style="width:100.0%" class="r-stretch"></section>
+<section id="organise-a-workflow-into-several-script" class="slide level2">
+<h2>Organise a workflow into several script</h2>
+<p>JUba section 5.3 sourcing</p>
+<p>Puis parler de l’organisation des projects Cesab et BES</p>
 <!-- have them create a project that they will use for the whole class-->
 <!-- 
 les scripts, commenter les scripts...
@@ -1224,8 +1408,7 @@ Voir aide RStudio ? et le mettre dans les ressources
 
 -->
 <!-- voir 2.4 in Juba-->
-</section>
-
+</section></section>
 <section>
 <section id="data-structure" class="title-slide slide level1 center">
 <h1>Data structure</h1>
@@ -1304,7 +1487,8 @@ and how to get HELP -->
 </section>
 <section id="resources" class="slide level2">
 <h2>Resources</h2>
-<p>::: :::: ::::: :::::: ::::::: ::::::::</p>
+<!-- TO FINISH-->
+<p><strong>RStudio</strong> cheatsheet in <a href="https://rstudio.github.io/cheatsheets/rstudio-ide.pdf" data-preview-link="false">English</a> and in <a href="https://rstudio.github.io/cheatsheets/translations/portuguese/rstudio-ide_pt.pdf" data-preview-link="false">Portuguese</a></p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
