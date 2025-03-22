@@ -8,13 +8,13 @@ delivered by Géraldine Derroire (Cirad-University of Brasilia).
 Course syllabus in English is [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/EFL360457_R_for_Forest_Sciences_2025.pdf),
 and in Portuguese [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/EFL360457_R_para_Ciencias_Florestais_2025.pdf).
 
+The course material has been created using quarto and R version 4.4.3.
+
 # Content
 
 - [Course introduction](https://geraldinederroire.github.io/Course_R_Forest_Sciences)
 - [Set up the working environment](https://geraldinederroire.github.io/Course_R_Forest_Sciences/0_installing_enviro)
 - [Principles of reproductible science](https://geraldinederroire.github.io/Course_R_Forest_Sciences/1_reproducible_science)
-
-The course material has been created using quarto and R V4.4.3.
 
 <!--
 

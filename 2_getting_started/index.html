@@ -1308,7 +1308,7 @@ Géraldine Derroire
 <h2>Save and open a script</h2>
 <p>When there are unsaved changes in a script, it appears in blue</p>
 
-<img data-src="unsaved_script.png" style="width:80.0%" class="r-stretch"><p><span class="fragment">To save a script, go to <em>File &gt; Save</em> or <em>File &gt; Save</em>. 💡 You can also use the shortcut <em>Ctrl + S</em> or click on 💾.</span></p>
+<img data-src="unsaved_script.png" style="width:80.0%" class="r-stretch"><p><span class="fragment">To save a script, go to <em>File &gt; Save</em> or <em>File &gt; Save As…</em>. 💡 You can also use the shortcut <em>Ctrl + S</em> or click on 💾.</span></p>
 <p><span class="fragment">To open an existing script, go <em>File &gt; Open file…</em>.💡 You can also use the short cut <em>Ctrl + O</em> or click on 📂.</span></p>
 </section>
 <section id="r-file" class="slide level2">
@@ -1369,14 +1369,13 @@ Géraldine Derroire
 <p>We will use <strong>RStudio projects</strong> to organise the workflow and gather all the files related to a same workflow in a same place.</p>
 <p>A RStudio project is a folder on your computer where all the files of the project are grouped.</p>
 <p>By default, the working directory of a project is this folder. So no more problems with absolute path 😊!</p>
-<p>To share a project, just share the full folder.</p>
+<p>To share a project, just share the full folder 👍.</p>
 </section>
 <section id="rstudio-project-1" class="slide level2">
 <h2>RStudio project</h2>
 <p>To create a new RStudio project, go to <em>File &gt; New project…</em></p>
 
 <img data-src="new_project.png" class="r-stretch"><p>You can either start a new directory or associate an existing one, if you already have one.</p>
-<p>Let’s try!</p>
 </section>
 <section id="rstudio-project-2" class="slide level2">
 <h2>RStudio project</h2>
@@ -1395,20 +1394,98 @@ Géraldine Derroire
 <p>You can view the content of the project folder in the file pane.</p>
 
 <img data-src="file_pane.png" style="width:100.0%" class="r-stretch"></section>
-<section id="organise-a-workflow-into-several-script" class="slide level2">
-<h2>Organise a workflow into several script</h2>
-<p>JUba section 5.3 sourcing</p>
-<p>Puis parler de l’organisation des projects Cesab et BES</p>
-<!-- have them create a project that they will use for the whole class-->
-<!-- 
-les scripts, commenter les scripts...
-See cours Mélaine sur working enviro
-puis project, project organisation
-Voir aide RStudio ? et le mettre dans les ressources
+<section id="rstudio-project-5" class="slide level2">
+<h2>RStudio project</h2>
+<p>From now on, we will always work with RStudio project.</p>
+<p>Find a good balance between putting too many things into a same project, and having too many little projects.</p>
+<p><span class="fragment"><em>Eg: Don’t have all the analyses of your PhD in a single project, but don’t split the steps of a given chapter into several projects.</em></span></p>
+<p><span class="fragment"><strong>A research objective = a chapter/paper = a RStudio project</strong></span></p>
+<p><span class="fragment">Let’s create a RStudio project for the course.</span></p>
+<aside class="notes">
+<p>Give time for them to create a project.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="organising-a-rstudio-project" class="slide level2">
+<h2>Organising a RStudio project</h2>
+<p>To facilitate the work with others (including the <strong>future you</strong>):</p>
+<ul>
+<li class="fragment"><p>Organise your projects a clear and consistant way</p></li>
+<li class="fragment"><p>Separate data, methods and outputs</p></li>
+<li class="fragment"><p>Document your project in a README file</p></li>
+</ul>
 
--->
-<!-- voir 2.4 in Juba-->
+<img data-src="repro_kitchen.png" class="r-stretch"></section>
+<section id="organise-a-workflow-into-several-scripts" class="slide level2">
+<h2>Organise a workflow into several scripts</h2>
+<p>Avoid very long script</p>
+<p>=&gt; Split the workflow into (relatively) short and logical steps and make a script for each</p>
+
+<img data-src="split_scripts.png" style="width:20.0%" class="r-stretch"><p><span class="fragment">💡 Give an explicit name to the scripts and start with a number so that they are ordered in logical way.</span></p>
+<aside class="notes">
+<p>This is just an example</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="organising-a-rstudio-project-1" class="slide level2">
+<h2>Organising a RStudio project</h2>
+<p><em>Example of project organisation</em></p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li class="fragment"><em>.Rproj</em> file at the root of the project folder</li>
+<li class="fragment"><em>data</em> contains raw data and derived data in separate folders</li>
+<li class="fragment"><em>analyses</em>: contains the script organised in a logical way</li>
+<li class="fragment"><em>R</em>: contains the functions</li>
+<li class="fragment"><em>outputs</em>: contains figures, reports, etc…</li>
+<li class="fragment"><em>README</em>: description of the project</li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><img data-src="directory.png"></p>
+</div></div>
+</section>
+<section id="readme-file" class="slide level2">
+<h2>README file</h2>
+<p><em>Example of a basic README</em></p>
+
+<img data-src="README.png" class="r-stretch"><p>❗ We will see what is a <em>.md</em> file later, for the moment, you can write the README file as a <em>.txt</em></p>
 </section></section>
+<section id="all-good-1" class="title-slide slide level1 center">
+<h1>All good?</h1>
+<p>Do you understand the interest of working with RStudio now?</p>
+<aside class="notes">
+<p>Can be the end of the second session If there is time, start the 3rd one</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
 <section>
 <section id="data-structure" class="title-slide slide level1 center">
 <h1>Data structure</h1>

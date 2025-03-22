@@ -669,7 +669,7 @@ When there are unsaved changes in a script, it appears in blue
 
 ![](unsaved_script.png){width="80%"}
 
-[To save a script, go to *File \> Save* or *File \> Save*. 💡 You can also use the shortcut *Ctrl + S* or click on 💾.]{.fragment}
+[To save a script, go to *File \> Save* or *File \> Save As...*. 💡 You can also use the shortcut *Ctrl + S* or click on 💾.]{.fragment}
 
 [To open an existing script, go *File \> Open file...*.💡 You can also use the short cut *Ctrl + O* or click on 📂.]{.fragment}
 
@@ -724,13 +724,13 @@ We will use **RStudio projects** to organise the workflow and gather all the fil
 A RStudio project is a folder on your computer where all the files of the project are grouped.
 
 By default, the working directory of a project is this folder.
-So no more problems with absolute path 😊! 
+So no more problems with absolute path 😊!
 
-To share a project, just share the full folder.
+To share a project, just share the full folder 👍.
 
 ## RStudio project
 
-To create a new RStudio project, go to *File > New project...*
+To create a new RStudio project, go to *File \> New project...*
 
 ![](new_project.png)
 
@@ -746,11 +746,10 @@ RStudio creates a *.Rproj* file that contains information about your project (yo
 
 You can see the name of the project, and switch from one project to another in the upper right corner.
 
-You can see the path to the project folder at the top of the Console. 
+You can see the path to the project folder at the top of the Console.
 This is the working directory (try getwd to check this).
 
 ![](project.png){width="100%"}
-
 
 ## RStudio project
 
@@ -764,7 +763,13 @@ You can view the content of the project folder in the file pane.
 
 From now on, we will always work with RStudio project.
 
-Let's create one for the course.
+Find a good balance between putting too many things into a same project, and having too many little projects.
+
+[*Eg: Don't have all the analyses of your PhD in a single project, but don't split the steps of a given chapter into several projects.*]{.fragment}
+
+[**A research objective = a chapter/paper = a RStudio project**]{.fragment}
+
+[Let's create a RStudio project for the course.]{.fragment}
 
 ::: notes
 Give time for them to create a project.
@@ -772,16 +777,64 @@ Give time for them to create a project.
 
 ## Organising a RStudio project
 
+To facilitate the work with others (including the **future you**):
 
+-   Organise your projects a clear and consistant way
 
+-   Separate data, methods and outputs
+
+-   Document your project in a README file
+
+![](repro_kitchen.png)
 
 ## Organise a workflow into several scripts
 
-JUba section 5.3 sourcing
+Avoid very long script
 
-Puis parler de l'organisation des projects Cesab et BES
+=\> Split the workflow into (relatively) short and logical steps and make a script for each
 
+![](split_scripts.png){width="20%"}
 
+[💡 Give an explicit name to the scripts and start with a number so that they are ordered in logical way.]{.fragment}
+
+::: notes
+This is just an example
+:::
+
+## Organising a RStudio project
+
+*Example of project organisation*
+
+::::: columns
+::: {.column width="70%"}
+-   *.Rproj* file at the root of the project folder
+-   *data* contains raw data and derived data in separate folders
+-   *analyses*: contains the script organised in a logical way
+-   *R*: contains the functions
+-   *outputs*: contains figures, reports, etc...
+-   *README*: description of the project
+:::
+
+::: {.column width="30%"}
+![](directory.png)
+:::
+:::::
+
+## README file
+
+*Example of a basic README*
+
+![](README.png)
+
+❗ We will see what is a *.md* file later, for the moment, you can write the README file as a *.txt*
+
+# All good?
+
+Do you understand the interest of working with RStudio now?
+
+::: notes
+Can be the end of the second session If there is time, start the 3rd one
+:::
 
 # Data structure
 
