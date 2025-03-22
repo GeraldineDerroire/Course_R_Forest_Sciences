@@ -15,9 +15,10 @@ The course material has been created using quarto and R version 4.4.3.
 - [Course introduction](https://geraldinederroire.github.io/Course_R_Forest_Sciences)
 - [Set up the working environment](https://geraldinederroire.github.io/Course_R_Forest_Sciences/0_installing_enviro)
 - [Principles of reproductible science](https://geraldinederroire.github.io/Course_R_Forest_Sciences/1_reproducible_science)
+- [Getting started with R](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started)
 
 <!--
 
-https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started
+
 
 https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data-->
