@@ -77,9 +77,9 @@ Other things: text mining, GIS...
 
 ## Let's open RStudio
 
-![](RStudio_logo.png){width="20%"}
+![](RStudio_logo.png){width="15%"}
 
-![](RStudio_screen.png){width="70%"}
+![](RStudio_screen.png){width="65%"}
 
 =\> RStudio opens R.
 
@@ -723,10 +723,9 @@ We will use **RStudio projects** to organise the workflow and gather all the fil
 
 A RStudio project is a folder on your computer where all the files of the project are grouped.
 
-By default, the working directory of a project is this folder.
-So no more problems with absolute path 😊!
+[By default, the working directory of a project is this folder. So no more problems with absolute path 😊!]{.fragment}
 
-To share a project, just share the full folder 👍.
+[To share a project, just share the full folder 👍.]{.fragment}
 
 ## RStudio project
 
@@ -801,6 +800,26 @@ Avoid very long script
 This is just an example
 :::
 
+## Executing a script from another one
+
+We can run a full script by calling it from another script.
+
+[For instance, in a script called *analyses.R*, we can run a script called *data_preparation.R* by running the following command in the *analyses.R* script:]{.fragment}
+
+::: fragment
+```{r, eval=FALSE}
+source("data_preparation.R") 
+```
+:::
+
+[❗ We need to indicate the path into the working directory here. So if *data_preparation.R* is in the *analyses* folder, we need to write:]{.fragment}
+
+::: fragment
+```{r, eval=FALSE}
+source("analyses/data_preparation.R") 
+```
+:::
+
 ## Organising a RStudio project
 
 *Example of project organisation*
@@ -836,69 +855,500 @@ Do you understand the interest of working with RStudio now?
 Can be the end of the second session If there is time, start the 3rd one
 :::
 
-# Data structure
+# Questions on the last session?
 
-![](data_structure.png){width="120%"}
+::: notes
+Start of the second session
+:::
+
+## Let's see if all is clear
+
+::: notes
+TO DO, add some tests
+:::
+
+# Vectors
+
+## Objects we have seen so far
+
+-   numeric
+
+::: fragment
+```{r}
+mode(5.3)
+```
+:::
+
+-   character
+
+::: fragment
+```{r}
+mode("Hello!")
+```
+:::
+
+-   logical
+
+::: fragment
+```{r}
+mode(TRUE)
+```
+:::
 
 ## Vectors
 
-```{=html}
-<!-- what if we want to put more than a value in an object
-cf Mélaine slide 61... 
--->
+Let's imagine that we have several logs for which we know the volume, and we want to calculate the mean volume of a log, we can to:
+
+```{r}
+# Volumes in m3
+vol1 <- 2.9
+vol2 <- 3.2
+vol3 <- 2.4
+vol4 <- 3.5
+(vol1 + vol2 + vol3 + vol4) /4
 ```
 
-```{=html}
-<!-- see class Juba here, from 2.2.2
+[🤨 This is clearly not very practical...]{.fragment}
 
-https://larmarange.github.io/analyse-R/vecteurs-indexation-et-assignation.html-->
+## Vectors
+
+Instead, we use *c()* to create an object called a **vector** containing several values:
+
+::: fragment
+```{r}
+vol <- c(2.9, 3.2, 2.4, 3.5)
+vol
 ```
+:::
+
+[Or we can also write]{.fragment}
+
+::: fragment
+```{r}
+vol <- c(vol1, vol2, vol3, vol4)
+vol
+```
+:::
+
+[*NB*: the values need to be separated by *,*]{.fragment}
+
+## Vectors
+
+A vector can contain several values of any mode...
+
+```{r}
+test <- c(TRUE, FALSE, TRUE, TRUE)
+mode(test)
+```
+
+[...but these values need to be **of the same mode**]{.fragment}
+
+::: fragment
+```{r}
+test2 <- c(2.3, "blue", TRUE)
+mode(test2)
+```
+:::
+
+[🤔 What happened?]{.fragment}
+
+[R converted all the values into character.]{.fragment}
+
+## Vectors
+
+[To see the length of a vector, we can use the function *length*:]{.fragment}
+
+::: fragment
+```{r}
+length(vol)
+```
+:::
+
+[*NB*: an object of length one is also a vector]{.fragment}
+
+::: fragment
+```{r}
+length(vol1)
+is.vector(vol1)
+```
+:::
+
+## Vectors
+
+We can access a value within a vector using \[\]. This is called the **indexation**: 
+
+```{r}
+vol[2]
+```
+
+[This is the second value of the vector *vol*.]{.fragment}
+
+[💡 the numbers within [] that we see when we print a vector indicates the position of the first element of a line. Let's see an exemple with a long vector:]{.fragment}
+
+::: fragment
+```{r, echo=FALSE}
+long <- round(runif(25, min=0, max=3000),2)
+long
+```
+:::
+
+::: notes
+I don't show how I created the vector for now, as a bit too advanced
+:::
+
+
+## Named vectors
+
+We can add names to the elements of a vector:
+
+```{r}
+names(vol) <- c("Tree1", "Tree2", "Tree3", "Tree4")
+vol
+```
+
+[💡 The names are stored in an object that is also a vector:]{.fragment}
+
+::: fragment
+```{r}
+is.vector(names(vol))
+```
+:::
+
+[We can then call an element of a vector by its name:]{.fragment}
+
+::: fragment
+```{r}
+vol["Tree1"]
+```
+:::
+
+::: notes
+take time to explain what we did to check that names is a vector
+:::
+
+## Operations on vectors
+
+We can perform an operation on each value of a vector, simultaneously.
+
+[For instance, let's convert the volume from m^3^ to cm^3^]]{.fragment}
+
+::: fragment
+```{r}
+vol_cm3 <- vol * (100 * 100 * 100)
+vol_cm3
+```
+:::
+
+::: notes
+here the () are not needed, just for clarity
+:::
+
+## Operations on vectors
+
+Let's come back to the mean volume:
+
+```{r}
+mean_vol <- sum(vol) / 4
+mean_vol
+```
+
+[🤔 What did we do?]{.fragment}
+
+[We used the function *sum* to calculate the sum and then divided by 4]{.fragment}
+
+[💡 We can also use the function *mean*]{.fragment}
+
+::: fragment
+```{r}
+mean(vol)
+```
+:::
+
+[We have just learnt two new functions 😄 !]{.fragment}
+
+## Operations on vectors
+
+We can also do operations between two vectors.
+
+Let's create a vector of wood density (*WD*) and calculate the weight of the wood logs:
+
+```{r}
+WD <- c(0.76, 0.65, 0.58, 0.81)
+weight <- vol * WD
+weight
+```
+
+[🤔 What did we do?]{.fragment}
+[We multiplied each value of *vol* by the corresponding value of WD]{.fragment}
+
+::: fragment
+```{r}
+vol[3] * WD[3]
+```
+:::
+
+[❗ The vectors need to have the same length]{.fragment}
+
+::: notes
+Here ask if everything is ok with vectors, before moving on
+:::
 
 ## Factors
 
-```{=html}
-<!--
-Class of data, that we can use for a vector
+If we want to create a vector for a categorical variable, we can use a class of vector called a **factor**.
 
-par ex, si on a un vecteur de 3 couleurs => en faire un vecteur de caractères et le transformer en vecteur
+[<span style="font-size: 20px">🤔 What is a categorical variable?</span>]{.fragment}
+[<span style="font-size: 20px">It's a type of variable representing data divided in distinct group or categories.</span>]{.fragment}
 
-https://larmarange.github.io/analyse-R/facteurs-et-vecteurs-labellises.html
+[Let's take the example of the seasons:]{.fragment}
 
--->
+::: fragment
+```{r}
+season <- c("dry", "dry", "wet", "dry", "wet", "wet")
+class(season)
+```
+:::
+
+[Let's transform it into a factor:]{.fragment}
+
+::: fragment
+```{r}
+season <- as.factor(season)
+class(season)
+season
+```
+:::
+
+## Factors
+
+The list of values that a factor can take is called *levels*.
+
+```{r}
+levels(season)
+```
+
+[We cannot add a value that is not in *levels*:]{.fragment}
+
+::: fragment
+```{r}
+#| warning: true
+season[7] <- "winter"
+season
+```
+:::
+
+[💡 *NA* means *Not available* and represents missing or undefined values.]{.fragment}
+
+## Factors
+
+We can add levels:
+
+```{r}
+levels(season) <- c(levels(season), "winter", "spring", "summer", "fall")
+levels(season)
+```
+[The new levels are added, even though none of the observation takes these values:]{.fragment}
+
+::: fragment
+```{r}
+season
+```
+:::
+
+[We can now add a value within these new levels:]{.fragment}
+
+::: fragment
+```{r}
+#| warning: true
+season[8] <- "winter"
+season
+```
+:::
+
+::: notes
+explain what is in the print:
+first line : the values
+second line: the levels
+
+ASK if all is OK
+::: 
+
+# Data structure
+
+## Data structure
+
+![](data_structure.png){width="120%"}
+
+::: notes
+There is more type of structure.
+We have seen the vector so far.
+We are quickly present the other ones now, without 
+explaining much how to work with them.
+We will see that later.
+
+The main ones that we are going to use during the class are:
+vectors and dataframe
+:::
+
+## Matrices
+
+![](matrix.png){width="20%"}
+
+A matrix is a **two-dimensional** data structure (rows and columns) where all the element are of the **same mode**.
+
+[Let's create a matrix:]{.fragment}
+
+::: fragment
+```{r}
+M <- matrix(c(1, 4, 8, 6.5, 7, 8.3, 4.6, 6), # content of the matrix
+              4, # number of row
+              2) # number of column
+M
+```
+:::
+
+::: notes
+In the first code, explain that this is just one command that I wrote on several line for clarity of the code
+::: 
+
+## Matrices
+
+We get the dimensions of the matrix with the function *dim*:
+
+```{r}
+dim(M)
+```
+[To access a row, a column, or a value in a matrix, we use []:]{.fragment}
+
+::::: columns
+::: {.column width="50%"}
+::: fragment
+```{r}
+M[2, ] # 2nd row
+```
+:::
+
+::: fragment
+```{r}
+M[, 1] # 1st column
+```
+:::
+
+::: fragment
+```{r}
+M[4, 2] # 4th row, 2nd column
+```
+:::
+:::
+
+::: {.column width="50%"}
+::: fragment
+```{r}
+M[-2,] # all rows except 2nd
+```
+:::
+
+::: fragment
+```{r}
+M[2:3, ] # rows 2 to 3
+```
+:::
+
+:::
+:::::
+
+
+## Arrays
+
+![](array.png){width="20%"}
+
+An array is a **multi-dimensional** data structure where all the element are of the **same mode**.
+
+It is an extension of a matrix with more than two dimensions.
+
+
+
+
+.
+
+::: notes
+Let's not spend some time on this, you won't need ite for the moment,
+it's enought to know that this exist.
+:::
+
+## Lists
+
+![](list.png){width="20%"}
+
+A list is a flexible object containing elements of **different structuress** (*eg*: a vector, a matrix,... but a also a graph, a function...).
+
+
+
+.
+
+## Lists
+
+Let's create a list:
+
+```{r}
+L <- list(vol, M, season)
+L
 ```
 
 ## Lists
 
-```{=html}
-<!-- mélaine slide 74
 
-https://larmarange.github.io/analyse-R/listes-et-tableaux-de-donnees.html
--->
+To access an object within a list, we use [[]]:
+
+```{r}
+L[[3]]
 ```
 
-## Matrices
+[We can then access a value within this object:]{.fragment}
 
-<!-- mélaine slide 77-->
+::: fragment
+```{r}
+L[[3]][2]
+```
+:::
 
-## Arrays
+## Lists
+
+::::: columns
+::: {.column width="50%"}
+<span style="font-size: 25px">The objects contained in a list can also be named when we create the list:</span>
+
+```{r}
+L1 <- list(Volume = vol, 
+           Matrix = M, 
+           Season = season)
+L1
+```
+:::
+
+::: {.column width="50%"}
+::: fragment
+<span style="font-size: 25px">We can then access an object by its name, using *$*:</span>
+```{r}
+L1$Volume
+```
+:::
+:::
+:::::
+
 
 ## Dataframes
 
-```{=html}
-<!-- mélaine slide 81
+![](dataframe.png){width="20%"}
 
-But we will see this later, during the session Manipulating data-->
-```
+A dataframe is a two-dimensional structure that allow storing data sets:
 
-```{=html}
-<!-- 
+* each column is a variable (can be of different type)
 
-and they don't contain necessarly only one information 
+* each row is an observation
 
--->
-```
+[**This is the structure we will use the more, we'll come back to it in the next session.**]{.fragment}
 
-<!-- prepare some ex for next time-->
 
 # Functions, operators, packages, etc...
 

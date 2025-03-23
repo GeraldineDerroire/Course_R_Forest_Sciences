@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-03-22">
+  <meta name="dcterms.date" content="2025-03-23">
   <title>Getting started with R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-03-22</p>
+  <p class="date">2025-03-23</p>
 </section>
 <section>
 <section id="r-and-rstudio" class="title-slide slide level1 center">
@@ -480,8 +480,8 @@ Géraldine Derroire
 <img data-src="R_learning_curve.png" style="width:120.0%" class="r-stretch"></section>
 <section id="lets-open-rstudio" class="slide level2">
 <h2>Let’s open RStudio</h2>
-<p><img data-src="RStudio_logo.png" style="width:20.0%"></p>
-<p><img data-src="RStudio_screen.png" style="width:70.0%"></p>
+<p><img data-src="RStudio_logo.png" style="width:15.0%"></p>
+<p><img data-src="RStudio_screen.png" style="width:65.0%"></p>
 <p>=&gt; RStudio opens R.</p>
 <aside class="notes">
 <p>We are not going to work directly in R but in RStudio, for reason that you will discover in the coming hours, and days. =&gt; Let’s close R and open RStudio.</p>
@@ -1326,7 +1326,7 @@ Géraldine Derroire
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "D:/my_R_remote/Course_R_Forest_Sciences/2_getting_started"</code></pre>
+<pre><code>[1] "D:/my_R_remote/00_My_Courses/Course_R_Forest_Sciences/2_getting_started"</code></pre>
 </div>
 </div>
 <p><span class="fragment">This gives the absolute path to the work directory</span></p>
@@ -1368,8 +1368,8 @@ Géraldine Derroire
 <h2>RStudio project</h2>
 <p>We will use <strong>RStudio projects</strong> to organise the workflow and gather all the files related to a same workflow in a same place.</p>
 <p>A RStudio project is a folder on your computer where all the files of the project are grouped.</p>
-<p>By default, the working directory of a project is this folder. So no more problems with absolute path 😊!</p>
-<p>To share a project, just share the full folder 👍.</p>
+<p><span class="fragment">By default, the working directory of a project is this folder. So no more problems with absolute path 😊!</span></p>
+<p><span class="fragment">To share a project, just share the full folder 👍.</span></p>
 </section>
 <section id="rstudio-project-1" class="slide level2">
 <h2>RStudio project</h2>
@@ -1445,6 +1445,28 @@ Géraldine Derroire
           display:block!important;
       }</style></aside>
 </section>
+<section id="executing-a-script-from-another-one" class="slide level2">
+<h2>Executing a script from another one</h2>
+<p>We can run a full script by calling it from another script.</p>
+<p><span class="fragment">For instance, in a script called <em>analyses.R</em>, we can run a script called <em>data_preparation.R</em> by running the following command in the <em>analyses.R</em> script:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href=""></a><span class="fu">source</span>(<span class="st">"data_preparation.R"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<p><span class="fragment">❗ We need to indicate the path into the working directory here. So if <em>data_preparation.R</em> is in the <em>analyses</em> folder, we need to write:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href=""></a><span class="fu">source</span>(<span class="st">"analyses/data_preparation.R"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+</section>
 <section id="organising-a-rstudio-project-1" class="slide level2">
 <h2>Organising a RStudio project</h2>
 <p><em>Example of project organisation</em></p>
@@ -1487,55 +1509,749 @@ Géraldine Derroire
 </section>
 
 <section>
-<section id="data-structure" class="title-slide slide level1 center">
-<h1>Data structure</h1>
+<section id="questions-on-the-last-session-1" class="title-slide slide level1 center">
+<h1>Questions on the last session?</h1>
+<aside class="notes">
+<p>Start of the second session</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lets-see-if-all-is-clear-1" class="slide level2">
+<h2>Let’s see if all is clear</h2>
+<aside class="notes">
+<p>TO DO, add some tests</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="vectors" class="title-slide slide level1 center">
+<h1>Vectors</h1>
 
-<img data-src="data_structure.png" style="width:120.0%" class="r-stretch"></section>
-<section id="vectors" class="slide level2">
+</section>
+<section id="objects-we-have-seen-so-far" class="slide level2">
+<h2>Objects we have seen so far</h2>
+<ul>
+<li class="fragment">numeric</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href=""></a><span class="fu">mode</span>(<span class="fl">5.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">character</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href=""></a><span class="fu">mode</span>(<span class="st">"Hello!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">logical</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href=""></a><span class="fu">mode</span>(<span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="vectors-1" class="slide level2">
 <h2>Vectors</h2>
-<!-- what if we want to put more than a value in an object
-cf Mélaine slide 61... 
--->
-<!-- see class Juba here, from 2.2.2
-
-https://larmarange.github.io/analyse-R/vecteurs-indexation-et-assignation.html-->
+<p>Let’s imagine that we have several logs for which we know the volume, and we want to calculate the mean volume of a log, we can to:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href=""></a><span class="co"># Volumes in m3</span></span>
+<span id="cb93-2"><a href=""></a>vol1 <span class="ot">&lt;-</span> <span class="fl">2.9</span></span>
+<span id="cb93-3"><a href=""></a>vol2 <span class="ot">&lt;-</span> <span class="fl">3.2</span></span>
+<span id="cb93-4"><a href=""></a>vol3 <span class="ot">&lt;-</span> <span class="fl">2.4</span></span>
+<span id="cb93-5"><a href=""></a>vol4 <span class="ot">&lt;-</span> <span class="fl">3.5</span></span>
+<span id="cb93-6"><a href=""></a>(vol1 <span class="sc">+</span> vol2 <span class="sc">+</span> vol3 <span class="sc">+</span> vol4) <span class="sc">/</span><span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p><span class="fragment">🤨 This is clearly not very practical…</span></p>
+</section>
+<section id="vectors-2" class="slide level2">
+<h2>Vectors</h2>
+<p>Instead, we use <em>c()</em> to create an object called a <strong>vector</strong> containing several values:</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href=""></a>vol <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.9</span>, <span class="fl">3.2</span>, <span class="fl">2.4</span>, <span class="fl">3.5</span>)</span>
+<span id="cb95-2"><a href=""></a>vol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.9 3.2 2.4 3.5</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">Or we can also write</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href=""></a>vol <span class="ot">&lt;-</span> <span class="fu">c</span>(vol1, vol2, vol3, vol4)</span>
+<span id="cb97-2"><a href=""></a>vol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.9 3.2 2.4 3.5</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><em>NB</em>: the values need to be separated by <em>,</em></span></p>
+</section>
+<section id="vectors-3" class="slide level2">
+<h2>Vectors</h2>
+<p>A vector can contain several values of any mode…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href=""></a>test <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb99-2"><a href=""></a><span class="fu">mode</span>(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<p><span class="fragment">…but these values need to be <strong>of the same mode</strong></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href=""></a>test2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.3</span>, <span class="st">"blue"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb101-2"><a href=""></a><span class="fu">mode</span>(test2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">🤔 What happened?</span></p>
+<p><span class="fragment">R converted all the values into character.</span></p>
+</section>
+<section id="vectors-4" class="slide level2">
+<h2>Vectors</h2>
+<p><span class="fragment">To see the length of a vector, we can use the function <em>length</em>:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href=""></a><span class="fu">length</span>(vol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><em>NB</em>: an object of length one is also a vector</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href=""></a><span class="fu">length</span>(vol1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href=""></a><span class="fu">is.vector</span>(vol1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="vectors-5" class="slide level2">
+<h2>Vectors</h2>
+<p>We can access a value within a vector using []. This is called the <strong>indexation</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href=""></a>vol[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.2</code></pre>
+</div>
+</div>
+<p><span class="fragment">This is the second value of the vector <em>vol</em>.</span></p>
+<p><span class="fragment">💡 the numbers within [] that we see when we print a vector indicates the position of the first element of a line. Let’s see an exemple with a long vector:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 2179.00 1775.39 2447.23 2004.41 2152.45 1370.89 1067.01 2178.46 2242.14
+[10] 1361.50 1148.90  356.88 1286.20  547.41 1012.55 2577.62 2938.47 1358.58
+[19] 1769.95 1318.21  477.92 2656.05  103.07 2020.65 2350.51</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>I don’t show how I created the vector for now, as a bit too advanced</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="named-vectors" class="slide level2">
+<h2>Named vectors</h2>
+<p>We can add names to the elements of a vector:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href=""></a><span class="fu">names</span>(vol) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Tree1"</span>, <span class="st">"Tree2"</span>, <span class="st">"Tree3"</span>, <span class="st">"Tree4"</span>)</span>
+<span id="cb112-2"><a href=""></a>vol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Tree1 Tree2 Tree3 Tree4 
+  2.9   3.2   2.4   3.5 </code></pre>
+</div>
+</div>
+<p><span class="fragment">💡 The names are stored in an object that is also a vector:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href=""></a><span class="fu">is.vector</span>(<span class="fu">names</span>(vol))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">We can then call an element of a vector by its name:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href=""></a>vol[<span class="st">"Tree1"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Tree1 
+  2.9 </code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>take time to explain what we did to check that names is a vector</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="operations-on-vectors" class="slide level2">
+<h2>Operations on vectors</h2>
+<p>We can perform an operation on each value of a vector, simultaneously.</p>
+<p>[For instance, let’s convert the volume from m<sup>3</sup> to cm<sup>3</sup>]]{.fragment}</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href=""></a>vol_cm3 <span class="ot">&lt;-</span> vol <span class="sc">*</span> (<span class="dv">100</span> <span class="sc">*</span> <span class="dv">100</span> <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb118-2"><a href=""></a>vol_cm3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tree1   Tree2   Tree3   Tree4 
+2900000 3200000 2400000 3500000 </code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>here the () are not needed, just for clarity</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="operations-on-vectors-1" class="slide level2">
+<h2>Operations on vectors</h2>
+<p>Let’s come back to the mean volume:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href=""></a>mean_vol <span class="ot">&lt;-</span> <span class="fu">sum</span>(vol) <span class="sc">/</span> <span class="dv">4</span></span>
+<span id="cb120-2"><a href=""></a>mean_vol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p><span class="fragment">🤔 What did we do?</span></p>
+<p><span class="fragment">We used the function <em>sum</em> to calculate the sum and then divided by 4</span></p>
+<p><span class="fragment">💡 We can also use the function <em>mean</em></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href=""></a><span class="fu">mean</span>(vol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">We have just learnt two new functions 😄 !</span></p>
+</section>
+<section id="operations-on-vectors-2" class="slide level2">
+<h2>Operations on vectors</h2>
+<p>We can also do operations between two vectors.</p>
+<p>Let’s create a vector of wood density (<em>WD</em>) and calculate the weight of the wood logs:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href=""></a>WD <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.76</span>, <span class="fl">0.65</span>, <span class="fl">0.58</span>, <span class="fl">0.81</span>)</span>
+<span id="cb124-2"><a href=""></a>weight <span class="ot">&lt;-</span> vol <span class="sc">*</span> WD</span>
+<span id="cb124-3"><a href=""></a>weight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Tree1 Tree2 Tree3 Tree4 
+2.204 2.080 1.392 2.835 </code></pre>
+</div>
+</div>
+<p><span class="fragment">🤔 What did we do?</span> <span class="fragment">We multiplied each value of <em>vol</em> by the corresponding value of WD</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href=""></a>vol[<span class="dv">3</span>] <span class="sc">*</span> WD[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Tree3 
+1.392 </code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">❗ The vectors need to have the same length</span></p>
+<aside class="notes">
+<p>Here ask if everything is ok with vectors, before moving on</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="factors" class="slide level2">
 <h2>Factors</h2>
-<!--
-Class of data, that we can use for a vector
-
-par ex, si on a un vecteur de 3 couleurs => en faire un vecteur de caractères et le transformer en vecteur
-
-https://larmarange.github.io/analyse-R/facteurs-et-vecteurs-labellises.html
-
--->
+<p>If we want to create a vector for a categorical variable, we can use a class of vector called a <strong>factor</strong>.</p>
+<p><span class="fragment"><span style="font-size: 20px">🤔 What is a categorical variable?</span></span> <span class="fragment"><span style="font-size: 20px">It’s a type of variable representing data divided in distinct group or categories.</span></span></p>
+<p><span class="fragment">Let’s take the example of the seasons:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href=""></a>season <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dry"</span>, <span class="st">"dry"</span>, <span class="st">"wet"</span>, <span class="st">"dry"</span>, <span class="st">"wet"</span>, <span class="st">"wet"</span>)</span>
+<span id="cb128-2"><a href=""></a><span class="fu">class</span>(season)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">Let’s transform it into a factor:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href=""></a>season <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(season)</span>
+<span id="cb130-2"><a href=""></a><span class="fu">class</span>(season)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "factor"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href=""></a>season</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] dry dry wet dry wet wet
+Levels: dry wet</code></pre>
+</div>
+</div>
+</div>
 </section>
-<section id="lists" class="slide level2">
-<h2>Lists</h2>
-<!-- mélaine slide 74
+<section id="factors-1" class="slide level2">
+<h2>Factors</h2>
+<p>The list of values that a factor can take is called <em>levels</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href=""></a><span class="fu">levels</span>(season)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "dry" "wet"</code></pre>
+</div>
+</div>
+<p><span class="fragment">We cannot add a value that is not in <em>levels</em>:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href=""></a>season[<span class="dv">7</span>] <span class="ot">&lt;-</span> <span class="st">"winter"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in `[&lt;-.factor`(`*tmp*`, 7, value = "winter"): invalid factor level, NA
+generated</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href=""></a>season</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] dry  dry  wet  dry  wet  wet  &lt;NA&gt;
+Levels: dry wet</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">💡 <em>NA</em> means <em>Not available</em> and represents missing or undefined values.</span></p>
+</section>
+<section id="factors-2" class="slide level2">
+<h2>Factors</h2>
+<p>We can add levels:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href=""></a><span class="fu">levels</span>(season) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">levels</span>(season), <span class="st">"winter"</span>, <span class="st">"spring"</span>, <span class="st">"summer"</span>, <span class="st">"fall"</span>)</span>
+<span id="cb140-2"><a href=""></a><span class="fu">levels</span>(season)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "dry"    "wet"    "winter" "spring" "summer" "fall"  </code></pre>
+</div>
+</div>
+<p><span class="fragment">The new levels are added, even though none of the observation takes these values:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href=""></a>season</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] dry  dry  wet  dry  wet  wet  &lt;NA&gt;
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">We can now add a value within these new levels:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href=""></a>season[<span class="dv">8</span>] <span class="ot">&lt;-</span> <span class="st">"winter"</span></span>
+<span id="cb144-2"><a href=""></a>season</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] dry    dry    wet    dry    wet    wet    &lt;NA&gt;   winter
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>explain what is in the print: first line : the values second line: the levels</p>
+<p>ASK if all is OK</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="data-structure" class="title-slide slide level1 center">
+<h1>Data structure</h1>
 
-https://larmarange.github.io/analyse-R/listes-et-tableaux-de-donnees.html
--->
+</section>
+<section id="data-structure-1" class="slide level2">
+<h2>Data structure</h2>
+
+<img data-src="data_structure.png" style="width:120.0%" class="r-stretch"><aside class="notes">
+<p>There is more type of structure. We have seen the vector so far. We are quickly present the other ones now, without explaining much how to work with them. We will see that later.</p>
+<p>The main ones that we are going to use during the class are: vectors and dataframe</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="matrices" class="slide level2">
 <h2>Matrices</h2>
-<!-- mélaine slide 77-->
+
+<img data-src="matrix.png" style="width:20.0%" class="r-stretch"><p>A matrix is a <strong>two-dimensional</strong> data structure (rows and columns) where all the element are of the <strong>same mode</strong>.</p>
+<p><span class="fragment">Let’s create a matrix:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href=""></a>M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="fl">6.5</span>, <span class="dv">7</span>, <span class="fl">8.3</span>, <span class="fl">4.6</span>, <span class="dv">6</span>), <span class="co"># content of the matrix</span></span>
+<span id="cb146-2"><a href=""></a>              <span class="dv">4</span>, <span class="co"># number of row</span></span>
+<span id="cb146-3"><a href=""></a>              <span class="dv">2</span>) <span class="co"># number of column</span></span>
+<span id="cb146-4"><a href=""></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]  1.0  7.0
+[2,]  4.0  8.3
+[3,]  8.0  4.6
+[4,]  6.5  6.0</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>In the first code, explain that this is just one command that I wrote on several line for clarity of the code</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="matrices-1" class="slide level2">
+<h2>Matrices</h2>
+<p>We get the dimensions of the matrix with the function <em>dim</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href=""></a><span class="fu">dim</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 2</code></pre>
+</div>
+</div>
+<p><span class="fragment">To access a row, a column, or a value in a matrix, we use []:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href=""></a>M[<span class="dv">2</span>, ] <span class="co"># 2nd row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.0 8.3</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href=""></a>M[, <span class="dv">1</span>] <span class="co"># 1st column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.0 4.0 8.0 6.5</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href=""></a>M[<span class="dv">4</span>, <span class="dv">2</span>] <span class="co"># 4th row, 2nd column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href=""></a>M[<span class="sc">-</span><span class="dv">2</span>,] <span class="co"># all rows except 2nd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]  1.0  7.0
+[2,]  8.0  4.6
+[3,]  6.5  6.0</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href=""></a>M[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, ] <span class="co"># rows 2 to 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    4  8.3
+[2,]    8  4.6</code></pre>
+</div>
+</div>
+</div>
+</div></div>
 </section>
 <section id="arrays" class="slide level2">
 <h2>Arrays</h2>
+
+<img data-src="array.png" style="width:20.0%" class="r-stretch"><p>An array is a <strong>multi-dimensional</strong> data structure where all the element are of the <strong>same mode</strong>.</p>
+<p>It is an extension of a matrix with more than two dimensions.</p>
+<p>.</p>
+<aside class="notes">
+<p>Let’s not spend some time on this, you won’t need ite for the moment, it’s enought to know that this exist.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lists" class="slide level2">
+<h2>Lists</h2>
+
+<img data-src="list.png" style="width:20.0%" class="r-stretch"><p>A list is a flexible object containing elements of <strong>different structuress</strong> (<em>eg</em>: a vector, a matrix,… but a also a graph, a function…).</p>
+<p>.</p>
+</section>
+<section id="lists-1" class="slide level2">
+<h2>Lists</h2>
+<p>Let’s create a list:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href=""></a>L <span class="ot">&lt;-</span> <span class="fu">list</span>(vol, M, season)</span>
+<span id="cb160-2"><a href=""></a>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+Tree1 Tree2 Tree3 Tree4 
+  2.9   3.2   2.4   3.5 
+
+[[2]]
+     [,1] [,2]
+[1,]  1.0  7.0
+[2,]  4.0  8.3
+[3,]  8.0  4.6
+[4,]  6.5  6.0
+
+[[3]]
+[1] dry    dry    wet    dry    wet    wet    &lt;NA&gt;   winter
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+</section>
+<section id="lists-2" class="slide level2">
+<h2>Lists</h2>
+<p>To access an object within a list, we use [[]]:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb162"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href=""></a>L[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] dry    dry    wet    dry    wet    wet    &lt;NA&gt;   winter
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+<p><span class="fragment">We can then access a value within this object:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb164"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb164-1"><a href=""></a>L[[<span class="dv">3</span>]][<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] dry
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="lists-3" class="slide level2">
+<h2>Lists</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 25px">The objects contained in a list can also be named when we create the list:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb166"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href=""></a>L1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Volume =</span> vol, </span>
+<span id="cb166-2"><a href=""></a>           <span class="at">Matrix =</span> M, </span>
+<span id="cb166-3"><a href=""></a>           <span class="at">Season =</span> season)</span>
+<span id="cb166-4"><a href=""></a>L1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>$Volume
+Tree1 Tree2 Tree3 Tree4 
+  2.9   3.2   2.4   3.5 
+
+$Matrix
+     [,1] [,2]
+[1,]  1.0  7.0
+[2,]  4.0  8.3
+[3,]  8.0  4.6
+[4,]  6.5  6.0
+
+$Season
+[1] dry    dry    wet    dry    wet    wet    &lt;NA&gt;   winter
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 25px">We can then access an object by its name, using <em>$</em>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb168"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb168-1"><a href=""></a>L1<span class="sc">$</span>Volume</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Tree1 Tree2 Tree3 Tree4 
+  2.9   3.2   2.4   3.5 </code></pre>
+</div>
+</div>
+</div>
+</div></div>
 </section>
 <section id="dataframes" class="slide level2">
 <h2>Dataframes</h2>
-<!-- mélaine slide 81
 
-But we will see this later, during the session Manipulating data-->
-<!-- 
-
-and they don't contain necessarly only one information 
-
--->
-<!-- prepare some ex for next time-->
+<img data-src="dataframe.png" style="width:20.0%" class="r-stretch"><p>A dataframe is a two-dimensional structure that allow storing data sets:</p>
+<ul>
+<li class="fragment"><p>each column is a variable (can be of different type)</p></li>
+<li class="fragment"><p>each row is an observation</p></li>
+</ul>
+<p><span class="fragment"><strong>This is the structure we will use the more, we’ll come back to it in the next session.</strong></span></p>
 </section></section>
 <section>
 <section id="functions-operators-packages-etc" class="title-slide slide level1 center">
