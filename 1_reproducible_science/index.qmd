@@ -39,7 +39,7 @@ Why?
 
 ## Still not reproducible science...
 
-> "We collected data following standard protocols and analysed them using the StatForDummies software."
+**"We collected data following standard protocols and analysed them using the StatForDummies software."**
 
 ::: {.notes}
 Why?
@@ -65,6 +65,7 @@ in which every step is well documented
 
 ::: {.notes}
 Reproducibilyu => be able to reproduce a study and come to the same results
+
 Full reproducibility is almost impossible in natural system so computational repro 
 => computational repro
 :::
@@ -104,7 +105,7 @@ So to acheive that, we need to document clearly all the steps, and make the diff
 
 # Increase your visibility and credibility
 
->“An article about computational results is advertising, not scholarship. The actual scholarship* is the full software environment, code and data, that produced the result.”
+>“An article about computational results is advertising, not scholarship. The actual scholarship is the full software environment, code and data, that produced the result.”
 > Claerbout and Karrenbach 1992.
 
 
@@ -217,6 +218,10 @@ many tools exist, there are the one we are going to use
 
 ![](tools_R.png)
 
+::: {.notes}
+R is the programming language that we will use for data management and
+analyses
+:::
 
 ## Main tools
 
@@ -232,6 +237,8 @@ collection of tools (packages) that will help us coding in R
 
 ::: {.notes}
 git for version control
+
+version control = using a system that tracks changes to files over time
 :::
 
 ## Main tools
@@ -241,12 +248,18 @@ git for version control
 ::: {.notes}
 github for
 version control on web
+and 
 tools for collaboration and project organisation
 :::
 
 ## Main tools
 
 ![](tools_quarto.png)
+
+::: {.notes}
+Quarto will allow creating report/presentation with text and script.
+:::
+
 
 ## Main tools
 

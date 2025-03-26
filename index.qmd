@@ -21,7 +21,10 @@ execute:
 # Introduction and expectations toward this module
 
 ::: {.notes}
-introducing everyone: who, project, expectations
+introducing everyone: 
+* who
+* topic of Msc/PhD project, with whomm?
+* expectations / interest in the class?
 :::
 
 ## Practical information
@@ -36,7 +39,9 @@ You will work on your own laptop
 <span style="color:indianred;">**Please make sure you have all the programs and packages installed before the class.**</span>
 
 ::: notes
-I will send a tuto for installing R and everything + email between the class to telle which packages need to be installed for the next session.
+Students are expected to work between the classes : review and make sure they understand everything we have seen + exercices.
+
+I will send a tuto for installing R and everything + email between the class to tell which packages need to be installed for the next session.
 :::
 
 ## Targeted audiance
@@ -73,6 +78,10 @@ functions...)
 - Use the tool Quarto to produce a report or a presentation with text and code
 :::
 
+::: {.notes}
+Not a statistics course
+:::
+
 # Let's make the class interactive... *não importa o idioma* 
 
 ::: {.notes}
@@ -93,6 +102,8 @@ you can ask questions in portuguese
 - Literate programming using quarto 
 
 ::: notes
+May change a bit as this is the first time that I teach this class.
+
 There will be weeks when I will be travelling, we'll talk in advance how to reschedule.
 :::
 
@@ -132,10 +143,10 @@ I will let you know as well when the work will be due.
 
 ## Mean of communication between the class
 
-*email or SIGAA?*
-
 Communication about exercices to do for the next session, and packages to install.
-<span style="color:indianred;">**Please make sure you check the messages!.**</span>
+<span style="color:indianred;">**Please make sure you check the messages!**</span>
+
+*email or SIGAA?*
 
 ## 
 
