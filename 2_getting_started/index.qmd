@@ -372,6 +372,12 @@ mode(x)
 
 ::: fragment
 ```{r}
+y
+```
+:::
+
+::: fragment
+```{r}
 mode(y)
 ```
 :::
