@@ -14,7 +14,9 @@ format:
     link-external-newwindow: true
     incremental: true
 execute:
-  echo: true    
+  echo: true   
+  warning: true
+  message: true 
 editor: 
   markdown: 
     wrap: sentence
@@ -29,7 +31,11 @@ editor:
 ![](open_R.png){width="50%"}
 
 ::: notes
-Talk about the meaning of free Talk about the fact that it is collaborative and about the no warranty =\> packages (collection of tools come with different level of quality =\> as for everything, be critical of what you use. But most packages are highly tested and reliable.)
+-   make sure to open the right one
+-   Talk about the meaning of free
+-   Talk about the fact that it is collaborative and about the no warranty
+-   =\> packages (collection of tools come with different level of quality)
+-   =\> as for everything, be critical of what you use. But most packages are highly tested and reliable.
 :::
 
 ## What is R?
@@ -75,6 +81,13 @@ Other things: text mining, GIS...
 
 ![](R_learning_curve.png){width="120%"}
 
+::: notes
+discuss a bit with people who laready use R
+
+=\> what do they find particularly difficult?
+easy?
+:::
+
 ## Let's open RStudio
 
 ![](RStudio_logo.png){width="15%"}
@@ -87,6 +100,8 @@ Other things: text mining, GIS...
 We are not going to work directly in R but in RStudio, for reason that you will discover in the coming hours, and days.
 =\> Let's close R and open RStudio.
 
+make sure we use the rigth one (see logo)
+
 We find the same text than when we open R directly =\> RStudio opens R.
 :::
 
@@ -98,6 +113,8 @@ RStudio is an *Integrated Development Environment* (IDE): a software that provid
 
 ::: notes
 RStudio is also free and open source.
+
+So R is the engine, RStudio is the dashboard
 :::
 
 ## The console and the prompt
@@ -153,6 +170,12 @@ Write an operation in the console and click *Enter*.
 ```
 :::
 
+::: notes
+So here we have seen the 4 four operations
+
+and the power
+:::
+
 ## Spaces are not important.
 
 ```{r}
@@ -175,10 +198,17 @@ You can also use the ⬆️ or ⬇️ keys of the keyboard to navigate the comma
 ## Let's try some more commands...
 
 ```{r}
+#| warning: true
 log(-1)
 ```
 
 [*NAN* means "not a number".]{.fragment}
+
+::: notes
+BEFORE CLICKING: what do you think?
+
+=\> importance to understand the output (but also warning and error) that we get
+:::
 
 ## Let's try some more commands...
 
@@ -199,6 +229,10 @@ log(-1)
 [We get an error message. Why?]{.fragment}
 
 [R doesn't know what is *x*.]{.fragment}
+
+::: notes
+Error: object 'x' not found
+:::
 
 # Objects
 
@@ -236,6 +270,10 @@ Objects are store in the environment
 
 [⚠️ They are kept in memory throughout the session but are **not saved** when RStudio is closed.]{.fragment}
 
+::: notes
+we will see later how to save our work
+:::
+
 ## Where are the objects stored?
 
 You can see the content of the environment with the function *ls*
@@ -255,7 +293,7 @@ ls()
 ```
 :::
 
-[⚠️ Typing *rm()* clears all the environement!]{.fragment}
+[⚠️ Typing *rm()* or using the 🧹symbol in the *environment* windows clears all the environment!]{.fragment}
 
 ## Assigning a new value to an existing object
 
@@ -276,11 +314,10 @@ x
 ## Objects are not linked
 
 ```{r}
+x
 y <- x
 y
 ```
-
-[Modifying *x* does not modify *y*.]{.fragment}
 
 ::: fragment
 ```{r}
@@ -288,6 +325,8 @@ x <- 25
 y
 ```
 :::
+
+[Modifying *x* does not modify *y*.]{.fragment}
 
 ## Creating more objects
 
@@ -325,15 +364,70 @@ Some good practices when naming an object:
 -   Use explicit names while trying to keep names short
 -   Object names can contain letter, numbers, the symbols [.]{style="color:indianred;"}, [-]{style="color:indianred;"} and [\_]{style="color:indianred;"}
 -   Object names cannot start with a number
--   Object names cannot contain a space
--   The case matters (upper and lower cases are not the same)
--   Avoid accents (for encoding problems)
+
+::: fragment
+```{r, eval=FALSE}
+2x <- 3
+```
+:::
+
+[🤔 What does the error message mean?]{.fragment}
+
+::: notes
+Let's try
+
+* Error: unexpected symbol in "2x"
+:::
 
 ## Naming an object
 
-Adopt a consistant naming style
+Some good practices when naming an object:
+
+-   Object names cannot contain a space
+
+::: fragment
+```{r, eval=FALSE}
+x 3 <- 2
+x y <- 3
+```
+:::
+
+[🤔 What do the error messages mean?]{.fragment}
+
+-   [The case matters (upper and lower cases are not the same)]{.fragment}
+
+::: fragment
+```{r}
+z <- 5
+Z <- 8
+z
+Z
+```
+:::
+
+-   [Avoid accents (for encoding problems)]{.fragment}
+
+::: notes
+Let's try
+
+Error: unexpected numeric constant in "x 3"
+
+Error: unexpected symbol in "x y"
+
+Important to try to understand the error messages
+:::
+
+## Naming an object
+
+Adopt a consistent naming style
 
 ![](name_style.png)
+
+::: notes
+Easier to remember when consistent object names
+
+Most used are snake_case and camelCase or UpperCamel
+:::
 
 ## Objects are not necessarly numbers
 
@@ -352,7 +446,11 @@ y <- Ola!
 ```
 :::
 
+[🤔 What does the error message mean?]{.fragment}
+
 ## Mode of an object
+
+Object can have different types.
 
 The type of an object is called the *mode*.
 
@@ -394,7 +492,7 @@ knitr::kable(mod)
 ```
 
 ::: notes
-But other exists: complex, raw, expression, function, list
+But other exists: complex, raw, expression, function, list...
 :::
 
 ## Mode of an object
@@ -446,6 +544,29 @@ typeof(x)
 The L is to specify that we want it to be integer
 :::
 
+## Numeric
+
+What happens if we try to put a decimal number as a numeric?
+
+```{r}
+#| warning: true
+x <- 1.5L
+```
+
+[We get a *warning* message. What does it mean?]{.fragment}
+
+::: fragment
+```{r}
+typeof(x)
+```
+:::
+
+::: notes
+Warning message:
+
+integer literal 1.5L contains decimal; using numeric value
+:::
+
 ## Check the type of an object
 
 ```{r}
@@ -472,6 +593,10 @@ is.numeric(x)
 ```{r}
 is.integer(x)
 ```
+:::
+
+::: notes
+if we don't specify that 1 is an integer =\> double by default
 :::
 
 ## Change the type of an object
@@ -542,7 +667,8 @@ Parabéns 🎉
 
 ::: notes
 End of the first session If still a lot of time =\> questions?
-=\> start the third session on vectors?
+
+=\> start the next session until R files (slide 52)
 :::
 
 # Questions on the last session?
@@ -684,6 +810,10 @@ When there are unsaved changes in a script, it appears in blue
 The script is saved as an *.R* file:
 
 *.R* files are recognised as R script by RStudio, which allows using the syntax colour code, and running the code directly.
+
+::: notes
+stop here if this is still the first session
+:::
 
 ## Working directory
 
@@ -903,7 +1033,7 @@ mode(TRUE)
 
 ## Vectors
 
-Let's imagine that we have several logs for which we know the volume, and we want to calculate the mean volume of a log, we can to:
+Let's imagine that we have several logs (trunks of wood) for which we know the volume, and we want to calculate the mean volume of a log , we can do:
 
 ```{r}
 # Volumes in m3
@@ -981,7 +1111,8 @@ is.vector(vol1)
 
 ## Vectors
 
-We can access a value within a vector using \[\]. This is called the **indexation**: 
+We can access a value within a vector using \[\].
+This is called the **indexation**:
 
 ```{r}
 vol[2]
@@ -989,7 +1120,7 @@ vol[2]
 
 [This is the second value of the vector *vol*.]{.fragment}
 
-[💡 the numbers within [] that we see when we print a vector indicates the position of the first element of a line. Let's see an exemple with a long vector:]{.fragment}
+[💡 the numbers within \[\] that we see when we print a vector indicates the position of the first element of a line. Let's see an exemple with a long vector:]{.fragment}
 
 ::: fragment
 ```{r, echo=FALSE}
@@ -1001,7 +1132,6 @@ long
 ::: notes
 I don't show how I created the vector for now, as a bit too advanced
 :::
-
 
 ## Named vectors
 
@@ -1036,7 +1166,7 @@ take time to explain what we did to check that names is a vector
 
 We can perform an operation on each value of a vector, simultaneously.
 
-[For instance, let's convert the volume from m^3^ to cm^3^]]{.fragment}
+\[For instance, let's convert the volume from m^3^ to cm^3^\]\]{.fragment}
 
 ::: fragment
 ```{r}
@@ -1103,8 +1233,8 @@ Here ask if everything is ok with vectors, before moving on
 
 If we want to create a vector for a categorical variable, we can use a class of vector called a **factor**.
 
-[<span style="font-size: 20px">🤔 What is a categorical variable?</span>]{.fragment}
-[<span style="font-size: 20px">It's a type of variable representing data divided in distinct group or categories.</span>]{.fragment}
+[🤔 What is a categorical variable?]{style="font-size: 20px"}
+[It's a type of variable representing data divided in distinct group or categories.]{style="font-size: 20px"}
 
 [Let's take the example of the seasons:]{.fragment}
 
@@ -1153,6 +1283,7 @@ We can add levels:
 levels(season) <- c(levels(season), "winter", "spring", "summer", "fall")
 levels(season)
 ```
+
 [The new levels are added, even though none of the observation takes these values:]{.fragment}
 
 ::: fragment
@@ -1172,12 +1303,10 @@ season
 :::
 
 ::: notes
-explain what is in the print:
-first line : the values
-second line: the levels
+explain what is in the print: first line : the values second line: the levels
 
 ASK if all is OK
-::: 
+:::
 
 # Data structure
 
@@ -1188,12 +1317,10 @@ ASK if all is OK
 ::: notes
 There is more type of structure.
 We have seen the vector so far.
-We are quickly present the other ones now, without 
-explaining much how to work with them.
+We are quickly present the other ones now, without explaining much how to work with them.
 We will see that later.
 
-The main ones that we are going to use during the class are:
-vectors and dataframe
+The main ones that we are going to use during the class are: vectors and dataframe
 :::
 
 ## Matrices
@@ -1215,7 +1342,7 @@ M
 
 ::: notes
 In the first code, explain that this is just one command that I wrote on several line for clarity of the code
-::: 
+:::
 
 ## Matrices
 
@@ -1224,10 +1351,11 @@ We get the dimensions of the matrix with the function *dim*:
 ```{r}
 dim(M)
 ```
-[To access a row, a column, or a value in a matrix, we use []:]{.fragment}
 
-::::: columns
-::: {.column width="50%"}
+[To access a row, a column, or a value in a matrix, we use \[\]:]{.fragment}
+
+:::::::::: columns
+:::::: {.column width="50%"}
 ::: fragment
 ```{r}
 M[2, ] # 2nd row
@@ -1245,9 +1373,9 @@ M[, 1] # 1st column
 M[4, 2] # 4th row, 2nd column
 ```
 :::
-:::
+::::::
 
-::: {.column width="50%"}
+::::: {.column width="50%"}
 ::: fragment
 ```{r}
 M[-2,] # all rows except 2nd
@@ -1259,10 +1387,8 @@ M[-2,] # all rows except 2nd
 M[2:3, ] # rows 2 to 3
 ```
 :::
-
-:::
 :::::
-
+::::::::::
 
 ## Arrays
 
@@ -1272,14 +1398,10 @@ An array is a **multi-dimensional** data structure where all the element are of 
 
 It is an extension of a matrix with more than two dimensions.
 
-
-
-
 .
 
 ::: notes
-Let's not spend some time on this, you won't need ite for the moment,
-it's enought to know that this exist.
+Let's not spend some time on this, you won't need ite for the moment, it's enought to know that this exist.
 :::
 
 ## Lists
@@ -1287,8 +1409,6 @@ it's enought to know that this exist.
 ![](list.png){width="20%"}
 
 A list is a flexible object containing elements of **different structuress** (*eg*: a vector, a matrix,... but a also a graph, a function...).
-
-
 
 .
 
@@ -1303,8 +1423,7 @@ L
 
 ## Lists
 
-
-To access an object within a list, we use [[]]:
+To access an object within a list, we use \[\[\]\]:
 
 ```{r}
 L[[3]]
@@ -1320,9 +1439,9 @@ L[[3]][2]
 
 ## Lists
 
-::::: columns
+:::::: columns
 ::: {.column width="50%"}
-<span style="font-size: 25px">The objects contained in a list can also be named when we create the list:</span>
+[The objects contained in a list can also be named when we create the list:]{style="font-size: 25px"}
 
 ```{r}
 L1 <- list(Volume = vol, 
@@ -1332,16 +1451,16 @@ L1
 ```
 :::
 
-::: {.column width="50%"}
+:::: {.column width="50%"}
 ::: fragment
-<span style="font-size: 25px">We can then access an object by its name, using *$*:</span>
+[We can then access an object by its name, using *\$*:]{style="font-size: 25px"}
+
 ```{r}
 L1$Volume
 ```
 :::
-:::
-:::::
-
+::::
+::::::
 
 ## Dataframes
 
@@ -1349,12 +1468,11 @@ L1$Volume
 
 A dataframe is a two-dimensional structure that allow storing data sets:
 
-* each column is a variable (can be of different type)
+-   each column is a variable (can be of different type)
 
-* each row is an observation
+-   each row is an observation
 
 [**This is the structure we will use the more, we'll come back to it in the next session.**]{.fragment}
-
 
 # Operators, functions, packages, etc...
 
