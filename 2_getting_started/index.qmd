@@ -394,17 +394,6 @@ x y <- 3
 
 [🤔 What do the error messages mean?]{.fragment}
 
--   [The case matters (upper and lower cases are not the same)]{.fragment}
-
-::: fragment
-```{r}
-z <- 5
-Z <- 8
-z
-Z
-```
-:::
-
 -   [Avoid accents (for encoding problems)]{.fragment}
 
 ::: notes
@@ -415,6 +404,21 @@ Error: unexpected numeric constant in "x 3"
 Error: unexpected symbol in "x y"
 
 Important to try to understand the error messages
+:::
+
+## Naming an object
+
+Some good practices when naming an object:
+
+-   [The case matters (upper and lower cases are not the same)]{.fragment}
+
+::: fragment
+```{r}
+z <- 5
+Z <- 8
+z
+Z
+```
 :::
 
 ## Naming an object
@@ -671,17 +675,6 @@ End of the first session If still a lot of time =\> questions?
 =\> start the next session until R files (slide 52)
 :::
 
-# Questions on the last session?
-
-::: notes
-Start of the second session
-:::
-
-## Let's see if all is clear
-
-::: notes
-TO DO, add some tests
-:::
 
 # Working with RStudio
 
@@ -814,6 +807,21 @@ The script is saved as an *.R* file:
 ::: notes
 stop here if this is still the first session
 :::
+
+<!--
+
+# Questions on the last session?
+
+::: notes
+Start of the second session
+:::
+
+## Let's see if all is clear
+
+::: notes
+TO DO, add some tests
+:::
+
 
 ## Working directory
 
@@ -1478,7 +1486,7 @@ A dataframe is a two-dimensional structure that allow storing data sets:
 
 Work in progress...
 
-```{=html}
+
 <!-- see slides Mélaine from slide 58 for operators
 include here operation on vectors, matrix, etc...
 
@@ -1490,22 +1498,26 @@ et slides juba
 Dire que tout est des objects (see slide Mélaine on object 53)
 
 and how to get HELP -->
-```
 
+<!--
 ## Acknowledgments
 
-```{=html}
+
 <!-- AT the end: recheck the two course to see if I have forgotten something
 
 + lister des ressources
 
 + faire des exercices pour chaque fin de session!!!!! -->
-```
+
 
 <!-- Cours Juba, cours Mélaine-->
 
+<!--
 ## Resources
 
 <!-- TO FINISH-->
 
+<!--
 **RStudio** cheatsheet in [English](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf){preview-link="false"} and in [Portuguese](https://rstudio.github.io/cheatsheets/translations/portuguese/rstudio-ide_pt.pdf){preview-link="false"}
+-->
+
