@@ -1,0 +1,99 @@
+---
+title: "Exercices on session *Getting started with R (2/3)*"
+date: 09/04/2025
+format:
+  pdf
+execute:
+  echo: false  
+---
+
+# RStudio project
+
+* Create a RStudio project to organise the work we will do during the class. Make sure you organise the project in a clear way.
+
+* Create a new script for these exercises (and save it).
+
+# Vectors
+
+Let's work on tree aboveground biomass (AGB). 
+
+We have 2 different forest plots, each containing 4 trees.
+
+* Create two vectors called AGB1 and AGB2 and store the AGB of each of the trees in these plots. Use the following AGB values (in tons).
+
+```{r}
+AGB <- data.frame(Plot = c("Plot1", "Plot2"),
+                  Tree1 = c(0.1, 0.24),
+                  Tree2 = c(0.42, 0.29),
+                  Tree3 = c(0.25, 0.2),
+                  Tree4 = c(0.3, 0.3))
+knitr::kable(AGB)
+```
+
+```{r}
+AGB1 <- c(0.1, 0.42, 0.25, 0.3)
+AGB2 <- c(0.24, 0.29, 0.2, 0.3)
+```
+
+* Add names to these vectors (for Tree1, Tree2, etc...)
+
+```{r}
+tree_names <- c("Tree1", "Tree2", "Tree3", "Tree4")
+names(AGB1) <- tree_names
+names(AGB2) <- tree_names
+```
+
+* Create two new vectors to store the AGB in kg
+
+```{r}
+AGB1_kg <- AGB1 * 1000
+AGB2_kg <- AGB2 * 1000
+```
+
+
+* Calculate the mean AGB for each of the plots.
+
+```{r}
+mean1 <- mean(AGB1)
+mean2 <-mean(AGB2)
+```
+
+* Calculate the difference between Tree1 in plot 1 and plot 2, Tree2 in plot 1 and plot 2, etc...
+
+```{r}
+delta <- AGB1 - AGB2
+```
+
+
+# Factors
+
+Let's now work on the floristic composition of a plot that has 10 trees of 3 different species.
+
+* Create a vector called *compo* that contains the name of the species of each tree (you can use spA, spB, or the name of you favourite species). 
+Your vector should look like this:
+
+```{r}
+compo <- c("spA", "spB", "spA", "spC", "spA", "spA", "spC", "spB", "spA", "spC")
+compo
+```
+
+* Transform *compo* to a factor and check that all is ok (number of trees and number of species).
+
+```{r}
+compo <- as.factor(compo)
+# str(compo)
+# length(compo)
+```
+
+* Add a level for a fourth species
+
+```{r}
+levels(compo)  <- c(levels(compo), "spD")
+```
+
+* Count the number of trees per species
+
+```{r}
+tab <- table(compo)
+```
+

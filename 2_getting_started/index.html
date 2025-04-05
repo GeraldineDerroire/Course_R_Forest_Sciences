@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-02">
+  <meta name="dcterms.date" content="2025-04-05">
   <title>Getting started with R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-02</p>
+  <p class="date">2025-04-05</p>
 </section>
 <section>
 <section id="r-and-rstudio" class="title-slide slide level1 center">
@@ -1419,8 +1419,8 @@ Géraldine Derroire
       }</style></aside>
 </section></section>
 <section>
-<section id="working-with-rstudio" class="title-slide slide level1 center">
-<h1>Working with RStudio</h1>
+<section id="r-scripts" class="title-slide slide level1 center">
+<h1>R scripts</h1>
 <p>Before going further with our exploration of R, let’s get organised!</p>
 </section>
 <section id="section" class="slide level2">
@@ -1522,7 +1522,7 @@ Géraldine Derroire
 <p>The script is saved as an <em>.R</em> file:</p>
 <p><em>.R</em> files are recognised as R script by RStudio, which allows using the syntax colour code, and running the code directly.</p>
 <aside class="notes">
-<p>stop here if this is still the first session</p>
+<p>stopped here at the end of session <em>Getting started 1/3</em></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1534,1265 +1534,1019 @@ Géraldine Derroire
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<!--
-
-# Questions on the last session?
-
-::: notes
-Start of the second session
-:::
-
-## Let's see if all is clear
-
-::: notes
-TO DO, add some tests
-:::
-
-
-## Working directory
-
-The working directory is where R works.
-
-This is where R looks for when you want to open or save a file.
-
-To know where is the working directory:
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-getwd()
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "D:/my_R_remote/00_My_Courses/Course_R_Forest_Sciences/2_getting_started"
-```
-
-
-:::
-:::
-
-
-
-[This gives the absolute path to the work directory]{.fragment}
-
-[You can change the working directory using the function *setwd()* to organise your work in a same folder.]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-setwd("D:/some_other_folder")
-```
-:::
-
-
-:::
-
-::: notes
-But we will see in 5 min that there is a better way of doing this.
-:::
-
-## Problems with absolute path
-
--   If you move your folder, the path will no longer work.
-
--   If you give your script to someone else, they will have to manually change the path to use your script.
-
--   If you are messy...
-
-::: fragment
-![](messy.png){width="50%"}
-:::
-
-## RStudio project
-
-We will use **RStudio projects** to organise the workflow and gather all the files related to a same workflow in a same place.
-
-A RStudio project is a folder on your computer where all the files of the project are grouped.
-
-[By default, the working directory of a project is this folder. So no more problems with absolute path 😊!]{.fragment}
-
-[To share a project, just share the full folder 👍.]{.fragment}
-
-## RStudio project
-
-To create a new RStudio project, go to *File \> New project...*
-
-![](new_project.png)
-
-You can either start a new directory or associate an existing one, if you already have one.
-
-## RStudio project
-
-RStudio creates a *.Rproj* file that contains information about your project (you won't need to open it).
-
-![](Rproj.png){width="100%"}
-
-## RStudio project
-
-You can see the name of the project, and switch from one project to another in the upper right corner.
-
-You can see the path to the project folder at the top of the Console.
-This is the working directory (try getwd to check this).
-
-![](project.png){width="100%"}
-
-## RStudio project
-
-When you create a new script, RStudio save it by default in the project folder.
-
-You can view the content of the project folder in the file pane.
-
-![](file_pane.png){width="100%"}
-
-## RStudio project
-
-From now on, we will always work with RStudio project.
-
-Find a good balance between putting too many things into a same project, and having too many little projects.
-
-[*Eg: Don't have all the analyses of your PhD in a single project, but don't split the steps of a given chapter into several projects.*]{.fragment}
-
-[**A research objective = a chapter/paper = a RStudio project**]{.fragment}
-
-[Let's create a RStudio project for the course.]{.fragment}
-
-::: notes
-Give time for them to create a project.
-:::
-
-## Organising a RStudio project
-
-To facilitate the work with others (including the **future you**):
-
--   Organise your projects a clear and consistant way
-
--   Separate data, methods and outputs
-
--   Document your project in a README file
-
-![](repro_kitchen.png)
-
-## Organise a workflow into several scripts
-
-Avoid very long script
-
-=\> Split the workflow into (relatively) short and logical steps and make a script for each
-
-![](split_scripts.png){width="20%"}
-
-[💡 Give an explicit name to the scripts and start with a number so that they are ordered in logical way.]{.fragment}
-
-::: notes
-This is just an example
-:::
-
-## Executing a script from another one
-
-We can run a full script by calling it from another script.
-
-[For instance, in a script called *analyses.R*, we can run a script called *data_preparation.R* by running the following command in the *analyses.R* script:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-source("data_preparation.R") 
-```
-:::
-
-
-:::
-
-[❗ We need to indicate the path into the working directory here. So if *data_preparation.R* is in the *analyses* folder, we need to write:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-source("analyses/data_preparation.R") 
-```
-:::
-
-
-:::
-
-## Organising a RStudio project
-
-*Example of project organisation*
-
-::::: columns
-::: {.column width="70%"}
--   *.Rproj* file at the root of the project folder
--   *data* contains raw data and derived data in separate folders
--   *analyses*: contains the script organised in a logical way
--   *R*: contains the functions
--   *outputs*: contains figures, reports, etc...
--   *README*: description of the project
-:::
-
-::: {.column width="30%"}
-![](directory.png)
-:::
-:::::
-
-## README file
-
-*Example of a basic README*
-
-![](README.png)
-
-❗ We will see what is a *.md* file later, for the moment, you can write the README file as a *.txt*
-
-# All good?
-
-Do you understand the interest of working with RStudio now?
-
-::: notes
-Can be the end of the second session If there is time, start the 3rd one
-:::
-
-# Questions on the last session?
-
-::: notes
-Start of the second session
-:::
-
-## Let's see if all is clear
-
-::: notes
-TO DO, add some tests
-:::
-
-# Vectors
-
-## Objects we have seen so far
-
--   numeric
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-mode(5.3)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "numeric"
-```
-
-
-:::
-:::
-
-
-:::
-
--   character
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-mode("Hello!")
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "character"
-```
-
-
-:::
-:::
-
-
-:::
-
--   logical
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-mode(TRUE)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "logical"
-```
-
-
-:::
-:::
-
-
-:::
-
-## Vectors
-
-Let's imagine that we have several logs (trunks of wood) for which we know the volume, and we want to calculate the mean volume of a log , we can do:
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Volumes in m3
-vol1 <- 2.9
-vol2 <- 3.2
-vol3 <- 2.4
-vol4 <- 3.5
-(vol1 + vol2 + vol3 + vol4) /4
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 3
-```
-
-
-:::
-:::
-
-
-
-[🤨 This is clearly not very practical...]{.fragment}
-
-## Vectors
-
-Instead, we use *c()* to create an object called a **vector** containing several values:
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-vol <- c(2.9, 3.2, 2.4, 3.5)
-vol
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 2.9 3.2 2.4 3.5
-```
-
-
-:::
-:::
-
-
-:::
-
-[Or we can also write]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-vol <- c(vol1, vol2, vol3, vol4)
-vol
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 2.9 3.2 2.4 3.5
-```
-
-
-:::
-:::
-
-
-:::
-
-[*NB*: the values need to be separated by *,*]{.fragment}
-
-## Vectors
-
-A vector can contain several values of any mode...
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-test <- c(TRUE, FALSE, TRUE, TRUE)
-mode(test)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "logical"
-```
-
-
-:::
-:::
-
-
-
-[...but these values need to be **of the same mode**]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-test2 <- c(2.3, "blue", TRUE)
-mode(test2)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "character"
-```
-
-
-:::
-:::
-
-
-:::
-
-[🤔 What happened?]{.fragment}
-
-[R converted all the values into character.]{.fragment}
-
-## Vectors
-
-[To see the length of a vector, we can use the function *length*:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-length(vol)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 4
-```
-
-
-:::
-:::
-
-
-:::
-
-[*NB*: an object of length one is also a vector]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-length(vol1)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 1
-```
-
-
-:::
-
-```{.r .cell-code}
-is.vector(vol1)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] TRUE
-```
-
-
-:::
-:::
-
-
-:::
-
-## Vectors
-
-We can access a value within a vector using \[\].
-This is called the **indexation**:
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-vol[2]
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 3.2
-```
-
-
-:::
-:::
-
-
-
-[This is the second value of the vector *vol*.]{.fragment}
-
-[💡 the numbers within \[\] that we see when we print a vector indicates the position of the first element of a line. Let's see an exemple with a long vector:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-::: {.cell-output .cell-output-stdout}
-
-```
- [1]  650.74  290.36  702.11  685.67 1038.12 2262.26 2340.04 2126.16  391.66
-[10]  972.24 2464.69  708.44  359.70 2385.57 1480.82 2489.97 1463.12 2417.88
-[19]  942.03  639.43  518.26 2091.99 2727.95 2581.66 1903.43
-```
-
-
-:::
-:::
-
-
-:::
-
-::: notes
-I don't show how I created the vector for now, as a bit too advanced
-:::
-
-## Named vectors
-
-We can add names to the elements of a vector:
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-names(vol) <- c("Tree1", "Tree2", "Tree3", "Tree4")
-vol
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Tree1 Tree2 Tree3 Tree4 
-  2.9   3.2   2.4   3.5 
-```
-
-
-:::
-:::
-
-
-
-[💡 The names are stored in an object that is also a vector:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-is.vector(names(vol))
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] TRUE
-```
-
-
-:::
-:::
-
-
-:::
-
-[We can then call an element of a vector by its name:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-vol["Tree1"]
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Tree1 
-  2.9 
-```
-
-
-:::
-:::
-
-
-:::
-
-::: notes
-take time to explain what we did to check that names is a vector
-:::
-
-## Operations on vectors
-
-We can perform an operation on each value of a vector, simultaneously.
-
-\[For instance, let's convert the volume from m^3^ to cm^3^\]\]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-vol_cm3 <- vol * (100 * 100 * 100)
-vol_cm3
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-  Tree1   Tree2   Tree3   Tree4 
-2900000 3200000 2400000 3500000 
-```
-
-
-:::
-:::
-
-
-:::
-
-::: notes
-here the () are not needed, just for clarity
-:::
-
-## Operations on vectors
-
-Let's come back to the mean volume:
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-mean_vol <- sum(vol) / 4
-mean_vol
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 3
-```
-
-
-:::
-:::
-
-
-
-[🤔 What did we do?]{.fragment}
-
-[We used the function *sum* to calculate the sum and then divided by 4]{.fragment}
-
-[💡 We can also use the function *mean*]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-mean(vol)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 3
-```
-
-
-:::
-:::
-
-
-:::
-
-[We have just learnt two new functions 😄 !]{.fragment}
-
-## Operations on vectors
-
-We can also do operations between two vectors.
-
-Let's create a vector of wood density (*WD*) and calculate the weight of the wood logs:
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-WD <- c(0.76, 0.65, 0.58, 0.81)
-weight <- vol * WD
-weight
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Tree1 Tree2 Tree3 Tree4 
-2.204 2.080 1.392 2.835 
-```
-
-
-:::
-:::
-
-
-
-[🤔 What did we do?]{.fragment}
-[We multiplied each value of *vol* by the corresponding value of WD]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-vol[3] * WD[3]
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Tree3 
-1.392 
-```
-
-
-:::
-:::
-
-
-:::
-
-[❗ The vectors need to have the same length]{.fragment}
-
-::: notes
-Here ask if everything is ok with vectors, before moving on
-:::
-
-## Factors
-
-If we want to create a vector for a categorical variable, we can use a class of vector called a **factor**.
-
-[🤔 What is a categorical variable?]{style="font-size: 20px"}
-[It's a type of variable representing data divided in distinct group or categories.]{style="font-size: 20px"}
-
-[Let's take the example of the seasons:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-season <- c("dry", "dry", "wet", "dry", "wet", "wet")
-class(season)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "character"
-```
-
-
-:::
-:::
-
-
-:::
-
-[Let's transform it into a factor:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-season <- as.factor(season)
-class(season)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "factor"
-```
-
-
-:::
-
-```{.r .cell-code}
-season
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] dry dry wet dry wet wet
-Levels: dry wet
-```
-
-
-:::
-:::
-
-
-:::
-
-## Factors
-
-The list of values that a factor can take is called *levels*.
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-levels(season)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "dry" "wet"
-```
-
-
-:::
-:::
-
-
-
-[We cannot add a value that is not in *levels*:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-season[7] <- "winter"
-```
-
-::: {.cell-output .cell-output-stderr}
-
-```
-Warning in `[<-.factor`(`*tmp*`, 7, value = "winter"): invalid factor level, NA
-generated
-```
-
-
-:::
-
-```{.r .cell-code}
-season
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] dry  dry  wet  dry  wet  wet  <NA>
-Levels: dry wet
-```
-
-
-:::
-:::
-
-
-:::
-
-[💡 *NA* means *Not available* and represents missing or undefined values.]{.fragment}
-
-## Factors
-
-We can add levels:
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-levels(season) <- c(levels(season), "winter", "spring", "summer", "fall")
-levels(season)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] "dry"    "wet"    "winter" "spring" "summer" "fall"  
-```
-
-
-:::
-:::
-
-
-
-[The new levels are added, even though none of the observation takes these values:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-season
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] dry  dry  wet  dry  wet  wet  <NA>
-Levels: dry wet winter spring summer fall
-```
-
-
-:::
-:::
-
-
-:::
-
-[We can now add a value within these new levels:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-season[8] <- "winter"
-season
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] dry    dry    wet    dry    wet    wet    <NA>   winter
-Levels: dry wet winter spring summer fall
-```
-
-
-:::
-:::
-
-
-:::
-
-::: notes
-explain what is in the print: first line : the values second line: the levels
-
-ASK if all is OK
-:::
-
-# Data structure
-
-## Data structure
-
-![](data_structure.png){width="120%"}
-
-::: notes
-There is more type of structure.
-We have seen the vector so far.
-We are quickly present the other ones now, without explaining much how to work with them.
-We will see that later.
-
-The main ones that we are going to use during the class are: vectors and dataframe
-:::
-
-## Matrices
-
-![](matrix.png){width="20%"}
-
-A matrix is a **two-dimensional** data structure (rows and columns) where all the element are of the **same mode**.
-
-[Let's create a matrix:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-M <- matrix(c(1, 4, 8, 6.5, 7, 8.3, 4.6, 6), # content of the matrix
-              4, # number of row
-              2) # number of column
-M
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-     [,1] [,2]
+</section></section>
+<section>
+<section id="questions-on-the-last-session" class="title-slide slide level1 center">
+<h1>Questions on the last session?</h1>
+<aside class="notes">
+<p>Start of the second session Have them all come closer so they can write directly on my computer Have a question for each of them</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lets-see-if-all-is-clear" class="slide level2">
+<h2>Let’s see if all is clear</h2>
+<!-- for next year : put this in an exercice doc to do for the next session-->
+<p>What is the difference between R and RStudio?</p>
+<div class="fragment">
+<p>Write the command for the following operations:</p>
+<p>4 multiplied by -2</p>
+</div>
+<div class="fragment">
+<p><span class="math inline">\(5^2\)</span></p>
+</div>
+<div class="fragment">
+<p>6 divided by 3</p>
+</div>
+<div class="fragment">
+<p>Logarithm of 6</p>
+</div>
+<div class="fragment">
+<p>5 squared</p>
+</div>
+</section>
+<section id="lets-see-if-all-is-clear-1" class="slide level2">
+<h2>Let’s see if all is clear</h2>
+<p>Create an object call <em>dimension</em> and assing it the value of 2.5</p>
+<div class="fragment">
+<p>Calculate the area of a square with sides = <em>dimension</em> and store the result in <em>area</em></p>
+</div>
+<div class="fragment">
+<p>What are the good practices when naming an object?</p>
+</div>
+<div class="fragment">
+<p>Create a object containing a character string</p>
+</div>
+<div class="fragment">
+<p>What are the three most used modes for basic objects</p>
+</div>
+<div class="fragment">
+<p>Test if <em>dimension</em> is smaller than <em>area</em> and store the result in an object called <em>test</em></p>
+</div>
+</section>
+<section id="lets-see-if-all-is-clear-2" class="slide level2">
+<h2>Let’s see if all is clear</h2>
+<p>Create a object containing the value of 33 and transform it to a character string</p>
+<div class="fragment">
+<p>Create an object containing an integer value</p>
+</div>
+<div class="fragment">
+<p>Check if the object <em>area</em> is an numeric</p>
+</div>
+<div class="fragment">
+<p>Check if the object <em>area</em> and an integer and store the result in another object</p>
+</div>
+<div class="fragment">
+<p>Create a new script and write its title</p>
+</div>
+<div class="fragment">
+<p>How to save a script?</p>
+</div>
+</section></section>
+<section>
+<section id="working-with-rstudio" class="title-slide slide level1 center">
+<h1>Working with RStudio</h1>
+
+</section>
+<section id="working-directory" class="slide level2">
+<h2>Working directory</h2>
+<p>The working directory is where R works.</p>
+<p>This is where R looks for when you want to open or save a file.</p>
+<p><span class="fragment">To know where is the working directory:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href=""></a><span class="fu">getwd</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "D:/my_R_remote/00_My_Courses/Course_R_Forest_Sciences/2_getting_started"</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">This gives the absolute path to the work directory</span></p>
+<p><span class="fragment">You can change the working directory using the function <em>setwd()</em> to organise your work in a same folder.</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href=""></a><span class="fu">setwd</span>(<span class="st">"D:/some_other_folder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<aside class="notes">
+<p>Where did you save your script?</p>
+<p>But we will see in 5 min that there is a better way of doing this.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="problems-with-absolute-path" class="slide level2">
+<h2>Problems with absolute path</h2>
+<ul>
+<li class="fragment"><p>If you move your folder, the path will no longer work.</p></li>
+<li class="fragment"><p>If you give your script to someone else, they will have to manually change the path to use your script.</p></li>
+<li class="fragment"><p>If you are messy…</p></li>
+</ul>
+<div class="fragment">
+<p><img data-src="messy.png" style="width:50.0%"></p>
+</div>
+</section>
+<section id="rstudio-project" class="slide level2">
+<h2>RStudio project</h2>
+<p>We will use <strong>RStudio projects</strong> to organise the workflow and gather all the files related to a same workflow in a same place.</p>
+<p>A <strong>RStudio project</strong> is a folder on your computer where all the files of the project are grouped.</p>
+<p><span class="fragment">By default, the working directory of a project is this folder where you put the RStudio project. So no more problems with absolute path 😊!</span></p>
+<p><span class="fragment">To share a project, just share the full folder.</span></p>
+</section>
+<section id="rstudio-project-1" class="slide level2">
+<h2>RStudio project</h2>
+<p>To create a new RStudio project, go to <em>File &gt; New project…</em></p>
+
+<img data-src="new_project.png" class="r-stretch"><p>You can either start a new directory or associate an existing one, if you already have one.</p>
+<aside class="notes">
+<p>See the 3rd possibility Version control =&gt; we will go back to it when we will talk about git</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="rstudio-project-2" class="slide level2">
+<h2>RStudio project</h2>
+<p>RStudio creates a <em>.Rproj</em> file that contains information about your project (you won’t need to open it).</p>
+
+<img data-src="Rproj.png" style="width:100.0%" class="r-stretch"></section>
+<section id="rstudio-project-3" class="slide level2">
+<h2>RStudio project</h2>
+<p>You can see the name of the project, and switch from one project to another in the upper right corner.</p>
+<p>You can see the path to the project folder at the top of the Console. This is the working directory (try getwd to check this).</p>
+
+<img data-src="project.png" style="width:100.0%" class="r-stretch"></section>
+<section id="rstudio-project-4" class="slide level2">
+<h2>RStudio project</h2>
+<p>When you create a new script, RStudio save it by default in the project folder.</p>
+<p>You can view the content of the project folder in the <strong>file</strong> pane.</p>
+
+<img data-src="file_pane.png" style="width:100.0%" class="r-stretch"></section>
+<section id="rstudio-project-5" class="slide level2">
+<h2>RStudio project</h2>
+<p>From now on, we will always work with RStudio project.</p>
+<p>Find a good balance between putting too many things into a same project, and having too many little projects.</p>
+<p><span class="fragment"><em>Eg: Don’t have all the analyses of your PhD in a single project, but don’t split the steps of a given chapter into several projects.</em></span></p>
+<p><span class="fragment"><strong>A research objective = a chapter/paper = a RStudio project</strong></span></p>
+<!--[Let's create a RStudio project for the course.]{.fragment}-->
+<aside class="notes">
+<p>Give time for them to create a project.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="organising-a-rstudio-project" class="slide level2">
+<h2>Organising a RStudio project</h2>
+<p>To facilitate the work with others (including the <strong>future you</strong>):</p>
+<ul>
+<li class="fragment"><p>Organise your projects a clear and consistant way</p></li>
+<li class="fragment"><p>Separate data, methods and outputs</p></li>
+<li class="fragment"><p>Document your project in a README file</p></li>
+</ul>
+
+<img data-src="repro_kitchen.png" class="r-stretch"></section>
+<section id="organise-a-workflow-into-several-scripts" class="slide level2">
+<h2>Organise a workflow into several scripts</h2>
+<p>Avoid very long script</p>
+<p>=&gt; Split the workflow into (relatively) short and logical steps and make a script for each</p>
+
+<img data-src="split_scripts.png" style="width:20.0%" class="r-stretch"><p><span class="fragment">💡 Give an explicit name to the scripts and start with a number so that they are ordered in logical way.</span></p>
+<aside class="notes">
+<p>This is just an example</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="executing-a-script-from-another-one" class="slide level2">
+<h2>Executing a script from another one</h2>
+<p>We can run a full script by calling it from another script.</p>
+<p><span class="fragment">For instance, in a script called <em>analyses.R</em>, we can run a script called <em>data_preparation.R</em> by running the following command in the <em>analyses.R</em> script:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href=""></a><span class="fu">source</span>(<span class="st">"data_preparation.R"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<p><span class="fragment">❗ We need to indicate the path into the working directory here. So if <em>data_preparation.R</em> is in the <em>analyses</em> folder, we need to write:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href=""></a><span class="fu">source</span>(<span class="st">"analyses/data_preparation.R"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+</section>
+<section id="example-of-project-organisation" class="slide level2">
+<h2>Example of project organisation</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<ul>
+<li class="fragment"><em>.Rproj</em> file at the root of the project folder</li>
+<li class="fragment"><em>data</em> contains raw data and derived data in separate folders</li>
+<li class="fragment"><em>analyses</em>: contains the script organised in a logical way</li>
+<li class="fragment"><em>R</em>: contains the functions</li>
+<li class="fragment"><em>outputs</em>: contains figures, reports, etc…</li>
+<li class="fragment"><em>README</em>: description of the project</li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><img data-src="directory.png"></p>
+</div></div>
+</section>
+<section id="readme-file" class="slide level2">
+<h2>README file</h2>
+<p><em>Example of a basic README</em></p>
+
+<img data-src="README.png" class="r-stretch"><p>❗ We will see what is a <em>.md</em> file later, for the moment, you can write the README file as a <em>.txt</em></p>
+</section></section>
+<section id="all-good-1" class="title-slide slide level1 center">
+<h1>All good?</h1>
+<p>Do you understand the interest of working with RStudio now?</p>
+</section>
+
+<section>
+<section id="some-more-objects" class="title-slide slide level1 center">
+<h1>Some more objects</h1>
+
+</section>
+<section id="objects-we-have-seen-so-far" class="slide level2">
+<h2>Objects we have seen so far</h2>
+<ul>
+<li class="fragment">numeric</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href=""></a><span class="fu">mode</span>(<span class="fl">5.3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "numeric"</code></pre>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">character</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href=""></a><span class="fu">mode</span>(<span class="st">"Hello!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">logical</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href=""></a><span class="fu">mode</span>(<span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>Let’s imagine that we have several logs (of wood) for which we know the volume. To calculate the mean volume of a log, we can do:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href=""></a><span class="co"># Volumes in m3</span></span>
+<span id="cb107-2"><a href=""></a>vol1 <span class="ot">&lt;-</span> <span class="fl">2.9</span></span>
+<span id="cb107-3"><a href=""></a>vol2 <span class="ot">&lt;-</span> <span class="fl">3.2</span></span>
+<span id="cb107-4"><a href=""></a>vol3 <span class="ot">&lt;-</span> <span class="fl">2.4</span></span>
+<span id="cb107-5"><a href=""></a>vol4 <span class="ot">&lt;-</span> <span class="fl">3.5</span></span>
+<span id="cb107-6"><a href=""></a>(vol1 <span class="sc">+</span> vol2 <span class="sc">+</span> vol3 <span class="sc">+</span> vol4) <span class="sc">/</span><span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p><span class="fragment">🤨 This is clearly not very practical…</span></p>
+<aside class="notes">
+<p>For those who know R, how can we do better?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="vectors" class="slide level2">
+<h2>Vectors</h2>
+<p>Instead, we use <em>c()</em> to create an object called a <strong>vector</strong> containing several values:</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href=""></a>vol <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.9</span>, <span class="fl">3.2</span>, <span class="fl">2.4</span>, <span class="fl">3.5</span>)</span>
+<span id="cb109-2"><a href=""></a>vol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.9 3.2 2.4 3.5</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">Or we can also write</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href=""></a>vol <span class="ot">&lt;-</span> <span class="fu">c</span>(vol1, vol2, vol3, vol4)</span>
+<span id="cb111-2"><a href=""></a>vol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2.9 3.2 2.4 3.5</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><em>NB</em>: the values need to be separated by</span><span style="color:indianred;">,</span></p>
+</section>
+<section id="vectors-1" class="slide level2">
+<h2>Vectors</h2>
+<p>A vector can contain several values of any mode…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href=""></a>test <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb113-2"><a href=""></a><span class="fu">mode</span>(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "logical"</code></pre>
+</div>
+</div>
+<p><span class="fragment">…but these values need to be <strong>of the same mode</strong></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href=""></a>test2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.3</span>, <span class="st">"blue"</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb115-2"><a href=""></a><span class="fu">mode</span>(test2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">🤔 What happened?</span></p>
+<p><span class="fragment">R converted all the values into character (the more flexible mode).</span></p>
+</section>
+<section id="vectors-2" class="slide level2">
+<h2>Vectors</h2>
+<p>We can check that <em>vol</em> is a vector:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href=""></a><span class="fu">is.vector</span>(vol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<p><span class="fragment">To see the length of a vector, we can use the function <em>length</em>:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href=""></a><span class="fu">length</span>(vol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="vectors-3" class="slide level2">
+<h2>Vectors</h2>
+<p>We can see the structure of <em>vol</em>, using the function <span style="color:indianred;">str</span>.</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href=""></a><span class="fu">str</span>(vol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:4] 2.9 3.2 2.4 3.5</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><em>num</em> tells us that the vector contains numerical values.</span></p>
+<p><span class="fragment"><em>[1:4]</em> gives the length of the vector.</span></p>
+<p><span class="fragment">The first values of the vector are displayed.</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href=""></a><span class="fu">str</span>(test2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> chr [1:3] "2.3" "blue" "TRUE"</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>the function str is very useful, try to use it often to be sure of the structure of your object</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="vectors-4" class="slide level2">
+<h2>Vectors</h2>
+<p><em>NB</em>: an object of length one is also a vector.</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href=""></a><span class="fu">length</span>(vol1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href=""></a><span class="fu">is.vector</span>(vol1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="vectors-5" class="slide level2">
+<h2>Vectors</h2>
+<p>We can access a value within a vector using []. This is called the <strong>indexation</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href=""></a>vol[<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.2</code></pre>
+</div>
+</div>
+<p><span class="fragment">This is the second value of the vector <em>vol</em>.</span></p>
+<p><span class="fragment">💡 the numbers within [] that we see when we print a vector indicates the position of the first element of a line. Let’s see an exemple with a long vector:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  101.35 2707.56 2925.31 2905.36 1242.85 1082.46  265.43 2667.28 1281.34
+[10]  163.05 2019.10 2801.28   72.73  426.73 2061.37 2980.30 2686.46  953.21
+[19] 2082.25 1272.98 2452.77  833.73  513.90  118.34 2587.17</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>I don’t show how I created the vector for now, as a bit too advanced</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="named-vectors" class="slide level2">
+<h2>Named vectors</h2>
+<p>We can add names to the elements of a vector:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href=""></a><span class="fu">names</span>(vol) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Tree1"</span>, <span class="st">"Tree2"</span>, <span class="st">"Tree3"</span>, <span class="st">"Tree4"</span>)</span>
+<span id="cb132-2"><a href=""></a>vol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Tree1 Tree2 Tree3 Tree4 
+  2.9   3.2   2.4   3.5 </code></pre>
+</div>
+</div>
+<p><span class="fragment">💡 The names are stored in an object that is also a vector:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href=""></a><span class="fu">is.vector</span>(<span class="fu">names</span>(vol))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">We can then call an element of a vector by its name:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href=""></a>vol[<span class="st">"Tree1"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Tree1 
+  2.9 </code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>take time to explain what we did to check that names is a vector</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="operations-on-vectors" class="slide level2">
+<h2>Operations on vectors</h2>
+<p>We can perform an operation on each value of a vector, simultaneously.</p>
+<p><span class="fragment">For instance, let’s convert the volume from m<sup>3</sup> to cm<sup>3</sup></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href=""></a>vol_cm3 <span class="ot">&lt;-</span> vol <span class="sc">*</span> (<span class="dv">100</span> <span class="sc">*</span> <span class="dv">100</span> <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb138-2"><a href=""></a>vol_cm3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tree1   Tree2   Tree3   Tree4 
+2900000 3200000 2400000 3500000 </code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>here the () are not needed, just for clarity and obviously, we could do * 1 000 000</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="operations-on-vectors-1" class="slide level2">
+<h2>Operations on vectors</h2>
+<p>Let’s come back to the mean volume:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href=""></a>mean_vol <span class="ot">&lt;-</span> <span class="fu">sum</span>(vol) <span class="sc">/</span> <span class="dv">4</span></span>
+<span id="cb140-2"><a href=""></a>mean_vol</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p><span class="fragment">🤔 What did we do?</span></p>
+<p><span class="fragment">We used the function <em>sum</em> to calculate the sum and then divided it by 4</span></p>
+<p><span class="fragment">💡 We can also use the function <em>mean</em></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href=""></a><span class="fu">mean</span>(vol)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">We have just learnt two new functions 😄 !</span></p>
+</section>
+<section id="operations-on-vectors-2" class="slide level2">
+<h2>Operations on vectors</h2>
+<p>We can also do operations between two vectors. ⚠️ The vectors need to have the same length</p>
+<p>Let’s create a vector of wood density (<em>WD</em>) and calculate the weight of the logs:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href=""></a>WD <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.76</span>, <span class="fl">0.65</span>, <span class="fl">0.58</span>, <span class="fl">0.81</span>)</span>
+<span id="cb144-2"><a href=""></a>weight <span class="ot">&lt;-</span> vol <span class="sc">*</span> WD</span>
+<span id="cb144-3"><a href=""></a>weight</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Tree1 Tree2 Tree3 Tree4 
+2.204 2.080 1.392 2.835 </code></pre>
+</div>
+</div>
+<p><span class="fragment">🤔 What did we do?</span> <span class="fragment">We multiplied each value of <em>vol</em> by the corresponding value of WD</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href=""></a>vol[<span class="dv">3</span>] <span class="sc">*</span> WD[<span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Tree3 
+1.392 </code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Here ask if everything is ok with vectors, before moving on If almost the end of the class =&gt; STOP HERE</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="factors" class="slide level2">
+<h2>Factors</h2>
+<p>If we want to create a vector for a categorical variable, we can use a class of vector called a <strong>factor</strong>.</p>
+<p><span style="font-size: 20px">🤔 What is a categorical variable?</span> <span style="font-size: 20px">It’s a type of variable representing data divided in distinct group or categories.</span></p>
+<p><span class="fragment">Let’s take the example of the seasons:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href=""></a>season <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dry"</span>, <span class="st">"dry"</span>, <span class="st">"wet"</span>, <span class="st">"dry"</span>, <span class="st">"wet"</span>, <span class="st">"wet"</span>)</span>
+<span id="cb148-2"><a href=""></a><span class="fu">class</span>(season)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "character"</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">Let’s transform it into a factor:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href=""></a>season <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(season)</span>
+<span id="cb150-2"><a href=""></a><span class="fu">class</span>(season)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "factor"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="factors-1" class="slide level2">
+<h2>Factors</h2>
+<p>The values that a factor can take are called <em>levels</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href=""></a>season</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] dry dry wet dry wet wet
+Levels: dry wet</code></pre>
+</div>
+</div>
+<p><span class="fragment">When printing a vector, the first line shows the values, the second line shows the levels.</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href=""></a><span class="fu">levels</span>(season)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "dry" "wet"</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>explain what is in the print: first line : the values second line: the levels</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="factors-2" class="slide level2">
+<h2>Factors</h2>
+<p>We cannot add a value that is not in <em>levels</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href=""></a>season[<span class="dv">7</span>] <span class="ot">&lt;-</span> <span class="st">"winter"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in `[&lt;-.factor`(`*tmp*`, 7, value = "winter"): invalid factor level, NA
+generated</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href=""></a>season</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] dry  dry  wet  dry  wet  wet  &lt;NA&gt;
+Levels: dry wet</code></pre>
+</div>
+</div>
+<p><span class="fragment">💡 <em>NA</em> means <em>Not available</em> and represents missing or undefined values.</span></p>
+</section>
+<section id="factors-3" class="slide level2">
+<h2>Factors</h2>
+<p>We can add levels:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href=""></a><span class="fu">levels</span>(season) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">levels</span>(season), <span class="st">"winter"</span>, <span class="st">"spring"</span>, <span class="st">"summer"</span>, <span class="st">"fall"</span>)</span>
+<span id="cb160-2"><a href=""></a><span class="fu">levels</span>(season)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "dry"    "wet"    "winter" "spring" "summer" "fall"  </code></pre>
+</div>
+</div>
+<p><span class="fragment">🤔 What did we do?</span> <span class="fragment">We combined the existing levels and the new ones and replaced the vector of levels by this new vector.</span></p>
+</section>
+<section id="factors-4" class="slide level2">
+<h2>Factors</h2>
+<p>The new levels are added, even though none of the observation takes these values:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb162"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href=""></a>season</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] dry  dry  wet  dry  wet  wet  &lt;NA&gt;
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+<p><span class="fragment">We can now add a value within these new levels:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb164"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb164-1"><a href=""></a>season[<span class="dv">8</span>] <span class="ot">&lt;-</span> <span class="st">"winter"</span></span>
+<span id="cb164-2"><a href=""></a>season</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] dry    dry    wet    dry    wet    wet    &lt;NA&gt;   winter
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="factors-5" class="slide level2">
+<h2>Factors</h2>
+<p>We can easily count the number of values per levels using the function <span style="color:indianred;"> table</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb166"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href=""></a><span class="fu">table</span>(season)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>season
+   dry    wet winter spring summer   fall 
+     3      3      1      0      0      0 </code></pre>
+</div>
+</div>
+<p><span class="fragment"><em>NB</em>: NAs are not shown.</span></p>
+<aside class="notes">
+<p>ASK if all is OK</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="to-go-further-on-object-type" class="slide level2">
+<h2>To go further on object type</h2>
+
+<img data-src="data_type.png" class="r-stretch"><p><span style="font-size: 30px"><em>Figure by Jenny Bryan</em></span></p>
+<aside class="notes">
+<p>No need to remember all of this.</p>
+<p>End of the second session.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="data-structure" class="title-slide slide level1 center">
+<h1>Data structure</h1>
+
+</section>
+<section id="data-structure-1" class="slide level2">
+<h2>Data structure</h2>
+
+<img data-src="data_structure.png" style="width:120.0%" class="r-stretch"><aside class="notes">
+<p>There is more type of structure. We have seen the vector so far. We are quickly present the other ones now, without explaining much how to work with them. We will see that later.</p>
+<p>The main ones that we are going to use during the class are: vectors and dataframe</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="matrices" class="slide level2">
+<h2>Matrices</h2>
+
+<img data-src="matrix.png" style="width:20.0%" class="r-stretch"><p>A matrix is a <strong>two-dimensional</strong> data structure (rows and columns) where all the element are of the <strong>same mode</strong>.</p>
+<p><span class="fragment">Let’s create a matrix:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb168"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb168-1"><a href=""></a>M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">8</span>, <span class="fl">6.5</span>, <span class="dv">7</span>, <span class="fl">8.3</span>, <span class="fl">4.6</span>, <span class="dv">6</span>), <span class="co"># content of the matrix</span></span>
+<span id="cb168-2"><a href=""></a>              <span class="dv">4</span>, <span class="co"># number of row</span></span>
+<span id="cb168-3"><a href=""></a>              <span class="dv">2</span>) <span class="co"># number of column</span></span>
+<span id="cb168-4"><a href=""></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
 [1,]  1.0  7.0
 [2,]  4.0  8.3
 [3,]  8.0  4.6
-[4,]  6.5  6.0
-```
-
-
-:::
-:::
-
-
-:::
-
-::: notes
-In the first code, explain that this is just one command that I wrote on several line for clarity of the code
-:::
-
-## Matrices
-
-We get the dimensions of the matrix with the function *dim*:
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-dim(M)
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 4 2
-```
-
-
-:::
-:::
-
-
-
-[To access a row, a column, or a value in a matrix, we use \[\]:]{.fragment}
-
-:::::::::: columns
-:::::: {.column width="50%"}
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-M[2, ] # 2nd row
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 4.0 8.3
-```
-
-
-:::
-:::
-
-
-:::
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-M[, 1] # 1st column
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 1.0 4.0 8.0 6.5
-```
-
-
-:::
-:::
-
-
-:::
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-M[4, 2] # 4th row, 2nd column
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] 6
-```
-
-
-:::
-:::
-
-
-:::
-::::::
-
-::::: {.column width="50%"}
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-M[-2,] # all rows except 2nd
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-     [,1] [,2]
+[4,]  6.5  6.0</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>In the first code, explain that this is just one command that I wrote on several line for clarity of the code</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="matrices-1" class="slide level2">
+<h2>Matrices</h2>
+<p>We get the dimensions of the matrix with the function <em>dim</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb170"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href=""></a><span class="fu">dim</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4 2</code></pre>
+</div>
+</div>
+<p><span class="fragment">To access a row, a column, or a value in a matrix, we use []:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href=""></a>M[<span class="dv">2</span>, ] <span class="co"># 2nd row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.0 8.3</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href=""></a>M[, <span class="dv">1</span>] <span class="co"># 1st column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.0 4.0 8.0 6.5</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href=""></a>M[<span class="dv">4</span>, <span class="dv">2</span>] <span class="co"># 4th row, 2nd column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href=""></a>M[<span class="sc">-</span><span class="dv">2</span>,] <span class="co"># all rows except 2nd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
 [1,]  1.0  7.0
 [2,]  8.0  4.6
-[3,]  6.5  6.0
-```
-
-
-:::
-:::
-
-
-:::
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-M[2:3, ] # rows 2 to 3
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-     [,1] [,2]
+[3,]  6.5  6.0</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href=""></a>M[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, ] <span class="co"># rows 2 to 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
 [1,]    4  8.3
-[2,]    8  4.6
-```
+[2,]    8  4.6</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="arrays" class="slide level2">
+<h2>Arrays</h2>
 
+<img data-src="array.png" style="width:20.0%" class="r-stretch"><p>An array is a <strong>multi-dimensional</strong> data structure where all the element are of the <strong>same mode</strong>.</p>
+<p>It is an extension of a matrix with more than two dimensions.</p>
+<p>.</p>
+<aside class="notes">
+<p>Let’s not spend some time on this, you won’t need ite for the moment, it’s enought to know that this exist.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lists" class="slide level2">
+<h2>Lists</h2>
 
-:::
-:::
-
-
-:::
-:::::
-::::::::::
-
-## Arrays
-
-![](array.png){width="20%"}
-
-An array is a **multi-dimensional** data structure where all the element are of the **same mode**.
-
-It is an extension of a matrix with more than two dimensions.
-
-.
-
-::: notes
-Let's not spend some time on this, you won't need ite for the moment, it's enought to know that this exist.
-:::
-
-## Lists
-
-![](list.png){width="20%"}
-
-A list is a flexible object containing elements of **different structuress** (*eg*: a vector, a matrix,... but a also a graph, a function...).
-
-.
-
-## Lists
-
-Let's create a list:
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-L <- list(vol, M, season)
-L
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[[1]]
+<img data-src="list.png" style="width:20.0%" class="r-stretch"><p>A list is a flexible object containing elements of <strong>different structuress</strong> (<em>eg</em>: a vector, a matrix,… but a also a graph, a function…).</p>
+<p>.</p>
+</section>
+<section id="lists-1" class="slide level2">
+<h2>Lists</h2>
+<p>Let’s create a list:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href=""></a>L <span class="ot">&lt;-</span> <span class="fu">list</span>(vol, M, season)</span>
+<span id="cb182-2"><a href=""></a>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
 Tree1 Tree2 Tree3 Tree4 
   2.9   3.2   2.4   3.5 
 
@@ -2804,87 +2558,50 @@ Tree1 Tree2 Tree3 Tree4
 [4,]  6.5  6.0
 
 [[3]]
-[1] dry    dry    wet    dry    wet    wet    <NA>   winter
-Levels: dry wet winter spring summer fall
-```
-
-
-:::
-:::
-
-
-
-## Lists
-
-To access an object within a list, we use \[\[\]\]:
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-L[[3]]
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] dry    dry    wet    dry    wet    wet    <NA>   winter
-Levels: dry wet winter spring summer fall
-```
-
-
-:::
-:::
-
-
-
-[We can then access a value within this object:]{.fragment}
-
-::: fragment
-
-
-::: {.cell}
-
-```{.r .cell-code}
-L[[3]][2]
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-[1] dry
-Levels: dry wet winter spring summer fall
-```
-
-
-:::
-:::
-
-
-:::
-
-## Lists
-
-:::::: columns
-::: {.column width="50%"}
-[The objects contained in a list can also be named when we create the list:]{style="font-size: 25px"}
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-L1 <- list(Volume = vol, 
-           Matrix = M, 
-           Season = season)
-L1
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-$Volume
+[1] dry    dry    wet    dry    wet    wet    &lt;NA&gt;   winter
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+</section>
+<section id="lists-2" class="slide level2">
+<h2>Lists</h2>
+<p>To access an object within a list, we use [[]]:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb184"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href=""></a>L[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] dry    dry    wet    dry    wet    wet    &lt;NA&gt;   winter
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+<p><span class="fragment">We can then access a value within this object:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb186"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb186-1"><a href=""></a>L[[<span class="dv">3</span>]][<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] dry
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="lists-3" class="slide level2">
+<h2>Lists</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 25px">The objects contained in a list can also be named when we create the list:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb188"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb188-1"><a href=""></a>L1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Volume =</span> vol, </span>
+<span id="cb188-2"><a href=""></a>           <span class="at">Matrix =</span> M, </span>
+<span id="cb188-3"><a href=""></a>           <span class="at">Season =</span> season)</span>
+<span id="cb188-4"><a href=""></a>L1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>$Volume
 Tree1 Tree2 Tree3 Tree4 
   2.9   3.2   2.4   3.5 
 
@@ -2896,62 +2613,38 @@ $Matrix
 [4,]  6.5  6.0
 
 $Season
-[1] dry    dry    wet    dry    wet    wet    <NA>   winter
-Levels: dry wet winter spring summer fall
-```
+[1] dry    dry    wet    dry    wet    wet    &lt;NA&gt;   winter
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 25px">We can then access an object by its name, using <em>$</em>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb190"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb190-1"><a href=""></a>L1<span class="sc">$</span>Volume</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Tree1 Tree2 Tree3 Tree4 
+  2.9   3.2   2.4   3.5 </code></pre>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="dataframes" class="slide level2">
+<h2>Dataframes</h2>
 
-
-:::
-:::
-
-
-:::
-
-:::: {.column width="50%"}
-::: fragment
-[We can then access an object by its name, using *\$*:]{style="font-size: 25px"}
-
-
-
-::: {.cell}
-
-```{.r .cell-code}
-L1$Volume
-```
-
-::: {.cell-output .cell-output-stdout}
-
-```
-Tree1 Tree2 Tree3 Tree4 
-  2.9   3.2   2.4   3.5 
-```
-
-
-:::
-:::
-
-
-:::
-::::
-::::::
-
-## Dataframes
-
-![](dataframe.png){width="20%"}
-
-A dataframe is a two-dimensional structure that allow storing data sets:
-
--   each column is a variable (can be of different type)
-
--   each row is an observation
-
-[**This is the structure we will use the more, we'll come back to it in the next session.**]{.fragment}
-
-# Operators, functions, packages, etc...
-
-Work in progress...
-
-
+<img data-src="dataframe.png" style="width:20.0%" class="r-stretch"><p>A dataframe is a two-dimensional structure that allow storing data sets:</p>
+<ul>
+<li class="fragment"><p>each column is a variable (can be of different type)</p></li>
+<li class="fragment"><p>each row is an observation</p></li>
+</ul>
+<p><span class="fragment"><strong>This is the structure we will use the more, we’ll come back to it in the next session.</strong></span></p>
+</section></section>
+<section id="operators-functions-packages-etc" class="title-slide slide level1 center">
+<h1>Operators, functions, packages, etc…</h1>
+<p>Work in progress…</p>
 <!-- see slides Mélaine from slide 58 for operators
 include here operation on vectors, matrix, etc...
 
@@ -2985,7 +2678,7 @@ and how to get HELP -->
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
