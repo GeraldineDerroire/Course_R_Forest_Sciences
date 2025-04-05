@@ -1137,7 +1137,7 @@ vol
 ```
 :::
 
-[*NB*: the values need to be separated by ]{.fragment}[ ,]{style="color:indianred;"}
+[*NB*: the values need to be separated by]{.fragment}[,]{style="color:indianred;"}
 
 ## Vectors
 
@@ -1179,7 +1179,7 @@ length(vol)
 
 ## Vectors
 
-We can see the structure of *vol*, using the function [ str]{style="color:indianred;"}.
+We can see the structure of *vol*, using the function [str]{style="color:indianred;"}.
 
 ::: fragment
 ```{r}
@@ -1310,7 +1310,7 @@ mean(vol)
 ## Operations on vectors
 
 We can also do operations between two vectors.
-⚠️ The vectors need to have the same length
+⚠️ The⚠️ vectors need to have the same length
 
 Let's create a vector of wood density (*WD*) and calculate the weight of the logs:
 
@@ -1330,8 +1330,7 @@ vol[3] * WD[3]
 :::
 
 ::: notes
-Here ask if everything is ok with vectors, before moving on
-If almost the end of the class => STOP HERE
+Here ask if everything is ok with vectors, before moving on If almost the end of the class =\> STOP HERE
 :::
 
 ## Factors
@@ -1366,6 +1365,7 @@ The values that a factor can take are called *levels*.
 ```{r}
 season
 ```
+
 [When printing a vector, the first line shows the values, the second line shows the levels.]{.fragment}
 
 ::: fragment
@@ -1382,16 +1382,13 @@ explain what is in the print: first line : the values second line: the levels
 
 We cannot add a value that is not in *levels*:
 
-
 ```{r}
 #| warning: true
 season[7] <- "winter"
 season
 ```
 
-
 [💡 *NA* means *Not available* and represents missing or undefined values.]{.fragment}
-
 
 ## Factors
 
@@ -1409,11 +1406,9 @@ levels(season)
 
 The new levels are added, even though none of the observation takes these values:
 
-
 ```{r}
 season
 ```
-
 
 [We can now add a value within these new levels:]{.fragment}
 
@@ -1427,14 +1422,14 @@ season
 
 ## Factors
 
-We can easily count the number of values per levels using the function  <span style="color:indianred;"> table</span>
+We can easily count the number of values per levels using the function [table]{style="color:indianred;"}
 
 ```{r}
 table(season)
 ```
 
 [*NB*: NAs are not shown.]{.fragment}
- 
+
 ::: notes
 ASK if all is OK
 :::
@@ -1451,6 +1446,13 @@ No need to remember all of this.
 End of the second session.
 :::
 
+# Questions on the last session?
+
+::: notes
+How did they feel with the exercices ?
+have someone show how they did
+:::
+
 # Data structure
 
 ## Data structure
@@ -1460,7 +1462,7 @@ End of the second session.
 ::: notes
 There is more type of structure.
 We have seen the vector so far.
-We are quickly present the other ones now, without explaining much how to work with them.
+We are now going to quickly present the other ones, without explaining much how to work with them.
 We will see that later.
 
 The main ones that we are going to use during the class are: vectors and dataframe
@@ -1484,18 +1486,40 @@ M
 :::
 
 ::: notes
-In the first code, explain that this is just one command that I wrote on several line for clarity of the code
+In the code, explain that this is just one command that I wrote on several line for clarity of the code
+
+In practice, we will rarely create the matrix like this but we will import the data.
 :::
 
 ## Matrices
 
-We get the dimensions of the matrix with the function *dim*:
+We get the dimensions of the matrix with the function [dim]{style="color:indianred;"}:
 
 ```{r}
 dim(M)
 ```
 
-[To access a row, a column, or a value in a matrix, we use \[\]:]{.fragment}
+[The first number is the number of rows, and the second the number of columns.]{.fragment}
+
+[We can see the structure of the matrix using ]{.fragment}[str]{style="color:indianred;"}
+
+::: fragment
+```{r}
+str(M)
+```
+:::
+
+::: notes
+dim is another function, with lenght and str that we will use a lot
+:::
+
+## Matrices
+
+To access a row, a column, or a value in a matrix, we use [\[\]]{style="color:indianred;"}
+
+```{r}
+M
+```
 
 :::::::::: columns
 :::::: {.column width="50%"}
@@ -1533,6 +1557,67 @@ M[2:3, ] # rows 2 to 3
 :::::
 ::::::::::
 
+## Operations on matrices
+
+We can get the sum of each row of a matrix using [rowSums]{style="color:indianred;"} :
+
+```{r}
+rowSums(M)
+```
+
+[⚠️ the function rowsum also exists, and doesn't do the same thing.]{.fragment}
+
+[We get the sum of each column using ]{.fragment}[colSums]{style="color:indianred;"} :
+
+::: fragment
+```{r}
+colSums(M)
+```
+:::
+
+::: notes
+! rowSums is not the same thing as rowsum...
+:::
+
+## Operations on matrices
+
+We can do an operation on each element of a matrix:
+
+```{r}
+M * 2
+```
+
+::: fragment
+```{r}
+M^2
+```
+:::
+
+## Operations on matrices
+
+We can transposed a matrix using [t]{style="color:indianred;"}
+
+```{r}
+M
+t(M)
+```
+
+## Operations on matrices
+
+We can add/subtract/multiply/divide each element of two matrices of the *same size*, element by element:
+
+```{r}
+M+M
+```
+
+::: fragment
+```{r}
+M/M
+```
+:::
+
+[⚠️ This is not the same thing as matrix calculus (which we will not cover here).]{.fragment}
+
 ## Arrays
 
 ![](array.png){width="20%"}
@@ -1544,14 +1629,14 @@ It is an extension of a matrix with more than two dimensions.
 .
 
 ::: notes
-Let's not spend some time on this, you won't need ite for the moment, it's enought to know that this exist.
+Let's not spend some time on this, you won't need it for the moment, it's enought to know that this exist.
 :::
 
 ## Lists
 
 ![](list.png){width="20%"}
 
-A list is a flexible object containing elements of **different structuress** (*eg*: a vector, a matrix,... but a also a graph, a function...).
+A list is a flexible object containing elements of **different structures** (*eg*: a vector, a matrix,... but a also a graph, a function...).
 
 .
 
@@ -1563,6 +1648,24 @@ Let's create a list:
 L <- list(vol, M, season)
 L
 ```
+
+## Lists
+
+We get the dimensions of the list with the function [length]{style="color:indianred;"}:
+
+```{r}
+length(L)
+```
+
+[We can see the structure of the list using ]{.fragment}[str:]{style="color:indianred;"}
+
+::: fragment
+```{r}
+str(L)
+```
+:::
+
+[We see the structure of each element of the list.]{.fragment}
 
 ## Lists
 
@@ -1582,9 +1685,22 @@ L[[3]][2]
 
 ## Lists
 
-:::::: columns
-::: {.column width="50%"}
-[The objects contained in a list can also be named when we create the list:]{style="font-size: 25px"}
+The element of a list can be named using [names:]{style="color:indianred;"}
+
+```{r}
+names(L)
+```
+
+::: fragment
+```{r}
+names(L) <- c("Volumes", "Matrix", "Season")
+L
+```
+:::
+
+## Lists
+
+The objects contained in a list can also be named when we create the list:
 
 ```{r}
 L1 <- list(Volume = vol, 
@@ -1592,18 +1708,14 @@ L1 <- list(Volume = vol,
            Season = season)
 L1
 ```
-:::
 
-:::: {.column width="50%"}
-::: fragment
-[We can then access an object by its name, using *\$*:]{style="font-size: 25px"}
+## Lists
+
+We can then access an object by its name, using [\$:]{style="color:indianred;"}:
 
 ```{r}
 L1$Volume
 ```
-:::
-::::
-::::::
 
 ## Dataframes
 
@@ -1617,23 +1729,396 @@ A dataframe is a two-dimensional structure that allow storing data sets:
 
 [**This is the structure we will use the more, we'll come back to it in the next session.**]{.fragment}
 
-# Operators, functions, packages, etc...
+# Operators
 
-Work in progress...
+## Arithmetic operators
 
-```{=html}
-<!-- see slides Mélaine from slide 58 for operators
-include here operation on vectors, matrix, etc...
+We have already seen the 4 main operations in R:
 
-tehn from slide 69 for fonctions
-then slide 83 on fonctions
-
-et slides juba
-
-Dire que tout est des objects (see slide Mélaine on object 53)
-
-and how to get HELP -->
+```{r}
+2 + 2 
+2 - 2
+2 * 2
+2 / 2
 ```
+
+[and we also have seen that we can apply them on all elements of a vector or a matrix.]{.fragment}
+
+## Arithmetic operators
+
+The priority for operation in R are the same as in maths:
+
+```{r}
+10+2*3
+```
+
+::: fragment
+```{r}
+10+(2*3)
+```
+:::
+
+::: fragment
+```{r}
+(10+2)*3
+```
+:::
+
+::: notes
+Ask the results before showing them
+:::
+
+## Sequence operator
+
+The operator [:]{style="color:indianred;"} is used to create a sequence:
+
+```{r}
+1:10
+```
+
+[⚠️ This operator has a high precedence (it takes priority), so use () wisely]{.fragment}
+
+::: fragment
+```{r}
+1:10 * 2
+# is equivalent to:
+(1:10) * 2  
+```
+:::
+
+::: fragment
+```{r}
+1:(10 * 2)
+```
+:::
+
+::: notes
+We will use it a lot
+:::
+
+## Logical operators - comparison
+
+Logical comparison operators are used to compare values.
+They return a logical value (TRUE/FALSE).
+
+```{r}
+2 < 3
+```
+
+::: fragment
+```{r}
+2 > 3
+```
+:::
+
+[Superior or equal / inferior or equal:]{.fragment}
+
+::: fragment
+```{r}
+2 <= 2
+```
+:::
+
+::: fragment
+```{r}
+2 >= 4
+```
+:::
+
+## Logical operators - comparison
+
+Logical comparison operators are used to compare values.
+They return a logical value (TRUE/FALSE).
+
+We will use them a lot later when we will do conditional tests.
+
+Equal [==]{style="color:indianred;"} *vs* non-equal [!=]{style="color:indianred;"}:
+
+```{r}
+2 == 3
+```
+
+::: fragment
+```{r}
+2 != 3
+```
+:::
+
+## Logical operators - comparison
+
+[isTRUE]{style="color:indianred;"} / [isFALSE]{style="color:indianred;"}
+
+```{r}
+isTRUE(2 == 3)
+```
+
+::: fragment
+```{r}
+isFALSE(2 == 3)
+```
+:::
+
+## Logical operators - comparison
+
+[%in%]{style="color:indianred;"} tests if a value belongs to a vector.
+
+```{r}
+v <- c(2, 3)
+v
+```
+
+::: fragment
+```{r}
+2 %in% v
+```
+:::
+
+::: fragment
+```{r}
+4 %in% v
+```
+:::
+
+## Logical operators - comparison
+
+🤔 Let's play a bit!
+
+```{r}
+3 %in% 1:5
+```
+
+::: fragment
+```{r}
+isTRUE(2 %in% 1:10)
+```
+:::
+
+::: fragment
+```{r}
+isFALSE(2 %in% 5:10)
+```
+:::
+
+::: fragment
+```{r}
+!(2 %in% 1:5)
+```
+:::
+
+::: notes
+No worries if not clear now, look at it tranquilly later DO NOT DO if late or already lost
+:::
+
+## Logical operators - combination
+
+Logical combination operators are used to combine two (or more) conditions:
+
+We use [&]{style="color:indianred;"} to test if **both** conditions are satisfied:
+
+```{r}
+(2 == 2) & (3 == 3)
+```
+
+::: fragment
+```{r}
+(2 == 2) & (2 == 3)
+```
+:::
+
+[We use ]{.fragment}[\|]{style="color:indianred;"} to test if **at least** one condition is satisfied:
+
+::: fragment
+```{r}
+(2 == 2) | (3 == 3)
+```
+:::
+
+::: fragment
+```{r}
+(2 == 2) | (2 == 3)
+```
+:::
+
+::: fragment
+```{r}
+(2 == 4) | (2 == 3)
+```
+:::
+
+# Functions
+
+## 
+
+We have already use many functions.
+
+Do you remember some of them?
+
+::: notes
+ls, rm
+
+mode, typeof, is.integer,...
+
+log, mean, sum, c, rowSums, colSums,
+
+names, length, dim, table...
+
+setwd, getwd
+
+and also most of the operators
+:::
+
+## What is a function?
+
+A function is a command:
+
+```{r}
+v <- c(2, 3, 5, NA)
+Mymean <- mean(v, na.rm=TRUE)
+```
+
+[MyMean \<-]{style="color:darkgreen;"}[mean]{style="color:indianred;"}([v]{style="color:blueviolet;"}, [na.rm=TRUE]{style="color:darkcyan;"})
+
+-   It has a [name]{style="color:indianred;"}
+
+-   It takes arguments that can be [data]{style="color:blueviolet;"} on which to perform the command, or [parameters or options]{style="color:darkcyan;"} of the function.
+Arguments are put within **( )** and separated with **,**.
+
+-   It returns a [result]{style="color:darkgreen;"}
+
+::: notes
+at the end of the course, we will see how to write our own functions
+
+we see on next slide what na.rm means
+:::
+
+
+## Argument with default values
+
+Let's go back to our mean:
+
+```{r}
+v <- c(2, 3, 5, NA)
+mean(v)
+```
+
+[⚠️ Arguments can have default values, see the help of the function]{.fragment}
+
+[Here [na.rm]{style="color:darkcyan;"} (which allows to remove the NAs) takes the value of false by default]{.fragment}
+
+::: fragment
+```{r}
+mean(v, na.rm=FALSE)
+mean(v, na.rm=TRUE)
+```
+:::
+
+## Getting help on a function
+
+We can use [help]{style="color:indianred;"} or [?]{style="color:indianred;"} to see the help of a function. 
+
+```{r, eval=FALSE}
+help(mean)
+?mean
+```
+
+![](help_func.png){width="50%"}
+
+## Getting help on a function
+
+The help generally contains:
+
+* A title
+
+* Description
+
+* Usage: show the main arguments and their default values
+
+* Arguments: explain what are the arguments
+
+* Value: explain how the results is obtained
+
+* References
+
+* See Also: links to related functions
+
+* Examples
+
+[On the top of the help, the package is mention in [{ }]{style="color:indianred;"}]{.fragment}
+
+::: notes
+We will see in a few minutes what is a package.
+:::
+
+
+## Some useful mathematical functions
+
+* [sqrt]{style="color:indianred;"}: square root
+
+* [exp]{style="color:indianred;"} and [log]{style="color:indianred;"}:  exponetial and logarithm
+
+* [abs]{style="color:indianred;"}: absolute value
+
+* [cos]{style="color:indianred;"}, [sinus]{style="color:indianred;"} and [tan]{style="color:indianred;"}: cosinus, sinus and tangent
+
+* [mean]{style="color:indianred;"}, [min]{style="color:indianred;"}, [max]{style="color:indianred;"}, [median]{style="color:indianred;"}, [range]{style="color:indianred;"}
+
+* [pi]{style="color:indianred;"}: the number $\pi$
+
+::: notes
+No need to remember them all, easily found with an Internet search
+:::
+
+# Packages
+
+## What is a package?
+
+* A package is an extension of R, developed by a member of the community of R users.
+
+* A package gathers additional functions
+
+* Many packages are available on **CRAN** (Comprehensive R Archive Network)
+
+* There are packages for (almost ?) everything...
+
+::: notes
+Anyone can create packages (you ?)
+:::
+
+## Installing a package 
+
+Go the tab *Package* and click on Install
+
+Type the name of the package and click on *Install*
+
+![](install_package.png)
+[💡 you can also use the function [install.packages]{style="color:indianred;"}.]{.fragment}
+
+::: fragment
+```{r, eval=FALSE}
+install.packages("ggplot2")
+```
+:::
+
+::: notes
+DON'T INSTALL packages now, you will do it at home.
+::: 
+
+
+## Getting help on a package
+
+When you click on the name of a package that is already installed, in the *Packages* tab, you can get access to:
+
+* User guides and vignettes (sort of tutorial)
+
+* The help of all the functions of the package
+
+![](package_help.png)
+
+## Getting help on a package
+
+Many packages have a cheatsheet where you can easily see an overview of the main functions of a package.
+
+![](cheatsheet.png)
 
 ```{=html}
 <!--
@@ -1647,13 +2132,15 @@ and how to get HELP -->
 + faire des exercices pour chaque fin de session!!!!! -->
 ```
 
-<!-- Cours Juba, cours Mélaine-->
+<!-- Cours Juba, cours Mélaine, cours Eric-->
 
 ```{=html}
 <!--
 ## Resources
 
-<!-- TO FINISH-->
+voir si help on rbase
+
+et les cours en portugais (video of prof de Ecology et livre en portugais)
 ```
 
 ```{=html}

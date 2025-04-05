@@ -2040,9 +2040,9 @@ Géraldine Derroire
 <div class="fragment">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  101.35 2707.56 2925.31 2905.36 1242.85 1082.46  265.43 2667.28 1281.34
-[10]  163.05 2019.10 2801.28   72.73  426.73 2061.37 2980.30 2686.46  953.21
-[19] 2082.25 1272.98 2452.77  833.73  513.90  118.34 2587.17</code></pre>
+<pre><code> [1] 1456.64 1378.97 2148.31 2858.16 2842.55 1204.48 1464.85   83.68  495.81
+[10]  974.33 2289.50   49.74 2918.93  194.74 2480.22 1777.36 1432.97 2315.05
+[19]   11.37 1252.62 1688.25  310.63  957.64 1144.33 1764.98</code></pre>
 </div>
 </div>
 </div>
@@ -2169,7 +2169,7 @@ Géraldine Derroire
 </section>
 <section id="operations-on-vectors-2" class="slide level2">
 <h2>Operations on vectors</h2>
-<p>We can also do operations between two vectors. ⚠️ The vectors need to have the same length</p>
+<p>We can also do operations between two vectors. ⚠️ The⚠️ vectors need to have the same length</p>
 <p>Let’s create a vector of wood density (<em>WD</em>) and calculate the weight of the logs:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb144"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href=""></a>WD <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.76</span>, <span class="fl">0.65</span>, <span class="fl">0.58</span>, <span class="fl">0.81</span>)</span>
@@ -2335,7 +2335,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </section>
 <section id="factors-5" class="slide level2">
 <h2>Factors</h2>
-<p>We can easily count the number of values per levels using the function <span style="color:indianred;"> table</span></p>
+<p>We can easily count the number of values per levels using the function <span style="color:indianred;">table</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb166"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href=""></a><span class="fu">table</span>(season)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -2380,6 +2380,23 @@ Levels: dry wet winter spring summer fall</code></pre>
           display:block!important;
       }</style></aside>
 </section></section>
+<section id="questions-on-the-last-session-1" class="title-slide slide level1 center">
+<h1>Questions on the last session?</h1>
+<aside class="notes">
+<p>How did they feel with the exercices ? have someone show how they did</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
 <section>
 <section id="data-structure" class="title-slide slide level1 center">
 <h1>Data structure</h1>
@@ -2389,7 +2406,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Data structure</h2>
 
 <img data-src="data_structure.png" style="width:120.0%" class="r-stretch"><aside class="notes">
-<p>There is more type of structure. We have seen the vector so far. We are quickly present the other ones now, without explaining much how to work with them. We will see that later.</p>
+<p>There is more type of structure. We have seen the vector so far. We are now going to quickly present the other ones, without explaining much how to work with them. We will see that later.</p>
 <p>The main ones that we are going to use during the class are: vectors and dataframe</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2426,7 +2443,8 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 </div>
 <aside class="notes">
-<p>In the first code, explain that this is just one command that I wrote on several line for clarity of the code</p>
+<p>In the code, explain that this is just one command that I wrote on several line for clarity of the code</p>
+<p>In practice, we will rarely create the matrix like this but we will import the data.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2441,7 +2459,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </section>
 <section id="matrices-1" class="slide level2">
 <h2>Matrices</h2>
-<p>We get the dimensions of the matrix with the function <em>dim</em>:</p>
+<p>We get the dimensions of the matrix with the function <span style="color:indianred;">dim</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb170"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href=""></a><span class="fu">dim</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -2450,12 +2468,52 @@ Levels: dry wet winter spring summer fall</code></pre>
 <pre><code>[1] 4 2</code></pre>
 </div>
 </div>
-<p><span class="fragment">To access a row, a column, or a value in a matrix, we use []:</span></p>
+<p><span class="fragment">The first number is the number of rows, and the second the number of columns.</span></p>
+<p><span class="fragment">We can see the structure of the matrix using</span><span style="color:indianred;">str</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href=""></a><span class="fu">str</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> num [1:4, 1:2] 1 4 8 6.5 7 8.3 4.6 6</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>dim is another function, with lenght and str that we will use a lot</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="matrices-2" class="slide level2">
+<h2>Matrices</h2>
+<p>To access a row, a column, or a value in a matrix, we use <span style="color:indianred;">[]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href=""></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]  1.0  7.0
+[2,]  4.0  8.3
+[3,]  8.0  4.6
+[4,]  6.5  6.0</code></pre>
+</div>
+</div>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href=""></a>M[<span class="dv">2</span>, ] <span class="co"># 2nd row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href=""></a>M[<span class="dv">2</span>, ] <span class="co"># 2nd row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2465,7 +2523,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href=""></a>M[, <span class="dv">1</span>] <span class="co"># 1st column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href=""></a>M[, <span class="dv">1</span>] <span class="co"># 1st column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2475,7 +2533,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href=""></a>M[<span class="dv">4</span>, <span class="dv">2</span>] <span class="co"># 4th row, 2nd column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href=""></a>M[<span class="dv">4</span>, <span class="dv">2</span>] <span class="co"># 4th row, 2nd column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2486,7 +2544,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href=""></a>M[<span class="sc">-</span><span class="dv">2</span>,] <span class="co"># all rows except 2nd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href=""></a>M[<span class="sc">-</span><span class="dv">2</span>,] <span class="co"># all rows except 2nd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2499,7 +2557,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href=""></a>M[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, ] <span class="co"># rows 2 to 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb184"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href=""></a>M[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, ] <span class="co"># rows 2 to 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2511,6 +2569,126 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 </div></div>
 </section>
+<section id="operations-on-matrices" class="slide level2">
+<h2>Operations on matrices</h2>
+<p>We can get the sum of each row of a matrix using <span style="color:indianred;">rowSums</span> :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb186"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb186-1"><a href=""></a><span class="fu">rowSums</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  8.0 12.3 12.6 12.5</code></pre>
+</div>
+</div>
+<p><span class="fragment">⚠️ the function rowsum also exists, and doesn’t do the same thing.</span></p>
+<p><span class="fragment">We get the sum of each column using</span><span style="color:indianred;">colSums</span> :</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb188"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb188-1"><a href=""></a><span class="fu">colSums</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19.5 25.9</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>! rowSums is not the same thing as rowsum…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="operations-on-matrices-1" class="slide level2">
+<h2>Operations on matrices</h2>
+<p>We can do an operation on each element of a matrix:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb190"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb190-1"><a href=""></a>M <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    2 14.0
+[2,]    8 16.6
+[3,]   16  9.2
+[4,]   13 12.0</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb192"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb192-1"><a href=""></a>M<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>      [,1]  [,2]
+[1,]  1.00 49.00
+[2,] 16.00 68.89
+[3,] 64.00 21.16
+[4,] 42.25 36.00</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="operations-on-matrices-2" class="slide level2">
+<h2>Operations on matrices</h2>
+<p>We can transposed a matrix using <span style="color:indianred;">t</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb194"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb194-1"><a href=""></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]  1.0  7.0
+[2,]  4.0  8.3
+[3,]  8.0  4.6
+[4,]  6.5  6.0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb196"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb196-1"><a href=""></a><span class="fu">t</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4]
+[1,]    1  4.0  8.0  6.5
+[2,]    7  8.3  4.6  6.0</code></pre>
+</div>
+</div>
+</section>
+<section id="operations-on-matrices-3" class="slide level2">
+<h2>Operations on matrices</h2>
+<p>We can add/subtract/multiply/divide each element of two matrices of the <em>same size</em>, element by element:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb198"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb198-1"><a href=""></a>M<span class="sc">+</span>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    2 14.0
+[2,]    8 16.6
+[3,]   16  9.2
+[4,]   13 12.0</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb200"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb200-1"><a href=""></a>M<span class="sc">/</span>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2]
+[1,]    1    1
+[2,]    1    1
+[3,]    1    1
+[4,]    1    1</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">⚠️ This is not the same thing as matrix calculus (which we will not cover here).</span></p>
+</section>
 <section id="arrays" class="slide level2">
 <h2>Arrays</h2>
 
@@ -2518,7 +2696,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <p>It is an extension of a matrix with more than two dimensions.</p>
 <p>.</p>
 <aside class="notes">
-<p>Let’s not spend some time on this, you won’t need ite for the moment, it’s enought to know that this exist.</p>
+<p>Let’s not spend some time on this, you won’t need it for the moment, it’s enought to know that this exist.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2534,15 +2712,15 @@ Levels: dry wet winter spring summer fall</code></pre>
 <section id="lists" class="slide level2">
 <h2>Lists</h2>
 
-<img data-src="list.png" style="width:20.0%" class="r-stretch"><p>A list is a flexible object containing elements of <strong>different structuress</strong> (<em>eg</em>: a vector, a matrix,… but a also a graph, a function…).</p>
+<img data-src="list.png" style="width:20.0%" class="r-stretch"><p>A list is a flexible object containing elements of <strong>different structures</strong> (<em>eg</em>: a vector, a matrix,… but a also a graph, a function…).</p>
 <p>.</p>
 </section>
 <section id="lists-1" class="slide level2">
 <h2>Lists</h2>
 <p>Let’s create a list:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href=""></a>L <span class="ot">&lt;-</span> <span class="fu">list</span>(vol, M, season)</span>
-<span id="cb182-2"><a href=""></a>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb202"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb202-1"><a href=""></a>L <span class="ot">&lt;-</span> <span class="fu">list</span>(vol, M, season)</span>
+<span id="cb202-2"><a href=""></a>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2565,9 +2743,37 @@ Levels: dry wet winter spring summer fall</code></pre>
 </section>
 <section id="lists-2" class="slide level2">
 <h2>Lists</h2>
+<p>We get the dimensions of the list with the function <span style="color:indianred;">length</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb204"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb204-1"><a href=""></a><span class="fu">length</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3</code></pre>
+</div>
+</div>
+<p><span class="fragment">We can see the structure of the list using</span><span style="color:indianred;">str:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb206"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb206-1"><a href=""></a><span class="fu">str</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 3
+ $ : Named num [1:4] 2.9 3.2 2.4 3.5
+  ..- attr(*, "names")= chr [1:4] "Tree1" "Tree2" "Tree3" "Tree4"
+ $ : num [1:4, 1:2] 1 4 8 6.5 7 8.3 4.6 6
+ $ : Factor w/ 6 levels "dry","wet","winter",..: 1 1 2 1 2 2 NA 3</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">We see the structure of each element of the list.</span></p>
+</section>
+<section id="lists-3" class="slide level2">
+<h2>Lists</h2>
 <p>To access an object within a list, we use [[]]:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb184"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href=""></a>L[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb208"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb208-1"><a href=""></a>L[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2578,7 +2784,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <p><span class="fragment">We can then access a value within this object:</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb186"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb186-1"><a href=""></a>L[[<span class="dv">3</span>]][<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb210"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb210-1"><a href=""></a>L[[<span class="dv">3</span>]][<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2588,16 +2794,50 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 </div>
 </section>
-<section id="lists-3" class="slide level2">
+<section id="lists-4" class="slide level2">
 <h2>Lists</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><span style="font-size: 25px">The objects contained in a list can also be named when we create the list:</span></p>
+<p>The element of a list can be named using <span style="color:indianred;">names:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb188"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb188-1"><a href=""></a>L1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Volume =</span> vol, </span>
-<span id="cb188-2"><a href=""></a>           <span class="at">Matrix =</span> M, </span>
-<span id="cb188-3"><a href=""></a>           <span class="at">Season =</span> season)</span>
-<span id="cb188-4"><a href=""></a>L1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb212"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb212-1"><a href=""></a><span class="fu">names</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>NULL</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb214"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb214-1"><a href=""></a><span class="fu">names</span>(L) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Volumes"</span>, <span class="st">"Matrix"</span>, <span class="st">"Season"</span>)</span>
+<span id="cb214-2"><a href=""></a>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>$Volumes
+Tree1 Tree2 Tree3 Tree4 
+  2.9   3.2   2.4   3.5 
+
+$Matrix
+     [,1] [,2]
+[1,]  1.0  7.0
+[2,]  4.0  8.3
+[3,]  8.0  4.6
+[4,]  6.5  6.0
+
+$Season
+[1] dry    dry    wet    dry    wet    wet    &lt;NA&gt;   winter
+Levels: dry wet winter spring summer fall</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="lists-5" class="slide level2">
+<h2>Lists</h2>
+<p>The objects contained in a list can also be named when we create the list:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb216"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb216-1"><a href=""></a>L1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Volume =</span> vol, </span>
+<span id="cb216-2"><a href=""></a>           <span class="at">Matrix =</span> M, </span>
+<span id="cb216-3"><a href=""></a>           <span class="at">Season =</span> season)</span>
+<span id="cb216-4"><a href=""></a>L1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2617,11 +2857,12 @@ $Season
 Levels: dry wet winter spring summer fall</code></pre>
 </div>
 </div>
-</div><div class="column" style="width:50%;">
-<div class="fragment">
-<p><span style="font-size: 25px">We can then access an object by its name, using <em>$</em>:</span></p>
+</section>
+<section id="lists-6" class="slide level2">
+<h2>Lists</h2>
+<p>We can then access an object by its name, using <span style="color:indianred;">$:</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb190"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb190-1"><a href=""></a>L1<span class="sc">$</span>Volume</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb218"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb218-1"><a href=""></a>L1<span class="sc">$</span>Volume</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2629,8 +2870,6 @@ Levels: dry wet winter spring summer fall</code></pre>
   2.9   3.2   2.4   3.5 </code></pre>
 </div>
 </div>
-</div>
-</div></div>
 </section>
 <section id="dataframes" class="slide level2">
 <h2>Dataframes</h2>
@@ -2642,20 +2881,582 @@ Levels: dry wet winter spring summer fall</code></pre>
 </ul>
 <p><span class="fragment"><strong>This is the structure we will use the more, we’ll come back to it in the next session.</strong></span></p>
 </section></section>
-<section id="operators-functions-packages-etc" class="title-slide slide level1 center">
-<h1>Operators, functions, packages, etc…</h1>
-<p>Work in progress…</p>
-<!-- see slides Mélaine from slide 58 for operators
-include here operation on vectors, matrix, etc...
+<section>
+<section id="operators" class="title-slide slide level1 center">
+<h1>Operators</h1>
 
-tehn from slide 69 for fonctions
-then slide 83 on fonctions
+</section>
+<section id="arithmetic-operators" class="slide level2">
+<h2>Arithmetic operators</h2>
+<p>We have already seen the 4 main operations in R:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb220"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb220-1"><a href=""></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb222"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb222-1"><a href=""></a><span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb224"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href=""></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb226"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb226-1"><a href=""></a><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1</code></pre>
+</div>
+</div>
+<p><span class="fragment">and we also have seen that we can apply them on all elements of a vector or a matrix.</span></p>
+</section>
+<section id="arithmetic-operators-1" class="slide level2">
+<h2>Arithmetic operators</h2>
+<p>The priority for operation in R are the same as in maths:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb228"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb228-1"><a href=""></a><span class="dv">10</span><span class="sc">+</span><span class="dv">2</span><span class="sc">*</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb230"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb230-1"><a href=""></a><span class="dv">10</span><span class="sc">+</span>(<span class="dv">2</span><span class="sc">*</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb232"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb232-1"><a href=""></a>(<span class="dv">10</span><span class="sc">+</span><span class="dv">2</span>)<span class="sc">*</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 36</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Ask the results before showing them</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sequence-operator" class="slide level2">
+<h2>Sequence operator</h2>
+<p>The operator <span style="color:indianred;">:</span> is used to create a sequence:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb234"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb234-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+<p><span class="fragment">⚠️ This operator has a high precedence (it takes priority), so use () wisely</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb236"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb236-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  2  4  6  8 10 12 14 16 18 20</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb238"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb238-1"><a href=""></a><span class="co"># is equivalent to:</span></span>
+<span id="cb238-2"><a href=""></a>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">*</span> <span class="dv">2</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  2  4  6  8 10 12 14 16 18 20</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb240"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb240-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span>(<span class="dv">10</span> <span class="sc">*</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>We will use it a lot</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="logical-operators---comparison" class="slide level2">
+<h2>Logical operators - comparison</h2>
+<p>Logical comparison operators are used to compare values. They return a logical value (TRUE/FALSE).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb242"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb242-1"><a href=""></a><span class="dv">2</span> <span class="sc">&lt;</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb244"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb244-1"><a href=""></a><span class="dv">2</span> <span class="sc">&gt;</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">Superior or equal / inferior or equal:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb246"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb246-1"><a href=""></a><span class="dv">2</span> <span class="sc">&lt;=</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb248"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb248-1"><a href=""></a><span class="dv">2</span> <span class="sc">&gt;=</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="logical-operators---comparison-1" class="slide level2">
+<h2>Logical operators - comparison</h2>
+<p>Logical comparison operators are used to compare values. They return a logical value (TRUE/FALSE).</p>
+<p>We will use them a lot later when we will do conditional tests.</p>
+<p>Equal <span style="color:indianred;">==</span> <em>vs</em> non-equal <span style="color:indianred;">!=</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb250"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb250-1"><a href=""></a><span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb252"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb252-1"><a href=""></a><span class="dv">2</span> <span class="sc">!=</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="logical-operators---comparison-2" class="slide level2">
+<h2>Logical operators - comparison</h2>
+<p><span style="color:indianred;">isTRUE</span> / <span style="color:indianred;">isFALSE</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb254"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb254-1"><a href=""></a><span class="fu">isTRUE</span>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb256"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb256-1"><a href=""></a><span class="fu">isFALSE</span>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="logical-operators---comparison-3" class="slide level2">
+<h2>Logical operators - comparison</h2>
+<p><span style="color:indianred;">%in%</span> tests if a value belongs to a vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb258"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb258-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb258-2"><a href=""></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2 3</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb260"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb260-1"><a href=""></a><span class="dv">2</span> <span class="sc">%in%</span> v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb262"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb262-1"><a href=""></a><span class="dv">4</span> <span class="sc">%in%</span> v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="logical-operators---comparison-4" class="slide level2">
+<h2>Logical operators - comparison</h2>
+<p>🤔 Let’s play a bit!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb264"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb264-1"><a href=""></a><span class="dv">3</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb266"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb266-1"><a href=""></a><span class="fu">isTRUE</span>(<span class="dv">2</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb268"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb268-1"><a href=""></a><span class="fu">isFALSE</span>(<span class="dv">2</span> <span class="sc">%in%</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb270"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb270-1"><a href=""></a><span class="sc">!</span>(<span class="dv">2</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>No worries if not clear now, look at it tranquilly later DO NOT DO if late or already lost</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="logical-operators---combination" class="slide level2">
+<h2>Logical operators - combination</h2>
+<p>Logical combination operators are used to combine two (or more) conditions:</p>
+<p>We use <span style="color:indianred;">&amp;</span> to test if <strong>both</strong> conditions are satisfied:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb272"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb272-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">&amp;</span> (<span class="dv">3</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb274"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb274-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">&amp;</span> (<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">We use</span><span style="color:indianred;">|</span> to test if <strong>at least</strong> one condition is satisfied:</p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb276"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb276-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|</span> (<span class="dv">3</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb278"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb278-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|</span> (<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb280"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb280-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">|</span> (<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="functions" class="title-slide slide level1 center">
+<h1>Functions</h1>
 
-et slides juba
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<p>We have already use many functions.</p>
+<p>Do you remember some of them?</p>
+<aside class="notes">
+<p>ls, rm</p>
+<p>mode, typeof, is.integer,…</p>
+<p>log, mean, sum, c, rowSums, colSums,</p>
+<p>names, length, dim, table…</p>
+<p>setwd, getwd</p>
+<p>and also most of the operators</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-a-function" class="slide level2">
+<h2>What is a function?</h2>
+<p>A function is a command:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb282"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb282-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NA</span>)</span>
+<span id="cb282-2"><a href=""></a>Mymean <span class="ot">&lt;-</span> <span class="fu">mean</span>(v, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 
-Dire que tout est des objects (see slide Mélaine on object 53)
+</div>
+<p><span style="color:darkgreen;">MyMean &lt;-</span><span style="color:indianred;">mean</span>(<span style="color:blueviolet;">v</span>, <span style="color:darkcyan;">na.rm=TRUE</span>)</p>
+<ul>
+<li class="fragment"><p>It has a <span style="color:indianred;">name</span></p></li>
+<li class="fragment"><p>It takes arguments that can be <span style="color:blueviolet;">data</span> on which to perform the command, or <span style="color:darkcyan;">parameters or options</span> of the function. Arguments are put within <strong>( )</strong> and separated with <strong>,</strong>.</p></li>
+<li class="fragment"><p>It returns a <span style="color:darkgreen;">result</span></p></li>
+</ul>
+<aside class="notes">
+<p>at the end of the course, we will see how to write our own functions</p>
+<p>we see on next slide what na.rm means</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="argument-with-default-values" class="slide level2">
+<h2>Argument with default values</h2>
+<p>Let’s go back to our mean:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb283"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb283-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NA</span>)</span>
+<span id="cb283-2"><a href=""></a><span class="fu">mean</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p><span class="fragment">⚠️ Arguments can have default values, see the help of the function</span></p>
+<p><span class="fragment">Here <span style="color:darkcyan;">na.rm</span> (which allows to remove the NAs) takes the value of false by default</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb285"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb285-1"><a href=""></a><span class="fu">mean</span>(v, <span class="at">na.rm=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb287"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb287-1"><a href=""></a><span class="fu">mean</span>(v, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.333333</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="getting-help-on-a-function" class="slide level2">
+<h2>Getting help on a function</h2>
+<p>We can use <span style="color:indianred;">help</span> or <span style="color:indianred;">?</span> to see the help of a function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb289"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb289-1"><a href=""></a><span class="fu">help</span>(mean)</span>
+<span id="cb289-2"><a href=""></a>?mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 
-and how to get HELP -->
+</div>
+
+<img data-src="help_func.png" style="width:50.0%" class="r-stretch"></section>
+<section id="getting-help-on-a-function-1" class="slide level2">
+<h2>Getting help on a function</h2>
+<p>The help generally contains:</p>
+<ul>
+<li class="fragment"><p>A title</p></li>
+<li class="fragment"><p>Description</p></li>
+<li class="fragment"><p>Usage: show the main arguments and their default values</p></li>
+<li class="fragment"><p>Arguments: explain what are the arguments</p></li>
+<li class="fragment"><p>Value: explain how the results is obtained</p></li>
+<li class="fragment"><p>References</p></li>
+<li class="fragment"><p>See Also: links to related functions</p></li>
+<li class="fragment"><p>Examples</p></li>
+</ul>
+<p><span class="fragment">On the top of the help, the package is mention in <span style="color:indianred;">{ }</span></span></p>
+<aside class="notes">
+<p>We will see in a few minutes what is a package.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="some-useful-mathematical-functions" class="slide level2">
+<h2>Some useful mathematical functions</h2>
+<ul>
+<li class="fragment"><p><span style="color:indianred;">sqrt</span>: square root</p></li>
+<li class="fragment"><p><span style="color:indianred;">exp</span> and <span style="color:indianred;">log</span>: exponetial and logarithm</p></li>
+<li class="fragment"><p><span style="color:indianred;">abs</span>: absolute value</p></li>
+<li class="fragment"><p><span style="color:indianred;">cos</span>, <span style="color:indianred;">sinus</span> and <span style="color:indianred;">tan</span>: cosinus, sinus and tangent</p></li>
+<li class="fragment"><p><span style="color:indianred;">mean</span>, <span style="color:indianred;">min</span>, <span style="color:indianred;">max</span>, <span style="color:indianred;">median</span>, <span style="color:indianred;">range</span></p></li>
+<li class="fragment"><p><span style="color:indianred;">pi</span>: the number <span class="math inline">\(\pi\)</span></p></li>
+</ul>
+<aside class="notes">
+<p>No need to remember them all, easily found with an Internet search</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="packages" class="title-slide slide level1 center">
+<h1>Packages</h1>
+
+</section>
+<section id="what-is-a-package" class="slide level2">
+<h2>What is a package?</h2>
+<ul>
+<li class="fragment"><p>A package is an extension of R, developed by a member of the community of R users.</p></li>
+<li class="fragment"><p>A package gathers additional functions</p></li>
+<li class="fragment"><p>Many packages are available on <strong>CRAN</strong> (Comprehensive R Archive Network)</p></li>
+<li class="fragment"><p>There are packages for (almost ?) everything…</p></li>
+</ul>
+<aside class="notes">
+<p>Anyone can create packages (you ?)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="installing-a-package" class="slide level2">
+<h2>Installing a package</h2>
+<p>Go the tab <em>Package</em> and click on Install</p>
+<p>Type the name of the package and click on <em>Install</em></p>
+<p><img data-src="install_package.png"> <span class="fragment">💡 you can also use the function <span style="color:indianred;">install.packages</span>.</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb290"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb290-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<aside class="notes">
+<p>DON’T INSTALL packages now, you will do it at home.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="getting-help-on-a-package" class="slide level2">
+<h2>Getting help on a package</h2>
+<p>When you click on the name of a package that is already installed, in the <em>Packages</em> tab, you can get access to:</p>
+<ul>
+<li class="fragment"><p>User guides and vignettes (sort of tutorial)</p></li>
+<li class="fragment"><p>The help of all the functions of the package</p></li>
+</ul>
+
+<img data-src="package_help.png" class="r-stretch"></section>
+<section id="getting-help-on-a-package-1" class="slide level2">
+<h2>Getting help on a package</h2>
+<p>Many packages have a cheatsheet where you can easily see an overview of the main functions of a package.</p>
+
 <!--
 ## Acknowledgments
 
@@ -2665,20 +3466,22 @@ and how to get HELP -->
 + lister des ressources
 
 + faire des exercices pour chaque fin de session!!!!! -->
-<!-- Cours Juba, cours Mélaine-->
+<!-- Cours Juba, cours Mélaine, cours Eric-->
 <!--
 ## Resources
 
-<!-- TO FINISH-->
+voir si help on rbase
+
+et les cours en portugais (video of prof de Ecology et livre en portugais)
 <!--
 **RStudio** cheatsheet in [English](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf){preview-link="false"} and in [Portuguese](https://rstudio.github.io/cheatsheets/translations/portuguese/rstudio-ide_pt.pdf){preview-link="false"}
 -->
-<div class="quarto-auto-generated-content">
+<img data-src="cheatsheet.png" class="r-stretch"><div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

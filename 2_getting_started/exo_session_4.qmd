@@ -1,0 +1,29 @@
+---
+  title: "Exercices on session *Getting started with R (3/3)*"
+date: 16/04/2025
+format:
+  pdf
+execute:
+  echo: false  
+---
+  
+# Matrices
+
+for presence/abs several sites, several sp => 0/1
+
+transfor it to a factor
+
+do some calculation (nb of sp per site)
+
+
+# Lists
+
+....
+
+
+# Install the following packages from CRAN
+
+see the ones we will need for the data next week...
+
+
+
