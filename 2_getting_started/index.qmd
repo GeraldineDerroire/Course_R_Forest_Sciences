@@ -1501,7 +1501,7 @@ dim(M)
 
 [The first number is the number of rows, and the second the number of columns.]{.fragment}
 
-[We can see the structure of the matrix using ]{.fragment}[str]{style="color:indianred;"}
+[We can see the structure of the matrix using [str]{style="color:indianred;"}]{.fragment}
 
 ::: fragment
 ```{r}
@@ -1512,6 +1512,18 @@ str(M)
 ::: notes
 dim is another function, with lenght and str that we will use a lot
 :::
+
+## Matrices
+
+We can name the columns and row names of a matrix using [colnames]{style="color:indianred;"} and
+[rownames]{style="color:indianred;"} respectively.
+
+```{r}
+colnames(M) <- c("col1", "col2")
+rownames(M) <- c("row1", "row2", "row3", "row4")
+M
+```
+
 
 ## Matrices
 
@@ -1557,6 +1569,14 @@ M[2:3, ] # rows 2 to 3
 :::::
 ::::::::::
 
+::: fragment
+Or we call the row and columns by their names:
+
+```{r}
+M["row3", "col2"]
+```
+:::
+
 ## Operations on matrices
 
 We can get the sum of each row of a matrix using [rowSums]{style="color:indianred;"} :
@@ -1567,7 +1587,7 @@ rowSums(M)
 
 [⚠️ the function rowsum also exists, and doesn't do the same thing.]{.fragment}
 
-[We get the sum of each column using ]{.fragment}[colSums]{style="color:indianred;"} :
+[We get the sum of each column using [colSums]{style="color:indianred;"}:]{.fragment} 
 
 ::: fragment
 ```{r}
@@ -1657,7 +1677,7 @@ We get the dimensions of the list with the function [length]{style="color:indian
 length(L)
 ```
 
-[We can see the structure of the list using ]{.fragment}[str:]{style="color:indianred;"}
+[We can see the structure of the list using [str:]{style="color:indianred;"}]{.fragment}
 
 ::: fragment
 ```{r}
@@ -1925,7 +1945,7 @@ We use [&]{style="color:indianred;"} to test if **both** conditions are satisfie
 ```
 :::
 
-[We use ]{.fragment}[\|]{style="color:indianred;"} to test if **at least** one condition is satisfied:
+[We use [|]{style="color:indianred;"} to test if **at least** one condition is satisfied:]{.fragment} 
 
 ::: fragment
 ```{r}
@@ -1949,7 +1969,7 @@ We use [&]{style="color:indianred;"} to test if **both** conditions are satisfie
 
 ## 
 
-We have already use many functions.
+We have already used many functions.
 
 Do you remember some of them?
 
@@ -2090,7 +2110,9 @@ Go the tab *Package* and click on Install
 
 Type the name of the package and click on *Install*
 
-![](install_package.png)
+![](install_package.png){width="50%"}
+
+
 [💡 you can also use the function [install.packages]{style="color:indianred;"}.]{.fragment}
 
 ::: fragment
@@ -2103,6 +2125,17 @@ install.packages("ggplot2")
 DON'T INSTALL packages now, you will do it at home.
 ::: 
 
+## Loading a package
+
+Once a package is installed, you will need to load it using [library]{style="color:indianred;"} to be able
+to use it.
+
+```{r, eval=FALSE}
+library(ggplot2)
+```
+
+You need to install packages once, but load them in every new session.
+
 
 ## Getting help on a package
 
@@ -2114,37 +2147,41 @@ When you click on the name of a package that is already installed, in the *Packa
 
 ![](package_help.png)
 
+
 ## Getting help on a package
 
 Many packages have a cheatsheet where you can easily see an overview of the main functions of a package.
 
 ![](cheatsheet.png)
 
-```{=html}
-<!--
-## Acknowledgments
+
+## Acknowledgments {.no-fragment}
+
+This document largely uses the following:
+
+* *Introduction à R et au tidyverse* - Julien Barnier   [in French](https://juba.github.io/tidyverse/){preview-link="false"}
+
+* *Travailler avec R* - Eric Marcon [in French](https://ericmarcon.github.io/Cours-travailleR/){preview-link="false"} 
+
+* Introdutory class of Mélaine Aubry-Kientz, Julien Claude and Marine Zwicke (University of Montpellier)
 
 
-<!-- AT the end: recheck the two course to see if I have forgotten something
 
-+ lister des ressources
+## Resources 
 
-+ faire des exercices pour chaque fin de session!!!!! -->
-```
+* *How to R* (Videos in English) [Here](https://www.youtube.com/watch?v=lVKMsaWju8w){preview-link="false"} 
+and [Here](https://www.youtube.com/watch?v=h_Nruq9-NQw){preview-link="false"} 
 
-<!-- Cours Juba, cours Mélaine, cours Eric-->
+* Aulas *R do basico eo avançado* - Murilo S. Dias (Videos em Portuguese, até aula 19) [Here](https://www.youtube.com/watch?v=TXiwRJ-25Xc&list=PLSYhm4WnLPLBciaJOvx25ohO8yaxmae8k){preview-link="false"} 
 
-```{=html}
-<!--
-## Resources
+* *Base R cheatsheet* [in English](https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf){preview-link="false"}
 
-voir si help on rbase
+* *RStudio cheatsheet* [in English](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf){preview-link="false"} and [in Portuguese](https://rstudio.github.io/cheatsheets/translations/portuguese/rstudio-ide_pt.pdf){preview-link="false"}
 
-et les cours en portugais (video of prof de Ecology et livre en portugais)
-```
+* *Ciência de Dados em R* Damiani, A. Milz, B., Lente, C., Falbel, D., Correa, F. Trecenti, J., Luduvice, N., Lacerda, T., Amorim, W. (Livro em portuguese, até capitulo 4) [Here](https://livro.curso-r.com/index.html){preview-link="false"} 
 
-```{=html}
-<!--
-**RStudio** cheatsheet in [English](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf){preview-link="false"} and in [Portuguese](https://rstudio.github.io/cheatsheets/translations/portuguese/rstudio-ide_pt.pdf){preview-link="false"}
--->
-```
+
+[You don't need to read/watch all!]{.fragment}
+
+
+

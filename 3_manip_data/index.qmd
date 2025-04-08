@@ -2,18 +2,24 @@
 title: "Manipulating data"
 author: Géraldine Derroire
 institute: Cirad - UnB
-date: today
+date: last-modified
 format: 
   revealjs:
-    theme: moon
+    theme: solarized
     output-location: fragment 
     slide-number: true
     preview-links: true
     chalkboard: true
     link-external-icon: true
     link-external-newwindow: true
+    incremental: true
 execute:
-  echo: true      
+  echo: true   
+  warning: true
+  message: true 
+editor: 
+  markdown: 
+    wrap: sentence
 ---
 
 FAIR (Findable, Accessible, Interoperable and Reusable data principles; https://force11.org/info/the-­fair-­data-­principles/

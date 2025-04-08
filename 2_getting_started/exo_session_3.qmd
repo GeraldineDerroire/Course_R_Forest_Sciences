@@ -1,6 +1,5 @@
 ---
 title: "Exercices on session *Getting started with R (2/3)*"
-date: 09/04/2025
 format:
   pdf
 execute:

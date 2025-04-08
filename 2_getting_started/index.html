@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-05">
+  <meta name="dcterms.date" content="2025-04-08">
   <title>Getting started with R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-05</p>
+  <p class="date">2025-04-08</p>
 </section>
 <section>
 <section id="r-and-rstudio" class="title-slide slide level1 center">
@@ -2040,9 +2040,9 @@ Géraldine Derroire
 <div class="fragment">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1456.64 1378.97 2148.31 2858.16 2842.55 1204.48 1464.85   83.68  495.81
-[10]  974.33 2289.50   49.74 2918.93  194.74 2480.22 1777.36 1432.97 2315.05
-[19]   11.37 1252.62 1688.25  310.63  957.64 1144.33 1764.98</code></pre>
+<pre><code> [1] 2988.28 2163.22 2010.48  313.15  112.82 2668.42  645.92 1356.32  360.64
+[10] 2929.36 1333.83 2985.22  557.40 2034.86  130.60 2925.65  324.96  259.36
+[19] 2972.14 1913.02 1987.92 2476.09 1966.06 1613.51  419.18</code></pre>
 </div>
 </div>
 </div>
@@ -2469,7 +2469,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 </div>
 <p><span class="fragment">The first number is the number of rows, and the second the number of columns.</span></p>
-<p><span class="fragment">We can see the structure of the matrix using</span><span style="color:indianred;">str</span></p>
+<p><span class="fragment">We can see the structure of the matrix using <span style="color:indianred;">str</span></span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb172"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href=""></a><span class="fu">str</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2496,44 +2496,64 @@ Levels: dry wet winter spring summer fall</code></pre>
 </section>
 <section id="matrices-2" class="slide level2">
 <h2>Matrices</h2>
-<p>To access a row, a column, or a value in a matrix, we use <span style="color:indianred;">[]</span></p>
+<p>We can name the columns and row names of a matrix using <span style="color:indianred;">colnames</span> and <span style="color:indianred;">rownames</span> respectively.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href=""></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href=""></a><span class="fu">colnames</span>(M) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"col1"</span>, <span class="st">"col2"</span>)</span>
+<span id="cb174-2"><a href=""></a><span class="fu">rownames</span>(M) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"row1"</span>, <span class="st">"row2"</span>, <span class="st">"row3"</span>, <span class="st">"row4"</span>)</span>
+<span id="cb174-3"><a href=""></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]  1.0  7.0
-[2,]  4.0  8.3
-[3,]  8.0  4.6
-[4,]  6.5  6.0</code></pre>
+<pre><code>     col1 col2
+row1  1.0  7.0
+row2  4.0  8.3
+row3  8.0  4.6
+row4  6.5  6.0</code></pre>
+</div>
+</div>
+</section>
+<section id="matrices-3" class="slide level2">
+<h2>Matrices</h2>
+<p>To access a row, a column, or a value in a matrix, we use <span style="color:indianred;">[]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href=""></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     col1 col2
+row1  1.0  7.0
+row2  4.0  8.3
+row3  8.0  4.6
+row4  6.5  6.0</code></pre>
 </div>
 </div>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href=""></a>M[<span class="dv">2</span>, ] <span class="co"># 2nd row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href=""></a>M[<span class="dv">2</span>, ] <span class="co"># 2nd row</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.0 8.3</code></pre>
+<pre><code>col1 col2 
+ 4.0  8.3 </code></pre>
 </div>
 </div>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href=""></a>M[, <span class="dv">1</span>] <span class="co"># 1st column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href=""></a>M[, <span class="dv">1</span>] <span class="co"># 1st column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.0 4.0 8.0 6.5</code></pre>
+<pre><code>row1 row2 row3 row4 
+ 1.0  4.0  8.0  6.5 </code></pre>
 </div>
 </div>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href=""></a>M[<span class="dv">4</span>, <span class="dv">2</span>] <span class="co"># 4th row, 2nd column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href=""></a>M[<span class="dv">4</span>, <span class="dv">2</span>] <span class="co"># 4th row, 2nd column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2544,51 +2564,64 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href=""></a>M[<span class="sc">-</span><span class="dv">2</span>,] <span class="co"># all rows except 2nd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb184"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href=""></a>M[<span class="sc">-</span><span class="dv">2</span>,] <span class="co"># all rows except 2nd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]  1.0  7.0
-[2,]  8.0  4.6
-[3,]  6.5  6.0</code></pre>
+<pre><code>     col1 col2
+row1  1.0  7.0
+row3  8.0  4.6
+row4  6.5  6.0</code></pre>
 </div>
 </div>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb184"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href=""></a>M[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, ] <span class="co"># rows 2 to 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb186"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb186-1"><a href=""></a>M[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, ] <span class="co"># rows 2 to 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]    4  8.3
-[2,]    8  4.6</code></pre>
+<pre><code>     col1 col2
+row2    4  8.3
+row3    8  4.6</code></pre>
 </div>
 </div>
 </div>
 </div></div>
+<div class="fragment">
+<p>Or we call the row and columns by their names:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb188"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb188-1"><a href=""></a>M[<span class="st">"row3"</span>, <span class="st">"col2"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4.6</code></pre>
+</div>
+</div>
+</div>
 </section>
 <section id="operations-on-matrices" class="slide level2">
 <h2>Operations on matrices</h2>
 <p>We can get the sum of each row of a matrix using <span style="color:indianred;">rowSums</span> :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb186"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb186-1"><a href=""></a><span class="fu">rowSums</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb190"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb190-1"><a href=""></a><span class="fu">rowSums</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  8.0 12.3 12.6 12.5</code></pre>
+<pre><code>row1 row2 row3 row4 
+ 8.0 12.3 12.6 12.5 </code></pre>
 </div>
 </div>
 <p><span class="fragment">⚠️ the function rowsum also exists, and doesn’t do the same thing.</span></p>
-<p><span class="fragment">We get the sum of each column using</span><span style="color:indianred;">colSums</span> :</p>
+<p><span class="fragment">We get the sum of each column using <span style="color:indianred;">colSums</span>:</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb188"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb188-1"><a href=""></a><span class="fu">colSums</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb192"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb192-1"><a href=""></a><span class="fu">colSums</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 19.5 25.9</code></pre>
+<pre><code>col1 col2 
+19.5 25.9 </code></pre>
 </div>
 </div>
 </div>
@@ -2610,28 +2643,28 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Operations on matrices</h2>
 <p>We can do an operation on each element of a matrix:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb190"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb190-1"><a href=""></a>M <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb194"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb194-1"><a href=""></a>M <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]    2 14.0
-[2,]    8 16.6
-[3,]   16  9.2
-[4,]   13 12.0</code></pre>
+<pre><code>     col1 col2
+row1    2 14.0
+row2    8 16.6
+row3   16  9.2
+row4   13 12.0</code></pre>
 </div>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb192"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb192-1"><a href=""></a>M<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb196"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb196-1"><a href=""></a>M<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>      [,1]  [,2]
-[1,]  1.00 49.00
-[2,] 16.00 68.89
-[3,] 64.00 21.16
-[4,] 42.25 36.00</code></pre>
+<pre><code>      col1  col2
+row1  1.00 49.00
+row2 16.00 68.89
+row3 64.00 21.16
+row4 42.25 36.00</code></pre>
 </div>
 </div>
 </div>
@@ -2640,21 +2673,21 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Operations on matrices</h2>
 <p>We can transposed a matrix using <span style="color:indianred;">t</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb194"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb194-1"><a href=""></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb198"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb198-1"><a href=""></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]  1.0  7.0
-[2,]  4.0  8.3
-[3,]  8.0  4.6
-[4,]  6.5  6.0</code></pre>
+<pre><code>     col1 col2
+row1  1.0  7.0
+row2  4.0  8.3
+row3  8.0  4.6
+row4  6.5  6.0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb196"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb196-1"><a href=""></a><span class="fu">t</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb200"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb200-1"><a href=""></a><span class="fu">t</span>(M)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2] [,3] [,4]
-[1,]    1  4.0  8.0  6.5
-[2,]    7  8.3  4.6  6.0</code></pre>
+<pre><code>     row1 row2 row3 row4
+col1    1  4.0  8.0  6.5
+col2    7  8.3  4.6  6.0</code></pre>
 </div>
 </div>
 </section>
@@ -2662,28 +2695,28 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Operations on matrices</h2>
 <p>We can add/subtract/multiply/divide each element of two matrices of the <em>same size</em>, element by element:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb198"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb198-1"><a href=""></a>M<span class="sc">+</span>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb202"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb202-1"><a href=""></a>M<span class="sc">+</span>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]    2 14.0
-[2,]    8 16.6
-[3,]   16  9.2
-[4,]   13 12.0</code></pre>
+<pre><code>     col1 col2
+row1    2 14.0
+row2    8 16.6
+row3   16  9.2
+row4   13 12.0</code></pre>
 </div>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb200"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb200-1"><a href=""></a>M<span class="sc">/</span>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb204"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb204-1"><a href=""></a>M<span class="sc">/</span>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>     [,1] [,2]
-[1,]    1    1
-[2,]    1    1
-[3,]    1    1
-[4,]    1    1</code></pre>
+<pre><code>     col1 col2
+row1    1    1
+row2    1    1
+row3    1    1
+row4    1    1</code></pre>
 </div>
 </div>
 </div>
@@ -2719,8 +2752,8 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Lists</h2>
 <p>Let’s create a list:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb202"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb202-1"><a href=""></a>L <span class="ot">&lt;-</span> <span class="fu">list</span>(vol, M, season)</span>
-<span id="cb202-2"><a href=""></a>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb206"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb206-1"><a href=""></a>L <span class="ot">&lt;-</span> <span class="fu">list</span>(vol, M, season)</span>
+<span id="cb206-2"><a href=""></a>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2729,11 +2762,11 @@ Tree1 Tree2 Tree3 Tree4
   2.9   3.2   2.4   3.5 
 
 [[2]]
-     [,1] [,2]
-[1,]  1.0  7.0
-[2,]  4.0  8.3
-[3,]  8.0  4.6
-[4,]  6.5  6.0
+     col1 col2
+row1  1.0  7.0
+row2  4.0  8.3
+row3  8.0  4.6
+row4  6.5  6.0
 
 [[3]]
 [1] dry    dry    wet    dry    wet    wet    &lt;NA&gt;   winter
@@ -2745,17 +2778,17 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Lists</h2>
 <p>We get the dimensions of the list with the function <span style="color:indianred;">length</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb204"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb204-1"><a href=""></a><span class="fu">length</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb208"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb208-1"><a href=""></a><span class="fu">length</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
-<p><span class="fragment">We can see the structure of the list using</span><span style="color:indianred;">str:</span></p>
+<p><span class="fragment">We can see the structure of the list using <span style="color:indianred;">str:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb206"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb206-1"><a href=""></a><span class="fu">str</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb210"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb210-1"><a href=""></a><span class="fu">str</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2763,6 +2796,9 @@ Levels: dry wet winter spring summer fall</code></pre>
  $ : Named num [1:4] 2.9 3.2 2.4 3.5
   ..- attr(*, "names")= chr [1:4] "Tree1" "Tree2" "Tree3" "Tree4"
  $ : num [1:4, 1:2] 1 4 8 6.5 7 8.3 4.6 6
+  ..- attr(*, "dimnames")=List of 2
+  .. ..$ : chr [1:4] "row1" "row2" "row3" "row4"
+  .. ..$ : chr [1:2] "col1" "col2"
  $ : Factor w/ 6 levels "dry","wet","winter",..: 1 1 2 1 2 2 NA 3</code></pre>
 </div>
 </div>
@@ -2773,7 +2809,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Lists</h2>
 <p>To access an object within a list, we use [[]]:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb208"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb208-1"><a href=""></a>L[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb212"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb212-1"><a href=""></a>L[[<span class="dv">3</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2784,7 +2820,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <p><span class="fragment">We can then access a value within this object:</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb210"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb210-1"><a href=""></a>L[[<span class="dv">3</span>]][<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb214"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb214-1"><a href=""></a>L[[<span class="dv">3</span>]][<span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2798,7 +2834,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Lists</h2>
 <p>The element of a list can be named using <span style="color:indianred;">names:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb212"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb212-1"><a href=""></a><span class="fu">names</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb216"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb216-1"><a href=""></a><span class="fu">names</span>(L)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2807,8 +2843,8 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb214"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb214-1"><a href=""></a><span class="fu">names</span>(L) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Volumes"</span>, <span class="st">"Matrix"</span>, <span class="st">"Season"</span>)</span>
-<span id="cb214-2"><a href=""></a>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb218"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb218-1"><a href=""></a><span class="fu">names</span>(L) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Volumes"</span>, <span class="st">"Matrix"</span>, <span class="st">"Season"</span>)</span>
+<span id="cb218-2"><a href=""></a>L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2817,11 +2853,11 @@ Tree1 Tree2 Tree3 Tree4
   2.9   3.2   2.4   3.5 
 
 $Matrix
-     [,1] [,2]
-[1,]  1.0  7.0
-[2,]  4.0  8.3
-[3,]  8.0  4.6
-[4,]  6.5  6.0
+     col1 col2
+row1  1.0  7.0
+row2  4.0  8.3
+row3  8.0  4.6
+row4  6.5  6.0
 
 $Season
 [1] dry    dry    wet    dry    wet    wet    &lt;NA&gt;   winter
@@ -2834,10 +2870,10 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Lists</h2>
 <p>The objects contained in a list can also be named when we create the list:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb216"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb216-1"><a href=""></a>L1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Volume =</span> vol, </span>
-<span id="cb216-2"><a href=""></a>           <span class="at">Matrix =</span> M, </span>
-<span id="cb216-3"><a href=""></a>           <span class="at">Season =</span> season)</span>
-<span id="cb216-4"><a href=""></a>L1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb220"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb220-1"><a href=""></a>L1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Volume =</span> vol, </span>
+<span id="cb220-2"><a href=""></a>           <span class="at">Matrix =</span> M, </span>
+<span id="cb220-3"><a href=""></a>           <span class="at">Season =</span> season)</span>
+<span id="cb220-4"><a href=""></a>L1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2846,11 +2882,11 @@ Tree1 Tree2 Tree3 Tree4
   2.9   3.2   2.4   3.5 
 
 $Matrix
-     [,1] [,2]
-[1,]  1.0  7.0
-[2,]  4.0  8.3
-[3,]  8.0  4.6
-[4,]  6.5  6.0
+     col1 col2
+row1  1.0  7.0
+row2  4.0  8.3
+row3  8.0  4.6
+row4  6.5  6.0
 
 $Season
 [1] dry    dry    wet    dry    wet    wet    &lt;NA&gt;   winter
@@ -2862,7 +2898,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Lists</h2>
 <p>We can then access an object by its name, using <span style="color:indianred;">$:</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb218"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb218-1"><a href=""></a>L1<span class="sc">$</span>Volume</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb222"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb222-1"><a href=""></a>L1<span class="sc">$</span>Volume</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2890,21 +2926,21 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Arithmetic operators</h2>
 <p>We have already seen the 4 main operations in R:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb220"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb220-1"><a href=""></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb224"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href=""></a><span class="dv">2</span> <span class="sc">+</span> <span class="dv">2</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb222"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb222-1"><a href=""></a><span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb226"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb226-1"><a href=""></a><span class="dv">2</span> <span class="sc">-</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb224"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb224-1"><a href=""></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb228"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb228-1"><a href=""></a><span class="dv">2</span> <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb226"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb226-1"><a href=""></a><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb230"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb230-1"><a href=""></a><span class="dv">2</span> <span class="sc">/</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
@@ -2915,7 +2951,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Arithmetic operators</h2>
 <p>The priority for operation in R are the same as in maths:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb228"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb228-1"><a href=""></a><span class="dv">10</span><span class="sc">+</span><span class="dv">2</span><span class="sc">*</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb232"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb232-1"><a href=""></a><span class="dv">10</span><span class="sc">+</span><span class="dv">2</span><span class="sc">*</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2924,7 +2960,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb230"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb230-1"><a href=""></a><span class="dv">10</span><span class="sc">+</span>(<span class="dv">2</span><span class="sc">*</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb234"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb234-1"><a href=""></a><span class="dv">10</span><span class="sc">+</span>(<span class="dv">2</span><span class="sc">*</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2934,7 +2970,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb232"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb232-1"><a href=""></a>(<span class="dv">10</span><span class="sc">+</span><span class="dv">2</span>)<span class="sc">*</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb236"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb236-1"><a href=""></a>(<span class="dv">10</span><span class="sc">+</span><span class="dv">2</span>)<span class="sc">*</span><span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2960,7 +2996,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Sequence operator</h2>
 <p>The operator <span style="color:indianred;">:</span> is used to create a sequence:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb234"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb234-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb238"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb238-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2970,14 +3006,14 @@ Levels: dry wet winter spring summer fall</code></pre>
 <p><span class="fragment">⚠️ This operator has a high precedence (it takes priority), so use () wisely</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb236"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb236-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb240"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb240-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">*</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  2  4  6  8 10 12 14 16 18 20</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb238"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb238-1"><a href=""></a><span class="co"># is equivalent to:</span></span>
-<span id="cb238-2"><a href=""></a>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">*</span> <span class="dv">2</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb242"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb242-1"><a href=""></a><span class="co"># is equivalent to:</span></span>
+<span id="cb242-2"><a href=""></a>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">*</span> <span class="dv">2</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1]  2  4  6  8 10 12 14 16 18 20</code></pre>
 </div>
@@ -2985,7 +3021,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb240"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb240-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span>(<span class="dv">10</span> <span class="sc">*</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb244"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb244-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span>(<span class="dv">10</span> <span class="sc">*</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3011,7 +3047,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Logical operators - comparison</h2>
 <p>Logical comparison operators are used to compare values. They return a logical value (TRUE/FALSE).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb242"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb242-1"><a href=""></a><span class="dv">2</span> <span class="sc">&lt;</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb246"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb246-1"><a href=""></a><span class="dv">2</span> <span class="sc">&lt;</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3020,7 +3056,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb244"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb244-1"><a href=""></a><span class="dv">2</span> <span class="sc">&gt;</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb248"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb248-1"><a href=""></a><span class="dv">2</span> <span class="sc">&gt;</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3031,7 +3067,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <p><span class="fragment">Superior or equal / inferior or equal:</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb246"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb246-1"><a href=""></a><span class="dv">2</span> <span class="sc">&lt;=</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb250"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb250-1"><a href=""></a><span class="dv">2</span> <span class="sc">&lt;=</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3041,7 +3077,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb248"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb248-1"><a href=""></a><span class="dv">2</span> <span class="sc">&gt;=</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb252"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb252-1"><a href=""></a><span class="dv">2</span> <span class="sc">&gt;=</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3056,7 +3092,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <p>We will use them a lot later when we will do conditional tests.</p>
 <p>Equal <span style="color:indianred;">==</span> <em>vs</em> non-equal <span style="color:indianred;">!=</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb250"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb250-1"><a href=""></a><span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb254"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb254-1"><a href=""></a><span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3065,7 +3101,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb252"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb252-1"><a href=""></a><span class="dv">2</span> <span class="sc">!=</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb256"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb256-1"><a href=""></a><span class="dv">2</span> <span class="sc">!=</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3078,7 +3114,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Logical operators - comparison</h2>
 <p><span style="color:indianred;">isTRUE</span> / <span style="color:indianred;">isFALSE</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb254"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb254-1"><a href=""></a><span class="fu">isTRUE</span>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb258"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb258-1"><a href=""></a><span class="fu">isTRUE</span>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3087,7 +3123,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb256"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb256-1"><a href=""></a><span class="fu">isFALSE</span>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb260"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb260-1"><a href=""></a><span class="fu">isFALSE</span>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3100,8 +3136,8 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Logical operators - comparison</h2>
 <p><span style="color:indianred;">%in%</span> tests if a value belongs to a vector.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb258"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb258-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb258-2"><a href=""></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb262"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb262-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb262-2"><a href=""></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3110,7 +3146,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb260"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb260-1"><a href=""></a><span class="dv">2</span> <span class="sc">%in%</span> v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb264"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb264-1"><a href=""></a><span class="dv">2</span> <span class="sc">%in%</span> v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3120,7 +3156,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb262"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb262-1"><a href=""></a><span class="dv">4</span> <span class="sc">%in%</span> v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb266"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb266-1"><a href=""></a><span class="dv">4</span> <span class="sc">%in%</span> v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3133,7 +3169,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Logical operators - comparison</h2>
 <p>🤔 Let’s play a bit!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb264"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb264-1"><a href=""></a><span class="dv">3</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb268"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb268-1"><a href=""></a><span class="dv">3</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3142,17 +3178,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb266"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb266-1"><a href=""></a><span class="fu">isTRUE</span>(<span class="dv">2</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb268"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb268-1"><a href=""></a><span class="fu">isFALSE</span>(<span class="dv">2</span> <span class="sc">%in%</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb270"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb270-1"><a href=""></a><span class="fu">isTRUE</span>(<span class="dv">2</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3162,7 +3188,17 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb270"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb270-1"><a href=""></a><span class="sc">!</span>(<span class="dv">2</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb272"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb272-1"><a href=""></a><span class="fu">isFALSE</span>(<span class="dv">2</span> <span class="sc">%in%</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb274"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb274-1"><a href=""></a><span class="sc">!</span>(<span class="dv">2</span> <span class="sc">%in%</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3189,7 +3225,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 <p>Logical combination operators are used to combine two (or more) conditions:</p>
 <p>We use <span style="color:indianred;">&amp;</span> to test if <strong>both</strong> conditions are satisfied:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb272"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb272-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">&amp;</span> (<span class="dv">3</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb276"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb276-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">&amp;</span> (<span class="dv">3</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3198,7 +3234,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb274"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb274-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">&amp;</span> (<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb278"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb278-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">&amp;</span> (<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3206,10 +3242,10 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 </div>
 </div>
-<p><span class="fragment">We use</span><span style="color:indianred;">|</span> to test if <strong>at least</strong> one condition is satisfied:</p>
+<p><span class="fragment">We use <span style="color:indianred;">|</span> to test if <strong>at least</strong> one condition is satisfied:</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb276"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb276-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|</span> (<span class="dv">3</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb280"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb280-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|</span> (<span class="dv">3</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3219,7 +3255,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb278"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb278-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|</span> (<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb282"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb282-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">2</span>) <span class="sc">|</span> (<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3229,7 +3265,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb280"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb280-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">|</span> (<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb284"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb284-1"><a href=""></a>(<span class="dv">2</span> <span class="sc">==</span> <span class="dv">4</span>) <span class="sc">|</span> (<span class="dv">2</span> <span class="sc">==</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3245,7 +3281,7 @@ Levels: dry wet winter spring summer fall</code></pre>
 </section>
 <section id="section-2" class="slide level2">
 <h2></h2>
-<p>We have already use many functions.</p>
+<p>We have already used many functions.</p>
 <p>Do you remember some of them?</p>
 <aside class="notes">
 <p>ls, rm</p>
@@ -3270,8 +3306,8 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>What is a function?</h2>
 <p>A function is a command:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb282"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb282-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NA</span>)</span>
-<span id="cb282-2"><a href=""></a>Mymean <span class="ot">&lt;-</span> <span class="fu">mean</span>(v, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb286"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb286-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NA</span>)</span>
+<span id="cb286-2"><a href=""></a>Mymean <span class="ot">&lt;-</span> <span class="fu">mean</span>(v, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -3301,8 +3337,8 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Argument with default values</h2>
 <p>Let’s go back to our mean:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb283"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb283-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NA</span>)</span>
-<span id="cb283-2"><a href=""></a><span class="fu">mean</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb287"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb287-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="cn">NA</span>)</span>
+<span id="cb287-2"><a href=""></a><span class="fu">mean</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3313,13 +3349,13 @@ Levels: dry wet winter spring summer fall</code></pre>
 <p><span class="fragment">Here <span style="color:darkcyan;">na.rm</span> (which allows to remove the NAs) takes the value of false by default</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb285"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb285-1"><a href=""></a><span class="fu">mean</span>(v, <span class="at">na.rm=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb289"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb289-1"><a href=""></a><span class="fu">mean</span>(v, <span class="at">na.rm=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb287"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb287-1"><a href=""></a><span class="fu">mean</span>(v, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb291"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb291-1"><a href=""></a><span class="fu">mean</span>(v, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.333333</code></pre>
 </div>
@@ -3330,8 +3366,8 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Getting help on a function</h2>
 <p>We can use <span style="color:indianred;">help</span> or <span style="color:indianred;">?</span> to see the help of a function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb289"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb289-1"><a href=""></a><span class="fu">help</span>(mean)</span>
-<span id="cb289-2"><a href=""></a>?mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb293"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb293-1"><a href=""></a><span class="fu">help</span>(mean)</span>
+<span id="cb293-2"><a href=""></a>?mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -3421,10 +3457,11 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Installing a package</h2>
 <p>Go the tab <em>Package</em> and click on Install</p>
 <p>Type the name of the package and click on <em>Install</em></p>
-<p><img data-src="install_package.png"> <span class="fragment">💡 you can also use the function <span style="color:indianred;">install.packages</span>.</span></p>
+
+<img data-src="install_package.png" style="width:50.0%" class="r-stretch"><p><span class="fragment">💡 you can also use the function <span style="color:indianred;">install.packages</span>.</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb290"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb290-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb294"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb294-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -3444,6 +3481,17 @@ Levels: dry wet winter spring summer fall</code></pre>
           display:block!important;
       }</style></aside>
 </section>
+<section id="loading-a-package" class="slide level2">
+<h2>Loading a package</h2>
+<p>Once a package is installed, you will need to load it using <span style="color:indianred;">library</span> to be able to use it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb295"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb295-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p>You need to install packages once, but load them in every new session.</p>
+</section>
 <section id="getting-help-on-a-package" class="slide level2">
 <h2>Getting help on a package</h2>
 <p>When you click on the name of a package that is already installed, in the <em>Packages</em> tab, you can get access to:</p>
@@ -3457,26 +3505,29 @@ Levels: dry wet winter spring summer fall</code></pre>
 <h2>Getting help on a package</h2>
 <p>Many packages have a cheatsheet where you can easily see an overview of the main functions of a package.</p>
 
-<!--
-## Acknowledgments
-
-
-<!-- AT the end: recheck the two course to see if I have forgotten something
-
-+ lister des ressources
-
-+ faire des exercices pour chaque fin de session!!!!! -->
-<!-- Cours Juba, cours Mélaine, cours Eric-->
-<!--
-## Resources
-
-voir si help on rbase
-
-et les cours en portugais (video of prof de Ecology et livre en portugais)
-<!--
-**RStudio** cheatsheet in [English](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf){preview-link="false"} and in [Portuguese](https://rstudio.github.io/cheatsheets/translations/portuguese/rstudio-ide_pt.pdf){preview-link="false"}
--->
-<img data-src="cheatsheet.png" class="r-stretch"><div class="quarto-auto-generated-content">
+<img data-src="cheatsheet.png" class="r-stretch"></section>
+<section id="acknowledgments" class="slide level2 no-fragment">
+<h2>Acknowledgments</h2>
+<p>This document largely uses the following:</p>
+<ul>
+<li class="fragment"><p><em>Introduction à R et au tidyverse</em> - Julien Barnier <a href="https://juba.github.io/tidyverse/" data-preview-link="false">in French</a></p></li>
+<li class="fragment"><p><em>Travailler avec R</em> - Eric Marcon <a href="https://ericmarcon.github.io/Cours-travailleR/" data-preview-link="false">in French</a></p></li>
+<li class="fragment"><p>Introdutory class of Mélaine Aubry-Kientz, Julien Claude and Marine Zwicke (University of Montpellier)</p></li>
+</ul>
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<div class="no-incremental">
+<ul>
+<li class="fragment"><p><em>How to R</em> (Videos in English) <a href="https://www.youtube.com/watch?v=lVKMsaWju8w" data-preview-link="false">Here</a> and <a href="https://www.youtube.com/watch?v=h_Nruq9-NQw" data-preview-link="false">Here</a></p></li>
+<li class="fragment"><p>Aulas <em>R do basico eo avançado</em> - Murilo S. Dias (Videos em Portuguese, até aula 19) <a href="https://www.youtube.com/watch?v=TXiwRJ-25Xc&amp;list=PLSYhm4WnLPLBciaJOvx25ohO8yaxmae8k" data-preview-link="false">Here</a></p></li>
+<li class="fragment"><p><em>Base R cheatsheet</em> <a href="https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf" data-preview-link="false">in English</a></p></li>
+<li class="fragment"><p><em>RStudio cheatsheet</em> <a href="https://rstudio.github.io/cheatsheets/rstudio-ide.pdf" data-preview-link="false">in English</a> and <a href="https://rstudio.github.io/cheatsheets/translations/portuguese/rstudio-ide_pt.pdf" data-preview-link="false">in Portuguese</a></p></li>
+<li class="fragment"><p><em>Ciência de Dados em R</em> Damiani, A. Milz, B., Lente, C., Falbel, D., Correa, F. Trecenti, J., Luduvice, N., Lacerda, T., Amorim, W. (Livro em portuguese, até capitulo 4) <a href="https://livro.curso-r.com/index.html" data-preview-link="false">Here</a></p></li>
+</ul>
+</div>
+<p><span class="fragment">You don’t need to read/watch all!</span></p>
+<div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>

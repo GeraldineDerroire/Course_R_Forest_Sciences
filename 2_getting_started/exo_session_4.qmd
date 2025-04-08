@@ -1,6 +1,5 @@
 ---
-  title: "Exercices on session *Getting started with R (3/3)*"
-date: 16/04/2025
+title: "Exercices on session *Getting started with R (3/3)*"
 format:
   pdf
 execute:
@@ -9,21 +8,103 @@ execute:
   
 # Matrices
 
-for presence/abs several sites, several sp => 0/1
+We are going to use a matrix called *occ* to get data on occurrence of species in sites (*1* if the species is present, and *0* if it is absent).
 
-transfor it to a factor
+* Create the following matrix and check that we have the structure we want.
 
-do some calculation (nb of sp per site)
+```{r}
+# t.seed(22)
+# occ <- matrix(sample(c(0,1), 20, replace="TRUE"), 4, 5)
+occ <- matrix(c(1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1), 
+              4, 
+              5)
+colnames(occ) <- c("Sp1", "Sp2", "Sp3", "Sp4", "Sp5")
+rownames(occ) <- c("site1", "site2", "site3", "site4")
+occ
+```
+```{r, eval=FALSE}
+str(occ)
+```
+* Calculate the number of species in each site.
 
+```{r, eval=FALSE}
+rowSums(occ)
+```
+
+* Calculate the number of sites in which each species occurs.
+
+```{r, eval=FALSE}
+colSums(occ)
+```
+* Transpose the matrix to get the following:
+
+```{r}
+t(occ)
+```
 
 # Lists
 
-....
+* Create the following list:
+
+```{r}
+v <- c("site1" = "DF", "site2"= "GO", "site3" = "GO", "site4" = "MT")
+dt <- list(occurence = occ,
+           site_state = v)
+dt
+```
+
+# Operators and Functions
+
+* Calculate the square root of 25
+
+```{r, eval=FALSE}
+sqrt(25)
+```
+* Check that the exponential of the logarithm of 1 is equal to 1.
+*NB: If you try to do it for another number, you will get an unexpected result due to rounding.*
+
+```{r, eval=FALSE}
+exp(log(1)) == 1
+
+# for other values
+round(exp(log(3))) == 3
+```
+
+* Check that 2 is between 0 and 10 (there are different ways to do it)
+
+```{r, eval=FALSE}
+2 %in% 0:10
+# or
+2 <= 10 & 2 >= 0
+```
+
+* Get the absolute value of each element of the following vector *vec*:
+
+```{r}
+vec <- c(-4, 5, 8, -9, -3)
+vec
+```
+
+```{r, eval=FALSE}
+abs(vec)
+```
+* Get the range of values in *vec* 
+
+```{r, eval=FALSE}
+range(vec)
+```
+* Calculate the basal area of a tree of diameter 25 cm (the basal area is the area of a circle of the diameter of a tree), in m^2^
+
+```{r, eval=FALSE}
+pi * (25/200)^2
+```
 
 
-# Install the following packages from CRAN
+# Packages
 
-see the ones we will need for the data next week...
+Install the following packages from CRAN
+
+**TO DO see the ones we will need for the data next week...**
 
 
 
