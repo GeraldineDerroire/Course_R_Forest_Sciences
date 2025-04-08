@@ -807,7 +807,7 @@ The script is saved as an *.R* file:
 stopped here at the end of session *Getting started 1/3*
 :::
 
-<!--
+
 
 # Questions on the last session?
 
@@ -817,11 +817,6 @@ Start of the second session Have them all come closer so they can write directly
 
 ## Let's see if all is clear
 
---> 
-
-<!-- for next year : put this in an exercice doc to do for the next session-->
-
-<!--
 
 What is the difference between R and RStudio?
 
@@ -2187,5 +2182,5 @@ and [Here](https://www.youtube.com/watch?v=h_Nruq9-NQw){preview-link="false"}
 
 [You don't need to read/watch all!]{.fragment}
 
--->
+
 
