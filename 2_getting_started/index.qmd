@@ -807,6 +807,8 @@ The script is saved as an *.R* file:
 stopped here at the end of session *Getting started 1/3*
 :::
 
+<!--
+
 # Questions on the last session?
 
 ::: notes
@@ -815,7 +817,11 @@ Start of the second session Have them all come closer so they can write directly
 
 ## Let's see if all is clear
 
+--> 
+
 <!-- for next year : put this in an exercice doc to do for the next session-->
+
+<!--
 
 What is the difference between R and RStudio?
 
@@ -987,8 +993,6 @@ Find a good balance between putting too many things into a same project, and hav
 [*Eg: Don't have all the analyses of your PhD in a single project, but don't split the steps of a given chapter into several projects.*]{.fragment}
 
 [**A research objective = a chapter/paper = a RStudio project**]{.fragment}
-
-<!--[Let's create a RStudio project for the course.]{.fragment}-->
 
 ::: notes
 Give time for them to create a project.
@@ -2183,5 +2187,5 @@ and [Here](https://www.youtube.com/watch?v=h_Nruq9-NQw){preview-link="false"}
 
 [You don't need to read/watch all!]{.fragment}
 
-
+-->
 
