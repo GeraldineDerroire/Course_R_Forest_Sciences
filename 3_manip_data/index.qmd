@@ -1,5 +1,5 @@
 ---
-title: "Manipulating data"
+title: "Working with data"
 author: Géraldine Derroire
 institute: Cirad - UnB
 date: last-modified
@@ -22,7 +22,160 @@ editor:
     wrap: sentence
 ---
 
+
+## Example data set
+
+<!-- present the data set that we will use (example data set from one of the package)
+
+open it : see Juba 3.1 -->
+
+## Data frame
+
+![](dataframe.png)
+
+<!-- source illustration Wickham (2014)--> 
+
+<!-- what is it
+how to view it, str, dim, etc... indexation, head, tail...
+Juba 3.2
+Mélaine slides 81 and follwing
+
+https://larmarange.github.io/analyse-R/listes-et-tableaux-de-donnees.html#tableaux-de-donn%C3%A9es 
+-->
+
+NB each columns is a vector => so all the what we have seen so far applies
+
+## Add a variable to a data frame
+
+<!-- Juba 3.2.3 en faissant une opération sur des variables -->
+
+# Univariate descriptive statistics 
+
+<!--Juba 3.3
+See how far I go (do I include graphs, probably)
+
+Here check that they knwo the difference between quanti / quali variable
+-->
+
+::: notes
+descriptive statistics are summary statistics
+They help us to get a fill of our data
+Important to use them often
+::: 
+
+
+
+## Descriptive statistics on a quantitative variable
+
+
+## Descriptive statistics on a qualitative variable
+
+## Function summary 
+
+<!-- and function describe ? bof, it requires another package called questionr ... -->
+
+<!-- parler de la fonction skim du package skimr ? elle a l'air top: https://larmarange.github.io/analyse-R/visualiser-ses-donnees.html#skim-skimr
+
+<!-- for the whole dataframe or for just a column-->
+
+<!-- for describe, cf https://larmarange.github.io/analyse-R/premier-travail-avec-les-donnees.html#tableaux-de-donn%C3%A9es la fonction str -->
+
+# Bivariate descriptive statistics 
+
+<!-- See Juba 4
+see how far I go ? probably not testing correlation
+-->
+
+::: notes
+Used to describe the relationship between two variables
+:::
+
+## To go further
+
+<!-- library  DataExplorer => function create report => ça a l'air top !!!! 
+https://larmarange.github.io/analyse-R/visualiser-ses-donnees.html#create_report-dataexplorer 
+
+et aussi package dataMaid (aussi dans cour larmarange)
+
+-->
+
+# TO DO 
+
+## Different ways of getting data
+
+### Creating a dataframe
+
+<!-- Mélaine 81 -->
+
+### Importing data from a csv or other...
+
+<!-- Mélaine 94
+https://larmarange.github.io/analyse-R/import-de-donnees.html
+
+nb: on peut importer des données depuis excel mais ... https://larmarange.github.io/analyse-R/import-de-donnees.html#excel
+
+voir si jeu veux parler de l'intérogation des DB à distance avec le dplyer https://larmarange.github.io/analyse-R/import-de-donnees.html#utilisation-de-dplyr-et-dbplyr 
+=> plutôt non
+
+https://biodiversitydata.github.io/chapters/files-formats.html
+
+
+-->
+
+### Voir si je peux parler de data download from gbif
+
+https://biodiversitydata.github.io/chapters/data-acquisition.html using download.file()
+
+There is a package called rgbif https://biodiversitydata.github.io/chapters/data-cleaning.html
+
+
+### Checking data when importing them
+
+<!-- Mélaine 100-->
+
+
+## Saving data
+
+<!-- 
+save et write
+
+https://larmarange.github.io/analyse-R/import-de-donnees.html#sauver-ses-donn%C3%A9es 
+
+https://larmarange.github.io/analyse-R/export-de-donnees.html
+
+
+-->
+
+## Good practive when working with data
+
+### raw vs derived data
+
+<!--https://biodiversitydata.github.io/chapters/data-cleaning.html-->
+
+### Data storage / backup
+
+https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf
+
+### Cleaning data
+
+<!-- voir si j'ai le temps d'explorer ça: probablement pas....
+
+https://larmarange.github.io/analyse-R/recodage.html#nettoyage
+
+checklist : https://biodiversitydata.github.io/chapters/data-cleaning.html
+-->
+
+### FAIR principles
+
+<!-- https://biodiversitydata.github.io/chapters/introduction.html
+https://biodiversitydata.github.io/chapters/protocols-methods.html
+-->
+
 FAIR (Findable, Accessible, Interoperable and Reusable data principles; https://force11.org/info/the-­fair-­data-­principles/
+
+### Metadata
+
+<!-- https://biodiversitydata.github.io/chapters/introduction.html -->
 
 * Metadata, sometimes referred to as data about data or a data dictionary,
 are a “centralized repository of information about data such as meaning,
@@ -31,7 +184,35 @@ of Computing, 10th edition, 1993). In Jenkins et al 2023
 
 <!-- have them work on the project they created last time-->
 
+## cycle de vie des données ????
+
+https://biodiversitydata.github.io/chapters/introduction.html
+Cours Gaëlle
+guide BES
+
+
 ## What about open science?
 
 sharing of data products, code, and metadata
+
+## Where to find enviro data ? 
+
+<!--https://biodiversitydata.github.io/chapters/env-databases.html
+probablement just leur donner le lien comme ressource
+-->
+
+## Acknowledgments
+
+## Ressources
+
+<!-- check videos here
+https://www.youtube.com/c/HowToR4U/videos
+-->
+
+## Ressources
+
+To go further on data management
+
+https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf
+
 
