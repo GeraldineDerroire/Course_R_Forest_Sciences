@@ -807,7 +807,6 @@ The script is saved as an *.R* file:
 stopped here at the end of session *Getting started 1/3*
 :::
 
-<!--
 
 # Questions on the last session?
 
@@ -859,11 +858,15 @@ Create a object containing a character string
 :::
 
 ::: fragment
-What are the three most used modes for basic objects
+What are the three most used modes for basic objects?
 :::
 
 ::: fragment
 Test if *dimension* is smaller than *area* and store the result in an object called *test*
+:::
+
+::: notes
+modes: numeric, character, logical
 :::
 
 ## Let's see if all is clear
@@ -875,11 +878,11 @@ Create an object containing an integer value
 :::
 
 ::: fragment
-Check if the object *area* is an numeric
+Check if the object *area* is a numeric
 :::
 
 ::: fragment
-Check if the object *area* and an integer and store the result in another object
+Check if the object *area* is an integer and store the result in another object
 :::
 
 ::: fragment
@@ -940,7 +943,7 @@ We will use **RStudio projects** to organise the workflow and gather all the fil
 
 A **RStudio project** is a folder on your computer where all the files of the project are grouped.
 
-[By default, the working directory of a project is this folder where you put the RStudio project. So no more problems with absolute path 😊!]{.fragment}
+[By default, the working directory of a project is the root of the RStudio project (the folder where you put the  project). So no more problems with absolute path 😊!]{.fragment}
 
 [To share a project, just share the full folder.]{.fragment}
 
@@ -997,7 +1000,7 @@ Give time for them to create a project.
 
 To facilitate the work with others (including the **future you**):
 
--   Organise your projects a clear and consistant way
+-   Organise your projects in a clear and consistent way
 
 -   Separate data, methods and outputs
 
@@ -1046,7 +1049,7 @@ source("analyses/data_preparation.R")
 -   *.Rproj* file at the root of the project folder
 -   *data* contains raw data and derived data in separate folders
 -   *analyses*: contains the script organised in a logical way
--   *R*: contains the functions
+-   *R*: contains the functions you have written
 -   *outputs*: contains figures, reports, etc...
 -   *README*: description of the project
 :::
@@ -1118,7 +1121,7 @@ For those who know R, how can we do better?
 
 ## Vectors
 
-Instead, we use *c()* to create an object called a **vector** containing several values:
+Instead, we use [c()]{style="color:indianred;"} (that means *combine*) to create an object called a **vector** containing several values:
 
 ::: fragment
 ```{r}
@@ -1274,14 +1277,11 @@ We can perform an operation on each value of a vector, simultaneously.
 
 ::: fragment
 ```{r}
-vol_cm3 <- vol * (100 * 100 * 100)
+vol_cm3 <- vol * 1000000 # could be written vol * 100^3
 vol_cm3
 ```
 :::
 
-::: notes
-here the () are not needed, just for clarity and obviously, we could do \* 1 000 000
-:::
 
 ## Operations on vectors
 
@@ -1309,7 +1309,7 @@ mean(vol)
 ## Operations on vectors
 
 We can also do operations between two vectors.
-⚠️ The⚠️ vectors need to have the same length
+⚠️ The vectors need to have the same length
 
 Let's create a vector of wood density (*WD*) and calculate the weight of the logs:
 
@@ -1444,6 +1444,8 @@ No need to remember all of this.
 
 End of the second session.
 :::
+
+<!--
 
 # Questions on the last session?
 

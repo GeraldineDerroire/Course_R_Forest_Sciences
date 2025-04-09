@@ -18,7 +18,7 @@ Let's work on tree aboveground biomass (AGB).
 
 We have 2 different forest plots, each containing 4 trees.
 
-* Create two vectors called AGB1 and AGB2 and store the AGB of each of the trees in these plots. Use the following AGB values (in tons).
+* Create two vectors called AGB1_t and AGB2_t and store the AGB of each of the trees in these plots. Use the following AGB values (in tons).
 
 ```{r}
 AGB <- data.frame(Plot = c("Plot1", "Plot2"),
@@ -30,37 +30,37 @@ knitr::kable(AGB)
 ```
 
 ```{r}
-AGB1 <- c(0.1, 0.42, 0.25, 0.3)
-AGB2 <- c(0.24, 0.29, 0.2, 0.3)
+AGB1_t <- c(0.1, 0.42, 0.25, 0.3)
+AGB2_t <- c(0.24, 0.29, 0.2, 0.3)
 ```
 
 * Add names to these vectors (for Tree1, Tree2, etc...)
 
 ```{r}
 tree_names <- c("Tree1", "Tree2", "Tree3", "Tree4")
-names(AGB1) <- tree_names
-names(AGB2) <- tree_names
+names(AGB1_t) <- tree_names
+names(AGB2_t) <- tree_names
 ```
 
-* Create two new vectors to store the AGB in kg
+* Create two new vectors that contain the AGB in kg (call them AGB1_kg a,d AGB2_kg)
 
 ```{r}
-AGB1_kg <- AGB1 * 1000
-AGB2_kg <- AGB2 * 1000
+AGB1_kg <- AGB1_t * 1000
+AGB2_kg <- AGB2_t * 1000
 ```
 
 
-* Calculate the mean AGB for each of the plots.
+* Calculate the mean AGB for each of the plots (in tons).
 
 ```{r}
-mean1 <- mean(AGB1)
-mean2 <-mean(AGB2)
+mean1 <- mean(AGB1_t)
+mean2 <-mean(AGB2_t)
 ```
 
 * Calculate the difference between Tree1 in plot 1 and plot 2, Tree2 in plot 1 and plot 2, etc...
 
 ```{r}
-delta <- AGB1 - AGB2
+delta <- AGB1_t - AGB2_t
 ```
 
 
