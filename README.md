@@ -21,4 +21,6 @@ The course material has been created using quarto and R version 4.4.3.
 
 
 
-https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data-->
+- [Working with data](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data)
+
+-->
