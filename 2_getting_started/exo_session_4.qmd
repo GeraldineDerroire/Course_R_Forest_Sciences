@@ -102,7 +102,11 @@ pi * (25/200)^2
 
 # Packages
 
-Install the following packages from CRAN
+Install the following packages from CRAN:
+
+* vegan
+
+* questionr
 
 **TO DO see the ones we will need for the data next week...**
 

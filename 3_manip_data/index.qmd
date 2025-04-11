@@ -23,43 +23,305 @@ editor:
 ---
 
 
-## Example data set
+## Let's work on Barro Colorado Island data
 
-<!-- present the data set that we will use (example data set from one of the package)
+A 50-ha long-term forest monitoring plot established in 1980
 
-open it : see Juba 3.1 -->
+![](BCI.png){width="80%"}
+
+[To know more about BCI](https://stri.si.edu/facility/barro-colorado){preview-link="false"}
+
+## Let's work on Barro Colorado Island data
+
+We will work with data on the environment of the 50 1-ha plots.
+
+These data are available within the package [vegan]{style="color:indianred;"}.
+
+You should have already installed the package, let's load it:
+
+```{r}
+library(vegan)
+```
+
+[We use the command [data]{style="color:indianred;"} to open the data:]{.fragment}
+
+::: fragment
+```{r}
+data("BCI.env")
+```
+:::
+
+[We can now see the data in the *Environment*. What does it say?]{.fragment}
+
+::: notes
+in the enviro: 50 obs of 9 variables
+the object is called BCI.env
+:::
+
+## Let's work on Barro Colorado Island data
+
+Let's see what is BCI.env
+
+::::: columns
+::: {.column width="70%"}
+```{r}
+BCI.env
+```
+:::
+
+::: {.column width="30%"}
+[BCI.env contains environmental variables in columns, and observations (here each 50 1-ha plot) in rows.]{.fragment}
+:::
+:::::
+
+
+## Let's work on Barro Colorado Island data
+
+Displaying the data set in the console is not very helpful...
+
+We can display it in a separate tab using the function [View]{style="color:indianred;"}
+
+```{r, eval=FALSE}
+View(BCI.env)
+```
+
+[or to click on the table icon in the environment:
+![](view.png){width="80%"}]{.fragment}
 
 ## Data frame
 
+::::: columns
+::: {.column width="50%"}
+BCI.env is a [data frame]{style="color:indianred;"}:
+
+```{r}
+is.data.frame(BCI.env)
+```
+
+A data frame is a type of R object that contains data with observations in row and variables in columns.
+:::
+
+::: {.column width="50%"}
 ![](dataframe.png)
+:::
+:::::
 
-<!-- source illustration Wickham (2014)--> 
+[The data frame is the structure the most commonly used by scientists.]{.fragment}  
 
-<!-- what is it
-how to view it, str, dim, etc... indexation, head, tail...
-Juba 3.2
-Mélaine slides 81 and follwing
 
-https://larmarange.github.io/analyse-R/listes-et-tableaux-de-donnees.html#tableaux-de-donn%C3%A9es 
--->
+## Structure of a data frame
 
-NB each columns is a vector => so all the what we have seen so far applies
+To know the dimension of the data frame, we can use the functions [nrow]{style="color:indianred;"} and [ncol]{style="color:indianred;"}:
+
+```{r}
+nrow(BCI.env)
+```
+
+::: fragment
+```{r}
+ncol(BCI.env)
+```
+:::
+
+[BCI.env contains `r nrow(BCI.env)` observations and `r ncol(BCI.env)` variables, as indicated in the environment.]{.fragment}
+
+[We can also use the function [dim]{style="color:indianred;"} to get both dimention (1st the number of rows, second the number of columns).]{.fragment}
+
+::: fragment
+```{r}
+dim(BCI.env)
+```
+:::
+
+## Structure of a data frame
+
+The function [names]{style="color:indianred;"} gives the columns names, which are the name of the variables.
+
+```{r}
+names(BCI.env)
+```
+
+[To know more about these variables, we can look at the help:]{.fragment}
+
+:::fragment
+```{r, eval=FALSE}
+?BCI.env
+```
+:::
+
+
+## Structure of a data frame
+
+The function [structure]{style="color:indianred;"} give a more detail overview of a data frame:
+
+```{r}
+str(BCI.env)
+```
+
+[This gives the **dimensions** of the data frame, and the **name** and **classe** of each variable.]{.fragment}
+
+[**NB:** Variables can be of different classes.]{.fragment}
+
+::: notes
+This function is very useful, you should always use it to look at the structure when working with a new data frame.
+looking at the structure (and especially the class of the variables) can help detect problems in the data frame
+:::
+
+## Structure of a data frame
+
+We can also access the structure by clicking on the blue arrow in the environment:
+
+![](str.png)
+
+## Variables of a data frame
+
+Each variable (*each column*) of a data frame is a vector.
+
+We can access the variables using [$]{style="color:indianred;"}
+
+```{r}
+BCI.env$Precipitation
+```
+
+[To see only the first or last values, we use the functions [head]{style="color:indianred;"} or [tail]{style="color:indianred;"}. 
+We can specify the number of observations to show in the second argument:]{.fragment}
+
+::: fragment
+```{r}
+head(BCI.env$Precipitation)
+```
+:::
+
+::: fragment
+```{r}
+head(BCI.env$Precipitation, 15)
+```
+:::
+
+::: notes
+each colum is a vector => so we can use all the things we have seen on the manipulation of vector in a previous session
+:::
+
+## Indexation
+
+We can access the content of a data frame using [ [] ]{style="color:indianred;"}
+
+A variable (column):
+
+```{r}
+BCI.env[,4]
+```
+
+[An observation (row):]{.fragment}
+
+::: fragment
+```{r}
+BCI.env[5,]
+```
+:::
+
+[or a value (row and column):]{.fragment}
+
+::: fragment
+```{r}
+BCI.env[5,4]
+```
+:::
+
+::: notes
+We need to have the , to indicate if we want the row or column
+:::
+
+## Indexation
+
+Since the variables have a name, we can also access them by name:
+
+```{r}
+BCI.env[5,"Elevation"]
+```
+
+[We can access several observations and/or several variables at the same time:]{.fragment}
+
+```{r}
+BCI.env[5:8, c("Precipitation", "Elevation")]
+```
+
+[*5:8 means from 5 to 8*]{.fragment}
+
+::: notes
+rows could also have a name so we could call them by names 
+
+This is not the case in our data.
+
+To add names to the row, we can use the function row.names()
+:::
 
 ## Add a variable to a data frame
 
-<!-- Juba 3.2.3 en faissant une opération sur des variables -->
+We can also use [$]{style="color:indianred;"} to create a new variable to a data frame. Let's add the site (BCI):
+
+```{r}
+BCI.env$Site <- rep("BCI", 50)
+```
+
+[The function [rep]{style="color:indianred;"} allows to repeat the same value (here "BCI") a certain number of times (here 50).]{style="font-size: 23px"}
+
+[**NB:** the dimensions and structure of the data frame have changed:]{.fragment}
+
+::: fragment
+```{r}
+dim(BCI.env)
+```
+:::
+
+## Add a variable to a data frame
+
+We can check the new structure of the data frame:
+
+```{r}
+str(BCI.env)
+```
+
+[We can transform the variable *site* to a factor using the function [as.factor]{style="color:indianred;"}]{.fragment}
+
+::: fragment
+```{r}
+BCI.env$Site <- as.factor(BCI.env$Site)
+```
+:::
+
+::: notes
+now you can check the structure again
+:::
+
+
+## Add a variable to a data frame
+
+We can also add a variable by doing an operation on an existing variable. Let's add the precipitations in meters:
+
+```{r}
+BCI.env$Precip_m <- BCI.env$Precipitation / 1000
+```
+
+[Let's check the new structure:]{.fragment}
+
+::: fragment
+```{r}
+str(BCI.env)
+```
+:::
+
+::: notes
+in practice, doesn't make much sense to have precipitation in meters...
+:::
+
 
 # Univariate descriptive statistics 
 
-<!--Juba 3.3
-See how far I go (do I include graphs, probably)
-
-Here check that they knwo the difference between quanti / quali variable
--->
 
 ::: notes
 descriptive statistics are summary statistics
-They help us to get a fill of our data
+They help us to get a fell of our data
 Important to use them often
 ::: 
 
@@ -67,10 +329,245 @@ Important to use them often
 
 ## Descriptive statistics on a quantitative variable
 
+Which are the quantitative variables in our data set?
+
+```{r}
+str(BCI.env)
+```
+
+[UTM.EW, UTM.NS, Precipitation, Elevation, EnvHet (and Precip_m)]{.fragment}
+
+::: notes
+Everyone knows the difference between quantitative (numeric)
+and qualitative variables (limited number of values = modalities = categories)?
+:::
+
+
+## Descriptive statistics on a quantitative variable
+
+Let's consider the environmental heterogeneity (see the help to know how it was calculated).
+
+We can use the functions [min]{style="color:indianred;"}, 
+[max]{style="color:indianred;"}
+and [range]{style="color:indianred;"} 
+to explore the extreme values of the variable:
+
+```{r}
+min(BCI.env$EnvHet)
+```
+
+::: fragment
+```{r}
+max(BCI.env$EnvHet)
+```
+:::
+
+::: fragment
+```{r}
+range(BCI.env$EnvHet)
+```
+:::
+
+::: notes
+We have already seen this functions for vectors 
+=> variables of a data frame are vectors
+::: 
+
+## Indicators of centrality
+
+We already know how to get the mean:
+
+```{r}
+mean(BCI.env$EnvHet)
+```
+
+[We can get the median using the function [median]{style="color:indianred;"}]{.fragment}
+
+::: fragment
+```{r}
+median(BCI.env$EnvHet)
+```
+:::
+
+[🤔 Do you remember what is the median?]{.fragment}
+
+[*It is the middle value: half of the values are lower than the median and half are higher.*]{.fragment}
+
+
+## Indicators of dispersion
+
+The simpler one is the extent of the distribution:
+
+```{r}
+max(BCI.env$EnvHet) - min(BCI.env$EnvHet)
+```
+[We can also get the **variance** and the **standard deviation** (which is the square root of the variance),
+using the functions [var]{style="color:indianred;"} 
+and [sd]{style="color:indianred;"}]{.fragment}
+
+::: fragment
+```{r}
+var(BCI.env$EnvHet)
+```
+:::
+
+::: fragment
+```{r}
+sd(BCI.env$EnvHet)
+```
+:::
+
+[The higher the variance (and the standard deviation) the more dispersed the values are around the mean.]{.fragment}
+
+## Indicators of dispersion
+
+We can also look at the quantiles.
+
+[🤔 What is a quantile?]{.fragment}
+
+[A quantile is a value that divides a vector into equal-size groups, to understand the distribution of the data]{.fragment}
+
+## Indicators of dispersion
+
+For example, we can look at the *quartiles* that divides the distribution in 4.
+
+* 1/4 (25%) of the values are below the first quartile:
+
+::: fragment
+```{r}
+quantile(BCI.env$EnvHet, prob = 0.25)
+```
+:::
+
+[*prob indicate which quantile we want*]{.fragment}
+
+## Indicators of dispersion
+
+* the second quartile is equal to the median (1/2 of the values are below and 1/2 are above)
+
+::: fragment
+```{r}
+quantile(BCI.env$EnvHet, prob = 0.5) == median(BCI.env$EnvHet)
+```
+:::
+
+* 3/4 (75%) of the values are below the fourth quartile:
+
+::: fragment
+```{r}
+quantile(BCI.env$EnvHet, prob = 0.75)
+```
+:::
+
+## Indicators of dispersion
+
+But we can also consider other quartiles, for example the percentiles (dividing the vector in 100).
+
+95% of the values are between the percentile 2.5 and the percentile 97.5:
+
+```{r}
+quantile(BCI.env$EnvHet, prob = c(0.025, 0.975))
+```
+::: notes
+Here we have only values so it doesn't make much sense to divide them in 100 groups...
+:::
+
+## The function summary
+
+The function [summary]{style="color:indianred;"} gives several indicators in one go:
+
+```{r}
+summary(BCI.env$EnvHet)
+```
+## Graphical representation of a quantitative variable - the histogram
+
+::::: columns
+::: {.column width="70%"}
+```{r}
+hist(BCI.env$EnvHet)
+```
+:::
+
+::: {.column width="30%"}
+[A **histogram** makes classes (on the *x* axis) and count the number of values per class (the frequency, on the *y* axis).]{.fragment}
+:::
+:::::
+
+::: notes
+I don't show here how to make this graph pretty, we will do it with ggplot in a future session
+:::
 
 ## Descriptive statistics on a qualitative variable
 
-## Function summary 
+Which are the qualitative variables in our data set?
+
+```{r}
+str(BCI.env)
+```
+[Age.cat, Geology, Habitat, Stream (and Site)]{.fragment}
+
+
+## Descriptive statistics on a qualitative variable
+
+Let's consider the variable habitat:
+
+We can use the function [table]{style="color:indianred;"} to count the number of occurrences in each category (each levels of the factor);
+
+```{r}
+table(BCI.env$Habitat)
+```
+[⚠️ By default, we don't see the missing values (NA). To get them, we need to use the argument useNA:]{.fragment}
+
+::: fragment
+```{r}
+table(BCI.env$Habitat, useNA = "always")
+```
+:::
+
+## Descriptive statistics on a qualitative variable
+
+We can also use the function [freq]{style="color:indianred;"} from the package [questionr]{style="color:indianred;"}:
+
+::::: columns
+::: {.column width="75%"}
+```{r}
+questionr::freq(BCI.env$Habitat, 
+                total = TRUE, # add the total
+                sort = "dec") # sort by decending order
+```
+:::
+
+::: {.column width="25%"}
+[💡 *using the name of the package before the name of the function with :: (here questionr::freq) allows not to load the whole package*]{style="font-size: 23px"}
+:::
+:::::
+
+* [*n* is the number of values per category]{style="font-size: 30px"}
+ 
+* [*%* is the percentage]{style="font-size: 30px"}
+ 
+* [*val%* is the percentage calculated on valid values (excluding *NA*)]{style="font-size: 300px"}
+
+::: notes
+In our case, there is no NA so % and val% are the same
+:::
+
+<!-- carry on with the graphical representation in juba 3.3.2--> 
+
+
+
+
+#
+
+##
+
+
+##
+
+
+
+
+## Function summary on the whole data frame
 
 <!-- and function describe ? bof, it requires another package called questionr ... -->
 
@@ -156,7 +653,16 @@ https://larmarange.github.io/analyse-R/export-de-donnees.html
 
 https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf
 
-### Cleaning data
+### Cleaning data / checking data
+
+<!-- Faire un data set à problème 
+•	Un sep ; qui n’a pas la bonne taille 
+•	Un site qui est écrit un fois avec une majuscule et une fois sans => 2 sites
+•	Un nombre avec une virgule à la place du point => caractère 
+•	…
+ ICI ou pour les exercices??? (ça peut-être pas mal de leur faire trouver les problèmes avec un dataset) ou à mettre plus haut?
+ 
+ -->
 
 <!-- voir si j'ai le temps d'explorer ça: probablement pas....
 
@@ -202,6 +708,8 @@ probablement just leur donner le lien comme ressource
 -->
 
 ## Acknowledgments
+
+Cours Juba
 
 ## Ressources
 
