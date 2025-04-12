@@ -434,7 +434,7 @@ Géraldine Derroire
 <pre><code>This is vegan 2.6-8</code></pre>
 </div>
 </div>
-<p><span class="fragment">We use the command <span style="color:indianred;">data</span> to open the data:</span></p>
+<p><span class="fragment">We use the command</span><span style="color:indianred;">data</span> to open the data:</p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">data</span>(<span class="st">"BCI.env"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -629,7 +629,7 @@ Géraldine Derroire
 </div>
 </div>
 <p><span class="fragment">BCI.env contains 50 observations and 9 variables, as indicated in the environment.</span></p>
-<p><span class="fragment">We can also use the function <span style="color:indianred;">dim</span> to get both dimention (1st the number of rows, second the number of columns).</span></p>
+<p><span class="fragment">We can also use the function</span><span style="color:indianred;">dim</span> to get both dimention (1st the number of rows, second the number of columns).</p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">dim</span>(BCI.env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -720,7 +720,7 @@ Géraldine Derroire
 [46] 2530 2530 2530 2530 2530</code></pre>
 </div>
 </div>
-<p><span class="fragment">To see only the first or last values, we use the functions <span style="color:indianred;">head</span> or <span style="color:indianred;">tail</span>. We can specify the number of observations to show in the second argument:</span></p>
+<p><span class="fragment">To see only the first or last values, we use the functions</span><span style="color:indianred;">head</span> or <span style="color:indianred;">tail</span>. We can specify the number of observations to show in the second argument:</p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">head</span>(BCI.env<span class="sc">$</span>Precipitation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -858,7 +858,7 @@ Géraldine Derroire
 <div class="cell fragment">
 
 </div>
-<p><span style="font-size: 23px">The function <span style="color:indianred;">rep</span> allows to repeat the same value (here “BCI”) a certain number of times (here 50).</span></p>
+<p><span style="font-size: 23px">The function</span><span style="color:indianred;">rep</span> allows to repeat the same value (here “BCI”) a certain number of times (here 50).</p>
 <p><span class="fragment"><strong>NB:</strong> the dimensions and structure of the data frame have changed:</span></p>
 <div class="fragment">
 <div class="cell">
@@ -892,7 +892,7 @@ Géraldine Derroire
  $ Site         : chr  "BCI" "BCI" "BCI" "BCI" ...</code></pre>
 </div>
 </div>
-<p><span class="fragment">We can transform the variable <em>site</em> to a factor using the function <span style="color:indianred;">as.factor</span></span></p>
+<p><span class="fragment">We can transform the variable <em>site</em> to a factor using the function</span><span style="color:indianred;">as.factor</span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a>BCI.env<span class="sc">$</span>Site <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(BCI.env<span class="sc">$</span>Site)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1071,7 +1071,7 @@ Géraldine Derroire
 <pre><code>[1] 0.31072</code></pre>
 </div>
 </div>
-<p><span class="fragment">We can get the median using the function <span style="color:indianred;">median</span></span></p>
+<p><span class="fragment">We can get the median using the function</span><span style="color:indianred;">median</span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a><span class="fu">median</span>(BCI.env<span class="sc">$</span>EnvHet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1096,7 +1096,7 @@ Géraldine Derroire
 <pre><code>[1] 0.7264</code></pre>
 </div>
 </div>
-<p><span class="fragment">We can also get the <strong>variance</strong> and the <strong>standard deviation</strong> (which is the square root of the variance), using the functions <span style="color:indianred;">var</span> and <span style="color:indianred;">sd</span></span></p>
+<p><span class="fragment">We can also get the <strong>variance</strong> and the <strong>standard deviation</strong> (which is the square root of the variance), using the functions</span><span style="color:indianred;">var</span> and <span style="color:indianred;">sd</span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="fu">var</span>(BCI.env<span class="sc">$</span>EnvHet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1459,7 +1459,7 @@ Total    50 100  100</code></pre>
 
 </div>
 </div>
-<p><span class="fragment">See result <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/codebook_BCI.env.pdf" data-preview-link="false">Here</a></span></p>
+<p><span class="fragment">See result <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/codebook_BCI.env.pdf" data-preview-link="false">here</a></span></p>
 <ul>
 <li class="fragment">The package <span style="color:indianred;">DataExplorer</span>:</li>
 </ul>
@@ -1471,9 +1471,12 @@ Total    50 100  100</code></pre>
 
 </div>
 </div>
-<p><span class="fragment">See result <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/report.html" data-preview-link="false">Here</a></span></p>
+<p><span class="fragment">See result <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/report.html" data-preview-link="false">here</a></span></p>
 <aside class="notes">
 <p>don’t do it now… don’t have the packages installed</p>
+<p>depending how late it is =&gt; explore them a bit or not</p>
+<p>mode: most represented value</p>
+<p>Q–Q plot (quantile–quantile plot) is a probability plot, a graphical method for comparing two probability distributions by plotting their quantiles against each other. On x the normal distrib, on y our variable</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1487,14 +1490,139 @@ Total    50 100  100</code></pre>
       }</style></aside>
 </section></section>
 <section>
+<section id="different-ways-of-getting-data" class="title-slide slide level1 center">
+<h1>Different ways of getting data</h1>
+<aside class="notes">
+<p>So far we have use a example data set from a package, but we will want to use our own data</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="creating-a-data-frame-in-r" class="slide level2">
+<h2>Creating a data frame in R</h2>
+<p>We can create a data frame using the function <span style="color:indianred;">data.frame</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href=""></a>My_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Site =</span> <span class="fu">c</span>(<span class="st">"Site1"</span>, <span class="st">"Site2"</span>, <span class="st">"Site3"</span>, <span class="st">"Site4"</span>), </span>
+<span id="cb90-2"><a href=""></a>                 <span class="at">Temp =</span> <span class="fu">c</span>(<span class="fl">25.8</span>, <span class="fl">29.3</span>, <span class="dv">32</span>, <span class="fl">31.3</span>),</span>
+<span id="cb90-3"><a href=""></a>                 <span class="at">Precip =</span> <span class="fu">c</span>(<span class="dv">1423</span>, <span class="dv">1532</span>, <span class="dv">1489</span>, <span class="dv">1567</span>),</span>
+<span id="cb90-4"><a href=""></a>                 <span class="at">Veget =</span> <span class="fu">c</span>(<span class="st">"Savana"</span>, <span class="st">"Forest"</span>, <span class="st">"Savana"</span>, <span class="st">"Savana"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment">To do this, we enter each variable as a vector.</span></p>
+<aside class="notes">
+<p>makesure they understand the synthax, especally the “”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="creating-a-data-frame-in-r-1" class="slide level2">
+<h2>Creating a data frame in R</h2>
+<p>Let’s visualise it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href=""></a><span class="fu">str</span>(My_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   4 obs. of  4 variables:
+ $ Site  : chr  "Site1" "Site2" "Site3" "Site4"
+ $ Temp  : num  25.8 29.3 32 31.3
+ $ Precip: num  1423 1532 1489 1567
+ $ Veget : chr  "Savana" "Forest" "Savana" "Savana"</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>What do we need to check?</p>
+<p>The dim</p>
+<p>The type/mode of variables</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="creating-a-data-frame-in-r-2" class="slide level2">
+<h2>Creating a data frame in R</h2>
+<p>We can then transform some variables to factors if relevant:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href=""></a>My_data<span class="sc">$</span>Veget <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(My_data<span class="sc">$</span>Veget)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment">We can check the structure again:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href=""></a><span class="fu">str</span>(My_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   4 obs. of  4 variables:
+ $ Site  : chr  "Site1" "Site2" "Site3" "Site4"
+ $ Temp  : num  25.8 29.3 32 31.3
+ $ Precip: num  1423 1532 1489 1567
+ $ Veget : Factor w/ 2 levels "Forest","Savana": 2 1 2 2</code></pre>
+</div>
+</div>
+</div>
+</section></section>
+<section>
 <section id="to-do" class="title-slide slide level1 center">
 <h1>TO DO</h1>
 
 </section>
-<section id="different-ways-of-getting-data" class="slide level2">
-<h2>Different ways of getting data</h2>
-<h3 id="creating-a-dataframe">Creating a dataframe</h3>
-<!-- Mélaine 81 -->
+<section id="importing-data-as-a-csv" class="slide level2">
+<h2>Importing data as a csv</h2>
+<!-- tell that we can also import from other format but bof-->
+</section>
+<section id="good-practice-when-typing-data-in-spreadsheet" class="slide level2">
+<h2>Good practice when typing data in spreadsheet</h2>
+<p><em>You can use Excel, Google Sheets, LibreOffice Calc…</em></p>
+<ul>
+<li class="fragment"><p>One dataset (one table) per spreadsheet</p></li>
+<li class="fragment"><p>Give clear headers (column names)</p></li>
+<li class="fragment"><p>No empty row or column</p></li>
+<li class="fragment"><p>No merged cells</p></li>
+</ul>
+</section>
+<section id="good-practice-when-typing-data-in-spreadsheet-1" class="slide level2">
+<h2>Good practice when typing data in spreadsheet</h2>
+<ul>
+<li class="fragment"><p>Leave empty cells for missing values (or write “NA”)</p></li>
+<li class="fragment"><p>Avoid special characters</p></li>
+<li class="fragment"><p>Use . for the decimal separator</p></li>
+<li class="fragment"><p>Use YYYY-MM–DD for date <em>(handling dates in Excel is</em> 😭🤬<em>)</em></p></li>
+<li class="fragment"><p>Export as a CSV (Comma-Separated Values), which uses comma <span style="color:indianred;">,</span> as delimiter of column</p></li>
+</ul>
+</section></section>
+<section>
+<section id="to-do-1" class="title-slide slide level1 center">
+<h1>TO DO</h1>
+
+</section>
 <h3 id="importing-data-from-a-csv-or-other">Importing data from a csv or other…</h3>
 <!-- Mélaine 94
 https://larmarange.github.io/analyse-R/import-de-donnees.html
@@ -1508,12 +1636,6 @@ https://biodiversitydata.github.io/chapters/files-formats.html
 
 
 -->
-<h3 id="voir-si-je-peux-parler-de-data-download-from-gbif">Voir si je peux parler de data download from gbif</h3>
-<p>https://biodiversitydata.github.io/chapters/data-acquisition.html using download.file()</p>
-<p>There is a package called rgbif https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
-<h3 id="checking-data-when-importing-them">Checking data when importing them</h3>
-<!-- Mélaine 100-->
-</section>
 <section id="saving-data" class="slide level2">
 <h2>Saving data</h2>
 <!-- 
@@ -1525,6 +1647,11 @@ https://larmarange.github.io/analyse-R/export-de-donnees.html
 
 
 -->
+<h3 id="voir-si-je-peux-parler-de-data-download-from-gbif">Voir si je peux parler de data download from gbif</h3>
+<p>https://biodiversitydata.github.io/chapters/data-acquisition.html using download.file()</p>
+<p>There is a package called rgbif https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
+<h3 id="checking-data-when-importing-them">Checking data when importing them</h3>
+<!-- Mélaine 100-->
 </section>
 <section id="good-practive-when-working-with-data" class="slide level2">
 <h2>Good practive when working with data</h2>

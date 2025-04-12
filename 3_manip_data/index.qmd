@@ -22,7 +22,6 @@ editor:
     wrap: sentence
 ---
 
-
 ## Let's work on Barro Colorado Island data
 
 A 50-ha long-term forest monitoring plot established in 1980
@@ -43,7 +42,7 @@ You should have already installed the package, let's load it:
 library(vegan)
 ```
 
-[We use the command [data]{style="color:indianred;"} to open the data:]{.fragment}
+[We use the command ]{.fragment}[data]{style="color:indianred;"} to open the data:
 
 ::: fragment
 ```{r}
@@ -54,8 +53,7 @@ data("BCI.env")
 [We can now see the data in the *Environment*. What does it say?]{.fragment}
 
 ::: notes
-in the enviro: 50 obs of 9 variables
-the object is called BCI.env
+in the enviro: 50 obs of 9 variables the object is called BCI.env
 :::
 
 ## Let's work on Barro Colorado Island data
@@ -74,7 +72,6 @@ BCI.env
 :::
 :::::
 
-
 ## Let's work on Barro Colorado Island data
 
 Displaying the data set in the console is not very helpful...
@@ -85,8 +82,7 @@ We can display it in a separate tab using the function [View]{style="color:india
 View(BCI.env)
 ```
 
-[or to click on the table icon in the environment:
-![](view.png){width="80%"}]{.fragment}
+[or to click on the table icon in the environment: ![](view.png){width="80%"}]{.fragment}
 
 ## Data frame
 
@@ -106,8 +102,7 @@ A data frame is a type of R object that contains data with observations in row a
 :::
 :::::
 
-[The data frame is the structure the most commonly used by scientists.]{.fragment}  
-
+[The data frame is the structure the most commonly used by scientists.]{.fragment}
 
 ## Structure of a data frame
 
@@ -125,7 +120,7 @@ ncol(BCI.env)
 
 [BCI.env contains `r nrow(BCI.env)` observations and `r ncol(BCI.env)` variables, as indicated in the environment.]{.fragment}
 
-[We can also use the function [dim]{style="color:indianred;"} to get both dimention (1st the number of rows, second the number of columns).]{.fragment}
+[We can also use the function ]{.fragment}[dim]{style="color:indianred;"} to get both dimention (1st the number of rows, second the number of columns).
 
 ::: fragment
 ```{r}
@@ -143,12 +138,11 @@ names(BCI.env)
 
 [To know more about these variables, we can look at the help:]{.fragment}
 
-:::fragment
+::: fragment
 ```{r, eval=FALSE}
 ?BCI.env
 ```
 :::
-
 
 ## Structure of a data frame
 
@@ -177,14 +171,14 @@ We can also access the structure by clicking on the blue arrow in the environmen
 
 Each variable (*each column*) of a data frame is a vector.
 
-We can access the variables using [$]{style="color:indianred;"}
+We can access the variables using [\$]{style="color:indianred;"}
 
 ```{r}
 BCI.env$Precipitation
 ```
 
-[To see only the first or last values, we use the functions [head]{style="color:indianred;"} or [tail]{style="color:indianred;"}. 
-We can specify the number of observations to show in the second argument:]{.fragment}
+[To see only the first or last values, we use the functions ]{.fragment}[head]{style="color:indianred;"} or [tail]{style="color:indianred;"}.
+We can specify the number of observations to show in the second argument:
 
 ::: fragment
 ```{r}
@@ -199,12 +193,12 @@ head(BCI.env$Precipitation, 15)
 :::
 
 ::: notes
-each colum is a vector => so we can use all the things we have seen on the manipulation of vector in a previous session
+each colum is a vector =\> so we can use all the things we have seen on the manipulation of vector in a previous session
 :::
 
 ## Indexation
 
-We can access the content of a data frame using [ [] ]{style="color:indianred;"}
+We can access the content of a data frame using [\[\]]{style="color:indianred;"}
 
 A variable (column):
 
@@ -251,7 +245,7 @@ BCI.env[5:8, c("Precipitation", "Elevation")]
 [*5:8 means from 5 to 8*]{.fragment}
 
 ::: notes
-rows could also have a name so we could call them by names 
+rows could also have a name so we could call them by names
 
 This is not the case in our data.
 
@@ -260,13 +254,14 @@ To add names to the row, we can use the function row.names()
 
 ## Add a variable to a data frame
 
-We can also use [$]{style="color:indianred;"} to create a new variable to a data frame. Let's add the site (BCI):
+We can also use [\$]{style="color:indianred;"} to create a new variable to a data frame.
+Let's add the site (BCI):
 
 ```{r}
 BCI.env$Site <- rep("BCI", 50)
 ```
 
-[The function [rep]{style="color:indianred;"} allows to repeat the same value (here "BCI") a certain number of times (here 50).]{style="font-size: 23px"}
+[The function ]{style="font-size: 23px"}[rep]{style="color:indianred;"} allows to repeat the same value (here "BCI") a certain number of times (here 50).
 
 [**NB:** the dimensions and structure of the data frame have changed:]{.fragment}
 
@@ -284,7 +279,7 @@ We can check the new structure of the data frame:
 str(BCI.env)
 ```
 
-[We can transform the variable *site* to a factor using the function [as.factor]{style="color:indianred;"}]{.fragment}
+[We can transform the variable *site* to a factor using the function ]{.fragment}[as.factor]{style="color:indianred;"}
 
 ::: fragment
 ```{r}
@@ -296,10 +291,10 @@ BCI.env$Site <- as.factor(BCI.env$Site)
 now you can check the structure again
 :::
 
-
 ## Add a variable to a data frame
 
-We can also add a variable by doing an operation on an existing variable. Let's add the precipitations in meters:
+We can also add a variable by doing an operation on an existing variable.
+Let's add the precipitations in meters:
 
 ```{r}
 BCI.env$Precip_m <- BCI.env$Precipitation / 1000
@@ -317,17 +312,11 @@ str(BCI.env)
 in practice, doesn't make much sense to have precipitation in meters...
 :::
 
-
-# Univariate descriptive statistics 
-
+# Univariate descriptive statistics
 
 ::: notes
-descriptive statistics are summary statistics
-They help us to get a fell of our data
-Important to use them often
-::: 
-
-
+descriptive statistics are summary statistics They help us to get a fell of our data Important to use them often
+:::
 
 ## Descriptive statistics on a quantitative variable
 
@@ -340,19 +329,14 @@ str(BCI.env)
 [UTM.EW, UTM.NS, Precipitation, Elevation, EnvHet (and Precip_m)]{.fragment}
 
 ::: notes
-Everyone knows the difference between quantitative (numeric)
-and qualitative variables (limited number of values = modalities = categories)?
+Everyone knows the difference between quantitative (numeric) and qualitative variables (limited number of values = modalities = categories)?
 :::
-
 
 ## Descriptive statistics on a quantitative variable
 
 Let's consider the environmental heterogeneity (see the help to know how it was calculated).
 
-We can use the functions [min]{style="color:indianred;"}, 
-[max]{style="color:indianred;"}
-and [range]{style="color:indianred;"} 
-to explore the extreme values of the variable:
+We can use the functions [min]{style="color:indianred;"}, [max]{style="color:indianred;"} and [range]{style="color:indianred;"} to explore the extreme values of the variable:
 
 ```{r}
 min(BCI.env$EnvHet)
@@ -371,9 +355,8 @@ range(BCI.env$EnvHet)
 :::
 
 ::: notes
-We have already seen this functions for vectors 
-=> variables of a data frame are vectors
-::: 
+We have already seen this functions for vectors =\> variables of a data frame are vectors
+:::
 
 ## Indicators of centrality
 
@@ -383,7 +366,7 @@ We already know how to get the mean:
 mean(BCI.env$EnvHet)
 ```
 
-[We can get the median using the function [median]{style="color:indianred;"}]{.fragment}
+[We can get the median using the function ]{.fragment}[median]{style="color:indianred;"}
 
 ::: fragment
 ```{r}
@@ -395,7 +378,6 @@ median(BCI.env$EnvHet)
 
 [*It is the middle value: half of the values are lower than the median and half are higher.*]{.fragment}
 
-
 ## Indicators of dispersion
 
 The simpler one is the extent of the distribution:
@@ -403,9 +385,8 @@ The simpler one is the extent of the distribution:
 ```{r}
 max(BCI.env$EnvHet) - min(BCI.env$EnvHet)
 ```
-[We can also get the **variance** and the **standard deviation** (which is the square root of the variance),
-using the functions [var]{style="color:indianred;"} 
-and [sd]{style="color:indianred;"}]{.fragment}
+
+[We can also get the **variance** and the **standard deviation** (which is the square root of the variance), using the functions ]{.fragment}[var]{style="color:indianred;"} and [sd]{style="color:indianred;"}
 
 ::: fragment
 ```{r}
@@ -433,7 +414,7 @@ We can also look at the quantiles.
 
 For example, we can look at the *quartiles* that divides the distribution in 4.
 
-* 1/4 (25%) of the values are below the first quartile:
+-   1/4 (25%) of the values are below the first quartile:
 
 ::: fragment
 ```{r}
@@ -445,7 +426,7 @@ quantile(BCI.env$EnvHet, prob = 0.25)
 
 ## Indicators of dispersion
 
-* the second quartile is equal to the median (1/2 of the values are below and 1/2 are above)
+-   the second quartile is equal to the median (1/2 of the values are below and 1/2 are above)
 
 ::: fragment
 ```{r}
@@ -453,7 +434,7 @@ quantile(BCI.env$EnvHet, prob = 0.5) == median(BCI.env$EnvHet)
 ```
 :::
 
-* 3/4 (75%) of the values are below the fourth quartile:
+-   3/4 (75%) of the values are below the fourth quartile:
 
 ::: fragment
 ```{r}
@@ -470,6 +451,7 @@ But we can also consider other quartiles, for example the percentiles (dividing 
 ```{r}
 quantile(BCI.env$EnvHet, prob = c(0.025, 0.975))
 ```
+
 ::: notes
 Here we have only values so it doesn't make much sense to divide them in 100 groups...
 :::
@@ -481,6 +463,7 @@ The function [summary]{style="color:indianred;"} gives several indicators in one
 ```{r}
 summary(BCI.env$EnvHet)
 ```
+
 ## Graphical representation of a quantitative variable - the histogram
 
 ::::: columns
@@ -506,8 +489,8 @@ Which are the qualitative variables in our data set?
 ```{r}
 str(BCI.env)
 ```
-[Age.cat, Geology, Habitat, Stream (and Site)]{.fragment}
 
+[Age.cat, Geology, Habitat, Stream (and Site)]{.fragment}
 
 ## Descriptive analysis on a qualitative variable
 
@@ -518,6 +501,7 @@ We can use the function [table]{style="color:indianred;"} to count the number of
 ```{r}
 table(BCI.env$Habitat)
 ```
+
 [⚠️ By default, we don't see the missing values (NA). To get them, we need to use the argument useNA:]{.fragment}
 
 ::: fragment
@@ -544,11 +528,11 @@ questionr::freq(BCI.env$Habitat,
 :::
 :::::
 
-* [*n* is the number of observations per category]{style="font-size: 30px"}
- 
-* [*%* is the percentage]{style="font-size: 30px"}
- 
-* [*val%* is the percentage calculated on valid values (excluding *NA*)]{style="font-size: 30px"}
+-   [*n* is the number of observations per category]{style="font-size: 30px"}
+
+-   [*%* is the percentage]{style="font-size: 30px"}
+
+-   [*val%* is the percentage calculated on valid values (excluding *NA*)]{style="font-size: 30px"}
 
 ::: notes
 In our case, there is no NA so % and val% are the same
@@ -558,7 +542,7 @@ In our case, there is no NA so % and val% are the same
 
 ::::: columns
 ::: {.column width="30%"}
-We can use a barplot to represent the number of observations per category, with the function [barplot]{style="color:indianred;"}: 
+We can use a barplot to represent the number of observations per category, with the function [barplot]{style="color:indianred;"}:
 :::
 
 ::: {.column width="70%"}
@@ -571,9 +555,7 @@ barplot(tab)
 :::::
 
 ::: notes
-Here we have to proceed in two steps:
-first create the table, and then make the barplot
-and we can add a step to order the categories
+Here we have to proceed in two steps: first create the table, and then make the barplot and we can add a step to order the categories
 :::
 
 ## Graphical representation of a qualitative variable - the Cleveland plot
@@ -591,12 +573,11 @@ dotchart(as.vector(tab), # convert the table to a vector
 :::
 :::::
 
-
 # Overview of the whole data frame
 
 ## The function summary
 
-We have already used the function [summary]{style="color:indianred;"} on a vector. 
+We have already used the function [summary]{style="color:indianred;"} on a vector.
 We can also use it on a whole data frame:
 
 ::: {.scroll-output style="max-height: 300px; overflow-y: auto;"}
@@ -615,7 +596,7 @@ Using **str** and **summary** to explore a new data set is a good practice.
 
 Some packages propose functions to create automatic reports to explore a data frame.
 
-* The package [dataMaid]{style="color:indianred;"}:
+-   The package [dataMaid]{style="color:indianred;"}:
 
 ::: fragment
 ```{r, eval=FALSE}
@@ -625,7 +606,7 @@ dataMaid::makeCodebook(BCI.env)
 
 [See result [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/codebook_BCI.env.pdf){preview-link="false"}]{.fragment}
 
-* The package [DataExplorer]{style="color:indianred;"}:
+-   The package [DataExplorer]{style="color:indianred;"}:
 
 ::: fragment
 ```{r, eval=FALSE}
@@ -636,25 +617,111 @@ DataExplorer::create_report(BCI.env)
 [See result [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/report.html){preview-link="false"}]{.fragment}
 
 ::: notes
-don't do it now... don't have the packages installed
+don't do it now...
+don't have the packages installed
+
+depending how late it is =\> explore them a bit or not
+
+mode: most represented value
+
+Q–Q plot (quantile–quantile plot) is a probability plot, a graphical method for comparing two probability distributions by plotting their quantiles against each other.
+On x the normal distrib, on y our variable
+:::
+
+# Different ways of getting data
+
+::: notes
+So far we have use a example data set from a package, but we will want to use our own data
+:::
+
+## Creating a data frame in R
+
+We can create a data frame using the function [data.frame]{style="color:indianred;"}:
+
+```{r}
+My_data <- data.frame(Site = c("Site1", "Site2", "Site3", "Site4"), 
+                 Temp = c(25.8, 29.3, 32, 31.3),
+                 Precip = c(1423, 1532, 1489, 1567),
+                 Veget = c("Savana", "Forest", "Savana", "Savana"))
+```
+
+[To do this, we enter each variable as a vector.]{.fragment}
+
+::: notes
+makesure they understand the synthax, especally the ""
+:::
+
+## Creating a data frame in R
+
+Let's visualise it:
+
+```{r}
+str(My_data)
+```
+
+::: notes
+What do we need to check?
+
+The dim
+
+The type/mode of variables
+:::
+
+## Creating a data frame in R
+
+We can then transform some variables to factors if relevant:
+
+```{r}
+My_data$Veget <- as.factor(My_data$Veget)
+```
+
+[We can check the structure again:]{.fragment}
+
+::: fragment
+```{r}
+str(My_data)
+```
 :::
 
 
 
 
 
+# TO DO
 
+## Importing data as a csv
 
-# TO DO 
+<!-- tell that we can also import from other format but bof-->
 
-## Different ways of getting data
+## Good practice when typing data in spreadsheet
 
-### Creating a dataframe
+*You can use Excel, Google Sheets, LibreOffice Calc...*
 
-<!-- Mélaine 81 -->
+-   One dataset (one table) per spreadsheet
+
+-   Give clear headers (column names)
+
+-   No empty row or column
+
+-   No merged cells
+
+## Good practice when typing data in spreadsheet
+
+-   Leave empty cells for missing values (or write "NA")
+
+-   Avoid special characters
+
+-   Use . for the decimal separator
+
+-   Use YYYY-MM--DD for date *(handling dates in Excel is* 😭🤬*)*
+
+-   Export as a CSV (Comma-Separated Values), which uses comma [,]{style="color:indianred;"} as delimiter of column
+
+# TO DO
 
 ### Importing data from a csv or other...
 
+```{=html}
 <!-- Mélaine 94
 https://larmarange.github.io/analyse-R/import-de-donnees.html
 
@@ -667,21 +734,11 @@ https://biodiversitydata.github.io/chapters/files-formats.html
 
 
 -->
-
-### Voir si je peux parler de data download from gbif
-
-https://biodiversitydata.github.io/chapters/data-acquisition.html using download.file()
-
-There is a package called rgbif https://biodiversitydata.github.io/chapters/data-cleaning.html
-
-
-### Checking data when importing them
-
-<!-- Mélaine 100-->
-
+```
 
 ## Saving data
 
+```{=html}
 <!-- 
 save et write
 
@@ -691,6 +748,17 @@ https://larmarange.github.io/analyse-R/export-de-donnees.html
 
 
 -->
+```
+
+### Voir si je peux parler de data download from gbif
+
+https://biodiversitydata.github.io/chapters/data-acquisition.html using download.file()
+
+There is a package called rgbif https://biodiversitydata.github.io/chapters/data-cleaning.html
+
+### Checking data when importing them
+
+<!-- Mélaine 100-->
 
 ## Good practive when working with data
 
@@ -704,27 +772,33 @@ https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-ma
 
 ### Cleaning data / checking data
 
+```{=html}
 <!-- Faire un data set à problème 
-•	Un sep ; qui n’a pas la bonne taille 
-•	Un site qui est écrit un fois avec une majuscule et une fois sans => 2 sites
-•	Un nombre avec une virgule à la place du point => caractère 
-•	…
+•   Un sep ; qui n’a pas la bonne taille 
+•   Un site qui est écrit un fois avec une majuscule et une fois sans => 2 sites
+•   Un nombre avec une virgule à la place du point => caractère 
+•   …
  ICI ou pour les exercices??? (ça peut-être pas mal de leur faire trouver les problèmes avec un dataset) ou à mettre plus haut?
  
  -->
+```
 
+```{=html}
 <!-- voir si j'ai le temps d'explorer ça: probablement pas....
 
 https://larmarange.github.io/analyse-R/recodage.html#nettoyage
 
 checklist : https://biodiversitydata.github.io/chapters/data-cleaning.html
 -->
+```
 
 ### FAIR principles
 
+```{=html}
 <!-- https://biodiversitydata.github.io/chapters/introduction.html
 https://biodiversitydata.github.io/chapters/protocols-methods.html
 -->
+```
 
 FAIR (Findable, Accessible, Interoperable and Reusable data principles; https://force11.org/info/the-­fair-­data-­principles/
 
@@ -732,29 +806,25 @@ FAIR (Findable, Accessible, Interoperable and Reusable data principles; https://
 
 <!-- https://biodiversitydata.github.io/chapters/introduction.html -->
 
-* Metadata, sometimes referred to as data about data or a data dictionary,
-are a “centralized repository of information about data such as meaning,
-relationships to other data, origin, usage, and format” (IBM Dictionary
-of Computing, 10th edition, 1993). In Jenkins et al 2023
+-   Metadata, sometimes referred to as data about data or a data dictionary, are a “centralized repository of information about data such as meaning, relationships to other data, origin, usage, and format” (IBM Dictionary of Computing, 10th edition, 1993). In Jenkins et al 2023
 
 <!-- have them work on the project they created last time-->
 
 ## cycle de vie des données ????
 
-https://biodiversitydata.github.io/chapters/introduction.html
-Cours Gaëlle
-guide BES
-
+https://biodiversitydata.github.io/chapters/introduction.html Cours Gaëlle guide BES
 
 ## What about open science?
 
 sharing of data products, code, and metadata
 
-## Where to find enviro data ? 
+## Where to find enviro data ?
 
+```{=html}
 <!--https://biodiversitydata.github.io/chapters/env-databases.html
 probablement just leur donner le lien comme ressource
 -->
+```
 
 ## Acknowledgments
 
@@ -762,14 +832,14 @@ Cours Juba
 
 ## Ressources
 
+```{=html}
 <!-- check videos here
 https://www.youtube.com/c/HowToR4U/videos
 -->
+```
 
 ## Ressources
 
 To go further on data management
 
 https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf
-
-
