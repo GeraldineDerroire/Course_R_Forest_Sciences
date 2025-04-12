@@ -135,7 +135,7 @@ dim(BCI.env)
 
 ## Structure of a data frame
 
-The function [names]{style="color:indianred;"} gives the columns names, which are the name of the variables.
+The function [names]{style="color:indianred;"} gives the columns names, which are the names of the variables.
 
 ```{r}
 names(BCI.env)
@@ -242,9 +242,11 @@ BCI.env[5,"Elevation"]
 
 [We can access several observations and/or several variables at the same time:]{.fragment}
 
+::: fragment
 ```{r}
 BCI.env[5:8, c("Precipitation", "Elevation")]
 ```
+:::
 
 [*5:8 means from 5 to 8*]{.fragment}
 
@@ -497,7 +499,7 @@ hist(BCI.env$EnvHet)
 I don't show here how to make this graph pretty, we will do it with ggplot in a future session
 :::
 
-## Descriptive statistics on a qualitative variable
+## Descriptive analysis on a qualitative variable
 
 Which are the qualitative variables in our data set?
 
@@ -507,7 +509,7 @@ str(BCI.env)
 [Age.cat, Geology, Habitat, Stream (and Site)]{.fragment}
 
 
-## Descriptive statistics on a qualitative variable
+## Descriptive analysis on a qualitative variable
 
 Let's consider the variable habitat:
 
@@ -524,7 +526,7 @@ table(BCI.env$Habitat, useNA = "always")
 ```
 :::
 
-## Descriptive statistics on a qualitative variable
+## Descriptive analysis on a qualitative variable
 
 We can also use the function [freq]{style="color:indianred;"} from the package [questionr]{style="color:indianred;"}:
 
@@ -538,63 +540,110 @@ questionr::freq(BCI.env$Habitat,
 :::
 
 ::: {.column width="25%"}
-[💡 *using the name of the package before the name of the function with :: (here questionr::freq) allows not to load the whole package*]{style="font-size: 23px"}
+[💡 *using the name of the package before the name of the function with :: (here questionr::freq) allows not to load the whole package*]{style="font-size: 20px"}
 :::
 :::::
 
-* [*n* is the number of values per category]{style="font-size: 30px"}
+* [*n* is the number of observations per category]{style="font-size: 30px"}
  
 * [*%* is the percentage]{style="font-size: 30px"}
  
-* [*val%* is the percentage calculated on valid values (excluding *NA*)]{style="font-size: 300px"}
+* [*val%* is the percentage calculated on valid values (excluding *NA*)]{style="font-size: 30px"}
 
 ::: notes
 In our case, there is no NA so % and val% are the same
 :::
 
-<!-- carry on with the graphical representation in juba 3.3.2--> 
+## Graphical representation of a qualitative variable - the barplot
 
+::::: columns
+::: {.column width="30%"}
+We can use a barplot to represent the number of observations per category, with the function [barplot]{style="color:indianred;"}: 
+:::
 
-
-
-#
-
-##
-
-
-##
-
-
-
-
-## Function summary on the whole data frame
-
-<!-- and function describe ? bof, it requires another package called questionr ... -->
-
-<!-- parler de la fonction skim du package skimr ? elle a l'air top: https://larmarange.github.io/analyse-R/visualiser-ses-donnees.html#skim-skimr
-
-<!-- for the whole dataframe or for just a column-->
-
-<!-- for describe, cf https://larmarange.github.io/analyse-R/premier-travail-avec-les-donnees.html#tableaux-de-donn%C3%A9es la fonction str -->
-
-# Bivariate descriptive statistics 
-
-<!-- See Juba 4
-see how far I go ? probably not testing correlation
--->
+::: {.column width="70%"}
+```{r}
+tab <- table(BCI.env$Habitat)
+tab <- sort(tab) # order in ascending order
+barplot(tab)
+```
+:::
+:::::
 
 ::: notes
-Used to describe the relationship between two variables
+Here we have to proceed in two steps:
+first create the table, and then make the barplot
+and we can add a step to order the categories
+:::
+
+## Graphical representation of a qualitative variable - the Cleveland plot
+
+::::: columns
+::: {.column width="25%"}
+We can also make a Cleveland plot using the function [dotchart]{style="color:indianred;"}:
+:::
+
+::: {.column width="75%"}
+```{r}
+dotchart(as.vector(tab), # convert the table to a vector
+         labels = names(tab)) # specify the labels
+```
+:::
+:::::
+
+
+# Overview of the whole data frame
+
+## The function summary
+
+We have already used the function [summary]{style="color:indianred;"} on a vector. 
+We can also use it on a whole data frame:
+
+::: {.scroll-output style="max-height: 300px; overflow-y: auto;"}
+```{r}
+summary(BCI.env)
+```
+:::
+
+[We get the summary statistics for quantitative variables, and the number of observations per categories for categorical ones.]{.fragment}
+
+::: notes
+Using **str** and **summary** to explore a new data set is a good practice.
 :::
 
 ## To go further
 
-<!-- library  DataExplorer => function create report => ça a l'air top !!!! 
-https://larmarange.github.io/analyse-R/visualiser-ses-donnees.html#create_report-dataexplorer 
+Some packages propose functions to create automatic reports to explore a data frame.
 
-et aussi package dataMaid (aussi dans cour larmarange)
+* The package [dataMaid]{style="color:indianred;"}:
 
--->
+::: fragment
+```{r, eval=FALSE}
+dataMaid::makeCodebook(BCI.env)
+```
+:::
+
+[See result [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/codebook_BCI.env.pdf){preview-link="false"}]{.fragment}
+
+* The package [DataExplorer]{style="color:indianred;"}:
+
+::: fragment
+```{r, eval=FALSE}
+DataExplorer::create_report(BCI.env)
+```
+:::
+
+[See result [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/report.html){preview-link="false"}]{.fragment}
+
+::: notes
+don't do it now... don't have the packages installed
+:::
+
+
+
+
+
+
 
 # TO DO 
 

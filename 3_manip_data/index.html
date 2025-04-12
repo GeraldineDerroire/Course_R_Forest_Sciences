@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-11">
+  <meta name="dcterms.date" content="2025-04-12">
   <title>Working with data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-11</p>
+  <p class="date">2025-04-12</p>
 </section>
 <section id="lets-work-on-barro-colorado-island-data" class="slide level2">
 <h2>Let’s work on Barro Colorado Island data</h2>
@@ -643,7 +643,7 @@ Géraldine Derroire
 </section>
 <section id="structure-of-a-data-frame-1" class="slide level2">
 <h2>Structure of a data frame</h2>
-<p>The function <span style="color:indianred;">names</span> gives the columns names, which are the name of the variables.</p>
+<p>The function <span style="color:indianred;">names</span> gives the columns names, which are the names of the variables.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">names</span>(BCI.env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -818,6 +818,7 @@ Géraldine Derroire
 </div>
 </div>
 <p><span class="fragment">We can access several observations and/or several variables at the same time:</span></p>
+<div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>BCI.env[<span class="dv">5</span><span class="sc">:</span><span class="dv">8</span>, <span class="fu">c</span>(<span class="st">"Precipitation"</span>, <span class="st">"Elevation"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -828,6 +829,7 @@ Géraldine Derroire
 6          2530       120
 7          2530       120
 8          2530       120</code></pre>
+</div>
 </div>
 </div>
 <p><span class="fragment"><em>5:8 means from 5 to 8</em></span></p>
@@ -1246,8 +1248,8 @@ TRUE </code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="descriptive-statistics-on-a-qualitative-variable" class="slide level2">
-<h2>Descriptive statistics on a qualitative variable</h2>
+<section id="descriptive-analysis-on-a-qualitative-variable" class="slide level2">
+<h2>Descriptive analysis on a qualitative variable</h2>
 <p>Which are the qualitative variables in our data set?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a><span class="fu">str</span>(BCI.env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1270,8 +1272,8 @@ TRUE </code></pre>
 </div>
 <p><span class="fragment">Age.cat, Geology, Habitat, Stream (and Site)</span></p>
 </section>
-<section id="descriptive-statistics-on-a-qualitative-variable-1" class="slide level2">
-<h2>Descriptive statistics on a qualitative variable</h2>
+<section id="descriptive-analysis-on-a-qualitative-variable-1" class="slide level2">
+<h2>Descriptive analysis on a qualitative variable</h2>
 <p>Let’s consider the variable habitat:</p>
 <p>We can use the function <span style="color:indianred;">table</span> to count the number of occurrences in each category (each levels of the factor);</p>
 <div class="cell">
@@ -1298,8 +1300,8 @@ TRUE </code></pre>
 </div>
 </div>
 </section>
-<section id="descriptive-statistics-on-a-qualitative-variable-2" class="slide level2">
-<h2>Descriptive statistics on a qualitative variable</h2>
+<section id="descriptive-analysis-on-a-qualitative-variable-2" class="slide level2">
+<h2>Descriptive analysis on a qualitative variable</h2>
 <p>We can also use the function <span style="color:indianred;">freq</span> from the package <span style="color:indianred;">questionr</span>:</p>
 <div class="columns">
 <div class="column" style="width:75%;">
@@ -1320,12 +1322,12 @@ Total    50 100  100</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:25%;">
-<p><span style="font-size: 23px">💡 <em>using the name of the package before the name of the function with :: (here questionr::freq) allows not to load the whole package</em></span></p>
+<p><span style="font-size: 20px">💡 <em>using the name of the package before the name of the function with :: (here questionr::freq) allows not to load the whole package</em></span></p>
 </div></div>
 <ul>
-<li class="fragment"><p><span style="font-size: 30px"><em>n</em> is the number of values per category</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px"><em>n</em> is the number of observations per category</span></p></li>
 <li class="fragment"><p><span style="font-size: 30px"><em>%</em> is the percentage</span></p></li>
-<li class="fragment"><p><span style="font-size: 300px"><em>val%</em> is the percentage calculated on valid values (excluding <em>NA</em>)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px"><em>val%</em> is the percentage calculated on valid values (excluding <em>NA</em>)</span></p></li>
 </ul>
 <aside class="notes">
 <p>In our case, there is no NA so % and val% are the same</p>
@@ -1340,35 +1342,97 @@ Total    50 100  100</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<!-- carry on with the graphical representation in juba 3.3.2-->
-</section></section>
-<section>
-<section id="section" class="title-slide slide level1 center">
-<h1></h1>
-
 </section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-</section>
-<section id="section-2" class="slide level2">
-<h2></h2>
-</section>
-<section id="function-summary-on-the-whole-data-frame" class="slide level2">
-<h2>Function summary on the whole data frame</h2>
-<!-- and function describe ? bof, it requires another package called questionr ... -->
-<!-- parler de la fonction skim du package skimr ? elle a l'air top: https://larmarange.github.io/analyse-R/visualiser-ses-donnees.html#skim-skimr
-
-<!-- for the whole dataframe or for just a column-->
-<!-- for describe, cf https://larmarange.github.io/analyse-R/premier-travail-avec-les-donnees.html#tableaux-de-donn%C3%A9es la fonction str -->
-</section></section>
-<section>
-<section id="bivariate-descriptive-statistics" class="title-slide slide level1 center">
-<h1>Bivariate descriptive statistics</h1>
-<!-- See Juba 4
-see how far I go ? probably not testing correlation
--->
+<section id="graphical-representation-of-a-qualitative-variable---the-barplot" class="slide level2">
+<h2>Graphical representation of a qualitative variable - the barplot</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p>We can use a barplot to represent the number of observations per category, with the function <span style="color:indianred;">barplot</span>:</p>
+</div><div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a>tab <span class="ot">&lt;-</span> <span class="fu">table</span>(BCI.env<span class="sc">$</span>Habitat)</span>
+<span id="cb84-2"><a href=""></a>tab <span class="ot">&lt;-</span> <span class="fu">sort</span>(tab) <span class="co"># order in ascending order</span></span>
+<span id="cb84-3"><a href=""></a><span class="fu">barplot</span>(tab)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-45-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
 <aside class="notes">
-<p>Used to describe the relationship between two variables</p>
+<p>Here we have to proceed in two steps: first create the table, and then make the barplot and we can add a step to order the categories</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="graphical-representation-of-a-qualitative-variable---the-cleveland-plot" class="slide level2">
+<h2>Graphical representation of a qualitative variable - the Cleveland plot</h2>
+<div class="columns">
+<div class="column" style="width:25%;">
+<p>We can also make a Cleveland plot using the function <span style="color:indianred;">dotchart</span>:</p>
+</div><div class="column" style="width:75%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href=""></a><span class="fu">dotchart</span>(<span class="fu">as.vector</span>(tab), <span class="co"># convert the table to a vector</span></span>
+<span id="cb85-2"><a href=""></a>         <span class="at">labels =</span> <span class="fu">names</span>(tab)) <span class="co"># specify the labels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-46-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section></section>
+<section>
+<section id="overview-of-the-whole-data-frame" class="title-slide slide level1 center">
+<h1>Overview of the whole data frame</h1>
+
+</section>
+<section id="the-function-summary-1" class="slide level2">
+<h2>The function summary</h2>
+<p>We have already used the function <span style="color:indianred;">summary</span> on a vector. We can also use it on a whole data frame:</p>
+<div class="scroll-output" style="max-height: 300px; overflow-y: auto;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href=""></a><span class="fu">summary</span>(BCI.env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     UTM.EW           UTM.NS        Precipitation    Elevation   Age.cat
+ Min.   :625754   Min.   :1011569   Min.   :2530   Min.   :120   c2: 1  
+ 1st Qu.:625954   1st Qu.:1011669   1st Qu.:2530   1st Qu.:120   c3:49  
+ Median :626204   Median :1011769   Median :2530   Median :120          
+ Mean   :626204   Mean   :1011769   Mean   :2530   Mean   :120          
+ 3rd Qu.:626454   3rd Qu.:1011869   3rd Qu.:2530   3rd Qu.:120          
+ Max.   :626654   Max.   :1011969   Max.   :2530   Max.   :120          
+ Geology     Habitat   Stream       EnvHet        Site       Precip_m   
+ Tb:50   OldHigh : 8   No :43   Min.   :0.0000   BCI:50   Min.   :2.53  
+         OldLow  :26   Yes: 7   1st Qu.:0.0768            1st Qu.:2.53  
+         OldSlope:12            Median :0.3536            Median :2.53  
+         Swamp   : 2            Mean   :0.3107            Mean   :2.53  
+         Young   : 2            3rd Qu.:0.4848            3rd Qu.:2.53  
+                                Max.   :0.7264            Max.   :2.53  </code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">We get the summary statistics for quantitative variables, and the number of observations per categories for categorical ones.</span></p>
+<aside class="notes">
+<p>Using <strong>str</strong> and <strong>summary</strong> to explore a new data set is a good practice.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1383,12 +1447,44 @@ see how far I go ? probably not testing correlation
 </section>
 <section id="to-go-further" class="slide level2">
 <h2>To go further</h2>
-<!-- library  DataExplorer => function create report => ça a l'air top !!!! 
-https://larmarange.github.io/analyse-R/visualiser-ses-donnees.html#create_report-dataexplorer 
+<p>Some packages propose functions to create automatic reports to explore a data frame.</p>
+<ul>
+<li class="fragment">The package <span style="color:indianred;">dataMaid</span>:</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a>dataMaid<span class="sc">::</span><span class="fu">makeCodebook</span>(BCI.env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 
-et aussi package dataMaid (aussi dans cour larmarange)
+</div>
+</div>
+<p><span class="fragment">See result <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/codebook_BCI.env.pdf" data-preview-link="false">Here</a></span></p>
+<ul>
+<li class="fragment">The package <span style="color:indianred;">DataExplorer</span>:</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href=""></a>DataExplorer<span class="sc">::</span><span class="fu">create_report</span>(BCI.env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 
--->
+</div>
+</div>
+<p><span class="fragment">See result <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/report.html" data-preview-link="false">Here</a></span></p>
+<aside class="notes">
+<p>don’t do it now… don’t have the packages installed</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="to-do" class="title-slide slide level1 center">

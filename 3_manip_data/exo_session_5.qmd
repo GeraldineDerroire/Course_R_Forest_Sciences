@@ -1,0 +1,8 @@
+---
+title: "Exercices on session *Working with data*"
+format:
+  pdf
+execute:
+  echo: false  
+---
+
