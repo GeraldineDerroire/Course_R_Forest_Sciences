@@ -185,6 +185,7 @@ table(dt_pb$plot)
 # alternative not seen in the class
 length(unique(dt_pb$plot)) == dim(dt_pb)[1]
 ```
+# Packages
 
-
+Install the following packages from CRAN:
 
