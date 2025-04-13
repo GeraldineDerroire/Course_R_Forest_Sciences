@@ -16,15 +16,14 @@ The course material has been created using quarto and R version 4.4.3.
 - [Set up the working environment](https://geraldinederroire.github.io/Course_R_Forest_Sciences/0_installing_enviro)
 - [Principles of reproductible science](https://geraldinederroire.github.io/Course_R_Forest_Sciences/1_reproducible_science)
 - [Getting started with R](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started)
-      - [Exercices on session 2/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started/exo_session_3.pdf)
-      - [Exercices on session 3/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started/exo_session_4.pdf)
+   * [Exercices on session 2/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started/exo_session_3.pdf)
+   * [Exercices on session 3/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started/exo_session_4.pdf)
 - [Working with data](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data)
-      - [Exercices](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/exo_session_5.pdf)
+   * [Exercices](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/exo_session_5.pdf)
 
 <!--
 
 
 
-- [Working with data](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data)
 
 -->
