@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-12">
+  <meta name="dcterms.date" content="2025-04-13">
   <title>Working with data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-12</p>
+  <p class="date">2025-04-13</p>
 </section>
 <section id="lets-work-on-barro-colorado-island-data" class="slide level2">
 <h2>Let’s work on Barro Colorado Island data</h2>
@@ -434,7 +434,7 @@ Géraldine Derroire
 <pre><code>This is vegan 2.6-8</code></pre>
 </div>
 </div>
-<p><span class="fragment">We use the command</span><span style="color:indianred;">data</span> to open the data:</p>
+<p><span class="fragment">We use the command <span style="color:indianred;">data</span> to open the data:</span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">data</span>(<span class="st">"BCI.env"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -586,7 +586,7 @@ Géraldine Derroire
 <div class="cell fragment">
 
 </div>
-<p><span class="fragment">or to click on the table icon in the environment: <img data-src="view.png" style="width:80.0%"></span></p>
+<p><span class="fragment">or by clicking on the table icon in the environment: <img data-src="view.png" style="width:80.0%"></span></p>
 </section>
 <section id="data-frame" class="slide level2">
 <h2>Data frame</h2>
@@ -629,7 +629,7 @@ Géraldine Derroire
 </div>
 </div>
 <p><span class="fragment">BCI.env contains 50 observations and 9 variables, as indicated in the environment.</span></p>
-<p><span class="fragment">We can also use the function</span><span style="color:indianred;">dim</span> to get both dimention (1st the number of rows, second the number of columns).</p>
+<p><span class="fragment">We can also use the function <span style="color:indianred;">dim</span> to get both dimensions (1st the number of rows, second the number of columns).</span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">dim</span>(BCI.env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -720,7 +720,7 @@ Géraldine Derroire
 [46] 2530 2530 2530 2530 2530</code></pre>
 </div>
 </div>
-<p><span class="fragment">To see only the first or last values, we use the functions</span><span style="color:indianred;">head</span> or <span style="color:indianred;">tail</span>. We can specify the number of observations to show in the second argument:</p>
+<p><span class="fragment">To see only the first or last values, we use the functions <span style="color:indianred;">head</span> or <span style="color:indianred;">tail</span>. We can specify the number of observations to show in the second argument:</span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">head</span>(BCI.env<span class="sc">$</span>Precipitation)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -858,8 +858,8 @@ Géraldine Derroire
 <div class="cell fragment">
 
 </div>
-<p><span style="font-size: 23px">The function</span><span style="color:indianred;">rep</span> allows to repeat the same value (here “BCI”) a certain number of times (here 50).</p>
-<p><span class="fragment"><strong>NB:</strong> the dimensions and structure of the data frame have changed:</span></p>
+<p><span style="font-size: 23px">The function <span style="color:indianred;">rep</span> allows to repeat the same value (here “BCI”) a certain number of times (here 50).</span></p>
+<p><span class="fragment"><strong>NB:</strong> the dimensions of the data frame have changed:</span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">dim</span>(BCI.env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -892,7 +892,7 @@ Géraldine Derroire
  $ Site         : chr  "BCI" "BCI" "BCI" "BCI" ...</code></pre>
 </div>
 </div>
-<p><span class="fragment">We can transform the variable <em>site</em> to a factor using the function</span><span style="color:indianred;">as.factor</span></p>
+<p><span class="fragment">We can transform the variable <em>site</em> to a factor using the function <span style="color:indianred;">as.factor</span></span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a>BCI.env<span class="sc">$</span>Site <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(BCI.env<span class="sc">$</span>Site)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1071,7 +1071,7 @@ Géraldine Derroire
 <pre><code>[1] 0.31072</code></pre>
 </div>
 </div>
-<p><span class="fragment">We can get the median using the function</span><span style="color:indianred;">median</span></p>
+<p><span class="fragment">We can get the median using the function <span style="color:indianred;">median</span></span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a><span class="fu">median</span>(BCI.env<span class="sc">$</span>EnvHet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1096,7 +1096,7 @@ Géraldine Derroire
 <pre><code>[1] 0.7264</code></pre>
 </div>
 </div>
-<p><span class="fragment">We can also get the <strong>variance</strong> and the <strong>standard deviation</strong> (which is the square root of the variance), using the functions</span><span style="color:indianred;">var</span> and <span style="color:indianred;">sd</span></p>
+<p><span class="fragment">We can also get the <strong>variance</strong> and the <strong>standard deviation</strong> (which is the square root of the variance), using the functions <span style="color:indianred;">var</span> and <span style="color:indianred;">sd</span></span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="fu">var</span>(BCI.env<span class="sc">$</span>EnvHet)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1588,15 +1588,70 @@ Total    50 100  100</code></pre>
 </div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="to-do" class="title-slide slide level1 center">
-<h1>TO DO</h1>
-
 </section>
-<section id="importing-data-as-a-csv" class="slide level2">
-<h2>Importing data as a csv</h2>
-<!-- tell that we can also import from other format but bof-->
+<section id="importing-data-from-a-text-file" class="slide level2">
+<h2>Importing data from a text file</h2>
+<p>The most common way to exchange data is through a text file in which variables are organised in columns.</p>
+<p>Before importing data, it is important to know the structure of the data:</p>
+<ul>
+<li class="fragment"><p>Are there headers, meaning that the first line contains the names of the columns?</p></li>
+<li class="fragment"><p>How are the variables separated? This can be tabulations, or commas (<span style="color:indianred;">,</span>), or semicolon (<span style="color:indianred;">;</span>)</p></li>
+<li class="fragment"><p>What is the separator of decimals?</p></li>
+</ul>
+<aside class="notes">
+<p>in practice a data file should contain a header, otherwise we don’t know the variable names</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="importing-data-from-a-text-file-1" class="slide level2">
+<h2>Importing data from a text file</h2>
+<p>There are many types of text files.</p>
+<p>The recommended one for exchanging data is the format <span style="color:indianred;">CSV</span>.</p>
+<p>CSV means <em>Comma-Separated Values</em>: CSV files use comma (<span style="color:indianred;">,</span>) as delimiter of columns.</p>
+<p>⚠️ depending of the software and the configuration of your computer, CSV files can use the <span style="color:indianred;">;</span> by default.</p>
+</section>
+<section id="importing-data-from-a-text-file-2" class="slide level2">
+<h2>Importing data from a text file</h2>
+<p>We can use RStudio interface to import data:</p>
+<ul>
+<li class="fragment"><p><em>File/Import Dataset</em>, <em>From Text (base)…</em></p></li>
+<li class="fragment"><p>or in the <em>Environment</em>, <em>From Text (base)…</em></p></li>
+</ul>
+<div class="fragment">
+<p><img data-src="import.png"></p>
+</div>
+</section>
+<section id="importing-data-from-a-text-file-3" class="slide level2">
+<h2>Importing data from a text file</h2>
+<p>We can then set the correct structure for the data:</p>
+
+<img data-src="import2.png" class="r-stretch"></section>
+<section id="importing-data-from-a-text-file-4" class="slide level2">
+<h2>Importing data from a text file</h2>
+<p>We can alternatively use the function <span style="color:indianred;">read.csv</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href=""></a>BCI.env <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"data/BCI_env.csv"</span>, <span class="co"># the file name and its relative path</span></span>
+<span id="cb96-2"><a href=""></a>                    <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># the dathave headers (column names)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment">By default, the the separator of columns is the <span style="color:indianred;">,</span> and the separator of decimal the <span style="color:indianred;">.</span></span></p>
+<p><span class="fragment">⚠️ Make sure you put the data in an object (otherwise, they are just displayed).</span></p>
+</section>
+<section id="importing-data-from-other-formats" class="slide level2">
+<h2>Importing data from other formats</h2>
+<p>You can also import data from a statistics software (SPSS, SAS, Stata…) or from Excel.</p>
+<p>But using a universal data format (CSV) is preferred.</p>
 </section>
 <section id="good-practice-when-typing-data-in-spreadsheet" class="slide level2">
 <h2>Good practice when typing data in spreadsheet</h2>
@@ -1606,7 +1661,21 @@ Total    50 100  100</code></pre>
 <li class="fragment"><p>Give clear headers (column names)</p></li>
 <li class="fragment"><p>No empty row or column</p></li>
 <li class="fragment"><p>No merged cells</p></li>
+<li class="fragment"><p>Use a unique identifier (ID) for each observation</p></li>
 </ul>
+<aside class="notes">
+<p>unique identifier: unique number for each observation</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="good-practice-when-typing-data-in-spreadsheet-1" class="slide level2">
 <h2>Good practice when typing data in spreadsheet</h2>
@@ -1614,106 +1683,155 @@ Total    50 100  100</code></pre>
 <li class="fragment"><p>Leave empty cells for missing values (or write “NA”)</p></li>
 <li class="fragment"><p>Avoid special characters</p></li>
 <li class="fragment"><p>Use . for the decimal separator</p></li>
-<li class="fragment"><p>Use YYYY-MM–DD for date <em>(handling dates in Excel is</em> 😭🤬<em>)</em></p></li>
+<li class="fragment"><p>Use YYYY-MM–DD for dates <em>(handling dates in Excel</em> 😭🤬<em>)</em></p></li>
 <li class="fragment"><p>Export as a CSV (Comma-Separated Values), which uses comma <span style="color:indianred;">,</span> as delimiter of column</p></li>
 </ul>
+</section>
+<section id="writing-data-to-a-csv" class="slide level2">
+<h2>Writing data to a csv</h2>
+<p>We can save a data frame to a csv file using the function <span style="color:indianred;">write.csv</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href=""></a><span class="fu">write.csv</span>(<span class="at">x =</span> BCI.env, <span class="co"># the object to be written</span></span>
+<span id="cb97-2"><a href=""></a>          <span class="at">file =</span> <span class="st">"data/BCI_env.csv"</span>, <span class="co"># the file to write in (and its relative path)</span></span>
+<span id="cb97-3"><a href=""></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># no row names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment">By default, the the separator of columns is the <span style="color:indianred;">,</span> and the separator of decimal the <span style="color:indianred;">.</span></span></p>
+</section>
+<section id="writing-data-to-a-csv-1" class="slide level2">
+<h2>Writing data to a csv</h2>
+<p>We can use different separators, <strong>but this is not recommended</strong>.</p>
+<p>If we use different separators with the function <span style="color:indianred;">write.csv</span>, it ignores them:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href=""></a><span class="fu">write.csv</span>(<span class="at">x =</span> BCI.env, <span class="co"># the object to be written</span></span>
+<span id="cb98-2"><a href=""></a>          <span class="at">file =</span> <span class="st">"data/BCI.env_semicol.csv"</span>, <span class="co"># the file to write in (and its relative path)</span></span>
+<span id="cb98-3"><a href=""></a>          <span class="at">sep=</span><span class="st">";"</span>, <span class="co"># the separator of columns</span></span>
+<span id="cb98-4"><a href=""></a>          <span class="at">dec =</span> <span class="st">","</span>, <span class="co"># the separator of decimals</span></span>
+<span id="cb98-5"><a href=""></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># no row names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in write.csv(x = BCI.env, file = "data/BCI.env_semicol.csv", sep = ";",
+: attempt to set 'sep' ignored</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in write.csv(x = BCI.env, file = "data/BCI.env_semicol.csv", sep = ";",
+: attempt to set 'dec' ignored</code></pre>
+</div>
+</div>
+</section>
+<section id="writing-data-to-a-csv-2" class="slide level2">
+<h2>Writing data to a csv</h2>
+<p>If we really want to change the separators, we need the function <span style="color:indianred;">write.csv2</span>, which uses a <span style="color:indianred;">;</span> to separate the columns and a <span style="color:indianred;">,</span> for the decimals:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href=""></a><span class="fu">write.csv2</span>(<span class="at">x =</span> BCI.env, <span class="co"># the object to be written</span></span>
+<span id="cb101-2"><a href=""></a>          <span class="at">file =</span> <span class="st">"data/BCI.env_semicol.csv"</span>, <span class="co"># the file to write in (and its relative path)</span></span>
+<span id="cb101-3"><a href=""></a>           <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># no row names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
 </section></section>
 <section>
-<section id="to-do-1" class="title-slide slide level1 center">
-<h1>TO DO</h1>
+<section id="good-practive-when-working-with-data" class="title-slide slide level1 center">
+<h1>Good practive when working with data</h1>
 
 </section>
-<h3 id="importing-data-from-a-csv-or-other">Importing data from a csv or other…</h3>
-<!-- Mélaine 94
-https://larmarange.github.io/analyse-R/import-de-donnees.html
-
-nb: on peut importer des données depuis excel mais ... https://larmarange.github.io/analyse-R/import-de-donnees.html#excel
-
-voir si jeu veux parler de l'intérogation des DB à distance avec le dplyer https://larmarange.github.io/analyse-R/import-de-donnees.html#utilisation-de-dplyr-et-dbplyr 
-=> plutôt non
-
-https://biodiversitydata.github.io/chapters/files-formats.html
-
-
--->
-<section id="saving-data" class="slide level2">
-<h2>Saving data</h2>
-<!-- 
-save et write
-
-https://larmarange.github.io/analyse-R/import-de-donnees.html#sauver-ses-donn%C3%A9es 
-
-https://larmarange.github.io/analyse-R/export-de-donnees.html
-
-
--->
-<h3 id="voir-si-je-peux-parler-de-data-download-from-gbif">Voir si je peux parler de data download from gbif</h3>
-<p>https://biodiversitydata.github.io/chapters/data-acquisition.html using download.file()</p>
-<p>There is a package called rgbif https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
-<h3 id="checking-data-when-importing-them">Checking data when importing them</h3>
-<!-- Mélaine 100-->
-</section>
-<section id="good-practive-when-working-with-data" class="slide level2">
-<h2>Good practive when working with data</h2>
-<h3 id="raw-vs-derived-data">raw vs derived data</h3>
-<!--https://biodiversitydata.github.io/chapters/data-cleaning.html-->
-<h3 id="data-storage-backup">Data storage / backup</h3>
-<p>https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf</p>
-<h3 id="cleaning-data-checking-data">Cleaning data / checking data</h3>
-<!-- Faire un data set à problème 
-•   Un sep ; qui n’a pas la bonne taille 
-•   Un site qui est écrit un fois avec une majuscule et une fois sans => 2 sites
-•   Un nombre avec une virgule à la place du point => caractère 
-•   …
- ICI ou pour les exercices??? (ça peut-être pas mal de leur faire trouver les problèmes avec un dataset) ou à mettre plus haut?
- 
- -->
-<!-- voir si j'ai le temps d'explorer ça: probablement pas....
-
-https://larmarange.github.io/analyse-R/recodage.html#nettoyage
-
-checklist : https://biodiversitydata.github.io/chapters/data-cleaning.html
--->
-<h3 id="fair-principles">FAIR principles</h3>
-<!-- https://biodiversitydata.github.io/chapters/introduction.html
-https://biodiversitydata.github.io/chapters/protocols-methods.html
--->
-<p>FAIR (Findable, Accessible, Interoperable and Reusable data principles; https://force11.org/info/the-­fair-­data-­principles/</p>
-<h3 id="metadata">Metadata</h3>
-<!-- https://biodiversitydata.github.io/chapters/introduction.html -->
+<section id="raw-versus-derived-data" class="slide level2">
+<h2>Raw <em>versus</em> derived data</h2>
+<p>What are the raw data?</p>
+<p><span class="fragment">The <em>raw data</em> are the data in the form they were originally generated:</span></p>
 <ul>
-<li class="fragment">Metadata, sometimes referred to as data about data or a data dictionary, are a “centralized repository of information about data such as meaning, relationships to other data, origin, usage, and format” (IBM Dictionary of Computing, 10th edition, 1993). In Jenkins et al 2023</li>
+<li class="fragment"><p>by an sensor, instrument…</p></li>
+<li class="fragment"><p>by the tablet/computer used in the field</p></li>
+<li class="fragment"><p>in paper field sheets (in that case, also save the spreadsheet in which data are first recorded)</p></li>
+<li class="fragment"><p>…</p></li>
 </ul>
-<!-- have them work on the project they created last time-->
 </section>
-<section id="cycle-de-vie-des-données" class="slide level2">
-<h2>cycle de vie des données ????</h2>
-<p>https://biodiversitydata.github.io/chapters/introduction.html Cours Gaëlle guide BES</p>
+<section id="raw-versus-derived-data-1" class="slide level2">
+<h2>Raw <em>versus</em> derived data</h2>
+<p>Never modify the raw data.</p>
+<p><span class="fragment">⚠️ <strong>Any data that has been modified/corrected is no longer raw data, it is derived data.</strong></span></p>
+<p><span class="fragment">🔒 Put the raw data in a read only mode.</span></p>
 </section>
-<section id="what-about-open-science" class="slide level2">
-<h2>What about open science?</h2>
-<p>sharing of data products, code, and metadata</p>
+<section id="backup-your-data" class="slide level2">
+<h2>Backup your data</h2>
+<p>⚠️️ The raw data should be saved in <strong>more than one location</strong>!</p>
+
+<img data-src="bad_luck.png" class="r-stretch"></section>
+<section id="document-your-data" class="slide level2">
+<h2>Document your data</h2>
+<ul>
+<li class="fragment"><p>Use informative variable and file names</p></li>
+<li class="fragment"><p>Write detailed metadata (protocol, units of measurement, date, people…)</p></li>
+</ul>
 </section>
-<section id="where-to-find-enviro-data" class="slide level2">
-<h2>Where to find enviro data ?</h2>
-<!--https://biodiversitydata.github.io/chapters/env-databases.html
-probablement just leur donner le lien comme ressource
--->
+<section id="check-data-when-importing-them" class="slide level2">
+<h2>Check data when importing them</h2>
+<p>Make sure the data are correctly read by checking</p>
+<ul>
+<li class="fragment"><p>the dimension of the data frame</p></li>
+<li class="fragment"><p>if all variables (columns) have a name</p></li>
+<li class="fragment"><p>that there are no duplicated column names</p></li>
+<li class="fragment"><p>the mode of each variable <span class="fragment"><em>For example, if a numerical data is stored in a character vectors, there must be a typo somewhere.</em></span></p></li>
+</ul>
+<p><span class="fragment">The functions <span style="color:indianred;">dim</span>, <span style="color:indianred;">str</span>, <span style="color:indianred;">summary</span> are your best friends!</span></p>
+</section>
+<section id="check-data-when-importing-them-1" class="slide level2">
+<h2>Check data when importing them</h2>
+<p>Use <span style="color:indianred;">summary</span> and graphs to check the content of the variables.</p>
+<p>For quantitative variable:</p>
+<ul>
+<li class="fragment"><p>any impossible value (ex: a negative size)?</p></li>
+<li class="fragment"><p>any outlier? an outlier is not necessarily a mistake, but you need to ask yourself the question</p></li>
+</ul>
+</section>
+<section id="check-data-when-importing-them-2" class="slide level2">
+<h2>Check data when importing them</h2>
+<p><span class="fragment">For qualitative data:</span></p>
+<ul>
+<li class="fragment"><p>any non possible category (level)?</p></li>
+<li class="fragment"><p>any level written in two different ways (Site1, site1, site_1…)?</p></li>
+</ul>
+<p><span class="fragment">For both:</span></p>
+<ul>
+<li class="fragment">any missing data?</li>
+</ul>
 </section>
 <section id="acknowledgments" class="slide level2">
 <h2>Acknowledgments</h2>
-<p>Cours Juba</p>
+<p>This document uses the following:</p>
+<ul>
+<li class="fragment"><p><em>Introduction à R et au tidyverse</em> - Julien Barnier <a href="https://juba.github.io/tidyverse/" data-preview-link="false">in French</a></p></li>
+<li class="fragment"><p><em>Introduction à l’analyse d’enquêtes avec R et RStudio</em> - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette <a href="https://larmarange.github.io/analyse-R/" data-preview-link="false">in French</a></p></li>
+<li class="fragment"><p><em>Biodiversity data: From data collection to publication. An FRB-CESAB, PNDB &amp; GBIF France training course</em> Casajus N, Coux C, Le Bras Y, Norvez O, Archambeau A-S &amp; Pamerlon S (2024) <a href="">URL</a> https://biodiversitydata.github.io/){preview-link=“false”}</p></li>
+<li class="fragment"><p>Introductory class of Mélaine Aubry-Kientz, Julien Claude and Marine Zwicke (University of Montpellier)</p></li>
+</ul>
 </section>
 <section id="ressources" class="slide level2">
 <h2>Ressources</h2>
-<!-- check videos here
-https://www.youtube.com/c/HowToR4U/videos
--->
+<ul>
+<li class="fragment"><p><em>How to R</em> (Videos in English) <a href="https://www.youtube.com/watch?v=hGkPgYfgapY" data-preview-link="false">Here</a></p></li>
+<li class="fragment"><p>Aulas <em>R do basico eo avançado</em> - Murilo S. Dias (Videos em Portuguese, aula 15) <a href="https://www.youtube.com/watch?v=zC5VMELgRG4&amp;list=PLSYhm4WnLPLBciaJOvx25ohO8yaxmae8k&amp;index=15" data-preview-link="false">Here</a></p></li>
+<li class="fragment"><p>Wilson <em>et al</em> (2017) <em>Good enough practices in scientific computing</em> Downloadable <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510" data-preview-link="false">here</a></p></li>
+</ul>
 </section>
-<section id="ressources-1" class="slide level2">
-<h2>Ressources</h2>
-<p>To go further on data management</p>
-<p>https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf</p>
+<section id="ressources-to-go-further" class="slide level2">
+<h2>Ressources to go further</h2>
+<h3 id="on-data-format">On data format</h3>
+<ul>
+<li class="fragment"><em>Data formats</em> - Nicolas Casajus <a href="https://biodiversitydata.github.io/chapters/files-formats.htmll" data-preview-link="false">Here</a></li>
+</ul>
+<h3 id="on-data-management">On data management</h3>
+<ul>
+<li class="fragment">British Ecological Society (2017) <em>Data-management</em> Downloadable <a href="https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf" data-preview-link="false">here</a></li>
+</ul>
+<h3 id="on-where-to-get-biodiversity-data">On where to get biodiversity data</h3>
+<ul>
+<li class="fragment"><em>Biodiversity data: From data collection to publication. An FRB-CESAB, PNDB &amp; GBIF France training course</em> Casajus N, Coux C, Le Bras Y, Norvez O, Archambeau A-S &amp; Pamerlon S (2024) <a href="">URL</a> https://biodiversitydata.github.io/){preview-link=“false”}</li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

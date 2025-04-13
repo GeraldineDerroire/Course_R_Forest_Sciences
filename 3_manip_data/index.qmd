@@ -42,7 +42,7 @@ You should have already installed the package, let's load it:
 library(vegan)
 ```
 
-[We use the command ]{.fragment}[data]{style="color:indianred;"} to open the data:
+[We use the command [data]{style="color:indianred;"} to open the data:]{.fragment}
 
 ::: fragment
 ```{r}
@@ -82,7 +82,7 @@ We can display it in a separate tab using the function [View]{style="color:india
 View(BCI.env)
 ```
 
-[or to click on the table icon in the environment: ![](view.png){width="80%"}]{.fragment}
+[or by clicking on the table icon in the environment: ![](view.png){width="80%"}]{.fragment}
 
 ## Data frame
 
@@ -120,7 +120,7 @@ ncol(BCI.env)
 
 [BCI.env contains `r nrow(BCI.env)` observations and `r ncol(BCI.env)` variables, as indicated in the environment.]{.fragment}
 
-[We can also use the function ]{.fragment}[dim]{style="color:indianred;"} to get both dimention (1st the number of rows, second the number of columns).
+[We can also use the function [dim]{style="color:indianred;"} to get both dimensions (1st the number of rows, second the number of columns).]{.fragment}
 
 ::: fragment
 ```{r}
@@ -177,8 +177,8 @@ We can access the variables using [\$]{style="color:indianred;"}
 BCI.env$Precipitation
 ```
 
-[To see only the first or last values, we use the functions ]{.fragment}[head]{style="color:indianred;"} or [tail]{style="color:indianred;"}.
-We can specify the number of observations to show in the second argument:
+[To see only the first or last values, we use the functions [head]{style="color:indianred;"} or [tail]{style="color:indianred;"}.
+We can specify the number of observations to show in the second argument:]{.fragment}
 
 ::: fragment
 ```{r}
@@ -261,9 +261,9 @@ Let's add the site (BCI):
 BCI.env$Site <- rep("BCI", 50)
 ```
 
-[The function ]{style="font-size: 23px"}[rep]{style="color:indianred;"} allows to repeat the same value (here "BCI") a certain number of times (here 50).
+[The function [rep]{style="color:indianred;"} allows to repeat the same value (here "BCI") a certain number of times (here 50).]{style="font-size: 23px"}
 
-[**NB:** the dimensions and structure of the data frame have changed:]{.fragment}
+[**NB:** the dimensions of the data frame have changed:]{.fragment}
 
 ::: fragment
 ```{r}
@@ -279,7 +279,7 @@ We can check the new structure of the data frame:
 str(BCI.env)
 ```
 
-[We can transform the variable *site* to a factor using the function ]{.fragment}[as.factor]{style="color:indianred;"}
+[We can transform the variable *site* to a factor using the function [as.factor]{style="color:indianred;"}]{.fragment}
 
 ::: fragment
 ```{r}
@@ -366,7 +366,7 @@ We already know how to get the mean:
 mean(BCI.env$EnvHet)
 ```
 
-[We can get the median using the function ]{.fragment}[median]{style="color:indianred;"}
+[We can get the median using the function [median]{style="color:indianred;"}]{.fragment}
 
 ::: fragment
 ```{r}
@@ -386,7 +386,7 @@ The simpler one is the extent of the distribution:
 max(BCI.env$EnvHet) - min(BCI.env$EnvHet)
 ```
 
-[We can also get the **variance** and the **standard deviation** (which is the square root of the variance), using the functions ]{.fragment}[var]{style="color:indianred;"} and [sd]{style="color:indianred;"}
+[We can also get the **variance** and the **standard deviation** (which is the square root of the variance), using the functions [var]{style="color:indianred;"} and [sd]{style="color:indianred;"}]{.fragment}
 
 ::: fragment
 ```{r}
@@ -684,14 +684,73 @@ str(My_data)
 :::
 
 
+## Importing data from a text file
+
+The most common way to exchange data is through a text file in which variables are organised in columns.
+
+Before importing data, it is important to know the structure of the data:
+
+* Are there headers, meaning that the first line contains the names of the columns?
+
+* How are the variables separated? This can be tabulations, or commas ([,]{style="color:indianred;"}), or semicolon ([;]{style="color:indianred;"})
+
+* What is the separator of decimals?
+
+::: notes
+in practice a data file should contain a header, otherwise we don't know the variable names
+:::
 
 
+## Importing data from a text file
 
-# TO DO
+There are many types of text files.
 
-## Importing data as a csv
+The recommended one for exchanging data is the format [CSV]{style="color:indianred;"}.
 
-<!-- tell that we can also import from other format but bof-->
+CSV means *Comma-Separated Values*: CSV files use comma ([,]{style="color:indianred;"}) as delimiter of columns.
+
+⚠️ depending of the software and the configuration of your computer, CSV files can use the [;]{style="color:indianred;"} by default.
+
+
+## Importing data from a text file
+
+We can use RStudio interface to import data:
+
+* *File/Import Dataset*, *From Text (base)...*
+
+* or in the *Environment*, *From Text (base)...*
+
+::: fragment
+![](import.png)
+:::
+
+
+## Importing data from a text file
+
+We can then set the correct structure for the data:
+
+![](import2.png)
+
+## Importing data from a text file
+
+We can alternatively use the function [read.csv]{style="color:indianred;"}:
+
+```{r}
+BCI.env <- read.csv(file = "data/BCI_env.csv", # the file name and its relative path
+                    header = TRUE) # the dathave headers (column names)
+```
+
+[By default, the the separator of columns is the [,]{style="color:indianred;"} and the separator of decimal the [.]{style="color:indianred;"}]{.fragment}
+
+[⚠️ Make sure you put the data in an object (otherwise, they are just displayed).]{.fragment}
+
+
+## Importing data from other formats
+
+You can also import data from a statistics software (SPSS, SAS, Stata...) or from Excel.
+
+But using a universal data format (CSV) is preferred.
+
 
 ## Good practice when typing data in spreadsheet
 
@@ -705,6 +764,12 @@ str(My_data)
 
 -   No merged cells
 
+-   Use a unique identifier (ID) for each observation
+
+::: notes
+unique identifier: unique number for each observation
+:::
+
 ## Good practice when typing data in spreadsheet
 
 -   Leave empty cells for missing values (or write "NA")
@@ -713,133 +778,156 @@ str(My_data)
 
 -   Use . for the decimal separator
 
--   Use YYYY-MM--DD for date *(handling dates in Excel is* 😭🤬*)*
+-   Use YYYY-MM--DD for dates *(handling dates in Excel* 😭🤬*)*
 
 -   Export as a CSV (Comma-Separated Values), which uses comma [,]{style="color:indianred;"} as delimiter of column
 
-# TO DO
 
-### Importing data from a csv or other...
+## Writing data to a csv
 
-```{=html}
-<!-- Mélaine 94
-https://larmarange.github.io/analyse-R/import-de-donnees.html
+We can save a data frame to a csv file using the function [write.csv]{style="color:indianred;"}:
 
-nb: on peut importer des données depuis excel mais ... https://larmarange.github.io/analyse-R/import-de-donnees.html#excel
-
-voir si jeu veux parler de l'intérogation des DB à distance avec le dplyer https://larmarange.github.io/analyse-R/import-de-donnees.html#utilisation-de-dplyr-et-dbplyr 
-=> plutôt non
-
-https://biodiversitydata.github.io/chapters/files-formats.html
-
-
--->
+```{r, eval=FALSE}
+write.csv(x = BCI.env, # the object to be written
+          file = "data/BCI_env.csv", # the file to write in (and its relative path)
+          row.names = FALSE) # no row names
 ```
 
-## Saving data
+[By default, the the separator of columns is the [,]{style="color:indianred;"} and the separator of decimal the [.]{style="color:indianred;"}]{.fragment}
 
-```{=html}
-<!-- 
-save et write
+## Writing data to a csv
 
-https://larmarange.github.io/analyse-R/import-de-donnees.html#sauver-ses-donn%C3%A9es 
+We can use different separators, **but this is not recommended**.
 
-https://larmarange.github.io/analyse-R/export-de-donnees.html
+If we use different separators with the function [write.csv]{style="color:indianred;"}, it ignores them:
 
-
--->
+```{r}
+write.csv(x = BCI.env, # the object to be written
+          file = "data/BCI.env_semicol.csv", # the file to write in (and its relative path)
+          sep=";", # the separator of columns
+          dec = ",", # the separator of decimals
+          row.names = FALSE) # no row names
 ```
 
-### Voir si je peux parler de data download from gbif
+## Writing data to a csv
 
-https://biodiversitydata.github.io/chapters/data-acquisition.html using download.file()
+If we really want to change the separators, we need the function [write.csv2]{style="color:indianred;"}, which uses a [;]{style="color:indianred;"} to separate the columns and a [,]{style="color:indianred;"} for the decimals:
 
-There is a package called rgbif https://biodiversitydata.github.io/chapters/data-cleaning.html
-
-### Checking data when importing them
-
-<!-- Mélaine 100-->
-
-## Good practive when working with data
-
-### raw vs derived data
-
-<!--https://biodiversitydata.github.io/chapters/data-cleaning.html-->
-
-### Data storage / backup
-
-https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf
-
-### Cleaning data / checking data
-
-```{=html}
-<!-- Faire un data set à problème 
-•   Un sep ; qui n’a pas la bonne taille 
-•   Un site qui est écrit un fois avec une majuscule et une fois sans => 2 sites
-•   Un nombre avec une virgule à la place du point => caractère 
-•   …
- ICI ou pour les exercices??? (ça peut-être pas mal de leur faire trouver les problèmes avec un dataset) ou à mettre plus haut?
- 
- -->
+```{r}
+write.csv2(x = BCI.env, # the object to be written
+          file = "data/BCI.env_semicol.csv", # the file to write in (and its relative path)
+           row.names = FALSE) # no row names
 ```
 
-```{=html}
-<!-- voir si j'ai le temps d'explorer ça: probablement pas....
+# Good practive when working with data
 
-https://larmarange.github.io/analyse-R/recodage.html#nettoyage
+## Raw *versus* derived data
 
-checklist : https://biodiversitydata.github.io/chapters/data-cleaning.html
--->
-```
+What are the raw data?
 
-### FAIR principles
+[The *raw data* are the data in the form they were originally generated:]{.fragment}
 
-```{=html}
-<!-- https://biodiversitydata.github.io/chapters/introduction.html
-https://biodiversitydata.github.io/chapters/protocols-methods.html
--->
-```
+* by an sensor, instrument...
 
-FAIR (Findable, Accessible, Interoperable and Reusable data principles; https://force11.org/info/the-­fair-­data-­principles/
+* by the tablet/computer used in the field
 
-### Metadata
+* in paper field sheets (in that case, also save the spreadsheet in which data are first recorded)
 
-<!-- https://biodiversitydata.github.io/chapters/introduction.html -->
+* ...
 
--   Metadata, sometimes referred to as data about data or a data dictionary, are a “centralized repository of information about data such as meaning, relationships to other data, origin, usage, and format” (IBM Dictionary of Computing, 10th edition, 1993). In Jenkins et al 2023
 
-<!-- have them work on the project they created last time-->
+## Raw *versus* derived data
 
-## cycle de vie des données ????
+Never modify the raw data. 
 
-https://biodiversitydata.github.io/chapters/introduction.html Cours Gaëlle guide BES
+[⚠️ **Any data that has been modified/corrected is no longer raw data, it is derived data.**]{.fragment}
 
-## What about open science?
+[🔒 Put the raw data in a read only mode.]{.fragment}
 
-sharing of data products, code, and metadata
+## Backup your data
 
-## Where to find enviro data ?
+⚠️️ The raw data should be saved in **more than one location**!
 
-```{=html}
-<!--https://biodiversitydata.github.io/chapters/env-databases.html
-probablement just leur donner le lien comme ressource
--->
-```
+![](bad_luck.png)
+
+## Document your data
+
+* Use informative variable and file names
+
+* Write detailed metadata (protocol, units of measurement, date, people...)
+
+
+## Check data when importing them
+
+Make sure the data are correctly read by checking 
+
+* the dimension of the data frame
+
+* if all variables (columns) have a name 
+
+* that there are no duplicated column names
+
+* the mode of each variable [*For example, if a numerical data is stored in a character vectors, there must be a typo somewhere.*]{.fragment}
+
+[The functions [dim]{style="color:indianred;"}, [str]{style="color:indianred;"}, [summary]{style="color:indianred;"} are your best friends!]{.fragment}
+
+
+## Check data when importing them
+
+Use [summary]{style="color:indianred;"} and graphs to check the content of the variables.
+
+For quantitative variable: 
+
+* any impossible value (ex: a negative size)?
+
+* any outlier? an outlier is not necessarily a mistake, but you need to ask yourself the question
+
+## Check data when importing them
+
+[For qualitative data: ]{.fragment}
+
+* any non possible category (level)?
+
+* any level written in two different ways (Site1, site1, site_1...)?
+
+[For both: ]{.fragment}
+
+* any missing data?
+
+
 
 ## Acknowledgments
 
-Cours Juba
+This document uses the following:
+
+* *Introduction à R et au tidyverse* - Julien Barnier   [in French](https://juba.github.io/tidyverse/){preview-link="false"}
+
+* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"}
+
+* *Biodiversity data: From data collection to publication. An FRB-CESAB, PNDB & GBIF France training course* Casajus N, Coux C, Le Bras Y, Norvez O, Archambeau A-S & Pamerlon S (2024) [URL]() https://biodiversitydata.github.io/){preview-link="false"}
+
+* Introductory class of Mélaine Aubry-Kientz, Julien Claude and Marine Zwicke (University of Montpellier)
 
 ## Ressources
 
-```{=html}
-<!-- check videos here
-https://www.youtube.com/c/HowToR4U/videos
--->
-```
+* *How to R* (Videos in English) [Here](https://www.youtube.com/watch?v=hGkPgYfgapY){preview-link="false"} 
 
-## Ressources
+* Aulas *R do basico eo avançado* - Murilo S. Dias (Videos em Portuguese, aula 15) [Here](https://www.youtube.com/watch?v=zC5VMELgRG4&list=PLSYhm4WnLPLBciaJOvx25ohO8yaxmae8k&index=15){preview-link="false"} 
 
-To go further on data management
+* Wilson *et al* (2017) *Good enough practices in scientific computing* Downloadable [here](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510){preview-link="false"}
 
-https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf
+## Ressources to go further
+
+### On data format 
+
+* *Data formats* - Nicolas Casajus [Here](https://biodiversitydata.github.io/chapters/files-formats.htmll){preview-link="false"}
+
+### On data management
+
+- British Ecological Society (2017) *Data-management* Downloadable [here](https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf){preview-link="false"}
+
+### On where to get biodiversity data
+
+* *Biodiversity data: From data collection to publication. An FRB-CESAB, PNDB & GBIF France training course* Casajus N, Coux C, Le Bras Y, Norvez O, Archambeau A-S & Pamerlon S (2024) [URL]() https://biodiversitydata.github.io/){preview-link="false"}
+
+

@@ -3,6 +3,188 @@ title: "Exercices on session *Working with data*"
 format:
   pdf
 execute:
-  echo: false  
+  echo: false 
+  eval: false 
 ---
+
+# Working with data from the *Inventário Florestal Nacional*
+
+-   Go to the website of the IFN ([here](https://snif.florestal.gov.br/pt-br/inventario-florestal-nacional-ifn/ifn-dados-abertos){preview-link="false"}) and download the data of the Rondônia for trees with a DBH≥10cm (don't forget to look at the metadata!)
+
+
+
+- Import these data into R (make sure you look at the data structure before)
+
+```{r}
+data_Ron <- read.csv(file = "data/IFN-RO_arvores_dap_maior_10cm_20-04-2022.csv",
+                     sep = ";",
+                     dec = ",")
+```
+
+- How many variables are there? how many observations?
+
+```{r}
+ncol(data_Ron)
+nrow(data_Ron)
+dim(data_Ron)
+```
+
+- Look at the structure, everything is fine?
+
+```{r}
+str(data_Ron)
+```
+
+- Transform the following variable into factors: *Unidade amostral*, *estado de sanidade do fuste*, *qualidade do fuste*, 
+*posição sociológica*, *hábito da planta* and check the structure again
+
+```{r}
+data_Ron$UA <- as.factor(data_Ron$UA) # Unidade amostral
+data_Ron$SA <- as.factor(data_Ron$SA) # estado de sanidade do fuste
+data_Ron$QF <- as.factor(data_Ron$QF) # qualidade do fuste
+data_Ron$PS <- as.factor(data_Ron$PS) # posição sociológica
+data_Ron$HAB <- as.factor(data_Ron$HAB) # hábito da planta
+```
+
+- Transform the following variable into boleans: *árvore fora da floresta*, *presença ou ausência de lianas*, 
+*indivíduo com ou sem coleta botânica* and check the structure again
+
+```{r}
+data_Ron$AFF <- as.logical(data_Ron$AFF) # árvore fora da floresta
+data_Ron$PL <- as.logical(data_Ron$PL) # presença ou ausência de lianas
+data_Ron$MB <- as.logical(data_Ron$MB) # indivíduo com ou sem coleta botânica
+```
+
+- How many *Unidade amostral* is there?
+
+```{r}
+str(data_Ron$UA)
+
+# alternative not seen in class:
+length(unique(data_Ron$UA))
+```
+
+
+- Add a colum with the DBH in meter
+
+```{r}
+data_Ron$DAP_m <- data_Ron$DAP / 100
+```
+
+- What are the minimum, maximum and median height (*altura total*)
+
+```{r}
+min(data_Ron$HT)
+max(data_Ron$HT)
+# or 
+range(data_Ron$HT)
+
+median(data_Ron$HT)
+
+# or 
+summary(data_Ron$HT)
+```
+
+- Represent the distribution of DBH (in cm) using an histogram (*Bonus question for the foresters and forest ecologists: does this distribution make sense to you?*)
+
+```{r}
+hist(data_Ron$DAP)
+```
+
+- How many trees are out of the forest?
+
+```{r}
+table(data_Ron$AFF)
+```
+- Which percentage of trees have liana?
+
+```{r}
+questionr::freq(data_Ron$PL)
+```
+
+- Make a graphical representation (barplot or Cleveland plot) of the occurrences of health levels (*estado de sanidade do fuste*)
+
+```{r}
+tab <- table(data_Ron$SA)
+tab <- sort(tab) # order in ascending order
+barplot(tab)
+```
+
+```{r}
+tab <- table(data_Ron$SA)
+tab <- sort(tab) # order in ascending order
+dotchart(as.vector(tab), # convert the table to a vector
+         labels = names(tab))
+```
+
+
+# Find the problems
+
+We are working with a fake data set of vegetation survey in the DF, that contain the following variables:
+
+* *site*: name of the site
+
+* *plot*: plot ID (unique identifier)
+
+* *height_max*: height of the tallest tree on the plot (in m)
+
+* *DBH_max*: DBH (diameter at breast height) of the largest tree on the plot (in cm)
+
+
+```{r}
+dt_pb <- data.frame(site = c("Brasilia", "Brasilia", "brasilia", "Taguatinga", "Taguatinga"), # 
+                    plot = c(1:4, 4), #
+                    height_max = c("10.3", "8.5", "9.6", "4,7", "9.8"), # 
+                    DBH_max = c(20, 15, 31, 888, 12)) # 
+write.csv(dt_pb,
+          file = "data/dt_problem.csv",
+          row.names = FALSE)
+```
+
+You can find this data set [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/data/dt_problem.csv){preview-link="false"}.
+
+There are 4 problems in this data frame, what are they?
+
+```{r}
+str(dt_pb)
+summary(dt_pb)
+```
+<!-- There is a uncorrect decimal separator in height_max-->
+
+```{r}
+mode(dt_pb$height_max)
+dt_pb$height_max
+```
+<!-- There is a problem of encoding in site-->
+
+```{r}
+dt_pb$site
+
+# or better:
+dt_pb$site <- as.factor(dt_pb$site)
+levels(dt_pb$site)
+# or 
+table(dt_pb$site)
+```
+
+
+<!-- There is an incoherent value in DBH_max -->
+
+
+```{r}
+summary(dt_pb$DBH_max)
+
+# or
+range(dt_pb$DBH_max)
+```
+<!-- There is a duplicated plot ID -->
+
+```{r}
+table(dt_pb$plot)
+
+# alternative not seen in the class
+length(unique(dt_pb$plot)) == dim(dt_pb)[1]
+```
+
+
 
