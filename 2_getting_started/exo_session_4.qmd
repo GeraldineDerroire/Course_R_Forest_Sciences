@@ -108,7 +108,7 @@ Install the following packages from CRAN:
 
 * questionr
 
-**TO DO see the ones we will need for the data next week...**
+# For next time
 
-
+Download the two data set [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/data/BCI.env_semicol.csv){preview-link="false"} and here [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/data/BCI_env.csv){preview-link="false"} and store them in your raw data folder.
 
