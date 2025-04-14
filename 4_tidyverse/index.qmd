@@ -1,0 +1,24 @@
+---
+title: "Tidyverse"
+author: Géraldine Derroire
+institute: Cirad - UnB
+date: last-modified
+format: 
+  revealjs:
+    theme: solarized
+    output-location: fragment 
+    slide-number: true
+    preview-links: true
+    chalkboard: true
+    link-external-icon: true
+    link-external-newwindow: true
+    incremental: true
+execute:
+  echo: true   
+  warning: true
+  message: true 
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
