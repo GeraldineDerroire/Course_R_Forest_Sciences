@@ -189,3 +189,4 @@ length(unique(dt_pb$plot)) == dim(dt_pb)[1]
 
 Install the following packages from CRAN:
 
+* tidyverse

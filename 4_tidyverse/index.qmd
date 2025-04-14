@@ -1,5 +1,5 @@
 ---
-title: "Tidyverse"
+title: "Introduction to the tidyverse"
 author: Géraldine Derroire
 institute: Cirad - UnB
 date: last-modified
@@ -22,3 +22,206 @@ editor:
     wrap: sentence
 ---
 
+## What is the *tidyverse*?
+
+The name *tidyverse* come from *tidy* and *universe*. 
+
+::::: columns
+::: {.column width="70%"}
+* A group of packages with a coherent syntax
+
+* Based on the idea of *tidy* data
+
+* Optimise the readability and functionality of the code (*designed for humans*)
+
+* Easy to sequence commands (using a *pipe*)
+
+:::
+
+::: {.column width="30%"}
+![](tidyverse.png)
+:::
+:::::
+
+
+## Installing the *tidyverse*
+
+We just need to install and load the package tidyverse:
+
+```{r}
+library(tidyverse)
+```
+
+::: notes
+You should already have installed the package tidyverse
+:::
+
+
+## Core packages of the *tidyverse*
+
+This loads the "core" packages of the tidyverse:
+
+::::: columns
+::: {.column width="50%"}
+* [[tibble]{style="color:indianred;"} for tibbles, a modern re-imagining of data frames]{style="font-size: 30px"}
+
+* [[readr]{style="color:indianred;"} for data import]{style="font-size: 30px"}
+
+* [[tidyr]{style="color:indianred;"} for data tidying]{style="font-size: 30px"}
+
+* [[stringr]{style="color:indianred;"} for strings]{style="font-size: 30px"}
+
+:::
+
+::: {.column width="50%"}
+* [[forcats]{style="color:indianred;"} for factors]{style="font-size: 30px"}
+
+* [[lubridate]{style="color:indianred;"} for date/times]{style="font-size: 30px"}
+
+* [[dplyr]{style="color:indianred;"} for data manipulation]{style="font-size: 30px"}
+
+* [[ggplot2]{style="color:indianred;"} for data visualisation]{style="font-size: 30px"}
+
+* [[purrr]{style="color:indianred;"} for functional programming]{style="font-size: 30px"}
+:::
+:::::
+
+
+
+
+
+<!-- continue from here and 6.3 in juba, but before, put my image on the workflow ou après?-->
+
+## tibble
+
+https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#4
+
+https://larmarange.github.io/guide-R/bases/tibbles.html
+
+voir si je le mets ici ou dans la liste des packages?
+
+
+## Pipe
+
+https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#3
+
+https://larmarange.github.io/guide-R/manipulation/pipe.html
+
+
+Ctrl + Shuft + m %>% 
+
+
+## Wrangling / workflow
+
+http://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#9
+
+
+
+
+
+
+
+
+
+
+# Import data with the package *readr*
+
+https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#11
+
+https://juba.github.io/tidyverse/07-import.html
+
+
+
+
+# Transformer/manipuler avec le package *dplyer*
+
+utiliser un jeu de donné existant => voir par ex les traits de Guyane ? 
+
+on commencer par voir comment manipuler des données déja bien rangées
+
+https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#20
+
+https://biodiversitydata.github.io/chapters/data-cleaning.html
+
+https://larmarange.github.io/guide-R/manipulation/dplyr.html
+
+https://juba.github.io/tidyverse/10-dplyr.html
+
+
+filter
+select
+mutate
+arrange
+slice
+group_by, summarise, arrange...
+bind...
+join...
+
+
+# Ranger avec le package *tidyr*
+
+Mais si les données ne sont pas bien rangées => on range
+
+ici utiliser un jeu de données bordéliques... en créer un ?
+
+https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#15 et suivante
+
+https://biodiversitydata.github.io/chapters/data-cleaning.html
+
+https://larmarange.github.io/guide-R/manipulation_avancee/tidyr.html
+
+https://juba.github.io/tidyverse/12-tidyr.html
+
+
+les slides d'Eric sont bien pour les visuels, mais voir aussi Allison Horst
+
+function unite
+
+function separate
+
+pivot_longer / wider
+
+fonction complete?
+
+## package *janitor*
+
+not part of the tidyverse but compatible 
+https://biodiversitydata.github.io/chapters/data-cleaning.html
+
+
+# package *forcats* for qualitative variables
+
+https://juba.github.io/tidyverse/09-recodages.html#combiner-plusieurs-variables
+
+
+# package *stringr*
+
+https://biodiversitydata.github.io/chapters/data-cleaning.html
+
+https://larmarange.github.io/guide-R/manipulation_avancee/stringr.html
+
+https://juba.github.io/tidyverse/11-stringr.html
+
+
+# package *lubidate*
+
+https://biodiversitydata.github.io/chapters/data-cleaning.html
+
+# 
+
+# TO DECIDE
+
+## dire ggplot on va voir après
+
+
+
+
+## Acknowledgments
+
+Eric
+
+https://biodiversitydata.github.io/chapters/data-cleaning.html ???
+
+## Ressources
+
+cheatsheet of each of the tidyverse package
