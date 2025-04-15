@@ -22,7 +22,9 @@ editor:
     wrap: sentence
 ---
 
-## What is the *tidyverse*?
+# What is the tidyverse?
+
+## What is the tidyverse?
 
 The name *tidyverse* come from *tidy* and *universe*. 
 
@@ -44,7 +46,7 @@ The name *tidyverse* come from *tidy* and *universe*.
 :::::
 
 
-## Installing the *tidyverse*
+## Installing the tidyverse
 
 We just need to install and load the package tidyverse:
 
@@ -57,7 +59,7 @@ You should already have installed the package tidyverse
 :::
 
 
-## Core packages of the *tidyverse*
+## Core packages of the tidyverse
 
 This loads the "core" packages of the tidyverse:
 
@@ -87,57 +89,389 @@ This loads the "core" packages of the tidyverse:
 :::::
 
 
+## Tidy data
+
+The "concept" of tidy data has been proposed by Hadley Wickham [(2014)](https://www.jstatsoft.org/article/view/v059i10) to make data easy to manipulate and clean.
+
+::::: columns
+::: {.column width="70%"}
+The principles are:
+
+* each variable is a column
+
+* each observation is a row
+
+* each type of observational unit is a table
 
 
+:::
 
-<!-- continue from here and 6.3 in juba, but before, put my image on the workflow ou après?-->
+::: {.column width="30%"}
+![](dataframe.png)
+:::
+:::::
 
-## tibble
+[All the packages of the tidyverse require tidy data.]{.fragment}
 
-https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#4
+::: notes
+we have seen this figure when we talked about data frame.
+Tidy data are in a data frame, but all data frame are not necessarly tidy.
+Data frame is a structure, but it is possible to use it in a messy way.
+:::
 
-https://larmarange.github.io/guide-R/bases/tibbles.html
 
-voir si je le mets ici ou dans la liste des packages?
+## Tibbles
+
+All the packages of the tidyverse use objects of class [tibble]{style="color:indianred;"}, which is an evolution of the classic data frame.
+
+The main difference is that tibble don't have row names.
+
+Tibbles are compatible with data frames, and most of the tidyverse packages accept data frames.
 
 
 ## Pipe
 
-https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#3
+Commands can be executed one after the other using a pipe [%>% ]{style="color:indianred;"}:
 
-https://larmarange.github.io/guide-R/manipulation/pipe.html
+```{r}
+1:10 %>% 
+  sqrt %>% 
+  sum
+```
 
+[is equivalent to]{.fragment}
 
-Ctrl + Shuft + m %>% 
+::: fragment
+```{r}
+sum(sqrt(1:10))
+```
+:::
 
+[but much easier to read.]{.fragment}
 
-## Wrangling / workflow
+::: notes 
+what did we do?
+:::
 
-http://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#9
-
-
-
-
-
-
-
-
-
-
-# Import data with the package *readr*
-
-https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#11
-
-https://juba.github.io/tidyverse/07-import.html
+## Pipe
 
 
+::::: columns
+::: {.column width="50%"}
+The pipe is introduced by the package [magritt ]{style="color:indianred;"}, but is also loaded with the tidyverse.
+
+[It can be accessed using the shortcut [Ctrl + Shuft + m]{style="color:indianred;"}]{.fragment}
+:::
+
+::: {.column width="50%"}
+![](pipe.png)
+
+![](magritt.png)
+:::
+:::::
 
 
-# Transformer/manipuler avec le package *dplyer*
+::: notes
+René Magritte: Belgium surrealist artist
+:::
 
-utiliser un jeu de donné existant => voir par ex les traits de Guyane ? 
 
-on commencer par voir comment manipuler des données déja bien rangées
+
+
+## Workflow
+
+![](workflow.png)
+
+::: notes
+In the tidyverse the steps of importing, tidying and transforming data is called "wrangling"
+:::
+
+
+# Let's work with data on trees of French Guiana
+
+## Functional trait data of trees
+
+*‘‘Functional traits are defined as morpho-physio-phenological traits which impact fitness indirectly via their effects on growth, reproduction and survival, the three components of individual performance.’’* Violle *et al* [2007](https://nsojournals.onlinelibrary.wiley.com/doi/10.1111/j.0030-1299.2007.15559.x)
+
+::::: columns
+::: {.column width="70%"}
+These data are available in the package rcontroll (Schmitt *et al* [2023](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.14215)),
+but were are going to import them from a csv file available 
+[here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/func_traits.csv){preview-link="false"}.
+:::
+
+::: {.column width="30%"}
+![](rcontroll.png)
+:::
+:::::
+
+
+## Commercial tree species
+
+We will also use data on commercial species.
+
+::::: columns
+::: {.column width="70%"}
+These data are available in the package LoggingLab (Badouard *et al* [2024](https://www.sciencedirect.com/science/article/abs/pii/S0304380023002697)),
+but were are going to import them from a csv file available 
+[here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/commercial_sp.csv){preview-link="false"}.
+:::
+
+
+::: {.column width="30%"}
+![](logginglab.png)
+:::
+:::::
+
+
+# Import data with the package [readr]{style="color:indianred;"}
+
+::: notes
+remember, the core packages are already loaded with the tidyverse, so no need to load them one by one
+:::
+
+## Importing a csv file
+
+We use the function [read_csv]{style="color:indianred;"} to import the trait data from the csv file.
+
+```{r}
+traits <- read_csv("data/func_traits.csv")
+```
+::: notes
+change the path to your relative path in your project
+:::
+
+## Importing a csv file
+
+[read_csv]{style="color:indianred;"} is the tidyverse equivalent of [read.csv]{style="color:indianred;"}, but:
+
+* it returns a tibble (which is also a data frame)
+
+::: fragment
+```{r}
+class(traits)
+```
+:::
+
+* it is faster
+
+
+::: notes
+tbl_df a subclass of data.frame to distinguish its behaviour from these of other tibble (explain that some functions performs different things depending of the class of the object)
+
+spec_tbl_df store the columns specification (as seen here)
+:::
+
+## Functional trait data of trees
+
+Let's look at the functional trait data:
+
+```{r}
+traits
+```
+
+[[To know more, we can look at the help on the package rcontroll:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r, eval=FALSE}
+?rcontroll::TROLLv3_species
+```
+:::
+
+::: notes
+but package rcontroll is probably not installed...
+:::
+
+## Transform data frame into tibble
+
+Let's import the data on commercial trees as a regular data frame:
+
+```{r}
+sp_commer <- read.csv("data/commercial_sp.csv")
+class(sp_commer)
+```
+
+[and transform it into a tibble using the function [as_tibble]{style="color:indianred;"}:]{.fragment}
+
+::: fragment
+```{r}
+sp_commer <- as_tibble(sp_commer)
+class(sp_commer)
+```
+:::
+
+## Transform data frame into tibble
+
+⚠️ Remember that tibbles don't have row names.
+
+So if there was row names that we want to keep in our data frame, we should use the function [rownames_to_column]{style="color:indianred;"} to put them in a column (but let's not store it here).
+
+```{r}
+as.tibble(rownames_to_column(sp_commer))
+```
+
+::: notes
+here we just look at the results but don't store them
+:::
+
+## Commercial tree species
+
+Let's look at the sp_commer data :
+
+```{r}
+sp_commer
+```
+
+[[To know more, we can look at the help on the package LoggingLab (if you want to install it, see instructions [here](https://vincyanebadouard.github.io/LoggingLab/))]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r, eval=FALSE}
+?LoggingLab::SpeciesCriteria
+```
+:::
+
+::: notes
+explain that the package is not on the cran
+:::
+
+
+# Manipulate and transform with the package [dplyr]{style="color:indianred;"}
+
+## The verbs of [dplyer]{style="color:indianred;"}
+
+::::: columns
+::: {.column width="70%"}
+The package [dplyr]{style="color:indianred;"} proposes an intuitive syntax to manipulate and transform data.
+
+The names of the functions are verbs that relate to the use of the function.
+
+dplyr functions accept *data frame* and *tibble* and return a *tibble*.
+:::
+
+::: {.column width="30%"}
+![](dplyr.png)
+:::
+:::::
+
+## slice
+
+The function [slice]{style="color:indianred;"} selects row(s) according to its/their position(s).
+
+```{r}
+slice(traits, 25)
+```
+[which is equivalent to:]{.fragment}
+
+::: fragment
+```{r}
+traits[25,]
+```
+:::
+
+## slice
+
+and also equivalent to:
+
+```{r}
+traits %>% 
+  slice(25)
+```
+
+## slice
+
+We can also get several rows:
+
+```{r}
+slice(traits, 2:8)
+```
+
+## slice
+
+We can select only the first (or last) ones using [slice_head]{style="color:indianred;"} or [slice_tail]{style="color:indianred;"}:
+
+```{r}
+slice_head(traits, n=3) # n specify the number of rows
+```
+::: fragment
+```{r}
+slice_tail(traits, prop=0.1) # prop specify the proportion of rows
+```
+:::
+
+## slice
+
+[slice_min]{style="color:indianred;"} and [slice_max]{style="color:indianred;"} selects the row with the smallest or biggest value for a given variable:
+
+```{r}
+slice_min(traits, s_dbhmax)
+```
+
+::: fragment
+```{r}
+traits %>% 
+  slice_max(s_hmax)
+```
+
+:::
+
+::: notes
+the two ways of writing it (using the pipe or not) are equivalent
+:::
+
+## filter
+
+The function [filter]{style="color:indianred;"} selects rows according to a condition (a test).
+Only the rows for which the result of the test is TRUE are selected.
+
+[Let's select only the aggregative species in the commercial species dataset:]{style="font-size: 30px"}
+
+```{r}
+filter(sp_commer, Aggregative == TRUE)
+```
+
+
+## filter
+
+Or let's select the species that have a wood specific gravity (wsg) is less than 0.4:
+
+```{r}
+filter(traits, s_wsg < 0.4)
+```
+
+
+::: notes
+Remember the logical operators of comparisons that we have seen two sessions ago?
+:::
+
+## filter
+
+We can also combine several conditions:
+
+```{r}
+filter(traits, 
+       s_wsg < 0.4 & # first condition
+         s_LMA > 70) # second condition
+```
+[There are no species satisfying these two conditions in our dataset.]{.fragment}
+
+::: notes
+we could write it only on one line, it's just for readability
+:::
+
+
+## filter
+
+We can also use a function to specify the condition.
+
+Let's select trees with maximum DBH higher than the median:
+
+```{r}
+filter(traits, s_dbhmax > median(s_dbhmax))
+```
+
+
+
+##
 
 https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#20
 
@@ -225,3 +559,6 @@ https://biodiversitydata.github.io/chapters/data-cleaning.html ???
 ## Ressources
 
 cheatsheet of each of the tidyverse package
+
+* Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. [https://doi.org/10.18637/jss.v059.i10](https://doi.org/10.18637/jss.v059.i10)
+

@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-14">
+  <meta name="dcterms.date" content="2025-04-15">
   <title>Introduction to the tidyverse</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,10 +407,15 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-14</p>
+  <p class="date">2025-04-15</p>
 </section>
-<section id="what-is-the-tidyverse" class="slide level2">
-<h2>What is the <em>tidyverse</em>?</h2>
+<section>
+<section id="what-is-the-tidyverse" class="title-slide slide level1 center">
+<h1>What is the tidyverse?</h1>
+
+</section>
+<section id="what-is-the-tidyverse-1" class="slide level2">
+<h2>What is the tidyverse?</h2>
 <p>The name <em>tidyverse</em> come from <em>tidy</em> and <em>universe</em>.</p>
 <div class="columns">
 <div class="column" style="width:70%;">
@@ -425,7 +430,7 @@ Géraldine Derroire
 </div></div>
 </section>
 <section id="installing-the-tidyverse" class="slide level2">
-<h2>Installing the <em>tidyverse</em></h2>
+<h2>Installing the tidyverse</h2>
 <p>We just need to install and load the package tidyverse:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -444,9 +449,22 @@ Géraldine Derroire
 ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>You should already have installed the package tidyverse</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="cor-packages-of-the-tidyverse" class="slide level2">
-<h2>Cor packages of the <em>tidyverse</em></h2>
+<section id="core-packages-of-the-tidyverse" class="slide level2">
+<h2>Core packages of the tidyverse</h2>
 <p>This loads the “core” packages of the tidyverse:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -465,8 +483,24 @@ Géraldine Derroire
 <li class="fragment"><p><span style="font-size: 30px"><span style="color:indianred;">purrr</span> for functional programming</span></p></li>
 </ul>
 </div></div>
+</section>
+<section id="tidy-data" class="slide level2">
+<h2>Tidy data</h2>
+<p>The “concept” of tidy data has been proposed by Hadley Wickham <a href="https://www.jstatsoft.org/article/view/v059i10">(2014)</a> to make data easy to manipulate and clean.</p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p>The principles are:</p>
+<ul>
+<li class="fragment"><p>each variable is a column</p></li>
+<li class="fragment"><p>each observation is a row</p></li>
+<li class="fragment"><p>each type of observational unit is a table</p></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><img data-src="dataframe.png"></p>
+</div></div>
+<p><span class="fragment">All the packages of the tidyverse require tidy data.</span></p>
 <aside class="notes">
-<p>You should already have installed the package tidyverse</p>
+<p>we have seen this figure when we talked about data frame. Tidy data are in a data frame, but all data frame are not necessarly tidy. Data frame is a structure, but it is possible to use it in a messy way.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -478,41 +512,643 @@ Géraldine Derroire
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<!-- continue from here and 6.3 in juba, but before, put my image on the workflow ou après?-->
 </section>
-<section id="tibble" class="slide level2">
-<h2>tibble</h2>
-<p>https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#4</p>
-<p>https://larmarange.github.io/guide-R/bases/tibbles.html</p>
-<p>voir si je le mets ici ou dans la liste des packages?</p>
+<section id="tibbles" class="slide level2">
+<h2>Tibbles</h2>
+<p>All the packages of the tidyverse use objects of class <span style="color:indianred;">tibble</span>, which is an evolution of the classic data frame.</p>
+<p>The main difference is that tibble don’t have row names.</p>
+<p>Tibbles are compatible with data frames, and most of the tidyverse packages accept data frames.</p>
 </section>
 <section id="pipe" class="slide level2">
 <h2>Pipe</h2>
-<p>https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#3</p>
-<p>https://larmarange.github.io/guide-R/manipulation/pipe.html</p>
-<p>Ctrl + Shuft + m %&gt;%</p>
+<p>Commands can be executed one after the other using a pipe <span style="color:indianred;">%&gt;%</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href=""></a>  sqrt <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href=""></a>  sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22.46828</code></pre>
+</div>
+</div>
+<p><span class="fragment">is equivalent to</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">sum</span>(<span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22.46828</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment">but much easier to read.</span></p>
+<aside class="notes">
+<p>what did we do?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="wrangling-workflow" class="slide level2">
-<h2>Wrangling / workflow</h2>
-<p>http://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#9</p>
+<section id="pipe-1" class="slide level2">
+<h2>Pipe</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>The pipe is introduced by the package <span style="color:indianred;">magritt</span>, but is also loaded with the tidyverse.</p>
+<p><span class="fragment">It can be accessed using the shortcut <span style="color:indianred;">Ctrl + Shuft + m</span></span></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="pipe.png"></p>
+<p><img data-src="magritt.png"></p>
+</div></div>
+<aside class="notes">
+<p>René Magritte: Belgium surrealist artist</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="import-data-with-the-package-readr" class="title-slide slide level1 center">
-<h1>Import data with the package <em>readr</em></h1>
-<p>https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#11</p>
-<p>https://juba.github.io/tidyverse/07-import.html</p>
-</section>
+<section id="workflow" class="slide level2">
+<h2>Workflow</h2>
 
-<section id="transformermanipuler-avec-le-package-dplyer" class="title-slide slide level1 center">
-<h1>Transformer/manipuler avec le package <em>dplyer</em></h1>
-<p>utiliser un jeu de donné existant =&gt; voir par ex les traits de Guyane ?</p>
-<p>on commencer par voir comment manipuler des données déja bien rangées</p>
+<img data-src="workflow.png" class="r-stretch"><aside class="notes">
+<p>In the tidyverse the steps of importing, tidying and transforming data is called “wrangling”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="lets-work-with-data-on-trees-of-french-guiana" class="title-slide slide level1 center">
+<h1>Let’s work with data on trees of French Guiana</h1>
+
+</section>
+<section id="functional-trait-data-of-trees" class="slide level2">
+<h2>Functional trait data of trees</h2>
+<p><em>‘‘Functional traits are defined as morpho-physio-phenological traits which impact fitness indirectly via their effects on growth, reproduction and survival, the three components of individual performance.’’</em> Violle <em>et al</em> <a href="https://nsojournals.onlinelibrary.wiley.com/doi/10.1111/j.0030-1299.2007.15559.x">2007</a></p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p>These data are available in the package rcontroll (Schmitt <em>et al</em> <a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.14215">2023</a>), but were are going to import them from a csv file available <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/func_traits.csv" data-preview-link="false">here</a>.</p>
+</div><div class="column" style="width:30%;">
+<p><img data-src="rcontroll.png"></p>
+</div></div>
+</section>
+<section id="commercial-tree-species" class="slide level2">
+<h2>Commercial tree species</h2>
+<p>We will also use data on commercial species.</p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p>These data are available in the package LoggingLab (Badouard <em>et al</em> <a href="https://www.sciencedirect.com/science/article/abs/pii/S0304380023002697">2024</a>), but were are going to import them from a csv file available <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/commercial_sp.csv" data-preview-link="false">here</a>.</p>
+</div><div class="column" style="width:30%;">
+<p><img data-src="logginglab.png"></p>
+</div></div>
+</section></section>
+<section>
+<section id="import-data-with-the-package-readr" class="title-slide slide level1 center">
+<h1>Import data with the package <span style="color:indianred;">readr</span></h1>
+<aside class="notes">
+<p>remember, the core packages are already loaded with the tidyverse, so no need to load them one by one</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="importing-a-csv-file" class="slide level2">
+<h2>Importing a csv file</h2>
+<p>We use the function <span style="color:indianred;">read_csv</span> to import the trait data from the csv file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>traits <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/func_traits.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Rows: 45 Columns: 12
+── Column specification ────────────────────────────────────────────────────────
+Delimiter: ","
+chr  (1): s_name
+dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
+
+ℹ Use `spec()` to retrieve the full column specification for this data.
+ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>change the path to your relative path in your project</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="importing-a-csv-file-1" class="slide level2">
+<h2>Importing a csv file</h2>
+<p><span style="color:indianred;">read_csv</span> is the tidyverse equivalent of <span style="color:indianred;">read.csv</span>, but:</p>
+<ul>
+<li class="fragment">it returns a tibble (which is also a data frame)</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">class</span>(traits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "spec_tbl_df" "tbl_df"      "tbl"         "data.frame" </code></pre>
+</div>
+</div>
+</div>
+<ul>
+<li class="fragment">it is faster</li>
+</ul>
+<aside class="notes">
+<p>tbl_df a subclass of data.frame to distinguish its behaviour from these of other tibble (explain that some functions performs different things depending of the class of the object)</p>
+<p>spec_tbl_df store the columns specification (as seen here)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="functional-trait-data-of-trees-1" class="slide level2">
+<h2>Functional trait data of trees</h2>
+<p>Let’s look at the functional trait data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>traits</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 45 × 12
+   s_name           s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+   &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Abarema_jupunba  110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
+ 2 Bocoa_prouacens…  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
+ 3 Brosimum_rubesc…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
+ 4 Carapa_procera   130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
+ 5 Caryocar_glabrum  84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
+ 6 Cecropia_obtusa   69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
+ 7 Chrysophyllum_s… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
+ 8 Conceveiba_guia…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
+ 9 Cordia_sagotii   134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
+10 Couepia_bracteo… 123.   0.015  4.82e-4 0.784     0.45   50.9 0.308          1
+# ℹ 35 more rows
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">To know more, we can look at the help on the package rcontroll:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>?rcontroll<span class="sc">::</span>TROLLv3_species</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<aside class="notes">
+<p>but package rcontroll is probably not installed…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="transform-data-frame-into-tibble" class="slide level2">
+<h2>Transform data frame into tibble</h2>
+<p>Let’s import the data on commercial trees as a regular data frame:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>sp_commer <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/commercial_sp.csv"</span>)</span>
+<span id="cb14-2"><a href=""></a><span class="fu">class</span>(sp_commer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
+<p><span class="fragment">and transform it into a tibble using the function <span style="color:indianred;">as_tibble</span>:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>sp_commer <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(sp_commer)</span>
+<span id="cb16-2"><a href=""></a><span class="fu">class</span>(sp_commer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="transform-data-frame-into-tibble-1" class="slide level2">
+<h2>Transform data frame into tibble</h2>
+<p>⚠️ Remember that tibbles don’t have row names.</p>
+<p>So if there was row names that we want to keep in our data frame, we should use the function <span style="color:indianred;">rownames_to_column</span> to put them in a column (but let’s not store it here).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">as.tibble</span>(<span class="fu">rownames_to_column</span>(sp_commer))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: `as.tibble()` was deprecated in tibble 2.0.0.
+ℹ Please use `as_tibble()` instead.
+ℹ The signature and semantics have changed, see `?as_tibble`.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 96 × 9
+   rowname CommercialName  Genus     Species CommercialLevel MinFD UpMinFD MaxFD
+   &lt;chr&gt;   &lt;chr&gt;           &lt;chr&gt;     &lt;chr&gt;             &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;int&gt;
+ 1 1       st martin rouge Andira    spp                   2    55      60   120
+ 2 2       bamba apici     Aniba     spp                   2    55      60   120
+ 3 3       bagasse         Bagassa   guiane…               2    55      60   120
+ 4 4       assao           Balizia   pedice…               2    55      60   120
+ 5 5       dokali          Brosimum  parina…               2    55      60   120
+ 6 6       satiné rubané   Brosimum  rubesc…               2    55      60   120
+ 7 7       dokali mapa     Brosimum  utile                 2    55      60   120
+ 8 8       bushi amanda    Buchenav… spp                   2    55      60   120
+ 9 9       carapa          Carapa    guians…               2    55      60   120
+10 10      carapa          Carapa    surina…               2    55      60   120
+# ℹ 86 more rows
+# ℹ 1 more variable: Aggregative &lt;lgl&gt;</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>here we just look at the results but don’t store them</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="commercial-tree-species-1" class="slide level2">
+<h2>Commercial tree species</h2>
+<p>Let’s look at the sp_commer data :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>sp_commer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 96 × 8
+   CommercialName  Genus Species CommercialLevel MinFD UpMinFD MaxFD Aggregative
+   &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;             &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;lgl&gt;      
+ 1 st martin rouge Andi… spp                   2    55      60   120 FALSE      
+ 2 bamba apici     Aniba spp                   2    55      60   120 FALSE      
+ 3 bagasse         Baga… guiane…               2    55      60   120 FALSE      
+ 4 assao           Bali… pedice…               2    55      60   120 FALSE      
+ 5 dokali          Bros… parina…               2    55      60   120 FALSE      
+ 6 satiné rubané   Bros… rubesc…               2    55      60   120 FALSE      
+ 7 dokali mapa     Bros… utile                 2    55      60   120 FALSE      
+ 8 bushi amanda    Buch… spp                   2    55      60   120 FALSE      
+ 9 carapa          Cara… guians…               2    55      60   120 FALSE      
+10 carapa          Cara… surina…               2    55      60   120 FALSE      
+# ℹ 86 more rows</code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">To know more, we can look at the help on the package LoggingLab (if you want to install it, see instructions <a href="https://vincyanebadouard.github.io/LoggingLab/">here</a>)</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>?LoggingLab<span class="sc">::</span>SpeciesCriteria</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<aside class="notes">
+<p>explain that the package is not on the cran</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="manipulate-and-transform-with-the-package-dplyr" class="title-slide slide level1 center">
+<h1>Manipulate and transform with the package <span style="color:indianred;">dplyr</span></h1>
+
+</section>
+<section id="the-verbs-of-dplyer" class="slide level2">
+<h2>The verbs of <span style="color:indianred;">dplyer</span></h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p>The package <span style="color:indianred;">dplyr</span> proposes an intuitive syntax to manipulate and transform data.</p>
+<p>The names of the functions are verbs that relate to the use of the function.</p>
+<p>dplyr functions accept <em>data frame</em> and <em>tibble</em> and return a <em>tibble</em>.</p>
+</div><div class="column" style="width:30%;">
+<p><img data-src="dplyr.png"></p>
+</div></div>
+</section>
+<section id="slice" class="slide level2">
+<h2>slice</h2>
+<p>The function <span style="color:indianred;">slice</span> selects row(s) according to its/their position(s).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">slice</span>(traits, <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Lecythis_poiteaui  86.0  0.0276 5.87e-4 0.695     0.61   49.2  0.27          1
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p><span class="fragment">which is equivalent to:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>traits[<span class="dv">25</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Lecythis_poiteaui  86.0  0.0276 5.87e-4 0.695     0.61   49.2  0.27          1
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="slice-1" class="slide level2">
+<h2>slice</h2>
+<p>and also equivalent to:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href=""></a>  <span class="fu">slice</span>(<span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Lecythis_poiteaui  86.0  0.0276 5.87e-4 0.695     0.61   49.2  0.27          1
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="slice-2" class="slide level2">
+<h2>slice</h2>
+<p>We can also get several rows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">slice</span>(traits, <span class="dv">2</span><span class="sc">:</span><span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 12
+  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Bocoa_prouacensis  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
+2 Brosimum_rubesce…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
+3 Carapa_procera    130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
+4 Caryocar_glabrum   84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
+5 Cecropia_obtusa    69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
+6 Chrysophyllum_sa… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
+7 Conceveiba_guian…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="slice-3" class="slide level2">
+<h2>slice</h2>
+<p>We can select only the first (or last) ones using <span style="color:indianred;">slice_head</span> or <span style="color:indianred;">slice_tail</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">slice_head</span>(traits, <span class="at">n=</span><span class="dv">3</span>) <span class="co"># n specify the number of rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 12
+  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Abarema_jupunba   110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
+2 Bocoa_prouacensis  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
+3 Brosimum_rubesce…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="fu">slice_tail</span>(traits, <span class="at">prop=</span><span class="fl">0.1</span>) <span class="co"># prop specify the proportion of rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 12
+  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Theobroma_subinc…  84.3  0.0188 5.89e-4 0.553     0.28   41.4 0.211          1
+2 Unonopsis_rufesc…  67.8  0.0211 6.11e-4 0.564     0.15   17.6 0.025          1
+3 Virola_michelii    95.2  0.024  6.31e-4 0.476     0.62   46.2 0.229          1
+4 Vouacapoua_ameri…  72    0.026  1.60e-3 0.662     0.81   54.5 0.344          1
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="slice-4" class="slide level2">
+<h2>slice</h2>
+<p><span style="color:indianred;">slice_min</span> and <span style="color:indianred;">slice_max</span> selects the row with the smallest or biggest value for a given variable:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="fu">slice_min</span>(traits, s_dbhmax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Quararibea_duckei  50.8  0.0328 0.00103 0.527     0.14   19.4  0.07          1
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href=""></a>  <span class="fu">slice_max</span>(s_hmax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  s_name       s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Qualea_rosea  106.  0.0184 0.00053 0.548      0.5   58.1 0.299          1
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>the two ways of writing it (using the pipe or not) are equivalent</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="filter" class="slide level2">
+<h2>filter</h2>
+<p>The function <span style="color:indianred;">filter</span> selects rows according to a condition (a test). Only the rows for which the result of the test is TRUE are selected.</p>
+<p><span style="font-size: 30px">Let’s select only the aggregative species in the commercial species dataset:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">filter</span>(sp_commer, Aggregative <span class="sc">==</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 8
+  CommercialName Genus   Species CommercialLevel MinFD UpMinFD MaxFD Aggregative
+  &lt;chr&gt;          &lt;chr&gt;   &lt;chr&gt;             &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;lgl&gt;      
+1 angélique      Dicory… guiane…               1    55      60   120 TRUE       
+2 gonfolo rose   Qualea  rosea                 1    55      60   120 TRUE       </code></pre>
+</div>
+</div>
+</section>
+<section id="filter-1" class="slide level2">
+<h2>filter</h2>
+<p>Or let’s select the species that have a wood specific gravity (wsg) is less than 0.4:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">filter</span>(traits, s_wsg <span class="sc">&lt;</span> <span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 12
+  s_name          s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Cecropia_obtusa  69.5  0.0276 0.00138 0.388     0.35   50.9 0.308          1
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Remember the logical operators of comparisons that we have seen two sessions ago?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="filter-2" class="slide level2">
+<h2>filter</h2>
+<p>We can also combine several conditions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">filter</span>(traits, </span>
+<span id="cb44-2"><a href=""></a>       s_wsg <span class="sc">&lt;</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> <span class="co"># first condition</span></span>
+<span id="cb44-3"><a href=""></a>         s_LMA <span class="sc">&gt;</span> <span class="dv">70</span>) <span class="co"># second condition</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 × 12
+# ℹ 12 variables: s_name &lt;chr&gt;, s_LMA &lt;dbl&gt;, s_Nmass &lt;dbl&gt;, s_Pmass &lt;dbl&gt;,
+#   s_wsg &lt;dbl&gt;, s_dbhmax &lt;dbl&gt;, s_hmax &lt;dbl&gt;, s_ah &lt;dbl&gt;, s_seedmass &lt;dbl&gt;,
+#   s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<p><span class="fragment">There are no species satisfying these two conditions in our dataset.</span></p>
+<aside class="notes">
+<p>we could write it only on one line, it’s just for readability</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="filter-3" class="slide level2">
+<h2>filter</h2>
+<p>We can also use a function to specify the condition.</p>
+<p>Let’s select trees with maximum DBH higher than the median:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">filter</span>(traits, s_dbhmax <span class="sc">&gt;</span> <span class="fu">median</span>(s_dbhmax))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 22 × 12
+   s_name           s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+   &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Abarema_jupunba  110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
+ 2 Brosimum_rubesc…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
+ 3 Carapa_procera   130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
+ 4 Caryocar_glabrum  84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
+ 5 Chrysophyllum_s… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
+ 6 Cordia_sagotii   134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
+ 7 Couepia_bracteo… 123.   0.015  4.82e-4 0.784     0.45   50.9 0.308          1
+ 8 Cyrillopsis_par…  53.0  0.0289 5.72e-4 0.757     0.55   50.9 0.308          1
+ 9 Dicorynia_guian…  91.3  0.0243 6.9 e-4 0.61      1.02   57.9 0.362          1
+10 Drypetes_variab… 113.   0.0204 7.76e-4 0.699     0.5    50.9 0.308          1
+# ℹ 12 more rows
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
 <p>https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#20</p>
 <p>https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
 <p>https://larmarange.github.io/guide-R/manipulation/dplyr.html</p>
 <p>https://juba.github.io/tidyverse/10-dplyr.html</p>
 <p>filter select mutate arrange slice group_by, summarise, arrange… bind… join…</p>
-</section>
-
+</section></section>
 <section>
 <section id="ranger-avec-le-package-tidyr" class="title-slide slide level1 center">
 <h1>Ranger avec le package <em>tidyr</em></h1>
@@ -549,7 +1185,7 @@ Géraldine Derroire
 <p>https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
 </section>
 
-<section id="section" class="title-slide slide level1 center">
+<section id="section-1" class="title-slide slide level1 center">
 <h1></h1>
 
 </section>
@@ -570,6 +1206,9 @@ Géraldine Derroire
 <section id="ressources" class="slide level2">
 <h2>Ressources</h2>
 <p>cheatsheet of each of the tidyverse package</p>
+<ul>
+<li class="fragment">Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
