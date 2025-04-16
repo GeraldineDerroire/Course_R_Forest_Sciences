@@ -1616,7 +1616,7 @@ M^2
 
 ## Operations on matrices
 
-We can transposed a matrix using [t]{style="color:indianred;"}
+We can transpose a matrix using [t]{style="color:indianred;"}
 
 ```{r}
 M
@@ -2002,7 +2002,7 @@ Mymean <- mean(v, na.rm=TRUE)
 -   It has a [name]{style="color:indianred;"}
 
 -   It takes arguments that can be [data]{style="color:blueviolet;"} on which to perform the command, or [parameters or options]{style="color:darkcyan;"} of the function.
-Arguments are put within **( )** and separated with **,**.
+Arguments are put within **( )** and separated with **,**
 
 -   It returns a [result]{style="color:darkgreen;"}
 
