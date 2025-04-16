@@ -196,7 +196,7 @@ In the tidyverse the steps of importing, tidying and transforming data is called
 ::::: columns
 ::: {.column width="70%"}
 These data are available in the package rcontroll (Schmitt *et al* [2023](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.14215)),
-but were are going to import them from a csv file available 
+but were are going to import a slighly modified version from a csv file available 
 [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/func_traits.csv){preview-link="false"}.
 :::
 
@@ -355,6 +355,7 @@ dplyr functions accept *data frame* and *tibble* and return a *tibble*.
 
 ## Operations on rows
 
+::: {.nonincremental}
 * slice
 
 * filter
@@ -362,6 +363,8 @@ dplyr functions accept *data frame* and *tibble* and return a *tibble*.
 * arrange
 
 * distinct
+
+::: 
 
 
 ## slice
@@ -443,7 +446,7 @@ filter(sp_com, Aggregative == TRUE)
 
 ## filter
 
-Or let's select the species that have a wood specific gravity (wsg) is less than 0.4:
+Or let's select the species that have a wood specific gravity (wsg) lower than 0.4:
 
 ```{r}
 filter(traits, s_wsg < 0.4)
@@ -499,12 +502,30 @@ use desc for decreasing
 
 ## distinct
 
-TO DO 
+The function [distinct]{style="color:indianred;"} keep only rows that are distinct.
+
+[Let's create a simple dataset with a duplicated row:]{style="font-size: 26px"}
+
+```{r}
+my_tibble <- tibble(name = c("Lucia", "Lucia", "Anna"),
+                    age = c(21, 21, 23))
+my_tibble
+```
+
+[[and use [distinct]{style="color:indianred;"} to keep only distinct rows:]{style="font-size: 26px"}]{.fragment}
+
+::: fragment
+```{r}
+distinct(my_tibble)
+```
+:::
+
 
 https://larmarange.github.io/guide-R/manipulation/dplyr.html#distinct
 
 ## Operations on columns
 
+::: {.nonincremental}
 * select
 
 * rename
@@ -512,6 +533,8 @@ https://larmarange.github.io/guide-R/manipulation/dplyr.html#distinct
 * mutate
 
 * relocate
+
+:::
 
 ## select
 
@@ -527,7 +550,7 @@ select(sp_com, CommercialName, Genus, Species)
 
 We can also say the columns we don't want to select using [select]{style="color:indianred;"}.
 
-Let's select alls the columns but the commercial name:
+Let's select all the columns but the commercial name, using [-]{style="color:indianred;"} before the name of the column to exclude:
 
 ```{r}
 select(sp_com, - CommercialName)
@@ -561,48 +584,264 @@ select(sp_com, contains("FD"))
 
 ## rename
 
-We can rename columns with the function  [rename]{style="color:indianred;"}:
+We can rename columns with the function [rename]{style="color:indianred;"}:
 
 ```{r}
 rename(traits, 
-       species = s_name) # start with the new name
+       LMA = s_LMA) # start with the new name
 ```
 
 
 
 ## mutate
 
-TO DO
+The function [mutate]{style="color:indianred;"} creates new columns, using existing ones.
+
+[Let's create a new column in the traits dataset to have the DBHmax in cm:]{style="font-size: 25px"}
+
+
+```{r}
+mutate(traits,
+       dbhmax_cm = s_dbhmax * 100) %>% # add the new column dbhmax_cm
+  select(Genus, Species, s_dbhmax, dbhmax_cm) %>%  # select only the 4 columns of interest
+  slice_head(n=5) # just the 5 first rows
+```
+
+
+::: notes
+here we use a pipe to follow with the function select to only show the column we are interested in.
+
+But of course, mutate could be used on its own!
+:::
 
 ## relocate
 
-https://larmarange.github.io/guide-R/manipulation/dplyr.html#relocate
+We can reorder the columns using the function [relocate]{style="color:indianred;"}.
+We just need to specify the columns we want to put first (the order of the other ones is unchanged).
+
+[Let's move the columns of DBHmax and Hmax first (after the species name) in the trait dataset:]{style="font-size: 25px"}
+
+```{r}
+relocate(traits, Genus, Species, s_dbhmax, s_hmax) %>% 
+  slice_head(n=5) # just the 5 first rows
+```
+
+::: notes
+show that the number of columns/variables has NOT changed, just the order
+:::
 
 ## Grouped operations
 
+::: {.nonincremental}
 * group_by
 
 * summarise
 
 * count
 
+:::
 
+
+## group_by 
+
+The function [group_by]{style="color:indianred;"} allow grouping rows according to the values of a column.
+
+[Let's group the table of traits by Genus]{style="font-size: 25px"}
+
+::::: columns
+::: {.column width="70%"}
+```{r}
+traits %>% group_by(Genus)
+```
+:::
+
+::: {.column width="30%"}
+[There is no apparent change in the tibble, except the mention of the grouping.]{.fragment}
+:::
+:::::
+
+::: notes
+show that the tibble has still the same dimensions
+:::
+
+## group_by with slice
+
+When groups have been defined, we can apply further operations on these groups by using other functions.
+
+[Let's select the species with the maximum wsg **for each Genus**, using [slice_max]{style="color:indianred;"}:]{style="font-size: 25px"}
+
+::::: columns
+::: {.column width="70%"}
+```{r}
+traits %>% 
+  group_by(Genus) %>% 
+  slice_max(s_wsg) 
+```
+:::
+
+::: {.column width="30%"}
+[We see that the resulting tibble has as many rows as there are genus.]{.fragment}
+:::
+:::::
+
+::: notes
+note the change of dimension!
+:::
 
 ## group_by
 
+We can also use group_by with [mutate]{style="color:indianred;"} to do an operation by group.
+
+[Let's calculate the mean wsg of each Genus:]{style="font-size: 25px"}
+
+::::: columns
+::: {.column width="70%"}
+```{r}
+traits %>% 
+  group_by(Genus) %>%
+  mutate(mean_wsg = mean(s_wsg)) %>% 
+  select(Genus, Species, s_wsg, mean_wsg) # select only the columns of interest
+```
+:::
+
+::: {.column width="30%"}
+[Here all rows are kept and species of a same genus have the same value for mean_wsg]{.fragment}
+:::
+:::::
+
+::: notes
+all rows are j=kept as we didn't do a selection on rows
+:::
+
+## group_by
+
+We can check this by looking at the Licania for instance:
+
+
+```{r}
+traits %>% 
+  group_by(Genus) %>%
+  mutate(mean_wsg = mean(s_wsg)) %>% # add the mean wsg
+  select(Genus, Species, s_wsg, mean_wsg) %>% # select only the columns of interest
+  filter(Genus == "Licania") # only the Licania
+```
+
+
+## group_by 
+
+We can also use group_by with [filter]{style="color:indianred;"} to select according to a conditions applied **on each group**.
+
+[Let's look at the species that have a higher wsg than the mean of their Genus:]{style="font-size: 25px"}
+
+::::: columns
+::: {.column width="70%"}
+```{r}
+traits %>% 
+  group_by(Genus) %>% 
+  filter(s_wsg > mean(s_wsg)) %>% 
+  select(Genus, Species, s_wsg) # select only the columns of interest
+```
+:::
+
+```{r, echo=FALSE}
+dim_res <- traits %>% 
+  group_by(Genus) %>% 
+  filter(s_wsg > mean(s_wsg)) %>% 
+  select(Genus, Species, s_wsg) %>% 
+  dim()
+```
+
+
+::: {.column width="30%"}
+[[Here there are `r dim_res[1]` species that have a wsg higher than the mean of their genus.]{style="font-size: 25px"}]{.fragment}
+:::
+:::::
+
+::: notes
+Here most of the genus have just one species, so their wsg is not stricly > to the mean
+:::
+
 ## summarise
 
+The function [summarise]{style="color:indianred;"} aggregates the row by performing a summary operation on one or several columns.
+
+[Let's look at the min, max and mean values of wsg accross the dataset:]{style="font-size: 25px"}
+
+```{r}
+traits %>% 
+  summarise(min_wsg = min(s_wsg),
+            max_wsg = max(s_wsg),
+            mean_wsg = mean(s_wsg))
+```
+
+[*Note that here only the summary columns are kept.*]{.fragment}
+
+## summarise
+
+The function [summarise]{style="color:indianred;"} can be used together with [group_by]{style="color:indianred;"} to summarise *by group*.
+
+[Let's look at the min, max and mean values of wsg by Genus:]{style="font-size: 25px"}
+
+::::: columns
+::: {.column width="70%"}
+```{r}
+traits %>% 
+  group_by(Genus) %>% 
+  summarise(min_wsg = min(s_wsg),
+            max_wsg = max(s_wsg),
+            mean_wsg = mean(s_wsg))
+```
+:::
+
+::: {.column width="30%"}
+[*Here there are as many row than there are groups.*]{.fragment}
+:::
+:::::
+
 ## count
+
+The function [count]{style="color:indianred;"} counts the number of rows per group.
+
+[Let's count the number of Species per Genus:]{style="font-size: 25px"}
+
+```{r}
+traits %>% 
+  count(Genus)
+```
+
+
+## Grouping according to several columns
+
+The functions [group_by]{style="color:indianred;"} and [count]{style="color:indianred;"} can be used to group on several columns.
+
+[Let's go back to the dataset on commercial species and count the number of Species per Genus and per commercial name:]{style="font-size: 25px"}
+
+```{r}
+sp_com %>% 
+  count(Genus, CommercialName)
+```
+
+::: notes
+Look at the Carapa and Caryocar
+:::
+
+<!-- continue from here-->
+
+
 
 ## and many other functions... [](https://rstudio.github.io/cheatsheets/html/data-transformation.html){preview-link="false"} 
 
 ![](dplyr_cheatsheet.png){width="30%"}
+
+
 
 ## Using a pipe to chain the different operations
 
 The result of each operation feeds into the next one
 
 put everything in a new object
+
+think about checking the dim
 
  
 
@@ -621,7 +860,7 @@ inner_join keeps only rows from x that have a matching key in y
 full_join keeps all the rows in x and y
 
 
-
+say here that very important to check the dim
 
 
 

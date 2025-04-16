@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-15">
+  <meta name="dcterms.date" content="2025-04-16">
   <title>Introduction to the tidyverse</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-15</p>
+  <p class="date">2025-04-16</p>
 </section>
 <section>
 <section id="what-is-the-tidyverse" class="title-slide slide level1 center">
@@ -609,7 +609,7 @@ Géraldine Derroire
 <p><em>‘‘Functional traits are defined as morpho-physio-phenological traits which impact fitness indirectly via their effects on growth, reproduction and survival, the three components of individual performance.’’</em> Violle <em>et al</em> <a href="https://nsojournals.onlinelibrary.wiley.com/doi/10.1111/j.0030-1299.2007.15559.x">2007</a></p>
 <div class="columns">
 <div class="column" style="width:70%;">
-<p>These data are available in the package rcontroll (Schmitt <em>et al</em> <a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.14215">2023</a>), but were are going to import them from a csv file available <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/func_traits.csv" data-preview-link="false">here</a>.</p>
+<p>These data are available in the package rcontroll (Schmitt <em>et al</em> <a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.14215">2023</a>), but were are going to import a slighly modified version from a csv file available <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/func_traits.csv" data-preview-link="false">here</a>.</p>
 </div><div class="column" style="width:30%;">
 <p><img data-src="rcontroll.png"></p>
 </div></div>
@@ -649,10 +649,10 @@ Géraldine Derroire
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
-<pre><code>Rows: 45 Columns: 12
+<pre><code>Rows: 45 Columns: 13
 ── Column specification ────────────────────────────────────────────────────────
 Delimiter: ","
-chr  (1): s_name
+chr  (2): Genus, Species
 dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 
 ℹ Use `spec()` to retrieve the full column specification for this data.
@@ -715,19 +715,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 45 × 12
-   s_name           s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-   &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
- 1 Abarema_jupunba  110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
- 2 Bocoa_prouacens…  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
- 3 Brosimum_rubesc…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
- 4 Carapa_procera   130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
- 5 Caryocar_glabrum  84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
- 6 Cecropia_obtusa   69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
- 7 Chrysophyllum_s… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
- 8 Conceveiba_guia…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
- 9 Cordia_sagotii   134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
-10 Couepia_bracteo… 123.   0.015  4.82e-4 0.784     0.45   50.9 0.308          1
+<pre><code># A tibble: 45 × 13
+   Genus    Species s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Abarema  jupunba 110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
+ 2 Bocoa    prouac…  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
+ 3 Brosimum rubesc…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
+ 4 Carapa   procera 130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
+ 5 Caryocar glabrum  84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
+ 6 Cecropia obtusa   69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
+ 7 Chrysop… sangui… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
+ 8 Conceve… guiane…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
+ 9 Cordia   sagotii 134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
+10 Couepia  bracte… 123.   0.015  4.82e-4 0.784     0.45   50.9 0.308          1
 # ℹ 35 more rows
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
@@ -890,12 +890,14 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="operations-on-rows" class="slide level2">
 <h2>Operations on rows</h2>
+<div>
 <ul>
-<li class="fragment"><p>slice</p></li>
-<li class="fragment"><p>filter</p></li>
-<li class="fragment"><p>arrange</p></li>
-<li class="fragment"><p>distinct</p></li>
+<li><p>slice</p></li>
+<li><p>filter</p></li>
+<li><p>arrange</p></li>
+<li><p>distinct</p></li>
 </ul>
+</div>
 </section>
 <section id="slice" class="slide level2">
 <h2>slice</h2>
@@ -905,10 +907,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1 Lecythis_poiteaui  86.0  0.0276 5.87e-4 0.695     0.61   49.2  0.27          1
+<pre><code># A tibble: 1 × 13
+  Genus    Species  s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Lecythis poiteaui  86.0  0.0276 5.87e-4 0.695     0.61   49.2  0.27          1
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -919,10 +921,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1 Lecythis_poiteaui  86.0  0.0276 5.87e-4 0.695     0.61   49.2  0.27          1
+<pre><code># A tibble: 1 × 13
+  Genus    Species  s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Lecythis poiteaui  86.0  0.0276 5.87e-4 0.695     0.61   49.2  0.27          1
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -937,10 +939,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1 Lecythis_poiteaui  86.0  0.0276 5.87e-4 0.695     0.61   49.2  0.27          1
+<pre><code># A tibble: 1 × 13
+  Genus    Species  s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Lecythis poiteaui  86.0  0.0276 5.87e-4 0.695     0.61   49.2  0.27          1
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -953,16 +955,16 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7 × 12
-  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1 Bocoa_prouacensis  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
-2 Brosimum_rubesce…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
-3 Carapa_procera    130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
-4 Caryocar_glabrum   84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
-5 Cecropia_obtusa    69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
-6 Chrysophyllum_sa… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
-7 Conceveiba_guian…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
+<pre><code># A tibble: 7 × 13
+  Genus     Species s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Bocoa     prouac…  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
+2 Brosimum  rubesc…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
+3 Carapa    procera 130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
+4 Caryocar  glabrum  84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
+5 Cecropia  obtusa   69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
+6 Chrysoph… sangui… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
+7 Concevei… guiane…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -975,12 +977,12 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 12
-  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1 Abarema_jupunba   110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
-2 Bocoa_prouacensis  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
-3 Brosimum_rubesce…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
+<pre><code># A tibble: 3 × 13
+  Genus    Species  s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;    &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Abarema  jupunba  110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
+2 Bocoa    prouace…  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
+3 Brosimum rubesce…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -990,13 +992,13 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 12
-  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1 Theobroma_subinc…  84.3  0.0188 5.89e-4 0.553     0.28   41.4 0.211          1
-2 Unonopsis_rufesc…  67.8  0.0211 6.11e-4 0.564     0.15   17.6 0.025          1
-3 Virola_michelii    95.2  0.024  6.31e-4 0.476     0.62   46.2 0.229          1
-4 Vouacapoua_ameri…  72    0.026  1.60e-3 0.662     0.81   54.5 0.344          1
+<pre><code># A tibble: 4 × 13
+  Genus     Species s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Theobroma subinc…  84.3  0.0188 5.89e-4 0.553     0.28   41.4 0.211          1
+2 Unonopsis rufesc…  67.8  0.0211 6.11e-4 0.564     0.15   17.6 0.025          1
+3 Virola    michel…  95.2  0.024  6.31e-4 0.476     0.62   46.2 0.229          1
+4 Vouacapo… americ…  72    0.026  1.60e-3 0.662     0.81   54.5 0.344          1
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1010,10 +1012,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  s_name            s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-  &lt;chr&gt;             &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1 Quararibea_duckei  50.8  0.0328 0.00103 0.527     0.14   19.4  0.07          1
+<pre><code># A tibble: 1 × 13
+  Genus     Species s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Quararib… duckei   50.8  0.0328 0.00103 0.527     0.14   19.4  0.07          1
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1024,10 +1026,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  s_name       s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-  &lt;chr&gt;        &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1 Qualea_rosea  106.  0.0184 0.00053 0.548      0.5   58.1 0.299          1
+<pre><code># A tibble: 1 × 13
+  Genus  Species s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;  &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Qualea rosea    106.  0.0184 0.00053 0.548      0.5   58.1 0.299          1
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1065,16 +1067,16 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="filter-1" class="slide level2">
 <h2>filter</h2>
-<p>Or let’s select the species that have a wood specific gravity (wsg) is less than 0.4:</p>
+<p>Or let’s select the species that have a wood specific gravity (wsg) lower than 0.4:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">filter</span>(traits, s_wsg <span class="sc">&lt;</span> <span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 12
-  s_name          s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-  &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-1 Cecropia_obtusa  69.5  0.0276 0.00138 0.388     0.35   50.9 0.308          1
+<pre><code># A tibble: 1 × 13
+  Genus    Species s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+  &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Cecropia obtusa   69.5  0.0276 0.00138 0.388     0.35   50.9 0.308          1
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
 </div>
@@ -1102,10 +1104,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 0 × 12
-# ℹ 12 variables: s_name &lt;chr&gt;, s_LMA &lt;dbl&gt;, s_Nmass &lt;dbl&gt;, s_Pmass &lt;dbl&gt;,
-#   s_wsg &lt;dbl&gt;, s_dbhmax &lt;dbl&gt;, s_hmax &lt;dbl&gt;, s_ah &lt;dbl&gt;, s_seedmass &lt;dbl&gt;,
-#   s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+<pre><code># A tibble: 0 × 13
+# ℹ 13 variables: Genus &lt;chr&gt;, Species &lt;chr&gt;, s_LMA &lt;dbl&gt;, s_Nmass &lt;dbl&gt;,
+#   s_Pmass &lt;dbl&gt;, s_wsg &lt;dbl&gt;, s_dbhmax &lt;dbl&gt;, s_hmax &lt;dbl&gt;, s_ah &lt;dbl&gt;,
+#   s_seedmass &lt;dbl&gt;, s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
 </div>
 <p><span class="fragment">There are no species satisfying these two conditions in our dataset.</span></p>
@@ -1132,19 +1134,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 22 × 12
-   s_name           s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-   &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
- 1 Abarema_jupunba  110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
- 2 Brosimum_rubesc…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
- 3 Carapa_procera   130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
- 4 Caryocar_glabrum  84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
- 5 Chrysophyllum_s… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
- 6 Cordia_sagotii   134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
- 7 Couepia_bracteo… 123.   0.015  4.82e-4 0.784     0.45   50.9 0.308          1
- 8 Cyrillopsis_par…  53.0  0.0289 5.72e-4 0.757     0.55   50.9 0.308          1
- 9 Dicorynia_guian…  91.3  0.0243 6.9 e-4 0.61      1.02   57.9 0.362          1
-10 Drypetes_variab… 113.   0.0204 7.76e-4 0.699     0.5    50.9 0.308          1
+<pre><code># A tibble: 22 × 13
+   Genus    Species s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Abarema  jupunba 110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
+ 2 Brosimum rubesc…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
+ 3 Carapa   procera 130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
+ 4 Caryocar glabrum  84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
+ 5 Chrysop… sangui… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
+ 6 Cordia   sagotii 134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
+ 7 Couepia  bracte… 123.   0.015  4.82e-4 0.784     0.45   50.9 0.308          1
+ 8 Cyrillo… paraen…  53.0  0.0289 5.72e-4 0.757     0.55   50.9 0.308          1
+ 9 Dicoryn… guiane…  91.3  0.0243 6.9 e-4 0.61      1.02   57.9 0.362          1
+10 Drypetes variab… 113.   0.0204 7.76e-4 0.699     0.5    50.9 0.308          1
 # ℹ 12 more rows
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
@@ -1161,19 +1163,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 45 × 12
-   s_name           s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-   &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
- 1 Cecropia_obtusa   69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
- 2 Cordia_sagotii   134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
- 3 Neea_floribunda   74.3  0.036  7.65e-4 0.451     0.28   50.9 0.308          1
- 4 Virola_michelii   95.2  0.024  6.31e-4 0.476     0.62   46.2 0.229          1
- 5 Iryanthera_sago…  91.0  0.0193 5.29e-4 0.522     0.37   44.3 0.264          1
- 6 Quararibea_duck…  50.8  0.0328 1.03e-3 0.527     0.14   19.4 0.07           1
- 7 Conceveiba_guia…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
- 8 Qualea_rosea     106.   0.0184 5.3 e-4 0.548     0.5    58.1 0.299          1
- 9 Carapa_procera   130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
-10 Theobroma_subin…  84.3  0.0188 5.89e-4 0.553     0.28   41.4 0.211          1
+<pre><code># A tibble: 45 × 13
+   Genus    Species s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Cecropia obtusa   69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
+ 2 Cordia   sagotii 134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
+ 3 Neea     florib…  74.3  0.036  7.65e-4 0.451     0.28   50.9 0.308          1
+ 4 Virola   michel…  95.2  0.024  6.31e-4 0.476     0.62   46.2 0.229          1
+ 5 Iryanth… sagoti…  91.0  0.0193 5.29e-4 0.522     0.37   44.3 0.264          1
+ 6 Quarari… duckei   50.8  0.0328 1.03e-3 0.527     0.14   19.4 0.07           1
+ 7 Conceve… guiane…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
+ 8 Qualea   rosea   106.   0.0184 5.3 e-4 0.548     0.5    58.1 0.299          1
+ 9 Carapa   procera 130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
+10 Theobro… subinc…  84.3  0.0188 5.89e-4 0.553     0.28   41.4 0.211          1
 # ℹ 35 more rows
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
@@ -1194,24 +1196,57 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="distinct" class="slide level2">
 <h2>distinct</h2>
-<p>TO DO</p>
+<p>The function <span style="color:indianred;">distinct</span> keep only rows that are distinct.</p>
+<p><span style="font-size: 26px">Let’s create a simple dataset with a duplicated row:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Lucia"</span>, <span class="st">"Lucia"</span>, <span class="st">"Anna"</span>),</span>
+<span id="cb50-2"><a href=""></a>                    <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">21</span>, <span class="dv">23</span>))</span>
+<span id="cb50-3"><a href=""></a>my_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  name    age
+  &lt;chr&gt; &lt;dbl&gt;
+1 Lucia    21
+2 Lucia    21
+3 Anna     23</code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 26px">and use <span style="color:indianred;">distinct</span> to keep only distinct rows:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="fu">distinct</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  name    age
+  &lt;chr&gt; &lt;dbl&gt;
+1 Lucia    21
+2 Anna     23</code></pre>
+</div>
+</div>
+</div>
 <p>https://larmarange.github.io/guide-R/manipulation/dplyr.html#distinct</p>
 </section>
 <section id="operations-on-columns" class="slide level2">
 <h2>Operations on columns</h2>
+<div>
 <ul>
-<li class="fragment"><p>select</p></li>
-<li class="fragment"><p>rename</p></li>
-<li class="fragment"><p>mutate</p></li>
-<li class="fragment"><p>relocate</p></li>
+<li><p>select</p></li>
+<li><p>rename</p></li>
+<li><p>mutate</p></li>
+<li><p>relocate</p></li>
 </ul>
+</div>
 </section>
 <section id="select" class="slide level2">
 <h2>select</h2>
 <p>The function <span style="color:indianred;">select</span> selects columns:</p>
 <p>Let’s select the Commercial names, Genus and Species from sp_com:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a><span class="fu">select</span>(sp_com, CommercialName, Genus, Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a><span class="fu">select</span>(sp_com, CommercialName, Genus, Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1235,9 +1270,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <section id="select-1" class="slide level2">
 <h2>select</h2>
 <p>We can also say the columns we don’t want to select using <span style="color:indianred;">select</span>.</p>
-<p>Let’s select alls the columns but the commercial name:</p>
+<p>Let’s select all the columns but the commercial name, using <span style="color:indianred;">-</span> before the name of the column to exclude:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="fu">select</span>(sp_com, <span class="sc">-</span> CommercialName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a><span class="fu">select</span>(sp_com, <span class="sc">-</span> CommercialName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1264,8 +1299,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a><span class="co"># columns starting with "com"</span></span>
-<span id="cb54-2"><a href=""></a><span class="fu">select</span>(sp_com, <span class="fu">starts_with</span>(<span class="st">"Com"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="co"># columns starting with "com"</span></span>
+<span id="cb58-2"><a href=""></a><span class="fu">select</span>(sp_com, <span class="fu">starts_with</span>(<span class="st">"Com"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1288,8 +1323,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a><span class="co"># columns containing "FD"</span></span>
-<span id="cb56-2"><a href=""></a><span class="fu">select</span>(sp_com, <span class="fu">contains</span>(<span class="st">"FD"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="co"># columns containing "FD"</span></span>
+<span id="cb60-2"><a href=""></a><span class="fu">select</span>(sp_com, <span class="fu">contains</span>(<span class="st">"FD"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1317,24 +1352,24 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>rename</h2>
 <p>We can rename columns with the function <span style="color:indianred;">rename</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="fu">rename</span>(traits, </span>
-<span id="cb58-2"><a href=""></a>       <span class="at">species =</span> s_name) <span class="co"># start with the new name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="fu">rename</span>(traits, </span>
+<span id="cb62-2"><a href=""></a>       <span class="at">LMA =</span> s_LMA) <span class="co"># start with the new name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 45 × 12
-   species          s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
-   &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
- 1 Abarema_jupunba  110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
- 2 Bocoa_prouacens…  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
- 3 Brosimum_rubesc…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
- 4 Carapa_procera   130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
- 5 Caryocar_glabrum  84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
- 6 Cecropia_obtusa   69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
- 7 Chrysophyllum_s… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
- 8 Conceveiba_guia…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
- 9 Cordia_sagotii   134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
-10 Couepia_bracteo… 123.   0.015  4.82e-4 0.784     0.45   50.9 0.308          1
+<pre><code># A tibble: 45 × 13
+   Genus    Species   LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Abarema  jupunba 110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
+ 2 Bocoa    prouac…  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
+ 3 Brosimum rubesc…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
+ 4 Carapa   procera 130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
+ 5 Caryocar glabrum  84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
+ 6 Cecropia obtusa   69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
+ 7 Chrysop… sangui… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
+ 8 Conceve… guiane…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
+ 9 Cordia   sagotii 134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
+10 Couepia  bracte… 123.   0.015  4.82e-4 0.784     0.45   50.9 0.308          1
 # ℹ 35 more rows
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
@@ -1342,28 +1377,416 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="mutate" class="slide level2">
 <h2>mutate</h2>
-<p>TO DO</p>
+<p>The function <span style="color:indianred;">mutate</span> creates new columns, using existing ones.</p>
+<p><span style="font-size: 25px">Let’s create a new column in the traits dataset to have the DBHmax in cm:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a><span class="fu">mutate</span>(traits,</span>
+<span id="cb64-2"><a href=""></a>       <span class="at">dbhmax_cm =</span> s_dbhmax <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="co"># add the new column dbhmax_cm</span></span>
+<span id="cb64-3"><a href=""></a>  <span class="fu">select</span>(Genus, Species, s_dbhmax, dbhmax_cm) <span class="sc">%&gt;%</span>  <span class="co"># select only the 4 columns of interest</span></span>
+<span id="cb64-4"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="co"># just the 5 first rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 4
+  Genus    Species     s_dbhmax dbhmax_cm
+  &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;
+1 Abarema  jupunba         0.66        66
+2 Bocoa    prouacensis     0.4         40
+3 Brosimum rubescens       0.52        52
+4 Carapa   procera         0.49        49
+5 Caryocar glabrum         1.15       115</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>here we use a pipe to follow with the function select to only show the column we are interested in.</p>
+<p>But of course, mutate could be used on its own!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="relocate" class="slide level2">
 <h2>relocate</h2>
-<p>https://larmarange.github.io/guide-R/manipulation/dplyr.html#relocate</p>
+<p>We can reorder the columns using the function <span style="color:indianred;">relocate</span>. We just need to specify the columns we want to put first (the order of the other ones is unchanged).</p>
+<p><span style="font-size: 25px">Let’s move the columns of DBHmax and Hmax first (after the species name) in the trait dataset:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="fu">relocate</span>(traits, Genus, Species, s_dbhmax, s_hmax) <span class="sc">%&gt;%</span> </span>
+<span id="cb66-2"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="co"># just the 5 first rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 13
+  Genus    Species  s_dbhmax s_hmax s_LMA s_Nmass s_Pmass s_wsg  s_ah s_seedmass
+  &lt;chr&gt;    &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+1 Abarema  jupunba      0.66   50.9 110.   0.0232 5.7 e-4 0.576 0.308          1
+2 Bocoa    prouace…     0.4    47.9  95.6  0.0255 5.05e-4 0.798 0.251          1
+3 Brosimum rubesce…     0.52   50.9  85.8  0.0188 6.88e-4 0.619 0.308          1
+4 Carapa   procera      0.49   41.4 130.   0.0177 6.36e-4 0.55  0.187          1
+5 Caryocar glabrum      1.15   48.6  84.2  0.0217 8.13e-4 0.612 0.275          1
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>show that the number of columns/variables has NOT changed, just the order</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="grouped-operations" class="slide level2">
 <h2>Grouped operations</h2>
+<div>
 <ul>
-<li class="fragment"><p>group_by</p></li>
-<li class="fragment"><p>summarise</p></li>
-<li class="fragment"><p>count</p></li>
+<li><p>group_by</p></li>
+<li><p>summarise</p></li>
+<li><p>count</p></li>
 </ul>
+</div>
 </section>
 <section id="group_by" class="slide level2">
 <h2>group_by</h2>
+<p>The function <span style="color:indianred;">group_by</span> allow grouping rows according to the values of a column.</p>
+<p><span style="font-size: 25px">Let’s group the table of traits by Genus</span></p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a>traits <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 45 × 13
+# Groups:   Genus [35]
+   Genus    Species s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Abarema  jupunba 110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
+ 2 Bocoa    prouac…  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
+ 3 Brosimum rubesc…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
+ 4 Carapa   procera 130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
+ 5 Caryocar glabrum  84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
+ 6 Cecropia obtusa   69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
+ 7 Chrysop… sangui… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
+ 8 Conceve… guiane…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
+ 9 Cordia   sagotii 134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
+10 Couepia  bracte… 123.   0.015  4.82e-4 0.784     0.45   50.9 0.308          1
+# ℹ 35 more rows
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment">There is no apparent change in the tibble, except the mention of the grouping.</span></p>
+</div></div>
+<aside class="notes">
+<p>show that the tibble has still the same dimensions</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="group_by-with-slice" class="slide level2">
+<h2>group_by with slice</h2>
+<p>When groups have been defined, we can apply further operations on these groups by using other functions.</p>
+<p><span style="font-size: 25px">Let’s select the species with the maximum wsg <strong>for each Genus</strong>, using <span style="color:indianred;">slice_max</span>:</span></p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb70-2"><a href=""></a>  <span class="fu">group_by</span>(Genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb70-3"><a href=""></a>  <span class="fu">slice_max</span>(s_wsg) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 35 × 13
+# Groups:   Genus [35]
+   Genus    Species s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Abarema  jupunba 110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
+ 2 Bocoa    prouac…  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
+ 3 Brosimum rubesc…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
+ 4 Carapa   procera 130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
+ 5 Caryocar glabrum  84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
+ 6 Cecropia obtusa   69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
+ 7 Chrysop… sangui… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
+ 8 Conceve… guiane…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
+ 9 Cordia   sagotii 134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
+10 Couepia  bracte… 123.   0.015  4.82e-4 0.784     0.45   50.9 0.308          1
+# ℹ 25 more rows
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment">We see that the resulting tibble has as many rows as there are genus.</span></p>
+</div></div>
+<aside class="notes">
+<p>note the change of dimension!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="group_by-1" class="slide level2">
+<h2>group_by</h2>
+<p>We can also use group_by with <span style="color:indianred;">mutate</span> to do an operation by group.</p>
+<p><span style="font-size: 25px">Let’s calculate the mean wsg of each Genus:</span></p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb72-2"><a href=""></a>  <span class="fu">group_by</span>(Genus) <span class="sc">%&gt;%</span></span>
+<span id="cb72-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">mean_wsg =</span> <span class="fu">mean</span>(s_wsg)) <span class="sc">%&gt;%</span> </span>
+<span id="cb72-4"><a href=""></a>  <span class="fu">select</span>(Genus, Species, s_wsg, mean_wsg) <span class="co"># select only the columns of interest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 45 × 4
+# Groups:   Genus [35]
+   Genus         Species        s_wsg mean_wsg
+   &lt;chr&gt;         &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Abarema       jupunba        0.576    0.576
+ 2 Bocoa         prouacensis    0.798    0.798
+ 3 Brosimum      rubescens      0.619    0.619
+ 4 Carapa        procera        0.55     0.55 
+ 5 Caryocar      glabrum        0.612    0.612
+ 6 Cecropia      obtusa         0.388    0.388
+ 7 Chrysophyllum sanguinolentum 0.566    0.566
+ 8 Conceveiba    guianensis     0.537    0.537
+ 9 Cordia        sagotii        0.443    0.443
+10 Couepia       bracteosa      0.784    0.768
+# ℹ 35 more rows</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment">Here all rows are kept and species of a same genus have the same value for mean_wsg</span></p>
+</div></div>
+<aside class="notes">
+<p>all rows are j=kept as we didn’t do a selection on rows</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="group_by-2" class="slide level2">
+<h2>group_by</h2>
+<p>We can check this by looking at the Licania for instance:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb74-2"><a href=""></a>  <span class="fu">group_by</span>(Genus) <span class="sc">%&gt;%</span></span>
+<span id="cb74-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">mean_wsg =</span> <span class="fu">mean</span>(s_wsg)) <span class="sc">%&gt;%</span> <span class="co"># add the mean wsg</span></span>
+<span id="cb74-4"><a href=""></a>  <span class="fu">select</span>(Genus, Species, s_wsg, mean_wsg) <span class="sc">%&gt;%</span> <span class="co"># select only the columns of interest</span></span>
+<span id="cb74-5"><a href=""></a>  <span class="fu">filter</span>(Genus <span class="sc">==</span> <span class="st">"Licania"</span>) <span class="co"># only the Licania</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+# Groups:   Genus [1]
+  Genus   Species     s_wsg mean_wsg
+  &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;    &lt;dbl&gt;
+1 Licania alba        0.755    0.769
+2 Licania canescens   0.766    0.769
+3 Licania membranacea 0.785    0.769</code></pre>
+</div>
+</div>
+</section>
+<section id="group_by-3" class="slide level2">
+<h2>group_by</h2>
+<p>We can also use group_by with <span style="color:indianred;">filter</span> to select according to a conditions applied <strong>on each group</strong>.</p>
+<p><span style="font-size: 25px">Let’s look at the species that have a higher wsg than the mean of their Genus:</span></p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb76-2"><a href=""></a>  <span class="fu">group_by</span>(Genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb76-3"><a href=""></a>  <span class="fu">filter</span>(s_wsg <span class="sc">&gt;</span> <span class="fu">mean</span>(s_wsg)) <span class="sc">%&gt;%</span> </span>
+<span id="cb76-4"><a href=""></a>  <span class="fu">select</span>(Genus, Species, s_wsg) <span class="co"># select only the columns of interest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 3
+# Groups:   Genus [6]
+  Genus       Species       s_wsg
+  &lt;chr&gt;       &lt;chr&gt;         &lt;dbl&gt;
+1 Couepia     bracteosa     0.784
+2 Eschweilera coriacea      0.657
+3 Lecythis    poiteaui      0.695
+4 Licania     membranacea   0.785
+5 Pouteria    cladantha     0.811
+6 Protium     gallicum      0.639
+7 Protium     trifoliolatum 0.659</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment"><span style="font-size: 25px">Here there are 7 species that have a wsg higher than the mean of their genus.</span></span></p>
+</div></div>
+<aside class="notes">
+<p>Here most of the genus have just one species, so their wsg is not stricly &gt; to the mean</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="summarise" class="slide level2">
 <h2>summarise</h2>
+<p>The function <span style="color:indianred;">summarise</span> aggregates the row by performing a summary operation on one or several columns.</p>
+<p><span style="font-size: 25px">Let’s look at the min, max and mean values of wsg accross the dataset:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb78-2"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">min_wsg =</span> <span class="fu">min</span>(s_wsg),</span>
+<span id="cb78-3"><a href=""></a>            <span class="at">max_wsg =</span> <span class="fu">max</span>(s_wsg),</span>
+<span id="cb78-4"><a href=""></a>            <span class="at">mean_wsg =</span> <span class="fu">mean</span>(s_wsg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  min_wsg max_wsg mean_wsg
+    &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+1   0.388   0.811    0.635</code></pre>
+</div>
+</div>
+<p><span class="fragment"><em>Note that here only the summary columns are kept.</em></span></p>
+</section>
+<section id="summarise-1" class="slide level2">
+<h2>summarise</h2>
+<p>The function <span style="color:indianred;">summarise</span> can be used together with <span style="color:indianred;">group_by</span> to summarise <em>by group</em>.</p>
+<p><span style="font-size: 25px">Let’s look at the min, max and mean values of wsg by Genus:</span></p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb80-2"><a href=""></a>  <span class="fu">group_by</span>(Genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb80-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">min_wsg =</span> <span class="fu">min</span>(s_wsg),</span>
+<span id="cb80-4"><a href=""></a>            <span class="at">max_wsg =</span> <span class="fu">max</span>(s_wsg),</span>
+<span id="cb80-5"><a href=""></a>            <span class="at">mean_wsg =</span> <span class="fu">mean</span>(s_wsg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 35 × 4
+   Genus         min_wsg max_wsg mean_wsg
+   &lt;chr&gt;           &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+ 1 Abarema         0.576   0.576    0.576
+ 2 Bocoa           0.798   0.798    0.798
+ 3 Brosimum        0.619   0.619    0.619
+ 4 Carapa          0.55    0.55     0.55 
+ 5 Caryocar        0.612   0.612    0.612
+ 6 Cecropia        0.388   0.388    0.388
+ 7 Chrysophyllum   0.566   0.566    0.566
+ 8 Conceveiba      0.537   0.537    0.537
+ 9 Cordia          0.443   0.443    0.443
+10 Couepia         0.752   0.784    0.768
+# ℹ 25 more rows</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment"><em>Here there are as many row than there are groups.</em></span></p>
+</div></div>
 </section>
 <section id="count" class="slide level2">
 <h2>count</h2>
+<p>The function <span style="color:indianred;">count</span> counts the number of rows per group.</p>
+<p><span style="font-size: 25px">Let’s count the number of Species per Genus:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb82-2"><a href=""></a>  <span class="fu">count</span>(Genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 35 × 2
+   Genus             n
+   &lt;chr&gt;         &lt;int&gt;
+ 1 Abarema           1
+ 2 Bocoa             1
+ 3 Brosimum          1
+ 4 Carapa            1
+ 5 Caryocar          1
+ 6 Cecropia          1
+ 7 Chrysophyllum     1
+ 8 Conceveiba        1
+ 9 Cordia            1
+10 Couepia           2
+# ℹ 25 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="grouping-accroding-to-several-columns" class="slide level2">
+<h2>Grouping accroding to several columns</h2>
+<p>The functions <span style="color:indianred;">group_by</span> and <span style="color:indianred;">count</span> can be used to group on several columns.</p>
+<p><span style="font-size: 25px">Let’s go back to the dataset on commercial species and count the number of Species per Genus and commercial name:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a>sp_com <span class="sc">%&gt;%</span> </span>
+<span id="cb84-2"><a href=""></a>  <span class="fu">count</span>(Genus, CommercialName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 66 × 3
+   Genus      CommercialName      n
+   &lt;chr&gt;      &lt;chr&gt;           &lt;int&gt;
+ 1 Andira     st martin rouge     1
+ 2 Aniba      bamba apici         1
+ 3 Bagassa    bagasse             1
+ 4 Balizia    assao               1
+ 5 Brosimum   dokali              1
+ 6 Brosimum   dokali mapa         1
+ 7 Brosimum   satiné rubané       1
+ 8 Buchenavia bushi amanda        1
+ 9 Carapa     carapa              2
+10 Caryocar   chawari             2
+# ℹ 56 more rows</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Look at the Carapa and Caryocar</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!-- continue from here-->
 </section>
 <section id="and-many-other-functions" class="slide level2">
 <h2>and many other functions… <a href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" data-preview-link="false"></a></h2>
@@ -1373,6 +1796,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>Using a pipe to chain the different operations</h2>
 <p>The result of each operation feeds into the next one</p>
 <p>put everything in a new object</p>
+<p>think about checking the dim</p>
 </section>
 <section id="combining-multiple-tables" class="slide level2">
 <h2>Combining multiple tables</h2>
@@ -1386,6 +1810,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>right_join keeps all rows in y</p>
 <p>inner_join keeps only rows from x that have a matching key in y</p>
 <p>full_join keeps all the rows in x and y</p>
+<p>say here that very important to check the dim</p>
 <aside class="notes">
 <p>end of the first session</p>
 <style type="text/css">
