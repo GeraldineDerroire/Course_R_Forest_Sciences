@@ -804,11 +804,20 @@ The function [count]{style="color:indianred;"} counts the number of rows per gro
 
 [Let's count the number of Species per Genus:]{style="font-size: 25px"}
 
+::::: columns
+::: {.column width="70%"}
 ```{r}
 traits %>% 
   count(Genus)
 ```
+:::
 
+
+::: {.column width="30%"}
+[[We see that the genus *Couepia* has two species.]{style="font-size: 25px"}]{.fragment}
+
+:::
+:::::
 
 ## Grouping according to several columns
 
@@ -816,34 +825,80 @@ The functions [group_by]{style="color:indianred;"} and [count]{style="color:indi
 
 [Let's go back to the dataset on commercial species and count the number of Species per Genus and per commercial name:]{style="font-size: 25px"}
 
+::::: columns
+::: {.column width="60%"}
 ```{r}
 sp_com %>% 
   count(Genus, CommercialName)
 ```
+:::
+
+::: {.column width="40%"}
+[[We see that the genus *Brosimum* has three species, all with a different commercial name.]{style="font-size: 25px"}]{.fragment}
+
+[[We see for instance that the Genus *Caryocar* has two species for which the commercial name is chawari.]{style="font-size: 25px"}]{.fragment}
+:::
+:::::
 
 ::: notes
 Look at the Carapa and Caryocar
 :::
 
-<!-- continue from here-->
 
+## Using a pipe to chain the different operations
 
+We can a pipe [%>%]{style="color:indianred;"}  to chain several operations.
 
-## and many other functions... [](https://rstudio.github.io/cheatsheets/html/data-transformation.html){preview-link="false"} 
+The result of each operation feeds into the next one.
 
-![](dplyr_cheatsheet.png){width="30%"}
+[⚠️ Don't forget to put the result of a pipe in a new (or existing) object.]{.fragment}
 
+[When writing a pipe, write the operations one by one and **test them one by one**.]{.fragment}
+
+[The first thing to check is if the dimensions of the tibble have changed, and if you were expecting it to change.]{.fragment}
 
 
 ## Using a pipe to chain the different operations
 
-The result of each operation feeds into the next one
 
-put everything in a new object
+::::: columns
+::: {.column width="65%"}
+```{r}
+gen_dim_max <- traits %>% 
+  select(Genus, Species, s_hmax, s_dbhmax) %>% 
+  rename(Hmax = s_hmax,
+         DBHmax = s_dbhmax) %>% 
+  mutate(BAmax = (DBHmax/2)^2 * pi) %>% 
+  group_by(Genus) %>% 
+  summarise(Hmax_mean = mean(Hmax),
+            DBHmax_mean = mean(DBHmax),
+            BAmax_mean = mean(BAmax)) %>% 
+  arrange(desc(BAmax_mean))
+```
 
-think about checking the dim
+[What did we do?]{.fragment}
 
- 
+:::
+
+::: {.column width="35%"}
+* [select 4 columns]{style="font-size: 25px"}
+
+* [rename 2 columns]{style="font-size: 25px"}
+
+* [add the basal area max]{style="font-size: 25px"}
+
+* [group by genus]{style="font-size: 25px"}
+
+* [calculate mean dimensions by genus]{style="font-size: 25px"}
+
+* [sort the table by decreasing order of BAmax_mean]{style="font-size: 25px"}
+
+* [store the result in *gen_dim_max*]{style="font-size: 25px"}
+
+:::
+:::::
+
+<!-- carry on from here--> 
 
 ## Combining multiple tables
 
@@ -851,23 +906,40 @@ think about checking the dim
 
 ## The joints
 
-left_join keeps all rows in x
+Several functions allows to join two tibbles (*here x and y*) using a key (or several).
 
-right_join keeps all rows in y
+[[A key is a column (or group of column) that is used to match rows when joining two datasets.]{style="font-size: 30px"}]{.fragment}
+[[⚠️ A key need to uniquely identify observations in one or both datasets (otherwise there will be several combinations of matches).]{style="font-size: 30px"}]{.fragment}
 
-inner_join keeps only rows from x that have a matching key in y
+::::: columns
+::: {.column width="50%"}
+* [left_join]{style="color:indianred;"} keeps all rows in x
 
-full_join keeps all the rows in x and y
+* [right_join]{style="color:indianred;"} keeps all rows in y
+:::
 
+::: {.column width="50%"}
+* [inner_join]{style="color:indianred;"} keeps only rows from x that have a matching key in y
 
+* [full_join]{style="color:indianred;"} keeps all the rows in x and y
+:::
+:::::
+
+::: notes 
 say here that very important to check the dim
+:::
 
+## left_join
 
+give an example for all here (and explain the dims with a test)
 
+## and many other functions... [](https://rstudio.github.io/cheatsheets/html/data-transformation.html){preview-link="false"} 
+
+![](dplyr_cheatsheet.png){width="30%"}
 
 
 ::: notes
-end of the first session
+end of the first session??? or before after the joint???
 :::
 
 # Ranger avec le package *tidyr*

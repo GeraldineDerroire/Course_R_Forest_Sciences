@@ -1724,6 +1724,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>count</h2>
 <p>The function <span style="color:indianred;">count</span> counts the number of rows per group.</p>
 <p><span style="font-size: 25px">Let’s count the number of Species per Genus:</span></p>
+<div class="columns">
+<div class="column" style="width:70%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
 <span id="cb82-2"><a href=""></a>  <span class="fu">count</span>(Genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1746,11 +1748,16 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 # ℹ 25 more rows</code></pre>
 </div>
 </div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment"><span style="font-size: 25px">We see that the genus <em>Couepia</em> has two species.</span></span></p>
+</div></div>
 </section>
-<section id="grouping-accroding-to-several-columns" class="slide level2">
-<h2>Grouping accroding to several columns</h2>
+<section id="grouping-according-to-several-columns" class="slide level2">
+<h2>Grouping according to several columns</h2>
 <p>The functions <span style="color:indianred;">group_by</span> and <span style="color:indianred;">count</span> can be used to group on several columns.</p>
-<p><span style="font-size: 25px">Let’s go back to the dataset on commercial species and count the number of Species per Genus and commercial name:</span></p>
+<p><span style="font-size: 25px">Let’s go back to the dataset on commercial species and count the number of Species per Genus and per commercial name:</span></p>
+<div class="columns">
+<div class="column" style="width:60%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a>sp_com <span class="sc">%&gt;%</span> </span>
 <span id="cb84-2"><a href=""></a>  <span class="fu">count</span>(Genus, CommercialName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1773,6 +1780,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 # ℹ 56 more rows</code></pre>
 </div>
 </div>
+</div><div class="column" style="width:40%;">
+<p><span class="fragment"><span style="font-size: 25px">We see that the genus <em>Brosimum</em> has three species, all with a different commercial name.</span></span></p>
+<p><span class="fragment"><span style="font-size: 25px">We see for instance that the Genus <em>Caryocar</em> has two species for which the commercial name is chawari.</span></span></p>
+</div></div>
 <aside class="notes">
 <p>Look at the Carapa and Caryocar</p>
 <style type="text/css">
@@ -1786,17 +1797,47 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<!-- continue from here-->
 </section>
-<section id="and-many-other-functions" class="slide level2">
-<h2>and many other functions… <a href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" data-preview-link="false"></a></h2>
-
-<img data-src="dplyr_cheatsheet.png" style="width:30.0%" class="r-stretch"></section>
 <section id="using-a-pipe-to-chain-the-different-operations" class="slide level2">
 <h2>Using a pipe to chain the different operations</h2>
-<p>The result of each operation feeds into the next one</p>
-<p>put everything in a new object</p>
-<p>think about checking the dim</p>
+<p>We can a pipe <span style="color:indianred;">%&gt;%</span> to chain several operations.</p>
+<p>The result of each operation feeds into the next one.</p>
+<p><span class="fragment">⚠️ Don’t forget to put the result of a pipe in a new (or existing) object.</span></p>
+<p><span class="fragment">When writing a pipe, write the operations one by one and <strong>test them one by one</strong>.</span></p>
+<p><span class="fragment">The first thing to check is if the dimensions of the tibble have changed, and if you were expecting it to change.</span></p>
+</section>
+<section id="using-a-pipe-to-chain-the-different-operations-1" class="slide level2">
+<h2>Using a pipe to chain the different operations</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href=""></a>gen_dim_max <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> </span>
+<span id="cb86-2"><a href=""></a>  <span class="fu">select</span>(Genus, Species, s_hmax, s_dbhmax) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-3"><a href=""></a>  <span class="fu">rename</span>(<span class="at">Hmax =</span> s_hmax,</span>
+<span id="cb86-4"><a href=""></a>         <span class="at">DBHmax =</span> s_dbhmax) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-5"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">BAmax =</span> (DBHmax<span class="sc">/</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> pi) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-6"><a href=""></a>  <span class="fu">group_by</span>(Genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-7"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">Hmax_mean =</span> <span class="fu">mean</span>(Hmax),</span>
+<span id="cb86-8"><a href=""></a>            <span class="at">DBHmax_mean =</span> <span class="fu">mean</span>(DBHmax),</span>
+<span id="cb86-9"><a href=""></a>            <span class="at">BAmax_mean =</span> <span class="fu">mean</span>(BAmax)) <span class="sc">%&gt;%</span> </span>
+<span id="cb86-10"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(BAmax_mean))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment">What did we do?</span></p>
+</div><div class="column" style="width:35%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 25px">select 4 columns</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">rename 2 columns</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">add the basal area max</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">group by genus</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">calculate mean dimensions by genus</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">sort the table by decreasing order of BAmax_mean</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">store the result in <em>gen_dim_max</em></span></p></li>
+</ul>
+</div></div>
+<!-- carry on from here-->
 </section>
 <section id="combining-multiple-tables" class="slide level2">
 <h2>Combining multiple tables</h2>
@@ -1806,13 +1847,43 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="the-joints" class="slide level2">
 <h2>The joints</h2>
-<p>left_join keeps all rows in x</p>
-<p>right_join keeps all rows in y</p>
-<p>inner_join keeps only rows from x that have a matching key in y</p>
-<p>full_join keeps all the rows in x and y</p>
-<p>say here that very important to check the dim</p>
+<p>Several functions allows to join two tibbles (<em>here x and y</em>) using a key (or several).</p>
+<p><span class="fragment"><span style="font-size: 30px">A key is a column (or group of column) that is used to match rows when joining two datasets.</span></span> <span class="fragment"><span style="font-size: 30px">⚠️ A key need to uniquely identify observations in one or both datasets (otherwise there will be several combinations of matches).</span></span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p><span style="color:indianred;">left_join</span> keeps all rows in x</p></li>
+<li class="fragment"><p><span style="color:indianred;">right_join</span> keeps all rows in y</p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p><span style="color:indianred;">inner_join</span> keeps only rows from x that have a matching key in y</p></li>
+<li class="fragment"><p><span style="color:indianred;">full_join</span> keeps all the rows in x and y</p></li>
+</ul>
+</div></div>
 <aside class="notes">
-<p>end of the first session</p>
+<p>say here that very important to check the dim</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="left_join" class="slide level2">
+<h2>left_join</h2>
+<p>give an exemple for all here</p>
+</section>
+<section id="and-many-other-functions" class="slide level2">
+<h2>and many other functions… <a href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" data-preview-link="false"></a></h2>
+
+<img data-src="dplyr_cheatsheet.png" style="width:30.0%" class="r-stretch"><aside class="notes">
+<p>end of the first session??? or before after the joint???</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
