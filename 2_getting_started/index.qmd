@@ -1445,7 +1445,7 @@ No need to remember all of this.
 End of the second session.
 :::
 
-<!--
+
 
 # Questions on the last session?
 
@@ -2184,5 +2184,5 @@ and [Here](https://www.youtube.com/watch?v=h_Nruq9-NQw){preview-link="false"}
 
 [You don't need to read/watch all!]{.fragment}
 
--->
+
 
