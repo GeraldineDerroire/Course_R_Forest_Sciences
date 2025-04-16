@@ -287,16 +287,16 @@ but package rcontroll is probably not installed...
 Let's import the data on commercial trees as a regular data frame:
 
 ```{r}
-sp_commer <- read.csv("data/commercial_sp.csv")
-class(sp_commer)
+sp_com <- read.csv("data/commercial_sp.csv")
+class(sp_com)
 ```
 
 [and transform it into a tibble using the function [as_tibble]{style="color:indianred;"}:]{.fragment}
 
 ::: fragment
 ```{r}
-sp_commer <- as_tibble(sp_commer)
-class(sp_commer)
+sp_com <- as_tibble(sp_com)
+class(sp_com)
 ```
 :::
 
@@ -307,7 +307,7 @@ class(sp_commer)
 So if there was row names that we want to keep in our data frame, we should use the function [rownames_to_column]{style="color:indianred;"} to put them in a column (but let's not store it here).
 
 ```{r}
-as.tibble(rownames_to_column(sp_commer))
+as.tibble(rownames_to_column(sp_com))
 ```
 
 ::: notes
@@ -316,10 +316,10 @@ here we just look at the results but don't store them
 
 ## Commercial tree species
 
-Let's look at the sp_commer data :
+Let's look at the sp_com data :
 
 ```{r}
-sp_commer
+sp_com
 ```
 
 [[To know more, we can look at the help on the package LoggingLab (if you want to install it, see instructions [here](https://vincyanebadouard.github.io/LoggingLab/))]{style="font-size: 30px"}]{.fragment}
@@ -352,6 +352,17 @@ dplyr functions accept *data frame* and *tibble* and return a *tibble*.
 ![](dplyr.png)
 :::
 :::::
+
+## Operations on rows
+
+* slice
+
+* filter
+
+* arrange
+
+* distinct
+
 
 ## slice
 
@@ -426,7 +437,7 @@ Only the rows for which the result of the test is TRUE are selected.
 [Let's select only the aggregative species in the commercial species dataset:]{style="font-size: 30px"}
 
 ```{r}
-filter(sp_commer, Aggregative == TRUE)
+filter(sp_com, Aggregative == TRUE)
 ```
 
 
@@ -470,27 +481,155 @@ filter(traits, s_dbhmax > median(s_dbhmax))
 ```
 
 
+## arrange
 
-##
+The function [arrange]{style="color:indianred;"} reorders the row according to one or several columns:
 
-https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#20
+Let's sort the species by increasing order of WSG, **and then** by decreasing order of hmax:
 
-https://biodiversitydata.github.io/chapters/data-cleaning.html
+```{r}
+arrange(traits, 
+        s_wsg, # increasing
+        desc(s_hmax)) # decreasing
+```
 
-https://larmarange.github.io/guide-R/manipulation/dplyr.html
+::: notes
+use desc for decreasing
+:::
 
-https://juba.github.io/tidyverse/10-dplyr.html
+## distinct
+
+TO DO 
+
+https://larmarange.github.io/guide-R/manipulation/dplyr.html#distinct
+
+## Operations on columns
+
+* select
+
+* rename
+
+* mutate
+
+* relocate
+
+## select
+
+The function [select]{style="color:indianred;"} selects columns:
+
+Let's select the Commercial names, Genus and Species from sp_com:
+
+```{r}
+select(sp_com, CommercialName, Genus, Species)
+```
+
+## select
+
+We can also say the columns we don't want to select using [select]{style="color:indianred;"}.
+
+Let's select alls the columns but the commercial name:
+
+```{r}
+select(sp_com, - CommercialName)
+```
+
+## select
+
+We can use functions to express a conditions on the column names: [starts_with]{style="color:indianred;"}, [ends_with]{style="color:indianred;"}, [contains]{style="color:indianred;"}...
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+# columns starting with "com"
+select(sp_com, starts_with("Com")) 
+```
+:::
+
+::: {.column width="50%"}
+
+::: fragment
+```{r}
+# columns containing "FD"
+select(sp_com, contains("FD")) 
+```
+:::
+:::
+:::::
 
 
-filter
-select
-mutate
-arrange
-slice
-group_by, summarise, arrange...
-bind...
-join...
+[[See the package [tidyselect]{style="color:indianred;"} for more...]{style="font-size: 25px"}]{.fragment}
 
+## rename
+
+We can rename columns with the function  [rename]{style="color:indianred;"}:
+
+```{r}
+rename(traits, 
+       species = s_name) # start with the new name
+```
+
+
+
+## mutate
+
+TO DO
+
+## relocate
+
+https://larmarange.github.io/guide-R/manipulation/dplyr.html#relocate
+
+## Grouped operations
+
+* group_by
+
+* summarise
+
+* count
+
+
+
+## group_by
+
+## summarise
+
+## count
+
+## and many other functions... [](https://rstudio.github.io/cheatsheets/html/data-transformation.html){preview-link="false"} 
+
+![](dplyr_cheatsheet.png){width="30%"}
+
+## Using a pipe to chain the different operations
+
+The result of each operation feeds into the next one
+
+put everything in a new object
+
+ 
+
+## Combining multiple tables
+
+## bind_rows and bind_cols
+
+## The joints
+
+left_join keeps all rows in x
+
+right_join keeps all rows in y
+
+inner_join keeps only rows from x that have a matching key in y
+
+full_join keeps all the rows in x and y
+
+
+
+
+
+
+
+
+::: notes
+end of the first session
+:::
 
 # Ranger avec le package *tidyr*
 
@@ -554,7 +693,9 @@ https://biodiversitydata.github.io/chapters/data-cleaning.html
 
 Eric
 
-https://biodiversitydata.github.io/chapters/data-cleaning.html ???
+https://biodiversitydata.github.io/chapters/data-cleaning.html 
+
+juba
 
 ## Ressources
 

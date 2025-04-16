@@ -759,8 +759,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>Transform data frame into tibble</h2>
 <p>Let’s import the data on commercial trees as a regular data frame:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>sp_commer <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/commercial_sp.csv"</span>)</span>
-<span id="cb14-2"><a href=""></a><span class="fu">class</span>(sp_commer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>sp_com <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/commercial_sp.csv"</span>)</span>
+<span id="cb14-2"><a href=""></a><span class="fu">class</span>(sp_com)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -770,8 +770,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment">and transform it into a tibble using the function <span style="color:indianred;">as_tibble</span>:</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>sp_commer <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(sp_commer)</span>
-<span id="cb16-2"><a href=""></a><span class="fu">class</span>(sp_commer)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>sp_com <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(sp_com)</span>
+<span id="cb16-2"><a href=""></a><span class="fu">class</span>(sp_com)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -785,7 +785,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>⚠️ Remember that tibbles don’t have row names.</p>
 <p>So if there was row names that we want to keep in our data frame, we should use the function <span style="color:indianred;">rownames_to_column</span> to put them in a column (but let’s not store it here).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">as.tibble</span>(<span class="fu">rownames_to_column</span>(sp_commer))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">as.tibble</span>(<span class="fu">rownames_to_column</span>(sp_com))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -827,9 +827,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="commercial-tree-species-1" class="slide level2">
 <h2>Commercial tree species</h2>
-<p>Let’s look at the sp_commer data :</p>
+<p>Let’s look at the sp_com data :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>sp_commer</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>sp_com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -887,6 +887,15 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div><div class="column" style="width:30%;">
 <p><img data-src="dplyr.png"></p>
 </div></div>
+</section>
+<section id="operations-on-rows" class="slide level2">
+<h2>Operations on rows</h2>
+<ul>
+<li class="fragment"><p>slice</p></li>
+<li class="fragment"><p>filter</p></li>
+<li class="fragment"><p>arrange</p></li>
+<li class="fragment"><p>distinct</p></li>
+</ul>
 </section>
 <section id="slice" class="slide level2">
 <h2>slice</h2>
@@ -1042,7 +1051,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>The function <span style="color:indianred;">filter</span> selects rows according to a condition (a test). Only the rows for which the result of the test is TRUE are selected.</p>
 <p><span style="font-size: 30px">Let’s select only the aggregative species in the commercial species dataset:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">filter</span>(sp_commer, Aggregative <span class="sc">==</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">filter</span>(sp_com, Aggregative <span class="sc">==</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1141,13 +1150,255 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-<p>https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#20</p>
-<p>https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
-<p>https://larmarange.github.io/guide-R/manipulation/dplyr.html</p>
-<p>https://juba.github.io/tidyverse/10-dplyr.html</p>
-<p>filter select mutate arrange slice group_by, summarise, arrange… bind… join…</p>
+<section id="arrange" class="slide level2">
+<h2>arrange</h2>
+<p>The function <span style="color:indianred;">arrange</span> reorders the row according to one or several columns:</p>
+<p>Let’s sort the species by increasing order of WSG, <strong>and then</strong> by decreasing order of hmax:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">arrange</span>(traits, </span>
+<span id="cb48-2"><a href=""></a>        s_wsg, <span class="co"># increasing</span></span>
+<span id="cb48-3"><a href=""></a>        <span class="fu">desc</span>(s_hmax)) <span class="co"># decreasing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 45 × 12
+   s_name           s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+   &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Cecropia_obtusa   69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
+ 2 Cordia_sagotii   134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
+ 3 Neea_floribunda   74.3  0.036  7.65e-4 0.451     0.28   50.9 0.308          1
+ 4 Virola_michelii   95.2  0.024  6.31e-4 0.476     0.62   46.2 0.229          1
+ 5 Iryanthera_sago…  91.0  0.0193 5.29e-4 0.522     0.37   44.3 0.264          1
+ 6 Quararibea_duck…  50.8  0.0328 1.03e-3 0.527     0.14   19.4 0.07           1
+ 7 Conceveiba_guia…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
+ 8 Qualea_rosea     106.   0.0184 5.3 e-4 0.548     0.5    58.1 0.299          1
+ 9 Carapa_procera   130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
+10 Theobroma_subin…  84.3  0.0188 5.89e-4 0.553     0.28   41.4 0.211          1
+# ℹ 35 more rows
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>use desc for decreasing</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="distinct" class="slide level2">
+<h2>distinct</h2>
+<p>TO DO</p>
+<p>https://larmarange.github.io/guide-R/manipulation/dplyr.html#distinct</p>
+</section>
+<section id="operations-on-columns" class="slide level2">
+<h2>Operations on columns</h2>
+<ul>
+<li class="fragment"><p>select</p></li>
+<li class="fragment"><p>rename</p></li>
+<li class="fragment"><p>mutate</p></li>
+<li class="fragment"><p>relocate</p></li>
+</ul>
+</section>
+<section id="select" class="slide level2">
+<h2>select</h2>
+<p>The function <span style="color:indianred;">select</span> selects columns:</p>
+<p>Let’s select the Commercial names, Genus and Species from sp_com:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a><span class="fu">select</span>(sp_com, CommercialName, Genus, Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 96 × 3
+   CommercialName  Genus      Species      
+   &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;        
+ 1 st martin rouge Andira     spp          
+ 2 bamba apici     Aniba      spp          
+ 3 bagasse         Bagassa    guianensis   
+ 4 assao           Balizia    pedicellaris 
+ 5 dokali          Brosimum   parinarioides
+ 6 satiné rubané   Brosimum   rubescens    
+ 7 dokali mapa     Brosimum   utile        
+ 8 bushi amanda    Buchenavia spp          
+ 9 carapa          Carapa     guiansensis  
+10 carapa          Carapa     surinamensis 
+# ℹ 86 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="select-1" class="slide level2">
+<h2>select</h2>
+<p>We can also say the columns we don’t want to select using <span style="color:indianred;">select</span>.</p>
+<p>Let’s select alls the columns but the commercial name:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="fu">select</span>(sp_com, <span class="sc">-</span> CommercialName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 96 × 7
+   Genus      Species       CommercialLevel MinFD UpMinFD MaxFD Aggregative
+   &lt;chr&gt;      &lt;chr&gt;                   &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;lgl&gt;      
+ 1 Andira     spp                         2    55      60   120 FALSE      
+ 2 Aniba      spp                         2    55      60   120 FALSE      
+ 3 Bagassa    guianensis                  2    55      60   120 FALSE      
+ 4 Balizia    pedicellaris                2    55      60   120 FALSE      
+ 5 Brosimum   parinarioides               2    55      60   120 FALSE      
+ 6 Brosimum   rubescens                   2    55      60   120 FALSE      
+ 7 Brosimum   utile                       2    55      60   120 FALSE      
+ 8 Buchenavia spp                         2    55      60   120 FALSE      
+ 9 Carapa     guiansensis                 2    55      60   120 FALSE      
+10 Carapa     surinamensis                2    55      60   120 FALSE      
+# ℹ 86 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="select-2" class="slide level2">
+<h2>select</h2>
+<p>We can use functions to express a conditions on the column names: <span style="color:indianred;">starts_with</span>, <span style="color:indianred;">ends_with</span>, <span style="color:indianred;">contains</span>…</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a><span class="co"># columns starting with "com"</span></span>
+<span id="cb54-2"><a href=""></a><span class="fu">select</span>(sp_com, <span class="fu">starts_with</span>(<span class="st">"Com"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 96 × 2
+   CommercialName  CommercialLevel
+   &lt;chr&gt;                     &lt;int&gt;
+ 1 st martin rouge               2
+ 2 bamba apici                   2
+ 3 bagasse                       2
+ 4 assao                         2
+ 5 dokali                        2
+ 6 satiné rubané                 2
+ 7 dokali mapa                   2
+ 8 bushi amanda                  2
+ 9 carapa                        2
+10 carapa                        2
+# ℹ 86 more rows</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a><span class="co"># columns containing "FD"</span></span>
+<span id="cb56-2"><a href=""></a><span class="fu">select</span>(sp_com, <span class="fu">contains</span>(<span class="st">"FD"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 96 × 3
+   MinFD UpMinFD MaxFD
+   &lt;int&gt;   &lt;int&gt; &lt;int&gt;
+ 1    55      60   120
+ 2    55      60   120
+ 3    55      60   120
+ 4    55      60   120
+ 5    55      60   120
+ 6    55      60   120
+ 7    55      60   120
+ 8    55      60   120
+ 9    55      60   120
+10    55      60   120
+# ℹ 86 more rows</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 25px">See the package <span style="color:indianred;">tidyselect</span> for more…</span></span></p>
+</section>
+<section id="rename" class="slide level2">
+<h2>rename</h2>
+<p>We can rename columns with the function <span style="color:indianred;">rename</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="fu">rename</span>(traits, </span>
+<span id="cb58-2"><a href=""></a>       <span class="at">species =</span> s_name) <span class="co"># start with the new name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 45 × 12
+   species          s_LMA s_Nmass s_Pmass s_wsg s_dbhmax s_hmax  s_ah s_seedmass
+   &lt;chr&gt;            &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+ 1 Abarema_jupunba  110.   0.0232 5.7 e-4 0.576     0.66   50.9 0.308          1
+ 2 Bocoa_prouacens…  95.6  0.0255 5.05e-4 0.798     0.4    47.9 0.251          1
+ 3 Brosimum_rubesc…  85.8  0.0188 6.88e-4 0.619     0.52   50.9 0.308          1
+ 4 Carapa_procera   130.   0.0177 6.36e-4 0.55      0.49   41.4 0.187          1
+ 5 Caryocar_glabrum  84.2  0.0217 8.13e-4 0.612     1.15   48.6 0.275          1
+ 6 Cecropia_obtusa   69.5  0.0276 1.38e-3 0.388     0.35   50.9 0.308          1
+ 7 Chrysophyllum_s… 151.   0.0154 4.69e-4 0.566     0.67   50.9 0.308          1
+ 8 Conceveiba_guia…  86.7  0.0235 7.29e-4 0.537     0.23   33.3 0.16           1
+ 9 Cordia_sagotii   134.   0.0253 5.92e-4 0.443     0.47   36.4 0.139          1
+10 Couepia_bracteo… 123.   0.015  4.82e-4 0.784     0.45   50.9 0.308          1
+# ℹ 35 more rows
+# ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="mutate" class="slide level2">
+<h2>mutate</h2>
+<p>TO DO</p>
+</section>
+<section id="relocate" class="slide level2">
+<h2>relocate</h2>
+<p>https://larmarange.github.io/guide-R/manipulation/dplyr.html#relocate</p>
+</section>
+<section id="grouped-operations" class="slide level2">
+<h2>Grouped operations</h2>
+<ul>
+<li class="fragment"><p>group_by</p></li>
+<li class="fragment"><p>summarise</p></li>
+<li class="fragment"><p>count</p></li>
+</ul>
+</section>
+<section id="group_by" class="slide level2">
+<h2>group_by</h2>
+</section>
+<section id="summarise" class="slide level2">
+<h2>summarise</h2>
+</section>
+<section id="count" class="slide level2">
+<h2>count</h2>
+</section>
+<section id="and-many-other-functions" class="slide level2">
+<h2>and many other functions… <a href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" data-preview-link="false"></a></h2>
+
+<img data-src="dplyr_cheatsheet.png" style="width:30.0%" class="r-stretch"></section>
+<section id="using-a-pipe-to-chain-the-different-operations" class="slide level2">
+<h2>Using a pipe to chain the different operations</h2>
+<p>The result of each operation feeds into the next one</p>
+<p>put everything in a new object</p>
+</section>
+<section id="combining-multiple-tables" class="slide level2">
+<h2>Combining multiple tables</h2>
+</section>
+<section id="bind_rows-and-bind_cols" class="slide level2">
+<h2>bind_rows and bind_cols</h2>
+</section>
+<section id="the-joints" class="slide level2">
+<h2>The joints</h2>
+<p>left_join keeps all rows in x</p>
+<p>right_join keeps all rows in y</p>
+<p>inner_join keeps only rows from x that have a matching key in y</p>
+<p>full_join keeps all the rows in x and y</p>
+<aside class="notes">
+<p>end of the first session</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="ranger-avec-le-package-tidyr" class="title-slide slide level1 center">
@@ -1185,7 +1436,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
 </section>
 
-<section id="section-1" class="title-slide slide level1 center">
+<section id="section" class="title-slide slide level1 center">
 <h1></h1>
 
 </section>
@@ -1201,7 +1452,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <section id="acknowledgments" class="slide level2">
 <h2>Acknowledgments</h2>
 <p>Eric</p>
-<p>https://biodiversitydata.github.io/chapters/data-cleaning.html ???</p>
+<p>https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
+<p>juba</p>
 </section>
 <section id="ressources" class="slide level2">
 <h2>Ressources</h2>
