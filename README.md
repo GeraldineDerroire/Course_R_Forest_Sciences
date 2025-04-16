@@ -22,6 +22,7 @@ The course material has been created using quarto and R version 4.4.3.
    * [Exercices](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/exo_session_5.pdf)
 
 <!--
+- [Introduction to the tidyverse](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse)
 
 
 
