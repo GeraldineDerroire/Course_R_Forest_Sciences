@@ -20,9 +20,10 @@ The course material has been created using quarto and R version 4.4.3.
    * [Exercices on session 3/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started/exo_session_4.pdf)
 - [Working with data](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data)
    * [Exercices](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/exo_session_5.pdf)
+- [Introduction to the tidyverse](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse)
 
 <!--
-- [Introduction to the tidyverse](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse)
+
 
 
 
