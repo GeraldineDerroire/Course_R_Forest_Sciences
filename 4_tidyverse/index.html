@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-16">
+  <meta name="dcterms.date" content="2025-04-17">
   <title>Introduction to the tidyverse</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-16</p>
+  <p class="date">2025-04-17</p>
 </section>
 <section>
 <section id="what-is-the-tidyverse" class="title-slide slide level1 center">
@@ -780,10 +780,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </section>
-<section id="transform-data-frame-into-tibble-1" class="slide level2">
+<section id="transform-data-frame-into-tibble-1" class="slide level2 scrollable">
 <h2>Transform data frame into tibble</h2>
 <p>⚠️ Remember that tibbles don’t have row names.</p>
-<p>So if there was row names that we want to keep in our data frame, we should use the function <span style="color:indianred;">rownames_to_column</span> to put them in a column (but let’s not store it here).</p>
+<p>So if there was row names that we wanted to keep in our data frame, we should use the function <span style="color:indianred;">rownames_to_column</span> to put them in a column (but let’s not store it here).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">as.tibble</span>(<span class="fu">rownames_to_column</span>(sp_com))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -825,7 +825,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
           display:block!important;
       }</style></aside>
 </section>
-<section id="commercial-tree-species-1" class="slide level2">
+<section id="commercial-tree-species-1" class="slide level2 scrollable">
 <h2>Commercial tree species</h2>
 <p>Let’s look at the sp_com data :</p>
 <div class="cell">
@@ -1082,6 +1082,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <aside class="notes">
 <p>Remember the logical operators of comparisons that we have seen two sessions ago?</p>
+<p>Ask them if they know the cecropia</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1125,7 +1126,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
           display:block!important;
       }</style></aside>
 </section>
-<section id="filter-3" class="slide level2">
+<section id="filter-3" class="slide level2 scrollable">
 <h2>filter</h2>
 <p>We can also use a function to specify the condition.</p>
 <p>Let’s select trees with maximum DBH higher than the median:</p>
@@ -1152,7 +1153,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </section>
-<section id="arrange" class="slide level2">
+<section id="arrange" class="slide level2 scrollable">
 <h2>arrange</h2>
 <p>The function <span style="color:indianred;">arrange</span> reorders the row according to one or several columns:</p>
 <p>Let’s sort the species by increasing order of WSG, <strong>and then</strong> by decreasing order of hmax:</p>
@@ -1194,7 +1195,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
           display:block!important;
       }</style></aside>
 </section>
-<section id="distinct" class="slide level2">
+<section id="distinct" class="slide level2 scrollable">
 <h2>distinct</h2>
 <p>The function <span style="color:indianred;">distinct</span> keep only rows that are distinct.</p>
 <p><span style="font-size: 26px">Let’s create a simple dataset with a duplicated row:</span></p>
@@ -1267,7 +1268,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </section>
-<section id="select-1" class="slide level2">
+<section id="select-1" class="slide level2 scrollable">
 <h2>select</h2>
 <p>We can also say the columns we don’t want to select using <span style="color:indianred;">select</span>.</p>
 <p>Let’s select all the columns but the commercial name, using <span style="color:indianred;">-</span> before the name of the column to exclude:</p>
@@ -1539,6 +1540,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div></div>
 <aside class="notes">
 <p>note the change of dimension!</p>
+<p>show them the number of rows and the number of genus</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1551,9 +1553,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
           display:block!important;
       }</style></aside>
 </section>
-<section id="group_by-1" class="slide level2">
-<h2>group_by</h2>
-<p>We can also use group_by with <span style="color:indianred;">mutate</span> to do an operation by group.</p>
+<section id="group_by-with-mutate" class="slide level2 scrollable">
+<h2>group_by with mutate</h2>
+<p>We can also use v with <span style="color:indianred;">mutate</span> to do an operation by group.</p>
 <p><span style="font-size: 25px">Let’s calculate the mean wsg of each genus:</span></p>
 <div class="columns">
 <div class="column" style="width:70%;">
@@ -1599,8 +1601,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
           display:block!important;
       }</style></aside>
 </section>
-<section id="group_by-2" class="slide level2">
-<h2>group_by</h2>
+<section id="group_by-with-mutate-1" class="slide level2">
+<h2>group_by with mutate</h2>
 <p>We can check this by looking at the <em>Licania</em> for instance:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
@@ -1621,9 +1623,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </section>
-<section id="group_by-3" class="slide level2">
-<h2>group_by</h2>
-<p>We can also use group_by with <span style="color:indianred;">filter</span> to select according to a conditions applied <strong>on each group</strong>.</p>
+<section id="group_by-with-filter" class="slide level2">
+<h2>group_by with filter</h2>
+<p>We can also use <span style="color:indianred;">group_by</span> with <span style="color:indianred;">filter</span> to select according to a conditions applied <strong>on each group</strong>.</p>
 <p><span style="font-size: 25px">Let’s look at the species that have a higher wsg than the mean of their genus:</span></p>
 <div class="columns">
 <div class="column" style="width:70%;">
@@ -1685,7 +1687,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <p><span class="fragment"><em>Note that here only the summary columns are kept.</em></span></p>
 </section>
-<section id="summarise-1" class="slide level2">
+<section id="summarise-1" class="slide level2 scrollable">
 <h2>summarise</h2>
 <p>The function <span style="color:indianred;">summarise</span> can be used together with <span style="color:indianred;">group_by</span> to summarise <em>by group</em>.</p>
 <p><span style="font-size: 25px">Let’s look at the min, max and mean values of wsg by genus:</span></p>
@@ -1752,7 +1754,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment"><span style="font-size: 25px">We see that the genus <em>Couepia</em> has two species.</span></span></p>
 </div></div>
 </section>
-<section id="grouping-according-to-several-columns" class="slide level2">
+<section id="grouping-according-to-several-columns" class="slide level2 scrollable">
 <h2>Grouping according to several columns</h2>
 <p>The functions <span style="color:indianred;">group_by</span> and <span style="color:indianred;">count</span> can be used to group on several columns.</p>
 <p><span style="font-size: 25px">Let’s go back to the dataset on commercial species and count the number of Species per Genus and per commercial name:</span></p>
@@ -2011,9 +2013,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>bind_cols</h2>
 <p><span style="color:indianred;">bind_cols</span> works in a similar way but to concatenate columns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href=""></a>t1 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(genus, species)</span>
-<span id="cb101-2"><a href=""></a>t2 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(s_LMA)</span>
-<span id="cb101-3"><a href=""></a>t3 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(s_wsg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href=""></a><span class="co"># let's first make subset tables</span></span>
+<span id="cb101-2"><a href=""></a>t1 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(genus, species)</span>
+<span id="cb101-3"><a href=""></a>t2 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(s_LMA)</span>
+<span id="cb101-4"><a href=""></a>t3 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(s_wsg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -2253,7 +2256,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </div>
-<p><span class="fragment"><span style="font-size: 35px">🤔 What did we do here?</span></span> <span class="fragment"><span style="font-size: 35px">We have check that the total number of species is equal to the sum of the number of species in each datasets minus the number of common species.</span></span></p>
+<p><span class="fragment"><span style="font-size: 35px">🤔 What did we do here?</span></span> <span class="fragment"><span style="font-size: 35px">We checked that the total number of species is equal to the sum of the number of species in each datasets minus the number of common species.</span></span></p>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
@@ -2273,17 +2276,331 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<!-- to carry on from here -->
 </section></section>
 <section>
-<section id="ranger-avec-le-package-tidyr" class="title-slide slide level1 center">
-<h1>Ranger avec le package <em>tidyr</em></h1>
+<section id="tidy-a-dataset-with-with-the-package-tidyr" class="title-slide slide level1 center">
+<h1>Tidy a dataset with with the package <span style="color:indianred;">tidyr</span></h1>
+
+</section>
+<section id="the-verbs-of-tidyr" class="slide level2">
+<h2>The verbs of <span style="color:indianred;">tidyr</span></h2>
+<p>With <span style="color:indianred;">dplyr</span>, we have seen how to manipulate and transform tidy data. But what to do when data are non-tidy?</p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p><span class="fragment">We are going to use the package <span style="color:indianred;">tidyr</span> to make messy (untidy) data tidy, so that we can use them with all the packages of the tidyverse.</span></p>
+<p><span class="fragment">Just as <span style="color:indianred;">dplyr</span>, the syntax of <span style="color:indianred;">tidyr</span> is based on intuitive verbs, and commands can be chained using a pipe (<span style="color:indianred;">%&gt;%</span>)</span></p>
+</div><div class="column" style="width:30%;">
+<p><img data-src="tidyr.png"></p>
+</div></div>
+</section>
+<section id="lets-load-some-untidy-data" class="slide level2">
+<h2>Let’s load some untidy data</h2>
+<p>Today we are going to work with several dummy datasets, created only to serve as examples.</p>
+<p>They are available as a .Rdata file <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/data_tidyverse_2.RData" data-preview-link="false">here</a></p>
+<p><span style="font-size: 25px">A .Rdata file is a file that can contain several R objects.</span></p>
+<p>Let’s load them in our environment:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_tidyverse_2.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<aside class="notes">
+<p>! with their path</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="first-example-of-untidy-data" class="slide level2">
+<h2>First example of untidy data</h2>
+<p>Let’s look at the dataset called <em>dt1</em> containing tree DBH for different years:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href=""></a>dt1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  tree  `2015` `2020` `2025`
+  &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 tree1     25     26   26.5
+2 tree2     35     37   38.5
+3 tree3     43     43   43  </code></pre>
+</div>
+</div>
+<p><span class="fragment">🤔 Why is it untidy? What are the variables in this table?</span></p>
+<p><span class="fragment">The variables are the <em>tree</em>, the <em>year</em> and the <em>DBH</em>. These variable are NOT stored in columns.</span></p>
+</section>
+<section id="pivot_longer" class="slide level2">
+<h2>pivot_longer</h2>
+<p>We can use the function <span style="color:indianred;">pivot_longer</span> to put it in a tidy format:</p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href=""></a>dt1 <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>, <span class="st">`</span><span class="at">2020</span><span class="st">`</span>, <span class="st">`</span><span class="at">2025</span><span class="st">`</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  tree  name  value
+  &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+1 tree1 2015   25  
+2 tree1 2020   26  
+3 tree1 2025   26.5
+4 tree2 2015   35  
+5 tree2 2020   37  
+6 tree2 2025   38.5
+7 tree3 2015   43  
+8 tree3 2020   43  
+9 tree3 2025   43  </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment">We now have a column per variable, and a row per observation 😀</span></p>
+</div></div>
+<aside class="notes">
+<p><code></code> indicate that these are column names and not numbers</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pivot_longer-1" class="slide level2">
+<h2>pivot_longer</h2>
+<p>We can specify the names of the columns that will be created:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href=""></a>dt1L <span class="ot">&lt;-</span> dt1 <span class="sc">%&gt;%</span> </span>
+<span id="cb129-2"><a href=""></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>, <span class="st">`</span><span class="at">2020</span><span class="st">`</span>, <span class="st">`</span><span class="at">2025</span><span class="st">`</span>),</span>
+<span id="cb129-3"><a href=""></a>               <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="co"># for the name of the former columns</span></span>
+<span id="cb129-4"><a href=""></a>               <span class="at">values_to =</span> <span class="st">"DBH"</span>) <span class="co"># for the values contained in these columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</section>
+<section id="pivot_longer-2" class="slide level2">
+<h2>pivot_longer</h2>
+<p><span style="color:indianred;">pivot_longer</span> transform a table in a <em>wide format</em> to a table in a <em>long format</em>.</p>
+
+<img data-src="pivot_longer.png" class="r-stretch"><p><span style="font-size: 25px">Source: <a href="https://rstudio.github.io/cheatsheets/html/tidyr.html" data-preview-link="false">tidyr cheatsheet</a></span></p>
+</section>
+<section id="pivot_wider" class="slide level2">
+<h2>pivot_wider</h2>
+<p>The function <span style="color:indianred;">pivot_wider</span> does the opposite of <span style="color:indianred;">pivot_longer</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href=""></a>dt1L <span class="sc">%&gt;%</span> <span class="fu">pivot_wider</span>(</span>
+<span id="cb130-2"><a href=""></a>  <span class="at">names_from =</span> <span class="st">"year"</span>, <span class="co"># indicates where are the new column names</span></span>
+<span id="cb130-3"><a href=""></a>  <span class="at">values_from =</span> <span class="st">"DBH"</span>) <span class="co"># indicates where are the values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  tree  `2015` `2020` `2025`
+  &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+1 tree1     25     26   26.5
+2 tree2     35     37   38.5
+3 tree3     43     43   43  </code></pre>
+</div>
+</div>
+<p><span class="fragment">So we get back the wide table that we had initially.</span></p>
+</section>
+<section id="pivot_wider-1" class="slide level2">
+<h2>pivot_wider</h2>
+<p><span style="color:indianred;">pivot_wider</span> transform a table in a <em>long format</em> to a table in a <em>wide format</em>.</p>
+
+<img data-src="pivot_wider.png" class="r-stretch"><p><span style="font-size: 25px">Source: <a href="https://rstudio.github.io/cheatsheets/html/tidyr.html" data-preview-link="false">tidyr cheatsheet</a></span></p>
+</section>
+<section id="second-example-of-untidy-data" class="slide level2">
+<h2>Second example of untidy data</h2>
+<p>Let’s look at the dataset called <em>dt2</em> containing several tree DBH for different species:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href=""></a>dt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  taxo                                 DBH       
+  &lt;chr&gt;                                &lt;chr&gt;     
+1 Anacardiaceae_Myracrodruon_urundeuva 10, 12, 21
+2 Fabaceae_Hymenaea_martiana           13        
+3 Favaceae_Piptadenia_macradenia       24, 18    </code></pre>
+</div>
+</div>
+<p><span class="fragment">🤔 Why is it untidy?</span></p>
+<p><span class="fragment">The column <em>taxo</em> contains the family, genus and species names. And there are several values of DBH in a single column.</span></p>
+<aside class="notes">
+<p>cerado trees: Aroeira, Jatoba-da-mata and Pau-jacaré</p>
+<p>there are two problems</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="separate" class="slide level2">
+<h2>separate</h2>
+<p>We can use the function <span style="color:indianred;">separate</span> to separate the content of a column into several columns:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href=""></a>dt2 <span class="ot">&lt;-</span> dt2 <span class="sc">%&gt;%</span> </span>
+<span id="cb134-2"><a href=""></a>  <span class="fu">separate</span>(taxo, <span class="co"># name of the column we want to separate</span></span>
+<span id="cb134-3"><a href=""></a>           <span class="fu">c</span>(<span class="st">"family"</span>, <span class="st">"genus"</span>, <span class="st">"species"</span>), <span class="co"># names of the new columns </span></span>
+<span id="cb134-4"><a href=""></a>           <span class="at">sep =</span> <span class="st">"_"</span>) <span class="co"># separator</span></span>
+<span id="cb134-5"><a href=""></a>dt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  family        genus        species    DBH       
+  &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;     
+1 Anacardiaceae Myracrodruon urundeuva  10, 12, 21
+2 Fabaceae      Hymenaea     martiana   13        
+3 Favaceae      Piptadenia   macradenia 24, 18    </code></pre>
+</div>
+</div>
+</section>
+<section id="unite" class="slide level2">
+<h2>unite</h2>
+<p>The function <span style="color:indianred;">unite</span> does the opposite of <span style="color:indianred;">separate</span>.</p>
+<p>Let’s create a column to store the full species name:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href=""></a>dt2 <span class="ot">&lt;-</span> dt2 <span class="sc">%&gt;%</span> </span>
+<span id="cb136-2"><a href=""></a>  <span class="fu">unite</span>(full_name, <span class="co"># name of the column to create</span></span>
+<span id="cb136-3"><a href=""></a>        genus, species, <span class="co"># names of the columns to unite</span></span>
+<span id="cb136-4"><a href=""></a>        <span class="at">sep=</span><span class="st">" "</span>, <span class="co"># sperated by a space</span></span>
+<span id="cb136-5"><a href=""></a>        <span class="at">remove =</span> <span class="cn">FALSE</span>) <span class="co"># keep the two original columns</span></span>
+<span id="cb136-6"><a href=""></a>dt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 5
+  family        full_name              genus        species    DBH       
+  &lt;chr&gt;         &lt;chr&gt;                  &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;     
+1 Anacardiaceae Myracrodruon urundeuva Myracrodruon urundeuva  10, 12, 21
+2 Fabaceae      Hymenaea martiana      Hymenaea     martiana   13        
+3 Favaceae      Piptadenia macradenia  Piptadenia   macradenia 24, 18    </code></pre>
+</div>
+</div>
+</section>
+<section id="separate_rows" class="slide level2 scrollable">
+<h2>separate_rows</h2>
+<p>We still have the problem of having several DBH in a single column. 🤔 How should we store them?</p>
+<p><span class="fragment">We should store each DBH (observation) in a separate row.</span> <span class="fragment">We can use the function <span style="color:indianred;">separate_rows</span> to do this:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href=""></a>dt2 <span class="ot">&lt;-</span> dt2 <span class="sc">%&gt;%</span> </span>
+<span id="cb138-2"><a href=""></a>  <span class="fu">separate_rows</span>(DBH, <span class="co"># column to separate</span></span>
+<span id="cb138-3"><a href=""></a>                <span class="at">sep =</span><span class="st">","</span>) <span class="sc">%&gt;%</span> <span class="co"># specify the separator</span></span>
+<span id="cb138-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">DBH =</span> <span class="fu">as.numeric</span>(DBH)) <span class="co"># to transform DBH to numeric</span></span>
+<span id="cb138-5"><a href=""></a>dt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 5
+  family        full_name              genus        species      DBH
+  &lt;chr&gt;         &lt;chr&gt;                  &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt;
+1 Anacardiaceae Myracrodruon urundeuva Myracrodruon urundeuva     10
+2 Anacardiaceae Myracrodruon urundeuva Myracrodruon urundeuva     12
+3 Anacardiaceae Myracrodruon urundeuva Myracrodruon urundeuva     21
+4 Fabaceae      Hymenaea martiana      Hymenaea     martiana      13
+5 Favaceae      Piptadenia macradenia  Piptadenia   macradenia    24
+6 Favaceae      Piptadenia macradenia  Piptadenia   macradenia    18</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>NB: we added a command to put DBH in a numeric otherwise it would be a character</p>
+<p>By default, <span style="color:indianred;">separate_rows</span> uses any character that is not a number or a letter as the separator, so we don’t necesseraly need to specify it</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="complete" class="slide level2">
+<h2>complete</h2>
+<p>Let’s go back to the first data set <em>db1L</em> and let’s add a measurement for tree3 in 2017:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href=""></a>dt1L <span class="ot">&lt;-</span> dt1L <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>(</span>
+<span id="cb140-2"><a href=""></a>  <span class="fu">tibble</span>(<span class="at">tree =</span> <span class="st">"tree3"</span>, <span class="at">year =</span> <span class="st">"2017"</span>, <span class="at">DBH =</span> <span class="dv">43</span>))</span>
+<span id="cb140-3"><a href=""></a>dt1L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 3
+   tree  year    DBH
+   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+ 1 tree1 2015   25  
+ 2 tree1 2020   26  
+ 3 tree1 2025   26.5
+ 4 tree2 2015   35  
+ 5 tree2 2020   37  
+ 6 tree2 2025   38.5
+ 7 tree3 2015   43  
+ 8 tree3 2020   43  
+ 9 tree3 2025   43  
+10 tree3 2017   43  </code></pre>
+</div>
+</div>
+</section>
+<section id="complete-1" class="slide level2">
+<h2>complete</h2>
+<p>To add rows for the two other trees for 2017, we can use the function <span style="color:indianred;">complete</span>.</p>
+<p>The function <span style="color:indianred;">complete</span> add rows for all missing combination of several columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href=""></a>dt1L <span class="sc">%&gt;%</span> <span class="fu">complete</span>(tree, year) <span class="co"># names of the columns for which we want all combinations</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 3
+   tree  year    DBH
+   &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+ 1 tree1 2015   25  
+ 2 tree1 2017   NA  
+ 3 tree1 2020   26  
+ 4 tree1 2025   26.5
+ 5 tree2 2015   35  
+ 6 tree2 2017   NA  
+ 7 tree2 2020   37  
+ 8 tree2 2025   38.5
+ 9 tree3 2015   43  
+10 tree3 2017   43  
+11 tree3 2020   43  
+12 tree3 2025   43  </code></pre>
+</div>
+</div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
 <p>Mais si les données ne sont pas bien rangées =&gt; on range</p>
 <p>ici utiliser un jeu de données bordéliques… en créer un ?</p>
 <p>https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#15 et suivante</p>
 <p>https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
-<p>https://larmarange.github.io/guide-R/manipulation_avancee/tidyr.html</p>
-<p>https://juba.github.io/tidyverse/12-tidyr.html</p>
 <p>les slides d’Eric sont bien pour les visuels, mais voir aussi Allison Horst</p>
 <p>function unite</p>
 <p>function separate</p>
@@ -2293,6 +2610,13 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <section id="package-janitor" class="slide level2">
 <h2>package <em>janitor</em></h2>
 <p>not part of the tidyverse but compatible https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
+<p>voir seulement 2 fonctions :</p>
+<ul>
+<li class="fragment"><p>clean_names</p></li>
+<li class="fragment"><p>remove_empty</p></li>
+</ul>
+<p>=&gt; faire un dataframe pour ces deux</p>
+<p>https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html</p>
 </section></section>
 <section id="package-forcats-for-qualitative-variables" class="title-slide slide level1 center">
 <h1>package <em>forcats</em> for qualitative variables</h1>
@@ -2311,7 +2635,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
 </section>
 
-<section id="section-1" class="title-slide slide level1 center">
+<section id="section-2" class="title-slide slide level1 center">
 <h1></h1>
 
 </section>
@@ -2319,7 +2643,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <section>
 <section id="to-decide" class="title-slide slide level1 center">
 <h1>TO DECIDE</h1>
-
+<p>https://juba.github.io/tidyverse/09-recodages.html#combiner-plusieurs-variables</p>
 </section>
 <section id="dire-ggplot-on-va-voir-après" class="slide level2">
 <h2>dire ggplot on va voir après</h2>
@@ -2336,6 +2660,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <ul>
 <li class="fragment">Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a></li>
 </ul>
+<p>R for data science: chap sur les données</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

@@ -1209,39 +1209,252 @@ but there are many other more...[](https://rstudio.github.io/cheatsheets/html/da
 end of the first session??? or before after the joint???
 :::
 
-<!-- to carry on from here
-think about all the function I want to present here before choosing a dataset
--->
-
-# Ranger avec le package *tidyr*
-
-Mais si les données ne sont pas bien rangées => on range
-
-ici utiliser un jeu de données bordéliques... en créer un ?
-
-https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#15 et suivante
-
-https://biodiversitydata.github.io/chapters/data-cleaning.html
-
-https://larmarange.github.io/guide-R/manipulation_avancee/tidyr.html
-
-https://juba.github.io/tidyverse/12-tidyr.html
 
 
-les slides d'Eric sont bien pour les visuels, mais voir aussi Allison Horst
+# Tidy a dataset with with the package [tidyr]{style="color:indianred;"}
 
-function unite
 
-function separate
 
-pivot_longer / wider
+## The verbs of [tidyr]{style="color:indianred;"}
 
-fonction complete?
+With [dplyr]{style="color:indianred;"}, we have seen how to manipulate and transform tidy data.
+But what to do when data are non-tidy? 
 
-## package *janitor*
+::::: columns
+::: {.column width="70%"}
+[We are going to use the package [tidyr]{style="color:indianred;"} to make messy (untidy) data tidy, so that we can use them with all the packages of the tidyverse.]{.fragment}
+
+[Just as [dplyr]{style="color:indianred;"}, the syntax of [tidyr]{style="color:indianred;"} is based on intuitive verbs, and commands can be chained using a pipe ([%>%]{style="color:indianred;"})]{.fragment}
+:::
+
+::: {.column width="30%"}
+![](tidyr.png)
+:::
+:::::
+
+
+## Let's load some untidy data
+
+Today we are going to work with several dummy datasets, created only to serve as examples.
+
+They are available as a .Rdata file [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/data_tidyverse_2.RData){preview-link="false"}
+
+[A .Rdata file is a file that can contain several R objects.]{style="font-size: 25px"}
+
+Let's load them in our environment:
+
+```{r}
+load("data/data_tidyverse_2.RData")
+```
+
+::: notes
+! with their path
+::: 
+
+## First example of untidy data
+
+Let's look at the dataset called *dt1* containing tree DBH for different years:
+
+```{r}
+dt1
+```
+[🤔 Why is it untidy? What are the variables in this table?]{.fragment}
+
+[The variables are the *tree*, the *year* and the *DBH*.
+These variable are NOT stored in columns.]{.fragment}
+
+
+## pivot_longer
+
+We can use the function [pivot_longer]{style="color:indianred;"} to put it in a  tidy format:
+
+::::: columns
+::: {.column width="70%"}
+```{r}
+dt1 %>% pivot_longer(c(`2015`, `2020`, `2025`)) 
+```
+:::
+
+::: {.column width="30%"}
+[We now have a column per variable, and a row per observation 😀]{.fragment}
+:::
+::::
+
+::: notes
+` ` indicate that these are column names and not numbers
+:::
+
+
+## pivot_longer
+
+We can specify the names of the columns that will be created:
+
+```{r}
+dt1L <- dt1 %>% 
+  pivot_longer(c(`2015`, `2020`, `2025`),
+               names_to = "year", # for the name of the former columns
+               values_to = "DBH") # for the values contained in these columns
+```
+
+## pivot_longer
+
+[pivot_longer]{style="color:indianred;"} transform a table in a *wide format* to a table in a *long format*.
+
+![](pivot_longer.png)
+
+[Source: [tidyr cheatsheet](https://rstudio.github.io/cheatsheets/html/tidyr.html){preview-link="false"}]{style="font-size: 25px"}
+
+
+## pivot_wider
+
+The function [pivot_wider]{style="color:indianred;"} does the opposite of [pivot_longer]{style="color:indianred;"}:
+
+```{r}
+dt1L %>% pivot_wider(
+  names_from = "year", # indicates where are the new column names
+  values_from = "DBH") # indicates where are the values
+```
+
+[So we get back the wide table that we had initially.]{.fragment}
+
+## pivot_wider
+
+[pivot_wider]{style="color:indianred;"} transform a table in a *long format* to a table in a *wide format*.
+
+![](pivot_wider.png)
+
+[Source: [tidyr cheatsheet](https://rstudio.github.io/cheatsheets/html/tidyr.html){preview-link="false"}]{style="font-size: 25px"}
+
+
+## Second example of untidy data
+
+Let's look at the dataset called *dt2* containing several tree DBH for different species:
+
+```{r}
+dt2
+```
+
+[🤔 Why is it untidy?]{.fragment}
+
+[The column *taxo* contains the family, genus and species names.
+And there are several values of DBH in a single column.]{.fragment}
+
+::: notes
+cerado trees: Aroeira, Jatoba-da-mata and Pau-jacaré
+
+there are two problems
+:::
+
+## separate
+
+We can use the function [separate]{style="color:indianred;"} to separate the content of a column into several columns:
+
+```{r}
+dt2 <- dt2 %>% 
+  separate(taxo, # name of the column we want to separate
+           c("family", "genus", "species"), # names of the new columns 
+           sep = "_") # separator
+dt2
+```
+
+
+## unite 
+
+The function [unite]{style="color:indianred;"} does the opposite of [separate]{style="color:indianred;"}.
+
+Let's create a column to store the full species name:
+
+```{r}
+dt2 <- dt2 %>% 
+  unite(full_name, # name of the column to create
+        genus, species, # names of the columns to unite
+        sep=" ", # sperated by a space
+        remove = FALSE) # keep the two original columns
+dt2
+```
+
+## separate_rows {.scrollable}
+
+We still have the problem of having several DBH in a single column. 🤔 How should we store them? 
+
+[We should store each DBH (observation) in a separate row.]{.fragment}
+[We can use the function [separate_rows]{style="color:indianred;"} to do this:]{.fragment}
+
+::: fragment
+```{r}
+dt2 <- dt2 %>% 
+  separate_rows(DBH, # column to separate
+                sep =",") %>% # specify the separator
+  mutate(DBH = as.numeric(DBH)) # to transform DBH to numeric
+dt2
+```
+:::
+
+::: notes
+NB: we added a command to put DBH in a numeric otherwise it would be a character
+
+By default, [separate_rows]{style="color:indianred;"} uses any character that is not a number or a letter as the separator, so we don't necesseraly need to specify it
+:::
+
+
+## complete
+
+Let's go back to the first data set *db1L* and let's add a measurement for tree3 in 2017:
+
+```{r}
+dt1L <- dt1L %>% bind_rows(
+  tibble(tree = "tree3", year = "2017", DBH = 43))
+dt1L
+```
+
+## complete {.scrollable}
+
+To add rows for the two other trees for 2017, we can use the function [complete]{style="color:indianred;"}.
+
+The function [complete]{style="color:indianred;"} add rows for all missing combination of several columns.
+
+```{r}
+dt1L %>% complete(tree, year) # names of the columns for which we want all combinations
+```
+
+::: notes
+use NA for missing values, but we could specify something else
+:::
+
+
+## The package [janitor]{style="color:indianred;"} 
+
+::::: columns
+::: {.column width="70%"}
+To go further, the package [janitor]{style="color:indianred;"} has several useful functions to clean messy data.
+:::
+
+
+
+
+```{r}
+dt3
+```
+
+
+```{r}
+library(janitor)
+dt3 %>% clean_names()
+```
+
 
 not part of the tidyverse but compatible 
 https://biodiversitydata.github.io/chapters/data-cleaning.html
+
+voir seulement 2 fonctions : 
+
+* clean_names
+
+* remove_empty
+
+=> faire un dataframe pour ces deux
+
+https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html
 
 
 # package *forcats* for qualitative variables
@@ -1266,6 +1479,8 @@ https://biodiversitydata.github.io/chapters/data-cleaning.html
 
 # TO DECIDE
 
+https://juba.github.io/tidyverse/09-recodages.html#combiner-plusieurs-variables
+
 ## dire ggplot on va voir après
 
 
@@ -1285,3 +1500,4 @@ cheatsheet of each of the tidyverse package
 
 * Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. [https://doi.org/10.18637/jss.v059.i10](https://doi.org/10.18637/jss.v059.i10)
 
+R for data science: chap sur les données

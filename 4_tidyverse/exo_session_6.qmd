@@ -1,0 +1,20 @@
+---
+title: "Exercices on session *Tidyverse 1/2*"
+format:
+  pdf
+execute:
+  echo: false 
+  eval: false 
+---
+
+# For next time
+
+* Install the following package from CRAN: *janitor*
+
+
+
+loader les jeux de données de la deuxième session du tidyverse (en faire un .Rdata)
+
+* Download the following data sets
+XXXXXXXXXXXXXXXXXXXXXXXXXXX
+and store them in your raw data folder.

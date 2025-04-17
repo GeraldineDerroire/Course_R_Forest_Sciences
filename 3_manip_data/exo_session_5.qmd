@@ -185,13 +185,10 @@ table(dt_pb$plot)
 # alternative not seen in the class
 length(unique(dt_pb$plot)) == dim(dt_pb)[1]
 ```
-# Packages
-
-Install the following packages from CRAN:
-
-* tidyverse
 
 # For next time
 
-Download the following data sets
+* Install the following package from CRAN: *tidyverse*
+
+* Download the following data sets
 [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/func_traits.csv){preview-link="false"} and here [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/commercial_sp.csv){preview-link="false"} and store them in your raw data folder.

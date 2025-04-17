@@ -1,0 +1,11 @@
+---
+title: "Exercices on session *Tidyverse 2/2*"
+format:
+  pdf
+execute:
+  echo: false 
+  eval: false 
+---
+
+# For next time
+
