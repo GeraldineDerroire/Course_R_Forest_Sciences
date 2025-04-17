@@ -36,7 +36,7 @@ dt2 <- tibble(
 
 # for janitor
 dt3 <- tibble(
-  sítio = c("A", NA, NA),
+  `#sítio` = c("A", NA, NA),
   `% cobertura` = c(0.25, NA, NA),
   numParcela = c(1, NA, NA))
 

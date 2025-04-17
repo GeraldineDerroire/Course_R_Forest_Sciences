@@ -1425,36 +1425,62 @@ use NA for missing values, but we could specify something else
 ## The package [janitor]{style="color:indianred;"} 
 
 ::::: columns
-::: {.column width="70%"}
+::: {.column width="80%"}
 To go further, the package [janitor]{style="color:indianred;"} has several useful functions to clean messy data.
+
+```{r, message=FALSE}
+library(janitor)
+```
+
 :::
 
+::: {.column width="20%"}
+![](janitor.png)
+:::
+:::::
 
+[For example, this one:]{.fragment}
 
-
+::: fragment
 ```{r}
 dt3
 ```
+:::
 
+::: notes
+we won't explore this package, I just mention it in case you need it.
+:::
+
+
+## clean_names
+
+The function [clean_names]{style="color:indianred;"} cleans the variable names:
+
+* use a consistent format
+
+* remove space and special characters
+
+* convert *#* to *number* and *%* to *percent*
+
+* ...
+
+::: fragment
+```{r}
+dt3 <- dt3 %>% clean_names()
+dt3
+```
+:::
+
+## remove_empty
+
+The function [remove_empty]{style="color:indianred;"} removes empty rows and/or columns:
 
 ```{r}
-library(janitor)
-dt3 %>% clean_names()
+dt3 %>%  remove_empty()
 ```
 
 
-not part of the tidyverse but compatible 
-https://biodiversitydata.github.io/chapters/data-cleaning.html
-
-voir seulement 2 fonctions : 
-
-* clean_names
-
-* remove_empty
-
-=> faire un dataframe pour ces deux
-
-https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html
+[To know more on *janitor*](https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html){preview-link="false"}
 
 
 # package *forcats* for qualitative variables

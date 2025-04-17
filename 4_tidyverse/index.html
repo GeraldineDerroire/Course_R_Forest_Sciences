@@ -2568,7 +2568,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </section>
-<section id="complete-1" class="slide level2">
+<section id="complete-1" class="slide level2 scrollable">
 <h2>complete</h2>
 <p>To add rows for the two other trees for 2017, we can use the function <span style="color:indianred;">complete</span>.</p>
 <p>The function <span style="color:indianred;">complete</span> add rows for all missing combination of several columns.</p>
@@ -2594,29 +2594,106 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 12 tree3 2025   43  </code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>use NA for missing values, but we could specify something else</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-<p>Mais si les données ne sont pas bien rangées =&gt; on range</p>
-<p>ici utiliser un jeu de données bordéliques… en créer un ?</p>
-<p>https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html#15 et suivante</p>
-<p>https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
-<p>les slides d’Eric sont bien pour les visuels, mais voir aussi Allison Horst</p>
-<p>function unite</p>
-<p>function separate</p>
-<p>pivot_longer / wider</p>
-<p>fonction complete?</p>
+<section id="the-package-janitor" class="slide level2">
+<h2>The package <span style="color:indianred;">janitor</span></h2>
+<div class="columns">
+<div class="column" style="width:80%;">
+<p>To go further, the package <span style="color:indianred;">janitor</span> has several useful functions to clean messy data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href=""></a><span class="fu">library</span>(janitor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div><div class="column" style="width:20%;">
+<p><img data-src="janitor.png"></p>
+</div></div>
+<p><span class="fragment">For example, this one:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href=""></a>dt3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  `#sítio` `% cobertura` numParcela
+  &lt;chr&gt;            &lt;dbl&gt;      &lt;dbl&gt;
+1 A                 0.25          1
+2 &lt;NA&gt;             NA            NA
+3 &lt;NA&gt;             NA            NA</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>we won’t explore this package, I just mention it in case you need it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="package-janitor" class="slide level2">
-<h2>package <em>janitor</em></h2>
-<p>not part of the tidyverse but compatible https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
-<p>voir seulement 2 fonctions :</p>
+<section id="clean_names" class="slide level2">
+<h2>clean_names</h2>
+<p>The function <span style="color:indianred;">clean_names</span> cleans the variable names:</p>
 <ul>
-<li class="fragment"><p>clean_names</p></li>
-<li class="fragment"><p>remove_empty</p></li>
+<li class="fragment"><p>use a consistent format</p></li>
+<li class="fragment"><p>remove space and special characters</p></li>
+<li class="fragment"><p>convert <em>#</em> to <em>number</em> and <em>%</em> to <em>percent</em></p></li>
+<li class="fragment"><p>…</p></li>
 </ul>
-<p>=&gt; faire un dataframe pour ces deux</p>
-<p>https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href=""></a>dt3 <span class="ot">&lt;-</span> dt3 <span class="sc">%&gt;%</span> <span class="fu">clean_names</span>()</span>
+<span id="cb147-2"><a href=""></a>dt3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  number_sitio percent_cobertura num_parcela
+  &lt;chr&gt;                    &lt;dbl&gt;       &lt;dbl&gt;
+1 A                         0.25           1
+2 &lt;NA&gt;                     NA             NA
+3 &lt;NA&gt;                     NA             NA</code></pre>
+</div>
+</div>
+</section>
+<section id="remove_empty" class="slide level2">
+<h2>remove_empty</h2>
+<p>The function <span style="color:indianred;">remove_empty</span> removes empty rows and/or columns:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href=""></a>dt3 <span class="sc">%&gt;%</span>  <span class="fu">remove_empty</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>value for "which" not specified, defaulting to c("rows", "cols")</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  number_sitio percent_cobertura num_parcela
+  &lt;chr&gt;                    &lt;dbl&gt;       &lt;dbl&gt;
+1 A                         0.25           1</code></pre>
+</div>
+</div>
+<p><a href="https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html" data-preview-link="false">To know more on <em>janitor</em></a></p>
 </section></section>
 <section id="package-forcats-for-qualitative-variables" class="title-slide slide level1 center">
 <h1>package <em>forcats</em> for qualitative variables</h1>
@@ -2635,7 +2712,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
 </section>
 
-<section id="section-2" class="title-slide slide level1 center">
+<section id="section-1" class="title-slide slide level1 center">
 <h1></h1>
 
 </section>
