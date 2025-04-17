@@ -2726,7 +2726,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
-<p>Let’s use the dataset <em>dt4</em> on secondary forests.</p>
+<p>Let’s use the dataset <em>dt4</em>, which is about on secondary forests.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb152"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href=""></a><span class="fu">str</span>(dt4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -2783,6 +2783,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 28px">see also <span style="color:indianred;">fct_other</span> and <span style="color:indianred;">fct_lump</span> to create a level <em>Other</em></span></span></p>
+<aside class="notes">
+<p>as always first we put the new one, and then the old one</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="re-ordering-levels" class="slide level2">
 <h2>Re-ordering levels</h2>
@@ -3122,33 +3135,71 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 
 <section>
-<section id="graphics-with-the-package-ggplot" class="title-slide slide level1 center">
+<section id="a-checklist-for-cleaning-data" class="title-slide slide level1 center">
+<h1>A checklist for cleaning data</h1>
+
+</section>
+<div>
+<div class="columns">
+<div class="column" style="width:33%;">
+<ul>
+<li><p>Clean column names</p></li>
+<li><p>Check decimal point</p></li>
+<li><p>Convert date format</p></li>
+<li><p>Check category values</p></li>
+</ul>
+</div><div class="columns">
+<div class="column" style="width:33%;">
+<ul>
+<li><p>Inspect numeric values</p></li>
+<li><p>Check for empty rows/columns</p></li>
+<li><p>Check for duplicates</p></li>
+<li><p>Duplicated unique identifier</p></li>
+</ul>
+</div><div class="columns">
+<div class="column" style="width:33%;">
+<ul>
+<li><p>Missing values</p></li>
+<li><p>Pivot data</p></li>
+<li><p>Split/combine columns</p></li>
+<li><p>…</p></li>
+</ul>
+</div>
+</div>
+</div><section id="graphics-with-the-package-ggplot" class="title-slide slide level1 center">
 <h1>Graphics with the package <span style="color:indianred;">ggplot</span></h1>
 <p><em>Next session!</em></p>
 
 <img data-src="ggplot.png" class="r-stretch"></section>
 <section id="acknowledgments" class="slide level2">
 <h2>Acknowledgments</h2>
+<div>
 <ul>
-<li class="fragment"><p>Barnier J. <em>Introduction à R et au tidyverse</em> <a href="https://juba.github.io/tidyverse/" data-preview-link="false">in French</a></p></li>
-<li class="fragment"><p>Marcon E. <em>R: Ridyverse</em> <a href="https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html" data-preview-link="false">in French</a></p></li>
-<li class="fragment"><p>Casajus N , Coux C. <em>Cleaning biodiversity data - Good practices, tools and homogenizing taxonomy</em> <a href="https://biodiversitydata.github.io/chapters/data-cleaning.html" data-preview-link="false">in English</a></p></li>
-<li class="fragment"><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> <a href="https://r4ds.hadley.nz/datetimes.html" data-preview-link="false">in English</a> and <a href="https://pt.r4ds.hadley.nz/" data-preview-link="false">in Portuguese</a></p></li>
+<li><p>Barnier J. <em>Introduction à R et au tidyverse</em> <a href="https://juba.github.io/tidyverse/" data-preview-link="false">in French</a></p></li>
+<li><p>Marcon E. <em>R: Ridyverse</em> <a href="https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html" data-preview-link="false">in French</a></p></li>
+<li><p>Casajus N , Coux C. <em>Cleaning biodiversity data - Good practices, tools and homogenizing taxonomy</em> <a href="https://biodiversitydata.github.io/chapters/data-cleaning.html" data-preview-link="false">in English</a></p></li>
+<li><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> <a href="https://r4ds.hadley.nz/datetimes.html" data-preview-link="false">in English</a> and <a href="https://pt.r4ds.hadley.nz/" data-preview-link="false">in Portuguese</a></p></li>
 </ul>
+</div>
 </section>
 <section id="ressources" class="slide level2">
 <h2>Ressources</h2>
+<div>
 <ul>
-<li class="fragment"><p>Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a></p></li>
-<li class="fragment"><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> <a href="https://r4ds.hadley.nz/datetimes.html">in English</a> and <a href="https://pt.r4ds.hadley.nz/">in Portuguese</a></p></li>
-<li class="fragment"><p>Cheatsheets of <a href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" data-preview-link="false">dpyr</a>, <a href="https://rstudio.github.io/cheatsheets/html/tidyr.html" data-preview-link="false">tidyr</a>, <a href="https://rstudio.github.io/cheatsheets/html/strings.html" data-preview-link="false">stringr</a>, <a href="https://www.flutterbys.com.au/stats/downloads/slides/figure/factors.pdf" data-preview-link="false">forcats</a></p></li>
+<li><p>Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a></p></li>
+<li><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> <a href="https://r4ds.hadley.nz/datetimes.html">in English</a> and <a href="https://pt.r4ds.hadley.nz/">in Portuguese</a></p></li>
+<li><p>Cheatsheets of <a href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" data-preview-link="false">dpyr</a>, <a href="https://rstudio.github.io/cheatsheets/html/tidyr.html" data-preview-link="false">tidyr</a>, <a href="https://rstudio.github.io/cheatsheets/html/strings.html" data-preview-link="false">stringr</a>, <a href="https://www.flutterbys.com.au/stats/downloads/slides/figure/factors.pdf" data-preview-link="false">forcats</a></p></li>
 </ul>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
+
+</div>
+</div></section>
     </div>
   </div>
 

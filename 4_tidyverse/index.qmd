@@ -1753,6 +1753,48 @@ str_replace_all(v, "Avenida", "AV.")
 delaing with dates can be complicated in R, if you need to use dates, check the package lubridate
 :::
 
+# A checklist for cleaning data
+
+::: {.nonincremental}
+
+::::: columns
+::: {.column width="33%"}
+* Clean column names
+
+* Check decimal point
+
+* Convert date format
+
+* Check category values
+:::
+
+::::: columns
+::: {.column width="33%"}
+* Inspect numeric values
+
+* Check for empty rows/columns
+
+* Check for duplicates
+
+* Duplicated unique identifier
+:::
+
+::::: columns
+::: {.column width="33%"}
+* Missing values
+
+* Pivot data
+
+* Split/combine columns
+
+* ...
+:::
+
+:::::
+
+:::
+
+
 # Graphics with the package [ggplot]{style="color:indianred;"}
 
 *Next session!*
