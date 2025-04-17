@@ -40,9 +40,19 @@ dt3 <- tibble(
   `% cobertura` = c(0.25, NA, NA),
   numParcela = c(1, NA, NA))
 
+# seondary forest
+dt4 <- tibble(
+  past_landuse = sample(c("Soybeans", "Sugarcane", "Pasture"), 25, replace = TRUE),
+  age = sample(5:15, 25, replace = TRUE)) %>% 
+  bind_rows(tibble(past_landuse= c("Tomatoes", "Corn"), 
+                   age = c(5, 12))) %>% 
+  mutate(past_landuse = as.factor(past_landuse))
+
+
 
 ## Save in a single .Rdata
 save(dt1,
      dt2,
      dt3,
+     dt4,
      file = "4_tidyverse/data/data_tidyverse_2.RData")

@@ -785,14 +785,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>⚠️ Remember that tibbles don’t have row names.</p>
 <p>So if there was row names that we wanted to keep in our data frame, we should use the function <span style="color:indianred;">rownames_to_column</span> to put them in a column (but let’s not store it here).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">as.tibble</span>(<span class="fu">rownames_to_column</span>(sp_com))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">as_tibble</span>(<span class="fu">rownames_to_column</span>(sp_com))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: `as.tibble()` was deprecated in tibble 2.0.0.
-ℹ Please use `as_tibble()` instead.
-ℹ The signature and semantics have changed, see `?as_tibble`.</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 96 × 9
    rowname CommercialName  Genus     Species CommercialLevel MinFD UpMinFD MaxFD
@@ -829,7 +824,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>Commercial tree species</h2>
 <p>Let’s look at the sp_com data :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>sp_com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>sp_com</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -852,7 +847,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment"><span style="font-size: 30px">To know more, we can look at the help on the package LoggingLab (if you want to install it, see instructions <a href="https://vincyanebadouard.github.io/LoggingLab/">here</a>)</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>?LoggingLab<span class="sc">::</span>SpeciesCriteria</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>?LoggingLab<span class="sc">::</span>SpeciesCriteria</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -877,8 +872,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h1>Manipulate and transform with the package <span style="color:indianred;">dplyr</span></h1>
 
 </section>
-<section id="the-verbs-of-dplyer" class="slide level2">
-<h2>The verbs of <span style="color:indianred;">dplyer</span></h2>
+<section id="the-verbs-of-dplyr" class="slide level2">
+<h2>The verbs of <span style="color:indianred;">dplyr</span></h2>
 <div class="columns">
 <div class="column" style="width:70%;">
 <p>The package <span style="color:indianred;">dplyr</span> proposes an intuitive syntax to manipulate and transform data.</p>
@@ -903,7 +898,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>slice</h2>
 <p>The function <span style="color:indianred;">slice</span> selects row(s) according to its/their position(s).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">slice</span>(traits, <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">slice</span>(traits, <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -917,7 +912,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment">which is equivalent to:</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>traits[<span class="dv">25</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>traits[<span class="dv">25</span>,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -934,8 +929,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>slice</h2>
 <p>and also equivalent to:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
-<span id="cb28-2"><a href=""></a>  <span class="fu">slice</span>(<span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href=""></a>  <span class="fu">slice</span>(<span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -951,7 +946,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>slice</h2>
 <p>We can also get several rows:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">slice</span>(traits, <span class="dv">2</span><span class="sc">:</span><span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="fu">slice</span>(traits, <span class="dv">2</span><span class="sc">:</span><span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -973,7 +968,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>slice</h2>
 <p>We can select only the first (or last) ones using <span style="color:indianred;">slice_head</span> or <span style="color:indianred;">slice_tail</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">slice_head</span>(traits, <span class="at">n=</span><span class="dv">3</span>) <span class="co"># n specify the number of rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">slice_head</span>(traits, <span class="at">n=</span><span class="dv">3</span>) <span class="co"># n specify the number of rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -988,7 +983,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="fu">slice_tail</span>(traits, <span class="at">prop=</span><span class="fl">0.1</span>) <span class="co"># prop specify the proportion of rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">slice_tail</span>(traits, <span class="at">prop=</span><span class="fl">0.1</span>) <span class="co"># prop specify the proportion of rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1008,7 +1003,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>slice</h2>
 <p><span style="color:indianred;">slice_min</span> and <span style="color:indianred;">slice_max</span> selects the row with the smallest or biggest value for a given variable:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="fu">slice_min</span>(traits, s_dbhmax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">slice_min</span>(traits, s_dbhmax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1021,8 +1016,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
-<span id="cb38-2"><a href=""></a>  <span class="fu">slice_max</span>(s_hmax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href=""></a>  <span class="fu">slice_max</span>(s_hmax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1053,7 +1048,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>The function <span style="color:indianred;">filter</span> selects rows according to a condition (a test). Only the rows for which the result of the test is TRUE are selected.</p>
 <p><span style="font-size: 30px">Let’s select only the aggregative species in the commercial species dataset:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">filter</span>(sp_com, Aggregative <span class="sc">==</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">filter</span>(sp_com, Aggregative <span class="sc">==</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1069,7 +1064,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>filter</h2>
 <p>Or let’s select the species that have a wood specific gravity (wsg) lower than 0.4:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">filter</span>(traits, s_wsg <span class="sc">&lt;</span> <span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="fu">filter</span>(traits, s_wsg <span class="sc">&lt;</span> <span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1099,9 +1094,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>filter</h2>
 <p>We can also combine several conditions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">filter</span>(traits, </span>
-<span id="cb44-2"><a href=""></a>       s_wsg <span class="sc">&lt;</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> <span class="co"># first condition</span></span>
-<span id="cb44-3"><a href=""></a>         s_LMA <span class="sc">&gt;</span> <span class="dv">70</span>) <span class="co"># second condition</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">filter</span>(traits, </span>
+<span id="cb43-2"><a href=""></a>       s_wsg <span class="sc">&lt;</span> <span class="fl">0.4</span> <span class="sc">&amp;</span> <span class="co"># first condition</span></span>
+<span id="cb43-3"><a href=""></a>         s_LMA <span class="sc">&gt;</span> <span class="dv">70</span>) <span class="co"># second condition</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1129,9 +1124,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <section id="filter-3" class="slide level2 scrollable">
 <h2>filter</h2>
 <p>We can also use a function to specify the condition.</p>
-<p>Let’s select trees with maximum DBH higher than the median:</p>
+<p>Let’s select species with maximum DBH higher than the median:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">filter</span>(traits, s_dbhmax <span class="sc">&gt;</span> <span class="fu">median</span>(s_dbhmax))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a><span class="fu">filter</span>(traits, s_dbhmax <span class="sc">&gt;</span> <span class="fu">median</span>(s_dbhmax))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1152,15 +1147,28 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 # ℹ 3 more variables: s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;, s_drymass &lt;dbl&gt;</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>in the dataset we have 45 values, so when we get the one above the median we get 22 =&gt; it makes sense</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="arrange" class="slide level2 scrollable">
 <h2>arrange</h2>
 <p>The function <span style="color:indianred;">arrange</span> reorders the row according to one or several columns:</p>
 <p>Let’s sort the species by increasing order of WSG, <strong>and then</strong> by decreasing order of hmax:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">arrange</span>(traits, </span>
-<span id="cb48-2"><a href=""></a>        s_wsg, <span class="co"># increasing</span></span>
-<span id="cb48-3"><a href=""></a>        <span class="fu">desc</span>(s_hmax)) <span class="co"># decreasing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">arrange</span>(traits, </span>
+<span id="cb47-2"><a href=""></a>        s_wsg, <span class="co"># increasing</span></span>
+<span id="cb47-3"><a href=""></a>        <span class="fu">desc</span>(s_hmax)) <span class="co"># decreasing</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1200,9 +1208,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>The function <span style="color:indianred;">distinct</span> keep only rows that are distinct.</p>
 <p><span style="font-size: 26px">Let’s create a simple dataset with a duplicated row:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Lucia"</span>, <span class="st">"Lucia"</span>, <span class="st">"Anna"</span>),</span>
-<span id="cb50-2"><a href=""></a>                    <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">21</span>, <span class="dv">23</span>))</span>
-<span id="cb50-3"><a href=""></a>my_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a>my_tibble <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Lucia"</span>, <span class="st">"Lucia"</span>, <span class="st">"Anna"</span>),</span>
+<span id="cb49-2"><a href=""></a>                    <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">21</span>, <span class="dv">21</span>, <span class="dv">23</span>))</span>
+<span id="cb49-3"><a href=""></a>my_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1217,7 +1225,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment"><span style="font-size: 26px">and use <span style="color:indianred;">distinct</span> to keep only distinct rows:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="fu">distinct</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="fu">distinct</span>(my_tibble)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1229,7 +1237,6 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </div>
-<p>https://larmarange.github.io/guide-R/manipulation/dplyr.html#distinct</p>
 </section>
 <section id="operations-on-columns" class="slide level2">
 <h2>Operations on columns</h2>
@@ -1247,7 +1254,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>The function <span style="color:indianred;">select</span> selects columns:</p>
 <p>Let’s select the Commercial names, Genus and Species from sp_com:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a><span class="fu">select</span>(sp_com, CommercialName, Genus, Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a><span class="fu">select</span>(sp_com, CommercialName, Genus, Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1271,9 +1278,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <section id="select-1" class="slide level2 scrollable">
 <h2>select</h2>
 <p>We can also say the columns we don’t want to select using <span style="color:indianred;">select</span>.</p>
-<p>Let’s select all the columns but the commercial name, using <span style="color:indianred;">-</span> before the name of the column to exclude:</p>
+<p>Let’s select all the columns except the commercial name, using <span style="color:indianred;">-</span> before the name of the column to exclude:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a><span class="fu">select</span>(sp_com, <span class="sc">-</span> CommercialName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="fu">select</span>(sp_com, <span class="sc">-</span> CommercialName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1300,8 +1307,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="co"># columns starting with "com"</span></span>
-<span id="cb58-2"><a href=""></a><span class="fu">select</span>(sp_com, <span class="fu">starts_with</span>(<span class="st">"Com"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a><span class="co"># columns starting with "com"</span></span>
+<span id="cb57-2"><a href=""></a><span class="fu">select</span>(sp_com, <span class="fu">starts_with</span>(<span class="st">"Com"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1324,8 +1331,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="co"># columns containing "FD"</span></span>
-<span id="cb60-2"><a href=""></a><span class="fu">select</span>(sp_com, <span class="fu">contains</span>(<span class="st">"FD"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a><span class="co"># columns containing "FD"</span></span>
+<span id="cb59-2"><a href=""></a><span class="fu">select</span>(sp_com, <span class="fu">contains</span>(<span class="st">"FD"</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1353,8 +1360,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>rename</h2>
 <p>We can rename columns with the function <span style="color:indianred;">rename</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="fu">rename</span>(traits, </span>
-<span id="cb62-2"><a href=""></a>       <span class="at">LMA =</span> s_LMA) <span class="co"># start with the new name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="fu">rename</span>(traits, </span>
+<span id="cb61-2"><a href=""></a>       <span class="at">LMA =</span> s_LMA) <span class="co"># start with the new name</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1381,10 +1388,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>The function <span style="color:indianred;">mutate</span> creates new columns, using existing ones.</p>
 <p><span style="font-size: 25px">Let’s create a new column in the traits dataset to have the DBHmax in cm:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a><span class="fu">mutate</span>(traits,</span>
-<span id="cb64-2"><a href=""></a>       <span class="at">dbhmax_cm =</span> s_dbhmax <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="co"># add the new column dbhmax_cm</span></span>
-<span id="cb64-3"><a href=""></a>  <span class="fu">select</span>(genus, species, s_dbhmax, dbhmax_cm) <span class="sc">%&gt;%</span>  <span class="co"># select only the 4 columns of interest</span></span>
-<span id="cb64-4"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="co"># just the 5 first rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a><span class="fu">mutate</span>(traits,</span>
+<span id="cb63-2"><a href=""></a>       <span class="at">dbhmax_cm =</span> s_dbhmax <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> <span class="co"># add the new column dbhmax_cm</span></span>
+<span id="cb63-3"><a href=""></a>  <span class="fu">select</span>(genus, species, s_dbhmax, dbhmax_cm) <span class="sc">%&gt;%</span>  <span class="co"># select only the 4 columns of interest</span></span>
+<span id="cb63-4"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="co"># just the 5 first rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1418,8 +1425,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>We can reorder the columns using the function <span style="color:indianred;">relocate</span>. We just need to specify the columns we want to put first (the order of the other ones is unchanged).</p>
 <p><span style="font-size: 25px">Let’s move the columns of DBHmax and Hmax first (after the species name) in the trait dataset:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="fu">relocate</span>(traits, genus, species, s_dbhmax, s_hmax) <span class="sc">%&gt;%</span> </span>
-<span id="cb66-2"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="co"># just the 5 first rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href=""></a><span class="fu">relocate</span>(traits, genus, species, s_dbhmax, s_hmax) <span class="sc">%&gt;%</span> </span>
+<span id="cb65-2"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n=</span><span class="dv">5</span>) <span class="co"># just the 5 first rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1465,7 +1472,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a>traits <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href=""></a>traits <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1511,9 +1518,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
-<span id="cb70-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
-<span id="cb70-3"><a href=""></a>  <span class="fu">slice_max</span>(s_wsg) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb69-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb69-3"><a href=""></a>  <span class="fu">slice_max</span>(s_wsg) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1555,15 +1562,15 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="group_by-with-mutate" class="slide level2 scrollable">
 <h2>group_by with mutate</h2>
-<p>We can also use v with <span style="color:indianred;">mutate</span> to do an operation by group.</p>
+<p>We can also use <span style="color:indianred;">group_by</span> with <span style="color:indianred;">mutate</span> to do an operation by group.</p>
 <p><span style="font-size: 25px">Let’s calculate the mean wsg of each genus:</span></p>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
-<span id="cb72-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span></span>
-<span id="cb72-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">mean_wsg =</span> <span class="fu">mean</span>(s_wsg)) <span class="sc">%&gt;%</span> </span>
-<span id="cb72-4"><a href=""></a>  <span class="fu">select</span>(genus, species, s_wsg, mean_wsg) <span class="co"># select only the columns of interest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb71-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span></span>
+<span id="cb71-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">mean_wsg =</span> <span class="fu">mean</span>(s_wsg)) <span class="sc">%&gt;%</span> </span>
+<span id="cb71-4"><a href=""></a>  <span class="fu">select</span>(genus, species, s_wsg, mean_wsg) <span class="co"># select only the columns of interest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1605,11 +1612,11 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>group_by with mutate</h2>
 <p>We can check this by looking at the <em>Licania</em> for instance:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
-<span id="cb74-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span></span>
-<span id="cb74-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">mean_wsg =</span> <span class="fu">mean</span>(s_wsg)) <span class="sc">%&gt;%</span> <span class="co"># add the mean wsg</span></span>
-<span id="cb74-4"><a href=""></a>  <span class="fu">select</span>(genus, species, s_wsg, mean_wsg) <span class="sc">%&gt;%</span> <span class="co"># select only the columns of interest</span></span>
-<span id="cb74-5"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">==</span> <span class="st">"Licania"</span>) <span class="co"># only the Licania</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb73-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span></span>
+<span id="cb73-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">mean_wsg =</span> <span class="fu">mean</span>(s_wsg)) <span class="sc">%&gt;%</span> <span class="co"># add the mean wsg</span></span>
+<span id="cb73-4"><a href=""></a>  <span class="fu">select</span>(genus, species, s_wsg, mean_wsg) <span class="sc">%&gt;%</span> <span class="co"># select only the columns of interest</span></span>
+<span id="cb73-5"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">==</span> <span class="st">"Licania"</span>) <span class="co"># only the Licania</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1630,10 +1637,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
-<span id="cb76-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
-<span id="cb76-3"><a href=""></a>  <span class="fu">filter</span>(s_wsg <span class="sc">&gt;</span> <span class="fu">mean</span>(s_wsg)) <span class="sc">%&gt;%</span> </span>
-<span id="cb76-4"><a href=""></a>  <span class="fu">select</span>(genus, species, s_wsg) <span class="co"># select only the columns of interest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb75-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb75-3"><a href=""></a>  <span class="fu">filter</span>(s_wsg <span class="sc">&gt;</span> <span class="fu">mean</span>(s_wsg)) <span class="sc">%&gt;%</span> </span>
+<span id="cb75-4"><a href=""></a>  <span class="fu">select</span>(genus, species, s_wsg) <span class="co"># select only the columns of interest</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1672,10 +1679,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>The function <span style="color:indianred;">summarise</span> aggregates the row by performing a summary operation on one or several columns.</p>
 <p><span style="font-size: 25px">Let’s look at the min, max and mean values of wsg accross the dataset:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
-<span id="cb78-2"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">min_wsg =</span> <span class="fu">min</span>(s_wsg),</span>
-<span id="cb78-3"><a href=""></a>            <span class="at">max_wsg =</span> <span class="fu">max</span>(s_wsg),</span>
-<span id="cb78-4"><a href=""></a>            <span class="at">mean_wsg =</span> <span class="fu">mean</span>(s_wsg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb77-2"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">min_wsg =</span> <span class="fu">min</span>(s_wsg),</span>
+<span id="cb77-3"><a href=""></a>            <span class="at">max_wsg =</span> <span class="fu">max</span>(s_wsg),</span>
+<span id="cb77-4"><a href=""></a>            <span class="at">mean_wsg =</span> <span class="fu">mean</span>(s_wsg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1694,11 +1701,11 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
-<span id="cb80-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
-<span id="cb80-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">min_wsg =</span> <span class="fu">min</span>(s_wsg),</span>
-<span id="cb80-4"><a href=""></a>            <span class="at">max_wsg =</span> <span class="fu">max</span>(s_wsg),</span>
-<span id="cb80-5"><a href=""></a>            <span class="at">mean_wsg =</span> <span class="fu">mean</span>(s_wsg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb79-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb79-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">min_wsg =</span> <span class="fu">min</span>(s_wsg),</span>
+<span id="cb79-4"><a href=""></a>            <span class="at">max_wsg =</span> <span class="fu">max</span>(s_wsg),</span>
+<span id="cb79-5"><a href=""></a>            <span class="at">mean_wsg =</span> <span class="fu">mean</span>(s_wsg))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1719,7 +1726,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </div><div class="column" style="width:30%;">
-<p><span class="fragment"><em>Here there are as many row than there are groups.</em></span></p>
+<p><span class="fragment"><em>Here there are as many rows than there are groups.</em></span></p>
 </div></div>
 </section>
 <section id="count" class="slide level2">
@@ -1729,8 +1736,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
-<span id="cb82-2"><a href=""></a>  <span class="fu">count</span>(genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
+<span id="cb81-2"><a href=""></a>  <span class="fu">count</span>(genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1761,8 +1768,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a>sp_com <span class="sc">%&gt;%</span> </span>
-<span id="cb84-2"><a href=""></a>  <span class="fu">count</span>(Genus, CommercialName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href=""></a>sp_com <span class="sc">%&gt;%</span> </span>
+<span id="cb83-2"><a href=""></a>  <span class="fu">count</span>(Genus, CommercialName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1802,7 +1809,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="using-a-pipe-to-chain-the-different-operations" class="slide level2">
 <h2>Using a pipe to chain the different operations</h2>
-<p>We can a pipe <span style="color:indianred;">%&gt;%</span> to chain several operations.</p>
+<p>We can use a pipe <span style="color:indianred;">%&gt;%</span> to chain several operations.</p>
 <p>The result of each operation feeds into the next one.</p>
 <p><span class="fragment">⚠️ Don’t forget to put the result of a pipe in a new (or existing) object.</span></p>
 <p><span class="fragment">When writing a pipe, write the operations one by one and <strong>test them one by one</strong>.</span></p>
@@ -1813,18 +1820,18 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:61%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href=""></a>gen_dim_max <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> </span>
-<span id="cb86-2"><a href=""></a>  <span class="fu">select</span>(genus, species, s_hmax, s_dbhmax) <span class="sc">%&gt;%</span> </span>
-<span id="cb86-3"><a href=""></a>  <span class="fu">rename</span>(<span class="at">Hmax =</span> s_hmax,</span>
-<span id="cb86-4"><a href=""></a>         <span class="at">DBHmax =</span> s_dbhmax) <span class="sc">%&gt;%</span> </span>
-<span id="cb86-5"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">BAmax =</span> (DBHmax<span class="sc">/</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> pi) <span class="sc">%&gt;%</span> </span>
-<span id="cb86-6"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
-<span id="cb86-7"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">Hmax_mean =</span> <span class="fu">mean</span>(Hmax),</span>
-<span id="cb86-8"><a href=""></a>            <span class="at">DBHmax_mean =</span> <span class="fu">mean</span>(DBHmax),</span>
-<span id="cb86-9"><a href=""></a>            <span class="at">BAmax_mean =</span> <span class="fu">mean</span>(BAmax)) <span class="sc">%&gt;%</span> </span>
-<span id="cb86-10"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(BAmax_mean))</span>
-<span id="cb86-11"><a href=""></a></span>
-<span id="cb86-12"><a href=""></a>gen_dim_max </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href=""></a>gen_dim_max <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> </span>
+<span id="cb85-2"><a href=""></a>  <span class="fu">select</span>(genus, species, s_hmax, s_dbhmax) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-3"><a href=""></a>  <span class="fu">rename</span>(<span class="at">Hmax =</span> s_hmax,</span>
+<span id="cb85-4"><a href=""></a>         <span class="at">DBHmax =</span> s_dbhmax) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-5"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">BAmax =</span> (DBHmax<span class="sc">/</span><span class="dv">2</span>)<span class="sc">^</span><span class="dv">2</span> <span class="sc">*</span> pi) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-6"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-7"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">Hmax_mean =</span> <span class="fu">mean</span>(Hmax),</span>
+<span id="cb85-8"><a href=""></a>            <span class="at">DBHmax_mean =</span> <span class="fu">mean</span>(DBHmax),</span>
+<span id="cb85-9"><a href=""></a>            <span class="at">BAmax_mean =</span> <span class="fu">mean</span>(BAmax)) <span class="sc">%&gt;%</span> </span>
+<span id="cb85-10"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(BAmax_mean))</span>
+<span id="cb85-11"><a href=""></a></span>
+<span id="cb85-12"><a href=""></a>gen_dim_max </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1885,21 +1892,21 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="bind_rows" class="slide level2">
 <h2>bind_rows</h2>
-<p><span style="font-size: 25px">To understand how <span style="color:indianred;">bind_rows</span>, we will first create several datasets of traits from the one we have used so far. This is obviously only for the purpose of the exercise…</span></p>
+<p><span style="font-size: 25px">To understand how <span style="color:indianred;">bind_rows</span> works, we will first create several datasets of traits that are subsets from the one we have used so far. This is obviously only for the purpose of the exercise…</span></p>
 <div class="columns">
 <div class="column" style="width:65%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a>traits1 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> </span>
-<span id="cb88-2"><a href=""></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href=""></a>traits1 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> </span>
+<span id="cb87-2"><a href=""></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href=""></a>traits2 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> </span>
-<span id="cb89-2"><a href=""></a>  <span class="fu">select</span>(, <span class="sc">-</span> s_wsg, <span class="sc">-</span> s_hmax) <span class="sc">%&gt;%</span> </span>
-<span id="cb89-3"><a href=""></a>  <span class="fu">slice</span>(<span class="dv">25</span><span class="sc">:</span><span class="dv">26</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a>traits2 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> </span>
+<span id="cb88-2"><a href=""></a>  <span class="fu">select</span>(, <span class="sc">-</span> s_wsg, <span class="sc">-</span> s_hmax) <span class="sc">%&gt;%</span> </span>
+<span id="cb88-3"><a href=""></a>  <span class="fu">slice</span>(<span class="dv">25</span><span class="sc">:</span><span class="dv">26</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1907,9 +1914,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href=""></a>traits3 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> </span>
-<span id="cb90-2"><a href=""></a>  <span class="fu">select</span>(, <span class="sc">-</span>s_LMA) <span class="sc">%&gt;%</span> </span>
-<span id="cb90-3"><a href=""></a>  <span class="fu">slice</span>(<span class="dv">25</span><span class="sc">:</span><span class="dv">27</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href=""></a>traits3 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> </span>
+<span id="cb89-2"><a href=""></a>  <span class="fu">select</span>(, <span class="sc">-</span>s_LMA) <span class="sc">%&gt;%</span> </span>
+<span id="cb89-3"><a href=""></a>  <span class="fu">slice</span>(<span class="dv">25</span><span class="sc">:</span><span class="dv">27</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1918,7 +1925,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div><div class="column" style="width:35%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href=""></a><span class="fu">dim</span>(traits1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href=""></a><span class="fu">dim</span>(traits1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1928,7 +1935,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href=""></a><span class="fu">dim</span>(traits2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href=""></a><span class="fu">dim</span>(traits2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1938,7 +1945,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href=""></a><span class="fu">dim</span>(traits3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href=""></a><span class="fu">dim</span>(traits3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1965,7 +1972,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>bind_rows</h2>
 <p>We can use <span style="color:indianred;">bind_row</span> to concatenate the three table by rows.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href=""></a><span class="fu">bind_rows</span>(traits1, traits2, traits3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href=""></a><span class="fu">bind_rows</span>(traits1, traits2, traits3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1987,10 +1994,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <section id="bind_rows-2" class="slide level2 scrollable">
 <h2>bind_rows</h2>
 <p>If we want to keep track of which table the rows came from, we can use the argument <span style="color:indianred;">.id</span> and specify the name of the column in which we want to store this information (here <em>“source”</em>).</p>
-<p>We can also explicity give a name to each table.</p>
+<p>We can also explicitly give a name to each table.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href=""></a><span class="fu">bind_rows</span>(<span class="at">table1 =</span> traits1, <span class="at">table2 =</span> traits2, <span class="at">table =</span> traits3,</span>
-<span id="cb99-2"><a href=""></a>          <span class="at">.id =</span><span class="st">"source"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href=""></a><span class="fu">bind_rows</span>(<span class="at">table1 =</span> traits1, <span class="at">table2 =</span> traits2, <span class="at">table3 =</span> traits3,</span>
+<span id="cb98-2"><a href=""></a>          <span class="at">.id =</span><span class="st">"source"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2001,9 +2008,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 2 table1 Bocoa    prouacensis  95.6  0.0255 5.05e-4  0.798     0.4    47.9 0.251
 3 table2 Lecythis poiteaui     86.0  0.0276 5.87e-4 NA         0.61   NA   0.27 
 4 table2 Licania  alba        138.   0.0141 3.93e-4 NA         0.42   NA   0.207
-5 table  Lecythis poiteaui     NA    0.0276 5.87e-4  0.695     0.61   49.2 0.27 
-6 table  Licania  alba         NA    0.0141 3.93e-4  0.755     0.42   40.3 0.207
-7 table  Licania  canescens    NA    0.0206 4.37e-4  0.766     0.29   27.3 0.11 
+5 table3 Lecythis poiteaui     NA    0.0276 5.87e-4  0.695     0.61   49.2 0.27 
+6 table3 Licania  alba         NA    0.0141 3.93e-4  0.755     0.42   40.3 0.207
+7 table3 Licania  canescens    NA    0.0206 4.37e-4  0.766     0.29   27.3 0.11 
 # ℹ 4 more variables: s_seedmass &lt;dbl&gt;, s_regionalfreq &lt;dbl&gt;, s_tlp &lt;dbl&gt;,
 #   s_drymass &lt;dbl&gt;</code></pre>
 </div>
@@ -2013,17 +2020,17 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>bind_cols</h2>
 <p><span style="color:indianred;">bind_cols</span> works in a similar way but to concatenate columns.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href=""></a><span class="co"># let's first make subset tables</span></span>
-<span id="cb101-2"><a href=""></a>t1 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(genus, species)</span>
-<span id="cb101-3"><a href=""></a>t2 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(s_LMA)</span>
-<span id="cb101-4"><a href=""></a>t3 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(s_wsg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href=""></a><span class="co"># let's first make subset tables</span></span>
+<span id="cb100-2"><a href=""></a>t1 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(genus, species)</span>
+<span id="cb100-3"><a href=""></a>t2 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(s_LMA)</span>
+<span id="cb100-4"><a href=""></a>t3 <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(s_wsg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href=""></a><span class="fu">bind_cols</span>(t1, t2, t3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href=""></a><span class="fu">bind_cols</span>(t1, t2, t3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2072,15 +2079,15 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>We are now going to join the dataset of traits and the dataset of commercial species.</p>
 <p>Let’s first select a subset of columns in each, to visualise the results better.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href=""></a>traits_sub <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(genus, species, s_LMA, s_wsg)</span>
-<span id="cb104-2"><a href=""></a>sp_com_sub <span class="ot">&lt;-</span> sp_com <span class="sc">%&gt;%</span> <span class="fu">select</span>(CommercialName, Genus, Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href=""></a>traits_sub <span class="ot">&lt;-</span> traits <span class="sc">%&gt;%</span> <span class="fu">select</span>(genus, species, s_LMA, s_wsg)</span>
+<span id="cb103-2"><a href=""></a>sp_com_sub <span class="ot">&lt;-</span> sp_com <span class="sc">%&gt;%</span> <span class="fu">select</span>(CommercialName, Genus, Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href=""></a><span class="fu">colnames</span>(traits_sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href=""></a><span class="fu">colnames</span>(traits_sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2090,7 +2097,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href=""></a><span class="fu">colnames</span>(sp_com_sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href=""></a><span class="fu">colnames</span>(sp_com_sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2106,11 +2113,11 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment"><span style="font-size: 30px">We need to specify which column matches which (as they are no columns with the exact same names in both datasets).</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href=""></a>j1 <span class="ot">&lt;-</span> traits_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb109-2"><a href=""></a>  <span class="fu">left_join</span>(sp_com_sub,</span>
-<span id="cb109-3"><a href=""></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"genus"</span> <span class="ot">=</span> <span class="st">"Genus"</span>,</span>
-<span id="cb109-4"><a href=""></a>                   <span class="st">"species"</span> <span class="ot">=</span> <span class="st">"Species"</span>))</span>
-<span id="cb109-5"><a href=""></a>j1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href=""></a>j1 <span class="ot">&lt;-</span> traits_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb108-2"><a href=""></a>  <span class="fu">left_join</span>(sp_com_sub,</span>
+<span id="cb108-3"><a href=""></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"genus"</span> <span class="ot">=</span> <span class="st">"Genus"</span>,</span>
+<span id="cb108-4"><a href=""></a>                   <span class="st">"species"</span> <span class="ot">=</span> <span class="st">"Species"</span>))</span>
+<span id="cb108-5"><a href=""></a>j1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2137,7 +2144,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>We can see that <span style="color:indianred;">left_join</span> kept all rows of <em>traits_sub</em>,</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href=""></a><span class="fu">dim</span>(j1)[<span class="dv">1</span>] <span class="sc">==</span> <span class="fu">dim</span>(traits_sub)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href=""></a><span class="fu">dim</span>(j1)[<span class="dv">1</span>] <span class="sc">==</span> <span class="fu">dim</span>(traits_sub)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2148,7 +2155,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment">and that <em>NA</em> have been added when there was not match in <em>sp_com_sub</em>.</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href=""></a><span class="fu">slice_head</span>(j1, <span class="at">n=</span><span class="dv">5</span>) <span class="co"># show only a few line for ease of reading</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href=""></a><span class="fu">slice_head</span>(j1, <span class="at">n=</span><span class="dv">5</span>) <span class="co"># show only a few line for ease of reading</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2182,10 +2189,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>righ_joint</h2>
 <p>We can join <em>traits_sub</em> with <em>sp_com_sub</em> using a <span style="color:indianred;">right_join</span>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href=""></a>j2 <span class="ot">&lt;-</span> traits_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb115-2"><a href=""></a>  <span class="fu">right_join</span>(sp_com_sub,</span>
-<span id="cb115-3"><a href=""></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"genus"</span> <span class="ot">=</span> <span class="st">"Genus"</span>,</span>
-<span id="cb115-4"><a href=""></a>                   <span class="st">"species"</span> <span class="ot">=</span> <span class="st">"Species"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href=""></a>j2 <span class="ot">&lt;-</span> traits_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb114-2"><a href=""></a>  <span class="fu">right_join</span>(sp_com_sub,</span>
+<span id="cb114-3"><a href=""></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"genus"</span> <span class="ot">=</span> <span class="st">"Genus"</span>,</span>
+<span id="cb114-4"><a href=""></a>                   <span class="st">"species"</span> <span class="ot">=</span> <span class="st">"Species"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -2193,7 +2200,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment">We can see that <span style="color:indianred;">right_join</span> kept all rows of <em>sp_com_sub</em>.</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href=""></a><span class="fu">dim</span>(j2)[<span class="dv">1</span>] <span class="sc">==</span> <span class="fu">dim</span>(sp_com_sub)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href=""></a><span class="fu">dim</span>(j2)[<span class="dv">1</span>] <span class="sc">==</span> <span class="fu">dim</span>(sp_com_sub)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2209,11 +2216,11 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href=""></a>j3 <span class="ot">&lt;-</span> traits_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb118-2"><a href=""></a>  <span class="fu">inner_join</span>(sp_com_sub,</span>
-<span id="cb118-3"><a href=""></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"genus"</span> <span class="ot">=</span> <span class="st">"Genus"</span>,</span>
-<span id="cb118-4"><a href=""></a>                   <span class="st">"species"</span> <span class="ot">=</span> <span class="st">"Species"</span>))</span>
-<span id="cb118-5"><a href=""></a><span class="fu">dim</span>(j3)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href=""></a>j3 <span class="ot">&lt;-</span> traits_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb117-2"><a href=""></a>  <span class="fu">inner_join</span>(sp_com_sub,</span>
+<span id="cb117-3"><a href=""></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"genus"</span> <span class="ot">=</span> <span class="st">"Genus"</span>,</span>
+<span id="cb117-4"><a href=""></a>                   <span class="st">"species"</span> <span class="ot">=</span> <span class="st">"Species"</span>))</span>
+<span id="cb117-5"><a href=""></a><span class="fu">dim</span>(j3)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2222,8 +2229,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div><div class="column" style="width:40%;">
 <p><span class="fragment">The <span style="color:indianred;">inner_join</span> keeps only rows from <em>traits_sub</em> that have a matching key in <em>sp_com_sub</em>.</span></p>
-<p><span class="fragment">So there are 11 species common to <em>traits_sub</em> and <em>sp_com_sub</em>.</span></p>
 </div></div>
+<p><span class="fragment">So there are 11 species common to <em>traits_sub</em> and <em>sp_com_sub</em>.</span></p>
 </section>
 <section id="full_join" class="slide level2">
 <h2>full_join</h2>
@@ -2231,11 +2238,11 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href=""></a>j4 <span class="ot">&lt;-</span> traits_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb120-2"><a href=""></a>  <span class="fu">full_join</span>(sp_com_sub,</span>
-<span id="cb120-3"><a href=""></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"genus"</span> <span class="ot">=</span> <span class="st">"Genus"</span>,</span>
-<span id="cb120-4"><a href=""></a>                   <span class="st">"species"</span> <span class="ot">=</span> <span class="st">"Species"</span>))</span>
-<span id="cb120-5"><a href=""></a><span class="fu">dim</span>(j4)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href=""></a>j4 <span class="ot">&lt;-</span> traits_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb119-2"><a href=""></a>  <span class="fu">full_join</span>(sp_com_sub,</span>
+<span id="cb119-3"><a href=""></a>            <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"genus"</span> <span class="ot">=</span> <span class="st">"Genus"</span>,</span>
+<span id="cb119-4"><a href=""></a>                   <span class="st">"species"</span> <span class="ot">=</span> <span class="st">"Species"</span>))</span>
+<span id="cb119-5"><a href=""></a><span class="fu">dim</span>(j4)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2248,7 +2255,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment">So there are 130 species in total in <em>traits_sub</em> and <em>sp_com_sub</em>.</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href=""></a><span class="fu">dim</span>(j4)[<span class="dv">1</span>]  <span class="sc">==</span> <span class="fu">dim</span>(traits_sub)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">dim</span>(sp_com_sub)[<span class="dv">1</span>] <span class="sc">-</span> <span class="fu">dim</span>(j3)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href=""></a><span class="fu">dim</span>(j4)[<span class="dv">1</span>]  <span class="sc">==</span> <span class="fu">dim</span>(traits_sub)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">dim</span>(sp_com_sub)[<span class="dv">1</span>] <span class="sc">-</span> <span class="fu">dim</span>(j3)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2288,7 +2295,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:70%;">
 <p><span class="fragment">We are going to use the package <span style="color:indianred;">tidyr</span> to make messy (untidy) data tidy, so that we can use them with all the packages of the tidyverse.</span></p>
-<p><span class="fragment">Just as <span style="color:indianred;">dplyr</span>, the syntax of <span style="color:indianred;">tidyr</span> is based on intuitive verbs, and commands can be chained using a pipe (<span style="color:indianred;">%&gt;%</span>)</span></p>
+<p><span class="fragment">Just as <span style="color:indianred;">dplyr</span>, the syntax of <span style="color:indianred;">tidyr</span> is based on intuitive verbs, and commands can be chained using a pipe (<span style="color:indianred;">%&gt;%</span>).</span></p>
 </div><div class="column" style="width:30%;">
 <p><img data-src="tidyr.png"></p>
 </div></div>
@@ -2300,7 +2307,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span style="font-size: 25px">A .Rdata file is a file that can contain several R objects.</span></p>
 <p>Let’s load them in our environment:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_tidyverse_2.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_tidyverse_2.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -2323,7 +2330,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>First example of untidy data</h2>
 <p>Let’s look at the dataset called <em>dt1</em> containing tree DBH for different years:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href=""></a>dt1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href=""></a>dt1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2344,7 +2351,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href=""></a>dt1 <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>, <span class="st">`</span><span class="at">2020</span><span class="st">`</span>, <span class="st">`</span><span class="at">2025</span><span class="st">`</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href=""></a>dt1 <span class="sc">%&gt;%</span> <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>, <span class="st">`</span><span class="at">2020</span><span class="st">`</span>, <span class="st">`</span><span class="at">2025</span><span class="st">`</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2379,17 +2386,31 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
           display:block!important;
       }</style></aside>
 </section>
-<section id="pivot_longer-1" class="slide level2">
+<section id="pivot_longer-1" class="slide level2 scrollable">
 <h2>pivot_longer</h2>
 <p>We can specify the names of the columns that will be created:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href=""></a>dt1L <span class="ot">&lt;-</span> dt1 <span class="sc">%&gt;%</span> </span>
-<span id="cb129-2"><a href=""></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>, <span class="st">`</span><span class="at">2020</span><span class="st">`</span>, <span class="st">`</span><span class="at">2025</span><span class="st">`</span>),</span>
-<span id="cb129-3"><a href=""></a>               <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="co"># for the name of the former columns</span></span>
-<span id="cb129-4"><a href=""></a>               <span class="at">values_to =</span> <span class="st">"DBH"</span>) <span class="co"># for the values contained in these columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href=""></a>dt1L <span class="ot">&lt;-</span> dt1 <span class="sc">%&gt;%</span> </span>
+<span id="cb128-2"><a href=""></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(<span class="st">`</span><span class="at">2015</span><span class="st">`</span>, <span class="st">`</span><span class="at">2020</span><span class="st">`</span>, <span class="st">`</span><span class="at">2025</span><span class="st">`</span>),</span>
+<span id="cb128-3"><a href=""></a>               <span class="at">names_to =</span> <span class="st">"year"</span>, <span class="co"># for the name of the former columns</span></span>
+<span id="cb128-4"><a href=""></a>               <span class="at">values_to =</span> <span class="st">"DBH"</span>) <span class="co"># for the values contained in these columns</span></span>
+<span id="cb128-5"><a href=""></a>dt1L</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
-
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  tree  year    DBH
+  &lt;chr&gt; &lt;chr&gt; &lt;dbl&gt;
+1 tree1 2015   25  
+2 tree1 2020   26  
+3 tree1 2025   26.5
+4 tree2 2015   35  
+5 tree2 2020   37  
+6 tree2 2025   38.5
+7 tree3 2015   43  
+8 tree3 2020   43  
+9 tree3 2025   43  </code></pre>
+</div>
 </div>
 </section>
 <section id="pivot_longer-2" class="slide level2">
@@ -2486,7 +2507,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="sourceCode cell-code" id="cb136"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href=""></a>dt2 <span class="ot">&lt;-</span> dt2 <span class="sc">%&gt;%</span> </span>
 <span id="cb136-2"><a href=""></a>  <span class="fu">unite</span>(full_name, <span class="co"># name of the column to create</span></span>
 <span id="cb136-3"><a href=""></a>        genus, species, <span class="co"># names of the columns to unite</span></span>
-<span id="cb136-4"><a href=""></a>        <span class="at">sep=</span><span class="st">" "</span>, <span class="co"># sperated by a space</span></span>
+<span id="cb136-4"><a href=""></a>        <span class="at">sep=</span><span class="st">" "</span>, <span class="co"># separated by a space</span></span>
 <span id="cb136-5"><a href=""></a>        <span class="at">remove =</span> <span class="cn">FALSE</span>) <span class="co"># keep the two original columns</span></span>
 <span id="cb136-6"><a href=""></a>dt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -2622,7 +2643,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div><div class="column" style="width:20%;">
 <p><img data-src="janitor.png"></p>
 </div></div>
-<p><span class="fragment">For example, this one:</span></p>
+<p><span class="fragment">For example, these messy data:</span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb145"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href=""></a>dt3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2640,6 +2661,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <aside class="notes">
 <p>we won’t explore this package, I just mention it in case you need it.</p>
+<p>could not to it if I’m really late</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2661,6 +2683,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <li class="fragment"><p>convert <em>#</em> to <em>number</em> and <em>%</em> to <em>percent</em></p></li>
 <li class="fragment"><p>…</p></li>
 </ul>
+<div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb147"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href=""></a>dt3 <span class="ot">&lt;-</span> dt3 <span class="sc">%&gt;%</span> <span class="fu">clean_names</span>()</span>
 <span id="cb147-2"><a href=""></a>dt3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2673,6 +2696,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 1 A                         0.25           1
 2 &lt;NA&gt;                     NA             NA
 3 &lt;NA&gt;                     NA             NA</code></pre>
+</div>
 </div>
 </div>
 </section>
@@ -2695,49 +2719,430 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <p><a href="https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html" data-preview-link="false">To know more on <em>janitor</em></a></p>
 </section></section>
-<section id="package-forcats-for-qualitative-variables" class="title-slide slide level1 center">
-<h1>package <em>forcats</em> for qualitative variables</h1>
-<p>https://juba.github.io/tidyverse/09-recodages.html#combiner-plusieurs-variables</p>
+<section>
+<section id="manipulating-factors-with-the-packages-forcats-and-dplyr" class="title-slide slide level1 center">
+<h1>Manipulating factors with the packages <span style="color:indianred;">forcats</span> and <span style="color:indianred;">dplyr</span></h1>
+
 </section>
-
-<section id="package-stringr" class="title-slide slide level1 center">
-<h1>package <em>stringr</em></h1>
-<p>https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
-<p>https://larmarange.github.io/guide-R/manipulation_avancee/stringr.html</p>
-<p>https://juba.github.io/tidyverse/11-stringr.html</p>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>Let’s use the dataset <em>dt4</em> on secondary forests.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb152"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb152-1"><a href=""></a><span class="fu">str</span>(dt4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [27 × 2] (S3: tbl_df/tbl/data.frame)
+ $ past_landuse: Factor w/ 5 levels "Corn","Pasture",..: 3 2 3 2 4 4 2 3 3 2 ...
+ $ age         : num [1:27] 12 14 8 7 8 7 9 10 6 11 ...</code></pre>
+</div>
+</div>
+<p><span class="fragment">What are the levels of the factor <em>past_landuse</em>?</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href=""></a><span class="fu">levels</span>(dt4<span class="sc">$</span>past_landuse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Corn"      "Pasture"   "Soybeans"  "Sugarcane" "Tomatoes" </code></pre>
+</div>
+</div>
+</div>
 </section>
-
-<section id="package-lubidate" class="title-slide slide level1 center">
-<h1>package <em>lubidate</em></h1>
-<p>https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
+<section id="recoding-levels" class="slide level2 scrollable">
+<h2>Recoding levels</h2>
+<p><span style="font-size: 28px"><span style="color:indianred;">fct_recode</span> allows to rename the levels:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href=""></a>dt4<span class="sc">$</span>past_landuse <span class="sc">%&gt;%</span> <span class="fu">fct_recode</span>(</span>
+<span id="cb156-2"><a href=""></a>  <span class="st">"Milho"</span> <span class="ot">=</span> <span class="st">"Corn"</span>, <span class="co"># new level = old level</span></span>
+<span id="cb156-3"><a href=""></a>  <span class="st">"Pastagem"</span> <span class="ot">=</span> <span class="st">"Pasture"</span>,</span>
+<span id="cb156-4"><a href=""></a>  <span class="st">"Soja"</span> <span class="ot">=</span> <span class="st">"Soybeans"</span>,</span>
+<span id="cb156-5"><a href=""></a>  <span class="st">"Cana-de-açúcar"</span> <span class="ot">=</span> <span class="st">"Sugarcane"</span>,</span>
+<span id="cb156-6"><a href=""></a>  <span class="st">"Tomate"</span> <span class="ot">=</span> <span class="st">"Tomatoes"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb156-7"><a href=""></a>  <span class="fu">levels</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Milho"          "Pastagem"       "Soja"           "Cana-de-açúcar"
+[5] "Tomate"        </code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 28px"><span style="color:indianred;">fct_collapse</span> allows grouping levels:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb158"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb158-1"><a href=""></a>dt4<span class="sc">$</span>past_landuse <span class="sc">%&gt;%</span> <span class="fu">fct_collapse</span>(</span>
+<span id="cb158-2"><a href=""></a>  <span class="st">"Agriculture"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Corn"</span>, <span class="st">"Soybeans"</span>, <span class="st">"Sugarcane"</span>, <span class="st">"Tomatoes"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb158-3"><a href=""></a>  <span class="fu">levels</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Agriculture" "Pasture"    </code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 28px">see also <span style="color:indianred;">fct_other</span> and <span style="color:indianred;">fct_lump</span> to create a level <em>Other</em></span></span></p>
 </section>
+<section id="re-ordering-levels" class="slide level2">
+<h2>Re-ordering levels</h2>
+<p><span style="font-size: 28px"><span style="color:indianred;">fct_relevel</span> allows changing the order of the levels:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb160"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb160-1"><a href=""></a>dt4<span class="sc">$</span>past_landuse <span class="sc">%&gt;%</span> <span class="fu">fct_relevel</span>(</span>
+<span id="cb160-2"><a href=""></a>  <span class="st">"Pasture"</span>, <span class="st">"Soybeans"</span>, <span class="st">"Sugarcane"</span>, <span class="st">"Tomatoes"</span>, <span class="st">"Corn"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb160-3"><a href=""></a>  <span class="fu">levels</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Pasture"   "Soybeans"  "Sugarcane" "Tomatoes"  "Corn"     </code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 28px"><span style="color:indianred;">fct_reorder</span> allows re-order the levels according to the values of another variable:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb162"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href=""></a>dt4<span class="sc">$</span>past_landuse <span class="sc">%&gt;%</span> <span class="fu">fct_reorder</span>(</span>
+<span id="cb162-2"><a href=""></a>  dt4<span class="sc">$</span>age,</span>
+<span id="cb162-3"><a href=""></a>  median) <span class="sc">%&gt;%</span>  <span class="co"># re-order the factor according the median of the age </span></span>
+<span id="cb162-4"><a href=""></a>  <span class="fu">levels</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Tomatoes"  "Sugarcane" "Soybeans"  "Pasture"   "Corn"     </code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>useful for graphs to set the order of the levels</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="function-if_else" class="slide level2 scrollable">
+<h2>Function <span style="color:indianred;">if_else</span></h2>
+<p><span style="font-size: 28px"><span style="color:indianred;">if_else</span> from the package <span style="color:indianred;">dplyr</span> performs a test on a variable, and give a value if true and another if false:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb164"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb164-1"><a href=""></a>dt4 <span class="sc">%&gt;%</span> </span>
+<span id="cb164-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">age_cat =</span> <span class="co"># add a new column</span></span>
+<span id="cb164-3"><a href=""></a>           <span class="fu">if_else</span>(dt4<span class="sc">$</span>age <span class="sc">&gt;</span> <span class="dv">10</span>, <span class="co"># test</span></span>
+<span id="cb164-4"><a href=""></a>                   <span class="st">"Older than 10yr"</span>, <span class="co"># value if test TRUE</span></span>
+<span id="cb164-5"><a href=""></a>                   <span class="st">"Younger than 10yr"</span>)) <span class="sc">%&gt;%</span> <span class="co"># value if test  FALSE</span></span>
+<span id="cb164-6"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">age_cat =</span> <span class="fu">as.factor</span>(age_cat)) <span class="co"># transform to factor</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 27 × 3
+   past_landuse   age age_cat          
+   &lt;fct&gt;        &lt;dbl&gt; &lt;fct&gt;            
+ 1 Soybeans        12 Older than 10yr  
+ 2 Pasture         14 Older than 10yr  
+ 3 Soybeans         8 Younger than 10yr
+ 4 Pasture          7 Younger than 10yr
+ 5 Sugarcane        8 Younger than 10yr
+ 6 Sugarcane        7 Younger than 10yr
+ 7 Pasture          9 Younger than 10yr
+ 8 Soybeans        10 Younger than 10yr
+ 9 Soybeans         6 Younger than 10yr
+10 Pasture         11 Older than 10yr  
+# ℹ 17 more rows</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>here if_gives a character so we then transform it to a factor</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="function-case_when" class="slide level2 scrollable">
+<h2>Function <span style="color:indianred;">case_when</span></h2>
+<p><span style="color:indianred;">case_when</span> from the package <span style="color:indianred;">dplyr</span> generalise if else to several tests (or groups of tests)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb166"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href=""></a>dt4 <span class="sc">%&gt;%</span> </span>
+<span id="cb166-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">category =</span> </span>
+<span id="cb166-3"><a href=""></a>           <span class="fu">case_when</span>(</span>
+<span id="cb166-4"><a href=""></a>             dt4<span class="sc">$</span>past_landuse <span class="sc">!=</span> <span class="st">"Pasture"</span> <span class="sc">&amp;</span> dt4<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="co"># tests for the first case</span></span>
+<span id="cb166-5"><a href=""></a>               <span class="st">"Young after agriculture"</span>, <span class="co"># value for the first case</span></span>
+<span id="cb166-6"><a href=""></a>             dt4<span class="sc">$</span>past_landuse <span class="sc">==</span> <span class="st">"Pasture"</span> <span class="sc">&amp;</span> dt4<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="co"># tests for the second case</span></span>
+<span id="cb166-7"><a href=""></a>               <span class="st">"Young after pasture"</span>, <span class="co"># value for the second case</span></span>
+<span id="cb166-8"><a href=""></a>             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"old"</span>)) <span class="sc">%&gt;%</span> <span class="co"># all the other cases</span></span>
+<span id="cb166-9"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">category =</span> <span class="fu">as.factor</span>(category)) <span class="co"># transform to factor</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 27 × 3
+   past_landuse   age category               
+   &lt;fct&gt;        &lt;dbl&gt; &lt;fct&gt;                  
+ 1 Soybeans        12 old                    
+ 2 Pasture         14 old                    
+ 3 Soybeans         8 Young after agriculture
+ 4 Pasture          7 Young after pasture    
+ 5 Sugarcane        8 Young after agriculture
+ 6 Sugarcane        7 Young after agriculture
+ 7 Pasture          9 Young after pasture    
+ 8 Soybeans        10 old                    
+ 9 Soybeans         6 Young after agriculture
+10 Pasture         11 old                    
+# ℹ 17 more rows</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>here what we do is a bit complicated:</p>
+<p>We have 3 cases</p>
+<p>and the test for each case has two conditions</p>
+<p>we could use case_when with a test with just one condition</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="function-cut" class="slide level2">
+<h2>Function <span style="color:indianred;">cut</span></h2>
+<p><span style="color:indianred;">cut</span> from the package <span style="color:indianred;">base</span> divides a vector into classes:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb168"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb168-1"><a href=""></a>dt4 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age_class =</span></span>
+<span id="cb168-2"><a href=""></a>                 <span class="fu">cut</span>(dt4<span class="sc">$</span>age, <span class="co"># vector to divide</span></span>
+<span id="cb168-3"><a href=""></a>                     <span class="at">breaks =</span> <span class="dv">4</span>)) <span class="co"># number of class</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 27 × 3
+   past_landuse   age age_class 
+   &lt;fct&gt;        &lt;dbl&gt; &lt;fct&gt;     
+ 1 Soybeans        12 (10,12.5] 
+ 2 Pasture         14 (12.5,15] 
+ 3 Soybeans         8 (7.5,10]  
+ 4 Pasture          7 (4.99,7.5]
+ 5 Sugarcane        8 (7.5,10]  
+ 6 Sugarcane        7 (4.99,7.5]
+ 7 Pasture          9 (7.5,10]  
+ 8 Soybeans        10 (7.5,10]  
+ 9 Soybeans         6 (4.99,7.5]
+10 Pasture         11 (10,12.5] 
+# ℹ 17 more rows</code></pre>
+</div>
+</div>
+</section></section>
+<section>
+<section id="manipulating-character-strings-with-the-package-stringr" class="title-slide slide level1 center">
+<h1>Manipulating character strings with the package <span style="color:indianred;">stringr</span></h1>
 
-<section id="section-1" class="title-slide slide level1 center">
-<h1></h1>
+</section>
+<section id="concatenate-character-strings" class="slide level2">
+<h2>Concatenate character strings</h2>
+<p>The function <span style="color:indianred;">paste</span> from the package <span style="color:indianred;">base</span> concatenate two vectors of characters:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb170"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href=""></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dark"</span>, <span class="st">"dark"</span>, <span class="st">"ligth"</span>, <span class="st">"dark"</span>, <span class="st">"light"</span>)</span>
+<span id="cb170-2"><a href=""></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"pink"</span>, <span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"pink"</span>)</span>
+<span id="cb170-3"><a href=""></a></span>
+<span id="cb170-4"><a href=""></a><span class="fu">paste</span>(v1, v2, <span class="at">sep=</span><span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "dark blue"   "dark pink"   "ligth red"   "dark yellow" "light pink" </code></pre>
+</div>
+</div>
+<p><span class="fragment">It is equivalent to the function <span style="color:indianred;">str_c</span> from the package <span style="color:indianred;">stringr</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href=""></a>v3 <span class="ot">&lt;-</span> <span class="fu">str_c</span>(v1, v2, <span class="at">sep=</span><span class="st">" "</span>)</span>
+<span id="cb172-2"><a href=""></a>v3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "dark blue"   "dark pink"   "ligth red"   "dark yellow" "light pink" </code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px"><em>NB: if we want to concatenate columns of a data frame, we can also use <span style="color:indianred;">unite</span>.</em></span></span></p>
+</section>
+<section id="split-a-character-string" class="slide level2">
+<h2>Split a character string</h2>
+<p>The opposite is the function <span style="color:indianred;">str_split</span> :</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href=""></a><span class="fu">str_split</span>(v3, <span class="co"># vector to split</span></span>
+<span id="cb174-2"><a href=""></a>          <span class="at">pattern =</span> <span class="st">" "</span>) <span class="co"># where to split</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]
+[1] "dark" "blue"
 
+[[2]]
+[1] "dark" "pink"
+
+[[3]]
+[1] "ligth" "red"  
+
+[[4]]
+[1] "dark"   "yellow"
+
+[[5]]
+[1] "light" "pink" </code></pre>
+</div>
+</div>
+<p><span class="fragment">It returns a list of vectors…</span></p>
+</div><div class="column" style="width:50%;">
+<p><span class="fragment">or a matrix if we use simplify = TRUE:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href=""></a><span class="fu">str_split</span>(v3, <span class="at">pattern =</span> <span class="st">" "</span>, </span>
+<span id="cb176-2"><a href=""></a>          <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1]    [,2]    
+[1,] "dark"  "blue"  
+[2,] "dark"  "pink"  
+[3,] "ligth" "red"   
+[4,] "dark"  "yellow"
+[5,] "light" "pink"  </code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px"><em>NB: if we want to separate columns of a data frame, we can also use <span style="color:indianred;">separate</span>.</em></span></span></p>
+</div></div>
+</section>
+<section id="more-useful-functions-for-character-strings" class="slide level2">
+<h2>More useful functions for character strings</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px">Convert to upper/lower case: <span style="color:indianred;">str_to_lower</span> and <span style="color:indianred;">str_to_upper</span></span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"one"</span>, <span class="st">"two"</span>)</span>
+<span id="cb178-2"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">str_to_upper</span>(v)</span>
+<span id="cb178-3"><a href=""></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "ONE" "TWO"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href=""></a><span class="fu">str_to_lower</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "one" "two"</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px">Extract substrings by position of the first and last character: <span style="color:indianred;">str_sub</span></span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Brasil"</span>, <span class="st">"Mexico"</span>)</span>
+<span id="cb182-2"><a href=""></a><span class="fu">str_sub</span>(v, <span class="at">start=</span><span class="dv">1</span>, <span class="at">end=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Bra" "Mex"</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px">Detect a pattern: <span style="color:indianred;">str_detect</span></span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb184"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Brasil"</span>, <span class="st">"Mexico"</span>)</span>
+<span id="cb184-2"><a href=""></a><span class="fu">str_detect</span>(v, <span class="st">"Br"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  TRUE FALSE</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px">Replace a pattern: <span style="color:indianred;">str_replace_all</span></span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb186"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb186-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Avenida Paulista"</span>, </span>
+<span id="cb186-2"><a href=""></a>       <span class="st">"Avenida Atlântica"</span>)</span>
+<span id="cb186-3"><a href=""></a><span class="fu">str_replace_all</span>(v, <span class="st">"Avenida"</span>, <span class="st">"AV."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "AV. Paulista"  "AV. Atlântica"</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+</section></section>
+<section id="dealing-with-dates-with-the-package-lubidate" class="title-slide slide level1 center">
+<h1>Dealing with dates with the package <span style="color:indianred;">lubidate</span></h1>
+
+<img data-src="lubridate.png" style="width:70.0%" class="r-stretch"><p><span style="font-size: 25px">Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em></span></p>
+<p><span style="font-size: 25px"><a href="https://r4ds.hadley.nz/datetimes.html">in English</a> and <a href="https://pt.r4ds.hadley.nz/" data-preview-link="false">in Portuguese</a></span></p>
+<aside class="notes">
+<p>delaing with dates can be complicated in R, if you need to use dates, check the package lubridate</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 
 <section>
-<section id="to-decide" class="title-slide slide level1 center">
-<h1>TO DECIDE</h1>
-<p>https://juba.github.io/tidyverse/09-recodages.html#combiner-plusieurs-variables</p>
-</section>
-<section id="dire-ggplot-on-va-voir-après" class="slide level2">
-<h2>dire ggplot on va voir après</h2>
-</section>
+<section id="graphics-with-the-package-ggplot" class="title-slide slide level1 center">
+<h1>Graphics with the package <span style="color:indianred;">ggplot</span></h1>
+<p><em>Next session!</em></p>
+
+<img data-src="ggplot.png" class="r-stretch"></section>
 <section id="acknowledgments" class="slide level2">
 <h2>Acknowledgments</h2>
-<p>Eric</p>
-<p>https://biodiversitydata.github.io/chapters/data-cleaning.html</p>
-<p>juba</p>
+<ul>
+<li class="fragment"><p>Barnier J. <em>Introduction à R et au tidyverse</em> <a href="https://juba.github.io/tidyverse/" data-preview-link="false">in French</a></p></li>
+<li class="fragment"><p>Marcon E. <em>R: Ridyverse</em> <a href="https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html" data-preview-link="false">in French</a></p></li>
+<li class="fragment"><p>Casajus N , Coux C. <em>Cleaning biodiversity data - Good practices, tools and homogenizing taxonomy</em> <a href="https://biodiversitydata.github.io/chapters/data-cleaning.html" data-preview-link="false">in English</a></p></li>
+<li class="fragment"><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> <a href="https://r4ds.hadley.nz/datetimes.html" data-preview-link="false">in English</a> and <a href="https://pt.r4ds.hadley.nz/" data-preview-link="false">in Portuguese</a></p></li>
+</ul>
 </section>
 <section id="ressources" class="slide level2">
 <h2>Ressources</h2>
-<p>cheatsheet of each of the tidyverse package</p>
 <ul>
-<li class="fragment">Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a></li>
+<li class="fragment"><p>Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. <a href="https://doi.org/10.18637/jss.v059.i10">https://doi.org/10.18637/jss.v059.i10</a></p></li>
+<li class="fragment"><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> <a href="https://r4ds.hadley.nz/datetimes.html">in English</a> and <a href="https://pt.r4ds.hadley.nz/">in Portuguese</a></p></li>
+<li class="fragment"><p>Cheatsheets of <a href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" data-preview-link="false">dpyr</a>, <a href="https://rstudio.github.io/cheatsheets/html/tidyr.html" data-preview-link="false">tidyr</a>, <a href="https://rstudio.github.io/cheatsheets/html/strings.html" data-preview-link="false">stringr</a>, <a href="https://www.flutterbys.com.au/stats/downloads/slides/figure/factors.pdf" data-preview-link="false">forcats</a></p></li>
 </ul>
-<p>R for data science: chap sur les données</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

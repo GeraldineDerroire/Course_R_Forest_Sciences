@@ -11,10 +11,11 @@ execute:
 
 * Install the following package from CRAN: *janitor*
 
-
+* Make sure you remember what we saw on factors and logical operators the session [Getting started with R](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started)
 
 loader les jeux de données de la deuxième session du tidyverse (en faire un .Rdata)
 
 * Download the following data sets
 XXXXXXXXXXXXXXXXXXXXXXXXXXX
 and store them in your raw data folder.
+

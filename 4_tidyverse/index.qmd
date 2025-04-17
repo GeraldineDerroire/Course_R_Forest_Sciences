@@ -307,7 +307,7 @@ class(sp_com)
 So if there was row names that we wanted to keep in our data frame, we should use the function [rownames_to_column]{style="color:indianred;"} to put them in a column (but let's not store it here).
 
 ```{r}
-as.tibble(rownames_to_column(sp_com))
+as_tibble(rownames_to_column(sp_com))
 ```
 
 ::: notes
@@ -337,7 +337,7 @@ explain that the package is not on the cran
 
 # Manipulate and transform with the package [dplyr]{style="color:indianred;"}
 
-## The verbs of [dplyer]{style="color:indianred;"}
+## The verbs of [dplyr]{style="color:indianred;"}
 
 ::::: columns
 ::: {.column width="70%"}
@@ -479,12 +479,16 @@ we could write it only on one line, it's just for readability
 
 We can also use a function to specify the condition.
 
-Let's select trees with maximum DBH higher than the median:
+Let's select species with maximum DBH higher than the median:
 
 ```{r}
 filter(traits, s_dbhmax > median(s_dbhmax))
 ```
 
+::: notes
+in the dataset we have 45 values, so when we get the one above the median we get 22
+=> it makes sense
+:::
 
 ## arrange {.scrollable}
 
@@ -523,7 +527,6 @@ distinct(my_tibble)
 :::
 
 
-https://larmarange.github.io/guide-R/manipulation/dplyr.html#distinct
 
 ## Operations on columns
 
@@ -552,7 +555,7 @@ select(sp_com, CommercialName, Genus, Species)
 
 We can also say the columns we don't want to select using [select]{style="color:indianred;"}.
 
-Let's select all the columns but the commercial name, using [-]{style="color:indianred;"} before the name of the column to exclude:
+Let's select all the columns except the commercial name, using [-]{style="color:indianred;"} before the name of the column to exclude:
 
 ```{r}
 select(sp_com, - CommercialName)
@@ -694,7 +697,7 @@ show them the number of rows and the number of genus
 
 ## group_by with mutate {.scrollable}
 
-We can also use v with [mutate]{style="color:indianred;"} to do an operation by group.
+We can also use [group_by]{style="color:indianred;"} with [mutate]{style="color:indianred;"} to do an operation by group.
 
 [Let's calculate the mean wsg of each genus:]{style="font-size: 25px"}
 
@@ -798,7 +801,7 @@ traits %>%
 :::
 
 ::: {.column width="30%"}
-[*Here there are as many row than there are groups.*]{.fragment}
+[*Here there are as many rows than there are groups.*]{.fragment}
 :::
 :::::
 
@@ -851,7 +854,7 @@ Look at the Carapa and Caryocar
 
 ## Using a pipe to chain the different operations
 
-We can a pipe [%>%]{style="color:indianred;"}  to chain several operations.
+We can use a pipe [%>%]{style="color:indianred;"} to chain several operations.
 
 The result of each operation feeds into the next one.
 
@@ -925,7 +928,7 @@ The functions [bind_rows]{style="color:indianred;"} and [bind_cols]{style="color
 
 ## bind_rows
 
-[To understand how [bind_rows]{style="color:indianred;"}, we will first create several datasets of traits from the one we have used so far.
+[To understand how [bind_rows]{style="color:indianred;"} works, we will first create several datasets of traits that are subsets from the one we have used so far.
 This is obviously only for the purpose of the exercise...]{style="font-size: 25px"}
 
 ::::: columns
@@ -993,10 +996,10 @@ bind_rows(traits1, traits2, traits3)
 
 If we want to keep track of which table the rows came from, we can use the argument [.id]{style="color:indianred;"} and specify the name of the column in which we want to store this information (here *"source"*).
 
-We can also explicity give a name to each table.
+We can also explicitly give a name to each table.
 
 ```{r}
-bind_rows(table1 = traits1, table2 = traits2, table = traits3,
+bind_rows(table1 = traits1, table2 = traits2, table3 = traits3,
           .id ="source")
 ```
 
@@ -1158,10 +1161,10 @@ dim(j3)[1]
 
 ::: {.column width="40%"}
 [The [inner_join]{style="color:indianred;"} keeps only rows from *traits_sub* that have a matching key in *sp_com_sub*.]{.fragment}
-
-[So there are `r dim(j3)[1]` species common to *traits_sub* and *sp_com_sub*.]{.fragment}
 :::
 :::::
+
+[So there are `r dim(j3)[1]` species common to *traits_sub* and *sp_com_sub*.]{.fragment}
 
 ## full_join
 
@@ -1224,7 +1227,7 @@ But what to do when data are non-tidy?
 ::: {.column width="70%"}
 [We are going to use the package [tidyr]{style="color:indianred;"} to make messy (untidy) data tidy, so that we can use them with all the packages of the tidyverse.]{.fragment}
 
-[Just as [dplyr]{style="color:indianred;"}, the syntax of [tidyr]{style="color:indianred;"} is based on intuitive verbs, and commands can be chained using a pipe ([%>%]{style="color:indianred;"})]{.fragment}
+[Just as [dplyr]{style="color:indianred;"}, the syntax of [tidyr]{style="color:indianred;"} is based on intuitive verbs, and commands can be chained using a pipe ([%>%]{style="color:indianred;"}).]{.fragment}
 :::
 
 ::: {.column width="30%"}
@@ -1285,7 +1288,7 @@ dt1 %>% pivot_longer(c(`2015`, `2020`, `2025`))
 :::
 
 
-## pivot_longer
+## pivot_longer {.scrollable}
 
 We can specify the names of the columns that will be created:
 
@@ -1294,6 +1297,7 @@ dt1L <- dt1 %>%
   pivot_longer(c(`2015`, `2020`, `2025`),
                names_to = "year", # for the name of the former columns
                values_to = "DBH") # for the values contained in these columns
+dt1L
 ```
 
 ## pivot_longer
@@ -1368,7 +1372,7 @@ Let's create a column to store the full species name:
 dt2 <- dt2 %>% 
   unite(full_name, # name of the column to create
         genus, species, # names of the columns to unite
-        sep=" ", # sperated by a space
+        sep=" ", # separated by a space
         remove = FALSE) # keep the two original columns
 dt2
 ```
@@ -1439,7 +1443,7 @@ library(janitor)
 :::
 :::::
 
-[For example, this one:]{.fragment}
+[For example, these messy data:]{.fragment}
 
 ::: fragment
 ```{r}
@@ -1449,6 +1453,8 @@ dt3
 
 ::: notes
 we won't explore this package, I just mention it in case you need it.
+
+could not to it if I'm really late
 :::
 
 
@@ -1471,6 +1477,7 @@ dt3
 ```
 :::
 
+
 ## remove_empty
 
 The function [remove_empty]{style="color:indianred;"} removes empty rows and/or columns:
@@ -1483,47 +1490,304 @@ dt3 %>%  remove_empty()
 [To know more on *janitor*](https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html){preview-link="false"}
 
 
-# package *forcats* for qualitative variables
+# Manipulating factors with the packages [forcats]{style="color:indianred;"} and [dplyr]{style="color:indianred;"}
 
-https://juba.github.io/tidyverse/09-recodages.html#combiner-plusieurs-variables
+## 
+
+Let's use the dataset *dt4*, which is about on secondary forests.
+
+```{r}
+str(dt4)
+```
+[What are the levels of the factor *past_landuse*?]{.fragment}
+
+::: fragment
+```{r}
+levels(dt4$past_landuse)
+```
+:::
+
+## Recoding levels {.scrollable}
+
+[[fct_recode]{style="color:indianred;"} allows to rename the levels:]{style="font-size: 28px"}
+
+::: fragment
+```{r}
+dt4$past_landuse %>% fct_recode(
+  "Milho" = "Corn", # new level = old level
+  "Pastagem" = "Pasture",
+  "Soja" = "Soybeans",
+  "Cana-de-açúcar" = "Sugarcane",
+  "Tomate" = "Tomatoes") %>% 
+  levels()
+```
+:::
+
+[[[fct_collapse]{style="color:indianred;"} allows grouping levels:]{style="font-size: 28px"}]{.fragment}
+
+::: fragment
+```{r}
+dt4$past_landuse %>% fct_collapse(
+  "Agriculture" = c("Corn", "Soybeans", "Sugarcane", "Tomatoes")) %>% 
+  levels()
+```
+:::
+
+[[see also [fct_other]{style="color:indianred;"} and [fct_lump]{style="color:indianred;"} to create a level *Other*]{style="font-size: 28px"}]{.fragment}
+
+::: notes
+as always first we put the new one, and then the old one
+:::
+
+## Re-ordering levels
+
+[[fct_relevel]{style="color:indianred;"} allows changing the order of the levels:]{style="font-size: 28px"}
+
+::: fragment
+```{r}
+dt4$past_landuse %>% fct_relevel(
+  "Pasture", "Soybeans", "Sugarcane", "Tomatoes", "Corn") %>% 
+  levels()
+```
+:::
+
+[[[fct_reorder]{style="color:indianred;"} allows re-order the levels according to the values of another variable:]{style="font-size: 28px"}]{.fragment}
+
+::: fragment
+```{r}
+dt4$past_landuse %>% fct_reorder(
+  dt4$age,
+  median) %>%  # re-order the factor according the median of the age 
+  levels()
+```
+:::
 
 
-# package *stringr*
-
-https://biodiversitydata.github.io/chapters/data-cleaning.html
-
-https://larmarange.github.io/guide-R/manipulation_avancee/stringr.html
-
-https://juba.github.io/tidyverse/11-stringr.html
+::: notes
+useful for graphs to set the order of the levels
+:::
 
 
-# package *lubidate*
+## Function [if_else]{style="color:indianred;"} {.scrollable}
 
-https://biodiversitydata.github.io/chapters/data-cleaning.html
+[[if_else]{style="color:indianred;"} from the package [dplyr]{style="color:indianred;"} performs a test on a variable, and give a value if true and another if false:]{style="font-size: 28px"}
 
-# 
+```{r}
+dt4 %>% 
+  mutate(age_cat = # add a new column
+           if_else(dt4$age > 10, # test
+                   "Older than 10yr", # value if test TRUE
+                   "Younger than 10yr")) %>% # value if test  FALSE
+  mutate(age_cat = as.factor(age_cat)) # transform to factor
+```
 
-# TO DECIDE
+::: notes
+here if_gives a character so we then transform it to a factor
+:::
 
-https://juba.github.io/tidyverse/09-recodages.html#combiner-plusieurs-variables
+## Function [case_when]{style="color:indianred;"} {.scrollable}
 
-## dire ggplot on va voir après
+[case_when]{style="color:indianred;"} from the package [dplyr]{style="color:indianred;"} generalise if else to several tests (or groups of tests)
 
+```{r}
+dt4 %>% 
+  mutate(category = 
+           case_when(
+             dt4$past_landuse != "Pasture" & dt4$age < 10 ~ # tests for the first case
+               "Young after agriculture", # value for the first case
+             dt4$past_landuse == "Pasture" & dt4$age < 10 ~ # tests for the second case
+               "Young after pasture", # value for the second case
+             TRUE ~ "old")) %>% # all the other cases
+  mutate(category = as.factor(category)) # transform to factor
+```
+
+::: notes
+here what we do is a bit complicated:
+
+We have 3 cases
+
+and the test for each case has two conditions
+
+we could use case_when with a test with just one condition
+:::
+
+
+
+## Function [cut]{style="color:indianred;"}
+
+[cut]{style="color:indianred;"} from the package [base]{style="color:indianred;"} divides a vector into classes:
+
+```{r}
+dt4 %>% mutate(age_class =
+                 cut(dt4$age, # vector to divide
+                     breaks = 4)) # number of class
+```
+
+# Manipulating character strings with the package [stringr]{style="color:indianred;"} 
+
+## Concatenate character strings
+
+The function [paste]{style="color:indianred;"} from the package [base]{style="color:indianred;"} concatenate two vectors of characters:
+
+```{r}
+v1 <- c("dark", "dark", "ligth", "dark", "light")
+v2 <- c("blue", "pink", "red", "yellow", "pink")
+
+paste(v1, v2, sep=" ")
+```
+
+[It is equivalent to the function [str_c]{style="color:indianred;"} from the package [stringr]{style="color:indianred;"}]{.fragment}
+
+::: fragment
+```{r}
+v3 <- str_c(v1, v2, sep=" ")
+v3
+```
+:::
+
+[[*NB: if we want to concatenate columns of a data frame, we can also use [unite]{style="color:indianred;"}.*]{style="font-size: 30px"}]{.fragment}
+
+
+## Split a character string
+
+The opposite is the function [str_split]{style="color:indianred;"} :
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+str_split(v3, # vector to split
+          pattern = " ") # where to split
+```
+[It returns a list of vectors...]{.fragment}
+
+:::
+
+
+::: {.column width="50%"}
+
+[or a matrix if we use simplify = TRUE:]{.fragment}
+
+::: fragment
+```{r}
+str_split(v3, pattern = " ", 
+          simplify = TRUE)
+```
+:::
+
+[[*NB: if we want to separate columns of a data frame, we can also use [separate]{style="color:indianred;"}.*]{style="font-size: 30px"}]{.fragment}
+
+:::
+:::::
+
+
+
+## More useful functions for character strings
+
+::::: columns
+::: {.column width="50%"}
+* [Convert to upper/lower case: [str_to_lower]{style="color:indianred;"} and [str_to_upper]{style="color:indianred;"}]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+v <- c("one", "two")
+v <- str_to_upper(v)
+v
+str_to_lower(v)
+```
+:::
+
+:::
+
+::: {.column width="50%"}
+* [Extract substrings by position of the first and last character: [str_sub]{style="color:indianred;"}]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+v <- c("Brasil", "Mexico")
+str_sub(v, start=1, end=3)
+```
+:::
+
+:::
+:::::
+
+
+::::: columns
+::: {.column width="50%"}
+* [Detect a pattern: [str_detect]{style="color:indianred;"}]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+v <- c("Brasil", "Mexico")
+str_detect(v, "Br")
+```
+:::
+
+:::
+
+::: {.column width="50%"}
+* [Replace a pattern:  [str_replace_all]{style="color:indianred;"}]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+v <- c("Avenida Paulista", 
+       "Avenida Atlântica")
+str_replace_all(v, "Avenida", "AV.")
+```
+:::
+
+:::
+:::::
+
+
+# Dealing with dates with the package [lubidate]{style="color:indianred;"}
+
+
+![](lubridate.png){width=70%}
+
+[Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*]{style="font-size: 25px"} 
+
+[[in English](https://r4ds.hadley.nz/datetimes.html) and [in Portuguese](https://pt.r4ds.hadley.nz/){preview-link="false"}]{style="font-size: 25px"}
+
+::: notes
+delaing with dates can be complicated in R, if you need to use dates, check the package lubridate
+:::
+
+# Graphics with the package [ggplot]{style="color:indianred;"}
+
+*Next session!*
+
+![](ggplot.png)
 
 
 
 ## Acknowledgments
 
-Eric
+::: {.nonincremental}
 
-https://biodiversitydata.github.io/chapters/data-cleaning.html 
+* Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
 
-juba
+* Marcon E. *R: Ridyverse* [in French](https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html){preview-link="false"}
+
+* Casajus N , Coux C. *Cleaning biodiversity data - Good practices, tools and homogenizing taxonomy* [in English](https://biodiversitydata.github.io/chapters/data-cleaning.html){preview-link="false"}
+
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science* [in English](https://r4ds.hadley.nz/datetimes.html){preview-link="false"} and [in Portuguese](https://pt.r4ds.hadley.nz/){preview-link="false"}
+
+:::
 
 ## Ressources
 
-cheatsheet of each of the tidyverse package
+::: {.nonincremental}
 
 * Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. [https://doi.org/10.18637/jss.v059.i10](https://doi.org/10.18637/jss.v059.i10)
 
-R for data science: chap sur les données
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science* [in English](https://r4ds.hadley.nz/datetimes.html) and [in Portuguese](https://pt.r4ds.hadley.nz/)
+
+* Cheatsheets of 
+[dpyr](https://rstudio.github.io/cheatsheets/html/data-transformation.html){preview-link="false"},
+[tidyr](https://rstudio.github.io/cheatsheets/html/tidyr.html){preview-link="false"},
+[stringr](https://rstudio.github.io/cheatsheets/html/strings.html){preview-link="false"},
+[forcats](https://www.flutterbys.com.au/stats/downloads/slides/figure/factors.pdf){preview-link="false"}
+
+:::
+
