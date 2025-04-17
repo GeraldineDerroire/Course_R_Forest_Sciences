@@ -300,11 +300,11 @@ class(sp_com)
 ```
 :::
 
-## Transform data frame into tibble
+## Transform data frame into tibble {.scrollable}
 
 ⚠️ Remember that tibbles don't have row names.
 
-So if there was row names that we want to keep in our data frame, we should use the function [rownames_to_column]{style="color:indianred;"} to put them in a column (but let's not store it here).
+So if there was row names that we wanted to keep in our data frame, we should use the function [rownames_to_column]{style="color:indianred;"} to put them in a column (but let's not store it here).
 
 ```{r}
 as.tibble(rownames_to_column(sp_com))
@@ -314,7 +314,7 @@ as.tibble(rownames_to_column(sp_com))
 here we just look at the results but don't store them
 :::
 
-## Commercial tree species
+## Commercial tree species {.scrollable}
 
 Let's look at the sp_com data :
 
@@ -455,6 +455,8 @@ filter(traits, s_wsg < 0.4)
 
 ::: notes
 Remember the logical operators of comparisons that we have seen two sessions ago?
+
+Ask them if they know the cecropia
 :::
 
 ## filter
@@ -473,7 +475,7 @@ we could write it only on one line, it's just for readability
 :::
 
 
-## filter
+## filter {.scrollable}
 
 We can also use a function to specify the condition.
 
@@ -484,7 +486,7 @@ filter(traits, s_dbhmax > median(s_dbhmax))
 ```
 
 
-## arrange
+## arrange {.scrollable}
 
 The function [arrange]{style="color:indianred;"} reorders the row according to one or several columns:
 
@@ -500,7 +502,7 @@ arrange(traits,
 use desc for decreasing
 :::
 
-## distinct
+## distinct {.scrollable}
 
 The function [distinct]{style="color:indianred;"} keep only rows that are distinct.
 
@@ -546,7 +548,7 @@ Let's select the Commercial names, Genus and Species from sp_com:
 select(sp_com, CommercialName, Genus, Species)
 ```
 
-## select
+## select {.scrollable}
 
 We can also say the columns we don't want to select using [select]{style="color:indianred;"}.
 
@@ -603,7 +605,7 @@ The function [mutate]{style="color:indianred;"} creates new columns, using exist
 ```{r}
 mutate(traits,
        dbhmax_cm = s_dbhmax * 100) %>% # add the new column dbhmax_cm
-  select(Genus, Species, s_dbhmax, dbhmax_cm) %>%  # select only the 4 columns of interest
+  select(genus, species, s_dbhmax, dbhmax_cm) %>%  # select only the 4 columns of interest
   slice_head(n=5) # just the 5 first rows
 ```
 
@@ -622,7 +624,7 @@ We just need to specify the columns we want to put first (the order of the other
 [Let's move the columns of DBHmax and Hmax first (after the species name) in the trait dataset:]{style="font-size: 25px"}
 
 ```{r}
-relocate(traits, Genus, Species, s_dbhmax, s_hmax) %>% 
+relocate(traits, genus, species, s_dbhmax, s_hmax) %>% 
   slice_head(n=5) # just the 5 first rows
 ```
 
@@ -646,12 +648,12 @@ show that the number of columns/variables has NOT changed, just the order
 
 The function [group_by]{style="color:indianred;"} allow grouping rows according to the values of a column.
 
-[Let's group the table of traits by Genus]{style="font-size: 25px"}
+[Let's group the table of traits by genus]{style="font-size: 25px"}
 
 ::::: columns
 ::: {.column width="70%"}
 ```{r}
-traits %>% group_by(Genus)
+traits %>% group_by(genus)
 ```
 :::
 
@@ -668,13 +670,13 @@ show that the tibble has still the same dimensions
 
 When groups have been defined, we can apply further operations on these groups by using other functions.
 
-[Let's select the species with the maximum wsg **for each Genus**, using [slice_max]{style="color:indianred;"}:]{style="font-size: 25px"}
+[Let's select the species with the maximum wsg **for each genus**, using [slice_max]{style="color:indianred;"}:]{style="font-size: 25px"}
 
 ::::: columns
 ::: {.column width="70%"}
 ```{r}
 traits %>% 
-  group_by(Genus) %>% 
+  group_by(genus) %>% 
   slice_max(s_wsg) 
 ```
 :::
@@ -686,21 +688,23 @@ traits %>%
 
 ::: notes
 note the change of dimension!
+
+show them the number of rows and the number of genus
 :::
 
-## group_by
+## group_by with mutate {.scrollable}
 
-We can also use group_by with [mutate]{style="color:indianred;"} to do an operation by group.
+We can also use v with [mutate]{style="color:indianred;"} to do an operation by group.
 
-[Let's calculate the mean wsg of each Genus:]{style="font-size: 25px"}
+[Let's calculate the mean wsg of each genus:]{style="font-size: 25px"}
 
 ::::: columns
 ::: {.column width="70%"}
 ```{r}
 traits %>% 
-  group_by(Genus) %>%
+  group_by(genus) %>%
   mutate(mean_wsg = mean(s_wsg)) %>% 
-  select(Genus, Species, s_wsg, mean_wsg) # select only the columns of interest
+  select(genus, species, s_wsg, mean_wsg) # select only the columns of interest
 ```
 :::
 
@@ -713,41 +717,41 @@ traits %>%
 all rows are j=kept as we didn't do a selection on rows
 :::
 
-## group_by
+## group_by with mutate
 
-We can check this by looking at the Licania for instance:
+We can check this by looking at the *Licania* for instance:
 
 
 ```{r}
 traits %>% 
-  group_by(Genus) %>%
+  group_by(genus) %>%
   mutate(mean_wsg = mean(s_wsg)) %>% # add the mean wsg
-  select(Genus, Species, s_wsg, mean_wsg) %>% # select only the columns of interest
-  filter(Genus == "Licania") # only the Licania
+  select(genus, species, s_wsg, mean_wsg) %>% # select only the columns of interest
+  filter(genus == "Licania") # only the Licania
 ```
 
 
-## group_by 
+## group_by with filter
 
-We can also use group_by with [filter]{style="color:indianred;"} to select according to a conditions applied **on each group**.
+We can also use [group_by]{style="color:indianred;"} with [filter]{style="color:indianred;"} to select according to a conditions applied **on each group**.
 
-[Let's look at the species that have a higher wsg than the mean of their Genus:]{style="font-size: 25px"}
+[Let's look at the species that have a higher wsg than the mean of their genus:]{style="font-size: 25px"}
 
 ::::: columns
 ::: {.column width="70%"}
 ```{r}
 traits %>% 
-  group_by(Genus) %>% 
+  group_by(genus) %>% 
   filter(s_wsg > mean(s_wsg)) %>% 
-  select(Genus, Species, s_wsg) # select only the columns of interest
+  select(genus, species, s_wsg) # select only the columns of interest
 ```
 :::
 
 ```{r, echo=FALSE}
 dim_res <- traits %>% 
-  group_by(Genus) %>% 
+  group_by(genus) %>% 
   filter(s_wsg > mean(s_wsg)) %>% 
-  select(Genus, Species, s_wsg) %>% 
+  select(genus, species, s_wsg) %>% 
   dim()
 ```
 
@@ -776,17 +780,17 @@ traits %>%
 
 [*Note that here only the summary columns are kept.*]{.fragment}
 
-## summarise
+## summarise {.scrollable}
 
 The function [summarise]{style="color:indianred;"} can be used together with [group_by]{style="color:indianred;"} to summarise *by group*.
 
-[Let's look at the min, max and mean values of wsg by Genus:]{style="font-size: 25px"}
+[Let's look at the min, max and mean values of wsg by genus:]{style="font-size: 25px"}
 
 ::::: columns
 ::: {.column width="70%"}
 ```{r}
 traits %>% 
-  group_by(Genus) %>% 
+  group_by(genus) %>% 
   summarise(min_wsg = min(s_wsg),
             max_wsg = max(s_wsg),
             mean_wsg = mean(s_wsg))
@@ -802,13 +806,13 @@ traits %>%
 
 The function [count]{style="color:indianred;"} counts the number of rows per group.
 
-[Let's count the number of Species per Genus:]{style="font-size: 25px"}
+[Let's count the number of species per genus:]{style="font-size: 25px"}
 
 ::::: columns
 ::: {.column width="70%"}
 ```{r}
 traits %>% 
-  count(Genus)
+  count(genus)
 ```
 :::
 
@@ -819,7 +823,7 @@ traits %>%
 :::
 :::::
 
-## Grouping according to several columns
+## Grouping according to several columns {.scrollable}
 
 The functions [group_by]{style="color:indianred;"} and [count]{style="color:indianred;"} can be used to group on several columns.
 
@@ -836,7 +840,7 @@ sp_com %>%
 ::: {.column width="40%"}
 [[We see that the genus *Brosimum* has three species, all with a different commercial name.]{style="font-size: 25px"}]{.fragment}
 
-[[We see for instance that the Genus *Caryocar* has two species for which the commercial name is chawari.]{style="font-size: 25px"}]{.fragment}
+[[We see for instance that the genus *Caryocar* has two species for which the commercial name is chawari.]{style="font-size: 25px"}]{.fragment}
 :::
 :::::
 
@@ -858,57 +862,171 @@ The result of each operation feeds into the next one.
 [The first thing to check is if the dimensions of the tibble have changed, and if you were expecting it to change.]{.fragment}
 
 
-## Using a pipe to chain the different operations
+## Using a pipe to chain the different operations  {.scrollable}
 
 
 ::::: columns
-::: {.column width="65%"}
+::: {.column width="61%"}
 ```{r}
 gen_dim_max <- traits %>% 
-  select(Genus, Species, s_hmax, s_dbhmax) %>% 
+  select(genus, species, s_hmax, s_dbhmax) %>% 
   rename(Hmax = s_hmax,
          DBHmax = s_dbhmax) %>% 
   mutate(BAmax = (DBHmax/2)^2 * pi) %>% 
-  group_by(Genus) %>% 
+  group_by(genus) %>% 
   summarise(Hmax_mean = mean(Hmax),
             DBHmax_mean = mean(DBHmax),
             BAmax_mean = mean(BAmax)) %>% 
   arrange(desc(BAmax_mean))
+
+gen_dim_max 
 ```
 
-[What did we do?]{.fragment}
 
 :::
+::: {.column width="39%"}
+[[What did we do?]{style="font-size: 25px"}]{.fragment}
 
-::: {.column width="35%"}
-* [select 4 columns]{style="font-size: 25px"}
+* [select 4 columns]{style="font-size: 23px"}
 
-* [rename 2 columns]{style="font-size: 25px"}
+* [rename 2 columns]{style="font-size: 23px"}
 
-* [add the basal area max]{style="font-size: 25px"}
+* [add the basal area max]{style="font-size: 23px"}
 
-* [group by genus]{style="font-size: 25px"}
+* [group by genus]{style="font-size: 23px"}
 
-* [calculate mean dimensions by genus]{style="font-size: 25px"}
+* [calculate mean dimensions by genus]{style="font-size: 23px"}
 
-* [sort the table by decreasing order of BAmax_mean]{style="font-size: 25px"}
+* [sort the table by decreasing order of BAmax_mean]{style="font-size: 23px"}
 
-* [store the result in *gen_dim_max*]{style="font-size: 25px"}
+* [store the result in *gen_dim_max*]{style="font-size: 23px"}
 
 :::
 :::::
 
-<!-- carry on from here--> 
+
+::: notes
+This could be the end of the session 1/2
+::: 
+
 
 ## Combining multiple tables
 
-## bind_rows and bind_cols
+::: {.nonincremental}
+* Concatenation
+
+* Joint
+
+:::
+
+## Concatenation
+
+The functions [bind_rows]{style="color:indianred;"} and [bind_cols]{style="color:indianred;"} allow to add rows and columns, respectively, from one or several tables.
+
+## bind_rows
+
+[To understand how [bind_rows]{style="color:indianred;"}, we will first create several datasets of traits from the one we have used so far.
+This is obviously only for the purpose of the exercise...]{style="font-size: 25px"}
+
+::::: columns
+::: {.column width="65%"}
+```{r}
+traits1 <- traits %>% 
+  slice(1:2)
+```
+
+::: fragment
+```{r}
+traits2 <- traits %>% 
+  select(, - s_wsg, - s_hmax) %>% 
+  slice(25:26)
+```
+:::
+
+::: fragment
+```{r}
+traits3 <- traits %>% 
+  select(, -s_LMA) %>% 
+  slice(25:27)
+```
+:::
+:::
+
+::: {.column width="35%"}
+::: fragment
+```{r}
+dim(traits1)
+```
+:::
+
+::: fragment
+```{r}
+dim(traits2)
+```
+:::
+
+::: fragment
+```{r}
+dim(traits3)
+```
+:::
+:::
+:::::
+
+::: notes
+in some of the table, some columns are now missing
+:::
+
+
+## bind_rows
+
+We can use [bind_row]{style="color:indianred;"} to concatenate the three table by rows.
+
+```{r}
+bind_rows(traits1, traits2, traits3)
+```
+
+[When the columns were missing in some tables, the values have been filled with *NA*.]{.fragment}
+
+
+## bind_rows {.scrollable}
+
+If we want to keep track of which table the rows came from, we can use the argument [.id]{style="color:indianred;"} and specify the name of the column in which we want to store this information (here *"source"*).
+
+We can also explicity give a name to each table.
+
+```{r}
+bind_rows(table1 = traits1, table2 = traits2, table = traits3,
+          .id ="source")
+```
+
+## bind_cols
+
+[bind_cols]{style="color:indianred;"} works in a similar way but to concatenate columns.
+
+```{r}
+# let's first make subset tables
+t1 <- traits %>% slice(1:2) %>% select(genus, species)
+t2 <- traits %>% slice(1:2) %>% select(s_LMA)
+t3 <- traits %>% slice(1:2) %>% select(s_wsg)
+```
+
+::: fragment
+```{r}
+bind_cols(t1, t2, t3)
+```
+:::
+
+
+[⚠️ The columns are matched only by position, so the rows needs to correspond (and there must be the same number of rows).
+A safer option is to use *joints* to combine several tables by columns.]{.fragment}
+
 
 ## The joints
 
 Several functions allows to join two tibbles (*here x and y*) using a key (or several).
 
-[[A key is a column (or group of column) that is used to match rows when joining two datasets.]{style="font-size: 30px"}]{.fragment}
+[[A key is a column (or group of columns) that is used to match rows when joining two datasets.]{style="font-size: 30px"}]{.fragment}
 [[⚠️ A key need to uniquely identify observations in one or both datasets (otherwise there will be several combinations of matches).]{style="font-size: 30px"}]{.fragment}
 
 ::::: columns
@@ -929,11 +1047,160 @@ Several functions allows to join two tibbles (*here x and y*) using a key (or se
 say here that very important to check the dim
 :::
 
+
+
+## The joints
+
+We are now going to join the dataset of traits and the dataset of commercial species.
+
+Let's first select a subset of columns in each, to visualise the results better.
+
+```{r}
+traits_sub <- traits %>% select(genus, species, s_LMA, s_wsg)
+sp_com_sub <- sp_com %>% select(CommercialName, Genus, Species)
+```
+
+::: fragment
+```{r}
+colnames(traits_sub)
+```
+:::
+
+::: fragment
+```{r}
+colnames(sp_com_sub)
+```
+:::
+
+[Both datasets have a column for the genus and a column for the species, which we can use as *keys*.
+But the columns names are not exactly written in the same way.]{.fragment}
+
+## left_join {.scrollable}
+
+We can join *traits_sub* with *sp_com_sub* using a [left_join]{style="color:indianred;"}.
+
+[[We need to specify which column matches which (as they are no columns with the exact same names in both datasets).]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+j1 <- traits_sub %>% 
+  left_join(sp_com_sub,
+            by = c("genus" = "Genus",
+                   "species" = "Species"))
+j1
+```
+:::
+
+
 ## left_join
 
-give an example for all here (and explain the dims with a test)
+We can see that [left_join]{style="color:indianred;"} kept all rows of *traits_sub*,
 
-## and many other functions... [](https://rstudio.github.io/cheatsheets/html/data-transformation.html){preview-link="false"} 
+::: fragment
+```{r}
+dim(j1)[1] == dim(traits_sub)[1]
+```
+:::
+
+[and that *NA* have been added when there was not match in *sp_com_sub*.]{.fragment}
+
+::: fragment
+```{r}
+slice_head(j1, n=5) # show only a few line for ease of reading
+```
+:::
+
+
+::: notes
+I encourage you to do this kind of test of dimension
+
+explian how we did the test
+:::
+
+
+## righ_joint
+
+We can join *traits_sub* with *sp_com_sub* using a [right_join]{style="color:indianred;"}.
+
+```{r}
+j2 <- traits_sub %>% 
+  right_join(sp_com_sub,
+            by = c("genus" = "Genus",
+                   "species" = "Species"))
+```
+
+[We can see that [right_join]{style="color:indianred;"} kept all rows of *sp_com_sub*.]{.fragment}
+
+::: fragment
+```{r}
+dim(j2)[1] == dim(sp_com_sub)[1]
+```
+:::
+
+[Here as well, *NA* have been added when there was not match in *traits_sub*.]{.fragment}
+
+
+## inner_join
+
+Let's now use a [inner_join]{style="color:indianred;"}.
+
+::::: columns
+::: {.column width="60%"}
+```{r}
+j3 <- traits_sub %>% 
+  inner_join(sp_com_sub,
+            by = c("genus" = "Genus",
+                   "species" = "Species"))
+dim(j3)[1]
+```
+:::
+
+
+::: {.column width="40%"}
+[The [inner_join]{style="color:indianred;"} keeps only rows from *traits_sub* that have a matching key in *sp_com_sub*.]{.fragment}
+
+[So there are `r dim(j3)[1]` species common to *traits_sub* and *sp_com_sub*.]{.fragment}
+:::
+:::::
+
+## full_join
+
+Let's now use a [full_join]{style="color:indianred;"}.
+
+::::: columns
+::: {.column width="60%"}
+```{r}
+j4 <- traits_sub %>% 
+  full_join(sp_com_sub,
+            by = c("genus" = "Genus",
+                   "species" = "Species"))
+dim(j4)[1]
+```
+:::
+
+::: {.column width="40%"}
+[The [full_join]{style="color:indianred;"} keeps all the rows in x and y]{.fragment}
+:::
+:::::
+
+[So there are `r dim(j4)[1]` species in total in  *traits_sub* and *sp_com_sub*.]{.fragment}
+
+::: fragment
+```{r}
+dim(j4)[1]  == dim(traits_sub)[1] + dim(sp_com_sub)[1] - dim(j3)[1]
+```
+:::
+
+[[🤔 What did we do here?]{style="font-size: 35px"}]{.fragment}
+[[We checked that the total number of species is equal to the sum of the number of species in each datasets minus the number of common species.]{style="font-size: 35px"}]{.fragment}
+
+
+
+##
+
+We have seen some of the main functions of dplyr...
+
+but there are many other more...[](https://rstudio.github.io/cheatsheets/html/data-transformation.html){preview-link="false"} 
 
 ![](dplyr_cheatsheet.png){width="30%"}
 
@@ -941,6 +1208,10 @@ give an example for all here (and explain the dims with a test)
 ::: notes
 end of the first session??? or before after the joint???
 :::
+
+<!-- to carry on from here
+think about all the function I want to present here before choosing a dataset
+-->
 
 # Ranger avec le package *tidyr*
 

@@ -1,4 +1,4 @@
-Genus,Species,s_LMA,s_Nmass,s_Pmass,s_wsg,s_dbhmax,s_hmax,s_ah,s_seedmass,s_regionalfreq,s_tlp,s_drymass
+genus,species,s_LMA,s_Nmass,s_Pmass,s_wsg,s_dbhmax,s_hmax,s_ah,s_seedmass,s_regionalfreq,s_tlp,s_drymass
 Abarema,jupunba,110.38,0.0232,5.7e-4,0.576,0.66,50.92,0.308,1,0.00526315789473684,-1.595426667,0.0273944445782238
 Bocoa,prouacensis,95.6,0.0255,5.054e-4,0.798,0.4,47.91,0.251,1,0.00526315789473684,-2.08046285714286,0.565737443427517
 Brosimum,rubescens,85.79,0.0188,6.881e-4,0.619,0.52,50.92,0.308,1,0.00526315789473684,-2.279746667,0.239722225608097

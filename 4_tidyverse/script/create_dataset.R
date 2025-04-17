@@ -6,7 +6,7 @@ rcontroll::data(TROLLv3_species)
 
 # separate the names in two columns
 traits <- TROLLv3_species %>% 
-  separate(s_name, c("Genus", "Species"),
+  separate(s_name, c("genus", "species"),
            sep = "_")
 
 write_csv(traits, "4_tidyverse/data/func_traits.csv")
