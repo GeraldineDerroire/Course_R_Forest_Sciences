@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-14">
+  <meta name="dcterms.date" content="2025-04-22">
   <title>Graphics with ggplot</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -342,11 +407,921 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-14</p>
+  <p class="date">2025-04-22</p>
 </section>
-<section class="slide level2">
+<section id="changer-le-titre-de-la-session" class="title-slide slide level1 center">
+<h1>CHANGER LE TITRE DE LA SESSION?</h1>
 
-<!-- think about the title I want to give-->
+</section>
+
+<section id="why-make-graphics" class="title-slide slide level1 smaller center">
+<h1>Why make graphics?</h1>
+<ul>
+<li class="fragment"><p>Explore and check a dataset</p>
+<ul>
+<li class="fragment"><p>What is the distribution of the variables?</p></li>
+<li class="fragment"><p>Is there any outliers (unusual values)? Can they be errors in the dataset?</p></li>
+</ul></li>
+<li class="fragment"><p>Exploratory data analysis: look for patterns of covariation between the variables before doing any statistical tests</p>
+<ul>
+<li class="fragment"><p>Can we observe relationships between the variables?</p></li>
+<li class="fragment"><p>Are there covarying variables that can cause bias in the interpretation of the results?</p></li>
+</ul></li>
+<li class="fragment"><p>Communicate of the results of data analysis</p></li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>distribution: inform on the min, max, median and quantiles in a visual way</p></li>
+<li><p>data exploration important before doing any stats =&gt; check and understand the data</p></li>
+<li><p>communicate =&gt; we can present the results of a model rather or together with raw data</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section>
+<section id="using-the-package-ggplot2-to-make-graphics" class="title-slide slide level1 center">
+<h1>Using the package <span style="color:indianred;">ggplot2</span> to make graphics</h1>
+
+</section>
+<section id="the-package-ggplot2" class="slide level2 scrollable">
+<h2>The package <span style="color:indianred;">ggplot2</span></h2>
+<div class="columns">
+<div class="column" style="width:80%;">
+<ul>
+<li class="fragment"><p><span style="color:indianred;">ggplot2</span> is a package of the <em>tidyverse</em> allowing to make graphics using a coherant synthax.</p></li>
+<li class="fragment"><p><span style="color:indianred;">ggplot2</span> requires data to be in a data frame, including a tibble.</p></li>
+<li class="fragment"><p><span style="color:indianred;">ggplot2</span> can be use in a pipe after manipulating data.</p></li>
+</ul>
+</div><div class="column" style="width:20%;">
+<p><img data-src="ggplot2.png"></p>
+</div></div>
+<p><span class="fragment">Let’s load the <span style="color:indianred;">tidyverse</span>, including <span style="color:indianred;">ggplot2</span>:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.5
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.5.1     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="lets-work-with-tree-data-from-the-nouragues-forest" class="slide level2">
+<h2>Let’s work with tree data from the Nouragues forest</h2>
+<p>We are going to work with the data set <em>NouraguesHD</em> available in the package <span style="color:indianred;">BIOMASS</span>. Let’s load them and transform them to a tibble.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(BIOMASS)</span>
+<span id="cb3-2"><a href=""></a><span class="fu">data</span>(NouraguesHD) <span class="co"># load the data</span></span>
+<span id="cb3-3"><a href=""></a>dt_HD <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(NouraguesHD) <span class="co"># rename and transform to tibble</span></span>
+<span id="cb3-4"><a href=""></a><span class="fu">rm</span>(NouraguesHD) <span class="co"># </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment">We can look at the help to know more about these data:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>?NouraguesHD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<aside class="notes">
+<p>Nouragues in FG</p>
+<p>Ignore the message (not useful for us)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="lets-work-with-tree-data-from-the-nouragues-forest-1" class="slide level2">
+<h2>Let’s work with tree data from the Nouragues forest</h2>
+<p>Let’s transform these data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>dt_HD <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href=""></a>  <span class="fu">unite</span>(full_name, genus, species, <span class="at">sep=</span><span class="st">"_"</span>, <span class="at">remove =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span> <span class="co"># add full name</span></span>
+<span id="cb5-3"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">genus =</span> <span class="fu">as.factor</span>(genus), <span class="co"># transform characters to factors</span></span>
+<span id="cb5-4"><a href=""></a>         <span class="at">species =</span> <span class="fu">as.factor</span>(species),</span>
+<span id="cb5-5"><a href=""></a>         <span class="at">full_name =</span> <span class="fu">as.factor</span>(full_name),</span>
+<span id="cb5-6"><a href=""></a>         <span class="at">plotId =</span> <span class="fu">as.factor</span>(plotId)) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-7"><a href=""></a>  <span class="fu">select</span>(<span class="sc">-</span> lat, <span class="sc">-</span> long) <span class="co"># remove the columns we don't need</span></span>
+<span id="cb5-8"><a href=""></a></span>
+<span id="cb5-9"><a href=""></a><span class="fu">str</span>(dt_HD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [1,051 × 6] (S3: tbl_df/tbl/data.frame)
+ $ plotId   : Factor w/ 2 levels "Plot1","Plot2": 1 1 1 1 1 1 1 1 1 1 ...
+ $ full_name: Factor w/ 196 levels "Abarema_cf_curvicarpa",..: 78 144 49 136 112 41 27 96 112 144 ...
+ $ genus    : Factor w/ 113 levels "Abarema","Agonandra",..: 54 85 35 81 71 27 18 60 71 85 ...
+ $ species  : Factor w/ 117 levels "acida","albiflora",..: 65 97 60 28 60 104 79 74 60 97 ...
+ $ D        : num [1:1051] 11.5 11.6 83.9 15 36.8 13.5 17.8 17.8 15.9 17.8 ...
+ $ H        : num [1:1051] 12 16 40 18 27 20 24 21 22 24 ...</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>These data are similar to the Karnataka data, but with the height added</p>
+<p>D: diameter in cm H: height in m</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-1-specify-the-data" class="slide level2">
+<h2>Step 1: specify the data</h2>
+<p><span style="font-size: 30px">The first step to make a graph with <span style="color:indianred;">ggplot2</span> is to specify the data that we use. For that, we use the function <span style="color:indianred;">ggplot</span> and specify the data in the argument <em>data</em>.</span></p>
+<div class="columns">
+<div class="column" style="width:80%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">ggplot</span>(<span class="at">data=</span>dt_HD)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-5-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:20%;">
+<p><span style="font-size: 30px"><span class="fragment">This creates an empty graph, as we didn’t say how we want to visualise the data.</span></span></p>
+</div></div>
+</section>
+<section id="step-2-specify-the-variables" class="slide level2">
+<h2>Step 2: specify the variables</h2>
+<p><span style="font-size: 30px">We use the argument <em>mapping</em> to specify the variables to represent.</span></p>
+<p><span style="font-size: 30px"><span class="fragment">We use the function <span style="color:indianred;">aes</span>, meaning <strong>aesthetics</strong>, which are the visual properties of the graph.</span></span></p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><span style="font-size: 30px"><span class="fragment">We want to plot the D on the x-axis and the H on the y-axis.</span></span></p>
+</div><div class="column" style="width:70%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">ggplot</span>(<span class="at">data=</span>dt_HD,</span>
+<span id="cb8-2"><a href=""></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:1000.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="step-3-specify-how-we-want-data-to-be-represented" class="slide level2">
+<h2>Step 3: specify how we want data to be represented</h2>
+<p><span style="font-size: 30px">We still need to define a <strong>geom</strong>: the geometrical object used to represent the data.</span> <span style="font-size: 30px"><span class="fragment">For this, we use a function with a name starting by <span style="color:indianred;">geom_</span>.</span></span></p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><span style="font-size: 30px"><span class="fragment">We want to represent data with points, we use <span style="color:indianred;">geom_point</span> .</span></span></p>
+</div><div class="column" style="width:70%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a><span class="fu">ggplot</span>(<span class="at">data=</span>dt_HD,</span>
+<span id="cb9-2"><a href=""></a>       <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href=""></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 163 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-7-1.png" style="width:90.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>We see a positive, monotone and non-linear relationship.</p>
+<p>=&gt; trees with a bigger diameter are taller.</p>
+<p>We have a warning message, as there are 163 missing NA in H.</p>
+<p>From now on, I will silent the message.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-more-concise-synthax" class="slide level2">
+<h2>A more concise synthax</h2>
+<p><span style="font-size: 30px">We can simplify the synthax:</span></p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">data is the first argument</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">mapping is the second</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">We don’t need to explicit them.</span></span></p>
+</div><div class="column" style="width:70%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb11-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href=""></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="adding-aesthetics" class="slide level2">
+<h2>Adding aesthetics</h2>
+<p><span style="font-size: 30px">Let’s differentiate the two plots:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="fragment"><span style="font-size: 30px">using colour:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb12-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H,</span>
+<span id="cb12-3"><a href=""></a>       <span class="at">color =</span> plotId)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href=""></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-9-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="fragment"><span style="font-size: 30px">or using shape:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb13-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H,</span>
+<span id="cb13-3"><a href=""></a>       <span class="at">shape =</span> plotId)) <span class="sc">+</span></span>
+<span id="cb13-4"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="co"># to increase the size of the points</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px"><em>NB: we could also combine colour and shape.</em></span></span></p>
+</section>
+<section id="adding-aesthetics-1" class="slide level2">
+<h2>Adding aesthetics</h2>
+<p><span style="font-size: 30px">We can also change the size of the points according to a continuous variable (here D):</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb14-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H,</span>
+<span id="cb14-3"><a href=""></a>       <span class="at">color =</span> plotId,</span>
+<span id="cb14-4"><a href=""></a>       <span class="at">size =</span> D)) <span class="sc">+</span></span>
+<span id="cb14-5"><a href=""></a>  <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Here there is no interest in doing this, as we already have the D on the x-axis…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="is-it-an-aesthetic-or-not" class="slide level2">
+<h2>Is it an aesthetic or not?</h2>
+<p><span style="font-size: 30px">The arguments <em>color</em>, <em>size</em>, <em>shape</em>, …, can be used as arguments of the function <span style="color:indianred;">aes</span> or of a function <span style="color:indianred;">geom_</span></span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb15-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H, </span>
+<span id="cb15-3"><a href=""></a>           <span class="at">color =</span> plotId)) <span class="sc">+</span></span>
+<span id="cb15-4"><a href=""></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">When in <em>aes</em>, the colour depends on the value of plotID.</span></span></p>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb16-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">color=</span><span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">When in <em>geom_</em>, the colour is constant.</span></span></p>
+</div></div>
+</section>
+<section id="adding-layers" class="slide level2">
+<h2>Adding layers</h2>
+<p><span style="font-size: 30px">We can add new layers to a graph using the <span style="color:indianred;">+</span></span></p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb17-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb17-4"><a href=""></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment"><span style="font-size: 30px"><span style="color:indianred;">geom_smooth</span> adds a trend line in the cloud of points.</span></span></p>
+</div></div>
+</section>
+<section id="where-to-specify-the-aesthetics" class="slide level2">
+<h2>Where to specify the aesthetics?</h2>
+<p><em>NB: the place where you specify the aesthetics matters!</em></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb18-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H,</span>
+<span id="cb18-3"><a href=""></a>           <span class="at">color =</span> plotId)) <span class="sc">+</span></span>
+<span id="cb18-4"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb18-5"><a href=""></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">applied to all geometries</span></span></p>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb19-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span></span>
+<span id="cb19-3"><a href=""></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> plotId)) <span class="sc">+</span> </span>
+<span id="cb19-4"><a href=""></a>  <span class="fu">geom_smooth</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">applied only to geom_point</span></span></p>
+</div></div>
+</section></section>
+<section>
+<section id="visualising-the-distribution-of-a-single-variable" class="title-slide slide level1 center">
+<h1>Visualising the distribution of a single variable</h1>
+<aside class="notes">
+<p>we are now going to see what type of graph to use for what</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="distribution-of-a-categorical-variable---barplot" class="slide level2">
+<h2>Distribution of a categorical variable - barplot</h2>
+<p><span style="font-size: 30px">We have seen in a previous session that the distribution of a categorical variable can be visualised using a <strong>barplot</strong>.</span> <span class="fragment"><span style="font-size: 30px">We use the geometry <span style="color:indianred;">geom_bar</span>.</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb20-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> plotId)) <span class="sc">+</span></span>
+<span id="cb20-3"><a href=""></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-17-1.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="distribution-of-a-numerical-variable---histogram" class="slide level2">
+<h2>Distribution of a numerical variable - histogram</h2>
+<p><span style="font-size: 28px">We have seen in a previous session that the distribution of a numerical (=quantitative) variable can be visualised using an <strong>histogram</strong>.</span> <span style="font-size: 28px">We use the geometry <span style="color:indianred;">geom_histogram</span>.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb21-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href=""></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>) <span class="co"># binwidth specify the size of intervals</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-18-1.png" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="distribution-of-a-numerical-variable---density-plot" class="slide level2">
+<h2>Distribution of a numerical variable - density plot</h2>
+<p><span style="font-size: 28px">We can also use a <strong>density plot</strong>, which is a smoothed-out version of an histogram.</span> <span style="font-size: 28px">We use the geometry <span style="color:indianred;">geom_density</span>.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb22-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D)) <span class="sc">+</span></span>
+<span id="cb22-3"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">"red"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-19-1.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="visualising-relationships-between-2-variables-or-more" class="title-slide slide level1 center">
+<h1>Visualising relationships between 2 variables or more</h1>
+
+</section>
+<section id="relationship-between-a-categorical-and-a-numerical-variable---boxplot" class="slide level2">
+<h2>Relationship between a categorical and a numerical variable - boxplot</h2>
+<div class="columns">
+<div class="column" style="width:25%;">
+<p><span style="font-size: 28px">We want to see if the distribution of the diameter differs between the three genus <em>Dicorynia</em>, <em>Eperua</em> and <em>Inga</em>.</span> <span style="font-size: 28px">We use the geometry <span style="color:indianred;">geom_boxplot</span>.</span></p>
+</div><div class="column" style="width:75%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Eperua"</span>, <span class="st">"Inga"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> genus, <span class="at">y=</span>D)) <span class="sc">+</span></span>
+<span id="cb23-4"><a href=""></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-20-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 28px">💡Here we used a pipe to transform the data and feed them to ggplot.</span></span></p>
+<aside class="notes">
+<p>What do we see? The Inga seems smaller than the two other genus (pioneer genus).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="how-do-read-a-boxplot" class="slide level2">
+<h2>How do read a boxplot?</h2>
+
+<img data-src="boxplot.png" style="width:90.0%" class="r-stretch"><p><span style="font-size: 20px">Source: <a href="https://r4ds.hadley.nz/" data-preview-link="false"><em>R for data science</em></a></span></p>
+<aside class="notes">
+<p>Box : IQR between 1st quartile (25th percentile) and the 3rd (75th percentile)</p>
+<p>Outliers: points further than 1.5 times the IQR from the box</p>
+<p>Whiskers: from the box to the last non-outlier point.</p>
+<p>We can use boxplot for a single numerical variable</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="relationship-between-a-categorical-and-a-numerical-variable---density-plot" class="slide level2">
+<h2>Relationship between a categorical and a numerical variable - density plot</h2>
+<div class="columns">
+<div class="column" style="width:25%;">
+<p><span style="font-size: 28px">We can also do several density plots with the geometry <span style="color:indianred;">geom_density</span>.</span></p>
+</div><div class="column" style="width:75%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a>dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Eperua"</span>, <span class="st">"Inga"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb24-3"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> D, </span>
+<span id="cb24-4"><a href=""></a>             <span class="at">color =</span> genus)) <span class="sc">+</span></span>
+<span id="cb24-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="co"># linewidth to change the width of the lines</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="relationship-between-two-categorical-variables---stacked-barplots" class="slide level2">
+<h2>Relationship between two categorical variables - stacked barplots</h2>
+<p><span style="font-size: 28px">We can see the relationship between two categorical variables using a stacked barplot.</span> <span style="font-size: 28px">We use the geometry <span style="color:indianred;">geom_bar</span>.</span></p>
+<div class="columns">
+<div class="column" style="width:25%;">
+<p><span style="font-size: 28px">Here we want to see the number of individuals of our three genus, in each plot (genus and plotId are two categorical variables).</span></p>
+</div><div class="column" style="width:75%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Eperua"</span>, <span class="st">"Inga"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> genus, </span>
+<span id="cb25-4"><a href=""></a>             <span class="at">fill =</span> plotId)) <span class="sc">+</span></span>
+<span id="cb25-5"><a href=""></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-22-1.png" style="width:75.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="relationship-between-two-categorical-variables---stacked-barplots-1" class="slide level2">
+<h2>Relationship between two categorical variables - stacked barplots</h2>
+<p><span style="font-size: 28px">If we use the argument <span style="color:indianred;">position = “fill”</span>, the barplot represent the proportions and not the counts</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb26-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Eperua"</span>, <span class="st">"Inga"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb26-3"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> genus, </span>
+<span id="cb26-4"><a href=""></a>             <span class="at">fill =</span> plotId)) <span class="sc">+</span></span>
+<span id="cb26-5"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span> </span>
+<span id="cb26-6"><a href=""></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co"># flip the graph</span></span>
+<span id="cb26-7"><a href=""></a> <span class="fu">ylab</span>(<span class="st">"Proportion of the genus in each plot"</span>) <span class="co"># change the axis label</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-23-1.png" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="relationship-between-two-categorical-variables" class="slide level2 scrollable smaller">
+<h2>Relationship between two categorical variables</h2>
+<p><span style="font-size: 28px">We can also display the count per <em>genus</em> and per <em>plotId</em>:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 28px">using <span style="color:indianred;">geom_count</span></span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a>dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Licania"</span>, <span class="st">"Lecythis"</span>, <span class="st">"Inga"</span>, </span>
+<span id="cb27-3"><a href=""></a>                      <span class="st">"Dicorynia"</span>, <span class="st">"Eperua"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-4"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> plotId, <span class="at">y =</span> genus)) <span class="sc">+</span></span>
+<span id="cb27-5"><a href=""></a>  <span class="fu">geom_count</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-24-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 28px">using <span style="color:indianred;">geom_tile</span></span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Licania"</span>, <span class="st">"Lecythis"</span>, <span class="st">"Inga"</span>, </span>
+<span id="cb28-3"><a href=""></a>                      <span class="st">"Dicorynia"</span>, <span class="st">"Eperua"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a href=""></a>  <span class="fu">count</span>(genus, plotId) <span class="sc">%&gt;%</span> <span class="co"># number of trees per genus and per plot</span></span>
+<span id="cb28-5"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> plotId, <span class="at">y =</span> genus)) <span class="sc">+</span></span>
+<span id="cb28-6"><a href=""></a>  <span class="fu">geom_tile</span>(<span class="fu">aes</span>(<span class="at">fill =</span> n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-25-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="relationship-between-two-numerical-variables" class="slide level2 scrollable">
+<h2>Relationship between two numerical variables</h2>
+<p><span style="font-size: 28px">We already saw how to make scatterplots and add trend lines using <span style="color:indianred;">geom_point</span> and <span style="color:indianred;">geom_smooth</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb29-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span></span>
+<span id="cb29-3"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> <span class="co"># alpha controls transparancy</span></span>
+<span id="cb29-4"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span> <span class="co"># adds a linear trend line</span></span>
+<span id="cb29-5"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="co"># adds a loess trend line</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-26-1.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="relationship-between-two-numerical-variables-1" class="slide level2">
+<h2>Relationship between two numerical variables</h2>
+<p><span style="font-size: 28px">When there are too many points to see them well, we can use <span style="color:indianred;">geom_bin2d</span> to discretise the two variables and count the number of observations in each bin.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb30-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span></span>
+<span id="cb30-3"><a href=""></a>  <span class="fu">geom_bin2d</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-27-1.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="relationship-between-two-numerical-variables-2" class="slide level2">
+<h2>Relationship between two numerical variables</h2>
+<p><span style="font-size: 28px">We can also use <span style="color:indianred;">geom_density2d</span> to add contour lines to show were the points are the more numerous.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb31-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span></span>
+<span id="cb31-3"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb31-4"><a href=""></a>  <span class="fu">geom_density2d</span>(<span class="at">color =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-28-1.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="relationship-between-several-variables" class="slide level2">
+<h2>Relationship between several variables</h2>
+<p><span style="font-size: 28px">We already saw how to use the aesthetics <span style="color:indianred;">shape</span>, <span style="color:indianred;">color</span>, <span style="color:indianred;">size</span> to add categorical and/or numerical variables.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb32-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Licania"</span>, <span class="st">"Inga"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span></span>
+<span id="cb32-4"><a href=""></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> genus, <span class="at">shape =</span> plotId)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-29-1.png" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>We could have put the aes color and shape in the aes of ggplot</p>
+<p>color can be categorical or numerical (gradient of colors)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="relationship-between-several-variables-1" class="slide level2">
+<h2>Relationship between several variables</h2>
+<p><span style="font-size: 28px">We can also split the graph into <strong>facets</strong> using <span style="color:indianred;">facet_wrap</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a>dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Licania"</span>, <span class="st">"Inga"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb33-3"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span></span>
+<span id="cb33-4"><a href=""></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> plotId)) <span class="sc">+</span></span>
+<span id="cb33-5"><a href=""></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>genus) <span class="co"># one facet per genus</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-30-1.png" width="1152"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="relationship-between-several-variables-2" class="slide level2">
+<h2>Relationship between several variables</h2>
+<p><span style="font-size: 28px"><span style="color:indianred;">facet_grid</span> allows to create <strong>facets</strong> using two categorical variables:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a>dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Licania"</span>, <span class="st">"Inga"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span></span>
+<span id="cb34-4"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb34-5"><a href=""></a>  <span class="fu">facet_grid</span>(plotId <span class="sc">~</span> genus) <span class="co"># one facet per plotId and per genus</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-31-1.png" style="width:65.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="summary-on-how-to-choose-a-type-of-graph" class="slide level2">
+<h2>Summary on how to choose a type of graph</h2>
+
+<img data-src="choose_graph.png" class="r-stretch"></section></section>
+<section>
+<section id="making-the-plots-look-pretty" class="title-slide slide level1 center">
+<h1>Making the plots look pretty</h1>
+<p>see section 11 in r4ds</p>
+</section>
+<section id="labels" class="slide level2">
+<h2>labels</h2>
+</section>
+<section id="annotations" class="slide level2">
+<h2>annotations</h2>
+</section>
+<section id="scales-including-color" class="slide level2">
+<h2>scales including color</h2>
+<p>voir aussi juba 8.7</p>
+</section>
+<section id="legend" class="slide level2">
+<h2>legend</h2>
+</section>
+<section id="theme" class="slide level2">
+<h2>theme</h2>
+<p>voir aussi juba 8.8</p>
+</section>
+<section id="patchwork" class="slide level2">
+<h2>patchwork</h2>
+</section></section>
+<section id="saving-graphs" class="title-slide slide level1 center">
+<h1>Saving graphs</h1>
+<p>r4ds chap 1.6</p>
+</section>
+
+<section id="acknowledgments" class="title-slide slide level1 center">
+<h1>Acknowledgments</h1>
+<p>r4ds</p>
+</section>
+
+<section id="ressources" class="title-slide slide level1 center">
+<h1>Ressources</h1>
+<p>r4ds</p>
+<p>https://r-graphics.org/ cookbook</p>
+<p>doc ggplot2 : https://ggplot2.tidyverse.org/index.html</p>
+<p>cheatsheet https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1<em>1orn8sn</em>_ga<em>OTcyNTAyMDE1LjE3NDA1OTQwOTI.</em>_ga_2C0WZ1JHG0*MTc0NTMzMzE4OC4xMy4wLjE3NDUzMzMxODguMC4wLjA. in English or in Portuguese</p>
+<aside class="notes">
+<p>this is obviously just an intro to ggplot =&gt; see these ressources and the help of the geom_function, to discover more possibilities</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="ressources-to-go-further" class="title-slide slide level1 center">
+<h1>Ressources to go further</h1>
+<p>https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#google_vignette need to have a quick look again</p>
+<p>https://r-graph-gallery.com/</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -565,6 +1540,82 @@ Géraldine Derroire
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

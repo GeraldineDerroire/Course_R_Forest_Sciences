@@ -22,4 +22,731 @@ editor:
     wrap: sentence
 ---
 
-<!-- think about the title I want to give-->
+# CHANGER LE TITRE DE LA SESSION?
+
+# Why make graphics? {.smaller}
+
+* Explore and check a dataset
+
+    * What is the distribution of the variables?
+    
+    * Is there any outliers (unusual values)? Can they be errors in the dataset?
+
+* Exploratory data analysis: look for patterns of covariation between the variables before doing any statistical tests 
+
+    * Can we observe relationships between the variables?
+    
+    * Are there covarying variables that can cause bias in the interpretation of the results?
+
+* Communicate of the results of data analysis
+
+::: notes
+* distribution: inform on the min, max, median and quantiles in a visual way
+
+* data exploration important before doing any stats => check and understand the data
+
+* communicate => we can present the results of a model rather or together with raw data
+
+:::
+
+
+# Using the package [ggplot2]{style="color:indianred;"} to make graphics
+
+## The package [ggplot2]{style="color:indianred;"} {.scrollable}
+
+::::: columns
+::: {.column width="80%"}
+
+* [ggplot2]{style="color:indianred;"} is a package of the *tidyverse* allowing to make graphics using a coherant synthax.
+
+* [ggplot2]{style="color:indianred;"} requires data to be in a data frame, including a tibble.
+
+* [ggplot2]{style="color:indianred;"} can be use in a pipe after manipulating data.
+
+:::
+
+::: {.column width="20%"}
+![](ggplot2.png)
+:::
+:::::
+
+[Let's load the [tidyverse]{style="color:indianred;"}, including [ggplot2]{style="color:indianred;"}:]{.fragment}
+
+::: fragment
+```{r}
+library(tidyverse)
+```
+:::
+
+
+## Let's work with tree data from the Nouragues forest
+
+We are going to work with the data set *NouraguesHD* available in the package [BIOMASS]{style="color:indianred;"}.
+Let's load them and transform them to a tibble.
+
+```{r, message=FALSE}
+library(BIOMASS)
+data(NouraguesHD) # load the data
+dt_HD <- as_tibble(NouraguesHD) # rename and transform to tibble
+rm(NouraguesHD) # 
+```
+
+[We can look at the help to know more about these data:]{.fragment}
+
+::: fragment
+```{r, eval=FALSE}
+?NouraguesHD
+```
+:::
+
+::: notes
+Nouragues in FG
+
+Ignore the message (not useful for us)
+:::
+
+## Let's work with tree data from the Nouragues forest 
+
+Let's transform these data:
+
+```{r}
+dt_HD <- dt_HD %>% 
+  unite(full_name, genus, species, sep="_", remove = FALSE) %>% # add full name
+  mutate(genus = as.factor(genus), # transform characters to factors
+         species = as.factor(species),
+         full_name = as.factor(full_name),
+         plotId = as.factor(plotId)) %>% 
+  select(- lat, - long) # remove the columns we don't need
+
+str(dt_HD)
+```
+
+::: notes
+These data are similar to the Karnataka data, but with the height added
+
+D: diameter in cm
+H: height in m
+:::
+
+## Step 1: specify the data 
+
+[The first step to make a graph with [ggplot2]{style="color:indianred;"} is to specify the data that we use.
+For that, we use the function [ggplot]{style="color:indianred;"} and specify the data in the argument *data*.]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="80%"}
+
+```{r}
+#| out.width: 100%
+ggplot(data=dt_HD)
+```
+
+:::
+
+::: {.column width="20%"}
+
+[[This creates an empty graph, as we didn't say how we want to visualise the data.]{.fragment}]{style="font-size: 30px"}
+
+:::
+:::::
+
+## Step 2: specify the variables 
+
+[We use the argument *mapping* to specify the variables to represent.]{style="font-size: 30px"}
+
+[[We use the function [aes]{style="color:indianred;"}, meaning **aesthetics**, which are the visual properties of the graph.]{.fragment}]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="30%"}
+[[We want to plot the D on the x-axis and the H on the y-axis.]{.fragment}]{style="font-size: 30px"}
+:::
+
+::: {.column width="70%"}
+
+::: fragment
+```{r}
+#| out.width: 1000%
+ggplot(data=dt_HD,
+       mapping = aes(x = D, y = H))
+```
+:::
+
+:::
+:::::
+
+## Step 3: specify how we want data to be represented
+
+[We still need to define a **geom**: the geometrical object used to represent the data.]{style="font-size: 30px"}
+[[For this, we use a function with a name starting by [geom_]{style="color:indianred;"}.]{.fragment}]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="30%"}
+[[We want to represent data with points, we use [geom_point]{style="color:indianred;"} .]{.fragment}]{style="font-size: 30px"}
+:::
+
+::: {.column width="70%"}
+
+::: fragment
+```{r}
+#| out.width: 90%
+ggplot(data=dt_HD,
+       mapping = aes(x = D, y = H)) +
+  geom_point()
+```
+:::
+
+:::
+:::::
+
+::: notes
+We see a positive, monotone and non-linear relationship.
+
+=> trees with a bigger diameter are taller.
+
+We have a warning message, as there are 163 missing NA in H.
+
+From now on, I will silent the message.
+:::
+
+## A more concise synthax
+
+[We can simplify the synthax:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="30%"}
+* [data is the first argument]{style="font-size: 30px"}
+
+* [mapping is the second]{style="font-size: 30px"}
+
+[[We don't need to explicit them.]{style="font-size: 30px"}]{.fragment}
+:::
+
+::: {.column width="70%"}
+
+::: fragment
+```{r}
+#| out.width: 100%
+#| warning: false
+ggplot(dt_HD,
+       aes(x = D, y = H)) +
+  geom_point()
+```
+:::
+
+:::
+:::::
+
+
+## Adding aesthetics
+
+[Let's differentiate the two plots:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+
+[[using colour:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+#| out.width: 100%
+#| warning: false
+ggplot(dt_HD,
+       aes(x = D, y = H,
+       color = plotId)) +
+  geom_point()
+```
+:::
+
+:::
+
+
+::: {.column width="50%"}
+
+[[or using shape:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+#| out.width: 100%
+#| warning: false
+ggplot(dt_HD,
+       aes(x = D, y = H,
+       shape = plotId)) +
+  geom_point(size = 3) # to increase the size of the points
+```
+:::
+
+:::
+:::::
+
+[[*NB: we could also combine colour and shape.*]{style="font-size: 30px"}]{.fragment}
+
+## Adding aesthetics
+
+[We can also change the size of the points according to a continuous variable (here D): ]{style="font-size: 30px"}
+
+```{r}
+#| out.width: 75%
+#| warning: false
+ggplot(dt_HD,
+       aes(x = D, y = H,
+       color = plotId,
+       size = D)) +
+  geom_point() 
+```
+::: notes
+Here there is no interest in doing this, as we already have the D on the x-axis...
+:::
+
+## Is it an aesthetic or not?
+
+[The arguments *color*, *size*, *shape*, ..., can be used as arguments of the function [aes]{style="color:indianred;"} or of a function [geom_]{style="color:indianred;"}]{style="font-size: 30px"}
+
+
+::::: columns
+::: {.column width="50%"}
+
+::: fragment
+```{r}
+#| warning: false
+ggplot(dt_HD,
+       aes(x = D, y = H, 
+           color = plotId)) +
+  geom_point()
+```
+:::
+
+[[When in *aes*, the colour depends on the value of plotID.]{style="font-size: 30px"}]{.fragment}
+
+:::
+
+::: {.column width="50%"}
+
+::: fragment
+```{r}
+#| warning: false
+ggplot(dt_HD,
+       aes(x = D, y = H)) +
+  geom_point(color="red")
+```
+:::
+
+[[When in *geom_*, the colour is constant.]{style="font-size: 30px"}]{.fragment}
+
+:::
+:::::
+
+
+## Adding layers
+
+[We can add new layers to a graph using the [+]{style="color:indianred;"}]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="70%"}
+```{r}
+#| warning: false
+ggplot(dt_HD,
+       aes(x = D, y = H)) +
+  geom_point() + 
+  geom_smooth()
+```
+:::
+
+::: {.column width="30%"}
+[[[geom_smooth]{style="color:indianred;"} adds a trend line in the cloud of points.]{style="font-size: 30px"}]{.fragment}
+:::
+:::::
+
+
+## Where to specify the aesthetics?
+
+*NB: the place where you specify the aesthetics matters!*
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+#| warning: false
+ggplot(dt_HD,
+       aes(x = D, y = H,
+           color = plotId)) +
+  geom_point() + 
+  geom_smooth()
+```
+
+[[applied to all geometries]{style="font-size: 30px"}]{.fragment}
+
+:::
+
+::: {.column width="50%"}
+::: fragment
+```{r}
+#| warning: false
+ggplot(dt_HD,
+       aes(x = D, y = H)) +
+  geom_point(aes(color = plotId)) + 
+  geom_smooth()
+```
+:::
+
+[[applied only to geom_point]{style="font-size: 30px"}]{.fragment}
+
+:::
+:::::
+
+
+
+
+# Visualising  the distribution of a single variable
+
+::: notes
+we are now going to see what type of graph to use for what
+:::
+
+## Distribution of a categorical variable -  barplot
+
+[We have seen in a previous session that the distribution of a categorical variable can be visualised using a **barplot**.]{style="font-size: 30px"}
+[[We use the geometry [geom_bar]{style="color:indianred;"}.]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+#| warning: false
+#| out.width: 70%
+ggplot(dt_HD,
+       aes(x = plotId)) +
+  geom_bar()
+```
+:::
+
+
+## Distribution of a numerical variable - histogram
+
+[We have seen in a previous session that the distribution of a numerical (=quantitative) variable can be visualised using an **histogram**.]{style="font-size: 28px"}
+[We use the geometry [geom_histogram]{style="color:indianred;"}.]{style="font-size: 28px"}
+
+
+```{r}
+#| warning: false
+#| out.width: 75%
+ggplot(dt_HD,
+       aes(x = D)) +
+  geom_histogram(binwidth = 5) # binwidth specify the size of intervals
+```
+
+
+
+## Distribution of a numerical variable - density plot
+
+
+[We can also use a **density plot**, which is a smoothed-out version of an histogram.]{style="font-size: 28px"}
+[We use the geometry [geom_density]{style="color:indianred;"}.]{style="font-size: 28px"}
+
+
+```{r}
+#| warning: false
+#| out.width: 70%
+ggplot(dt_HD,
+       aes(x = D)) +
+  geom_density(color = "red") 
+```
+
+
+
+# Visualising relationships between 2 variables or more
+
+## Relationship between a categorical and a numerical variable - boxplot
+
+::::: columns
+::: {.column width="25%"}
+[We want to see if the distribution of the diameter differs between the three genus *Dicorynia*, *Eperua* and *Inga*.]{style="font-size: 28px"}
+[We use the geometry [geom_boxplot]{style="color:indianred;"}.]{style="font-size: 28px"}
+:::
+
+::: {.column width="75%"}
+```{r}
+#| warning: false
+#| out.width: 100%
+dt_HD %>% 
+  filter(genus %in% c("Dicorynia", "Eperua", "Inga")) %>% 
+  ggplot(aes(x = genus, y=D)) +
+  geom_boxplot()
+```
+:::
+:::::
+
+[[💡Here we used a pipe to transform the data and feed them to ggplot.]{style="font-size: 28px"}]{.fragment}
+
+::: notes
+What do we see? The Inga seems smaller than the two other genus (pioneer genus).
+:::
+
+
+## How do read a boxplot?
+
+![](boxplot.png){width="90%"}
+
+[Source: [*R for data science*](https://r4ds.hadley.nz/){preview-link="false"}]{style="font-size: 20px"}
+
+::: notes
+Box : IQR between 1st quartile (25th percentile) and the 3rd (75th percentile)
+
+Outliers: points further than 1.5 times the IQR from the box
+
+Whiskers: from the box to the last non-outlier point.
+
+We can use boxplot for a single numerical variable
+:::
+
+
+## Relationship between a categorical and a numerical variable - density plot
+
+::::: columns
+::: {.column width="25%"}
+[We can also do several density plots with the geometry [geom_density]{style="color:indianred;"}.]{style="font-size: 28px"}
+:::
+
+::: {.column width="75%"}
+```{r}
+#| warning: false
+#| out.width: 100%
+dt_HD %>% 
+  filter(genus %in% c("Dicorynia", "Eperua", "Inga")) %>% 
+  ggplot(aes(x = D, 
+             color = genus)) +
+  geom_density(linewidth = 1) # linewidth to change the width of the lines
+```
+:::
+:::::
+
+## Relationship between two categorical variables - stacked barplots
+
+[We can see the relationship between two categorical variables using a stacked barplot.]{style="font-size: 28px"}
+[We use the geometry [geom_bar]{style="color:indianred;"}.]{style="font-size: 28px"}
+
+::::: columns
+::: {.column width="25%"}
+[Here we want to see the number of individuals of our three genus, in each plot (genus and plotId are two categorical variables).]{style="font-size: 28px"}
+:::
+
+::: {.column width="75%"}
+```{r}
+#| warning: false
+#| out.width: 75%
+dt_HD %>% 
+  filter(genus %in% c("Dicorynia", "Eperua", "Inga")) %>% 
+  ggplot(aes(x = genus, 
+             fill = plotId)) +
+  geom_bar()
+```
+:::
+:::::
+
+## Relationship between two categorical variables - stacked barplots
+
+[If we use the argument [position = "fill"]{style="color:indianred;"}, the barplot represent the proportions and not the counts]{style="font-size: 28px"}
+
+```{r}
+#| warning: false
+#| fig-width: 8
+#| fig-height: 1.5
+dt_HD %>% 
+  filter(genus %in% c("Dicorynia", "Eperua", "Inga")) %>% 
+  ggplot(aes(x = genus, 
+             fill = plotId)) +
+  geom_bar(position = "fill") + 
+  coord_flip() + # flip the graph
+ ylab("Proportion of the genus in each plot") # change the axis label
+```
+
+
+## Relationship between two categorical variables {.scrollable .smaller}
+
+[We can also display the count per *genus* and per *plotId*:]{style="font-size: 28px"}
+
+::::: columns
+::: {.column width="50%"}
+ 
+ * [using [geom_count]{style="color:indianred;"}]{style="font-size: 28px"}
+
+::: fragment
+```{r}
+#| warning: false
+#| fig-width: 4
+#| fig-height: 6
+dt_HD %>% 
+  filter(genus %in% c("Licania", "Lecythis", "Inga", 
+                      "Dicorynia", "Eperua")) %>% 
+  ggplot(aes(x = plotId, y = genus)) +
+  geom_count()
+```
+:::
+:::
+
+
+::: {.column width="50%"}
+
+* [using [geom_tile]{style="color:indianred;"}]{style="font-size: 28px"}
+
+::: fragment
+```{r}
+#| warning: false
+#| fig-width: 4
+#| fig-height: 6
+dt_HD %>% 
+  filter(genus %in% c("Licania", "Lecythis", "Inga", 
+                      "Dicorynia", "Eperua")) %>% 
+  count(genus, plotId) %>% # number of trees per genus and per plot
+  ggplot(aes(x = plotId, y = genus)) +
+  geom_tile(aes(fill = n))
+```
+:::
+:::
+:::::
+
+## Relationship between two numerical variables {.scrollable}
+
+[We already saw how to make scatterplots and add trend lines using [geom_point]{style="color:indianred;"} and [geom_smooth]{style="color:indianred;"}:]{style="font-size: 28px"}
+
+```{r}
+#| warning: false
+#| out.width: 70%
+ggplot(dt_HD,
+       aes(x = D, y = H)) +
+  geom_point(alpha = 0.2) + # alpha controls transparancy
+  geom_smooth(method = "lm", color = "red") + # adds a linear trend line
+  geom_smooth(method = "loess", color = "blue") # adds a loess trend line
+```
+
+
+## Relationship between two numerical variables
+
+[When there are too many points to see them well, we can use [geom_bin2d]{style="color:indianred;"} to discretise the two variables and count the number of observations in each bin.]{style="font-size: 28px"}
+
+```{r}
+#| warning: false
+#| out.width: 70%
+ggplot(dt_HD,
+       aes(x = D, y = H)) +
+  geom_bin2d()
+```
+
+## Relationship between two numerical variables
+
+[We can also use [geom_density2d]{style="color:indianred;"} to add contour lines to show were the points are the more numerous.]{style="font-size: 28px"}
+
+```{r}
+#| warning: false
+#| out.width: 70%
+ggplot(dt_HD,
+       aes(x = D, y = H)) +
+  geom_point(alpha = 0.2) + 
+  geom_density2d(color = "red")
+```
+
+## Relationship between several variables
+
+[We already saw how to use the aesthetics [shape]{style="color:indianred;"}, [color]{style="color:indianred;"}, [size]{style="color:indianred;"} to add categorical and/or numerical variables.]{style="font-size: 28px"}
+
+```{r}
+#| warning: false
+#| out.width: 65%
+dt_HD %>% 
+  filter(genus %in% c("Dicorynia", "Licania", "Inga")) %>%
+  ggplot(aes(x = D, y = H)) +
+  geom_point(aes(color = genus, shape = plotId)) 
+```
+
+
+::: notes
+We could have put the aes color and shape in the aes of ggplot
+
+color can be categorical or numerical (gradient of colors)
+:::
+
+
+## Relationship between several variables
+
+[We can also split the graph into **facets** using [facet_wrap]{style="color:indianred;"}:]{style="font-size: 28px"}
+
+```{r}
+#| warning: false
+#| fig-width: 12
+#| fig-height: 4
+dt_HD %>% 
+  filter(genus %in% c("Dicorynia", "Licania", "Inga")) %>%
+  ggplot(aes(x = D, y = H)) +
+  geom_point(aes(color = plotId)) +
+  facet_wrap(~genus) # one facet per genus
+```
+
+
+## Relationship between several variables
+
+[[facet_grid]{style="color:indianred;"} allows to create **facets** using two categorical variables:]{style="font-size: 28px"}
+
+```{r}
+#| warning: false
+#| out.width: 65%
+dt_HD %>% 
+  filter(genus %in% c("Dicorynia", "Licania", "Inga")) %>%
+  ggplot(aes(x = D, y = H)) +
+  geom_point() +
+  facet_grid(plotId ~ genus) # one facet per plotId and per genus
+```
+
+## Summary on how to choose a type of graph
+
+![](choose_graph.png)
+
+<!-- TO DO -->
+
+# Making the plots look pretty
+
+see section 11 in r4ds
+
+## labels
+
+## annotations
+
+## scales including color
+
+voir aussi juba 8.7
+
+## legend 
+
+## theme
+
+voir aussi juba 8.8
+
+## patchwork
+
+# Saving graphs
+
+r4ds chap 1.6
+
+
+# Acknowledgments
+
+r4ds
+
+# Ressources
+
+r4ds
+
+https://r-graphics.org/ cookbook
+
+doc ggplot2 : https://ggplot2.tidyverse.org/index.html
+
+cheatsheet https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1*1orn8sn*_ga*OTcyNTAyMDE1LjE3NDA1OTQwOTI.*_ga_2C0WZ1JHG0*MTc0NTMzMzE4OC4xMy4wLjE3NDUzMzMxODguMC4wLjA. in English or in Portuguese
+
+::: notes
+this is obviously just an intro to ggplot => see these ressources and the help of the geom_function, to discover more possibilities
+:::
+
+# Ressources to go further
+
+https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#google_vignette
+need to have a quick look again
+
+
+https://r-graph-gallery.com/
+
+

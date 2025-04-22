@@ -1821,9 +1821,9 @@ delaing with dates can be complicated in R, if you need to use dates, check the 
 
 ::: {.nonincremental}
 
-* Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. [https://doi.org/10.18637/jss.v059.i10](https://doi.org/10.18637/jss.v059.i10)
+* Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. [https://doi.org/10.18637/jss.v059.i10](https://doi.org/10.18637/jss.v059.i10){preview-link="false"}
 
-* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science* [in English](https://r4ds.hadley.nz/datetimes.html) and [in Portuguese](https://pt.r4ds.hadley.nz/)
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science* [in English](https://r4ds.hadley.nz/datetimes.html) and [in Portuguese](https://pt.r4ds.hadley.nz/){preview-link="false"}
 
 * Cheatsheets of 
 [dpyr](https://rstudio.github.io/cheatsheets/html/data-transformation.html){preview-link="false"},
