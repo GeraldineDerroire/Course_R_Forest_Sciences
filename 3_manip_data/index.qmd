@@ -434,7 +434,7 @@ quantile(BCI.env$EnvHet, prob = 0.5) == median(BCI.env$EnvHet)
 ```
 :::
 
--   3/4 (75%) of the values are below the fourth quartile:
+-   3/4 (75%) of the values are below the third quartile:
 
 ::: fragment
 ```{r}

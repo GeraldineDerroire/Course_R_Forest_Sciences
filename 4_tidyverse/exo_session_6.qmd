@@ -7,15 +7,134 @@ execute:
   eval: false 
 ---
 
+```{r, message=FALSE}
+library(BIOMASS)
+library(tidyverse)
+```
+
+For all the following exercises, use functions from the tidyverse whenever possible, and try to make one pipe per question.
+
+# Karnataka forest dataset
+
+You are going to work on data from forests of the central Western Ghats of India.
+These data are available in the package BIOMASS, and are called 
+KarnatakaForest.
+
+* Load the data (don't forget to look at the metadata in the help of the package). 
+Rename the data to facilitate the writing of the script.
+
+```{r}
+data(KarnatakaForest)
+dt_WG <- KarnatakaForest
+rm(KarnatakaForest)
+```
+
+* Get an overview of the data and check their class.
+
+```{r}
+str(dt_WG)
+summary(dt_WG)
+class(dt_WG)
+```
+
+* Transform the data to a tibble. 
+
+```{r}
+dt_WG <- as_tibble(dt_WG)
+str(dt_WG)
+```
+
+* Transform all non-numeric variables to a factor.
+
+```{r}
+dt_WG <- dt_WG %>% 
+  mutate(plotId = as.factor(plotId),
+         treeId = as.factor(treeId),
+         family = as.factor(family),
+         genus = as.factor(genus),
+         species = as.factor(species))
+```
+
+# Diameters
+
+* Rename the column *D* to *diam*
+
+```{r}
+dt_WG <- dt_WG %>% rename(diam = D)
+```
+
+* What is the smallest diameter of the whole dataset?
+
+```{r}
+dt_WG %>% 
+  slice_min(diam) %>% 
+  select(diam) %>% 
+  distinct()
+```
+
+
+* What are the full species names (genus and species) of the 5 biggest trees?
+
+```{r}
+big5 <- dt_WG %>% 
+  arrange(desc(diam)) %>% 
+  slice_head(n=5) %>% 
+  select(genus, species)
+
+big5
+```
+
+* How many different species are amongst these five biggest trees?
+
+```{r}
+big5 %>% 
+  distinct() %>% 
+  count()
+```
+
+* Create a table (tibble) with the median diameter per plot.
+
+```{r}
+dt_med_diam <- dt_WG %>% 
+  group_by(plotId) %>% 
+  summarize(median_d = median(diam))
+```
+
+* What is the most common family in the whole dataset?
+
+```{r}
+com_fam <- dt_WG %>%
+  count(family) %>% 
+  slice_max(n)
+com_fam
+```
+
+* Create a tibble with the number of trees per family in plots BSP1 and BSP2, and order it by decreasing number of individuals per family per plot. 
+
+```{r}
+dt_sub <- dt_WG %>% filter(plotId %in% c("BSP1", "BSP2")) %>% 
+  count(plotId, family) %>% 
+  arrange(plotId, desc(n))
+view(dt_sub)
+```
+
+* To how many families do trees that have a diameter in the fourth quartile (bigger than the 3rd quartile) of the whole dataset belong?
+
+```{r}
+dt_WG %>% 
+  filter(diam > quantile(diam, probs = 0.75)) %>% 
+  select(family) %>% 
+  distinct() %>% 
+  count()
+```
+
+
 # For next time
 
 * Install the following package from CRAN: *janitor*
 
-* Make sure you remember what we saw on factors and logical operators the session [Getting started with R](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started)
+* Make sure you remember what we saw on factors and logical operators during the session [Getting started with R](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started)
 
-loader les jeux de données de la deuxième session du tidyverse (en faire un .Rdata)
-
-* Download the following data sets
-XXXXXXXXXXXXXXXXXXXXXXXXXXX
+* Download the *RData* file available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/data_tidyverse_2.RData){preview-link="false"}
 and store them in your raw data folder.
 
