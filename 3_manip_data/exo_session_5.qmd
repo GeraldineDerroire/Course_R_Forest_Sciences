@@ -191,6 +191,7 @@ length(unique(dt_pb$plot)) == dim(dt_pb)[1]
 * Install the following package from CRAN: *tidyverse*
 
 * Download the following data sets
-[here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/func_traits.csv){preview-link="false"} and here [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/commercial_sp.csv){preview-link="false"} and store them in your raw data folder.
+[here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/func_traits.csv){preview-link="false"} and [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/commercial_sp.csv){preview-link="false"} and store them in your raw data folder.
 
-* Make sure you remember what we saw on factors and logical operators the session [Getting started with R](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started)
+* Make sure you remember what we saw on factors and logical operators in the session [Getting started with R](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started)
+

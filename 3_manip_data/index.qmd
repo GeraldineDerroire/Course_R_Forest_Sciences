@@ -30,6 +30,11 @@ A 50-ha long-term forest monitoring plot established in 1980
 
 [To know more about BCI](https://stri.si.edu/facility/barro-colorado){preview-link="false"}
 
+::: notes
+smithonian
+Hubbel neutral theory of biodiversity
+:::
+
 ## Let's work on Barro Colorado Island data
 
 We will work with data on the environment of the 50 1-ha plots.
@@ -94,7 +99,7 @@ BCI.env is a [data frame]{style="color:indianred;"}:
 is.data.frame(BCI.env)
 ```
 
-A data frame is a type of R object that contains data with observations in row and variables in columns.
+[A data frame is a type of R object that contains data with observations in row and variables in columns.]{.fragment}
 :::
 
 ::: {.column width="50%"}
@@ -152,7 +157,7 @@ The function [structure]{style="color:indianred;"} give a more detail overview o
 str(BCI.env)
 ```
 
-[This gives the **dimensions** of the data frame, and the **name** and **classe** of each variable.]{.fragment}
+[This gives the **dimensions** of the data frame, and the **name** and **class** of each variable.]{.fragment}
 
 [**NB:** Variables can be of different classes.]{.fragment}
 
@@ -315,7 +320,7 @@ in practice, doesn't make much sense to have precipitation in meters...
 # Univariate descriptive statistics
 
 ::: notes
-descriptive statistics are summary statistics They help us to get a fell of our data Important to use them often
+descriptive statistics are summary statistics They help us to get a feel of our data Important to use them often
 :::
 
 ## Descriptive statistics on a quantitative variable
@@ -402,6 +407,10 @@ sd(BCI.env$EnvHet)
 
 [The higher the variance (and the standard deviation) the more dispersed the values are around the mean.]{.fragment}
 
+::: notes
+variance = sum of the squared differences between each data point and the mean, divided by the number of data values
+:::
+
 ## Indicators of dispersion
 
 We can also look at the quantiles.
@@ -453,7 +462,7 @@ quantile(BCI.env$EnvHet, prob = c(0.025, 0.975))
 ```
 
 ::: notes
-Here we have only values so it doesn't make much sense to divide them in 100 groups...
+Here we have only 50 values so it doesn't make much sense to divide them in 100 groups...
 :::
 
 ## The function summary
@@ -556,6 +565,8 @@ barplot(tab)
 
 ::: notes
 Here we have to proceed in two steps: first create the table, and then make the barplot and we can add a step to order the categories
+
+Make sure that everyone understands the difference between a histogram and a barplot
 :::
 
 ## Graphical representation of a qualitative variable - the Cleveland plot
@@ -620,7 +631,7 @@ DataExplorer::create_report(BCI.env)
 don't do it now...
 don't have the packages installed
 
-depending how late it is =\> explore them a bit or not
+depending how late it is =\> explore them a bit or not (still about 30min of content left)
 
 mode: most represented value
 
@@ -683,6 +694,10 @@ str(My_data)
 ```
 :::
 
+::: notes
+in practices, we don't type dataframe in R, too tidious, and easy to make mistakes.
+:::
+
 
 ## Importing data from a text file
 
@@ -696,7 +711,11 @@ Before importing data, it is important to know the structure of the data:
 
 * What is the separator of decimals?
 
+[Let's look at what is in the file *BCI_env.csv*]{.fragment}
+
 ::: notes
+to view the file, either click on it in Rstudio and click view, or open it directly from the file explorer
+
 in practice a data file should contain a header, otherwise we don't know the variable names
 :::
 
@@ -718,12 +737,13 @@ We can use RStudio interface to import data:
 
 * *File/Import Dataset*, *From Text (base)...*
 
-* or in the *Environment*, *From Text (base)...*
+* or in the *Environment/Import Dataset*, *From Text (base)...*
 
 ::: fragment
 ![](import.png)
 :::
 
+[Let's import the dataset *BCI_env.csv*]{.fragment}
 
 ## Importing data from a text file
 
@@ -737,10 +757,10 @@ We can alternatively use the function [read.csv]{style="color:indianred;"}:
 
 ```{r}
 BCI.env <- read.csv(file = "data/BCI_env.csv", # the file name and its relative path
-                    header = TRUE) # the dathave headers (column names)
+                    header = TRUE) # the data have headers (column names)
 ```
 
-[By default, the the separator of columns is the [,]{style="color:indianred;"} and the separator of decimal the [.]{style="color:indianred;"}]{.fragment}
+[By default, the separator of columns is the [,]{style="color:indianred;"} and the separator of decimal the [.]{style="color:indianred;"}]{.fragment}
 
 [⚠️ Make sure you put the data in an object (otherwise, they are just displayed).]{.fragment}
 
@@ -767,6 +787,8 @@ But using a universal data format (CSV) is preferred.
 -   Use a unique identifier (ID) for each observation
 
 ::: notes
+ok, but how do we get the data in the text file?
+
 unique identifier: unique number for each observation
 :::
 
@@ -785,7 +807,7 @@ unique identifier: unique number for each observation
 
 ## Writing data to a csv
 
-We can save a data frame to a csv file using the function [write.csv]{style="color:indianred;"}:
+We can save a data frame from R to a csv file using the function [write.csv]{style="color:indianred;"}:
 
 ```{r, eval=FALSE}
 write.csv(x = BCI.env, # the object to be written
@@ -793,7 +815,7 @@ write.csv(x = BCI.env, # the object to be written
           row.names = FALSE) # no row names
 ```
 
-[By default, the the separator of columns is the [,]{style="color:indianred;"} and the separator of decimal the [.]{style="color:indianred;"}]{.fragment}
+[By default, the separator of columns is the [,]{style="color:indianred;"} and the separator of decimal the [.]{style="color:indianred;"}]{.fragment}
 
 ## Writing data to a csv
 
@@ -896,19 +918,25 @@ For quantitative variable:
 
 
 
-## Acknowledgments
+## Acknowledgments {.smaller}
 
 This document uses the following:
+
+::: {.nonincremental}
 
 * *Introduction à R et au tidyverse* - Julien Barnier   [in French](https://juba.github.io/tidyverse/){preview-link="false"}
 
 * *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"}
 
-* *Biodiversity data: From data collection to publication. An FRB-CESAB, PNDB & GBIF France training course* Casajus N, Coux C, Le Bras Y, Norvez O, Archambeau A-S & Pamerlon S (2024) [URL]() https://biodiversitydata.github.io/){preview-link="false"}
+* *Biodiversity data: From data collection to publication. An FRB-CESAB, PNDB & GBIF France training course* Casajus N, Coux C, Le Bras Y, Norvez O, Archambeau A-S & Pamerlon S (2024) [URL](https://biodiversitydata.github.io/){preview-link="false"}
 
 * Introductory class of Mélaine Aubry-Kientz, Julien Claude and Marine Zwicke (University of Montpellier)
 
+:::
+
 ## Ressources
+
+::: {.nonincremental}
 
 * *How to R* (Videos in English) [Here](https://www.youtube.com/watch?v=hGkPgYfgapY){preview-link="false"} 
 
@@ -916,18 +944,22 @@ This document uses the following:
 
 * Wilson *et al* (2017) *Good enough practices in scientific computing* Downloadable [here](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510){preview-link="false"}
 
+:::
+
 ## Ressources to go further
 
-### On data format 
+::: {.nonincremental}
+
+**On data format**
 
 * *Data formats* - Nicolas Casajus [Here](https://biodiversitydata.github.io/chapters/files-formats.htmll){preview-link="false"}
 
-### On data management
+**On data management**
 
 - British Ecological Society (2017) *Data-management* Downloadable [here](https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf){preview-link="false"}
 
-### On where to get biodiversity data
+**On where to get biodiversity data**
 
-* *Biodiversity data: From data collection to publication. An FRB-CESAB, PNDB & GBIF France training course* Casajus N, Coux C, Le Bras Y, Norvez O, Archambeau A-S & Pamerlon S (2024) [URL]() https://biodiversitydata.github.io/){preview-link="false"}
+* *Biodiversity data: From data collection to publication. An FRB-CESAB, PNDB & GBIF France training course* Casajus N, Coux C, Le Bras Y, Norvez O, Archambeau A-S & Pamerlon S (2024) [URL](https://biodiversitydata.github.io/){preview-link="false"}
 
-
+:::

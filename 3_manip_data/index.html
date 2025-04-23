@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-21">
+  <meta name="dcterms.date" content="2025-04-23">
   <title>Working with data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,13 +407,26 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-21</p>
+  <p class="date">2025-04-23</p>
 </section>
 <section id="lets-work-on-barro-colorado-island-data" class="slide level2">
 <h2>Let’s work on Barro Colorado Island data</h2>
 <p>A 50-ha long-term forest monitoring plot established in 1980</p>
 
 <img data-src="BCI.png" style="width:80.0%" class="r-stretch"><p><a href="https://stri.si.edu/facility/barro-colorado" data-preview-link="false">To know more about BCI</a></p>
+<aside class="notes">
+<p>smithonian Hubbel neutral theory of biodiversity</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="lets-work-on-barro-colorado-island-data-1" class="slide level2">
 <h2>Let’s work on Barro Colorado Island data</h2>
@@ -601,7 +614,7 @@ Géraldine Derroire
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>A data frame is a type of R object that contains data with observations in row and variables in columns.</p>
+<p><span class="fragment">A data frame is a type of R object that contains data with observations in row and variables in columns.</span></p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="dataframe.png"></p>
 </div></div>
@@ -684,7 +697,7 @@ Géraldine Derroire
  $ EnvHet       : num  0.627 0.394 0 0 0.461 ...</code></pre>
 </div>
 </div>
-<p><span class="fragment">This gives the <strong>dimensions</strong> of the data frame, and the <strong>name</strong> and <strong>classe</strong> of each variable.</span></p>
+<p><span class="fragment">This gives the <strong>dimensions</strong> of the data frame, and the <strong>name</strong> and <strong>class</strong> of each variable.</span></p>
 <p><span class="fragment"><strong>NB:</strong> Variables can be of different classes.</span></p>
 <aside class="notes">
 <p>This function is very useful, you should always use it to look at the structure when working with a new data frame. looking at the structure (and especially the class of the variables) can help detect problems in the data frame</p>
@@ -964,7 +977,7 @@ Géraldine Derroire
 <section id="univariate-descriptive-statistics" class="title-slide slide level1 center">
 <h1>Univariate descriptive statistics</h1>
 <aside class="notes">
-<p>descriptive statistics are summary statistics They help us to get a fell of our data Important to use them often</p>
+<p>descriptive statistics are summary statistics They help us to get a feel of our data Important to use them often</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1118,6 +1131,19 @@ Géraldine Derroire
 </div>
 </div>
 <p><span class="fragment">The higher the variance (and the standard deviation) the more dispersed the values are around the mean.</span></p>
+<aside class="notes">
+<p>variance = sum of the squared differences between each data point and the mean, divided by the number of data values</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="indicators-of-dispersion-1" class="slide level2">
 <h2>Indicators of dispersion</h2>
@@ -1189,7 +1215,7 @@ TRUE </code></pre>
 </div>
 </div>
 <aside class="notes">
-<p>Here we have only values so it doesn’t make much sense to divide them in 100 groups…</p>
+<p>Here we have only 50 values so it doesn’t make much sense to divide them in 100 groups…</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1366,6 +1392,7 @@ Total    50 100  100</code></pre>
 </div></div>
 <aside class="notes">
 <p>Here we have to proceed in two steps: first create the table, and then make the barplot and we can add a step to order the categories</p>
+<p>Make sure that everyone understands the difference between a histogram and a barplot</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1474,7 +1501,7 @@ Total    50 100  100</code></pre>
 <p><span class="fragment">See result <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/report.html" data-preview-link="false">here</a></span></p>
 <aside class="notes">
 <p>don’t do it now… don’t have the packages installed</p>
-<p>depending how late it is =&gt; explore them a bit or not</p>
+<p>depending how late it is =&gt; explore them a bit or not (still about 30min of content left)</p>
 <p>mode: most represented value</p>
 <p>Q–Q plot (quantile–quantile plot) is a probability plot, a graphical method for comparing two probability distributions by plotting their quantiles against each other. On x the normal distrib, on y our variable</p>
 <style type="text/css">
@@ -1588,6 +1615,19 @@ Total    50 100  100</code></pre>
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>in practices, we don’t type dataframe in R, too tidious, and easy to make mistakes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="importing-data-from-a-text-file" class="slide level2">
 <h2>Importing data from a text file</h2>
@@ -1598,7 +1638,9 @@ Total    50 100  100</code></pre>
 <li class="fragment"><p>How are the variables separated? This can be tabulations, or commas (<span style="color:indianred;">,</span>), or semicolon (<span style="color:indianred;">;</span>)</p></li>
 <li class="fragment"><p>What is the separator of decimals?</p></li>
 </ul>
+<p><span class="fragment">Let’s look at what is in the file <em>BCI_env.csv</em></span></p>
 <aside class="notes">
+<p>to view the file, either click on it in Rstudio and click view, or open it directly from the file explorer</p>
 <p>in practice a data file should contain a header, otherwise we don’t know the variable names</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1624,11 +1666,12 @@ Total    50 100  100</code></pre>
 <p>We can use RStudio interface to import data:</p>
 <ul>
 <li class="fragment"><p><em>File/Import Dataset</em>, <em>From Text (base)…</em></p></li>
-<li class="fragment"><p>or in the <em>Environment</em>, <em>From Text (base)…</em></p></li>
+<li class="fragment"><p>or in the <em>Environment/Import Dataset</em>, <em>From Text (base)…</em></p></li>
 </ul>
 <div class="fragment">
 <p><img data-src="import.png"></p>
 </div>
+<p><span class="fragment">Let’s import the dataset <em>BCI_env.csv</em></span></p>
 </section>
 <section id="importing-data-from-a-text-file-3" class="slide level2">
 <h2>Importing data from a text file</h2>
@@ -1640,12 +1683,12 @@ Total    50 100  100</code></pre>
 <p>We can alternatively use the function <span style="color:indianred;">read.csv</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href=""></a>BCI.env <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="at">file =</span> <span class="st">"data/BCI_env.csv"</span>, <span class="co"># the file name and its relative path</span></span>
-<span id="cb96-2"><a href=""></a>                    <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># the dathave headers (column names)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb96-2"><a href=""></a>                    <span class="at">header =</span> <span class="cn">TRUE</span>) <span class="co"># the data have headers (column names)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
-<p><span class="fragment">By default, the the separator of columns is the <span style="color:indianred;">,</span> and the separator of decimal the <span style="color:indianred;">.</span></span></p>
+<p><span class="fragment">By default, the separator of columns is the <span style="color:indianred;">,</span> and the separator of decimal the <span style="color:indianred;">.</span></span></p>
 <p><span class="fragment">⚠️ Make sure you put the data in an object (otherwise, they are just displayed).</span></p>
 </section>
 <section id="importing-data-from-other-formats" class="slide level2">
@@ -1664,6 +1707,7 @@ Total    50 100  100</code></pre>
 <li class="fragment"><p>Use a unique identifier (ID) for each observation</p></li>
 </ul>
 <aside class="notes">
+<p>ok, but how do we get the data in the text file?</p>
 <p>unique identifier: unique number for each observation</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1689,7 +1733,7 @@ Total    50 100  100</code></pre>
 </section>
 <section id="writing-data-to-a-csv" class="slide level2">
 <h2>Writing data to a csv</h2>
-<p>We can save a data frame to a csv file using the function <span style="color:indianred;">write.csv</span>:</p>
+<p>We can save a data frame from R to a csv file using the function <span style="color:indianred;">write.csv</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href=""></a><span class="fu">write.csv</span>(<span class="at">x =</span> BCI.env, <span class="co"># the object to be written</span></span>
 <span id="cb97-2"><a href=""></a>          <span class="at">file =</span> <span class="st">"data/BCI_env.csv"</span>, <span class="co"># the file to write in (and its relative path)</span></span>
@@ -1698,7 +1742,7 @@ Total    50 100  100</code></pre>
 <div class="cell fragment">
 
 </div>
-<p><span class="fragment">By default, the the separator of columns is the <span style="color:indianred;">,</span> and the separator of decimal the <span style="color:indianred;">.</span></span></p>
+<p><span class="fragment">By default, the separator of columns is the <span style="color:indianred;">,</span> and the separator of decimal the <span style="color:indianred;">.</span></span></p>
 </section>
 <section id="writing-data-to-a-csv-1" class="slide level2">
 <h2>Writing data to a csv</h2>
@@ -1800,38 +1844,44 @@ Total    50 100  100</code></pre>
 <li class="fragment">any missing data?</li>
 </ul>
 </section>
-<section id="acknowledgments" class="slide level2">
+<section id="acknowledgments" class="slide level2 smaller">
 <h2>Acknowledgments</h2>
 <p>This document uses the following:</p>
+<div>
 <ul>
-<li class="fragment"><p><em>Introduction à R et au tidyverse</em> - Julien Barnier <a href="https://juba.github.io/tidyverse/" data-preview-link="false">in French</a></p></li>
-<li class="fragment"><p><em>Introduction à l’analyse d’enquêtes avec R et RStudio</em> - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette <a href="https://larmarange.github.io/analyse-R/" data-preview-link="false">in French</a></p></li>
-<li class="fragment"><p><em>Biodiversity data: From data collection to publication. An FRB-CESAB, PNDB &amp; GBIF France training course</em> Casajus N, Coux C, Le Bras Y, Norvez O, Archambeau A-S &amp; Pamerlon S (2024) <a href="">URL</a> https://biodiversitydata.github.io/){preview-link=“false”}</p></li>
-<li class="fragment"><p>Introductory class of Mélaine Aubry-Kientz, Julien Claude and Marine Zwicke (University of Montpellier)</p></li>
+<li><p><em>Introduction à R et au tidyverse</em> - Julien Barnier <a href="https://juba.github.io/tidyverse/" data-preview-link="false">in French</a></p></li>
+<li><p><em>Introduction à l’analyse d’enquêtes avec R et RStudio</em> - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette <a href="https://larmarange.github.io/analyse-R/" data-preview-link="false">in French</a></p></li>
+<li><p><em>Biodiversity data: From data collection to publication. An FRB-CESAB, PNDB &amp; GBIF France training course</em> Casajus N, Coux C, Le Bras Y, Norvez O, Archambeau A-S &amp; Pamerlon S (2024) <a href="https://biodiversitydata.github.io/" data-preview-link="false">URL</a></p></li>
+<li><p>Introductory class of Mélaine Aubry-Kientz, Julien Claude and Marine Zwicke (University of Montpellier)</p></li>
 </ul>
+</div>
 </section>
 <section id="ressources" class="slide level2">
 <h2>Ressources</h2>
+<div>
 <ul>
-<li class="fragment"><p><em>How to R</em> (Videos in English) <a href="https://www.youtube.com/watch?v=hGkPgYfgapY" data-preview-link="false">Here</a></p></li>
-<li class="fragment"><p>Aulas <em>R do basico eo avançado</em> - Murilo S. Dias (Videos em Portuguese, aula 15) <a href="https://www.youtube.com/watch?v=zC5VMELgRG4&amp;list=PLSYhm4WnLPLBciaJOvx25ohO8yaxmae8k&amp;index=15" data-preview-link="false">Here</a></p></li>
-<li class="fragment"><p>Wilson <em>et al</em> (2017) <em>Good enough practices in scientific computing</em> Downloadable <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510" data-preview-link="false">here</a></p></li>
+<li><p><em>How to R</em> (Videos in English) <a href="https://www.youtube.com/watch?v=hGkPgYfgapY" data-preview-link="false">Here</a></p></li>
+<li><p>Aulas <em>R do basico eo avançado</em> - Murilo S. Dias (Videos em Portuguese, aula 15) <a href="https://www.youtube.com/watch?v=zC5VMELgRG4&amp;list=PLSYhm4WnLPLBciaJOvx25ohO8yaxmae8k&amp;index=15" data-preview-link="false">Here</a></p></li>
+<li><p>Wilson <em>et al</em> (2017) <em>Good enough practices in scientific computing</em> Downloadable <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510" data-preview-link="false">here</a></p></li>
 </ul>
+</div>
 </section>
 <section id="ressources-to-go-further" class="slide level2">
 <h2>Ressources to go further</h2>
-<h3 id="on-data-format">On data format</h3>
+<div>
+<p><strong>On data format</strong></p>
 <ul>
-<li class="fragment"><em>Data formats</em> - Nicolas Casajus <a href="https://biodiversitydata.github.io/chapters/files-formats.htmll" data-preview-link="false">Here</a></li>
+<li><em>Data formats</em> - Nicolas Casajus <a href="https://biodiversitydata.github.io/chapters/files-formats.htmll" data-preview-link="false">Here</a></li>
 </ul>
-<h3 id="on-data-management">On data management</h3>
+<p><strong>On data management</strong></p>
 <ul>
-<li class="fragment">British Ecological Society (2017) <em>Data-management</em> Downloadable <a href="https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf" data-preview-link="false">here</a></li>
+<li>British Ecological Society (2017) <em>Data-management</em> Downloadable <a href="https://www.britishecologicalsociety.org//wp-content/uploads/2024/12/BES-Data-management-guide.pdf" data-preview-link="false">here</a></li>
 </ul>
-<h3 id="on-where-to-get-biodiversity-data">On where to get biodiversity data</h3>
+<p><strong>On where to get biodiversity data</strong></p>
 <ul>
-<li class="fragment"><em>Biodiversity data: From data collection to publication. An FRB-CESAB, PNDB &amp; GBIF France training course</em> Casajus N, Coux C, Le Bras Y, Norvez O, Archambeau A-S &amp; Pamerlon S (2024) <a href="">URL</a> https://biodiversitydata.github.io/){preview-link=“false”}</li>
+<li><em>Biodiversity data: From data collection to publication. An FRB-CESAB, PNDB &amp; GBIF France training course</em> Casajus N, Coux C, Le Bras Y, Norvez O, Archambeau A-S &amp; Pamerlon S (2024) <a href="https://biodiversitydata.github.io/" data-preview-link="false">URL</a></li>
 </ul>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
