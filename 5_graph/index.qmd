@@ -285,7 +285,7 @@ ggplot(dt_HD,
 [We can also change the size of the points according to a continuous variable (here D): ]{style="font-size: 30px"}
 
 ```{r}
-#| out.width: 75%
+#| out.width: 60%
 #| warning: false
 ggplot(dt_HD,
        aes(x = D, y = H,
@@ -698,25 +698,186 @@ dt_HD %>%
 
 <!-- TO DO -->
 
-# Making the plots look pretty
+# Improving the visual appearance of graphics
 
-see section 11 in r4ds
+::: notes
+so far we have seen how to quickly make graphs to explore and visualise our data
+But to communicate with others, we want to make graphs explicit and pretty
+:::
 
-## labels
+## {.smaller}
 
-## annotations
+[Let's go back to a plot we already made, save it, and start to improve the visual appearance:]{style="font-size: 28px"}
 
-## scales including color
 
-voir aussi juba 8.7
+```{r}
+#| warning: false
+#| out.width: 80%
+dt_sub <- dt_HD %>% 
+  filter(genus %in% c("Dicorynia", "Licania", "Inga"))
 
-## legend 
+graph1 <-  ggplot(dt_sub, aes(x = D, y = H, color = genus)) +
+  geom_point() +
+  geom_smooth(method = "loess", se = FALSE)
+graph1
+```
 
-## theme
+
+## Labels {.smaller}
+
+::::: columns
+::: {.column width="20%"}
+[Let's start by changing the labels to make them more explicit, using the [labs]{style="color:indianred;"} function:]{style="font-size: 28px"}
+:::
+
+::: {.column width="80%"}
+```{r}
+#| warning: false
+#| out.width: 100%
+graph1 <- graph1 + 
+  labs(
+    x = "Diameter at Breast Height (cm)", # x axis
+    y = "Height (m)", # y axis
+    color = "Genus", # legend of the aes color
+    title = "Diameter - Height relationship",
+    subtitle = "Nouragues - French Guiana",
+    caption = "Source: Réjou-Méchain, M. et al. (2015)"
+  )
+graph1  
+```
+:::
+:::::
+
+::: notes
+note how we add things on the graph by adding + to an existing graphic
+:::
+
+<!--
+## Annotations
+
+
+TO REMOVE ?
+
+```{r}
+annot <- dt_sub %>% 
+  group_by(genus) %>% 
+  arrange(desc(D)) %>% 
+  slice_head(n = 1)
+```
+
+-->
+
+## Scales
+
+To change the visual appearance of the aesthetics, we can use the [scale]{style="color:indianred;"} functions.
+
+There are several scale functions, all with a name that specify the aesthetic and the type of variable they consider (*e.g.* continuous or discrete):
+
+* [scale_x_continuous]{style="color:indianred;"} relates to the aesthetic [x]{style="color:indianred;"} which is continuous (in our case *D*)
+
+* [scale_color_discrete]{style="color:indianred;"} relates to the aesthetic [color]{style="color:indianred;"} which is discrete (in our case *genus*)
+
+
+## Scales - Axis ticks 
+
+::::: columns
+::: {.column width="20%"}
+[To change the position of the axis ticks (axis graduation), we use the argument [breaks]{style="color:indianred;"}]{style="font-size: 28px"}
+:::
+
+::: {.column width="80%"}
+```{r}
+#| warning: false
+#| out.width: 100%
+graph1 <- graph1 + 
+  scale_x_continuous(breaks = seq(10, # x-axis ticks from 10
+                                  max(dt_sub$D), # to the max. value of D
+                                  by = 10)) # every 10 cm
+graph1
+```
+:::
+:::::
+
+## Scales - Labels
+
+::::: columns
+::: {.column width="20%"}
+[We could also change the keys of the legend using the argument [labels]{style="color:indianred;"}]{style="font-size: 28px"}
+:::
+
+::: {.column width="80%"}
+```{r}
+#| warning: false
+#| out.width: 100%
+graph1 + 
+  scale_color_discrete(labels = c(
+    "Dicorynia" = "Genus Dicorynia",
+    "Inga" = "Genus Inga",
+    "Licania" = "Genus Licania"))
+```
+:::
+:::::
+
+::: notes
+Not really a good idea in our case
+
+Let's not change graph1 (see no <-)
+:::
+
+## Replace a color scale
+::::: columns
+::: {.column width="23%"}
+[We can change the color palette manually with  [scale_color_manual]{style="color:indianred;"}]{style="font-size: 28px"}
+
+[See [here](https://sites.stat.columbia.edu/tzheng/files/Rcolor.pdf){preview-link="false"} for all available colours]{style="font-size: 20px"}
+:::
+
+::: {.column width="77%"}
+```{r}
+#| warning: false
+#| out.width: 100%
+graph1 <- graph1 + 
+  scale_color_manual(
+    values = c("Dicorynia" = "green",
+               "Inga" = "blue",
+               "Licania" = "orange"))
+graph1
+```
+:::
+:::::
+
+
+## Replace a color scale
+
+::::: columns
+::: {.column width="23%"}
+[We can alternatively use a predefined palette with [scale_color_brewer]{style="color:indianred;"}]{style="font-size: 28px"}
+
+[Use [RColorBrewer::display.brewer.all()]{style="color:indianred;"} for all available palettes]{style="font-size: 15px"}
+:::
+
+::: {.column width="77%"}
+```{r}
+#| warning: false
+#| out.width: 100%
+graph1 <- graph1 + 
+  scale_color_brewer(palette = "Dark2")
+graph1
+```
+:::
+:::::
+
+<!-- carry on here-->
+
+## Theme 
+
+" they control the non-data parts of the plot"
+
+theme(legend.position (see 11.4.3))
 
 voir aussi juba 8.8
 
-## patchwork
+## Assembling plots with patchwork
 
 # Saving graphs
 
@@ -725,7 +886,7 @@ r4ds chap 1.6
 
 # Acknowledgments
 
-r4ds
+r4ds + juba
 
 # Ressources
 
@@ -738,7 +899,7 @@ doc ggplot2 : https://ggplot2.tidyverse.org/index.html
 cheatsheet https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1*1orn8sn*_ga*OTcyNTAyMDE1LjE3NDA1OTQwOTI.*_ga_2C0WZ1JHG0*MTc0NTMzMzE4OC4xMy4wLjE3NDUzMzMxODguMC4wLjA. in English or in Portuguese
 
 ::: notes
-this is obviously just an intro to ggplot => see these ressources and the help of the geom_function, to discover more possibilities
+this is obviously just an intro to ggplot => see these resources and the help of the geom_function, to discover more possibilities
 :::
 
 # Ressources to go further

@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-22">
+  <meta name="dcterms.date" content="2025-04-23">
   <title>Graphics with ggplot</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-22</p>
+  <p class="date">2025-04-23</p>
 </section>
 <section id="changer-le-titre-de-la-session" class="title-slide slide level1 center">
 <h1>CHANGER LE TITRE DE LA SESSION?</h1>
@@ -741,7 +741,7 @@ Géraldine Derroire
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:75.0%"></p>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:60.0%"></p>
 </figure>
 </div>
 </div>
@@ -1261,27 +1261,242 @@ Géraldine Derroire
 <section id="summary-on-how-to-choose-a-type-of-graph" class="slide level2">
 <h2>Summary on how to choose a type of graph</h2>
 
+<!-- TO DO -->
 <img data-src="choose_graph.png" class="r-stretch"></section></section>
 <section>
-<section id="making-the-plots-look-pretty" class="title-slide slide level1 center">
-<h1>Making the plots look pretty</h1>
-<p>see section 11 in r4ds</p>
+<section id="improving-the-visual-appearance-of-graphics" class="title-slide slide level1 center">
+<h1>Improving the visual appearance of graphics</h1>
+<aside class="notes">
+<p>so far we have seen how to quickly make graphs to explore and visualise our data But to communicate with others, we want to make graphs explicit and pretty</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="labels" class="slide level2">
-<h2>labels</h2>
+<section id="section" class="slide level2 smaller">
+<h2></h2>
+<p><span style="font-size: 28px">Let’s go back to a plot we already made, save it, and start to improve the visual appearance:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>dt_sub <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Licania"</span>, <span class="st">"Inga"</span>))</span>
+<span id="cb35-3"><a href=""></a></span>
+<span id="cb35-4"><a href=""></a>graph1 <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(dt_sub, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H, <span class="at">color =</span> genus)) <span class="sc">+</span></span>
+<span id="cb35-5"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb35-6"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb35-7"><a href=""></a>graph1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-32-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="annotations" class="slide level2">
-<h2>annotations</h2>
+<section id="labels" class="slide level2 smaller">
+<h2>Labels</h2>
+<div class="columns">
+<div class="column" style="width:20%;">
+<p><span style="font-size: 28px">Let’s start by changing the labels to make them more explicit, using the <span style="color:indianred;">labs</span> function:</span></p>
+</div><div class="column" style="width:80%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>graph1 <span class="ot">&lt;-</span> graph1 <span class="sc">+</span> </span>
+<span id="cb36-2"><a href=""></a>  <span class="fu">labs</span>(</span>
+<span id="cb36-3"><a href=""></a>    <span class="at">x =</span> <span class="st">"Diameter at Breast Height (cm)"</span>, <span class="co"># x axis</span></span>
+<span id="cb36-4"><a href=""></a>    <span class="at">y =</span> <span class="st">"Height (m)"</span>, <span class="co"># y axis</span></span>
+<span id="cb36-5"><a href=""></a>    <span class="at">color =</span> <span class="st">"Genus"</span>, <span class="co"># legend of the aes color</span></span>
+<span id="cb36-6"><a href=""></a>    <span class="at">title =</span> <span class="st">"Diameter - Height relationship"</span>,</span>
+<span id="cb36-7"><a href=""></a>    <span class="at">subtitle =</span> <span class="st">"Nouragues - French Guiana"</span>,</span>
+<span id="cb36-8"><a href=""></a>    <span class="at">caption =</span> <span class="st">"Source: Réjou-Méchain, M. et al. (2015)"</span></span>
+<span id="cb36-9"><a href=""></a>  )</span>
+<span id="cb36-10"><a href=""></a>graph1  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-33-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>note how we add things on the graph by adding + to an existing graphic</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!--
+## Annotations
+
+
+TO REMOVE ?
+
+
+
+::: {.cell}
+
+```{.r .cell-code}
+annot <- dt_sub %>% 
+  group_by(genus) %>% 
+  arrange(desc(D)) %>% 
+  slice_head(n = 1)
+```
+:::
+
+
+
+-->
 </section>
-<section id="scales-including-color" class="slide level2">
-<h2>scales including color</h2>
+<section id="scales" class="slide level2">
+<h2>Scales</h2>
+<p>To change the visual appearance of the aesthetics, we can use the <span style="color:indianred;">scale</span> functions.</p>
+<p>There are several scale functions, all with a name that specify the aesthetic and the type of variable they consider (<em>e.g.</em> continuous or discrete):</p>
+<ul>
+<li class="fragment"><p><span style="color:indianred;">scale_x_continuous</span> relates to the aesthetic <span style="color:indianred;">x</span> which is continuous (in our case <em>D</em>)</p></li>
+<li class="fragment"><p><span style="color:indianred;">scale_color_discrete</span> relates to the aesthetic <span style="color:indianred;">color</span> which is discrete (in our case <em>genus</em>)</p></li>
+</ul>
+</section>
+<section id="scales---axis-ticks" class="slide level2">
+<h2>Scales - Axis ticks</h2>
+<div class="columns">
+<div class="column" style="width:20%;">
+<p><span style="font-size: 28px">To change the position of the axis ticks (axis graduation), we use the argument <span style="color:indianred;">breaks</span></span></p>
+</div><div class="column" style="width:80%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>graph1 <span class="ot">&lt;-</span> graph1 <span class="sc">+</span> </span>
+<span id="cb37-2"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="co"># x-axis ticks from 10</span></span>
+<span id="cb37-3"><a href=""></a>                                  <span class="fu">max</span>(dt_sub<span class="sc">$</span>D), <span class="co"># to the max. value of D</span></span>
+<span id="cb37-4"><a href=""></a>                                  <span class="at">by =</span> <span class="dv">10</span>)) <span class="co"># every 10 cm</span></span>
+<span id="cb37-5"><a href=""></a>graph1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-35-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="scales---labels" class="slide level2">
+<h2>Scales - Labels</h2>
+<div class="columns">
+<div class="column" style="width:20%;">
+<p><span style="font-size: 28px">We could also change the keys of the legend using the argument <span style="color:indianred;">labels</span></span></p>
+</div><div class="column" style="width:80%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>graph1 <span class="sc">+</span> </span>
+<span id="cb38-2"><a href=""></a>  <span class="fu">scale_color_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb38-3"><a href=""></a>    <span class="st">"Dicorynia"</span> <span class="ot">=</span> <span class="st">"Genus Dicorynia"</span>,</span>
+<span id="cb38-4"><a href=""></a>    <span class="st">"Inga"</span> <span class="ot">=</span> <span class="st">"Genus Inga"</span>,</span>
+<span id="cb38-5"><a href=""></a>    <span class="st">"Licania"</span> <span class="ot">=</span> <span class="st">"Genus Licania"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-36-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>Not really a good idea in our case</p>
+<p>Let’s not change graph1 (see no &lt;-)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="replace-a-color-scale" class="slide level2">
+<h2>Replace a color scale</h2>
+<div class="columns">
+<div class="column" style="width:23%;">
+<p><span style="font-size: 28px">We can change the color palette manually with <span style="color:indianred;">scale_color_manual</span></span></p>
+<p><span style="font-size: 20px">See <a href="https://sites.stat.columbia.edu/tzheng/files/Rcolor.pdf" data-preview-link="false">here</a> for all available colours</span></p>
+</div><div class="column" style="width:77%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>graph1 <span class="ot">&lt;-</span> graph1 <span class="sc">+</span> </span>
+<span id="cb39-2"><a href=""></a>  <span class="fu">scale_color_manual</span>(</span>
+<span id="cb39-3"><a href=""></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span> <span class="ot">=</span> <span class="st">"green"</span>,</span>
+<span id="cb39-4"><a href=""></a>               <span class="st">"Inga"</span> <span class="ot">=</span> <span class="st">"blue"</span>,</span>
+<span id="cb39-5"><a href=""></a>               <span class="st">"Licania"</span> <span class="ot">=</span> <span class="st">"orange"</span>))</span>
+<span id="cb39-6"><a href=""></a>graph1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-37-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="replace-a-color-scale-1" class="slide level2">
+<h2>Replace a color scale</h2>
+<div class="columns">
+<div class="column" style="width:23%;">
+<p><span style="font-size: 28px">We can alternatively use a predefined palette with <span style="color:indianred;">scale_color_brewer</span></span></p>
+<p><span style="font-size: 15px">Use <span style="color:indianred;">RColorBrewer::display.brewer.all()</span> for all available palettes</span></p>
+</div><div class="column" style="width:77%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>graph1 <span class="ot">&lt;-</span> graph1 <span class="sc">+</span> </span>
+<span id="cb40-2"><a href=""></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)</span>
+<span id="cb40-3"><a href=""></a>graph1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-38-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>scales including color</p>
 <p>voir aussi juba 8.7</p>
 </section>
 <section id="legend" class="slide level2">
 <h2>legend</h2>
 </section>
 <section id="theme" class="slide level2">
-<h2>theme</h2>
+<h2>Theme</h2>
+<p>” they control the non-data parts of the plot”</p>
+<p>theme(legend.position (see 11.4.3))</p>
 <p>voir aussi juba 8.8</p>
 </section>
 <section id="patchwork" class="slide level2">
