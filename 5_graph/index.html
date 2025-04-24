@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-23">
+  <meta name="dcterms.date" content="2025-04-24">
   <title>Graphics with ggplot</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,15 +407,15 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-23</p>
+  <p class="date">2025-04-24</p>
 </section>
 <section id="changer-le-titre-de-la-session" class="title-slide slide level1 center">
 <h1>CHANGER LE TITRE DE LA SESSION?</h1>
 
 </section>
 
-<section id="why-make-graphics" class="title-slide slide level1 smaller center">
-<h1>Why make graphics?</h1>
+<section id="why-make-plots" class="title-slide slide level1 smaller center">
+<h1>Why make plots?</h1>
 <ul>
 <li class="fragment"><p>Explore and check a dataset</p>
 <ul>
@@ -425,9 +425,9 @@ Géraldine Derroire
 <li class="fragment"><p>Exploratory data analysis: look for patterns of covariation between the variables before doing any statistical tests</p>
 <ul>
 <li class="fragment"><p>Can we observe relationships between the variables?</p></li>
-<li class="fragment"><p>Are there covarying variables that can cause bias in the interpretation of the results?</p></li>
+<li class="fragment"><p>Are there co-varying variables that can cause bias in the interpretation of the results?</p></li>
 </ul></li>
-<li class="fragment"><p>Communicate of the results of data analysis</p></li>
+<li class="fragment"><p>Communicate the results of data analysis</p></li>
 </ul>
 <aside class="notes">
 <ul>
@@ -449,8 +449,8 @@ Géraldine Derroire
 </section>
 
 <section>
-<section id="using-the-package-ggplot2-to-make-graphics" class="title-slide slide level1 center">
-<h1>Using the package <span style="color:indianred;">ggplot2</span> to make graphics</h1>
+<section id="using-the-package-ggplot2-to-make-plots" class="title-slide slide level1 center">
+<h1>Using the package <span style="color:indianred;">ggplot2</span> to make plots</h1>
 
 </section>
 <section id="the-package-ggplot2" class="slide level2 scrollable">
@@ -458,7 +458,7 @@ Géraldine Derroire
 <div class="columns">
 <div class="column" style="width:80%;">
 <ul>
-<li class="fragment"><p><span style="color:indianred;">ggplot2</span> is a package of the <em>tidyverse</em> allowing to make graphics using a coherant synthax.</p></li>
+<li class="fragment"><p><span style="color:indianred;">ggplot2</span> is a package of the <em>tidyverse</em> allowing to make plots using a coherant synthax.</p></li>
 <li class="fragment"><p><span style="color:indianred;">ggplot2</span> requires data to be in a data frame, including a tibble.</p></li>
 <li class="fragment"><p><span style="color:indianred;">ggplot2</span> can be use in a pipe after manipulating data.</p></li>
 </ul>
@@ -561,10 +561,15 @@ Géraldine Derroire
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section></section>
+<section>
+<section id="ggplot-grammar" class="title-slide slide level1 center">
+<h1>ggplot grammar</h1>
+
 </section>
 <section id="step-1-specify-the-data" class="slide level2">
 <h2>Step 1: specify the data</h2>
-<p><span style="font-size: 30px">The first step to make a graph with <span style="color:indianred;">ggplot2</span> is to specify the data that we use. For that, we use the function <span style="color:indianred;">ggplot</span> and specify the data in the argument <em>data</em>.</span></p>
+<p><span style="font-size: 30px">The first step to make a plot with <span style="color:indianred;">ggplot2</span> is to specify the data that we use. For that, we use the function <span style="color:indianred;">ggplot</span> and specify the data in the argument <em>data</em>.</span></p>
 <div class="columns">
 <div class="column" style="width:80%;">
 <div class="cell">
@@ -580,13 +585,13 @@ Géraldine Derroire
 </div>
 </div>
 </div><div class="column" style="width:20%;">
-<p><span style="font-size: 30px"><span class="fragment">This creates an empty graph, as we didn’t say how we want to visualise the data.</span></span></p>
+<p><span style="font-size: 30px"><span class="fragment">This creates an empty plot, as we didn’t say how we want to visualise the data.</span></span></p>
 </div></div>
 </section>
 <section id="step-2-specify-the-variables" class="slide level2">
 <h2>Step 2: specify the variables</h2>
 <p><span style="font-size: 30px">We use the argument <em>mapping</em> to specify the variables to represent.</span></p>
-<p><span style="font-size: 30px"><span class="fragment">We use the function <span style="color:indianred;">aes</span>, meaning <strong>aesthetics</strong>, which are the visual properties of the graph.</span></span></p>
+<p><span style="font-size: 30px"><span class="fragment">We use the function <span style="color:indianred;">aes</span>, meaning <strong>aesthetics</strong>, which are the visual properties of the plot.</span></span></p>
 <div class="columns">
 <div class="column" style="width:30%;">
 <p><span style="font-size: 30px"><span class="fragment">We want to plot the D on the x-axis and the H on the y-axis.</span></span></p>
@@ -684,7 +689,7 @@ Géraldine Derroire
 </section>
 <section id="adding-aesthetics" class="slide level2">
 <h2>Adding aesthetics</h2>
-<p><span style="font-size: 30px">Let’s differentiate the two plots:</span></p>
+<p><span style="font-size: 30px">Let’s differentiate the two plots (<em>parcelas</em>):</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><span class="fragment"><span style="font-size: 30px">using colour:</span></span></p>
@@ -762,7 +767,7 @@ Géraldine Derroire
 </section>
 <section id="is-it-an-aesthetic-or-not" class="slide level2">
 <h2>Is it an aesthetic or not?</h2>
-<p><span style="font-size: 30px">The arguments <em>color</em>, <em>size</em>, <em>shape</em>, …, can be used as arguments of the function <span style="color:indianred;">aes</span> or of a function <span style="color:indianred;">geom_</span></span></p>
+<p><span style="font-size: 30px">The arguments <em>color</em>, <em>size</em>, <em>shape</em>, …, can be used as arguments of the function <span style="color:indianred;">aes</span> or not. But this does not do the same thing.</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
@@ -782,7 +787,7 @@ Géraldine Derroire
 </div>
 </div>
 </div>
-<p><span class="fragment"><span style="font-size: 30px">When in <em>aes</em>, the colour depends on the value of plotID.</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">When in <em>aes</em>, the colour depends on the values of a variable (categorical or numeric).</span></span></p>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <div class="cell">
@@ -800,12 +805,12 @@ Géraldine Derroire
 </div>
 </div>
 </div>
-<p><span class="fragment"><span style="font-size: 30px">When in <em>geom_</em>, the colour is constant.</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">When not in <em>aes</em>, the colour is constant.</span></span></p>
 </div></div>
 </section>
 <section id="adding-layers" class="slide level2">
 <h2>Adding layers</h2>
-<p><span style="font-size: 30px">We can add new layers to a graph using the <span style="color:indianred;">+</span></span></p>
+<p><span style="font-size: 30px">We can add new layers to a plot using the <span style="color:indianred;">+</span></span></p>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
@@ -874,7 +879,7 @@ Géraldine Derroire
 <section id="visualising-the-distribution-of-a-single-variable" class="title-slide slide level1 center">
 <h1>Visualising the distribution of a single variable</h1>
 <aside class="notes">
-<p>we are now going to see what type of graph to use for what</p>
+<p>we are now going to see what type of plot to use for what</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -942,6 +947,19 @@ Géraldine Derroire
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>on y axis =&gt; density, so that the area under the entire curve equals 1</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="visualising-relationships-between-2-variables-or-more" class="title-slide slide level1 center">
@@ -1064,7 +1082,7 @@ Géraldine Derroire
 <span id="cb26-3"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> genus, </span>
 <span id="cb26-4"><a href=""></a>             <span class="at">fill =</span> plotId)) <span class="sc">+</span></span>
 <span id="cb26-5"><a href=""></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span> </span>
-<span id="cb26-6"><a href=""></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co"># flip the graph</span></span>
+<span id="cb26-6"><a href=""></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span> <span class="co"># flip the plot</span></span>
 <span id="cb26-7"><a href=""></a> <span class="fu">ylab</span>(<span class="st">"Proportion of the genus in each plot"</span>) <span class="co"># change the axis label</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
@@ -1220,7 +1238,7 @@ Géraldine Derroire
 </section>
 <section id="relationship-between-several-variables-1" class="slide level2">
 <h2>Relationship between several variables</h2>
-<p><span style="font-size: 28px">We can also split the graph into <strong>facets</strong> using <span style="color:indianred;">facet_wrap</span>:</span></p>
+<p><span style="font-size: 28px">We can also split the plot into <strong>facets</strong> using <span style="color:indianred;">facet_wrap</span>:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a>dt_HD <span class="sc">%&gt;%</span> </span>
 <span id="cb33-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Licania"</span>, <span class="st">"Inga"</span>)) <span class="sc">%&gt;%</span></span>
@@ -1258,16 +1276,16 @@ Géraldine Derroire
 </div>
 </div>
 </section>
-<section id="summary-on-how-to-choose-a-type-of-graph" class="slide level2">
-<h2>Summary on how to choose a type of graph</h2>
+<section id="summary-on-how-to-choose-a-type-of-plot" class="slide level2">
+<h2>Summary on how to choose a type of plot</h2>
 
 <!-- TO DO -->
 <img data-src="choose_graph.png" class="r-stretch"></section></section>
 <section>
-<section id="improving-the-visual-appearance-of-graphics" class="title-slide slide level1 center">
-<h1>Improving the visual appearance of graphics</h1>
+<section id="improving-the-visual-appearance-of-plots" class="title-slide slide level1 center">
+<h1>Improving the visual appearance of plots</h1>
 <aside class="notes">
-<p>so far we have seen how to quickly make graphs to explore and visualise our data But to communicate with others, we want to make graphs explicit and pretty</p>
+<p>so far we have seen how to quickly make plots to explore and visualise our data But to communicate with others, we want to make plots explicit and pretty</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1287,10 +1305,10 @@ Géraldine Derroire
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>dt_sub <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
 <span id="cb35-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Licania"</span>, <span class="st">"Inga"</span>))</span>
 <span id="cb35-3"><a href=""></a></span>
-<span id="cb35-4"><a href=""></a>graph1 <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(dt_sub, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H, <span class="at">color =</span> genus)) <span class="sc">+</span></span>
+<span id="cb35-4"><a href=""></a>plot1 <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(dt_sub, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H, <span class="at">color =</span> genus)) <span class="sc">+</span></span>
 <span id="cb35-5"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb35-6"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb35-7"><a href=""></a>graph1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-7"><a href=""></a>plot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -1309,7 +1327,7 @@ Géraldine Derroire
 <p><span style="font-size: 28px">Let’s start by changing the labels to make them more explicit, using the <span style="color:indianred;">labs</span> function:</span></p>
 </div><div class="column" style="width:80%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>graph1 <span class="ot">&lt;-</span> graph1 <span class="sc">+</span> </span>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>plot1 <span class="ot">&lt;-</span> plot1 <span class="sc">+</span> </span>
 <span id="cb36-2"><a href=""></a>  <span class="fu">labs</span>(</span>
 <span id="cb36-3"><a href=""></a>    <span class="at">x =</span> <span class="st">"Diameter at Breast Height (cm)"</span>, <span class="co"># x axis</span></span>
 <span id="cb36-4"><a href=""></a>    <span class="at">y =</span> <span class="st">"Height (m)"</span>, <span class="co"># y axis</span></span>
@@ -1318,7 +1336,7 @@ Géraldine Derroire
 <span id="cb36-7"><a href=""></a>    <span class="at">subtitle =</span> <span class="st">"Nouragues - French Guiana"</span>,</span>
 <span id="cb36-8"><a href=""></a>    <span class="at">caption =</span> <span class="st">"Source: Réjou-Méchain, M. et al. (2015)"</span></span>
 <span id="cb36-9"><a href=""></a>  )</span>
-<span id="cb36-10"><a href=""></a>graph1  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb36-10"><a href=""></a>plot1  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -1331,7 +1349,7 @@ Géraldine Derroire
 </div>
 </div></div>
 <aside class="notes">
-<p>note how we add things on the graph by adding + to an existing graphic</p>
+<p>note how we add things on the plot by adding + to an existing plotic</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1381,11 +1399,11 @@ annot <- dt_sub %>%
 <p><span style="font-size: 28px">To change the position of the axis ticks (axis graduation), we use the argument <span style="color:indianred;">breaks</span></span></p>
 </div><div class="column" style="width:80%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>graph1 <span class="ot">&lt;-</span> graph1 <span class="sc">+</span> </span>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>plot1 <span class="ot">&lt;-</span> plot1 <span class="sc">+</span> </span>
 <span id="cb37-2"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">10</span>, <span class="co"># x-axis ticks from 10</span></span>
 <span id="cb37-3"><a href=""></a>                                  <span class="fu">max</span>(dt_sub<span class="sc">$</span>D), <span class="co"># to the max. value of D</span></span>
 <span id="cb37-4"><a href=""></a>                                  <span class="at">by =</span> <span class="dv">10</span>)) <span class="co"># every 10 cm</span></span>
-<span id="cb37-5"><a href=""></a>graph1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-5"><a href=""></a>plot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -1405,7 +1423,7 @@ annot <- dt_sub %>%
 <p><span style="font-size: 28px">We could also change the keys of the legend using the argument <span style="color:indianred;">labels</span></span></p>
 </div><div class="column" style="width:80%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>graph1 <span class="sc">+</span> </span>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>plot1 <span class="sc">+</span> </span>
 <span id="cb38-2"><a href=""></a>  <span class="fu">scale_color_discrete</span>(<span class="at">labels =</span> <span class="fu">c</span>(</span>
 <span id="cb38-3"><a href=""></a>    <span class="st">"Dicorynia"</span> <span class="ot">=</span> <span class="st">"Genus Dicorynia"</span>,</span>
 <span id="cb38-4"><a href=""></a>    <span class="st">"Inga"</span> <span class="ot">=</span> <span class="st">"Genus Inga"</span>,</span>
@@ -1423,7 +1441,7 @@ annot <- dt_sub %>%
 </div></div>
 <aside class="notes">
 <p>Not really a good idea in our case</p>
-<p>Let’s not change graph1 (see no &lt;-)</p>
+<p>Let’s not change plot1 (see no &lt;-)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1436,20 +1454,20 @@ annot <- dt_sub %>%
           display:block!important;
       }</style></aside>
 </section>
-<section id="replace-a-color-scale" class="slide level2">
-<h2>Replace a color scale</h2>
+<section id="replacing-a-color-scale" class="slide level2">
+<h2>Replacing a color scale</h2>
 <div class="columns">
 <div class="column" style="width:23%;">
 <p><span style="font-size: 28px">We can change the color palette manually with <span style="color:indianred;">scale_color_manual</span></span></p>
 <p><span style="font-size: 20px">See <a href="https://sites.stat.columbia.edu/tzheng/files/Rcolor.pdf" data-preview-link="false">here</a> for all available colours</span></p>
 </div><div class="column" style="width:77%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>graph1 <span class="ot">&lt;-</span> graph1 <span class="sc">+</span> </span>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>plot1 <span class="ot">&lt;-</span> plot1 <span class="sc">+</span> </span>
 <span id="cb39-2"><a href=""></a>  <span class="fu">scale_color_manual</span>(</span>
 <span id="cb39-3"><a href=""></a>    <span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span> <span class="ot">=</span> <span class="st">"green"</span>,</span>
 <span id="cb39-4"><a href=""></a>               <span class="st">"Inga"</span> <span class="ot">=</span> <span class="st">"blue"</span>,</span>
 <span id="cb39-5"><a href=""></a>               <span class="st">"Licania"</span> <span class="ot">=</span> <span class="st">"orange"</span>))</span>
-<span id="cb39-6"><a href=""></a>graph1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb39-6"><a href=""></a>plot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -1462,17 +1480,16 @@ annot <- dt_sub %>%
 </div>
 </div></div>
 </section>
-<section id="replace-a-color-scale-1" class="slide level2">
-<h2>Replace a color scale</h2>
+<section id="replacing-a-color-scale-1" class="slide level2">
+<h2>Replacing a color scale</h2>
 <div class="columns">
 <div class="column" style="width:23%;">
 <p><span style="font-size: 28px">We can alternatively use a predefined palette with <span style="color:indianred;">scale_color_brewer</span></span></p>
-<p><span style="font-size: 15px">Use <span style="color:indianred;">RColorBrewer::display.brewer.all()</span> for all available palettes</span></p>
 </div><div class="column" style="width:77%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>graph1 <span class="ot">&lt;-</span> graph1 <span class="sc">+</span> </span>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>plot1 <span class="ot">&lt;-</span> plot1 <span class="sc">+</span> </span>
 <span id="cb40-2"><a href=""></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>)</span>
-<span id="cb40-3"><a href=""></a>graph1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb40-3"><a href=""></a>plot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -1484,42 +1501,276 @@ annot <- dt_sub %>%
 </div>
 </div>
 </div></div>
+<p><span style="font-size: 20px">Use <span style="color:indianred;">RColorBrewer::display.brewer.all()</span> for all available palettes</span></p>
+<aside class="notes">
+<p>You can also create your own palette =&gt; usefull for consistency between plots in a publication, or when color have a meaning</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="section-1" class="slide level2">
-<h2></h2>
-<p>scales including color</p>
-<p>voir aussi juba 8.7</p>
+<section id="replacing-a-color-scale-2" class="slide level2 smaller">
+<h2>Replacing a color scale</h2>
+<p><span style="font-size: 28px">We can also replace continuous colour scales (here on a quite artificial example…):</span></p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><span style="font-size: 28px">Default plot</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb41-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H,</span>
+<span id="cb41-3"><a href=""></a>       <span class="at">color =</span> H)) <span class="sc">+</span></span>
+<span id="cb41-4"><a href=""></a>  <span class="fu">geom_point</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-39-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p><span class="fragment"><span style="font-size: 28px">Setting the scale manually</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb42-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H,</span>
+<span id="cb42-3"><a href=""></a>       <span class="at">color =</span> H)) <span class="sc">+</span></span>
+<span id="cb42-4"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb42-5"><a href=""></a>  <span class="fu">scale_color_gradient</span>(<span class="at">low =</span> <span class="st">"yellow"</span>,</span>
+<span id="cb42-6"><a href=""></a>                       <span class="at">high =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-40-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment"><span style="font-size: 28px">Using a predefined viridis colour scales</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">ggplot</span>(dt_HD,</span>
+<span id="cb43-2"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H,</span>
+<span id="cb43-3"><a href=""></a>       <span class="at">color =</span> H)) <span class="sc">+</span></span>
+<span id="cb43-4"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb43-5"><a href=""></a>  <span class="fu">scale_color_viridis_c</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-41-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>A bit stupid to do it when we already have an axis for the H</p>
+<p>viridis =&gt; carrefully designed colour scale adapated to color-blindness</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="legend" class="slide level2">
-<h2>legend</h2>
+<section id="themes" class="slide level2">
+<h2>Themes</h2>
+<p><span style="font-size: 28px">Themes are used to control all the <strong>non-data parts</strong> of the plot.</span> <span class="fragment"><span style="font-size: 28px">We can use some predefined themes:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a>plot1 <span class="ot">&lt;-</span> plot1 <span class="sc">+</span> </span>
+<span id="cb44-2"><a href=""></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb44-3"><a href=""></a>plot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-42-1.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="theme" class="slide level2">
-<h2>Theme</h2>
-<p>” they control the non-data parts of the plot”</p>
-<p>theme(legend.position (see 11.4.3))</p>
-<p>voir aussi juba 8.8</p>
+<section id="themes-1" class="slide level2">
+<h2>Themes</h2>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><span style="font-size: 28px">Predefined ggplot2 themes:</span></p>
+<p><span style="font-size: 20px">Source: <a href="https://r4ds.hadley.nz/" data-preview-link="false"><em>R for data science</em></a></span></p>
+</div><div class="column" style="width:70%;">
+<p><img data-src="theme.png" style="width:70.0%"></p>
+</div></div>
 </section>
-<section id="patchwork" class="slide level2">
-<h2>patchwork</h2>
+<section id="themes-2" class="slide level2 smaller">
+<h2>Themes</h2>
+<p><span style="font-size: 28px">We can also control the theme elements individually.</span></p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>plot_ugly <span class="ot">&lt;-</span>plot1 <span class="sc">+</span> <span class="fu">theme</span>(</span>
+<span id="cb45-2"><a href=""></a>  <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"lightgrey"</span>, <span class="at">colour =</span> <span class="st">"red"</span>),</span>
+<span id="cb45-3"><a href=""></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">"darkgreen"</span>, <span class="at">face =</span> <span class="st">"bold"</span>),</span>
+<span id="cb45-4"><a href=""></a>  <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"blue"</span>),</span>
+<span id="cb45-5"><a href=""></a>  <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">15</span>),</span>
+<span id="cb45-6"><a href=""></a>  <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"orange"</span>),</span>
+<span id="cb45-7"><a href=""></a>  <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>)</span>
+<span id="cb45-8"><a href=""></a>)</span>
+<span id="cb45-9"><a href=""></a>plot_ugly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-43-1.png" style="width:100.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment"><span style="font-size: 28px">See <a href="https://ggplot2-book.org/themes.html#modifying-theme-components" data-preview-link="false">here</a> to know more about the 40 unique elements that can be controlled.</span></span></p>
+</div></div>
+</section>
+<section id="themes-3" class="slide level2">
+<h2>Themes</h2>
+<p><span style="font-size: 28px">Themes are also used to control the legend layout:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>plot1 <span class="sc">+</span> </span>
+<span id="cb46-2"><a href=""></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>) <span class="sc">+</span></span>
+<span id="cb46-3"><a href=""></a>  <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-44-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="assembling-plots-with-patchwork" class="slide level2">
+<h2>Assembling plots with patchwork</h2>
+<div class="columns">
+<div class="column" style="width:20%;">
+<p><span style="font-size: 28px">Patchwork is a very usefull package to assemble plots easily.</span></p>
+<p><img data-src="patchwork.png"></p>
+<p><span style="font-size: 20px"><a href="https://patchwork.data-imaginist.com/" data-preview-link="false">To know more</a></span></p>
+</div><div class="column" style="width:80%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb47-2"><a href=""></a>plot1 <span class="sc">+</span> plot_ugly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="index_files/figure-revealjs/unnamed-chunk-45-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div></div>
 </section></section>
-<section id="saving-graphs" class="title-slide slide level1 center">
-<h1>Saving graphs</h1>
-<p>r4ds chap 1.6</p>
+<section id="saving-plots" class="title-slide slide level1 center">
+<h1>Saving plots</h1>
+<p>To save a plot, we use the function <span style="color:indianred;">ggsave</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"outputs/my_plot.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment">By default, it saves the last plot that was displayed, with the dimensions at which it was displayed.</span></p>
+<p><span class="fragment">We can specify the extension either in the filename, or with the argument <em>device</em>.</span></p>
+<aside class="notes">
+<p>in practice, easier to put the extension in the filename</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="saving-plots-1" class="title-slide slide level1 center">
+<h1>Saving plots</h1>
+<p>We can also specify the plot we want to save, and the dimensions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a><span class="fu">ggsave</span>(<span class="at">plot =</span> plot1,</span>
+<span id="cb49-2"><a href=""></a>       <span class="at">filename =</span> <span class="st">"outputs/plot1.pdf"</span>,</span>
+<span id="cb49-3"><a href=""></a>       <span class="at">width =</span> <span class="dv">20</span>,</span>
+<span id="cb49-4"><a href=""></a>       <span class="at">height =</span> <span class="dv">12</span>,</span>
+<span id="cb49-5"><a href=""></a>       <span class="at">units =</span> <span class="st">"cm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 28 rows containing non-finite outside the scale range
+(`stat_smooth()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 28 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+</div>
 </section>
 
 <section id="acknowledgments" class="title-slide slide level1 center">
 <h1>Acknowledgments</h1>
-<p>r4ds</p>
+<div>
+<ul>
+<li><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> <a href="https://r4ds.hadley.nz/datetimes.html" data-preview-link="false">in English</a> and <a href="https://pt.r4ds.hadley.nz/" data-preview-link="false">in Portuguese</a></p></li>
+<li><p>Barnier J. <em>Introduction à R et au tidyverse</em> <a href="https://juba.github.io/tidyverse/" data-preview-link="false">in French</a></p></li>
+<li><p>Wickham H., Navarro D., Pederson T.L. <em>ggplot2: Elegant graphics for data analysis</em> <a href="https://ggplot2-book.org" data-preview-link="false">here</a></p></li>
+</ul>
+</div>
 </section>
 
 <section id="ressources" class="title-slide slide level1 center">
 <h1>Ressources</h1>
-<p>r4ds</p>
-<p>https://r-graphics.org/ cookbook</p>
-<p>doc ggplot2 : https://ggplot2.tidyverse.org/index.html</p>
-<p>cheatsheet https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1<em>1orn8sn</em>_ga<em>OTcyNTAyMDE1LjE3NDA1OTQwOTI.</em>_ga_2C0WZ1JHG0*MTc0NTMzMzE4OC4xMy4wLjE3NDUzMzMxODguMC4wLjA. in English or in Portuguese</p>
+<div>
+<ul>
+<li><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> <a href="https://r4ds.hadley.nz/datetimes.html" data-preview-link="false">in English</a> and <a href="https://pt.r4ds.hadley.nz/" data-preview-link="false">in Portuguese</a></p></li>
+<li><p>Chang W. <em>R graphics cookbook</em> <a href="https://r-graphics.org" data-preview-link="false">here</a></p></li>
+<li><p>Wickham H., Navarro D., Pederson T.L. <em>ggplot2: Elegant graphics for data analysis</em> <a href="https://ggplot2-book.org" data-preview-link="false">here</a></p></li>
+<li><p>Documentation of <a href="https://ggplot2.tidyverse.org/index.html" data-preview-link="false">ggplot2</a></p></li>
+<li><p>ggplot2 <a href="https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1*1orn8sn*_ga*OTcyNTAyMDE1LjE3NDA1OTQwOTI.*_ga_2C0WZ1JHG0*MTc0NTMzMzE4OC4xMy4wLjE3NDUzMzMxODguMC4wLjA." data-preview-link="false">cheatsheet</a></p></li>
+</ul>
+</div>
 <aside class="notes">
-<p>this is obviously just an intro to ggplot =&gt; see these ressources and the help of the geom_function, to discover more possibilities</p>
+<p>this is obviously just an intro to ggplot =&gt; see these resources and the help of the geom_function, to discover more possibilities</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1535,8 +1786,10 @@ annot <- dt_sub %>%
 
 <section id="ressources-to-go-further" class="title-slide slide level1 center">
 <h1>Ressources to go further</h1>
-<p>https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#google_vignette need to have a quick look again</p>
-<p>https://r-graph-gallery.com/</p>
+<div>
+<p><a href="https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#google_vignette" data-preview-link="false">Top 50 ggplot2 Visualizations</a></p>
+<p><a href="https://r-graph-gallery.com/" data-preview-link="false">R graph gallery</a></p>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

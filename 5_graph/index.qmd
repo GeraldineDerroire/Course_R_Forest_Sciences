@@ -1,5 +1,5 @@
 ---
-title: "Graphics with ggplot"
+title: "Data visualisation with ggplot"
 author: Géraldine Derroire
 institute: Cirad - UnB
 date: last-modified
@@ -22,9 +22,8 @@ editor:
     wrap: sentence
 ---
 
-# CHANGER LE TITRE DE LA SESSION?
 
-# Why make graphics? {.smaller}
+# Why make plots? {.smaller}
 
 * Explore and check a dataset
 
@@ -36,9 +35,9 @@ editor:
 
     * Can we observe relationships between the variables?
     
-    * Are there covarying variables that can cause bias in the interpretation of the results?
+    * Are there co-varying variables that can cause bias in the interpretation of the results?
 
-* Communicate of the results of data analysis
+* Communicate the results of data analysis
 
 ::: notes
 * distribution: inform on the min, max, median and quantiles in a visual way
@@ -50,14 +49,14 @@ editor:
 :::
 
 
-# Using the package [ggplot2]{style="color:indianred;"} to make graphics
+# Using the package [ggplot2]{style="color:indianred;"} to make plots
 
 ## The package [ggplot2]{style="color:indianred;"} {.scrollable}
 
 ::::: columns
 ::: {.column width="80%"}
 
-* [ggplot2]{style="color:indianred;"} is a package of the *tidyverse* allowing to make graphics using a coherant synthax.
+* [ggplot2]{style="color:indianred;"} is a package of the *tidyverse* allowing to make plots using a coherant synthax.
 
 * [ggplot2]{style="color:indianred;"} requires data to be in a data frame, including a tibble.
 
@@ -128,9 +127,11 @@ D: diameter in cm
 H: height in m
 :::
 
+# ggplot grammar
+
 ## Step 1: specify the data 
 
-[The first step to make a graph with [ggplot2]{style="color:indianred;"} is to specify the data that we use.
+[The first step to make a plot with [ggplot2]{style="color:indianred;"} is to specify the data that we use.
 For that, we use the function [ggplot]{style="color:indianred;"} and specify the data in the argument *data*.]{style="font-size: 30px"}
 
 ::::: columns
@@ -145,7 +146,7 @@ ggplot(data=dt_HD)
 
 ::: {.column width="20%"}
 
-[[This creates an empty graph, as we didn't say how we want to visualise the data.]{.fragment}]{style="font-size: 30px"}
+[[This creates an empty plot, as we didn't say how we want to visualise the data.]{.fragment}]{style="font-size: 30px"}
 
 :::
 :::::
@@ -154,7 +155,7 @@ ggplot(data=dt_HD)
 
 [We use the argument *mapping* to specify the variables to represent.]{style="font-size: 30px"}
 
-[[We use the function [aes]{style="color:indianred;"}, meaning **aesthetics**, which are the visual properties of the graph.]{.fragment}]{style="font-size: 30px"}
+[[We use the function [aes]{style="color:indianred;"}, meaning **aesthetics**, which are the visual properties of the plot.]{.fragment}]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="30%"}
@@ -239,7 +240,7 @@ ggplot(dt_HD,
 
 ## Adding aesthetics
 
-[Let's differentiate the two plots:]{style="font-size: 30px"}
+[Let's differentiate the two plots (*parcelas*):]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -299,7 +300,7 @@ Here there is no interest in doing this, as we already have the D on the x-axis.
 
 ## Is it an aesthetic or not?
 
-[The arguments *color*, *size*, *shape*, ..., can be used as arguments of the function [aes]{style="color:indianred;"} or of a function [geom_]{style="color:indianred;"}]{style="font-size: 30px"}
+[The arguments *color*, *size*, *shape*, ..., can be used as arguments of the function [aes]{style="color:indianred;"} or not. But this does not do the same thing.]{style="font-size: 30px"}
 
 
 ::::: columns
@@ -315,7 +316,7 @@ ggplot(dt_HD,
 ```
 :::
 
-[[When in *aes*, the colour depends on the value of plotID.]{style="font-size: 30px"}]{.fragment}
+[[When in *aes*, the colour depends on the values of a variable (categorical or numeric).]{style="font-size: 30px"}]{.fragment}
 
 :::
 
@@ -330,7 +331,7 @@ ggplot(dt_HD,
 ```
 :::
 
-[[When in *geom_*, the colour is constant.]{style="font-size: 30px"}]{.fragment}
+[[When not in *aes*, the colour is constant.]{style="font-size: 30px"}]{.fragment}
 
 :::
 :::::
@@ -338,7 +339,7 @@ ggplot(dt_HD,
 
 ## Adding layers
 
-[We can add new layers to a graph using the [+]{style="color:indianred;"}]{style="font-size: 30px"}
+[We can add new layers to a plot using the [+]{style="color:indianred;"}]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="70%"}
@@ -398,7 +399,7 @@ ggplot(dt_HD,
 # Visualising  the distribution of a single variable
 
 ::: notes
-we are now going to see what type of graph to use for what
+we are now going to see what type of plot to use for what
 :::
 
 ## Distribution of a categorical variable -  barplot
@@ -448,7 +449,9 @@ ggplot(dt_HD,
   geom_density(color = "red") 
 ```
 
-
+::: notes
+on y axis => density, so that the area under the entire curve equals 1
+:::
 
 # Visualising relationships between 2 variables or more
 
@@ -552,7 +555,7 @@ dt_HD %>%
   ggplot(aes(x = genus, 
              fill = plotId)) +
   geom_bar(position = "fill") + 
-  coord_flip() + # flip the graph
+  coord_flip() + # flip the plot
  ylab("Proportion of the genus in each plot") # change the axis label
 ```
 
@@ -664,7 +667,7 @@ color can be categorical or numerical (gradient of colors)
 
 ## Relationship between several variables
 
-[We can also split the graph into **facets** using [facet_wrap]{style="color:indianred;"}:]{style="font-size: 28px"}
+[We can also split the plot into **facets** using [facet_wrap]{style="color:indianred;"}:]{style="font-size: 28px"}
 
 ```{r}
 #| warning: false
@@ -692,17 +695,17 @@ dt_HD %>%
   facet_grid(plotId ~ genus) # one facet per plotId and per genus
 ```
 
-## Summary on how to choose a type of graph
+## Summary on how to choose a type of plot
 
 ![](choose_graph.png)
 
 <!-- TO DO -->
 
-# Improving the visual appearance of graphics
+# Improving the visual appearance of plots
 
 ::: notes
-so far we have seen how to quickly make graphs to explore and visualise our data
-But to communicate with others, we want to make graphs explicit and pretty
+so far we have seen how to quickly make plots to explore and visualise our data
+But to communicate with others, we want to make plots explicit and pretty
 :::
 
 ## {.smaller}
@@ -716,10 +719,10 @@ But to communicate with others, we want to make graphs explicit and pretty
 dt_sub <- dt_HD %>% 
   filter(genus %in% c("Dicorynia", "Licania", "Inga"))
 
-graph1 <-  ggplot(dt_sub, aes(x = D, y = H, color = genus)) +
+plot1 <-  ggplot(dt_sub, aes(x = D, y = H, color = genus)) +
   geom_point() +
   geom_smooth(method = "loess", se = FALSE)
-graph1
+plot1
 ```
 
 
@@ -734,7 +737,7 @@ graph1
 ```{r}
 #| warning: false
 #| out.width: 100%
-graph1 <- graph1 + 
+plot1 <- plot1 + 
   labs(
     x = "Diameter at Breast Height (cm)", # x axis
     y = "Height (m)", # y axis
@@ -743,13 +746,13 @@ graph1 <- graph1 +
     subtitle = "Nouragues - French Guiana",
     caption = "Source: Réjou-Méchain, M. et al. (2015)"
   )
-graph1  
+plot1  
 ```
 :::
 :::::
 
 ::: notes
-note how we add things on the graph by adding + to an existing graphic
+note how we add things on the plot by adding + to an existing plotic
 :::
 
 <!--
@@ -789,11 +792,11 @@ There are several scale functions, all with a name that specify the aesthetic an
 ```{r}
 #| warning: false
 #| out.width: 100%
-graph1 <- graph1 + 
+plot1 <- plot1 + 
   scale_x_continuous(breaks = seq(10, # x-axis ticks from 10
                                   max(dt_sub$D), # to the max. value of D
                                   by = 10)) # every 10 cm
-graph1
+plot1
 ```
 :::
 :::::
@@ -809,7 +812,7 @@ graph1
 ```{r}
 #| warning: false
 #| out.width: 100%
-graph1 + 
+plot1 + 
   scale_color_discrete(labels = c(
     "Dicorynia" = "Genus Dicorynia",
     "Inga" = "Genus Inga",
@@ -821,10 +824,11 @@ graph1 +
 ::: notes
 Not really a good idea in our case
 
-Let's not change graph1 (see no <-)
+Let's not change plot1 (see no <-)
 :::
 
-## Replace a color scale
+## Replacing a color scale
+
 ::::: columns
 ::: {.column width="23%"}
 [We can change the color palette manually with  [scale_color_manual]{style="color:indianred;"}]{style="font-size: 28px"}
@@ -836,67 +840,260 @@ Let's not change graph1 (see no <-)
 ```{r}
 #| warning: false
 #| out.width: 100%
-graph1 <- graph1 + 
+plot1 <- plot1 + 
   scale_color_manual(
     values = c("Dicorynia" = "green",
                "Inga" = "blue",
                "Licania" = "orange"))
-graph1
+plot1
 ```
 :::
 :::::
 
 
-## Replace a color scale
+## Replacing a color scale
 
 ::::: columns
 ::: {.column width="23%"}
 [We can alternatively use a predefined palette with [scale_color_brewer]{style="color:indianred;"}]{style="font-size: 28px"}
 
-[Use [RColorBrewer::display.brewer.all()]{style="color:indianred;"} for all available palettes]{style="font-size: 15px"}
+
 :::
 
 ::: {.column width="77%"}
 ```{r}
 #| warning: false
 #| out.width: 100%
-graph1 <- graph1 + 
+plot1 <- plot1 + 
   scale_color_brewer(palette = "Dark2")
-graph1
+plot1
 ```
 :::
 :::::
 
-<!-- carry on here-->
+[Use [RColorBrewer::display.brewer.all()]{style="color:indianred;"} for all available palettes]{style="font-size: 20px"}
 
-## Theme 
+::: notes
+You can also create your own palette => usefull for consistency between plots in a publication, or when color have a meaning
+:::
 
-" they control the non-data parts of the plot"
+## Replacing a color scale {.smaller}
 
-theme(legend.position (see 11.4.3))
+[We can also replace continuous colour scales (here on a quite artificial example...):]{style="font-size: 28px"}
 
-voir aussi juba 8.8
+::::: columns
+::: {.column width="30%"}
+
+[Default plot]{style="font-size: 28px"}
+
+```{r}
+#| warning: false
+ggplot(dt_HD,
+       aes(x = D, y = H,
+       color = H)) +
+  geom_point() 
+```
+:::
+
+::: {.column width="40%"}
+
+[[Setting the scale manually]{style="font-size: 28px"}]{.fragment}
+
+::: fragment
+```{r}
+#| warning: false
+#| out.width: 80%
+ggplot(dt_HD,
+       aes(x = D, y = H,
+       color = H)) +
+  geom_point() + 
+  scale_color_gradient(low = "yellow",
+                       high = "red")
+```
+:::
+:::
+
+::: {.column width="30%"}
+
+[[Using a predefined viridis colour scales ]{style="font-size: 28px"}]{.fragment}
+
+::: fragment
+```{r}
+#| warning: false
+#| #| out.width: 80%
+ggplot(dt_HD,
+       aes(x = D, y = H,
+       color = H)) +
+  geom_point() + 
+  scale_color_viridis_c()
+```
+:::
+:::
+:::::
+
+::: notes
+A bit stupid to do it when we already have an axis for the H
+
+viridis => carrefully designed colour scale adapated to color-blindness
+:::
+
+
+
+## Themes 
+
+[Themes are used to control all the **non-data parts** of the plot.]{style="font-size: 28px"}
+[[We can use some predefined themes:]{style="font-size: 28px"}]{.fragment}
+
+::: fragment
+```{r}
+#| warning: false
+#| out.width: 70%
+plot1 <- plot1 + 
+  theme_bw()
+plot1
+```
+:::
+
+## Themes
+
+::::: columns
+::: {.column width="30%"}
+
+[Predefined ggplot2 themes:]{style="font-size: 28px"}
+
+
+
+[Source: [*R for data science*](https://r4ds.hadley.nz/){preview-link="false"}]{style="font-size: 20px"}
+:::
+
+
+::: {.column width="70%"}
+![](theme.png){width="70%"}
+:::
+:::::
+
+
+## Themes {.smaller}
+
+[We can also control the theme elements individually.]{style="font-size: 28px"}
+
+::::: columns
+::: {.column width="70%"}
+
+```{r}
+#| warning: false
+#| out.width: 100%
+plot_ugly <-plot1 + theme(
+  plot.background = element_rect(fill = "lightgrey", colour = "red"),
+  plot.title = element_text(colour = "darkgreen", face = "bold"),
+  axis.line = element_line(colour = "blue"),
+  axis.title = element_text(size = 15),
+  panel.grid.major = element_line(color = "orange"),
+  panel.background = element_rect(fill = "lightblue")
+)
+plot_ugly
+```
+:::
+
+::: {.column width="30%"}
+[[See [here](https://ggplot2-book.org/themes.html#modifying-theme-components){preview-link="false"} to know more about the 40 unique elements that can be controlled.]{style="font-size: 28px"}]{.fragment}
+:::
+:::::
+
+## Themes 
+
+[Themes are also used to control the legend layout:]{style="font-size: 28px"}
+
+```{r}
+#| warning: false
+#| out.width: 80%
+plot1 + 
+  theme(legend.position = "bottom") +
+  guides(color = guide_legend(nrow = 2))
+```
+
 
 ## Assembling plots with patchwork
 
-# Saving graphs
+::::: columns
 
-r4ds chap 1.6
+::: {.column width="20%"}
+[Patchwork is a very usefull package to assemble plots easily.]{style="font-size: 28px"}
+
+![](patchwork.png)
+
+[[To know more](https://patchwork.data-imaginist.com/){preview-link="false"}]{style="font-size: 20px"} 
+:::
+
+::: {.column width="80%"}
+
+::: fragment
+```{r, message=FALSE}
+#| warning: false
+library(patchwork)
+plot1 + plot_ugly
+```
+:::
+
+:::
+:::::
+
+# Saving plots
+
+To save a plot, we use the function [ggsave]{style="color:indianred;"}:
+
+```{r, eval=FALSE}
+ggsave(filename = "outputs/my_plot.png")
+```
+
+[By default, it saves the last plot that was displayed, with the dimensions at which it was displayed.]{.fragment}
+
+[We can specify the extension either in the filename, or with the argument *device*.]{.fragment}
+
+::: notes
+in practice, easier to put the extension in the filename
+:::
+
+# Saving plots
+
+We can also specify the plot we want to save, and the dimensions:
+
+```{r}
+ggsave(plot = plot1,
+       filename = "outputs/plot1.pdf",
+       width = 20,
+       height = 12,
+       units = "cm")
+```
 
 
 # Acknowledgments
 
-r4ds + juba
+::: {.nonincremental}
+
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science* [in English](https://r4ds.hadley.nz/datetimes.html){preview-link="false"} and [in Portuguese](https://pt.r4ds.hadley.nz/){preview-link="false"}
+
+* Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
+
+* Wickham H., Navarro D., Pederson T.L. *ggplot2: Elegant graphics for data analysis* [here](https://ggplot2-book.org){preview-link="false"}
+
+:::
 
 # Ressources
 
-r4ds
+::: {.nonincremental}
 
-https://r-graphics.org/ cookbook
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science* [in English](https://r4ds.hadley.nz/datetimes.html){preview-link="false"} and [in Portuguese](https://pt.r4ds.hadley.nz/){preview-link="false"}
 
-doc ggplot2 : https://ggplot2.tidyverse.org/index.html
+* Chang W. *R graphics cookbook* [here](https://r-graphics.org){preview-link="false"}
 
-cheatsheet https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1*1orn8sn*_ga*OTcyNTAyMDE1LjE3NDA1OTQwOTI.*_ga_2C0WZ1JHG0*MTc0NTMzMzE4OC4xMy4wLjE3NDUzMzMxODguMC4wLjA. in English or in Portuguese
+* Wickham H., Navarro D., Pederson T.L. *ggplot2: Elegant graphics for data analysis* [here](https://ggplot2-book.org){preview-link="false"}
+
+* Documentation of [ggplot2](https://ggplot2.tidyverse.org/index.html){preview-link="false"}
+
+* ggplot2 [cheatsheet](https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1*1orn8sn*_ga*OTcyNTAyMDE1LjE3NDA1OTQwOTI.*_ga_2C0WZ1JHG0*MTc0NTMzMzE4OC4xMy4wLjE3NDUzMzMxODguMC4wLjA.){preview-link="false"}
+
+:::
 
 ::: notes
 this is obviously just an intro to ggplot => see these resources and the help of the geom_function, to discover more possibilities
@@ -904,10 +1101,12 @@ this is obviously just an intro to ggplot => see these resources and the help of
 
 # Ressources to go further
 
-https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#google_vignette
-need to have a quick look again
+::: {.nonincremental}
 
+[Top 50 ggplot2 Visualizations](https://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#google_vignette){preview-link="false"}
 
-https://r-graph-gallery.com/
+[R graph gallery](https://r-graph-gallery.com/){preview-link="false"}
+
+:::
 
 

@@ -1,0 +1,12 @@
+---
+  title: "Exercices on session *Data visualisation*"
+format:
+  pdf
+execute:
+  echo: false 
+eval: false 
+---
+  
+  # For next time
+  
+  * Install the following package from CRAN:

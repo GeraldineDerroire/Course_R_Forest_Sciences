@@ -9,4 +9,4 @@ execute:
 
 # For next time
 
-* Install the following package from CRAN: patchwork
+* Install the following package from CRAN: *patchwork*
