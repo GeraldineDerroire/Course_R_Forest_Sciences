@@ -10,6 +10,8 @@ eval: false
 # For next time
   
 * Install the following package from CRAN:
+
+* Make sur you have the following packages: *questionr*, *tidyverse*, *BIOMASS*
   
 * REVOIR LES TRUCS DE STAT DESCRIPTIVE LESSON????
   

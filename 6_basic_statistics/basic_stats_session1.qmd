@@ -37,6 +37,7 @@ PARTOUT : https://pmarchand1.github.io/ECL7102/
 
 ```{r}
 library(tidyverse)
+library(questionr)
 ```
 
 
@@ -256,7 +257,6 @@ The test assume all values to be different, but there are some ties (equal value
 => here very small so OK
 :::
 
-<!-- CONTINUE HERE-->
 
 ## What if the data are paired?
 
@@ -354,24 +354,163 @@ t.test(dt_thin_w$before,
 give the 95% confidence interval of the difference (before - after)
 ::: 
 
-##
+# Testing the association between two categorical variables
+
+## Do the number of occurences of several genus depends on the plot? {.smaller}
+
+[We are going to work on the 10 most abundant genus in the Nouragues dataset, let's select them:]{style="font-size: 30px"}
+
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+# look at the 10 most abundant genus
+abd_10 <- dt_HD %>% 
+  count(genus) %>% 
+  arrange(desc(n)) %>% 
+  slice_head(n = 10) 
+
+abd_10
+```
+:::
+
+
+::: {.column width="50%"}
+::: fragment
+```{r}
+# take a subset of dt_HD containing the 10 most abundant genus
+dt_sub10 <- dt_HD %>% 
+  filter(genus %in% abd_10$genus)
+```
+:::
+:::
+:::::
+
+
+## Contingency table
+
+[Let's start by doing a contingency table, using the function [table]{style="color:indianred;"}.]{style="font-size: 30px"}
+
+[This gives the number of observations for each pairs of categories.]{style="font-size: 30px"}
+
+```{r}
+tab_abd <- table(dt_sub10$genus, dt_sub10$plotId)
+tab_abd
+```
+
+## Percentages per category
+
+[We can look at the percentages per column (*here* per plot), using the function [cprop]{style="color:indianred;"} of the package [questionr]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+cprop(tab_abd)
+```
+[[⚠️ Here we look at the frequency per column because we are interested in the effect of the plot and the plot is in column. The function [lprop]{style="color:indianred;"} also exists to look at frequency per row.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+We see that the occurence of most genus seems to depend on the plot
+:::
+
+::: notes
+here in columns because...
+:::
+
+## Graphical exploration
+
+[We can do a mosaic plot, using the function [mosaicplot]{style="color:indianred;"} to explore the association graphically:]{style="font-size: 30px"}
+
+```{r}
+mosaicplot(tab_abd)
+```
+
+## $\chi^2$ test {.smaller}
+
+[We can then perform a $\chi^2$ test, to test the independence of the two categorical variables.
+**H0: the variables are independent**]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="40%"}
+[[We use the function [chisq.test]{style="color:indianred;"} on the **contingency table** (not on the percentage):]{style="font-size: 30px"}]{.fragment}
+:::
+
+::: {.column width="60%"}
+::: fragment
+```{r}
+res_chi2 <- chisq.test(tab_abd)
+res_chi2
+```
+:::
+:::
+:::::
+
+[[The result shows the following values:]{style="font-size: 30px"}]{.fragment}
+
+* [*X-squared* is the value of the $\chi^2$ statistics, which is a "distance" between the observed occurrences and the expected ones if the variables were independent.]{style="font-size: 28px"}
+
+* [*df* is the number of degrees of freedom]{style="font-size: 28px"}
+
+* [*p-value* is the probability to get such a *X-squared* value under the assumption of independence.]{style="font-size: 28px"}
+[[**Here the *p-value* is very low, so we can reject the null hypothesis of independence.**]{style="font-size: 28px"}]{.fragment}
+
+
+## $\chi^2$ test {.scrollable}
+
+* [The $\chi^2$ needs to be done on contingency tables and not on proportions, as the size of the sample needs to be known.]{style="font-size: 30px"}
+
+* [It is less reliable if the sample size is too small. It should not be used if any of the expected frequency under H0 is below 5. Let's check this:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+res_chi2$expected
+```
+:::
+
+::: notes
+Here it is ok
+:::
+
+## Residuals 
+
+[We can look at the residuals using the function [chisq.residuals]{style="color:indianred;"} of the package [questionr]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="40%"}
+
+```{r}
+chisq.residuals(tab_abd)
+```
+:::
+
+::: {.column width="60%}
+
+* [residuals < -2 indicate under-representation]{style="font-size: 30px"}
+
+* [residuals > 2 indicate over-representation]{style="font-size: 30px"}
+
+* [residuals in [-2, 2] indicate no significant difference to independence]{style="font-size: 30px"}
+
+[[*The threshold of 2 correspond to a 95% confidence interval.*]{style="font-size: 30px"}]{.fragment}
+:::
+
+::::
+
+## Residuals
+
+[We can also present the residuals graphically with the argument *shade = TRUE* in the function [mosaicplot]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+mosaicplot(tab_abd, 
+           shade = TRUE,
+           las = 3, # vertical orientation of labels
+           main = "") # remove main title
+```
 
 
 
 
 
-# chi2
-
-https://juba.github.io/tidyverse/04-bivarie.html#test-du-%CF%87%C2%B2
-
-https://ericmarcon.github.io/Cours-R-Geeft/TP_5.html#5
 
 
-# t-test
-
-https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques
-
-https://ericmarcon.github.io/Cours-R-Geeft/Tests.html#5
 
 # correlation linéraire (Pearson)
 
@@ -387,7 +526,25 @@ https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques
 
 https://ericmarcon.github.io/Cours-R-Geeft/Anova.html#21
 
-# test d'hyp?
 
-https://ericmarcon.github.io/Cours-R-Geeft/Tests.html#6
 
+
+# Acknowledgments
+
+::: {.nonincremental}
+
+* Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
+
+COURS ERIC GEEFT
+
+? LAMARANGE ? MARCHAND ?
+
+:::
+
+# Ressources
+
+::: {.nonincremental}
+??????
+:::
+
+::: {.nonincremental}
