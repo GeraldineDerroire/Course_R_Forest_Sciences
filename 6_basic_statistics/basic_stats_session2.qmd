@@ -22,3 +22,16 @@ editor:
   markdown: 
     wrap: sentence
 ---
+
+regression linéaire (en mnetionnant les GLM et les mixed-effect models)
+
+include DHARma for model diagnostics?
+
+Voir ici pour comparaison broom, modelr and DHARMa
+https://chatgpt.com/share/680a764b-476c-8004-9a40-6c99c92a6d35
+
+
+https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques
+
+https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#2
+

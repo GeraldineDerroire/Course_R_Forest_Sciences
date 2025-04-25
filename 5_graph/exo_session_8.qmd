@@ -7,6 +7,11 @@ execute:
 eval: false 
 ---
   
-  # For next time
+# For next time
   
-  * Install the following package from CRAN:
+* Install the following package from CRAN:
+  
+* REVOIR LES TRUCS DE STAT DESCRIPTIVE LESSON????
+  
+* Download the *RData* file available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics.RData){preview-link="false"}
+and store them in your raw data folder.

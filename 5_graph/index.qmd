@@ -87,7 +87,7 @@ Let's load them and transform them to a tibble.
 library(BIOMASS)
 data(NouraguesHD) # load the data
 dt_HD <- as_tibble(NouraguesHD) # rename and transform to tibble
-rm(NouraguesHD) # 
+rm(NouraguesHD) # remove 
 ```
 
 [We can look at the help to know more about these data:]{.fragment}
