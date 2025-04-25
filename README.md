@@ -28,7 +28,7 @@ The course material has been created using quarto and R version 4.4.3.
 
 <!--
 
-
+- [Statistics with R](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/basic_stats_session1.html)
 
 
 
