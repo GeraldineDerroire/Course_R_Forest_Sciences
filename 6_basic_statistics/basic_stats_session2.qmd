@@ -23,6 +23,31 @@ editor:
     wrap: sentence
 ---
 
+
+# Correlation
+
+# linear model with one var
+
+growth and WD
+
+do the whole model diagnostic and ploting the results
+
+# linear model with more than one var
+
+* check for collinearity (before and after, check the VIF)
+
+* add some other trais
+
+* do some models selections
+
+# mixed effect 
+
+which data? 
+
+# GLM?
+
+
+
 regression linéaire (en mnetionnant les GLM et les mixed-effect models)
 
 include DHARma for model diagnostics?

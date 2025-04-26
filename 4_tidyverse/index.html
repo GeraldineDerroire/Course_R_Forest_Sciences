@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-22">
+  <meta name="dcterms.date" content="2025-04-26">
   <title>Introduction to the tidyverse</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-22</p>
+  <p class="date">2025-04-26</p>
 </section>
 <section>
 <section id="what-is-the-tidyverse" class="title-slide slide level1 center">
@@ -2042,10 +2042,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </div>
-<p><span class="fragment">⚠️ The columns are matched only by position, so the rows needs to correspond (and there must be the same number of rows). A safer option is to use <em>joints</em> to combine several tables by columns.</span></p>
+<p><span class="fragment">⚠️ The columns are matched only by position, so the rows needs to correspond (and there must be the same number of rows). A safer option is to use <em>joins</em> to combine several tables by columns.</span></p>
 </section>
-<section id="the-joints" class="slide level2">
-<h2>The joints</h2>
+<section id="the-joins" class="slide level2">
+<h2>The joins</h2>
 <p>Several functions allows to join two tibbles (<em>here x and y</em>) using a key (or several).</p>
 <p><span class="fragment"><span style="font-size: 30px">A key is a column (or group of columns) that is used to match rows when joining two datasets.</span></span> <span class="fragment"><span style="font-size: 30px">⚠️ A key need to uniquely identify observations in one or both datasets (otherwise there will be several combinations of matches).</span></span></p>
 <div class="columns">
@@ -2074,8 +2074,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
           display:block!important;
       }</style></aside>
 </section>
-<section id="the-joints-1" class="slide level2">
-<h2>The joints</h2>
+<section id="the-joins-1" class="slide level2">
+<h2>The joins</h2>
 <p>We are now going to join the dataset of traits and the dataset of commercial species.</p>
 <p>Let’s first select a subset of columns in each, to visualise the results better.</p>
 <div class="cell">
@@ -2185,8 +2185,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
           display:block!important;
       }</style></aside>
 </section>
-<section id="righ_joint" class="slide level2">
-<h2>righ_joint</h2>
+<section id="righ_join" class="slide level2">
+<h2>righ_join</h2>
 <p>We can join <em>traits_sub</em> with <em>sp_com_sub</em> using a <span style="color:indianred;">right_join</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href=""></a>j2 <span class="ot">&lt;-</span> traits_sub <span class="sc">%&gt;%</span> </span>
@@ -3118,7 +3118,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h1>Dealing with dates with the package <span style="color:indianred;">lubidate</span></h1>
 
 <img data-src="lubridate.png" style="width:70.0%" class="r-stretch"><p><span style="font-size: 25px">Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em></span></p>
-<p><span style="font-size: 25px"><a href="https://r4ds.hadley.nz/datetimes.html">in English</a> and <a href="https://pt.r4ds.hadley.nz/" data-preview-link="false">in Portuguese</a></span></p>
+<p><span style="font-size: 25px"><a href="https://r4ds.hadley.nz/datetimes.html">in English</a> and <a href="https://pt.r4ds.hadley.nz/datetimes.html" data-preview-link="false">in Portuguese</a></span></p>
 <aside class="notes">
 <p>delaing with dates can be complicated in R, if you need to use dates, check the package lubridate</p>
 <style type="text/css">
@@ -3176,7 +3176,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <li><p>Barnier J. <em>Introduction à R et au tidyverse</em> <a href="https://juba.github.io/tidyverse/" data-preview-link="false">in French</a></p></li>
 <li><p>Marcon E. <em>R: Ridyverse</em> <a href="https://ericmarcon.github.io/Cours-travailleR/32-Tidyverse.html" data-preview-link="false">in French</a></p></li>
 <li><p>Casajus N , Coux C. <em>Cleaning biodiversity data - Good practices, tools and homogenizing taxonomy</em> <a href="https://biodiversitydata.github.io/chapters/data-cleaning.html" data-preview-link="false">in English</a></p></li>
-<li><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> <a href="https://r4ds.hadley.nz/datetimes.html" data-preview-link="false">in English</a> and <a href="https://pt.r4ds.hadley.nz/" data-preview-link="false">in Portuguese</a></p></li>
+<li><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> <a href="https://r4ds.hadley.nz/" data-preview-link="false">in English</a> and <a href="https://pt.r4ds.hadley.nz/" data-preview-link="false">in Portuguese</a></p></li>
 </ul>
 </div>
 </section>
@@ -3185,8 +3185,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h1>Ressources</h1>
 <div>
 <ul>
-<li><p>Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. <a href="https://doi.org/10.18637/jss.v059.i10" data-preview-link="false">https://doi.org/10.18637/jss.v059.i10</a></p></li>
-<li><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> <a href="https://r4ds.hadley.nz/datetimes.html">in English</a> and <a href="https://pt.r4ds.hadley.nz/" data-preview-link="false">in Portuguese</a></p></li>
+<li><p>Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. <a href="https://doi.org/10.18637/jss.v059.i10" data-preview-link="false">here</a></p></li>
+<li><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> <a href="https://r4ds.hadley.nz/">in English</a> and <a href="https://pt.r4ds.hadley.nz/" data-preview-link="false">in Portuguese</a></p></li>
 <li><p>Cheatsheets of <a href="https://rstudio.github.io/cheatsheets/html/data-transformation.html" data-preview-link="false">dpyr</a>, <a href="https://rstudio.github.io/cheatsheets/html/tidyr.html" data-preview-link="false">tidyr</a>, <a href="https://rstudio.github.io/cheatsheets/html/strings.html" data-preview-link="false">stringr</a>, <a href="https://www.flutterbys.com.au/stats/downloads/slides/figure/factors.pdf" data-preview-link="false">forcats</a></p></li>
 </ul>
 </div>

@@ -1022,10 +1022,10 @@ bind_cols(t1, t2, t3)
 
 
 [⚠️ The columns are matched only by position, so the rows needs to correspond (and there must be the same number of rows).
-A safer option is to use *joints* to combine several tables by columns.]{.fragment}
+A safer option is to use *joins* to combine several tables by columns.]{.fragment}
 
 
-## The joints
+## The joins
 
 Several functions allows to join two tibbles (*here x and y*) using a key (or several).
 
@@ -1052,7 +1052,7 @@ say here that very important to check the dim
 
 
 
-## The joints
+## The joins
 
 We are now going to join the dataset of traits and the dataset of commercial species.
 
@@ -1121,7 +1121,7 @@ explian how we did the test
 :::
 
 
-## righ_joint
+## righ_join
 
 We can join *traits_sub* with *sp_com_sub* using a [right_join]{style="color:indianred;"}.
 
@@ -1747,7 +1747,7 @@ str_replace_all(v, "Avenida", "AV.")
 
 [Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*]{style="font-size: 25px"} 
 
-[[in English](https://r4ds.hadley.nz/datetimes.html) and [in Portuguese](https://pt.r4ds.hadley.nz/){preview-link="false"}]{style="font-size: 25px"}
+[[in English](https://r4ds.hadley.nz/datetimes.html) and [in Portuguese](https://pt.r4ds.hadley.nz/datetimes.html){preview-link="false"}]{style="font-size: 25px"}
 
 ::: notes
 delaing with dates can be complicated in R, if you need to use dates, check the package lubridate
@@ -1813,7 +1813,7 @@ delaing with dates can be complicated in R, if you need to use dates, check the 
 
 * Casajus N , Coux C. *Cleaning biodiversity data - Good practices, tools and homogenizing taxonomy* [in English](https://biodiversitydata.github.io/chapters/data-cleaning.html){preview-link="false"}
 
-* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science* [in English](https://r4ds.hadley.nz/datetimes.html){preview-link="false"} and [in Portuguese](https://pt.r4ds.hadley.nz/){preview-link="false"}
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science* [in English](https://r4ds.hadley.nz/){preview-link="false"} and [in Portuguese](https://pt.r4ds.hadley.nz/){preview-link="false"}
 
 :::
 
@@ -1821,9 +1821,9 @@ delaing with dates can be complicated in R, if you need to use dates, check the 
 
 ::: {.nonincremental}
 
-* Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. [https://doi.org/10.18637/jss.v059.i10](https://doi.org/10.18637/jss.v059.i10){preview-link="false"}
+* Wickham, H. . (2014). Tidy Data. Journal of Statistical Software, 59(10), 1–23. [here](https://doi.org/10.18637/jss.v059.i10){preview-link="false"}
 
-* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science* [in English](https://r4ds.hadley.nz/datetimes.html) and [in Portuguese](https://pt.r4ds.hadley.nz/){preview-link="false"}
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science* [in English](https://r4ds.hadley.nz/) and [in Portuguese](https://pt.r4ds.hadley.nz/){preview-link="false"}
 
 * Cheatsheets of 
 [dpyr](https://rstudio.github.io/cheatsheets/html/data-transformation.html){preview-link="false"},

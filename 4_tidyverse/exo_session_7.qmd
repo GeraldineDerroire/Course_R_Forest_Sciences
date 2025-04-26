@@ -4,8 +4,198 @@ format:
   pdf
 execute:
   echo: false 
-  eval: false 
+  eval: true 
 ---
+
+For all the following exercises, use functions from the tidyverse, and pipes, whenever possible.
+
+```{r, message=FALSE}
+library(tidyverse)
+```
+
+
+# BCI tree count
+
+You are going to work on data from trees in Barro Colorado Island.
+These data are available in the package vegan, and are called 
+*BCI*.
+
+
+* Load the data (don't forget to look at the metadata in the help of the package). 
+
+```{r, message=FALSE}
+library(vegan)
+data(BCI)
+```
+
+* Get an overview of the data and check their class.
+
+```{r, eval= FALSE}
+str(BCI)
+summary(BCI)
+class(BCI)
+```
+
+* Transform the data to a tibble. 
+
+```{r}
+BCI <- as_tibble(BCI)
+# str(BCI)
+```
+
+# Transform the dataset
+
+* Add a column with the plot ID (from BCI_1 to BCI_...) (and check what you have done).
+
+```{r}
+BCI <- BCI %>% 
+  mutate(plot_ID = paste("BCI",
+                         1:dim(BCI)[1], # so that the code work if the size of the data changes
+                         sep ="_")
+  )
+```
+
+```{r, eval = FALSE}
+dim(BCI)
+names(BCI)
+```
+
+
+
+* Create a tibble with the data in a long format, to have one row per species and plot as follow: 
+
+```{r}
+BCI_L <- BCI %>% 
+  pivot_longer(!plot_ID,
+               names_to = "gen_sp",
+               values_to = "abund")
+BCI_L
+```
+
+* Check the dimension of this new table (try to do it using a test).
+
+```{r, eval = FALSE}
+dim(BCI_L)[1] == # number of row in the long format
+  (dim(BCI)[2] - 1) * dim(BCI)[1] # number of column (without plot_id) * number of rows in the wide format
+```
+* We now want to add a column for the genus and species name.
+
+    * Let's do it with the function *separate* (don't replace the initial data, store the result in a new object).
+    
+```{r}
+BCI_L_2 <- BCI_L %>% 
+  separate(gen_sp,
+           c("genus", "species"), # new column names
+           sep = ".",
+           remove = FALSE) # keep the gen_sp column
+```
+
+   * We get a warning message... It is not very explicit... Let's have a look at the full species name. For that, display the species list. Can we separate the column *gen_sp* based on the separator "." ? Why? 
+    
+```{r}
+sp_list <- BCI_L %>% distinct(gen_sp)
+```
+
+```{r, eval = FALSE}
+view(sp_list)
+```
+
+   * We want to keep only the characters that are before the second dot (so the genus and the species, removing the variety and subspecies). Let's split the *gen_sp* column by the separator ".". We want to get a matrix with a column by string separated by ".".
+**NB**: if you say that you want to split by ".", this will be interpreted as "any character", so you need to write "`\\.`" instead.
+   
+```{r}
+mat_name <- str_split(BCI_L$gen_sp, pattern = "\\.", simplify = TRUE)
+```
+
+```{r, eval = FALSE}
+view(mat_name)
+```
+
+  * Let's keep only the two first columns of this matrix and bind these columns to the long dataset.
+  
+```{r}
+BCI_L <- bind_cols(BCI_L, mat_name[, 1:2])
+```
+  
+  * Rename the two new columns to have this:
+  
+```{r, eval = TRUE}
+BCI_L <- BCI_L %>% rename(
+  "genus" = "...4",
+  "species" = "...5"
+)
+BCI_L
+```
+  
+* Get rid of the rows with an abundance of zero.
+
+```{r}
+BCI_L <- BCI_L %>% 
+  filter(abund != 0)
+```
+
+
+# Add environmental data
+
+* Let's now add some environmental data from the dataset *BCI.env*. Load it and transform it to a tibble.
+
+```{r}
+data(BCI.env)
+BCI.env <- as_tibble(BCI.env)
+```
+
+* Add a column with the plot ID (from BCI_1 to BCI_...)
+
+```{r}
+BCI.env <- BCI.env %>% 
+  mutate(plot_ID = paste("BCI",
+                         1:dim(BCI.env)[1], # so that the code work if the size of the data changes
+                         sep ="_")
+  )
+```
+
+* Reorder the levels of *Habitat* from the one with the most plots to the one with the least plots. There is a function for this, it is called *fct_infreq*.
+
+```{r}
+# first look at what we have
+  # levels(BCI.env$Habitat)
+  # count(BCI.env, Habitat)
+
+BCI.env <- BCI.env %>% 
+  mutate(Habitat = fct_infreq(BCI.env$Habitat))
+```
+
+* Add a column called *EnvHet_cat* taking the following values:
+
+  * *low* when the environmental heterogeneity is lower than 0.08
+      
+  * *medium* when the environmental heterogeneity is between 0.08 and 0.49
+      
+  * *high* when the environmental heterogeneity is higher than 0.49
+      
+```{r}
+BCI.env <- BCI.env %>% 
+  mutate(EnvHet_cat = 
+           case_when(EnvHet <= 0.08 ~ "low",
+                     EnvHet > 0.08 & EnvHet <= 0.49 ~ "medium",
+                     EnvHet > 0.49 ~ "high")
+         )
+```
+
+
+* Join the variable *Habitat* and *EnvHet_cat* to the long dataset of abundance (make sure you use the appropriate join function).
+
+```{r}
+BCI.env_sub <- BCI.env %>% select(plot_ID, Habitat, EnvHet_cat)
+
+BCI_L <- BCI_L %>% 
+  left_join(BCI.env_sub, 
+            by = c("plot_ID" = "plot_ID"))
+```
+
+
+
+
 
 # For next time
 
