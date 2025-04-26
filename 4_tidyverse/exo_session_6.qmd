@@ -63,13 +63,14 @@ dt_WG <- dt_WG %>%
 dt_WG <- dt_WG %>% rename(diam = D)
 ```
 
-* What is the smallest diameter of the whole dataset?
+* What is the smallest diameter of the whole dataset (make sure you extract the value, not only read it in a output)?
 
 ```{r}
-dt_WG %>% 
-  slice_min(diam) %>% 
-  select(diam) %>% 
-  distinct()
+diam_min <- dt_WG %>% 
+  slice_min(diam) %>% # get only the rows with the smallest diameter
+  select(diam) %>% # keep only the variable diameter
+  distinct() # keep only one unique value
+diam_min
 ```
 
 
@@ -77,55 +78,61 @@ dt_WG %>%
 
 ```{r}
 big5 <- dt_WG %>% 
-  arrange(desc(diam)) %>% 
-  slice_head(n=5) %>% 
-  select(genus, species)
-
+  arrange(desc(diam)) %>% # sort the tibble by decreasing order of diameter
+  slice_head(n=5) %>% # take the first 5 rows
+  select(genus, species) # select the columns 
 big5
 ```
 
 * How many different species are amongst these five biggest trees?
 
 ```{r}
-big5 %>% 
-  distinct() %>% 
-  count()
+sp_big5 <- big5 %>% 
+  distinct() %>% # select unique rows
+  count() # count them
+
+# NB: this is different from
+# big5 %>% count(genus, species)
+# which counts the number of tree for each species
 ```
 
 * Create a table (tibble) with the median diameter per plot.
 
 ```{r}
 dt_med_diam <- dt_WG %>% 
-  group_by(plotId) %>% 
-  summarize(median_d = median(diam))
+  group_by(plotId) %>% # group by plotId
+  summarize(median_d = median(diam)) # takje the median by plotId
+dt_med_diam
 ```
 
 * What is the most common family in the whole dataset?
 
 ```{r}
 com_fam <- dt_WG %>%
-  count(family) %>% 
-  slice_max(n)
+  count(family) %>% # count the number of trees per family
+  slice_max(n) # get the one with the highest number of tree
 com_fam
 ```
 
-* Create a tibble with the number of trees per family in plots BSP1 and BSP2, and order it by decreasing number of individuals per family per plot. 
+* Create a tibble with the number of trees per family and per plot for plots BSP1 and BSP2, and order it by decreasing number of individuals per family and per plot. 
 
 ```{r}
-dt_sub <- dt_WG %>% filter(plotId %in% c("BSP1", "BSP2")) %>% 
-  count(plotId, family) %>% 
-  arrange(plotId, desc(n))
+dt_sub <- dt_WG %>% 
+  filter(plotId %in% c("BSP1", "BSP2")) %>% # keep only the two plots of interest
+  count(plotId, family) %>% # count the number of trees per family and plot
+  arrange(plotId, desc(n)) # sort them
 view(dt_sub)
 ```
 
 * To how many families do trees that have a diameter in the fourth quartile (bigger than the 3rd quartile) of the whole dataset belong?
 
 ```{r}
-dt_WG %>% 
-  filter(diam > quantile(diam, probs = 0.75)) %>% 
-  select(family) %>% 
-  distinct() %>% 
-  count()
+n_75 <- dt_WG %>% 
+  filter(diam > quantile(diam, probs = 0.75)) %>% # select trees with a diameter in the fourth quartile
+  select(family) %>% # keep only the variable family
+  distinct() %>% # keep only a unique row for each family
+  count() # count the rows
+n_75
 ```
 
 
