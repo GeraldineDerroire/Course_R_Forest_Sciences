@@ -9,7 +9,7 @@ eval: false
   
 # For next time
   
-* Install the following package from CRAN:
+* Install the following package from CRAN: *multcompView*
 
 * Make sur you have the following packages: *questionr*, *tidyverse*, *BIOMASS*
   

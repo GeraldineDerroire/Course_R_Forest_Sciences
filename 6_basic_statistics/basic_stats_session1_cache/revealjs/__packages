@@ -8,5 +8,6 @@ dplyr
 stringr
 forcats
 lubridate
-BIOMASS
 questionr
+BIOMASS
+multcompView

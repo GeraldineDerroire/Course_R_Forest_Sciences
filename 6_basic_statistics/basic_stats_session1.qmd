@@ -48,6 +48,8 @@ library(questionr)
 
 => ne parler que de la distribution normale??? oui
 
+et parler des Q-Q plots
+
 https://ericmarcon.github.io/Cours-R-Geeft/TP_2.html#14
 
 + mentionner le distribution zoo
@@ -57,16 +59,21 @@ Ici ou en début de session sur le modèle linéaire?
 https://pmarchand1.github.io/ECL7102/notes_cours/3-Modeles_statistiques.html
 
 
+## confiance interval of a mean 
+
+if normally distributed using t.test 
+see: https://larmarange.github.io/analyse-R/intervalles-de-confiance.html
+
+
 ## Parametrique vs non paramétrique
 
+# Testing the association between two categorical variables
 
-# Testing if two groups differ considering a quantitative variable
-
-## Let's work with the Nouragues tree data
+## Let's work with the the Nouragues tree data
 
 [*Heights and diameters of trees in two 1-ha plots from the Nouragues forest (French Guiana)*]{style="font-size: 30px"}
 
-[Let's load them]{style="font-size: 30px"}
+[Let's load them:]{style="font-size: 30px"}
 
 ```{r, message=FALSE}
 library(BIOMASS)
@@ -75,7 +82,171 @@ dt_HD <- as_tibble(NouraguesHD) # rename and transform to tibble
 rm(NouraguesHD) # remove
 ```
 
-[[and select 2 genus:]{style="font-size: 30px"}]{.fragment}
+## Do the number of occurences of several genus depends on the plot? {.smaller}
+
+[We are going to work on the 10 most abundant genus in the Nouragues dataset, let's select them:]{style="font-size: 30px"}
+
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+# look at the 10 most abundant genus
+abd_10 <- dt_HD %>% 
+  filter(genus != "indet") %>%
+  count(genus) %>% 
+  arrange(desc(n)) %>% 
+  slice_head(n = 10) 
+
+abd_10
+```
+:::
+
+
+::: {.column width="50%"}
+::: fragment
+```{r}
+# take a subset of dt_HD containing the 10 most abundant genus
+dt_sub10 <- dt_HD %>% 
+  filter(genus %in% abd_10$genus) %>% 
+  mutate(genus = as.factor(genus))
+```
+:::
+:::
+:::::
+
+
+## Contingency table
+
+[Let's start by doing a contingency table, using the function [table]{style="color:indianred;"}.]{style="font-size: 30px"}
+
+[This gives the number of observations for each pairs of categories.]{style="font-size: 30px"}
+
+```{r}
+tab_abd <- table(dt_sub10$genus, dt_sub10$plotId)
+tab_abd
+```
+
+## Percentages per category
+
+[We can look at the percentages per column (*here* per plot), using the function [cprop]{style="color:indianred;"} of the package [questionr]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+cprop(tab_abd)
+```
+:::
+
+::: {.column width="50%"}
+[[⚠️ Here we look at the frequency per column because we are interested in the effect of the plot and the plot is in column. The function [lprop]{style="color:indianred;"} also exists to look at frequency per row.]{style="font-size: 30px"}]{.fragment}
+:::
+:::::
+
+::: notes
+We see that the occurence of most genus seems to depend on the plot
+:::
+
+::: notes
+here in columns because...
+:::
+
+## Graphical exploration
+
+[We can do a mosaic plot, using the function [mosaicplot]{style="color:indianred;"} to explore the association graphically:]{style="font-size: 30px"}
+
+```{r}
+mosaicplot(tab_abd)
+```
+
+## $\chi^2$ test {.smaller}
+
+[We can then perform a $\chi^2$ test, to test the independence of the two categorical variables.
+**H0: the variables are independent**]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="40%"}
+[[We use the function [chisq.test]{style="color:indianred;"} on the **contingency table** (not on the percentage):]{style="font-size: 30px"}]{.fragment}
+:::
+
+::: {.column width="60%"}
+::: fragment
+```{r}
+res_chi2 <- chisq.test(tab_abd)
+res_chi2
+```
+:::
+:::
+:::::
+
+[[The result shows the following values:]{style="font-size: 30px"}]{.fragment}
+
+* [*X-squared* is the value of the $\chi^2$ statistics, which is a "distance" between the observed occurrences and the expected ones if the variables were independent.]{style="font-size: 28px"}
+
+* [*df* is the number of degrees of freedom]{style="font-size: 28px"}
+
+* [*p-value* is the probability to get such a *X-squared* value under the assumption of independence.]{style="font-size: 28px"}
+[[**Here the *p-value* is very low, so we can reject the null hypothesis of independence.**]{style="font-size: 28px"}]{.fragment}
+
+
+## $\chi^2$ test {.smaller}
+
+* [The $\chi^2$ needs to be done on contingency tables and not on proportions, as the size of the sample needs to be known.]{style="font-size: 30px"}
+
+* [It is less reliable if the sample size is too small. It should not be used if any of the expected frequency under H0 is below 5. Let's check this:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+res_chi2$expected
+```
+:::
+
+::: notes
+Here it is ok
+:::
+
+## Residuals 
+
+::::: columns
+::: {.column width="40%"}
+
+[We can look at the residuals using the function [chisq.residuals]{style="color:indianred;"} of the package [questionr]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+chisq.residuals(tab_abd)
+```
+:::
+
+::: {.column width="60%}
+
+* [residuals < -2 indicate **under-representation**]{style="font-size: 28px"}
+
+* [residuals > 2 indicate **over-representation**]{style="font-size: 28px"}
+
+* [residuals in [-2, 2] indicate **no significant difference** to independence]{style="font-size: 28px"}
+
+[[*The threshold of 2 correspond to a 95% confidence interval.*]{style="font-size: 30px"}]{.fragment}
+:::
+
+::::
+
+## Residuals
+
+[We can also present the residuals graphically with the argument *shade = TRUE* in the function [mosaicplot]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+#| out.width: 80%
+mosaicplot(tab_abd, 
+           shade = TRUE,
+           las = 3, # vertical orientation of labels
+           main = "") # remove main title
+```
+
+
+# Testing if two groups differ considering a quantitative variable
+
+## Let's work with the Nouragues tree data
+
+[We will focus on two genus: *Dicorynia* and *Protium*:]{style="font-size: 30px"}
 
 ```{r, message=FALSE, eval = FALSE, echo=FALSE}
 # for me to choose the most abundant sp with a distrib that works well
@@ -85,8 +256,6 @@ dt_HD %>% filter(genus %in% abund$genus) %>%
   ggplot(aes(x=genus, y=H)) + geom_boxplot()
 ```
 
-
-::: fragment
 ```{r}
 # one dataset with both genus
 dt_sub <- dt_HD %>% 
@@ -96,7 +265,6 @@ dt_sub <- dt_HD %>%
 d_Dico <- filter(dt_sub, genus == "Dicorynia")
 d_Prot <- filter(dt_sub, genus == "Protium")
 ```
-:::
 
 ::: notes
 We do both a common dataset and two dataset per genus
@@ -138,7 +306,7 @@ We can consider the two distributions as normal.]{style="font-size: 30px"}]{.fra
 
 ## Are the distribution of height in both genus normal?
 
-[We could also check the normality graphically with normal QQ plot, using the function [qqnorm]{style="color:indianred;"}:]{style="font-size: 30px"}
+[We could also check the normality graphically with normal Q-Q plot, using the function [qqnorm]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -169,13 +337,22 @@ qqline(d_Prot$H)
 
 [[A t-test test the equality of means of two groups: **H0: equality of the means**]{style="font-size: 30px"}]{.fragment}
 
+::::: columns
+::: {.column width="65%"}
+
 ::: fragment
 ```{r}
 t.test(dt_sub$H ~ dt_sub$genus)
 ```
 :::
+:::
 
-[The result is significant, so we can reject the null hypothesis that the mean of both group are equal and conclude that the two genus differ in height.]{style="font-size: 30px"}
+::: {.column width="35%"}
+[[The result is significant, so we can reject the null hypothesis that the mean of both group are equal and conclude that the two genus differ in height.]{style="font-size: 30px"}]{.fragment}
+:::
+:::::
+
+[[💡 The result indicates that we performed a *Welch t-test*, which doesn't assume homoscedasticity (equality of variance). If we want to run a t-test assuming homoscedasticity, we need to use the argument *var.equal = TRUE*. ]{style="font-size: 25px"}]{.fragment}
 
 ::: notes
 the Welch modification is done because it handle better unequal variances and unequal sample size
@@ -249,7 +426,7 @@ qqline(d_Prot$D)
 wilcox.test(dt_sub$H ~dt_sub$genus)
 ```
 
-[[The result is significant, so we can reject the null hypothesis that the mean of both group are equal and conclude that the two genus differ in diameter.]{style="font-size: 30px"}]{.fragment}
+[[The result is significant, so we can reject the null hypothesis, and conclude that the two genus differ in diameter.]{style="font-size: 30px"}]{.fragment}
 
 
 ::: notes
@@ -335,182 +512,291 @@ no needs to check with a test because
 [We can do a t-test for paired data by specifying **paired = TRUE** in the function [t.test]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ::::: columns
-::: {.column width="50%"}
+::: {.column width="60%"}
 ```{r}
-t.test(dt_thin_w$before, 
-       dt_thin_w$after,
-       paired=T)
+res_paired <- t.test(dt_thin_w$before, 
+                     dt_thin_w$after,
+                     paired=T)
+res_paired
 ```
 :::
 
-::: {.column width="50%"}
-[[The result is significant, so we can conclude that the growth before and after thinning differs.]{style="font-size: 30px"}]{.fragment}
+::: {.column width="40%"}
+[[The result is significant, so we can conclude that the growths before and after thinning differ.]{style="font-size: 30px"}]{.fragment}
 
 [[💡 If the data are not normally distributed, we can do a Wikcoxon rank test for paired data in a similar way]{style="font-size: 30px"}]{.fragment}
 :::
 :::::
 
 ::: notes
+Note that the synthax has changed
+
 give the 95% confidence interval of the difference (before - after)
 ::: 
 
-# Testing the association between two categorical variables
+## What to report for a t-test? {.smaller}
 
-## Do the number of occurences of several genus depends on the plot? {.smaller}
+[To retrieve the p-value:]{style="font-size: 30px"}
 
-[We are going to work on the 10 most abundant genus in the Nouragues dataset, let's select them:]{style="font-size: 30px"}
+```{r}
+res_paired$p.value
+```
 
+[[A significant p-value indicates that it is highly improbable to have the observed effect is the null hypothesis is true. 
+So we can conclude that the two groups differ.
+**⚠️ However, this does not inform on the magnitude of the difference.**]{style="font-size: 30px"}]{.fragment}
+
+[[In addition to the p-value, we need to report:]{style="font-size: 30px"}]{.fragment}
 
 ::::: columns
 ::: {.column width="50%"}
-```{r}
-# look at the 10 most abundant genus
-abd_10 <- dt_HD %>% 
-  count(genus) %>% 
-  arrange(desc(n)) %>% 
-  slice_head(n = 10) 
+* [the magnitude of the difference]{style="font-size: 30px"}
 
-abd_10
-```
-:::
-
-
-::: {.column width="50%"}
 ::: fragment
 ```{r}
-# take a subset of dt_HD containing the 10 most abundant genus
-dt_sub10 <- dt_HD %>% 
-  filter(genus %in% abd_10$genus)
+res_paired$estimate
+```
+:::
+:::
+
+::: {.column width="50%"}
+
+* [the confidence interval of the difference]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+res_paired$conf.int
 ```
 :::
 :::
 :::::
 
-
-## Contingency table
-
-[Let's start by doing a contingency table, using the function [table]{style="color:indianred;"}.]{style="font-size: 30px"}
-
-[This gives the number of observations for each pairs of categories.]{style="font-size: 30px"}
-
-```{r}
-tab_abd <- table(dt_sub10$genus, dt_sub10$plotId)
-tab_abd
-```
-
-## Percentages per category
-
-[We can look at the percentages per column (*here* per plot), using the function [cprop]{style="color:indianred;"} of the package [questionr]{style="color:indianred;"}:]{style="font-size: 30px"}
-
-```{r}
-cprop(tab_abd)
-```
-[[⚠️ Here we look at the frequency per column because we are interested in the effect of the plot and the plot is in column. The function [lprop]{style="color:indianred;"} also exists to look at frequency per row.]{style="font-size: 30px"}]{.fragment}
-
 ::: notes
-We see that the occurence of most genus seems to depend on the plot
+the attr 0.95 is the confidence level (95% by default, but this can be changed
 :::
 
-::: notes
-here in columns because...
-:::
 
-## Graphical exploration
 
-[We can do a mosaic plot, using the function [mosaicplot]{style="color:indianred;"} to explore the association graphically:]{style="font-size: 30px"}
+# Testing difference between more than two groups
 
-```{r}
-mosaicplot(tab_abd)
-```
 
-## $\chi^2$ test {.smaller}
+## Analysis of variance: ANOVA
 
-[We can then perform a $\chi^2$ test, to test the independence of the two categorical variables.
-**H0: the variables are independent**]{style="font-size: 30px"}
+With the t-test, we tested the difference between two groups. 
 
-::::: columns
-::: {.column width="40%"}
-[[We use the function [chisq.test]{style="color:indianred;"} on the **contingency table** (not on the percentage):]{style="font-size: 30px"}]{.fragment}
-:::
+If we have more than two groups, we use the **ANOVA**.
 
-::: {.column width="60%"}
+The ANOVA compares the variation within groups with the variation between groups.
+
+**H0: all the observations come from populations with a same mean.**
+
+
+
+## Do the height of several genus differ? {.scrollable}
+
+[We extent the analysis done on *Dicorynia* and *Protium* to more genus: 
+let's consider the 10 more abundant genus.]{style="font-size: 30px"}
+
+[[Let's start with a graphical exploration:]{style="font-size: 30px"}]{.fragment}
+
 ::: fragment
 ```{r}
-res_chi2 <- chisq.test(tab_abd)
-res_chi2
+#| warning: false
+#| out.width: 70%
+ggplot(dt_sub10, aes(x=genus, y=H)) + 
+  geom_boxplot()
 ```
+:::
+
+## ANOVA
+
+[We perform the ANOVA using the function [aov]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+H_aov <- aov(H ~ genus,
+             data = dt_sub10)
+summary(H_aov)
+```
+[[**The test is significant, meaning that the groups differ.**]{style="font-size: 30px"}]{.fragment}
+
+
+## Checking the model assumptions
+
+[The ANOVA assumes **homoscedasticity**, meaning a constant variance variance of residuals across groups.]{style="font-size: 30px"}
+
+[We check this graphically by plotting the residuals against the fitted values (the estimated mean for each group):]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+
+```{r}
+#| fig.width: 5
+#| fig.height: 3.5
+plot(H_aov, which = 1)
+```
+:::
+
+::: {.column width="50%"}
+
+::: fragment
+[There is no strong pattern.]{style="font-size: 30px"}
+
+[The residuals are distributed around 0 in a similar way for each groups.]{style="font-size: 30px"}
+
+[**We can consider that the assumptions of homoscedasticity is respected.**]{style="font-size: 30px"}
 :::
 :::
 :::::
 
-[[The result shows the following values:]{style="font-size: 30px"}]{.fragment}
+## Checking the model assumptions
 
-* [*X-squared* is the value of the $\chi^2$ statistics, which is a "distance" between the observed occurrences and the expected ones if the variables were independent.]{style="font-size: 28px"}
+[The ANOVA assumes that the **residuals are normally distributed**.]{style="font-size: 30px"}
 
-* [*df* is the number of degrees of freedom]{style="font-size: 28px"}
+[We check this graphically with a Q-Q plot:]{style="font-size: 30px"}
 
-* [*p-value* is the probability to get such a *X-squared* value under the assumption of independence.]{style="font-size: 28px"}
-[[**Here the *p-value* is very low, so we can reject the null hypothesis of independence.**]{style="font-size: 28px"}]{.fragment}
+::::: columns
+::: {.column width="50%"}
+
+```{r}
+#| fig.width: 5
+#| fig.height: 3.5
+plot(H_aov, which = 2)
+```
+:::
+
+::: {.column width="50%"}
+
+::: fragment
+[The points are mostly on the diagonal.]{style="font-size: 30px"}
+
+[**We can consider that the assumptions of normality of the distribution of the residuals is respected.**]{style="font-size: 30px"}
+:::
+:::
+:::::
 
 
-## $\chi^2$ test {.scrollable}
+::: notes
+we don't check that the values are normally distributed, but the residuals
+:::
 
-* [The $\chi^2$ needs to be done on contingency tables and not on proportions, as the size of the sample needs to be known.]{style="font-size: 30px"}
 
-* [It is less reliable if the sample size is too small. It should not be used if any of the expected frequency under H0 is below 5. Let's check this:]{style="font-size: 30px"}
+
+## Estimated mean per group
+
+[The get the estimated mean of each group, we use the function [coef]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+coef(H_aov)
+```
+[[The *intercept* correspond to the first group (here *Dicorynia*).]{style="font-size: 30px"}]{.fragment}
+
+[[The other coeeficient show the difference of each group with the first group. For instance, the mean of *Sterculia* is:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
-res_chi2$expected
+coef(H_aov)[1] + coef(H_aov)[10]
+```
+:::
+
+
+## Comparing the groups 
+
+[We know that the means of the groups differ, but we also would like to know which groups significantly differ from the others.]{style="font-size: 30px"}
+
+[We can perform a Tukey test, which compares all pairs of groups, using the function [TukeyHSD]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+H_tukey <- TukeyHSD(H_aov)
+H_tukey
+```
+
+::: notes
+We get the comparison of all pairs
+:::
+
+## Graphical presentation of the results 
+
+[We use the function [multcompLetters4]{style="color:indianred;"} from the package [multcompView]{style="color:indianred;"} to get the letters indicating identical groups:]{style="font-size: 30px"}
+
+```{r}
+library(multcompView)
+H_letters <- multcompLetters4(H_aov, H_tukey)
+H_letters
+```
+
+[[This gives a list, from which we extract the letters:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+H_letters_tb <- tibble(
+  genus = names(H_letters[[1]]$Letters),
+  letter = as.character(H_letters[[1]]$Letters)
+  )
 ```
 :::
 
 ::: notes
-Here it is ok
+to understand why we do that str(H_letters)
 :::
 
-## Residuals 
 
-[We can look at the residuals using the function [chisq.residuals]{style="color:indianred;"} of the package [questionr]{style="color:indianred;"}:]{style="font-size: 30px"}
+## Graphical presentation of the results 
 
-::::: columns
-::: {.column width="40%"}
+[We then make a tibble containing the groups, the letters and the 75th percentile (to position the letter above the box):]{style="font-size: 30px"}
 
 ```{r}
-chisq.residuals(tab_abd)
+#| warning: false
+H_letters_pos <- dt_sub10 %>% 
+  group_by(genus) %>% 
+  summarise(q_75 = quantile(H, probs = 0.75, na.rm = TRUE)) %>% 
+  inner_join(H_letters_tb)
+```
+
+[[And we make the plot:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+graph_H <- ggplot() +
+  geom_boxplot(data = dt_sub10, 
+               aes(x = genus, y = H, fill = genus),
+               show.legend = FALSE) +
+  geom_text(data = H_letters_pos,
+            aes(x = genus, y = q_75, # position of the label
+                label = letter), # labels are the letters
+            size = 5, # size of the labels
+            vjust = -1, hjust = -1) + # adjusts position of the labels
+  scale_fill_brewer(palette = "Blues") + 
+  theme_bw()
 ```
 :::
 
-::: {.column width="60%}
-
-* [residuals < -2 indicate under-representation]{style="font-size: 30px"}
-
-* [residuals > 2 indicate over-representation]{style="font-size: 30px"}
-
-* [residuals in [-2, 2] indicate no significant difference to independence]{style="font-size: 30px"}
-
-[[*The threshold of 2 correspond to a 95% confidence interval.*]{style="font-size: 30px"}]{.fragment}
-:::
-
-::::
-
-## Residuals
-
-[We can also present the residuals graphically with the argument *shade = TRUE* in the function [mosaicplot]{style="color:indianred;"}:]{style="font-size: 30px"}
+## Graphical presentation of the results
 
 ```{r}
-mosaicplot(tab_abd, 
-           shade = TRUE,
-           las = 3, # vertical orientation of labels
-           main = "") # remove main title
+#| warning: false
+#| out.width: 120%
+graph_H
+
 ```
 
+## What to do if the assumptions of the ANOVA are not met?
+
+[If the assumption of normality of the residuals is not met, we can:]{style="font-size: 30px"}
+
+* [Perform a **Kruskal-Wallis test** (non parametric) using the function [kruskal.test]{style="color:indianred;"}]{style="font-size: 30px"}
+
+* [Transform the continuous variables (log, sqrt...)]{style="font-size: 30px"}
+
+* [Perform a **generalised linear model** (GLM)]{style="font-size: 30px"}
+
+[[If the assumption of homoscedasticity is not met, we can perform a **Welch's ANOVA** using the function [oneway.test]{style="color:indianred;"}]{style="font-size: 30px"}]{.fragment}
 
 
+<!-- TO CONTINUE-->
 
+# Correlation 
 
-
-
+à mettre dans la session d'après avec les modèles linéaires?
 
 # correlation linéraire (Pearson)
 
@@ -522,9 +808,7 @@ https://ericmarcon.github.io/Cours-R-Geeft/TP_5.html#8
 
 https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques
 
-# Anova
 
-https://ericmarcon.github.io/Cours-R-Geeft/Anova.html#21
 
 
 
@@ -537,14 +821,22 @@ https://ericmarcon.github.io/Cours-R-Geeft/Anova.html#21
 
 COURS ERIC GEEFT
 
-? LAMARANGE ? MARCHAND ?
+? LAMARANGE ? 
+
+MARCHAND 
+
+[Rosane Rech] https://statdoe.com/one-way-anova-and-box-plot-in-r/
 
 :::
 
 # Ressources
 
 ::: {.nonincremental}
-??????
+
+https://statdoe.com/one-way-anova-and-box-plot-in-r/
+TO CHECK ALSO FOR THE OTHER COURSES
+
+
 :::
 
-::: {.nonincremental}
+
