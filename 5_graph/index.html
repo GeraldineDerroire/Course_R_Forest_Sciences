@@ -11,8 +11,8 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-24">
-  <title>Graphics with ggplot</title>
+  <meta name="dcterms.date" content="2025-04-26">
+  <title>Data visualisation with ggplot</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -394,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Graphics with ggplot</h1>
+  <h1 class="title">Data visualisation with ggplot</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -407,13 +407,8 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-24</p>
+  <p class="date">2025-04-26</p>
 </section>
-<section id="changer-le-titre-de-la-session" class="title-slide slide level1 center">
-<h1>CHANGER LE TITRE DE LA SESSION?</h1>
-
-</section>
-
 <section id="why-make-plots" class="title-slide slide level1 smaller center">
 <h1>Why make plots?</h1>
 <ul>
@@ -493,7 +488,7 @@ Géraldine Derroire
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(BIOMASS)</span>
 <span id="cb3-2"><a href=""></a><span class="fu">data</span>(NouraguesHD) <span class="co"># load the data</span></span>
 <span id="cb3-3"><a href=""></a>dt_HD <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(NouraguesHD) <span class="co"># rename and transform to tibble</span></span>
-<span id="cb3-4"><a href=""></a><span class="fu">rm</span>(NouraguesHD) <span class="co"># </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href=""></a><span class="fu">rm</span>(NouraguesHD) <span class="co"># remove </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -765,7 +760,7 @@ Géraldine Derroire
           display:block!important;
       }</style></aside>
 </section>
-<section id="is-it-an-aesthetic-or-not" class="slide level2">
+<section id="is-it-an-aesthetic-or-not" class="slide level2 smaller">
 <h2>Is it an aesthetic or not?</h2>
 <p><span style="font-size: 30px">The arguments <em>color</em>, <em>size</em>, <em>shape</em>, …, can be used as arguments of the function <span style="color:indianred;">aes</span> or not. But this does not do the same thing.</span></p>
 <div class="columns">

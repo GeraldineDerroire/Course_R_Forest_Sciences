@@ -298,7 +298,7 @@ ggplot(dt_HD,
 Here there is no interest in doing this, as we already have the D on the x-axis...
 :::
 
-## Is it an aesthetic or not?
+## Is it an aesthetic or not? {.smaller}
 
 [The arguments *color*, *size*, *shape*, ..., can be used as arguments of the function [aes]{style="color:indianred;"} or not. But this does not do the same thing.]{style="font-size: 30px"}
 
