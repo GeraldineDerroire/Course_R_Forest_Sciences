@@ -1121,7 +1121,7 @@ https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques
 
 
 
-# Acknowledgments
+# Acknowledgments {.smaller}
 
 ::: {.nonincremental}
 
