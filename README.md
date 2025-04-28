@@ -24,7 +24,7 @@ The course material has been created using quarto and R version 4.4.3.
    * [Exercices on session 1/2](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/exo_session_6.pdf)
    * [Exercices on session 2/2](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/exo_session_7.pdf)
 - [Data visualisation with ggplot](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph)
-  * [Exercices](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/exo_session_8.pdf)
+  * [Exercices](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/exo_session_8.pdf)
 
 <!--
 
