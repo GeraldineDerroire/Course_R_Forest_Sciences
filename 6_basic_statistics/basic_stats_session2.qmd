@@ -1,5 +1,5 @@
 ---
-title: "Basic statistics with R - session 2"
+title: "Statistics with R - session 2"
 author: Géraldine Derroire
 institute: Cirad - UnB
 date: last-modified
@@ -24,13 +24,54 @@ editor:
 ---
 
 
-# Correlation
+# Covariance and correlation
+
+See the end here : https://pmarchand1.github.io/ECL7102/notes_cours/1-Statistiques_descriptives.html
 
 # linear model with one var
 
 growth and WD
 
 do the whole model diagnostic and ploting the results
+
+# transfor logatyhtmique
+
+marchand 3 et transfo logarythmique => pour modèle linéaire
+
+## Log-normal distribution {.smaller}
+
+$x \sim log\mathcal{N}(\mu, \sigma^2)$ if $log(x) \sim \mathcal{N}(\mu, \sigma^2)$
+
+[We use the function [rnorm]{style="color:indianred;"} to randomly draw data from a normal distribution:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="60%"}
+
+
+```{r}
+#| warning: false
+dt1 <- data.frame(x = rlnorm(n = 100000, mean = 0, sd = 1))
+dt2 <- data.frame(x = rlnorm(n = 100000, mean = 1, sd = 1))
+
+ggplot() + 
+  geom_density(data = dt1, aes(x = x), 
+               color = "blue") + 
+  geom_density(data = dt2, aes(x = x), 
+               color = "green") + 
+  scale_x_continuous(limits =c(0,20)) +
+  theme_minimal()
+```
+:::
+
+::: {.column width="40%"}
+
+* The values are stricty positive.
+
+* The variance increases when the mean increases. 
+
+:::
+:::::
+
 
 # linear model with more than one var
 
@@ -45,6 +86,8 @@ do the whole model diagnostic and ploting the results
 which data? 
 
 # GLM?
+
+binomial glm: cf p 254 book avec les pinguins
 
 
 

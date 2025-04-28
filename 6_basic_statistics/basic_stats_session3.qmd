@@ -1,5 +1,5 @@
 ---
-title: "Basic statistics with R - session 3"
+title: "Statistics with R - session 3"
 author: Géraldine Derroire
 institute: Cirad - UnB
 date: last-modified

@@ -11,8 +11,8 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-25">
-  <title>Basic statistics with R - session 1</title>
+  <meta name="dcterms.date" content="2025-04-28">
+  <title>Statistics with R - session 1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -394,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Basic statistics with R - session 1</h1>
+  <h1 class="title">Statistics with R - session 1</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -407,60 +407,440 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-25</p>
+  <p class="date">2025-04-28</p>
 </section>
-<section class="slide level2">
-
-<!-- Chnage the title ? maybe not basic...-->
-<!--
-test de base : t-tests, correlation, Anova...
-
-https://www.statology.org/choosing-the-right-statistical-test-a-decision-tree-approach/
-
-PARTOUT : https://pmarchand1.github.io/ECL7102/
-
--->
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
+<p>Let’s load the packages that we will use today</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href=""></a><span class="fu">library</span>(questionr)</span>
+<span id="cb1-3"><a href=""></a><span class="fu">library</span>(BIOMASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.4     ✔ readr     2.1.5
-✔ forcats   1.0.0     ✔ stringr   1.5.1
-✔ ggplot2   3.5.1     ✔ tibble    3.2.1
-✔ lubridate 1.9.3     ✔ tidyr     1.3.1
-✔ purrr     1.0.2     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">library</span>(questionr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section>
-<section id="quelques-rappels" class="title-slide slide level1 center">
-<h1>Quelques rappels???</h1>
 
+</div>
+<aside class="notes">
+<p>tidyverse for data manip and graph questionr for usefull function for exploration and visualisation BIOMASS for data</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="lois-de-distribution" class="slide level2">
-<h2>Lois de distribution</h2>
-<p>=&gt; ne parler que de la distribution normale??? oui</p>
-<p>et parler des Q-Q plots</p>
-<p>https://ericmarcon.github.io/Cours-R-Geeft/TP_2.html#14</p>
+
+<section>
+<section id="univariate-statistics" class="title-slide slide level1 center">
+<h1>Univariate statistics</h1>
+<aside class="notes">
+<p>one variable</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="reminder-on-the-descriptive-statistics" class="slide level2">
+<h2>Reminder on the descriptive statistics</h2>
+<p>For a categorical variable:</p>
 <ul>
-<li class="fragment">mentionner le distribution zoo</li>
+<li class="fragment"><p>Occurrence (count or proportion) per categories</p></li>
+<li class="fragment"><p><strong>visualisation</strong>: <span class="fragment">barplot, Cleveland plot</span></p></li>
 </ul>
-<p>Ici ou en début de session sur le modèle linéaire?</p>
-<p>https://pmarchand1.github.io/ECL7102/notes_cours/3-Modeles_statistiques.html</p>
 </section>
-<section id="confiance-interval-of-a-mean" class="slide level2">
-<h2>confiance interval of a mean</h2>
-<p>if normally distributed using t.test see: https://larmarange.github.io/analyse-R/intervalles-de-confiance.html</p>
+<section id="reminder-on-the-descriptive-statistics-1" class="slide level2">
+<h2>Reminder on the descriptive statistics</h2>
+<p>For a quantitative (numerical) variable:</p>
+<ul>
+<li class="fragment"><p><strong>measure of centrality</strong>: <span class="fragment">mean, median</span></p></li>
+<li class="fragment"><p><strong>measure of dispersion</strong>: <span class="fragment">max-min, variance, standard deviation, interquartile distance, coefficient of variation</span></p></li>
+<li class="fragment"><p><strong>visualisation</strong>: histogram, boxplot, density plot</p></li>
+</ul>
+<aside class="notes">
+<p>have them guess</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="parametrique-vs-non-paramétrique" class="slide level2">
-<h2>Parametrique vs non paramétrique</h2>
+<section id="reminder-on-the-descriptive-statistics-2" class="slide level2">
+<h2>Reminder on the descriptive statistics</h2>
+<p>The coefficient (CV) is a standardised measure of dispersion, that can be used to compared the dispersion of variables measured in different scale:</p>
+<p><span class="math display">\[CV = \frac{standard\:deviation}{mean}\]</span></p>
+</section>
+<section id="descriptive-statistics-vs-parameters" class="slide level2">
+<h2>Descriptive statistics <em>vs</em> parameters</h2>
+<p><span style="font-size: 30px"><strong>Descriptive statistics</strong> are calculated from the observations (the data). These observations are a sample of a theoretical population that we don’t measure.</span></p>
+<blockquote>
+<p><span style="font-size: 30px"><em>eg</em>: The trees that we can measure in a forest plot are a sample of the population of the trees in the considered forest. We can calculate the mean diameter.</span></p>
+</blockquote>
+<p><span style="font-size: 30px">A theoretical population can be described by its <strong>parameters</strong>, that are not measured.</span></p>
+<blockquote>
+<p><span style="font-size: 30px"><em>eg</em>: The mean diameter of the population of tree in the considered forest is a parameter.</span></p>
+</blockquote>
+</section>
+<section id="statistical-distributions" class="slide level2">
+<h2>Statistical distributions</h2>
+<p>We can use <strong>statistical distributions</strong> to represent the distribution of the values of the variable in the theoretical population.</p>
+<p>A statistical distribution (also called <em>probability law</em>) is a function that associates a probability with each possible value of a random variable.</p>
+</section>
+<section id="statistical-distributions-1" class="slide level2">
+<h2>Statistical distributions</h2>
+<p>We can visualise a distribution density function (also called density of probability) with a density plot:</p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment"><span style="font-size: 30px">Here, the probability that <span class="math inline">\(x \in [-1, 1]\)</span> is equal to the blue area, which is the integral of the density function between -1 and 1.</span></span></p>
+</div></div>
+<aside class="notes">
+<p>The density function does not give the probability of being equal to a value, as for a continuous variable, this probability would be null.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!-- for each law => give examples of how used, show the equation with parameters, show the density (with several values of the param) -->
+</section>
+<section id="uniform-distribution" class="slide level2">
+<h2>Uniform distribution</h2>
+<p><span class="math display">\[\mathcal{U}(a, b)\]</span></p>
+<p><span style="font-size: 30px"><span class="math inline">\([-a, b]\)</span> is the range of possible values</span></p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><span style="font-size: 30px"><em>e.g.</em> for <span class="math inline">\(\mathcal{U}(2, 5)\)</span></span></p>
+</div><div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="uniform-distribution-1" class="slide level2">
+<h2>Uniform distribution</h2>
+<p>We use the function <span style="color:indianred;">runif</span> to randomly draw data from a uniform distribution:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="co"># number of value t</span></span>
+<span id="cb2-2"><a href=""></a>      <span class="at">min =</span> <span class="dv">2</span>, <span class="co"># lower limit of the distribution</span></span>
+<span id="cb2-3"><a href=""></a>      <span class="at">max =</span> <span class="dv">5</span>) <span class="co"># upper limit of the distribution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 3.114180 4.244543 4.658490 3.817215 3.714333 3.489043 3.494237 2.463896
+ [9] 2.395771 3.943445</code></pre>
+</div>
+</div>
+<p><span class="fragment"><em>NB</em>: as we do a random draw, we get different values each time we run the command:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 3.843545 3.022048 3.107850 4.900490 4.217855 3.938573 3.507121 3.544891
+ [9] 2.741952 3.886340</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="law-of-large-numbers" class="slide level2">
+<h2>Law of large numbers</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">hist</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">50</span>,</span>
+<span id="cb6-2"><a href=""></a>           <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">hist</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100000</span>,</span>
+<span id="cb7-2"><a href=""></a>           <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><strong>The larger the size of the random sample, the closer the distribution of observed values is to the distribution of the theoretical population.</strong></span></p>
+</section>
+<section id="normal-distribution" class="slide level2">
+<h2>Normal distribution</h2>
+<p><span class="math display">\[\mathcal{N}(\mu, \sigma^2)\]</span></p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(\mu\)</span> is the mean</p></li>
+<li class="fragment"><p><span class="math inline">\(\sigma^2 &gt; 0\)</span> is the variance, so <span class="math inline">\(\sigma\)</span> is the standard deviation</p></li>
+</ul>
+<p><span class="fragment">💡 The normal distribution is also called <em>Gaussian distribution</em>.</span></p>
+</section>
+<section id="normal-distribution-1" class="slide level2 smaller">
+<h2>Normal distribution</h2>
+<p>We use the function <span style="color:indianred;">rnorm</span> to randomly draw data from a normal distribution:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, </span>
+<span id="cb8-2"><a href=""></a>                            <span class="at">mean =</span> <span class="dv">0</span>, </span>
+<span id="cb8-3"><a href=""></a>                            <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb8-4"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, </span>
+<span id="cb8-5"><a href=""></a>                            <span class="at">mean =</span> <span class="dv">4</span>, </span>
+<span id="cb8-6"><a href=""></a>                            <span class="at">sd =</span> <span class="fl">0.5</span>))</span>
+<span id="cb8-7"><a href=""></a>dt3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, </span>
+<span id="cb8-8"><a href=""></a>                            <span class="at">mean =</span> <span class="sc">-</span><span class="dv">2</span>, </span>
+<span id="cb8-9"><a href=""></a>                            <span class="at">sd =</span> <span class="dv">4</span>))</span>
+<span id="cb8-10"><a href=""></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb8-11"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb8-12"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb8-13"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb8-14"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
+<span id="cb8-15"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt3, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb8-16"><a href=""></a>               <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb8-17"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="centred-reduced-normal-distribution" class="slide level2">
+<h2>Centred reduced normal distribution</h2>
+<p>If <span class="math inline">\(x \sim \mathcal{N}(\mu, \sigma^2)\)</span></p>
+<p>then <span class="math inline">\(z = \frac{x - \mu}{\sigma}\)</span> follows a <strong>centred reduced normal distribution</strong>:</p>
+<p><span class="math inline">\(z \sim \mathcal{N}(0, 1)\)</span></p>
+<p><span class="fragment"><span style="font-size: 30px">💡 When to variable are measured in different scales, it can be usefull to standardise them by centring and reducing them, to be able to compare them.</span></span></p>
+</section>
+<section id="qq-plot" class="slide level2 smaller">
+<h2>QQ-plot</h2>
+<p><span style="font-size: 30px">A <em>quantile-quantile</em> plot is used to visualise the correspondence between two distributions by plotting each percentile of the two distributions.</span></p>
+<p><span style="font-size: 30px">This is very useful to visually assess if a variable is normally-distributed, by comparing its distribution to a normal distribution.</span></p>
+<p><span style="font-size: 30px">We use the function <span style="color:indianred;">qqnorm</span> to draw a normal QQ-plot:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">99</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="dv">4</span>)</span>
+<span id="cb10-2"><a href=""></a><span class="fu">qqnorm</span>(v1)</span>
+<span id="cb10-3"><a href=""></a><span class="fu">qqline</span>(v1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-10-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="dv">4</span>)</span>
+<span id="cb11-2"><a href=""></a><span class="fu">qqnorm</span>(v2)</span>
+<span id="cb11-3"><a href=""></a><span class="fu">qqline</span>(v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-11-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>if we see that they both follow a normal distribution, but the match is better when we increase the sampling size</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!--
+
+
+## Bernoulli and Binomial distribution
+
+$$\mathcal{B}(n, p)$$
+
+[The binomial distribution represent the number of successes when performing ***n*** independent experiment having a constant probability of success ***p***.]{style="font-size: 30px"}
+
+[It is a discrete distribution taking only **positive integer values**.{style="font-size: 30px"}
+
+> [[It can be use for proportion: *eg* proportion of trees browsed in a plot.]{style="font-size: 30px"}{.fragment}
+
+::: fragment
+[The Bernoulli distribution is a special case of the binomial distribution where ***n=1***.]{style="font-size: 30px"}
+
+It is a discrete distribution taking only the values **0 (failure) or 1 (success)**.]{style="font-size: 30px"}
+:::
+
+> [It can be use for presence/abscence and success/failure data: *eg* probability that a tree is browsed.]{style="font-size: 30px"}]{.fragment}
+
+
+
+## Bernoulli and binomial distribution {.smaller}
+
+We use the function [rbinom]{style="color:indianred;"} to randomly draw data from a binomial or a Bernoulli distribution:
+
+::::: columns
+::: {.column width="33%"}
+
+
+::: {.cell}
+
+```{.r .cell-code}
+dt1 <- data.frame(x = 
+          rbinom(n = 100000, 
+                 size  = 20, 
+                 p = 0.5))
+ggplot() + 
+  geom_bar(data = dt1, 
+           aes(x = x)) +
+  theme_minimal()
+```
+
+::: {.cell-output-display}
+![](basic_stats_session1_files/figure-revealjs/unnamed-chunk-12-1.png){width=960}
+:::
+:::
+
+
+:::
+
+::: {.column width="33%"}
+
+
+::: {.cell}
+
+```{.r .cell-code}
+dt2 <- data.frame(x = 
+          rbinom(n = 100000, 
+                 size = 20, 
+                 p = 0.7))
+ggplot() + 
+  geom_bar(data = dt2, 
+           aes(x = x)) +
+  theme_minimal()
+```
+
+::: {.cell-output-display}
+![](basic_stats_session1_files/figure-revealjs/unnamed-chunk-13-1.png){width=960}
+:::
+:::
+
+
+:::
+
+::: {.column width="33%"}
+
+
+::: {.cell}
+
+```{.r .cell-code}
+# Bernoulli distribution
+dt3 <- data.frame(x = 
+          rbinom(n = 100000, 
+                 size = 1, 
+                 p = 0.5))
+ggplot() +
+  geom_bar(data = dt3, 
+           aes(x = x)) +
+  theme_minimal()
+```
+
+::: {.cell-output-display}
+![](basic_stats_session1_files/figure-revealjs/unnamed-chunk-14-1.png){width=960}
+:::
+:::
+
+
+:::
+:::::
+
+
+## Poisson
+
+TO DO OR TO MOVE TO SESSION 2
+
+discrete
+
+cf Eric: 1 slide et Marchand
+
+## To go further on distribution
+
+TO PUT IN THE RESOURCES OF SESSION 2/3
+
+distribution zoo + wikipedia pages (in english)
+
+-->
 </section></section>
 <section>
 <section id="testing-the-association-between-two-categorical-variables" class="title-slide slide level1 center">
@@ -472,10 +852,9 @@ PARTOUT : https://pmarchand1.github.io/ECL7102/
 <p><span style="font-size: 30px"><em>Heights and diameters of trees in two 1-ha plots from the Nouragues forest (French Guiana)</em></span></p>
 <p><span style="font-size: 30px">Let’s load them:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">library</span>(BIOMASS)</span>
-<span id="cb4-2"><a href=""></a><span class="fu">data</span>(NouraguesHD) <span class="co"># load the data</span></span>
-<span id="cb4-3"><a href=""></a>dt_HD <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(NouraguesHD) <span class="co"># rename and transform to tibble</span></span>
-<span id="cb4-4"><a href=""></a><span class="fu">rm</span>(NouraguesHD) <span class="co"># remove</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">data</span>(NouraguesHD) <span class="co"># load the data</span></span>
+<span id="cb12-2"><a href=""></a>dt_HD <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(NouraguesHD) <span class="co"># rename and transform to tibble</span></span>
+<span id="cb12-3"><a href=""></a><span class="fu">rm</span>(NouraguesHD) <span class="co"># remove</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -487,14 +866,14 @@ PARTOUT : https://pmarchand1.github.io/ECL7102/
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># look at the 10 most abundant genus</span></span>
-<span id="cb5-2"><a href=""></a>abd_10 <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
-<span id="cb5-3"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">!=</span> <span class="st">"indet"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href=""></a>  <span class="fu">count</span>(genus) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-5"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-6"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) </span>
-<span id="cb5-7"><a href=""></a></span>
-<span id="cb5-8"><a href=""></a>abd_10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="co"># look at the 10 most abundant genus</span></span>
+<span id="cb13-2"><a href=""></a>abd_10 <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">!=</span> <span class="st">"indet"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href=""></a>  <span class="fu">count</span>(genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-5"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) </span>
+<span id="cb13-7"><a href=""></a></span>
+<span id="cb13-8"><a href=""></a>abd_10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -516,10 +895,10 @@ PARTOUT : https://pmarchand1.github.io/ECL7102/
 </div><div class="column" style="width:50%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="co"># take a subset of dt_HD containing the 10 most abundant genus</span></span>
-<span id="cb7-2"><a href=""></a>dt_sub10 <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
-<span id="cb7-3"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> abd_10<span class="sc">$</span>genus) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">genus =</span> <span class="fu">as.factor</span>(genus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="co"># take a subset of dt_HD containing the 10 most abundant genus</span></span>
+<span id="cb15-2"><a href=""></a>dt_sub10 <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> abd_10<span class="sc">$</span>genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">genus =</span> <span class="fu">as.factor</span>(genus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -532,8 +911,8 @@ PARTOUT : https://pmarchand1.github.io/ECL7102/
 <p><span style="font-size: 30px">Let’s start by doing a contingency table, using the function <span style="color:indianred;">table</span>.</span></p>
 <p><span style="font-size: 30px">This gives the number of observations for each pairs of categories.</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>tab_abd <span class="ot">&lt;-</span> <span class="fu">table</span>(dt_sub10<span class="sc">$</span>genus, dt_sub10<span class="sc">$</span>plotId)</span>
-<span id="cb8-2"><a href=""></a>tab_abd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>tab_abd <span class="ot">&lt;-</span> <span class="fu">table</span>(dt_sub10<span class="sc">$</span>genus, dt_sub10<span class="sc">$</span>plotId)</span>
+<span id="cb16-2"><a href=""></a>tab_abd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -558,7 +937,7 @@ PARTOUT : https://pmarchand1.github.io/ECL7102/
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">cprop</span>(tab_abd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">cprop</span>(tab_abd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -611,13 +990,13 @@ PARTOUT : https://pmarchand1.github.io/ECL7102/
 <h2>Graphical exploration</h2>
 <p><span style="font-size: 30px">We can do a mosaic plot, using the function <span style="color:indianred;">mosaicplot</span> to explore the association graphically:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">mosaicplot</span>(tab_abd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">mosaicplot</span>(tab_abd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -632,8 +1011,8 @@ PARTOUT : https://pmarchand1.github.io/ECL7102/
 </div><div class="column" style="width:60%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>res_chi2 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(tab_abd)</span>
-<span id="cb13-2"><a href=""></a>res_chi2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>res_chi2 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(tab_abd)</span>
+<span id="cb21-2"><a href=""></a>res_chi2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -661,7 +1040,7 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>res_chi2<span class="sc">$</span>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>res_chi2<span class="sc">$</span>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -700,7 +1079,7 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 <div class="column" style="width:40%;">
 <p><span style="font-size: 30px">We can look at the residuals using the function <span style="color:indianred;">chisq.residuals</span> of the package <span style="color:indianred;">questionr</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">chisq.residuals</span>(tab_abd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">chisq.residuals</span>(tab_abd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -731,16 +1110,16 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 <h2>Residuals</h2>
 <p><span style="font-size: 30px">We can also present the residuals graphically with the argument <em>shade = TRUE</em> in the function <span style="color:indianred;">mosaicplot</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">mosaicplot</span>(tab_abd, </span>
-<span id="cb19-2"><a href=""></a>           <span class="at">shade =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb19-3"><a href=""></a>           <span class="at">las =</span> <span class="dv">3</span>, <span class="co"># vertical orientation of labels</span></span>
-<span id="cb19-4"><a href=""></a>           <span class="at">main =</span> <span class="st">""</span>) <span class="co"># remove main title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">mosaicplot</span>(tab_abd, </span>
+<span id="cb27-2"><a href=""></a>           <span class="at">shade =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb27-3"><a href=""></a>           <span class="at">las =</span> <span class="dv">3</span>, <span class="co"># vertical orientation of labels</span></span>
+<span id="cb27-4"><a href=""></a>           <span class="at">main =</span> <span class="st">""</span>) <span class="co"># remove main title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-11-1.png" style="width:80.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-24-1.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -755,13 +1134,13 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 <h2>Let’s work with the Nouragues tree data</h2>
 <p><span style="font-size: 30px">We will focus on two genus: <em>Dicorynia</em> and <em>Protium</em>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="co"># one dataset with both genus</span></span>
-<span id="cb20-2"><a href=""></a>dt_sub <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
-<span id="cb20-3"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Protium"</span>))</span>
-<span id="cb20-4"><a href=""></a></span>
-<span id="cb20-5"><a href=""></a><span class="co"># one dataset per genus</span></span>
-<span id="cb20-6"><a href=""></a>d_Dico <span class="ot">&lt;-</span> <span class="fu">filter</span>(dt_sub, genus <span class="sc">==</span> <span class="st">"Dicorynia"</span>)</span>
-<span id="cb20-7"><a href=""></a>d_Prot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dt_sub, genus <span class="sc">==</span> <span class="st">"Protium"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="co"># one dataset with both genus</span></span>
+<span id="cb28-2"><a href=""></a>dt_sub <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Protium"</span>))</span>
+<span id="cb28-4"><a href=""></a></span>
+<span id="cb28-5"><a href=""></a><span class="co"># one dataset per genus</span></span>
+<span id="cb28-6"><a href=""></a>d_Dico <span class="ot">&lt;-</span> <span class="fu">filter</span>(dt_sub, genus <span class="sc">==</span> <span class="st">"Dicorynia"</span>)</span>
+<span id="cb28-7"><a href=""></a>d_Prot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dt_sub, genus <span class="sc">==</span> <span class="st">"Protium"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -784,15 +1163,15 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 <h2>Do the two genus differ in height?</h2>
 <p><span style="font-size: 30px">Let’s explore this graphically:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>dt_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb21-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>genus, <span class="at">y=</span>H)) <span class="sc">+</span> </span>
-<span id="cb21-3"><a href=""></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a>dt_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>genus, <span class="at">y=</span>H)) <span class="sc">+</span> </span>
+<span id="cb29-3"><a href=""></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-14-1.png" style="width:80.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-27-1.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -804,7 +1183,7 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">shapiro.test</span>(d_Dico<span class="sc">$</span>H)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">shapiro.test</span>(d_Dico<span class="sc">$</span>H)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -817,7 +1196,7 @@ W = 0.9642, p-value = 0.6307</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">shapiro.test</span>(d_Prot<span class="sc">$</span>H)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">shapiro.test</span>(d_Prot<span class="sc">$</span>H)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -833,32 +1212,32 @@ W = 0.98494, p-value = 0.8708</code></pre>
 </section>
 <section id="are-the-distribution-of-height-in-both-genus-normal-1" class="slide level2">
 <h2>Are the distribution of height in both genus normal?</h2>
-<p><span style="font-size: 30px">We could also check the normality graphically with normal Q-Q plot, using the function <span style="color:indianred;">qqnorm</span>:</span></p>
+<p><span style="font-size: 30px">We could also check the normality graphically with normal Q-Q plot:</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">qqnorm</span>(d_Dico<span class="sc">$</span>H)</span>
-<span id="cb26-2"><a href=""></a><span class="fu">qqline</span>(d_Dico<span class="sc">$</span>H)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="fu">qqnorm</span>(d_Dico<span class="sc">$</span>H)</span>
+<span id="cb34-2"><a href=""></a><span class="fu">qqline</span>(d_Dico<span class="sc">$</span>H)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-17-1.png" width="268"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-30-1.png" width="268"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">qqnorm</span>(d_Prot<span class="sc">$</span>H)</span>
-<span id="cb27-2"><a href=""></a><span class="fu">qqline</span>(d_Prot<span class="sc">$</span>H)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">qqnorm</span>(d_Prot<span class="sc">$</span>H)</span>
+<span id="cb35-2"><a href=""></a><span class="fu">qqline</span>(d_Prot<span class="sc">$</span>H)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-18-1.png" width="268"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-31-1.png" width="268"></p>
 </figure>
 </div>
 </div>
@@ -866,7 +1245,7 @@ W = 0.98494, p-value = 0.8708</code></pre>
 </div></div>
 <p><span class="fragment"><span style="font-size: 25px"><em>A QQ plot compares the quantiles of the observed distribution against a normal distribution. If the points fall reasonably on the diagonal line, we consider the data as normally distributed.</em></span></span></p>
 </section>
-<section id="t-test" class="slide level2">
+<section id="t-test" class="slide level2 smaller">
 <h2>t-test</h2>
 <p><span style="font-size: 30px">As the two distributions are normal, we can do a t-test using the function <span style="color:indianred;">t.test</span>:</span></p>
 <p><span class="fragment"><span style="font-size: 30px">A t-test test the equality of means of two groups: <strong>H0: equality of the means</strong></span></span></p>
@@ -874,7 +1253,7 @@ W = 0.98494, p-value = 0.8708</code></pre>
 <div class="column" style="width:65%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">t.test</span>(dt_sub<span class="sc">$</span>H <span class="sc">~</span> dt_sub<span class="sc">$</span>genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="fu">t.test</span>(dt_sub<span class="sc">$</span>H <span class="sc">~</span> dt_sub<span class="sc">$</span>genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -915,15 +1294,15 @@ mean in group Dicorynia   mean in group Protium
 <h2>Do the two genus differ in diameter?</h2>
 <p><span style="font-size: 30px">Let’s explore this graphically:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>dt_sub <span class="sc">%&gt;%</span> </span>
-<span id="cb30-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>genus, <span class="at">y=</span>D)) <span class="sc">+</span> </span>
-<span id="cb30-3"><a href=""></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>dt_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>genus, <span class="at">y=</span>D)) <span class="sc">+</span> </span>
+<span id="cb38-3"><a href=""></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-20-1.png" style="width:80.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-33-1.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -935,7 +1314,7 @@ mean in group Dicorynia   mean in group Protium
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">shapiro.test</span>(d_Dico<span class="sc">$</span>D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">shapiro.test</span>(d_Dico<span class="sc">$</span>D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -948,7 +1327,7 @@ W = 0.88346, p-value = 0.01171</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">shapiro.test</span>(d_Prot<span class="sc">$</span>D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="fu">shapiro.test</span>(d_Prot<span class="sc">$</span>D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -968,28 +1347,28 @@ W = 0.88607, p-value = 0.0001987</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">qqnorm</span>(d_Dico<span class="sc">$</span>D)</span>
-<span id="cb35-2"><a href=""></a><span class="fu">qqline</span>(d_Dico<span class="sc">$</span>D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">qqnorm</span>(d_Dico<span class="sc">$</span>D)</span>
+<span id="cb43-2"><a href=""></a><span class="fu">qqline</span>(d_Dico<span class="sc">$</span>D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-23-1.png" width="268"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-36-1.png" width="268"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="fu">qqnorm</span>(d_Prot<span class="sc">$</span>D)</span>
-<span id="cb36-2"><a href=""></a><span class="fu">qqline</span>(d_Prot<span class="sc">$</span>D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">qqnorm</span>(d_Prot<span class="sc">$</span>D)</span>
+<span id="cb44-2"><a href=""></a><span class="fu">qqline</span>(d_Prot<span class="sc">$</span>D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-24-1.png" width="268"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-37-1.png" width="268"></p>
 </figure>
 </div>
 </div>
@@ -1001,7 +1380,7 @@ W = 0.88607, p-value = 0.0001987</code></pre>
 <h2>Wikcoxon rank test</h2>
 <p><span style="font-size: 30px">We can do a Wilcoxon rank test, which is the non-parametric equivalent to the t-test, using the function <span style="color:indianred;">wilcox.test</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a><span class="fu">wilcox.test</span>(dt_sub<span class="sc">$</span>H <span class="sc">~</span>dt_sub<span class="sc">$</span>genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a><span class="fu">wilcox.test</span>(dt_sub<span class="sc">$</span>H <span class="sc">~</span>dt_sub<span class="sc">$</span>genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -1018,6 +1397,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">The result is significant, so we can reject the null hypothesis, and conclude that the two genus differ in diameter.</span></span></p>
+<p>[💡 A non-parametric test is a test that does not make any assumption regarding the distribution of the observations.]</p>
 <aside class="notes">
 <p>The test assume all values to be different, but there are some ties (equal values) so the p-value is approximates =&gt; here very small so OK</p>
 <style type="text/css">
@@ -1036,7 +1416,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <h2>What if the data are paired?</h2>
 <p><span style="font-size: 30px">Let’s load some data:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_statistics.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_statistics.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1044,7 +1424,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <p><span class="fragment"><span style="font-size: 30px">The data <em>dt_thin</em> is a dummy dataset of the growth (in cm DBH/year) of 100 tree before and after thinning.</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="fu">str</span>(dt_thin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a><span class="fu">str</span>(dt_thin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1055,19 +1435,19 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
 </div>
-<p><span class="fragment"><span style="font-size: 30px">These data are <strong>paired</strong>, as each individual tree is measured twice: (before and after thinning).</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">These data are <strong>paired</strong>, as each individual tree is measured twice: before and after thinning.</span></span></p>
 </section>
 <section id="growth-before-and-after-thinning" class="slide level2">
 <h2>Growth before and after thinning</h2>
 <p><span style="font-size: 30px">Let’s explore the data graphically:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">ggplot</span>(dt_thin, <span class="fu">aes</span>(<span class="at">x=</span>treat, <span class="at">y=</span>growth)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="fu">ggplot</span>(dt_thin, <span class="fu">aes</span>(<span class="at">x=</span>treat, <span class="at">y=</span>growth)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-28-1.png" style="width:80.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-41-1.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -1077,11 +1457,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <h2>Growth before and after thinning</h2>
 <p><span style="font-size: 30px">First, we pivot the data to a wide format:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a>dt_thin_w <span class="ot">&lt;-</span> dt_thin <span class="sc">%&gt;%</span> </span>
-<span id="cb44-2"><a href=""></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"treat"</span>, </span>
-<span id="cb44-3"><a href=""></a>              <span class="at">values_from =</span> <span class="st">"growth"</span>)</span>
-<span id="cb44-4"><a href=""></a></span>
-<span id="cb44-5"><a href=""></a><span class="fu">slice_head</span>(dt_thin_w, <span class="at">n =</span> <span class="dv">5</span>) <span class="co"># check the first rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a>dt_thin_w <span class="ot">&lt;-</span> dt_thin <span class="sc">%&gt;%</span> </span>
+<span id="cb52-2"><a href=""></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"treat"</span>, </span>
+<span id="cb52-3"><a href=""></a>              <span class="at">values_from =</span> <span class="st">"growth"</span>)</span>
+<span id="cb52-4"><a href=""></a></span>
+<span id="cb52-5"><a href=""></a><span class="fu">slice_head</span>(dt_thin_w, <span class="at">n =</span> <span class="dv">5</span>) <span class="co"># check the first rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1102,28 +1482,28 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">qqnorm</span>(dt_thin_w<span class="sc">$</span>before)</span>
-<span id="cb46-2"><a href=""></a><span class="fu">qqline</span>(dt_thin_w<span class="sc">$</span>before)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a><span class="fu">qqnorm</span>(dt_thin_w<span class="sc">$</span>before)</span>
+<span id="cb54-2"><a href=""></a><span class="fu">qqline</span>(dt_thin_w<span class="sc">$</span>before)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-30-1.png" width="288"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-43-1.png" width="288"></p>
 </figure>
 </div>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">qqnorm</span>(dt_thin_w<span class="sc">$</span>after)</span>
-<span id="cb47-2"><a href=""></a><span class="fu">qqline</span>(dt_thin_w<span class="sc">$</span>after)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="fu">qqnorm</span>(dt_thin_w<span class="sc">$</span>after)</span>
+<span id="cb55-2"><a href=""></a><span class="fu">qqline</span>(dt_thin_w<span class="sc">$</span>after)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-31-1.png" width="288"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-44-1.png" width="288"></p>
 </figure>
 </div>
 </div>
@@ -1153,10 +1533,10 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a>res_paired <span class="ot">&lt;-</span> <span class="fu">t.test</span>(dt_thin_w<span class="sc">$</span>before, </span>
-<span id="cb48-2"><a href=""></a>                     dt_thin_w<span class="sc">$</span>after,</span>
-<span id="cb48-3"><a href=""></a>                     <span class="at">paired=</span>T)</span>
-<span id="cb48-4"><a href=""></a>res_paired</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a>res_paired <span class="ot">&lt;-</span> <span class="fu">t.test</span>(dt_thin_w<span class="sc">$</span>before, </span>
+<span id="cb56-2"><a href=""></a>                     dt_thin_w<span class="sc">$</span>after,</span>
+<span id="cb56-3"><a href=""></a>                     <span class="at">paired=</span>T)</span>
+<span id="cb56-4"><a href=""></a>res_paired</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1196,14 +1576,14 @@ mean difference
 <h2>What to report for a t-test?</h2>
 <p><span style="font-size: 30px">To retrieve the p-value:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a>res_paired<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a>res_paired<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3.868284e-23</code></pre>
 </div>
 </div>
-<p><span class="fragment"><span style="font-size: 30px">A significant p-value indicates that it is highly improbable to have the observed effect is the null hypothesis is true. So we can conclude that the two groups differ. <strong>⚠️ However, this does not inform on the magnitude of the difference.</strong></span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">A significant p-value indicates that it is highly improbable to have the observed effect if the null hypothesis is true. So we can conclude that the two groups differ. <strong>⚠️ However, this does not inform on the magnitude of the difference.</strong></span></span></p>
 <p><span class="fragment"><span style="font-size: 30px">In addition to the p-value, we need to report:</span></span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -1212,7 +1592,7 @@ mean difference
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a>res_paired<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a>res_paired<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1227,7 +1607,7 @@ mean difference
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a>res_paired<span class="sc">$</span>conf.int</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a>res_paired<span class="sc">$</span>conf.int</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1270,14 +1650,14 @@ attr(,"conf.level")
 <p><span class="fragment"><span style="font-size: 30px">Let’s start with a graphical exploration:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a><span class="fu">ggplot</span>(dt_sub10, <span class="fu">aes</span>(<span class="at">x=</span>genus, <span class="at">y=</span>H)) <span class="sc">+</span> </span>
-<span id="cb56-2"><a href=""></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a><span class="fu">ggplot</span>(dt_sub10, <span class="fu">aes</span>(<span class="at">x=</span>genus, <span class="at">y=</span>H)) <span class="sc">+</span> </span>
+<span id="cb64-2"><a href=""></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-36-1.png" style="width:70.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-49-1.png" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -1288,9 +1668,9 @@ attr(,"conf.level")
 <h2>ANOVA</h2>
 <p><span style="font-size: 30px">We perform the ANOVA using the function <span style="color:indianred;">aov</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a>H_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(H <span class="sc">~</span> genus,</span>
-<span id="cb57-2"><a href=""></a>             <span class="at">data =</span> dt_sub10)</span>
-<span id="cb57-3"><a href=""></a><span class="fu">summary</span>(H_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href=""></a>H_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(H <span class="sc">~</span> genus,</span>
+<span id="cb65-2"><a href=""></a>             <span class="at">data =</span> dt_sub10)</span>
+<span id="cb65-3"><a href=""></a><span class="fu">summary</span>(H_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1311,13 +1691,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a><span class="fu">plot</span>(H_aov, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href=""></a><span class="fu">plot</span>(H_aov, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-38-1.png" width="480"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-51-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1337,13 +1717,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="fu">plot</span>(H_aov, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a><span class="fu">plot</span>(H_aov, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-39-1.png" width="480"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-52-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1372,7 +1752,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 <h2>Estimated mean per group</h2>
 <p><span style="font-size: 30px">The get the estimated mean of each group, we use the function <span style="color:indianred;">coef</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="fu">coef</span>(H_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a><span class="fu">coef</span>(H_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1388,7 +1768,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 <p><span class="fragment"><span style="font-size: 30px">The other coeeficient show the difference of each group with the first group. For instance, the mean of <em>Sterculia</em> is:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a><span class="fu">coef</span>(H_aov)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(H_aov)[<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href=""></a><span class="fu">coef</span>(H_aov)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(H_aov)[<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1403,8 +1783,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 <p><span style="font-size: 30px">We know that the means of the groups differ, but we also would like to know which groups significantly differ from the others.</span></p>
 <p><span style="font-size: 30px">We can perform a Tukey test, which compares all pairs of groups, using the function <span style="color:indianred;">TukeyHSD</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href=""></a>H_tukey <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(H_aov)</span>
-<span id="cb65-2"><a href=""></a>H_tukey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href=""></a>H_tukey <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(H_aov)</span>
+<span id="cb73-2"><a href=""></a>H_tukey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1480,9 +1860,9 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <h2>Graphical presentation of the results</h2>
 <p><span style="font-size: 30px">We use the function <span style="color:indianred;">multcompLetters4</span> from the package <span style="color:indianred;">multcompView</span> to get the letters indicating identical groups:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href=""></a><span class="fu">library</span>(multcompView)</span>
-<span id="cb67-2"><a href=""></a>H_letters <span class="ot">&lt;-</span> <span class="fu">multcompLetters4</span>(H_aov, H_tukey)</span>
-<span id="cb67-3"><a href=""></a>H_letters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a><span class="fu">library</span>(multcompView)</span>
+<span id="cb75-2"><a href=""></a>H_letters <span class="ot">&lt;-</span> <span class="fu">multcompLetters4</span>(H_aov, H_tukey)</span>
+<span id="cb75-3"><a href=""></a>H_letters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1496,10 +1876,10 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <p><span class="fragment"><span style="font-size: 30px">This gives a list, from which we extract the letters:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a>H_letters_tb <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb69-2"><a href=""></a>  <span class="at">genus =</span> <span class="fu">names</span>(H_letters[[<span class="dv">1</span>]]<span class="sc">$</span>Letters),</span>
-<span id="cb69-3"><a href=""></a>  <span class="at">letter =</span> <span class="fu">as.character</span>(H_letters[[<span class="dv">1</span>]]<span class="sc">$</span>Letters)</span>
-<span id="cb69-4"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a>H_letters_tb <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb77-2"><a href=""></a>  <span class="at">genus =</span> <span class="fu">names</span>(H_letters[[<span class="dv">1</span>]]<span class="sc">$</span>Letters),</span>
+<span id="cb77-3"><a href=""></a>  <span class="at">letter =</span> <span class="fu">as.character</span>(H_letters[[<span class="dv">1</span>]]<span class="sc">$</span>Letters)</span>
+<span id="cb77-4"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1523,10 +1903,10 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <h2>Graphical presentation of the results</h2>
 <p><span style="font-size: 30px">We then make a tibble containing the groups, the letters and the 75th percentile (to position the letter above the box):</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a>H_letters_pos <span class="ot">&lt;-</span> dt_sub10 <span class="sc">%&gt;%</span> </span>
-<span id="cb70-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
-<span id="cb70-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">q_75 =</span> <span class="fu">quantile</span>(H, <span class="at">probs =</span> <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb70-4"><a href=""></a>  <span class="fu">inner_join</span>(H_letters_tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a>H_letters_pos <span class="ot">&lt;-</span> dt_sub10 <span class="sc">%&gt;%</span> </span>
+<span id="cb78-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">q_75 =</span> <span class="fu">quantile</span>(H, <span class="at">probs =</span> <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb78-4"><a href=""></a>  <span class="fu">inner_join</span>(H_letters_tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1534,17 +1914,17 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <p><span class="fragment"><span style="font-size: 30px">And we make the plot:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href=""></a>graph_H <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb71-2"><a href=""></a>  <span class="fu">geom_boxplot</span>(<span class="at">data =</span> dt_sub10, </span>
-<span id="cb71-3"><a href=""></a>               <span class="fu">aes</span>(<span class="at">x =</span> genus, <span class="at">y =</span> H, <span class="at">fill =</span> genus),</span>
-<span id="cb71-4"><a href=""></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb71-5"><a href=""></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> H_letters_pos,</span>
-<span id="cb71-6"><a href=""></a>            <span class="fu">aes</span>(<span class="at">x =</span> genus, <span class="at">y =</span> q_75, <span class="co"># position of the label</span></span>
-<span id="cb71-7"><a href=""></a>                <span class="at">label =</span> letter), <span class="co"># labels are the letters</span></span>
-<span id="cb71-8"><a href=""></a>            <span class="at">size =</span> <span class="dv">5</span>, <span class="co"># size of the labels</span></span>
-<span id="cb71-9"><a href=""></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span> <span class="co"># adjusts position of the labels</span></span>
-<span id="cb71-10"><a href=""></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>) <span class="sc">+</span> </span>
-<span id="cb71-11"><a href=""></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a>graph_H <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb79-2"><a href=""></a>  <span class="fu">geom_boxplot</span>(<span class="at">data =</span> dt_sub10, </span>
+<span id="cb79-3"><a href=""></a>               <span class="fu">aes</span>(<span class="at">x =</span> genus, <span class="at">y =</span> H, <span class="at">fill =</span> genus),</span>
+<span id="cb79-4"><a href=""></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb79-5"><a href=""></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> H_letters_pos,</span>
+<span id="cb79-6"><a href=""></a>            <span class="fu">aes</span>(<span class="at">x =</span> genus, <span class="at">y =</span> q_75, <span class="co"># position of the label</span></span>
+<span id="cb79-7"><a href=""></a>                <span class="at">label =</span> letter), <span class="co"># labels are the letters</span></span>
+<span id="cb79-8"><a href=""></a>            <span class="at">size =</span> <span class="dv">5</span>, <span class="co"># size of the labels</span></span>
+<span id="cb79-9"><a href=""></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span> <span class="co"># adjusts position of the labels</span></span>
+<span id="cb79-10"><a href=""></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>) <span class="sc">+</span> </span>
+<span id="cb79-11"><a href=""></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1554,13 +1934,13 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <section id="graphical-presentation-of-the-results-2" class="slide level2">
 <h2>Graphical presentation of the results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a>graph_H</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href=""></a>graph_H</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-47-1.png" style="width:120.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-60-1.png" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
@@ -1571,7 +1951,7 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <p><span style="font-size: 30px">If the assumption of normality of the residuals is not met, we can:</span></p>
 <ul>
 <li class="fragment"><p><span style="font-size: 30px">Perform a <strong>Kruskal-Wallis test</strong> (non parametric) using the function <span style="color:indianred;">kruskal.test</span></span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">Transform the continuous variables (log, sqrt…)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Transform the continuous variable (log, sqrt…)</span></p></li>
 <li class="fragment"><p><span style="font-size: 30px">Perform a <strong>generalised linear model</strong> (GLM)</span></p></li>
 </ul>
 <p><span class="fragment"><span style="font-size: 30px">If the assumption of homoscedasticity is not met, we can perform a <strong>Welch’s ANOVA</strong> using the function <span style="color:indianred;">oneway.test</span></span></span></p>

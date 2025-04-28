@@ -1,5 +1,5 @@
 ---
-title: "Basic statistics with R - session 1"
+title: "Statistics with R - session 1"
 author: Géraldine Derroire
 institute: Cirad - UnB
 date: last-modified
@@ -23,49 +23,356 @@ editor:
     wrap: sentence
 ---
 
-<!-- Chnage the title ? maybe not basic...-->
+#
 
+Let's load the packages that we will use today
+
+```{r}
+#| message: false
+library(tidyverse)
+library(questionr)
+library(BIOMASS)
+```
+::: notes
+tidyverse for data manip and graph
+questionr for usefull function for exploration and visualisation
+BIOMASS for data
+:::
+
+
+# Univariate statistics
+
+::: notes
+one variable
+::: 
+
+## Reminder on the descriptive statistics
+
+For a categorical variable:
+
+* Occurrence (count or proportion) per categories
+
+* **visualisation**: [barplot, Cleveland plot]{.fragment}
+
+
+## Reminder on the descriptive statistics
+
+For a quantitative (numerical) variable:
+
+* **measure of centrality**: [mean, median]{.fragment}
+
+* **measure of dispersion**: [max-min, variance, standard deviation, interquartile distance, coefficient of variation]{.fragment}
+
+* **visualisation**: histogram, boxplot, density plot
+
+::: notes
+have them guess
+:::
+
+
+## Reminder on the descriptive statistics
+
+The coefficient (CV) is a standardised measure of dispersion, that can be used to compared the dispersion of variables measured in different scale:
+
+$$CV = \frac{standard\:deviation}{mean}$$
+
+
+## Descriptive statistics *vs* parameters
+
+[**Descriptive statistics** are calculated from the observations (the data). These observations are a sample of a theoretical population that we don't measure.]{style="font-size: 30px"}
+
+> [*eg*: The trees that we can measure in a forest plot are a sample of the population of the trees in the considered forest. We can calculate the mean diameter.]{style="font-size: 30px"}
+
+[A theoretical population can be described by its **parameters**, that are not measured.]{style="font-size: 30px"}
+
+> [*eg*: The mean diameter of the population of tree in the considered forest is a parameter.]{style="font-size: 30px"}
+
+
+## Statistical distributions
+
+We can use **statistical distributions** to represent the distribution of the values of the variable in the theoretical population. 
+
+A statistical distribution (also called *probability law*) is a function that associates a probability with each possible value of a random variable.
+
+## Statistical distributions
+
+We can visualise a distribution density function (also called density of probability) with a density plot:
+
+::::: columns
+::: {.column width="70%"}
+```{r}
+#| echo: false
+set.seed(22)
+v <- data.frame(x = rnorm(n = 1000000))
+p <- ggplot(v, aes(x = x)) + geom_density(color = "blue") + theme_minimal()
+# Extract the computed density data
+  density_data <- ggplot_build(p)$data[[1]]
+# Filter density data 
+  shade_data <- density_data %>% filter(x >= -1, x <= 1)
+# Add on the plot
+  p + geom_area(data = shade_data, aes(x = x, y = y), fill = "lightblue", alpha = 0.5) +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed") + 
+    scale_x_continuous(breaks = seq(from = -5, to = 5, by = 1)) + 
+    labs(x = "x", y = "density")
+```
+:::
+
+::: {.column width="30%"}
+[[Here, the probability that $x \in [-1, 1]$ is equal to the blue area, which is the integral of the density function between -1 and 1.]{style="font-size: 30px"}]{.fragment}
+:::
+:::::
+
+::: notes
+The density function does not give the probability of being equal to a value, as for a continuous variable, this probability would be null.
+
+:::
+
+<!-- for each law => give examples of how used, show the equation with parameters, show the density (with several values of the param) -->
+
+## Uniform distribution
+
+$$\mathcal{U}(a, b)$$
+
+[$[-a, b]$ is the range of possible values]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="30%"}
+[*e.g.* for $\mathcal{U}(2, 5)$]{style="font-size: 30px"}
+:::
+
+::: {.column width="70%"}
+```{r}
+#| echo: false
+dt <- data.frame(x = c(seq(from = -2, to = 7, by =1), 2, 5),
+                 y = c(0, 0, 0 , 0, 0, 1, 1, 1, 0, 0, 1, 0))
+dt0 <- filter(dt, x <= 2 & y==0)
+dt00 <- filter(dt, x>=5 & y==0)
+dt1 <- filter(dt, (x>=2 | x<=5) & y==1)
+ggplot() + geom_line(data = dt, aes(x=x, y=y), colour = "blue", linetype="dashed") + 
+  geom_line(data = dt0, aes(x=x, y=y), color = "blue", linewidth=1) + 
+  geom_line(data = dt00, aes(x=x, y=y), color = "blue", linewidth=1) +
+  geom_line(data = dt1, aes(x=x, y=y), color = "blue", linewidth=1) + theme_minimal() +
+  scale_x_continuous(breaks = seq(from = -2, to = 7, by = 1)) + 
+    labs(x = "x", y = "density")
+```
+:::
+:::::
+ 
+
+## Uniform distribution
+
+We use the function [runif]{style="color:indianred;"} to randomly draw data from a uniform distribution:
+
+```{r}
+runif(n = 10, # number of value t
+      min = 2, # lower limit of the distribution
+      max = 5) # upper limit of the distribution
+```
+[*NB*: as we do a random draw, we get different values each time we run the command:]{.fragment}
+
+::: fragment
+```{r}
+runif(n = 10, min = 2, max = 5) 
+```
+:::
+
+## Law of large numbers
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+hist(runif(n = 50,
+           min = 2, max = 5))
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+hist(runif(n = 100000,
+           min = 2, max = 5))
+```
+:::
+:::::
+
+[**The larger the size of the random sample, the closer the distribution of observed values is to the distribution of the theoretical population.**]{.fragment}
+
+
+
+## Normal distribution
+
+$$\mathcal{N}(\mu, \sigma^2)$$
+
+* $\mu$ is the mean
+
+* $\sigma^2 > 0$ is the variance, so $\sigma$ is the standard deviation
+
+[💡 The normal distribution is also called *Gaussian distribution*.]{.fragment}
+
+## Normal distribution {.smaller}
+
+We use the function [rnorm]{style="color:indianred;"} to randomly draw data from a normal distribution:
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+dt1 <- data.frame(x = rnorm(n = 100000, 
+                            mean = 0, 
+                            sd = 1))
+dt2 <- data.frame(x = rnorm(n = 100000, 
+                            mean = 4, 
+                            sd = 0.5))
+dt3 <- data.frame(x = rnorm(n = 100000, 
+                            mean = -2, 
+                            sd = 4))
+g <- ggplot() + 
+  geom_density(data = dt1, aes(x = x), 
+               color = "blue") + 
+  geom_density(data = dt2, aes(x = x), 
+               color = "green") + 
+  geom_density(data = dt3, aes(x = x), 
+               color = "red") +
+  theme_minimal()
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+g
+```
+:::
+:::::
+
+## Centred reduced normal distribution
+
+If $x \sim \mathcal{N}(\mu, \sigma^2)$
+
+then $z = \frac{x - \mu}{\sigma}$ follows a **centred reduced normal distribution**:
+
+$z \sim \mathcal{N}(0, 1)$
+
+[[💡 When to variable are measured in different scales, it can be usefull to standardise them by centring and reducing them, to be able to compare them.]{style="font-size: 30px"}]{.fragment}
+
+
+## QQ-plot {.smaller}
+
+[A *quantile-quantile* plot is used to visualise the correspondence between two distributions by plotting each percentile of the two distributions.]{style="font-size: 30px"}
+
+[This is very useful to visually assess if a variable is normally-distributed, by comparing its distribution to a normal distribution.]{style="font-size: 30px"}
+
+[We use the function [qqnorm]{style="color:indianred;"} to draw a normal QQ-plot:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+#| fig-width: 4
+#| fig-height: 3
+v1 <- rnorm(99, mean = 6, sd = 4)
+qqnorm(v1)
+qqline(v1)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| fig-width: 4
+#| fig-height: 3
+v2 <- rnorm(100000, mean = 6, sd = 4)
+qqnorm(v2)
+qqline(v2)
+```
+:::
+:::::
+
+::: notes
+if we see that they both follow a normal distribution, but the match is better when we increase the sampling size
+:::
 
 <!--
-test de base : t-tests, correlation, Anova...
 
-https://www.statology.org/choosing-the-right-statistical-test-a-decision-tree-approach/
 
-PARTOUT : https://pmarchand1.github.io/ECL7102/
+## Bernoulli and Binomial distribution
+
+$$\mathcal{B}(n, p)$$
+
+[The binomial distribution represent the number of successes when performing ***n*** independent experiment having a constant probability of success ***p***.]{style="font-size: 30px"}
+
+[It is a discrete distribution taking only **positive integer values**.{style="font-size: 30px"}
+
+> [[It can be use for proportion: *eg* proportion of trees browsed in a plot.]{style="font-size: 30px"}{.fragment}
+
+::: fragment
+[The Bernoulli distribution is a special case of the binomial distribution where ***n=1***.]{style="font-size: 30px"}
+
+It is a discrete distribution taking only the values **0 (failure) or 1 (success)**.]{style="font-size: 30px"}
+:::
+
+> [It can be use for presence/abscence and success/failure data: *eg* probability that a tree is browsed.]{style="font-size: 30px"}]{.fragment}
+
+
+
+## Bernoulli and binomial distribution {.smaller}
+
+We use the function [rbinom]{style="color:indianred;"} to randomly draw data from a binomial or a Bernoulli distribution:
+
+::::: columns
+::: {.column width="33%"}
+```{r}
+dt1 <- data.frame(x = 
+          rbinom(n = 100000, 
+                 size  = 20, 
+                 p = 0.5))
+ggplot() + 
+  geom_bar(data = dt1, 
+           aes(x = x)) +
+  theme_minimal()
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+dt2 <- data.frame(x = 
+          rbinom(n = 100000, 
+                 size = 20, 
+                 p = 0.7))
+ggplot() + 
+  geom_bar(data = dt2, 
+           aes(x = x)) +
+  theme_minimal()
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+# Bernoulli distribution
+dt3 <- data.frame(x = 
+          rbinom(n = 100000, 
+                 size = 1, 
+                 p = 0.5))
+ggplot() +
+  geom_bar(data = dt3, 
+           aes(x = x)) +
+  theme_minimal()
+```
+:::
+:::::
+
+
+## Poisson
+
+TO DO OR TO MOVE TO SESSION 2
+
+discrete
+
+cf Eric: 1 slide et Marchand
+
+## To go further on distribution
+
+TO PUT IN THE RESOURCES OF SESSION 2/3
+
+distribution zoo + wikipedia pages (in english)
 
 -->
 
-```{r}
-library(tidyverse)
-library(questionr)
-```
-
-
-
-# Quelques rappels???
-
-## Lois de distribution
-
-=> ne parler que de la distribution normale??? oui
-
-et parler des Q-Q plots
-
-https://ericmarcon.github.io/Cours-R-Geeft/TP_2.html#14
-
-+ mentionner le distribution zoo
-
-Ici ou en début de session sur le modèle linéaire?
-
-https://pmarchand1.github.io/ECL7102/notes_cours/3-Modeles_statistiques.html
-
-
-## confiance interval of a mean 
-
-if normally distributed using t.test 
-see: https://larmarange.github.io/analyse-R/intervalles-de-confiance.html
-
-
-## Parametrique vs non paramétrique
 
 # Testing the association between two categorical variables
 
@@ -76,7 +383,6 @@ see: https://larmarange.github.io/analyse-R/intervalles-de-confiance.html
 [Let's load them:]{style="font-size: 30px"}
 
 ```{r, message=FALSE}
-library(BIOMASS)
 data(NouraguesHD) # load the data
 dt_HD <- as_tibble(NouraguesHD) # rename and transform to tibble
 rm(NouraguesHD) # remove
@@ -306,7 +612,7 @@ We can consider the two distributions as normal.]{style="font-size: 30px"}]{.fra
 
 ## Are the distribution of height in both genus normal?
 
-[We could also check the normality graphically with normal Q-Q plot, using the function [qqnorm]{style="color:indianred;"}:]{style="font-size: 30px"}
+[We could also check the normality graphically with normal Q-Q plot:]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -331,7 +637,7 @@ qqline(d_Prot$H)
 [[*A QQ plot compares the quantiles of the observed distribution against a normal distribution. If the points fall reasonably on the diagonal line, we consider the data as normally distributed.*]{style="font-size: 25px"}]{.fragment}
 
 
-## t-test
+## t-test {.smaller}
 
 [As the two distributions are normal, we can do a t-test using the function [t.test]{style="color:indianred;"}:]{style="font-size: 30px"}
 
@@ -428,6 +734,8 @@ wilcox.test(dt_sub$H ~dt_sub$genus)
 
 [[The result is significant, so we can reject the null hypothesis, and conclude that the two genus differ in diameter.]{style="font-size: 30px"}]{.fragment}
 
+[💡 A non-parametric test is a test that does not make any assumption regarding the distribution of the observations.]
+
 
 ::: notes
 The test assume all values to be different, but there are some ties (equal values) so the p-value is approximates
@@ -451,7 +759,7 @@ str(dt_thin)
 ```
 :::
 
-[[These data are **paired**, as each individual tree is measured twice: (before and after thinning).]{style="font-size: 30px"}]{.fragment}
+[[These data are **paired**, as each individual tree is measured twice: before and after thinning.]{style="font-size: 30px"}]{.fragment}
 
 
 ## Growth before and after thinning
@@ -542,7 +850,7 @@ give the 95% confidence interval of the difference (before - after)
 res_paired$p.value
 ```
 
-[[A significant p-value indicates that it is highly improbable to have the observed effect is the null hypothesis is true. 
+[[A significant p-value indicates that it is highly improbable to have the observed effect if the null hypothesis is true. 
 So we can conclude that the two groups differ.
 **⚠️ However, this does not inform on the magnitude of the difference.**]{style="font-size: 30px"}]{.fragment}
 
@@ -785,7 +1093,7 @@ graph_H
 
 * [Perform a **Kruskal-Wallis test** (non parametric) using the function [kruskal.test]{style="color:indianred;"}]{style="font-size: 30px"}
 
-* [Transform the continuous variables (log, sqrt...)]{style="font-size: 30px"}
+* [Transform the continuous variable (log, sqrt...)]{style="font-size: 30px"}
 
 * [Perform a **generalised linear model** (GLM)]{style="font-size: 30px"}
 
@@ -817,15 +1125,15 @@ https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques
 
 ::: {.nonincremental}
 
+* Marchand P. *Analyses et modélisation des données écologiques* [in French](https://pmarchand1.github.io/ECL7102/){preview-link="false"}
+
+* Marcon E. *cours-R-Geeft* [in French](https://ericmarcon.github.io/Cours-R-Geeft/){preview-link="false"}
+
+* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"} 
+
 * Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
 
-COURS ERIC GEEFT
-
-? LAMARANGE ? 
-
-MARCHAND 
-
-[Rosane Rech] https://statdoe.com/one-way-anova-and-box-plot-in-r/
+* Rech R. *One-Way ANOVA and Boxplot in R* [here](https://statdoe.com/one-way-anova-and-box-plot-in-r/){preview-link="false"}
 
 :::
 
@@ -833,9 +1141,11 @@ MARCHAND
 
 ::: {.nonincremental}
 
-https://statdoe.com/one-way-anova-and-box-plot-in-r/
-TO CHECK ALSO FOR THE OTHER COURSES
+* Dytham C. *Choosing and using statistics - a biologist's guide*, 3rd Edition. Available [here](http://ngc.digitallibrary.co.in/bitstream/123456789/2272/1/Choosing%20and%20using%20statistics_A%20Biologist%27s%20Guide%20%283rd%20edition%29%40Dytham.pdf){preview-link="false"}
 
+* Rech R. *One-Way ANOVA and Boxplot in R* [here](https://statdoe.com/one-way-anova-and-box-plot-in-r/){preview-link="false"}
+
+* datacamp tutorials on [chi-square test](https://www.datacamp.com/tutorial/chi-square-test-r){preview-link="false"} and [t-test](https://www.datacamp.com/tutorial/t-tests-r-tutorial){preview-link="false"}, among other...
 
 :::
 
