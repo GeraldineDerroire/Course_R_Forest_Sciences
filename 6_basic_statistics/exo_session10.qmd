@@ -1,0 +1,10 @@
+---
+title: "Exercices on session *Statistics with R session 2*"
+format:
+  pdf
+execute:
+  echo: false 
+  eval: false 
+---
+
+travailler avec le climat des villes du monde?

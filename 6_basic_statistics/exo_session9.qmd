@@ -1,0 +1,14 @@
+---
+title: "Exercices on session *Statistics with R session 1*"
+format:
+  pdf
+execute:
+  echo: false 
+  eval: false 
+---
+
+Voir les espèces commerciales et WD (LoggingLab) pour faire des t-test et ANOVA et chi2
+
+# For next time
+
+* Install the following package from CRAN: *GGally*

@@ -1,0 +1,8 @@
+---
+title: "Exercices on session *Statistics with R session 3*"
+format:
+  pdf
+execute:
+  echo: false 
+  eval: false 
+---

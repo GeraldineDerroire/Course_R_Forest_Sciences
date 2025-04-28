@@ -11,8 +11,8 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-24">
-  <title>Basic statistics with R - session 2</title>
+  <meta name="dcterms.date" content="2025-04-28">
+  <title>Statistics with R - session 2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="basic_stats_session2_files/libs/revealjs/dist/theme/quarto.css">
   <link href="basic_stats_session2_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -329,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Basic statistics with R - session 2</h1>
+  <h1 class="title">Statistics with R - session 2</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -342,10 +407,261 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-24</p>
+  <p class="date">2025-04-28</p>
 </section>
-<section class="slide level2">
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
+<p>Let’s load the packages that we will use today</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href=""></a><span class="fu">library</span>(GGally)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 
+</div>
+<aside class="notes">
+<p>GGally to see pair-correlation</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="section-1" class="title-slide slide level1 center">
+<h1></h1>
+<p>Last session, we saw how to test for differences between variables.</p>
+<p>Today we are going to look at <strong>relationships between variables</strong>.</p>
+</section>
+
+<section>
+<section id="covariance-and-correlation" class="title-slide slide level1 center">
+<h1>Covariance and correlation</h1>
+
+</section>
+<section id="covariance" class="slide level2 scrollable">
+<h2>Covariance</h2>
+<p>We have seen that the variance of a variable <em>x</em> is the mean of squared deviations from the mean:</p>
+<p><span class="math display">\[\sigma^2_x = \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n}\]</span></p>
+<div class="fragment">
+<p><span style="font-size: 30px">The covariance between two quantitative variables <em>x</em> and <em>y</em> is the mean of the product of the deviations of <em>x</em> and <em>y</em> from their respective mean:</span></p>
+<p><span class="math display">\[cov_{xy} = \frac{\sum_{i=1}^n (x_i-\bar{x}) \times (y_i-\bar{y})}{n}\]</span></p>
+</div>
+</section>
+<section id="covariance-1" class="slide level2">
+<h2>Covariance</h2>
+<p>We use the function <span style="color:indianred;">cov</span> to get the covariance between two variables.</p>
+<p>Let’s test this with the iris data set, which you graphically explore in a last exercise. We focus on the species <em>versicolor</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">data</span>(iris)</span>
+<span id="cb2-2"><a href=""></a>iris <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(iris)</span>
+<span id="cb2-3"><a href=""></a>iris_vers <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"versicolor"</span>)</span>
+<span id="cb2-4"><a href=""></a><span class="fu">cov</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07310204</code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">⚠️ The unit of the covariance is the product of the unit of x and of y…</span></span></p>
+</section>
+<section id="correlation-of-pearson" class="slide level2">
+<h2>Correlation of Pearson</h2>
+<p><span style="font-size: 30px">To help with the interpretation of the covariance, we standardise the covariance by the product of the standard deviations.</span></p>
+<p><span style="font-size: 30px">This is the <strong>coefficient of correlation of Pearson</strong>, which is between -1 and 1:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">a coefficient = -1 (respectively 1) means that the variables are perfectly negatively (respectively positively) correlated</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">a coefficient = 0 shows an absence of correlation</span></p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><span class="fragment"><span style="font-size: 30px">We use the function <span style="color:indianred;">cor</span> to get the correlation between two variables (the default method is Pearson correlation).</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">cor</span>(iris_vers<span class="sc">$</span>Petal.Length, </span>
+<span id="cb4-2"><a href=""></a>    iris_vers<span class="sc">$</span>Petal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7866681</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px"><em>There is a strong positive correlation.</em></span></span></p>
+</div></div>
+<aside class="notes">
+<p>So here strong positive correlation</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="correlation-of-spearman" class="slide level2">
+<h2>Correlation of Spearman</h2>
+<p><span style="font-size: 30px">Pearson correlation makes the hypothesis that the relationship is linear.</span></p>
+<p><span style="font-size: 30px">If this is not the case, we can use the <em>rank correlation of Spearman</em>, by specifying the method:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">cor</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width,</span>
+<span id="cb6-2"><a href=""></a>    <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7870096</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>here, not much difference</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="test-of-correlation" class="slide level2">
+<h2>Test of correlation</h2>
+<p><span style="font-size: 30px">To test if the correlation is significant, we do a test of correlation with the function <span style="color:indianred;">cor.test</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">cor.test</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width,</span>
+<span id="cb8-2"><a href=""></a>         <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  iris_vers$Petal.Length and iris_vers$Petal.Width
+t = 8.828, df = 48, p-value = 1.272e-11
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.6508311 0.8737034
+sample estimates:
+      cor 
+0.7866681 </code></pre>
+</div>
+</div>
+<p><span style="font-size: 30px"><em>The correlation is significant.</em></span></p>
+</section>
+<section id="visualise-correlations" class="slide level2">
+<h2>Visualise correlations</h2>
+<p><span style="font-size: 30px">Pearson correlations between multiple pairs of variables can be visualised using the function <span style="color:indianred;">ggpairs</span> of the package <span style="color:indianred;">GGally</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">ggpairs</span>(iris_vers, <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>,</span>
+<span id="cb10-2"><a href=""></a>                               <span class="st">"Petal.Length"</span>, <span class="st">"Petal.Width"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="co"># this is equivalent to </span></span>
+<span id="cb11-2"><a href=""></a> <span class="co"># ggpairs(iris_vers, columns = 1:4)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>we get the correlation coef and its significance</p>
+<p>more complicated if we want other type of correlation than Pearson</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!-- CONTINUE HERE-->
+</section></section>
+<section id="linear-model-with-one-var" class="title-slide slide level1 center">
+<h1>linear model with one var</h1>
+<p>growth and WD</p>
+<p>do the whole model diagnostic and ploting the results</p>
+</section>
+
+<section>
+<section id="transfor-logatyhtmique" class="title-slide slide level1 center">
+<h1>transfor logatyhtmique</h1>
+<p>marchand 3 et transfo logarythmique =&gt; pour modèle linéaire</p>
+</section>
+<section id="log-normal-distribution" class="slide level2 smaller">
+<h2>Log-normal distribution</h2>
+<p><span class="math inline">\(x \sim log\mathcal{N}(\mu, \sigma^2)\)</span> if <span class="math inline">\(log(x) \sim \mathcal{N}(\mu, \sigma^2)\)</span></p>
+<p><span style="font-size: 30px">We use the function <span style="color:indianred;">rnorm</span> to randomly draw data from a normal distribution:</span></p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb12-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb12-3"><a href=""></a></span>
+<span id="cb12-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb12-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb12-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb12-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb12-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
+<span id="cb12-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb12-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<ul>
+<li class="fragment"><p>The values are stricty positive.</p></li>
+<li class="fragment"><p>The variance increases when the mean increases.</p></li>
+</ul>
+</div></div>
+</section></section>
+<section id="linear-model-with-more-than-one-var" class="title-slide slide level1 center">
+<h1>linear model with more than one var</h1>
+<ul>
+<li class="fragment"><p>check for collinearity (before and after, check the VIF)</p></li>
+<li class="fragment"><p>add some other trais</p></li>
+<li class="fragment"><p>do some models selections</p></li>
+</ul>
+</section>
+
+<section id="mixed-effect" class="title-slide slide level1 center">
+<h1>mixed effect</h1>
+<p>which data?</p>
+</section>
+
+<section id="glm" class="title-slide slide level1 center">
+<h1>GLM?</h1>
+<p>binomial glm: cf p 254 book avec les pinguins</p>
+<p>regression linéaire (en mnetionnant les GLM et les mixed-effect models)</p>
+<p>include DHARma for model diagnostics?</p>
+<p>Voir ici pour comparaison broom, modelr and DHARMa https://chatgpt.com/share/680a764b-476c-8004-9a40-6c99c92a6d35</p>
+<p>https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques</p>
+<p>https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#2</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -564,6 +880,82 @@ Géraldine Derroire
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
