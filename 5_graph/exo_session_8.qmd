@@ -155,5 +155,5 @@ p1 /(p2 | p3)
 
 * Make sur you have the following packages: *questionr*, *tidyverse*, *BIOMASS*
   
-* Download the *RData* file available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics.RData){preview-link="false"}
+* Download the *RData* file available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_1.RData){preview-link="false"}
 and store them in your raw data folder.

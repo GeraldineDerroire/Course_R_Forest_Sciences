@@ -635,7 +635,7 @@ qqline(d_Prot$H)
 :::
 :::::
 
-[[*A QQ plot compares the quantiles of the observed distribution against a normal distribution. If the points fall reasonably on the diagonal line, we consider the data as normally distributed.*]{style="font-size: 25px"}]{.fragment}
+[The points fall reasonably on the diagonal line, we can consider the data as normally distributed.]{style="font-size: 25px"}]{.fragment}
 
 
 ## t-test {.smaller}
@@ -746,10 +746,10 @@ The test assume all values to be different, but there are some ties (equal value
 
 ## What if the data are paired?
 
-[Let's load some data:]{style="font-size: 30px"}
+[Let's load some data:]{style="font-size: 30px"} (available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_1.RData){preview-link="false"})
 
 ```{r}
-load("data/data_statistics.RData")
+load("data/data_statistics_1.RData")
 ```
 
 [[The data *dt_thin* is a dummy dataset of the growth (in cm DBH/year) of 100 tree before and after thinning.]{style="font-size: 30px"}]{.fragment}

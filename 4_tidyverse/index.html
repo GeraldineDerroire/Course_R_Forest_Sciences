@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-26">
+  <meta name="dcterms.date" content="2025-04-29">
   <title>Introduction to the tidyverse</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,12 +407,24 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-26</p>
+  <p class="date">2025-04-29</p>
 </section>
 <section>
 <section id="what-is-the-tidyverse" class="title-slide slide level1 center">
 <h1>What is the tidyverse?</h1>
-
+<aside class="notes">
+<p>ask if some know / use it</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-is-the-tidyverse-1" class="slide level2">
 <h2>What is the tidyverse?</h2>
@@ -425,7 +437,19 @@ Géraldine Derroire
 <li class="fragment"><p>Optimise the readability and functionality of the code (<em>designed for humans</em>)</p></li>
 <li class="fragment"><p>Easy to sequence commands (using a <em>pipe</em>)</p></li>
 </ul>
-</div><div class="column" style="width:30%;">
+</div><aside class="notes">
+<p>we are going to see in a few minutes what are tidy data and pipe</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside><div class="column" style="width:30%;">
 <p><img data-src="tidyverse.png"></p>
 </div></div>
 </section>
@@ -451,6 +475,8 @@ Géraldine Derroire
 </div>
 <aside class="notes">
 <p>You should already have installed the package tidyverse</p>
+<p>we see that this attach several packages</p>
+<p>talk about conflicts and masked functions =&gt; dyplr function used by default so need to specify the package if we want to use the functions from the package stats</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -483,6 +509,19 @@ Géraldine Derroire
 <li class="fragment"><p><span style="font-size: 30px"><span style="color:indianred;">purrr</span> for functional programming</span></p></li>
 </ul>
 </div></div>
+<aside class="notes">
+<p>today: what is a tibble + packages readr, dplyr next session: tidyr, a bit of stringr and forcats latter: session on ggplot2</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="tidy-data" class="slide level2">
 <h2>Tidy data</h2>
@@ -563,7 +602,7 @@ Géraldine Derroire
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>The pipe is introduced by the package <span style="color:indianred;">magritt</span>, but is also loaded with the tidyverse.</p>
-<p><span class="fragment">It can be accessed using the shortcut <span style="color:indianred;">Ctrl + Shuft + m</span></span></p>
+<p><span class="fragment">It can be accessed using the shortcut <span style="color:indianred;">Ctrl + Shift + m</span></span></p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="pipe.png"></p>
 <p><img data-src="magritt.png"></p>
@@ -661,6 +700,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <aside class="notes">
 <p>change the path to your relative path in your project</p>
+<p>Here we get a nice message when importing data. It tells us…</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -693,6 +733,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <li class="fragment">it is faster</li>
 </ul>
 <aside class="notes">
+<p>we see that the data are a tibble (tbl) AND a data.frame AND a tbl_df AND a spec_tbl_df</p>
 <p>tbl_df a subclass of data.frame to distinguish its behaviour from these of other tibble (explain that some functions performs different things depending of the class of the object)</p>
 <p>spec_tbl_df store the columns specification (as seen here)</p>
 <style type="text/css">
@@ -742,6 +783,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 <aside class="notes">
+<p>read the print together</p>
 <p>but package rcontroll is probably not installed…</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -779,6 +821,20 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Let’s see another way of getting a tibble</p>
+<p>! note read.csv and read_csv</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="transform-data-frame-into-tibble-1" class="slide level2 scrollable">
 <h2>Transform data frame into tibble</h2>
@@ -868,8 +924,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
       }</style></aside>
 </section></section>
 <section>
-<section id="manipulate-and-transform-with-the-package-dplyr" class="title-slide slide level1 center">
-<h1>Manipulate and transform with the package <span style="color:indianred;">dplyr</span></h1>
+<section id="manipulate-and-transform-data-with-the-package-dplyr" class="title-slide slide level1 center">
+<h1>Manipulate and transform data with the package <span style="color:indianred;">dplyr</span></h1>
 
 </section>
 <section id="the-verbs-of-dplyr" class="slide level2">
@@ -893,6 +949,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <li><p>distinct</p></li>
 </ul>
 </div>
+<aside class="notes">
+<p>we are not going to see all the functions, but the more common and usefull ones</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="slice" class="slide level2">
 <h2>slice</h2>
@@ -998,6 +1067,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>The number of rows can be specify or we can specify a proportion of rows (here 10%, we had 45 species)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="slice-4" class="slide level2">
 <h2>slice</h2>
@@ -1059,6 +1141,20 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 2 gonfolo rose   Qualea  rosea                 1    55      60   120 TRUE       </code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>only 2 aggregative species</p>
+<p>talk about what is an aggregative species</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="filter-1" class="slide level2">
 <h2>filter</h2>
@@ -1108,6 +1204,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <p><span class="fragment">There are no species satisfying these two conditions in our dataset.</span></p>
 <aside class="notes">
+<p>look at the syntax together,especially the &amp;</p>
 <p>we could write it only on one line, it’s just for readability</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1277,7 +1374,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="select-1" class="slide level2 scrollable">
 <h2>select</h2>
-<p>We can also say the columns we don’t want to select using <span style="color:indianred;">select</span>.</p>
+<p>We can also specify the columns we don’t want to select using <span style="color:indianred;">select</span>.</p>
 <p>Let’s select all the columns except the commercial name, using <span style="color:indianred;">-</span> before the name of the column to exclude:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="fu">select</span>(sp_com, <span class="sc">-</span> CommercialName)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1406,6 +1503,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 <aside class="notes">
+<p>mutate is very usefull!!!!</p>
 <p>here we use a pipe to follow with the function select to only show the column we are interested in.</p>
 <p>But of course, mutate could be used on its own!</p>
 <style type="text/css">
@@ -1595,7 +1693,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment">Here all rows are kept and species of a same genus have the same value for mean_wsg</span></p>
 </div></div>
 <aside class="notes">
-<p>all rows are j=kept as we didn’t do a selection on rows</p>
+<p>Here a lot of values are the same as there are quite often just one species per genus</p>
+<p>but let’s scroll and look at Couepia</p>
+<p>all rows are kept as we didn’t do a selection on rows</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1629,6 +1729,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 3 Licania membranacea 0.785    0.769</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Here the beginning of the code is the same, we just filter the genus Licania</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="group_by-with-filter" class="slide level2">
 <h2>group_by with filter</h2>
@@ -1676,7 +1789,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="summarise" class="slide level2">
 <h2>summarise</h2>
-<p>The function <span style="color:indianred;">summarise</span> aggregates the row by performing a summary operation on one or several columns.</p>
+<p>The function <span style="color:indianred;">summarise</span> aggregates the rows by performing a summary operation on one or several columns.</p>
 <p><span style="font-size: 25px">Let’s look at the min, max and mean values of wsg accross the dataset:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a>traits <span class="sc">%&gt;%</span> </span>
@@ -1693,6 +1806,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 <p><span class="fragment"><em>Note that here only the summary columns are kept.</em></span></p>
+<aside class="notes">
+<p>and only one row of summary</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="summarise-1" class="slide level2 scrollable">
 <h2>summarise</h2>
@@ -1864,7 +1990,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </ul>
 </div></div>
 <aside class="notes">
-<p>This could be the end of the session 1/2</p>
+<p>This is the end of the session 1/2</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

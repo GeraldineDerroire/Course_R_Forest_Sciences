@@ -24,6 +24,10 @@ editor:
 
 # What is the tidyverse?
 
+::: notes
+ask if some know / use it
+:::
+
 ## What is the tidyverse?
 
 The name *tidyverse* come from *tidy* and *universe*. 
@@ -38,6 +42,10 @@ The name *tidyverse* come from *tidy* and *universe*.
 
 * Easy to sequence commands (using a *pipe*)
 
+:::
+
+::: notes
+we are going to see in a few minutes what are tidy data and pipe
 :::
 
 ::: {.column width="30%"}
@@ -56,6 +64,11 @@ library(tidyverse)
 
 ::: notes
 You should already have installed the package tidyverse
+
+we see that this attach several packages
+
+talk about conflicts and masked functions => dyplr function used by default
+so need to specify the package if we want to use the functions from the package stats
 :::
 
 
@@ -87,6 +100,12 @@ This loads the "core" packages of the tidyverse:
 * [[purrr]{style="color:indianred;"} for functional programming]{style="font-size: 30px"}
 :::
 :::::
+
+::: notes
+today: what is a tibble + packages readr, dplyr
+next session: tidyr, a bit of stringr and forcats
+latter: session on ggplot2
+:::
 
 
 ## Tidy data
@@ -160,7 +179,7 @@ what did we do?
 ::: {.column width="50%"}
 The pipe is introduced by the package [magritt ]{style="color:indianred;"}, but is also loaded with the tidyverse.
 
-[It can be accessed using the shortcut [Ctrl + Shuft + m]{style="color:indianred;"}]{.fragment}
+[It can be accessed using the shortcut [Ctrl + Shift + m]{style="color:indianred;"}]{.fragment}
 :::
 
 ::: {.column width="50%"}
@@ -239,6 +258,8 @@ traits <- read_csv("data/func_traits.csv")
 ```
 ::: notes
 change the path to your relative path in your project
+
+Here we get a nice message when importing data. It tells us...
 :::
 
 ## Importing a csv file
@@ -257,6 +278,8 @@ class(traits)
 
 
 ::: notes
+we see that the data are a tibble (tbl) AND a data.frame AND a tbl_df AND a spec_tbl_df
+
 tbl_df a subclass of data.frame to distinguish its behaviour from these of other tibble (explain that some functions performs different things depending of the class of the object)
 
 spec_tbl_df store the columns specification (as seen here)
@@ -279,6 +302,8 @@ traits
 :::
 
 ::: notes
+read the print together
+
 but package rcontroll is probably not installed...
 :::
 
@@ -298,6 +323,12 @@ class(sp_com)
 sp_com <- as_tibble(sp_com)
 class(sp_com)
 ```
+:::
+
+::: notes
+Let's see another way of getting a tibble
+
+! note read.csv and read_csv
 :::
 
 ## Transform data frame into tibble {.scrollable}
@@ -335,7 +366,7 @@ explain that the package is not on the cran
 :::
 
 
-# Manipulate and transform with the package [dplyr]{style="color:indianred;"}
+# Manipulate and transform data with the package [dplyr]{style="color:indianred;"}
 
 ## The verbs of [dplyr]{style="color:indianred;"}
 
@@ -365,6 +396,10 @@ dplyr functions accept *data frame* and *tibble* and return a *tibble*.
 * distinct
 
 ::: 
+
+::: notes
+we are not going to see all the functions, but the more common and usefull ones
+:::
 
 
 ## slice
@@ -412,6 +447,10 @@ slice_tail(traits, prop=0.1) # prop specify the proportion of rows
 ```
 :::
 
+::: notes
+The number of rows can be specify or we can specify a proportion of rows (here 10%, we had 45 species)
+:::
+
 ## slice
 
 [slice_min]{style="color:indianred;"} and [slice_max]{style="color:indianred;"} selects the row with the smallest or biggest value for a given variable:
@@ -443,6 +482,11 @@ Only the rows for which the result of the test is TRUE are selected.
 filter(sp_com, Aggregative == TRUE)
 ```
 
+::: notes
+only 2 aggregative species 
+
+talk about what is an aggregative species
+:::
 
 ## filter
 
@@ -471,6 +515,8 @@ filter(traits,
 [There are no species satisfying these two conditions in our dataset.]{.fragment}
 
 ::: notes
+look at the syntax together,especially the &
+
 we could write it only on one line, it's just for readability
 :::
 
@@ -553,7 +599,7 @@ select(sp_com, CommercialName, Genus, Species)
 
 ## select {.scrollable}
 
-We can also say the columns we don't want to select using [select]{style="color:indianred;"}.
+We can also specify the columns we don't want to select using [select]{style="color:indianred;"}.
 
 Let's select all the columns except the commercial name, using [-]{style="color:indianred;"} before the name of the column to exclude:
 
@@ -614,6 +660,8 @@ mutate(traits,
 
 
 ::: notes
+mutate is very usefull!!!!
+
 here we use a pipe to follow with the function select to only show the column we are interested in.
 
 But of course, mutate could be used on its own!
@@ -717,7 +765,11 @@ traits %>%
 :::::
 
 ::: notes
-all rows are j=kept as we didn't do a selection on rows
+Here a lot of values are the same as there are quite often just one species per genus
+
+but let's scroll and look at Couepia
+
+all rows are kept as we didn't do a selection on rows
 :::
 
 ## group_by with mutate
@@ -732,7 +784,9 @@ traits %>%
   select(genus, species, s_wsg, mean_wsg) %>% # select only the columns of interest
   filter(genus == "Licania") # only the Licania
 ```
-
+::: notes
+Here the beginning of the code is the same, we just filter the genus Licania
+:::
 
 ## group_by with filter
 
@@ -770,7 +824,7 @@ Here most of the genus have just one species, so their wsg is not stricly > to t
 
 ## summarise
 
-The function [summarise]{style="color:indianred;"} aggregates the row by performing a summary operation on one or several columns.
+The function [summarise]{style="color:indianred;"} aggregates the rows by performing a summary operation on one or several columns.
 
 [Let's look at the min, max and mean values of wsg accross the dataset:]{style="font-size: 25px"}
 
@@ -782,6 +836,10 @@ traits %>%
 ```
 
 [*Note that here only the summary columns are kept.*]{.fragment}
+
+::: notes
+and only one row of summary
+:::
 
 ## summarise {.scrollable}
 
@@ -909,7 +967,7 @@ gen_dim_max
 
 
 ::: notes
-This could be the end of the session 1/2
+This is the end of the session 1/2
 ::: 
 
 

@@ -53,11 +53,17 @@ data_Ron$HAB <- as.factor(data_Ron$HAB) # hábito da planta
 data_Ron$AFF <- as.logical(data_Ron$AFF) # árvore fora da floresta
 data_Ron$PL <- as.logical(data_Ron$PL) # presença ou ausência de lianas
 data_Ron$MB <- as.logical(data_Ron$MB) # indivíduo com ou sem coleta botânica
+
+# or
+data_Ron$AFF <- data_Ron$AFF == 1
 ```
 
 - How many *Unidade amostral* is there?
 
 ```{r}
+length(levels(data_Ron$UA))
+
+# alternative (but doesn't allow storing the result)
 str(data_Ron$UA)
 
 # alternative not seen in class:
@@ -95,6 +101,9 @@ hist(data_Ron$DAP)
 
 ```{r}
 table(data_Ron$AFF)
+
+# alternative not seen in class
+dim(data_Ron[data_Ron$AFF == TRUE,])[1]
 ```
 - Which percentage of trees have liana?
 
@@ -149,12 +158,14 @@ There are 4 problems in this data frame, what are they?
 str(dt_pb)
 summary(dt_pb)
 ```
+
 <!-- There is a uncorrect decimal separator in height_max-->
 
 ```{r}
 mode(dt_pb$height_max)
 dt_pb$height_max
 ```
+
 <!-- There is a problem of encoding in site-->
 
 ```{r}
@@ -170,17 +181,22 @@ table(dt_pb$site)
 
 <!-- There is an incoherent value in DBH_max -->
 
-
 ```{r}
 summary(dt_pb$DBH_max)
 
 # or
 range(dt_pb$DBH_max)
 ```
+
 <!-- There is a duplicated plot ID -->
 
 ```{r}
 table(dt_pb$plot)
+
+# 
+length(unique(table(dt_pb$plot))) ==  1
+
+
 
 # alternative not seen in the class
 length(unique(dt_pb$plot)) == dim(dt_pb)[1]

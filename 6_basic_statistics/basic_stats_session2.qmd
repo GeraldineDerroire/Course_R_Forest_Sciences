@@ -133,7 +133,7 @@ cor.test(iris_vers$Petal.Length, iris_vers$Petal.Width,
          method = "pearson")
 ```
 
-[*The correlation is significant.*]{style="font-size: 30px"}
+[[*The correlation is significant.*]{style="font-size: 30px"}]{.fragment}
 
 ## Visualise correlations 
 
@@ -153,20 +153,320 @@ we get the correlation coef and its significance
 more complicated if we want other type of correlation than Pearson
 :::
 
-<!-- CONTINUE HERE-->
+
+# Simple linear regression
+
+## Nouragues tree data {.scrollable}
+
+[We will work on a modified version of Nouragues tree data from the package BIOMASS (available     [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData){preview-link="false"})]{style="font-size: 30px"}
+[These data have been modified to exclude the non fully determined trees, and add the family.]{style="font-size: 30px"}
+
+[*Heights and diameters of trees in two 1-ha plots from the Nouragues forest (French Guiana)*]{style="font-size: 30px"}
+
+
+```{r}
+load("data/data_statistics_2.RData")
+dt_nou
+```
+
+
+<!-- could be plant growth rate as a function of soil humidity:
+https://pmarchand1.github.io/ECL7102/notes_cours/6-Regression_lineaire.html
+
+or maybe the data from the Nouragues
+=> modelling heigth ~ D
+=> then talking about log transfor
+=> selection of the best model
+! voir si je peux aussi m'en servir pour tester avec Category? Famille (à importer avec Biomass) ou plot?
+=> tester puis rajouter interaction entre D et famille?
+=> et effet aléatoire famille?
+--> 
+
+## Relationship between D and H
+
+[Let's explore the relationship between tree diameter and height graphically:]{style="font-size: 30px"}
+
+```{r}
+#| warning: false
+#| out.width: 80%
+ggplot(dt_nou, aes(x = D, y = H)) + 
+  geom_point() + 
+  geom_smooth(method = "lm", se = FALSE)
+```
+
+
+## Structure of a linear regression
+
+A linear regression is a model of the mathematical relationship between:
+
+* A **response variable**, also called *dependent variable*
+
+* One or several **explanatory variables**, also called *predictors* or *independent variables*
+
+[[In our case, we want to model the relationship between *D* (the explanatory variable) and *H* (the response variable).]{style="font-size: 30px"}]{.fragment}
+
+[[As our model has only one explanatory variable, it is called *simple* linear regression.]{style="font-size: 30px"}]{.fragment}
+
+
+
+## Uses of regressions
+
+* Study the relationship between several variables (without assuming causality)
+
+* Study the effect of numerical or categorical variables on another variables 
+
+* Use these relationships to predict the values of the modelled variable for new observations.
+
+[[In our case, we want to model a tree dimension by another tree dimension. This is an *allometric model*. Allometric models are often used to predict a variable difficult to measure from a variable more broadly available]{style="font-size: 30px"}]{.fragment}
+
+
+## Theory 
+
+$$y = \alpha + \beta \times x + \epsilon$$
+
+::::: columns
+::: {.column width="50%"}
+
+* [x is the response variable]{style="font-size: 30px"}
+
+* [y is the explanatory variable]{style="font-size: 30px"}
+
+* [$\alpha$ is the **intercept** (the mean of Y when X = 0)]{style="font-size: 30px"}
+
+* [$\beta$ is the **slope** of the relationship between X and Y]{style="font-size: 30px"}
+
+* [$\epsilon$ is the **residual** of the model. $\epsilon \sim \mathcal N(0, \sigma^2)$]{style="font-size: 30px"}
+
+* [$\alpha$, $\beta$ and $\epsilon$ are the **parameters** of the model]{style="font-size: 30px"}
+:::
+
+::: {.column width="50%"}
+
+::: fragment
+[The model can also be written:]{style="font-size: 30px"}
+
+$$y \sim \mathcal N(\alpha + \beta \times x,  \sigma^2)$$
+:::
+:::
+:::::
+
+::: notes
+who want to write the equation of the model we want to fit on the blackboard?
+:::
+
+
+## Theory 
+
+$$y \sim \mathcal N(\alpha + \beta \times x,  \sigma^2)$$
+
+[The model predicts a probability density of Y  for any value of X normally distributed around the regression line.]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+
+![](lm.png){width="200%"}
+[Source: [E. Marcon](https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6){preview-link="false"}]{style="font-size: 30px"}
+:::
+
+
+::: {.column width="50%"}
+* [The mean value of Y for any value of X is the black line : $\mu = \alpha + \beta \times x$]{style="font-size: 30px"}
+
+* [The predicted values are the red dots: they are normally distributed around the mean with a variance $\sigma^2$]{style="font-size: 30px"}
+
+
+:::
+:::::
+
+
+## Fitting a simple linear regression
+
+{We use the function [lm]{style="color:indianred;"} to fit a linear regression:]{style="font-size: 30px"}
+
+```{r}
+mod_dh_1 <- lm(H ~ D, # formula
+               data = dt_nou)
+```
+
+Syntax of the formula:
+
+* response variable ~ explanatory variable(s)
+
+* the intercept is implicit so *H ~ D* is equivalent to *H ~ 1 + D*
+
+[[If we don't want an intercept, we have to write *H ~ 0 + D*. The regression will go through the origin (0,0).]{style="font-size: 30px"}]{.fragment}
+
+
+## Interpreting the output the output {.smaller}
+
+
+::::: columns
+::: {.column width="50%"}
+
+[$$y = \alpha + \beta \times x + \epsilon$$]{style="font-size: 30px"}
+
+```{r}
+summary(mod_dh_1)
+```
+:::
+
+::: {.column width="50%"}
+* [*Coefficients* give the estimates of **intercept** ($\alpha$) and the **slope** ($\beta$).]{style="font-size: 30px"} [[The coefficients follow a normal distribution, so a t-test is performed to see if there are significant (significantly different from 0).]{style="font-size: 30px"}]{.fragment}
+
+* [*Residual standard error* is the estimate of the **standard deviation** of the residuals ($\sigma$).]{style="font-size: 30px"}
+
+* TO CONTINUE (on a different slide)
+
+:::
+::::::
+
+##
+
+Marchand + Eric (dont 26)
+
+## coefficient of determination
+
+Marchand + Eric
+
+## intervale de confiance
+
+## interval de prediction
+
+## predire avec des nouvelles valeurs
+
+cf Eric 28
+
+## verif des hyp du modèle
+
+Marchand + erci on diapo 7 et 11...
+
+
+## tranfo de variable
+
+pourquyoi transformer => Eric 47
+
+faire un log log sur diam/hauteur (testé par le pacakge BIOMASS) et dire que la relation linéaire n'est pas un bon modèle allométrique !!!!
+
+## comparaison de modèle
+
+entre le lineaire et le log-log
+
+Eric 57: AIC
+
+et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pas.html#afficher-les-indicateurs-de-performance
+
+
+## presentation des résultats
+
+cf lamaragnge: https://larmarange.github.io/guide-R/analyses/regression-lineaire.html
+
+gtsummary 
+
+
+## what if the predictor is categorical
+
+* show the equation
+
+compare ANOVA and lm (Marchand)
+
+à faire avec quelques familles de Nouragues?
+
+
+
+# Multiple linear regression - One quanti and one quali
+
+follow marchand et Eric 
+
+voir si je parle de emmean ou plutôt de ggstats::ggcoef_model() dans Marchand
+
+## Data
+
+je pourrais continuer avec les H/diam mais qu'un seul prédicteur continue...
+
+# Multiple linear regression - Several quanti
+
+follow marchand et Eric 
+
+## Data
+????? could use the msleep de ggplot comme Marchand?
+ou iris mais !!!! pb de collinearity...
+
+## talk about collinearity of predictor
+
+cf Eric 35 and VIF (cf marchand cours 8)
+
+## standardisation des variables
+
+cf Eric 37
+
+## interaction between variable
+
+Eric 36
+
+
+# What if the data are not normal ? GLM
+
+## Logistic regression
+
+karnataka pres/abs of a family per plot? mais pas de prédicteur?
+or BCI?
+
+## Poisson
+
+karnataka count of a family per plot? mais pas de prédicteur?
+or BCI?
+
+# What if the observation are not independant ? mixed-effect models
+
+Nouragues per plot?
 
 
 
 
-# linear model with one var
+# Acknowledgments {.smaller}
 
-growth and WD
+::: {.nonincremental}
 
-do the whole model diagnostic and ploting the results
+* Marchand P. *Analyses et modélisation des données écologiques* [in French](https://pmarchand1.github.io/ECL7102/){preview-link="false"}
 
-# transfor logatyhtmique
+* Marcon E. *cours-R-Geeft* [in French](https://ericmarcon.github.io/Cours-R-Geeft/){preview-link="false"}
 
-marchand 3 et transfo logarythmique => pour modèle linéaire
+<!--
+* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"} 
+
+* Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
+
+* Rech R. *One-Way ANOVA and Boxplot in R* [here](https://statdoe.com/one-way-anova-and-box-plot-in-r/){preview-link="false"}
+-->
+
+:::
+
+# Ressources
+
+::: {.nonincremental}
+
+<!--
+
+* Dytham C. *Choosing and using statistics - a biologist's guide*, 3rd Edition. Available [here](http://ngc.digitallibrary.co.in/bitstream/123456789/2272/1/Choosing%20and%20using%20statistics_A%20Biologist%27s%20Guide%20%283rd%20edition%29%40Dytham.pdf){preview-link="false"}
+
+* Rech R. *One-Way ANOVA and Boxplot in R* [here](https://statdoe.com/one-way-anova-and-box-plot-in-r/){preview-link="false"}
+
+* datacamp tutorials on [chi-square test](https://www.datacamp.com/tutorial/chi-square-test-r){preview-link="false"} and [t-test](https://www.datacamp.com/tutorial/t-tests-r-tutorial){preview-link="false"}, among other...
+
+-->
+
+:::
+
+# Ressources to gop further
+
+* broom????
+
+
+
+
+
+#########
+
 
 ## Log-normal distribution {.smaller}
 
@@ -203,17 +503,6 @@ ggplot() +
 :::::
 
 
-# linear model with more than one var
-
-* check for collinearity (before and after, check the VIF)
-
-* add some other trais
-
-* do some models selections
-
-# mixed effect 
-
-which data? 
 
 # GLM?
 
@@ -229,7 +518,6 @@ Voir ici pour comparaison broom, modelr and DHARMa
 https://chatgpt.com/share/680a764b-476c-8004-9a40-6c99c92a6d35
 
 
-https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques
 
 https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#2
 

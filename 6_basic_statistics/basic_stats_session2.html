@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-28">
+  <meta name="dcterms.date" content="2025-04-29">
   <title>Statistics with R - session 2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-28</p>
+  <p class="date">2025-04-29</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
@@ -559,7 +559,7 @@ sample estimates:
 0.7866681 </code></pre>
 </div>
 </div>
-<p><span style="font-size: 30px"><em>The correlation is significant.</em></span></p>
+<p><span class="fragment"><span style="font-size: 30px"><em>The correlation is significant.</em></span></span></p>
 </section>
 <section id="visualise-correlations" class="slide level2">
 <h2>Visualise correlations</h2>
@@ -593,19 +593,322 @@ sample estimates:
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<!-- CONTINUE HERE-->
 </section></section>
-<section id="linear-model-with-one-var" class="title-slide slide level1 center">
-<h1>linear model with one var</h1>
-<p>growth and WD</p>
-<p>do the whole model diagnostic and ploting the results</p>
+<section>
+<section id="simple-linear-regression" class="title-slide slide level1 center">
+<h1>Simple linear regression</h1>
+
+</section>
+<section id="nouragues-tree-data" class="slide level2 scrollable">
+<h2>Nouragues tree data</h2>
+<p><span style="font-size: 30px">We will work on a modified version of Nouragues tree data from the package BIOMASS (available <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData" data-preview-link="false">here</a>)</span> <span style="font-size: 30px">These data have been modified to exclude the non fully determined trees, and add the family.</span></p>
+<p><span style="font-size: 30px"><em>Heights and diameters of trees in two 1-ha plots from the Nouragues forest (French Guiana)</em></span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_statistics_2.RData"</span>)</span>
+<span id="cb12-2"><a href=""></a>dt_nou</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 457 × 8
+   plotId genus      species         D     H   lat  long family          
+   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;           
+ 1 Plot1  Qualea     rosea        11.6    16  4.07 -52.7 Vochysiaceae    
+ 2 Plot1  Dicorynia  guianensis   83.9    40  4.07 -52.7 Fabaceae        
+ 3 Plot1  Ocotea     guianensis   36.8    27  4.07 -52.7 Lauraceae       
+ 4 Plot1  Cordia     sagotii      13.5    20  4.07 -52.7 Boraginaceae    
+ 5 Plot1  Cecropia   obtusa       17.8    24  4.07 -52.7 Urticaceae      
+ 6 Plot1  Licania    membranacea  17.8    21  4.07 -52.7 Chrysobalanaceae
+ 7 Plot1  Ocotea     guianensis   15.9    22  4.07 -52.7 Lauraceae       
+ 8 Plot1  Qualea     rosea        17.8    24  4.07 -52.7 Vochysiaceae    
+ 9 Plot1  Oenocarpus bataua       20.5    23  4.07 -52.7 Arecaceae       
+10 Plot1  Licania    latistipula  11.1    15  4.07 -52.7 Chrysobalanaceae
+# ℹ 447 more rows</code></pre>
+</div>
+</div>
+<!-- could be plant growth rate as a function of soil humidity:
+https://pmarchand1.github.io/ECL7102/notes_cours/6-Regression_lineaire.html
+
+or maybe the data from the Nouragues
+=> modelling heigth ~ D
+=> then talking about log transfor
+=> selection of the best model
+! voir si je peux aussi m'en servir pour tester avec Category? Famille (à importer avec Biomass) ou plot?
+=> tester puis rajouter interaction entre D et famille?
+=> et effet aléatoire famille?
+-->
+</section>
+<section id="relationship-between-d-and-h" class="slide level2">
+<h2>Relationship between D and H</h2>
+<p><span style="font-size: 30px">Let’s explore the relationship between tree diameter and height graphically:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">ggplot</span>(dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span> </span>
+<span id="cb14-2"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb14-3"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="structure-of-a-linear-regression" class="slide level2">
+<h2>Structure of a linear regression</h2>
+<p>A linear regression is a model of the mathematical relationship between:</p>
+<ul>
+<li class="fragment"><p>A <strong>response variable</strong>, also called <em>dependent variable</em></p></li>
+<li class="fragment"><p>One or several <strong>explanatory variables</strong>, also called <em>predictors</em> or <em>independent variables</em></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">In our case, we want to model the relationship between <em>D</em> (the explanatory variable) and <em>H</em> (the response variable).</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">As our model has only one explanatory variable, it is called <em>simple</em> linear regression.</span></span></p>
+</section>
+<section id="uses-of-regressions" class="slide level2">
+<h2>Uses of regressions</h2>
+<ul>
+<li class="fragment"><p>Study the relationship between several variables (without assuming causality)</p></li>
+<li class="fragment"><p>Study the effect of numerical or categorical variables on another variables</p></li>
+<li class="fragment"><p>Use these relationships to predict the values of the modelled variable for new observations.</p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">In our case, we want to model a tree dimension by another tree dimension. This is an <em>allometric model</em>. Allometric models are often used to predict a variable difficult to measure from a variable more broadly available</span></span></p>
+</section>
+<section id="theory" class="slide level2">
+<h2>Theory</h2>
+<p><span class="math display">\[y = \alpha + \beta \times x + \epsilon\]</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">x is the response variable</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">y is the explanatory variable</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px"><span class="math inline">\(\alpha\)</span> is the <strong>intercept</strong> (the mean of Y when X = 0)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px"><span class="math inline">\(\beta\)</span> is the <strong>slope</strong> of the relationship between X and Y</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px"><span class="math inline">\(\epsilon\)</span> is the <strong>residual</strong> of the model. <span class="math inline">\(\epsilon \sim \mathcal N(0, \sigma^2)\)</span></span></p></li>
+<li class="fragment"><p><span style="font-size: 30px"><span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\epsilon\)</span> are the <strong>parameters</strong> of the model</span></p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">The model can also be written:</span></p>
+<p><span class="math display">\[y \sim \mathcal N(\alpha + \beta \times x,  \sigma^2)\]</span></p>
+</div>
+</div></div>
+<aside class="notes">
+<p>who want to write the equation of the model we want to fit on the blackboard?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="theory-1" class="slide level2">
+<h2>Theory</h2>
+<p><span class="math display">\[y \sim \mathcal N(\alpha + \beta \times x,  \sigma^2)\]</span></p>
+<p><span style="font-size: 30px">The model predicts a probability density of Y for any value of X normally distributed around the regression line.</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="lm.png" style="width:200.0%"> <span style="font-size: 30px">Source: <a href="https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6" data-preview-link="false">E. Marcon</a></span></p>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">The mean value of Y for any value of X is the black line : <span class="math inline">\(\mu = \alpha + \beta \times x\)</span></span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">The predicted values are the red dots: they are normally distributed around the mean with a variance <span class="math inline">\(\sigma^2\)</span></span></p></li>
+</ul>
+</div></div>
+</section>
+<section id="fitting-a-simple-linear-regression" class="slide level2">
+<h2>Fitting a simple linear regression</h2>
+<p>{We use the function <span style="color:indianred;">lm</span> to fit a linear regression:]{style=“font-size: 30px”}</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>mod_dh_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(H <span class="sc">~</span> D, <span class="co"># formula</span></span>
+<span id="cb15-2"><a href=""></a>               <span class="at">data =</span> dt_nou)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p>Syntax of the formula:</p>
+<ul>
+<li class="fragment"><p>response variable ~ explanatory variable(s)</p></li>
+<li class="fragment"><p>the intercept is implicit so <em>H ~ D</em> is equivalent to <em>H ~ 1 + D</em></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">If we don’t want an intercept, we have to write <em>H ~ 0 + D</em>. The regression will go through the origin (0,0).</span></span></p>
+</section>
+<section id="interpreting-the-output-the-output" class="slide level2 smaller">
+<h2>Interpreting the output the output</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px"><span class="math display">\[y = \alpha + \beta \times x + \epsilon\]</span></span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">summary</span>(mod_dh_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = H ~ D, data = dt_nou)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-25.8286  -2.8887   0.1766   3.1321  18.5592 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 13.59687    0.46023   29.54   &lt;2e-16 ***
+D            0.32576    0.01471   22.14   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 5.06 on 392 degrees of freedom
+  (63 observations deleted due to missingness)
+Multiple R-squared:  0.5556,    Adjusted R-squared:  0.5545 
+F-statistic: 490.1 on 1 and 392 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 30px"><em>Coefficients</em> give the estimates of <strong>intercept</strong> (<span class="math inline">\(\alpha\)</span>) and the <strong>slope</strong> (<span class="math inline">\(\beta\)</span>).</span> <span class="fragment"><span style="font-size: 30px">The coefficients follow a normal distribution, so a t-test is performed to see if there are significant (significantly different from 0).</span></span></p></li>
+<li class="fragment"><p>[<em>Residual standard error</em> is the estimate of the <strong>standard deviation</strong> of the residuals (<span class="math inline">\(\sigma\)</span>).]]{style=“font-size: 30px”}</p></li>
+<li class="fragment"><p>TO CONTINUE</p></li>
+</ul>
+</div></div>
+<p>Marchand + Eric (dont 26)</p>
+</section>
+<section id="coefficient-of-determination" class="slide level2">
+<h2>coefficient of determination</h2>
+<p>Marchand + Eric</p>
+</section>
+<section id="intervale-de-confiance" class="slide level2">
+<h2>intervale de confiance</h2>
+</section>
+<section id="interval-de-prediction" class="slide level2">
+<h2>interval de prediction</h2>
+</section>
+<section id="predire-avec-des-nouvelles-valeurs" class="slide level2">
+<h2>predire avec des nouvelles valeurs</h2>
+<p>cf Eric 28</p>
+</section>
+<section id="verif-des-hyp-du-modèle" class="slide level2">
+<h2>verif des hyp du modèle</h2>
+<p>Marchand + erci on diapo 7 et 11…</p>
+</section>
+<section id="tranfo-de-variable" class="slide level2">
+<h2>tranfo de variable</h2>
+<p>pourquyoi transformer =&gt; Eric 47</p>
+<p>faire un log log sur diam/hauteur (testé par le pacakge BIOMASS) et dire que la relation linéaire n’est pas un bon modèle allométrique !!!!</p>
+</section>
+<section id="comparaison-de-modèle" class="slide level2">
+<h2>comparaison de modèle</h2>
+<p>entre le lineaire et le log-log</p>
+<p>Eric 57: AIC</p>
+<p>et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pas.html#afficher-les-indicateurs-de-performance</p>
+</section>
+<section id="presentation-des-résultats" class="slide level2">
+<h2>presentation des résultats</h2>
+<p>cf lamaragnge: https://larmarange.github.io/guide-R/analyses/regression-lineaire.html</p>
+<p>gtsummary</p>
+</section>
+<section id="what-if-the-predictor-is-categorical" class="slide level2">
+<h2>what if the predictor is categorical</h2>
+<ul>
+<li class="fragment">show the equation</li>
+</ul>
+<p>compare ANOVA and lm (Marchand)</p>
+<p>à faire avec quelques familles de Nouragues?</p>
+</section></section>
+<section>
+<section id="multiple-linear-regression---one-quanti-and-one-quali" class="title-slide slide level1 center">
+<h1>Multiple linear regression - One quanti and one quali</h1>
+<p>follow marchand et Eric</p>
+<p>voir si je parle de emmean ou plutôt de ggstats::ggcoef_model() dans Marchand</p>
+</section>
+<section id="data" class="slide level2">
+<h2>Data</h2>
+<p>je pourrais continuer avec les H/diam mais qu’un seul prédicteur continue…</p>
+</section></section>
+<section>
+<section id="multiple-linear-regression---several-quanti" class="title-slide slide level1 center">
+<h1>Multiple linear regression - Several quanti</h1>
+<p>follow marchand et Eric</p>
+</section>
+<section id="data-1" class="slide level2">
+<h2>Data</h2>
+<p>????? could use the msleep de ggplot comme Marchand? ou iris mais !!!! pb de collinearity…</p>
+</section>
+<section id="talk-about-collinearity-of-predictor" class="slide level2">
+<h2>talk about collinearity of predictor</h2>
+<p>cf Eric 35 and VIF (cf marchand cours 8)</p>
+</section>
+<section id="standardisation-des-variables" class="slide level2">
+<h2>standardisation des variables</h2>
+<p>cf Eric 37</p>
+</section>
+<section id="interaction-between-variable" class="slide level2">
+<h2>interaction between variable</h2>
+<p>Eric 36</p>
+</section></section>
+<section>
+<section id="what-if-the-data-are-not-normal-glm" class="title-slide slide level1 center">
+<h1>What if the data are not normal ? GLM</h1>
+
+</section>
+<section id="logistic-regression" class="slide level2">
+<h2>Logistic regression</h2>
+<p>karnataka pres/abs of a family per plot? mais pas de prédicteur? or BCI?</p>
+</section>
+<section id="poisson" class="slide level2">
+<h2>Poisson</h2>
+<p>karnataka count of a family per plot? mais pas de prédicteur? or BCI?</p>
+</section></section>
+<section id="what-if-the-observation-are-not-independant-mixed-effect-models" class="title-slide slide level1 center">
+<h1>What if the observation are not independant ? mixed-effect models</h1>
+<p>Nouragues per plot?</p>
+</section>
+
+<section id="acknowledgments" class="title-slide slide level1 smaller center">
+<h1>Acknowledgments</h1>
+<div>
+<ul>
+<li><p>Marchand P. <em>Analyses et modélisation des données écologiques</em> <a href="https://pmarchand1.github.io/ECL7102/" data-preview-link="false">in French</a></p></li>
+<li><p>Marcon E. <em>cours-R-Geeft</em> <a href="https://ericmarcon.github.io/Cours-R-Geeft/" data-preview-link="false">in French</a></p></li>
+</ul>
+<!--
+* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"} 
+
+* Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
+
+* Rech R. *One-Way ANOVA and Boxplot in R* [here](https://statdoe.com/one-way-anova-and-box-plot-in-r/){preview-link="false"}
+-->
+</div>
+</section>
+
+<section id="ressources" class="title-slide slide level1 center">
+<h1>Ressources</h1>
+<div>
+<!--
+
+* Dytham C. *Choosing and using statistics - a biologist's guide*, 3rd Edition. Available [here](http://ngc.digitallibrary.co.in/bitstream/123456789/2272/1/Choosing%20and%20using%20statistics_A%20Biologist%27s%20Guide%20%283rd%20edition%29%40Dytham.pdf){preview-link="false"}
+
+* Rech R. *One-Way ANOVA and Boxplot in R* [here](https://statdoe.com/one-way-anova-and-box-plot-in-r/){preview-link="false"}
+
+* datacamp tutorials on [chi-square test](https://www.datacamp.com/tutorial/chi-square-test-r){preview-link="false"} and [t-test](https://www.datacamp.com/tutorial/t-tests-r-tutorial){preview-link="false"}, among other...
+
+-->
+</div>
 </section>
 
 <section>
-<section id="transfor-logatyhtmique" class="title-slide slide level1 center">
-<h1>transfor logatyhtmique</h1>
-<p>marchand 3 et transfo logarythmique =&gt; pour modèle linéaire</p>
+<section id="ressources-to-gop-further" class="title-slide slide level1 center">
+<h1>Ressources to gop further</h1>
+<ul>
+<li class="fragment">broom????</li>
+</ul>
 </section>
+<p class="heading" id="section-2"></p>
 <section id="log-normal-distribution" class="slide level2 smaller">
 <h2>Log-normal distribution</h2>
 <p><span class="math inline">\(x \sim log\mathcal{N}(\mu, \sigma^2)\)</span> if <span class="math inline">\(log(x) \sim \mathcal{N}(\mu, \sigma^2)\)</span></p>
@@ -613,22 +916,22 @@ sample estimates:
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb12-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb12-3"><a href=""></a></span>
-<span id="cb12-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb12-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb12-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
-<span id="cb12-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb12-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
-<span id="cb12-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb12-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb18-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb18-3"><a href=""></a></span>
+<span id="cb18-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb18-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb18-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb18-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb18-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
+<span id="cb18-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb18-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -640,27 +943,12 @@ sample estimates:
 </ul>
 </div></div>
 </section></section>
-<section id="linear-model-with-more-than-one-var" class="title-slide slide level1 center">
-<h1>linear model with more than one var</h1>
-<ul>
-<li class="fragment"><p>check for collinearity (before and after, check the VIF)</p></li>
-<li class="fragment"><p>add some other trais</p></li>
-<li class="fragment"><p>do some models selections</p></li>
-</ul>
-</section>
-
-<section id="mixed-effect" class="title-slide slide level1 center">
-<h1>mixed effect</h1>
-<p>which data?</p>
-</section>
-
 <section id="glm" class="title-slide slide level1 center">
 <h1>GLM?</h1>
 <p>binomial glm: cf p 254 book avec les pinguins</p>
 <p>regression linéaire (en mnetionnant les GLM et les mixed-effect models)</p>
 <p>include DHARma for model diagnostics?</p>
 <p>Voir ici pour comparaison broom, modelr and DHARMa https://chatgpt.com/share/680a764b-476c-8004-9a40-6c99c92a6d35</p>
-<p>https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques</p>
 <p>https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#2</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
