@@ -81,19 +81,23 @@ dt_nou <- dt_nou %>%
 # dt_nou %>% select(genus, species) %>% distinct()
 
 
+# # remove some point that are problematic with the lm
+dt_nou <- dt_nou %>% slice(-c(406, 123, 26))
+
+
 # count per family
 dt_nou %>% count(family) %>% arrange(desc(n))
 
 
 # # select the 3 more represented fam
-# fam3 <- dt_nou %>% count(family) %>% 
-#   arrange(desc(n)) %>% 
-#   slice_head(n = 3) %>% 
-#   select(family) 
-# 
-# dt_nou_sub <- dt_nou %>% filter(family %in% fam3$family)
-# 
-# dt_nou_sub %>% count(family) # OK
+fam3 <- dt_nou %>% count(family) %>%
+  arrange(desc(n)) %>%
+  slice_head(n = 3) %>%
+  select(family)
+
+dt_nou_sub <- dt_nou %>% filter(family %in% fam3$family)
+
+dt_nou_sub %>% count(family) # OK
 
   
 ## Save in a single .Rdata

@@ -189,9 +189,9 @@ or maybe the data from the Nouragues
 ```{r}
 #| warning: false
 #| out.width: 80%
-ggplot(dt_nou, aes(x = D, y = H)) + 
-  geom_point() + 
-  geom_smooth(method = "lm", se = FALSE)
+g <- ggplot(dt_nou, aes(x = D, y = H)) + 
+  geom_point() 
+g + geom_smooth(method = "lm", se = FALSE)
 ```
 
 
@@ -272,16 +272,20 @@ $$y \sim \mathcal N(\alpha + \beta \times x,  \sigma^2)$$
 ::: {.column width="50%"}
 * [The mean value of Y for any value of X is the black line : $\mu = \alpha + \beta \times x$]{style="font-size: 30px"}
 
-* [The predicted values are the red dots: they are normally distributed around the mean with a variance $\sigma^2$]{style="font-size: 30px"}
+* [The predicted probability density of Y are represented by the red dots: they are normally distributed around the mean with a variance $\sigma^2$]{style="font-size: 30px"}
 
 
 :::
 :::::
 
+::: notes
+read the fig as in 3D
+:::
+
 
 ## Fitting a simple linear regression
 
-{We use the function [lm]{style="color:indianred;"} to fit a linear regression:]{style="font-size: 30px"}
+[We use the function [lm]{style="color:indianred;"} to fit a linear regression:]{style="font-size: 30px"}
 
 ```{r}
 mod_dh_1 <- lm(H ~ D, # formula
@@ -297,7 +301,7 @@ Syntax of the formula:
 [[If we don't want an intercept, we have to write *H ~ 0 + D*. The regression will go through the origin (0,0).]{style="font-size: 30px"}]{.fragment}
 
 
-## Interpreting the output the output {.smaller}
+## Interpreting the output {.smaller}
 
 
 ::::: columns
@@ -311,49 +315,298 @@ summary(mod_dh_1)
 :::
 
 ::: {.column width="50%"}
-* [*Coefficients* give the estimates of **intercept** ($\alpha$) and the **slope** ($\beta$).]{style="font-size: 30px"} [[The coefficients follow a normal distribution, so a t-test is performed to see if there are significant (significantly different from 0).]{style="font-size: 30px"}]{.fragment}
+* [*Coefficients* give the estimates of **intercept** ($\alpha$) and the **slope** ($\beta$).]{style="font-size: 30px"}
+
+  * *intercept*: the value of H for D=0 is 0.325
+  
+  * *slope*: for every increase of 1 cm DBH, increase of 0.32 m in height
+  
+  * [A t-test is performed to see if there are significant (significantly different from 0).]{style="font-size: 30px"}
 
 * [*Residual standard error* is the estimate of the **standard deviation** of the residuals ($\sigma$).]{style="font-size: 30px"}
-
-* TO CONTINUE (on a different slide)
 
 :::
 ::::::
 
-##
+::: notes
+BUT don't use that to predict outside of the range of observed data
+:::
 
-Marchand + Eric (dont 26)
-
-## coefficient of determination
-
-Marchand + Eric
-
-## intervale de confiance
-
-## interval de prediction
-
-## predire avec des nouvelles valeurs
-
-cf Eric 28
-
-## verif des hyp du modèle
-
-Marchand + erci on diapo 7 et 11...
+## Interpreting the output {.smaller}
 
 
-## tranfo de variable
+::::: columns
+::: {.column width="50%"}
 
-pourquyoi transformer => Eric 47
+[$$y = \alpha + \beta \times x + \epsilon$$]{style="font-size: 30px"}
 
-faire un log log sur diam/hauteur (testé par le pacakge BIOMASS) et dire que la relation linéaire n'est pas un bon modèle allométrique !!!!
+```{r}
+summary(mod_dh_1)
+```
+:::
+
+::: {.column width="50%"}
+* [*R^2^ *(discussed after)]{style="font-size: 30px"}
+
+* [The *F-statistic* test if the model is significantly different from a null model, *i.e.* if it explains a **significant amount of the variation** on the response variable.]{style="font-size: 30px"}
+
+:::
+::::::
+
+::: notes
+Null model : a model without explanatory variable
+F-test for only one single explanatory variable is the same as the test for the explanatory variable
+:::
+
+## Coefficient of determination 
+
+The **R^2^** is the coefficient of determination: it represents the **fraction of variance explained** by the model. The closer the *R^2^* is to 1, the greater the explanatory power of the model.
+
+[The adjusted *R^2^* penalise the *R^2^* by the number of explanatory variables (not relevant when there is just one explanatory variable).]{.fragment}
+
+## *R^2^* and *p-value*
+
+* The **p-value** indicates **significance of the effect** of the explanatory variable: this effect can be small yet highly significant => a small p-value is particularly important for hypothesis testing.
+
+
+* The **R^2^** indicates the **goodness of fit** (how well the model fits the observed data) => a high *R^2^* is particularly important for prediction.
+
+
+## Confidence interval
+
+TELL WHAT ARE THE CONFIDENCE INTERVAL + COMMENT THE CODE
+
+```{r}
+new <- tibble(D = seq(from = 10, to = 160, by= 10))
+new_conf <- predict(mod_dh_1, newdata = new,
+                    interval = "confidence")
+new_conf <- bind_cols(new, new_conf)
+slice_head(new_conf)
+```
+
+```{r}
+#| warning: false
+gpred <- ggplot(new_conf, aes(x= D)) +
+  geom_line(aes(y = fit), color = "blue") +
+  geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.3, color = "darkgrey") +
+  geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.3) +
+  theme_bw()
+gpred
+```
+
+
+::: notes
+no need to take too many points because we have at line
+:::
+
+## Prediction interval
+
+TELL WHAT ARE THE PREDICTION + COMMENT THE CODE
+
+```{r}
+new_pred <- predict(mod_dh_1, newdata = new,
+                    interval = "prediction")
+new_pred <- bind_cols(new, new_pred)
+slice_head(new_pred)
+```
+
+```{r}
+#| warning: false
+gpred <- gpred +
+  geom_ribbon(data = new_pred, aes(ymin = lwr, ymax = upr), 
+              alpha = 0.3, color = "lightgrey") +
+  theme_bw()
+gpred
+```
+
+## Model validation
+
+We need to check the model assumptions.
+
+* normality of the residuals
+
+* independence of the residuals
+
+* constant variance of the residuals (homoscedasticity)
+
+* linearity of the relationship between response and explanatory variables
+
+## Homoscedasticity and independence of the residuals
+
+::::: columns
+::: {.column width="50%"}
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(mod_dh_1, which = 1)
+```
+
+:::
+
+
+::: {.column width="50%"}
+
+::: fragment
+[⚠️ Here the residuals depends on the fitted values => this suggests that the relationship is not linear...]{style="font-size: 30px"}
+
+[⚠️ The variance is not constant.]{style="font-size: 30px"}
+:::
+
+:::
+:::::
+
+
+## Normality of the residuals
+
+::::: columns
+::: {.column width="50%"}
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(mod_dh_1, which = 2)
+```
+
+:::
+
+
+::: {.column width="50%"}
+[[✅ Here the residuals are reasonably normality distributed.]{style="font-size: 30px"}]{.fragment}
+:::
+:::::
+
+
+## Leverage effect
+
+::::: columns
+::: {.column width="40%"}
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(mod_dh_1, which = 4)
+```
+
+:::
+
+
+::: {.column width="60%"}
+
+::: fragment
+[⚠️️ Some observations are highly influential.]{style="font-size: 30px"}
+
+:::
+
+:::
+:::::
+
+
+## Variable transformation
+
+[Our model has problem of linearity and high leverage of some observations.]{style="font-size: 30px"}
+
+::: fragment
+[💡 A transformation of variables may help, let's try to take the log of D and H:]{style="font-size: 30px"}
+
+$$log(H) = \alpha + \beta \times log(D)$$
+:::
+
+
+::: fragment
+
+[which is equivalent to
+$y = \alpha'x^\beta$ with $\alpha' = e^{\alpha}$
+because]{style="font-size: 30px"}
+
+[$log\big (\alpha'x^\beta \big) = log(\alpha') + \beta \times log(D)$]{style="font-size: 30px"}
+:::
+
+[[*This is a classical allometric model: it predicts that the height of the tree will increase less rapidly for trees with bigger DBH, which is consistent with what we expect.*]{style="font-size: 30px"}]{.fragment}
+
+
+## Fitting the log-log model {.smaller}
+
+```{r}
+mod_dh_2 <- lm(log(H) ~ log(D), data = dt_nou)
+summary(mod_dh_2)
+```
+
+## Model validation {.smaller}
+
+::::: columns
+::: {.column width="33%"}
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(mod_dh_2, which = 1)
+```
+
+[[😊 We have improved the independance of residuals and homoscedasticity.]{style="font-size: 30px"}]{.fragment}
+:::
+
+
+::: {.column width="33%"}
+::: fragment
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(mod_dh_2, which = 2)
+```
+:::
+[[😊 The residuals are still normally distributed.]{style="font-size: 30px"}]{.fragment}
+:::
+
+::: {.column width="33%"}
+::: fragment
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(mod_dh_2, which = 4)
+```
+:::
+
+[[😊 We have considerably reduced the leverage effect.]{style="font-size: 30px"}]{.fragment}
+
+:::
+:::::
+
+
 
 ## comparaison de modèle
 
-entre le lineaire et le log-log
+Dire qu'on préfère le log-log :
 
-Eric 57: AIC
+less pb with model validation, slighly better r2 and more ecological meaning
 
-et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pas.html#afficher-les-indicateurs-de-performance
+entre le lineaire et le log-log !!!!! not with the AIC so more in the next section on multiple linear regression
+
+
+
+
+## predire avec des nouvelles valeurs
+
+quand transfo de données: 
+
+```{r}
+# library(ggeffects)
+# library(ggplot2)
+# 
+# # Fit your model
+# model <- lm(log(H) ~ log(D), data = your_data)
+# 
+# # Get predictions back on original scale
+# preds <- ggpredict(model, terms = "D", type = "re")  # "re" = response scale (exp back-transform)
+# 
+# ggplot(preds, aes(x = x, y = predicted)) +
+#   geom_line(color = "blue", size = 1) +
+#   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), fill = "blue", alpha = 0.2) +
+#   geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.6) +
+#   labs(x = "D", y = "H", title = "Predicted H vs D (log-log model, back-transformed)") +
+#   theme_minimal()
+```
+
+
 
 
 ## presentation des résultats
@@ -371,13 +624,17 @@ compare ANOVA and lm (Marchand)
 
 à faire avec quelques familles de Nouragues?
 
+ne pas faire tout le diagnostic...
+
 
 
 # Multiple linear regression - One quanti and one quali
 
+maybe go directly to several quanti... so I can talk about collinearity and selection
+
 follow marchand et Eric 
 
-voir si je parle de emmean ou plutôt de ggstats::ggcoef_model() dans Marchand
+voir si je parle de emmean ou plutôt de ggstats::ggcoef_model() dans Lamaranche
 
 ## Data
 
@@ -404,6 +661,20 @@ cf Eric 37
 Eric 36
 
 
+## model selection
+Eric 57: AIC
+
+et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pas.html#afficher-les-indicateurs-de-performance
+
+
+
+# TO GO FURTHER (not in depth here...)
+
+# What if the observation are not independant ? mixed-effect models
+
+Nouragues per plot?
+
+
 # What if the data are not normal ? GLM
 
 ## Logistic regression
@@ -416,9 +687,7 @@ or BCI?
 karnataka count of a family per plot? mais pas de prédicteur?
 or BCI?
 
-# What if the observation are not independant ? mixed-effect models
 
-Nouragues per plot?
 
 
 

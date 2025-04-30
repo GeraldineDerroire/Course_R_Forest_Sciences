@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-29">
+  <meta name="dcterms.date" content="2025-04-30">
   <title>Statistics with R - session 2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-29</p>
+  <p class="date">2025-04-30</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
@@ -609,7 +609,7 @@ sample estimates:
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 457 × 8
+<pre><code># A tibble: 454 × 8
    plotId genus      species         D     H   lat  long family          
    &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;           
  1 Plot1  Qualea     rosea        11.6    16  4.07 -52.7 Vochysiaceae    
@@ -622,7 +622,7 @@ sample estimates:
  8 Plot1  Qualea     rosea        17.8    24  4.07 -52.7 Vochysiaceae    
  9 Plot1  Oenocarpus bataua       20.5    23  4.07 -52.7 Arecaceae       
 10 Plot1  Licania    latistipula  11.1    15  4.07 -52.7 Chrysobalanaceae
-# ℹ 447 more rows</code></pre>
+# ℹ 444 more rows</code></pre>
 </div>
 </div>
 <!-- could be plant growth rate as a function of soil humidity:
@@ -641,9 +641,9 @@ or maybe the data from the Nouragues
 <h2>Relationship between D and H</h2>
 <p><span style="font-size: 30px">Let’s explore the relationship between tree diameter and height graphically:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">ggplot</span>(dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span> </span>
-<span id="cb14-2"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb14-3"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span> </span>
+<span id="cb14-2"><a href=""></a>  <span class="fu">geom_point</span>() </span>
+<span id="cb14-3"><a href=""></a>g <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -717,13 +717,26 @@ or maybe the data from the Nouragues
 </div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p><span style="font-size: 30px">The mean value of Y for any value of X is the black line : <span class="math inline">\(\mu = \alpha + \beta \times x\)</span></span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">The predicted values are the red dots: they are normally distributed around the mean with a variance <span class="math inline">\(\sigma^2\)</span></span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">The predicted probability density of Y are represented by the red dots: they are normally distributed around the mean with a variance <span class="math inline">\(\sigma^2\)</span></span></p></li>
 </ul>
 </div></div>
+<aside class="notes">
+<p>read the fig as in 3D</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="fitting-a-simple-linear-regression" class="slide level2">
 <h2>Fitting a simple linear regression</h2>
-<p>{We use the function <span style="color:indianred;">lm</span> to fit a linear regression:]{style=“font-size: 30px”}</p>
+<p><span style="font-size: 30px">We use the function <span style="color:indianred;">lm</span> to fit a linear regression:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>mod_dh_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(H <span class="sc">~</span> D, <span class="co"># formula</span></span>
 <span id="cb15-2"><a href=""></a>               <span class="at">data =</span> dt_nou)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -738,8 +751,8 @@ or maybe the data from the Nouragues
 </ul>
 <p><span class="fragment"><span style="font-size: 30px">If we don’t want an intercept, we have to write <em>H ~ 0 + D</em>. The regression will go through the origin (0,0).</span></span></p>
 </section>
-<section id="interpreting-the-output-the-output" class="slide level2 smaller">
-<h2>Interpreting the output the output</h2>
+<section id="interpreting-the-output" class="slide level2 smaller">
+<h2>Interpreting the output</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><span style="font-size: 30px"><span class="math display">\[y = \alpha + \beta \times x + \epsilon\]</span></span></p>
@@ -754,58 +767,390 @@ lm(formula = H ~ D, data = dt_nou)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--25.8286  -2.8887   0.1766   3.1321  18.5592 
+-27.4910  -2.8950   0.1666   3.0275  11.4801 
 
 Coefficients:
             Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 13.59687    0.46023   29.54   &lt;2e-16 ***
-D            0.32576    0.01471   22.14   &lt;2e-16 ***
+(Intercept) 13.25635    0.43974   30.15   &lt;2e-16 ***
+D            0.34067    0.01415   24.07   &lt;2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 5.06 on 392 degrees of freedom
+Residual standard error: 4.777 on 389 degrees of freedom
   (63 observations deleted due to missingness)
-Multiple R-squared:  0.5556,    Adjusted R-squared:  0.5545 
-F-statistic: 490.1 on 1 and 392 DF,  p-value: &lt; 2.2e-16</code></pre>
+Multiple R-squared:  0.5983,    Adjusted R-squared:  0.5972 
+F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p><span style="font-size: 30px"><em>Coefficients</em> give the estimates of <strong>intercept</strong> (<span class="math inline">\(\alpha\)</span>) and the <strong>slope</strong> (<span class="math inline">\(\beta\)</span>).</span> <span class="fragment"><span style="font-size: 30px">The coefficients follow a normal distribution, so a t-test is performed to see if there are significant (significantly different from 0).</span></span></p></li>
-<li class="fragment"><p>[<em>Residual standard error</em> is the estimate of the <strong>standard deviation</strong> of the residuals (<span class="math inline">\(\sigma\)</span>).]]{style=“font-size: 30px”}</p></li>
-<li class="fragment"><p>TO CONTINUE</p></li>
+<li class="fragment"><p><span style="font-size: 30px"><em>Coefficients</em> give the estimates of <strong>intercept</strong> (<span class="math inline">\(\alpha\)</span>) and the <strong>slope</strong> (<span class="math inline">\(\beta\)</span>).</span></p>
+<ul>
+<li class="fragment"><p><em>intercept</em>: the value of H for D=0 is 0.325</p></li>
+<li class="fragment"><p><em>slope</em>: for every increase of 1 cm DBH, increase of 0.32 m in height</p></li>
+<li class="fragment"><p><span style="font-size: 30px">A t-test is performed to see if there are significant (significantly different from 0).</span></p></li>
+</ul></li>
+<li class="fragment"><p><span style="font-size: 30px"><em>Residual standard error</em> is the estimate of the <strong>standard deviation</strong> of the residuals (<span class="math inline">\(\sigma\)</span>).</span></p></li>
 </ul>
 </div></div>
-<p>Marchand + Eric (dont 26)</p>
+<aside class="notes">
+<p>BUT don’t use that to predict outside of the range of observed data</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="interpreting-the-output-1" class="slide level2 smaller">
+<h2>Interpreting the output</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px"><span class="math display">\[y = \alpha + \beta \times x + \epsilon\]</span></span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">summary</span>(mod_dh_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = H ~ D, data = dt_nou)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-27.4910  -2.8950   0.1666   3.0275  11.4801 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 13.25635    0.43974   30.15   &lt;2e-16 ***
+D            0.34067    0.01415   24.07   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 4.777 on 389 degrees of freedom
+  (63 observations deleted due to missingness)
+Multiple R-squared:  0.5983,    Adjusted R-squared:  0.5972 
+F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 30px"><em>R<sup>2</sup> </em>(discussed after)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">The <em>F-statistic</em> test if the model is significantly different from a null model, <em>i.e.</em> if it explains a <strong>significant amount of the variation</strong> on the response variable.</span></p></li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>Null model : a model without explanatory variable F-test for only one single explanatory variable is the same as the test for the explanatory variable</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="coefficient-of-determination" class="slide level2">
-<h2>coefficient of determination</h2>
-<p>Marchand + Eric</p>
+<h2>Coefficient of determination</h2>
+<p>The <strong>R<sup>2</sup></strong> is the coefficient of determination: it represents the <strong>fraction of variance explained</strong> by the model. The closer the <em>R<sup>2</sup></em> is to 1, the greater the explanatory power of the model.</p>
+<p><span class="fragment">The adjusted <em>R<sup>2</sup></em> penalise the <em>R<sup>2</sup></em> by the number of explanatory variables (not relevant when there is just one explanatory variable).</span></p>
 </section>
-<section id="intervale-de-confiance" class="slide level2">
-<h2>intervale de confiance</h2>
+<section id="r2-and-p-value" class="slide level2">
+<h2><em>R<sup>2</sup></em> and <em>p-value</em></h2>
+<ul>
+<li class="fragment"><p>The <strong>p-value</strong> indicates <strong>significance of the effect</strong> of the explanatory variable: this effect can be small yet highly significant =&gt; a small p-value is particularly important for hypothesis testing.</p></li>
+<li class="fragment"><p>The <strong>R<sup>2</sup></strong> indicates the <strong>goodness of fit</strong> (how well the model fits the observed data) =&gt; a high <em>R<sup>2</sup></em> is particularly important for prediction.</p></li>
+</ul>
 </section>
-<section id="interval-de-prediction" class="slide level2">
-<h2>interval de prediction</h2>
+<section id="confidence-interval" class="slide level2">
+<h2>Confidence interval</h2>
+<p>TELL WHAT ARE THE CONFIDENCE INTERVAL + COMMENT THE CODE</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>new <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">D =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">10</span>, <span class="at">to =</span> <span class="dv">160</span>, <span class="at">by=</span> <span class="dv">10</span>))</span>
+<span id="cb20-2"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new,</span>
+<span id="cb20-3"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
+<span id="cb20-4"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(new, new_conf)</span>
+<span id="cb20-5"><a href=""></a><span class="fu">slice_head</span>(new_conf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+      D   fit   lwr   upr
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1    10  16.7  16.0  17.3</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>gpred <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(new_conf, <span class="fu">aes</span>(<span class="at">x=</span> D)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href=""></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fit), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb22-3"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
+<span id="cb22-4"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb22-5"><a href=""></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb22-6"><a href=""></a>gpred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>no need to take too many points because we have at line</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="predire-avec-des-nouvelles-valeurs" class="slide level2">
-<h2>predire avec des nouvelles valeurs</h2>
-<p>cf Eric 28</p>
+<section id="prediction-interval" class="slide level2">
+<h2>Prediction interval</h2>
+<p>TELL WHAT ARE THE PREDICTION + COMMENT THE CODE</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>new_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new,</span>
+<span id="cb23-2"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"prediction"</span>)</span>
+<span id="cb23-3"><a href=""></a>new_pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(new, new_pred)</span>
+<span id="cb23-4"><a href=""></a><span class="fu">slice_head</span>(new_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+      D   fit   lwr   upr
+  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1    10  16.7  7.25  26.1</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>gpred <span class="ot">&lt;-</span> gpred <span class="sc">+</span></span>
+<span id="cb25-2"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> new_pred, <span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), </span>
+<span id="cb25-3"><a href=""></a>              <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"lightgrey"</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href=""></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb25-5"><a href=""></a>gpred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="verif-des-hyp-du-modèle" class="slide level2">
-<h2>verif des hyp du modèle</h2>
-<p>Marchand + erci on diapo 7 et 11…</p>
+<section id="model-validation" class="slide level2">
+<h2>Model validation</h2>
+<p>We need to check the model assumptions.</p>
+<ul>
+<li class="fragment"><p>normality of the residuals</p></li>
+<li class="fragment"><p>independence of the residuals</p></li>
+<li class="fragment"><p>constant variance of the residuals (homoscedasticity)</p></li>
+<li class="fragment"><p>linearity of the relationship between response and explanatory variables</p></li>
+</ul>
 </section>
-<section id="tranfo-de-variable" class="slide level2">
-<h2>tranfo de variable</h2>
-<p>pourquyoi transformer =&gt; Eric 47</p>
-<p>faire un log log sur diam/hauteur (testé par le pacakge BIOMASS) et dire que la relation linéaire n’est pas un bon modèle allométrique !!!!</p>
+<section id="homoscedasticity-and-independence-of-the-residuals" class="slide level2">
+<h2>Homoscedasticity and independence of the residuals</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">plot</span>(mod_dh_1, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-16-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">⚠️ Here the residuals depends on the fitted values =&gt; this suggests that the relationship is not linear…</span></p>
+<p><span style="font-size: 30px">⚠️ The variance is not constant.</span></p>
+</div>
+</div></div>
+</section>
+<section id="normality-of-the-residuals" class="slide level2">
+<h2>Normality of the residuals</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">plot</span>(mod_dh_1, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-17-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="fragment"><span style="font-size: 30px">✅ Here the residuals are reasonably normality distributed.</span></span></p>
+</div></div>
+</section>
+<section id="leverage-effect" class="slide level2">
+<h2>Leverage effect</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">plot</span>(mod_dh_1, <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-18-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="fragment">
+<p><span style="font-size: 30px">⚠️️ Some observations are highly influential.</span></p>
+</div>
+</div></div>
+</section>
+<section id="variable-transformation" class="slide level2">
+<h2>Variable transformation</h2>
+<p><span style="font-size: 30px">Our model has problem of linearity and high leverage of some observations.</span></p>
+<div class="fragment">
+<p><span style="font-size: 30px">💡 A transformation of variables may help, let’s try to take the log of D and H:</span></p>
+<p><span class="math display">\[log(H) = \alpha + \beta \times log(D)\]</span></p>
+</div>
+<div class="fragment">
+<p><span style="font-size: 30px">which is equivalent to <span class="math inline">\(y = \alpha'x^\beta\)</span> with <span class="math inline">\(\alpha' = e^{\alpha}\)</span> because</span></p>
+<p><span style="font-size: 30px"><span class="math inline">\(log\big (\alpha'x^\beta \big) = log(\alpha') + \beta \times log(D)\)</span></span></p>
+</div>
+<p><span class="fragment"><span style="font-size: 30px"><em>This is a classical allometric model: it predicts that the height of the tree will increase less rapidly for trees with bigger DBH, which is consistent with what we expect.</em></span></span></p>
+</section>
+<section id="fitting-the-log-log-model" class="slide level2 smaller">
+<h2>Fitting the log-log model</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a>mod_dh_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(H) <span class="sc">~</span> <span class="fu">log</span>(D), <span class="at">data =</span> dt_nou)</span>
+<span id="cb29-2"><a href=""></a><span class="fu">summary</span>(mod_dh_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = log(H) ~ log(D), data = dt_nou)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.86914 -0.10668  0.02985  0.14935  0.52921 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.51202    0.06114   24.73   &lt;2e-16 ***
+log(D)       0.49363    0.01948   25.34   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2155 on 389 degrees of freedom
+  (63 observations deleted due to missingness)
+Multiple R-squared:  0.6227,    Adjusted R-squared:  0.6217 
+F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="model-validation-1" class="slide level2 smaller">
+<h2>Model validation</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">plot</span>(mod_dh_2, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-20-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">😊 We have improved the independance of residuals and homoscedasticity.</span></span></p>
+</div><div class="column" style="width:33%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">plot</span>(mod_dh_2, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-21-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">😊 The residuals are still normally distributed.</span></span></p>
+</div><div class="column" style="width:33%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">plot</span>(mod_dh_2, <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-22-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">😊 We have considerably reduced the leverage effect.</span></span></p>
+</div></div>
 </section>
 <section id="comparaison-de-modèle" class="slide level2">
 <h2>comparaison de modèle</h2>
-<p>entre le lineaire et le log-log</p>
-<p>Eric 57: AIC</p>
-<p>et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pas.html#afficher-les-indicateurs-de-performance</p>
+<p>Dire qu’on préfère le log-log :</p>
+<p>less pb with model validation, slighly better r2 and more ecological meaning</p>
+<p>entre le lineaire et le log-log !!!!! not with the AIC so more in the next section on multiple linear regression</p>
+</section>
+<section id="predire-avec-des-nouvelles-valeurs" class="slide level2">
+<h2>predire avec des nouvelles valeurs</h2>
+<p>quand transfo de données:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="co"># library(ggeffects)</span></span>
+<span id="cb34-2"><a href=""></a><span class="co"># library(ggplot2)</span></span>
+<span id="cb34-3"><a href=""></a><span class="co"># </span></span>
+<span id="cb34-4"><a href=""></a><span class="co"># # Fit your model</span></span>
+<span id="cb34-5"><a href=""></a><span class="co"># model &lt;- lm(log(H) ~ log(D), data = your_data)</span></span>
+<span id="cb34-6"><a href=""></a><span class="co"># </span></span>
+<span id="cb34-7"><a href=""></a><span class="co"># # Get predictions back on original scale</span></span>
+<span id="cb34-8"><a href=""></a><span class="co"># preds &lt;- ggpredict(model, terms = "D", type = "re")  # "re" = response scale (exp back-transform)</span></span>
+<span id="cb34-9"><a href=""></a><span class="co"># </span></span>
+<span id="cb34-10"><a href=""></a><span class="co"># ggplot(preds, aes(x = x, y = predicted)) +</span></span>
+<span id="cb34-11"><a href=""></a><span class="co">#   geom_line(color = "blue", size = 1) +</span></span>
+<span id="cb34-12"><a href=""></a><span class="co">#   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), fill = "blue", alpha = 0.2) +</span></span>
+<span id="cb34-13"><a href=""></a><span class="co">#   geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.6) +</span></span>
+<span id="cb34-14"><a href=""></a><span class="co">#   labs(x = "D", y = "H", title = "Predicted H vs D (log-log model, back-transformed)") +</span></span>
+<span id="cb34-15"><a href=""></a><span class="co">#   theme_minimal()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
 </section>
 <section id="presentation-des-résultats" class="slide level2">
 <h2>presentation des résultats</h2>
@@ -819,12 +1164,14 @@ F-statistic: 490.1 on 1 and 392 DF,  p-value: &lt; 2.2e-16</code></pre>
 </ul>
 <p>compare ANOVA and lm (Marchand)</p>
 <p>à faire avec quelques familles de Nouragues?</p>
+<p>ne pas faire tout le diagnostic…</p>
 </section></section>
 <section>
 <section id="multiple-linear-regression---one-quanti-and-one-quali" class="title-slide slide level1 center">
 <h1>Multiple linear regression - One quanti and one quali</h1>
+<p>maybe go directly to several quanti… so I can talk about collinearity and selection</p>
 <p>follow marchand et Eric</p>
-<p>voir si je parle de emmean ou plutôt de ggstats::ggcoef_model() dans Marchand</p>
+<p>voir si je parle de emmean ou plutôt de ggstats::ggcoef_model() dans Lamaranche</p>
 </section>
 <section id="data" class="slide level2">
 <h2>Data</h2>
@@ -850,7 +1197,22 @@ F-statistic: 490.1 on 1 and 392 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="interaction-between-variable" class="slide level2">
 <h2>interaction between variable</h2>
 <p>Eric 36</p>
+</section>
+<section id="model-selection" class="slide level2">
+<h2>model selection</h2>
+<p>Eric 57: AIC</p>
+<p>et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pas.html#afficher-les-indicateurs-de-performance</p>
 </section></section>
+<section id="to-go-further-not-in-depth-here" class="title-slide slide level1 center">
+<h1>TO GO FURTHER (not in depth here…)</h1>
+
+</section>
+
+<section id="what-if-the-observation-are-not-independant-mixed-effect-models" class="title-slide slide level1 center">
+<h1>What if the observation are not independant ? mixed-effect models</h1>
+<p>Nouragues per plot?</p>
+</section>
+
 <section>
 <section id="what-if-the-data-are-not-normal-glm" class="title-slide slide level1 center">
 <h1>What if the data are not normal ? GLM</h1>
@@ -864,11 +1226,6 @@ F-statistic: 490.1 on 1 and 392 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Poisson</h2>
 <p>karnataka count of a family per plot? mais pas de prédicteur? or BCI?</p>
 </section></section>
-<section id="what-if-the-observation-are-not-independant-mixed-effect-models" class="title-slide slide level1 center">
-<h1>What if the observation are not independant ? mixed-effect models</h1>
-<p>Nouragues per plot?</p>
-</section>
-
 <section id="acknowledgments" class="title-slide slide level1 smaller center">
 <h1>Acknowledgments</h1>
 <div>
@@ -916,22 +1273,22 @@ F-statistic: 490.1 on 1 and 392 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb18-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb18-3"><a href=""></a></span>
-<span id="cb18-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb18-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb18-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
-<span id="cb18-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb18-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
-<span id="cb18-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb18-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb35-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb35-3"><a href=""></a></span>
+<span id="cb35-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb35-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb35-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb35-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb35-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
+<span id="cb35-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb35-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
 </figure>
 </div>
 </div>
