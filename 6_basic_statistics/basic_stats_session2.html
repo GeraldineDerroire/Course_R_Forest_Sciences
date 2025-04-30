@@ -872,40 +872,29 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="confidence-interval" class="slide level2">
 <h2>Confidence interval</h2>
-<p>TELL WHAT ARE THE CONFIDENCE INTERVAL + COMMENT THE CODE</p>
+<p>The <strong>confidence interval</strong> is the interval of confidence of the mean predicted value of y (so of <span class="math inline">\(\mu\)</span>).</p>
+<p><span class="fragment"><span style="font-size: 30px">To calculate it, we can use the function <span style="color:indianred;">predict</span>, with the argument <em>interval = “confidence”</em>, on new data that we create for the prediction:</span></span></p>
+<div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>new <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">D =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">10</span>, <span class="at">to =</span> <span class="dv">160</span>, <span class="at">by=</span> <span class="dv">10</span>))</span>
-<span id="cb20-2"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new,</span>
-<span id="cb20-3"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
-<span id="cb20-4"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(new, new_conf)</span>
-<span id="cb20-5"><a href=""></a><span class="fu">slice_head</span>(new_conf)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>new <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">D =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">10</span>, <span class="at">to =</span> <span class="dv">160</span>, <span class="at">by=</span> <span class="dv">10</span>)) <span class="co"># create new data</span></span>
+<span id="cb20-2"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new, </span>
+<span id="cb20-3"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"confidence"</span>) <span class="co"># calculate the confidence interval</span></span>
+<span id="cb20-4"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(new, new_conf) <span class="co"># combine the two</span></span>
+<span id="cb20-5"><a href=""></a><span class="fu">slice_head</span>(new_conf, <span class="at">n=</span><span class="dv">3</span>) <span class="co"># visualise them to check</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
+<pre><code># A tibble: 3 × 4
       D   fit   lwr   upr
   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1    10  16.7  16.0  17.3</code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>gpred <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(new_conf, <span class="fu">aes</span>(<span class="at">x=</span> D)) <span class="sc">+</span></span>
-<span id="cb22-2"><a href=""></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fit), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb22-3"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span></span>
-<span id="cb22-4"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb22-5"><a href=""></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb22-6"><a href=""></a>gpred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
-</figure>
+1    10  16.7  16.0  17.3
+2    20  20.1  19.6  20.6
+3    30  23.5  23.0  24.0</code></pre>
 </div>
 </div>
 </div>
 <aside class="notes">
+<p>why do we create new data? to do less predictions than if we were using the observed D</p>
 <p>no need to take too many points because we have at line</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -918,6 +907,27 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="confidence-interval-1" class="slide level2">
+<h2>Confidence interval</h2>
+<p><span style="font-size: 30px">We can then plot the confidence interval:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>gpred <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(new_conf, <span class="fu">aes</span>(<span class="at">x=</span> D)) <span class="sc">+</span></span>
+<span id="cb22-2"><a href=""></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fit), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> <span class="co"># prediction mean</span></span>
+<span id="cb22-3"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span> <span class="co"># CI</span></span>
+<span id="cb22-4"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="co"># observations</span></span>
+<span id="cb22-5"><a href=""></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb22-6"><a href=""></a>gpred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-13-1.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="prediction-interval" class="slide level2">
 <h2>Prediction interval</h2>
@@ -1160,7 +1170,7 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="what-if-the-predictor-is-categorical" class="slide level2">
 <h2>what if the predictor is categorical</h2>
 <ul>
-<li class="fragment">show the equation</li>
+<li class="fragment">show the equation et do it quickly</li>
 </ul>
 <p>compare ANOVA and lm (Marchand)</p>
 <p>à faire avec quelques familles de Nouragues?</p>

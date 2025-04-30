@@ -1878,7 +1878,7 @@ str_replace_all(v, "Avenida", "AV.")
 :::::
 
 
-# Dealing with dates with the package [lubidate]{style="color:indianred;"}
+# Dealing with dates with the package [lubridate]{style="color:indianred;"}
 
 
 ![](lubridate.png){width=70%}

@@ -2672,7 +2672,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
   &lt;chr&gt;                                &lt;chr&gt;     
 1 Anacardiaceae_Myracrodruon_urundeuva 10, 12, 21
 2 Fabaceae_Hymenaea_martiana           13        
-3 Favaceae_Piptadenia_macradenia       24, 18    </code></pre>
+3 Fabaceae_Piptadenia_macradenia       24, 18    </code></pre>
 </div>
 </div>
 <p><span class="fragment">🤔 Why is it untidy?</span></p>
@@ -2709,7 +2709,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
   &lt;chr&gt;         &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;     
 1 Anacardiaceae Myracrodruon urundeuva  10, 12, 21
 2 Fabaceae      Hymenaea     martiana   13        
-3 Favaceae      Piptadenia   macradenia 24, 18    </code></pre>
+3 Fabaceae      Piptadenia   macradenia 24, 18    </code></pre>
 </div>
 </div>
 </section>
@@ -2732,7 +2732,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
   &lt;chr&gt;         &lt;chr&gt;                  &lt;chr&gt;        &lt;chr&gt;      &lt;chr&gt;     
 1 Anacardiaceae Myracrodruon urundeuva Myracrodruon urundeuva  10, 12, 21
 2 Fabaceae      Hymenaea martiana      Hymenaea     martiana   13        
-3 Favaceae      Piptadenia macradenia  Piptadenia   macradenia 24, 18    </code></pre>
+3 Fabaceae      Piptadenia macradenia  Piptadenia   macradenia 24, 18    </code></pre>
 </div>
 </div>
 </section>
@@ -2757,8 +2757,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 2 Anacardiaceae Myracrodruon urundeuva Myracrodruon urundeuva     12
 3 Anacardiaceae Myracrodruon urundeuva Myracrodruon urundeuva     21
 4 Fabaceae      Hymenaea martiana      Hymenaea     martiana      13
-5 Favaceae      Piptadenia macradenia  Piptadenia   macradenia    24
-6 Favaceae      Piptadenia macradenia  Piptadenia   macradenia    18</code></pre>
+5 Fabaceae      Piptadenia macradenia  Piptadenia   macradenia    24
+6 Fabaceae      Piptadenia macradenia  Piptadenia   macradenia    18</code></pre>
 </div>
 </div>
 </div>
@@ -2949,8 +2949,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [27 × 2] (S3: tbl_df/tbl/data.frame)
- $ past_landuse: Factor w/ 5 levels "Corn","Pasture",..: 3 2 3 2 4 4 2 3 3 2 ...
- $ age         : num [1:27] 12 14 8 7 8 7 9 10 6 11 ...</code></pre>
+ $ past_landuse: Factor w/ 5 levels "Corn","Pasture",..: 2 2 3 4 4 3 2 3 2 2 ...
+ $ age         : num [1:27] 5 10 8 13 15 5 9 8 12 5 ...</code></pre>
 </div>
 </div>
 <p><span class="fragment">What are the levels of the factor <em>past_landuse</em>?</span></p>
@@ -3040,7 +3040,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Tomatoes"  "Sugarcane" "Soybeans"  "Pasture"   "Corn"     </code></pre>
+<pre><code>[1] "Tomatoes"  "Soybeans"  "Pasture"   "Sugarcane" "Corn"     </code></pre>
 </div>
 </div>
 </div>
@@ -3074,16 +3074,16 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <pre><code># A tibble: 27 × 3
    past_landuse   age age_cat          
    &lt;fct&gt;        &lt;dbl&gt; &lt;fct&gt;            
- 1 Soybeans        12 Older than 10yr  
- 2 Pasture         14 Older than 10yr  
+ 1 Pasture          5 Younger than 10yr
+ 2 Pasture         10 Younger than 10yr
  3 Soybeans         8 Younger than 10yr
- 4 Pasture          7 Younger than 10yr
- 5 Sugarcane        8 Younger than 10yr
- 6 Sugarcane        7 Younger than 10yr
+ 4 Sugarcane       13 Older than 10yr  
+ 5 Sugarcane       15 Older than 10yr  
+ 6 Soybeans         5 Younger than 10yr
  7 Pasture          9 Younger than 10yr
- 8 Soybeans        10 Younger than 10yr
- 9 Soybeans         6 Younger than 10yr
-10 Pasture         11 Older than 10yr  
+ 8 Soybeans         8 Younger than 10yr
+ 9 Pasture         12 Older than 10yr  
+10 Pasture          5 Younger than 10yr
 # ℹ 17 more rows</code></pre>
 </div>
 </div>
@@ -3120,16 +3120,16 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <pre><code># A tibble: 27 × 3
    past_landuse   age category
    &lt;fct&gt;        &lt;dbl&gt; &lt;fct&gt;   
- 1 Soybeans        12 Old     
- 2 Pasture         14 Old     
+ 1 Pasture          5 Young   
+ 2 Pasture         10 Medium  
  3 Soybeans         8 Medium  
- 4 Pasture          7 Young   
- 5 Sugarcane        8 Medium  
- 6 Sugarcane        7 Young   
+ 4 Sugarcane       13 Old     
+ 5 Sugarcane       15 Old     
+ 6 Soybeans         5 Young   
  7 Pasture          9 Medium  
- 8 Soybeans        10 Medium  
- 9 Soybeans         6 Young   
-10 Pasture         11 Old     
+ 8 Soybeans         8 Medium  
+ 9 Pasture         12 Old     
+10 Pasture          5 Young   
 # ℹ 17 more rows</code></pre>
 </div>
 </div>
@@ -3166,16 +3166,16 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <pre><code># A tibble: 27 × 3
    past_landuse   age category               
    &lt;fct&gt;        &lt;dbl&gt; &lt;fct&gt;                  
- 1 Soybeans        12 Old                    
- 2 Pasture         14 Old                    
+ 1 Pasture          5 Young after pasture    
+ 2 Pasture         10 Old                    
  3 Soybeans         8 Young after agriculture
- 4 Pasture          7 Young after pasture    
- 5 Sugarcane        8 Young after agriculture
- 6 Sugarcane        7 Young after agriculture
+ 4 Sugarcane       13 Old                    
+ 5 Sugarcane       15 Old                    
+ 6 Soybeans         5 Young after agriculture
  7 Pasture          9 Young after pasture    
- 8 Soybeans        10 Old                    
- 9 Soybeans         6 Young after agriculture
-10 Pasture         11 Old                    
+ 8 Soybeans         8 Young after agriculture
+ 9 Pasture         12 Old                    
+10 Pasture          5 Young after pasture    
 # ℹ 17 more rows</code></pre>
 </div>
 </div>
@@ -3209,16 +3209,16 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <pre><code># A tibble: 27 × 3
    past_landuse   age age_class 
    &lt;fct&gt;        &lt;dbl&gt; &lt;fct&gt;     
- 1 Soybeans        12 (10,12.5] 
- 2 Pasture         14 (12.5,15] 
+ 1 Pasture          5 (4.99,7.5]
+ 2 Pasture         10 (7.5,10]  
  3 Soybeans         8 (7.5,10]  
- 4 Pasture          7 (4.99,7.5]
- 5 Sugarcane        8 (7.5,10]  
- 6 Sugarcane        7 (4.99,7.5]
+ 4 Sugarcane       13 (12.5,15] 
+ 5 Sugarcane       15 (12.5,15] 
+ 6 Soybeans         5 (4.99,7.5]
  7 Pasture          9 (7.5,10]  
- 8 Soybeans        10 (7.5,10]  
- 9 Soybeans         6 (4.99,7.5]
-10 Pasture         11 (10,12.5] 
+ 8 Soybeans         8 (7.5,10]  
+ 9 Pasture         12 (10,12.5] 
+10 Pasture          5 (4.99,7.5]
 # ℹ 17 more rows</code></pre>
 </div>
 </div>
@@ -3393,8 +3393,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div></div>
 </section></section>
-<section id="dealing-with-dates-with-the-package-lubidate" class="title-slide slide level1 center">
-<h1>Dealing with dates with the package <span style="color:indianred;">lubidate</span></h1>
+<section id="dealing-with-dates-with-the-package-lubridate" class="title-slide slide level1 center">
+<h1>Dealing with dates with the package <span style="color:indianred;">lubridate</span></h1>
 
 <img data-src="lubridate.png" style="width:70.0%" class="r-stretch"><p><span style="font-size: 25px">Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em></span></p>
 <p><span style="font-size: 25px"><a href="https://r4ds.hadley.nz/datetimes.html">in English</a> and <a href="https://pt.r4ds.hadley.nz/datetimes.html" data-preview-link="false">in Portuguese</a></span></p>

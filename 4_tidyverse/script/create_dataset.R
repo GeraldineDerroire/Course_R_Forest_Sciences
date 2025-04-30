@@ -30,7 +30,7 @@ dt1 <- tibble(
 dt2 <- tibble(
   taxo = c("Anacardiaceae_Myracrodruon_urundeuva", # Aroeira
           "Fabaceae_Hymenaea_martiana", # Jatoba-da-mata
-          "Favaceae_Piptadenia_macradenia"), # Pau-jacaré
+          "Fabaceae_Piptadenia_macradenia"), # Pau-jacaré
   DBH = c("10, 12, 21" , "13", "24, 18")
 )
 

@@ -374,30 +374,43 @@ The **R^2^** is the coefficient of determination: it represents the **fraction o
 
 ## Confidence interval
 
-TELL WHAT ARE THE CONFIDENCE INTERVAL + COMMENT THE CODE
+The **confidence interval** is the interval of confidence of the mean predicted value of y (so of $\mu$).
 
+[[To calculate it, we can use the function [predict]{style="color:indianred;"}, with the argument *interval = "confidence"*, on new data that we create for the prediction:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
 ```{r}
-new <- tibble(D = seq(from = 10, to = 160, by= 10))
-new_conf <- predict(mod_dh_1, newdata = new,
-                    interval = "confidence")
-new_conf <- bind_cols(new, new_conf)
-slice_head(new_conf)
+new <- tibble(D = seq(from = 10, to = 160, by= 10)) # create new data
+new_conf <- predict(mod_dh_1, newdata = new, 
+                    interval = "confidence") # calculate the confidence interval
+new_conf <- bind_cols(new, new_conf) # combine the two
+slice_head(new_conf, n=3) # visualise them to check
 ```
+:::
+
+::: notes
+why do we create new data? to do less predictions than if we were using the observed D 
+
+no need to take too many points because we have at line
+:::
+
+## Confidence interval
+
+[We can then plot the confidence interval:]{style="font-size: 30px"}
 
 ```{r}
 #| warning: false
+#| out-width: 70%
 gpred <- ggplot(new_conf, aes(x= D)) +
-  geom_line(aes(y = fit), color = "blue") +
-  geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.3, color = "darkgrey") +
-  geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.3) +
+  geom_line(aes(y = fit), color = "blue") + # prediction mean
+  geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.3, color = "darkgrey") + # CI
+  geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.3) + # observations
   theme_bw()
 gpred
 ```
 
 
-::: notes
-no need to take too many points because we have at line
-:::
+
 
 ## Prediction interval
 
