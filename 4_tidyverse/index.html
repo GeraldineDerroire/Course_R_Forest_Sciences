@@ -2400,7 +2400,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>inner_join</h2>
 <p>Let’s now use a <span style="color:indianred;">inner_join</span>.</p>
 <div class="columns">
-<div class="column" style="width:60%;">
+<div class="column" style="width:40%;">
+<p>The <span style="color:indianred;">inner_join</span> keeps only rows from <em>traits_sub</em> that have a matching key in <em>sp_com_sub</em>.</p>
+</div><div class="column" style="width:60%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb117"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href=""></a>j3 <span class="ot">&lt;-</span> traits_sub <span class="sc">%&gt;%</span> </span>
 <span id="cb117-2"><a href=""></a>  <span class="fu">inner_join</span>(sp_com_sub,</span>
@@ -2413,8 +2415,6 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <pre><code>[1] 11</code></pre>
 </div>
 </div>
-</div><div class="column" style="width:40%;">
-<p><span class="fragment">The <span style="color:indianred;">inner_join</span> keeps only rows from <em>traits_sub</em> that have a matching key in <em>sp_com_sub</em>.</span></p>
 </div></div>
 <p><span class="fragment">So there are 11 species common to <em>traits_sub</em> and <em>sp_com_sub</em>.</span></p>
 <aside class="notes">
@@ -2435,7 +2435,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>full_join</h2>
 <p>Let’s now use a <span style="color:indianred;">full_join</span>.</p>
 <div class="columns">
-<div class="column" style="width:60%;">
+<div class="column" style="width:40%;">
+<p>The <span style="color:indianred;">full_join</span> keeps all the rows in traits_sub and sp_com_sub</p>
+</div><div class="column" style="width:60%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href=""></a>j4 <span class="ot">&lt;-</span> traits_sub <span class="sc">%&gt;%</span> </span>
 <span id="cb119-2"><a href=""></a>  <span class="fu">full_join</span>(sp_com_sub,</span>
@@ -2448,8 +2450,6 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <pre><code>[1] 130</code></pre>
 </div>
 </div>
-</div><div class="column" style="width:40%;">
-<p><span class="fragment">The <span style="color:indianred;">full_join</span> keeps all the rows in traits_sub and sp_com_sub</span></p>
 </div></div>
 <p><span class="fragment">So there are 130 species in total in <em>traits_sub</em> and <em>sp_com_sub</em>.</span></p>
 <div class="fragment">
@@ -2499,23 +2499,11 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <section>
 <section id="tidy-a-dataset-with-with-the-package-tidyr" class="title-slide slide level1 center">
 <h1>Tidy a dataset with with the package <span style="color:indianred;">tidyr</span></h1>
-<aside class="notes">
-<p>last session and today, we have seen how to manipulate dity data, but let’s now see what to do when the data are not tidy</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+
 </section>
 <section id="the-verbs-of-tidyr" class="slide level2">
 <h2>The verbs of <span style="color:indianred;">tidyr</span></h2>
-<p>With <span style="color:indianred;">dplyr</span>, we have seen how to manipulate and transform tidy data. But what to do when data are non-tidy?</p>
+<p>With <span style="color:indianred;">dplyr</span>, we have seen how to manipulate and transform tidy data. But what to do when data are not tidy?</p>
 <div class="columns">
 <div class="column" style="width:70%;">
 <p><span class="fragment">We are going to use the package <span style="color:indianred;">tidyr</span> to make messy (untidy) data tidy, so that we can use them with all the packages of the tidyverse.</span></p>
@@ -2568,11 +2556,11 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 <p><span class="fragment">🤔 Why is it untidy? What are the variables in this table?</span></p>
-<p><span class="fragment">The variables are the <em>tree</em>, the <em>year</em> and the <em>DBH</em>. These variable are NOT stored in columns.</span></p>
+<p><span class="fragment">The variables are the <em>tree</em>, the <em>year</em> and the <em>DBH</em>. These variables are NOT stored in columns.</span></p>
 </section>
 <section id="pivot_longer" class="slide level2">
 <h2>pivot_longer</h2>
-<p>We can use the function <span style="color:indianred;">pivot_longer</span> to put it in a tidy format:</p>
+<p>We can use the function <span style="color:indianred;">pivot_longer</span> to put the table in a tidy format:</p>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
@@ -3047,7 +3035,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="cell">
 <div class="sourceCode cell-code" id="cb162"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb162-1"><a href=""></a>dt4<span class="sc">$</span>past_landuse <span class="sc">%&gt;%</span> <span class="fu">fct_reorder</span>(</span>
 <span id="cb162-2"><a href=""></a>  dt4<span class="sc">$</span>age,</span>
-<span id="cb162-3"><a href=""></a>  median) <span class="sc">%&gt;%</span>  <span class="co"># re-order the factor according the median of the age </span></span>
+<span id="cb162-3"><a href=""></a>  median) <span class="sc">%&gt;%</span>  <span class="co"># re-order the levels according the median of the age </span></span>
 <span id="cb162-4"><a href=""></a>  <span class="fu">levels</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
@@ -3116,7 +3104,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="function-case_when" class="slide level2 scrollable">
 <h2>Function <span style="color:indianred;">case_when</span></h2>
-<p><span style="color:indianred;">case_when</span> from the package <span style="color:indianred;">dplyr</span> generalises if else to allow several conditions:</p>
+<p><span style="color:indianred;">case_when</span> from the package <span style="color:indianred;">dplyr</span> generalises <span style="color:indianred;">if_else</span> to allow several conditions:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb166"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href=""></a>dt4 <span class="sc">%&gt;%</span> </span>
 <span id="cb166-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">category =</span> </span>
@@ -3170,7 +3158,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <span id="cb168-5"><a href=""></a>               <span class="st">"Young after agriculture"</span>, <span class="co"># value for the first case</span></span>
 <span id="cb168-6"><a href=""></a>             dt4<span class="sc">$</span>past_landuse <span class="sc">==</span> <span class="st">"Pasture"</span> <span class="sc">&amp;</span> dt4<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="co"># tests for the second case</span></span>
 <span id="cb168-7"><a href=""></a>               <span class="st">"Young after pasture"</span>, <span class="co"># value for the second case</span></span>
-<span id="cb168-8"><a href=""></a>             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"old"</span>)) <span class="sc">%&gt;%</span> <span class="co"># all the other cases</span></span>
+<span id="cb168-8"><a href=""></a>             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Old"</span>)) <span class="sc">%&gt;%</span> <span class="co"># all the other cases</span></span>
 <span id="cb168-9"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">category =</span> <span class="fu">as.factor</span>(category)) <span class="co"># transform to factor</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
@@ -3178,16 +3166,16 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <pre><code># A tibble: 27 × 3
    past_landuse   age category               
    &lt;fct&gt;        &lt;dbl&gt; &lt;fct&gt;                  
- 1 Soybeans        12 old                    
- 2 Pasture         14 old                    
+ 1 Soybeans        12 Old                    
+ 2 Pasture         14 Old                    
  3 Soybeans         8 Young after agriculture
  4 Pasture          7 Young after pasture    
  5 Sugarcane        8 Young after agriculture
  6 Sugarcane        7 Young after agriculture
  7 Pasture          9 Young after pasture    
- 8 Soybeans        10 old                    
+ 8 Soybeans        10 Old                    
  9 Soybeans         6 Young after agriculture
-10 Pasture         11 old                    
+10 Pasture         11 Old                    
 # ℹ 17 more rows</code></pre>
 </div>
 </div>
