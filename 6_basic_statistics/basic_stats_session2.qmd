@@ -31,6 +31,7 @@ Let's load the packages that we will use today
 #| message: false
 library(tidyverse)
 library(GGally)
+library(ggeffects)
 ```
 
 ::: notes
@@ -384,7 +385,7 @@ new <- tibble(D = seq(from = 10, to = 160, by= 10)) # create new data
 new_conf <- predict(mod_dh_1, newdata = new, 
                     interval = "confidence") # calculate the confidence interval
 new_conf <- bind_cols(new, new_conf) # combine the two
-slice_head(new_conf, n=3) # visualise them to check
+slice_head(new_conf, n=3) # visualise to check
 ```
 :::
 
@@ -412,19 +413,29 @@ gpred
 
 
 
-## Prediction interval
+## Prediction interval {.scrollable}
 
-TELL WHAT ARE THE PREDICTION + COMMENT THE CODE
+The **prediction interval** includes the uncertainty of the predicted mean (like the confidence interval) and the variability of individual prediction by taking into account the residual variance $\sigma^2$.
+[It is therefore wider than the confidence interval and contains most of the observations.]{.fragment}
 
+[[To calculate it, we can use the function [predict]{style="color:indianred;"}, with the argument *interval = "prediction"*, on new data that we created for the prediction:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
 ```{r}
 new_pred <- predict(mod_dh_1, newdata = new,
-                    interval = "prediction")
+                    interval = "prediction") # calculate the prediction interval
 new_pred <- bind_cols(new, new_pred)
-slice_head(new_pred)
+slice_head(new_pred) # visualise to check
 ```
+:::
+
+## Prediction interval
+
+[We can then add the prediction interval to the plot:]{style="font-size: 30px"}
 
 ```{r}
 #| warning: false
+#| out-width: 70%
 gpred <- gpred +
   geom_ribbon(data = new_pred, aes(ymin = lwr, ymax = upr), 
               alpha = 0.3, color = "lightgrey") +
@@ -432,9 +443,11 @@ gpred <- gpred +
 gpred
 ```
 
+
+
 ## Model validation
 
-We need to check the model assumptions.
+We need to check the model assumptions:
 
 * normality of the residuals
 
@@ -586,37 +599,40 @@ plot(mod_dh_2, which = 4)
 
 
 
-## comparaison de modèle
+## Which model should we choose?
 
-Dire qu'on préfère le log-log :
+Here we would prefer the log-log model because:
 
-less pb with model validation, slighly better r2 and more ecological meaning
+* it is better regarding the model assumptions and reduced the leverage effect
 
-entre le lineaire et le log-log !!!!! not with the AIC so more in the next section on multiple linear regression
+* it has a slightly better R^2^
+
+* it make more sense ecologically
+
+[[⚠️ We will talk later about the AIC to compare models. We cannot use it here because the response variables are different (D *vs* log(D)).]{style="font-size: 30px"}]{.fragment}
 
 
+## Presenting the results
 
+<!--TO DO -->
 
-## predire avec des nouvelles valeurs
+We have seen how to 
 
-quand transfo de données: 
+quand transfo de données: from package ggeffects
 
 ```{r}
-# library(ggeffects)
-# library(ggplot2)
-# 
-# # Fit your model
-# model <- lm(log(H) ~ log(D), data = your_data)
-# 
-# # Get predictions back on original scale
-# preds <- ggpredict(model, terms = "D", type = "re")  # "re" = response scale (exp back-transform)
-# 
-# ggplot(preds, aes(x = x, y = predicted)) +
-#   geom_line(color = "blue", size = 1) +
-#   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), fill = "blue", alpha = 0.2) +
-#   geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.6) +
-#   labs(x = "D", y = "H", title = "Predicted H vs D (log-log model, back-transformed)") +
-#   theme_minimal()
+# Get predictions back on original scale
+preds <- ggeffects::ggpredict(mod_dh_2, terms = "D")  
+
+# check with the D usef for predict don't go above 80cm
+# for prediction interval, apparently add interval = "prediction" but TO CHECK
+
+ggplot(preds, aes(x = x, y = predicted)) +
+  geom_line(color = "blue", size = 1) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), fill = "blue", alpha = 0.2) +
+  geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.6) +
+  labs(x = "D", y = "H", title = "Predicted H vs D (log-log model, back-transformed)") +
+  theme_minimal()
 ```
 
 
@@ -627,6 +643,13 @@ quand transfo de données:
 cf lamaragnge: https://larmarange.github.io/guide-R/analyses/regression-lineaire.html
 
 gtsummary 
+
+
+## Other types of data transformation
+
+see Eric
+
+But be carrfull, this will change the shape of the relationship.
 
 
 ## what if the predictor is categorical

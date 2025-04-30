@@ -880,7 +880,7 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <span id="cb20-2"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new, </span>
 <span id="cb20-3"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"confidence"</span>) <span class="co"># calculate the confidence interval</span></span>
 <span id="cb20-4"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(new, new_conf) <span class="co"># combine the two</span></span>
-<span id="cb20-5"><a href=""></a><span class="fu">slice_head</span>(new_conf, <span class="at">n=</span><span class="dv">3</span>) <span class="co"># visualise them to check</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-5"><a href=""></a><span class="fu">slice_head</span>(new_conf, <span class="at">n=</span><span class="dv">3</span>) <span class="co"># visualise to check</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -931,12 +931,13 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="prediction-interval" class="slide level2">
 <h2>Prediction interval</h2>
-<p>TELL WHAT ARE THE PREDICTION + COMMENT THE CODE</p>
+<p>The <strong>prediction interval</strong> includes the uncertainty of the predicted mean (like the confidence interval) and the variability of individual prediction by taking into account the residual variance <span class="math inline">\(\sigma^2\)</span>. <span class="fragment">It is therefore wider than the confidence interval and contains most of the observations.</span></p>
+<p><span class="fragment"><span style="font-size: 30px">To calculate it, we can use the function <span style="color:indianred;">predict</span>, with the argument <em>interval = “prediction”</em>, on new data that we created for the prediction:</span></span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>new_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new,</span>
-<span id="cb23-2"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"prediction"</span>)</span>
+<span id="cb23-2"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"prediction"</span>) <span class="co"># calculate the prediction interval</span></span>
 <span id="cb23-3"><a href=""></a>new_pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(new, new_pred)</span>
-<span id="cb23-4"><a href=""></a><span class="fu">slice_head</span>(new_pred)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-4"><a href=""></a><span class="fu">slice_head</span>(new_pred) <span class="co"># visualise to check</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -946,6 +947,10 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 1    10  16.7  7.25  26.1</code></pre>
 </div>
 </div>
+</section>
+<section id="prediction-interval-1" class="slide level2">
+<h2>Prediction interval</h2>
+<p><span style="font-size: 30px">We can then add the prediction interval to the plot:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>gpred <span class="ot">&lt;-</span> gpred <span class="sc">+</span></span>
 <span id="cb25-2"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> new_pred, <span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), </span>
@@ -957,7 +962,7 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-15-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -965,7 +970,7 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="model-validation" class="slide level2">
 <h2>Model validation</h2>
-<p>We need to check the model assumptions.</p>
+<p>We need to check the model assumptions:</p>
 <ul>
 <li class="fragment"><p>normality of the residuals</p></li>
 <li class="fragment"><p>independence of the residuals</p></li>
