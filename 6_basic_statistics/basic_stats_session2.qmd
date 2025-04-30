@@ -618,7 +618,7 @@ gtsummary
 
 ## what if the predictor is categorical
 
-* show the equation
+* show the equation et do it quickly
 
 compare ANOVA and lm (Marchand)
 

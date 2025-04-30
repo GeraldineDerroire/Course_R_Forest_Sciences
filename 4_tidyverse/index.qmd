@@ -1035,6 +1035,8 @@ dim(traits3)
 :::::
 
 ::: notes
+What did we do? Let's look at the dimension
+
 in some of the table, some columns are now missing
 :::
 
@@ -1048,6 +1050,10 @@ bind_rows(traits1, traits2, traits3)
 ```
 
 [When the columns were missing in some tables, the values have been filled with *NA*.]{.fragment}
+
+::: notes
+so we have our 7 rows and the 13 colums, with missing value
+:::
 
 
 ## bind_rows {.scrollable}
@@ -1082,6 +1088,11 @@ bind_cols(t1, t2, t3)
 [⚠️ The columns are matched only by position, so the rows needs to correspond (and there must be the same number of rows).
 A safer option is to use *joins* to combine several tables by columns.]{.fragment}
 
+::: notes
+what did we do to make the subset?
+
+show what the cbind does on the blackboard
+:::
 
 ## The joins
 
@@ -1105,7 +1116,11 @@ Several functions allows to join two tibbles (*here x and y*) using a key (or se
 :::::
 
 ::: notes 
-say here that very important to check the dim
+show what is a key on the backboard, and explain how it is different from a bind_cols
+
+we are going to see the 4 types of join
+
+say here that very important to check the dim of the output
 :::
 
 
@@ -1150,6 +1165,16 @@ j1 <- traits_sub %>%
                    "species" = "Species"))
 j1
 ```
+:::
+
+::: notes
+left_join keeps all rows in x
+
+here show what is the 1st data set (traits_sub) and the second (sp_com_sub), so we will keep all the rows in traits_sub => see the dim
+
+show tha the coluns have been matches, and that the key is not repeated 
+
+we find the chawari from the previous session
 :::
 
 
@@ -1200,6 +1225,12 @@ dim(j2)[1] == dim(sp_com_sub)[1]
 
 [Here as well, *NA* have been added when there was not match in *traits_sub*.]{.fragment}
 
+::: notes
+keeps all rows in y
+
+=> show on the blackboard
+:::
+
 
 ## inner_join
 
@@ -1224,6 +1255,10 @@ dim(j3)[1]
 
 [So there are `r dim(j3)[1]` species common to *traits_sub* and *sp_com_sub*.]{.fragment}
 
+:::notes
+ inner_join keeps only rows from x that have a matching key in y
+:::
+
 ## full_join
 
 Let's now use a [full_join]{style="color:indianred;"}.
@@ -1240,7 +1275,7 @@ dim(j4)[1]
 :::
 
 ::: {.column width="40%"}
-[The [full_join]{style="color:indianred;"} keeps all the rows in x and y]{.fragment}
+[The [full_join]{style="color:indianred;"} keeps all the rows in traits_sub and sp_com_sub]{.fragment}
 :::
 :::::
 
@@ -1254,6 +1289,10 @@ dim(j4)[1]  == dim(traits_sub)[1] + dim(sp_com_sub)[1] - dim(j3)[1]
 
 [[🤔 What did we do here?]{style="font-size: 35px"}]{.fragment}
 [[We checked that the total number of species is equal to the sum of the number of species in each datasets minus the number of common species.]{style="font-size: 35px"}]{.fragment}
+
+::: notes
+full_join keeps all the rows in x and y
+:::
 
 
 
@@ -1274,6 +1313,9 @@ end of the first session??? or before after the joint???
 
 # Tidy a dataset with with the package [tidyr]{style="color:indianred;"}
 
+::: notes
+last session and today, we have seen how to manipulate dity data, but let's now see what to do when the data are not tidy
+:::
 
 
 ## The verbs of [tidyr]{style="color:indianred;"}
@@ -1310,6 +1352,8 @@ load("data/data_tidyverse_2.RData")
 
 ::: notes
 ! with their path
+
+you see that several dataset have been added
 ::: 
 
 ## First example of untidy data
@@ -1343,6 +1387,8 @@ dt1 %>% pivot_longer(c(`2015`, `2020`, `2025`))
 
 ::: notes
 ` ` indicate that these are column names and not numbers
+
+the columns created have some not very informative names...
 :::
 
 
@@ -1404,7 +1450,7 @@ And there are several values of DBH in a single column.]{.fragment}
 ::: notes
 cerado trees: Aroeira, Jatoba-da-mata and Pau-jacaré
 
-there are two problems
+there are two problems, let's start by the taxo => what would we like to have?
 :::
 
 ## separate
@@ -1456,6 +1502,8 @@ dt2
 NB: we added a command to put DBH in a numeric otherwise it would be a character
 
 By default, [separate_rows]{style="color:indianred;"} uses any character that is not a number or a letter as the separator, so we don't necesseraly need to specify it
+
+why do we have 6 row? let's go back to the previous slide and count them
 :::
 
 
@@ -1513,6 +1561,8 @@ dt3
 we won't explore this package, I just mention it in case you need it.
 
 could not to it if I'm really late
+
+what is wrong with these data?
 :::
 
 
@@ -1595,6 +1645,10 @@ dt4$past_landuse %>% fct_collapse(
 
 ::: notes
 as always first we put the new one, and then the old one
+
+fct_other => keep some levels and put the other ones into a level called "other" (or another name)
+
+fct_lump => group levels base on a criteria: ex all the levels that have a too small occurences groupes together
 :::
 
 ## Re-ordering levels
@@ -1641,11 +1695,32 @@ dt4 %>%
 
 ::: notes
 here if_gives a character so we then transform it to a factor
+
+her we perfom one test => so it created to category, one for the results that are TRUE and one for the ones that are FALSE
 :::
 
 ## Function [case_when]{style="color:indianred;"} {.scrollable}
 
-[case_when]{style="color:indianred;"} from the package [dplyr]{style="color:indianred;"} generalise if else to several tests (or groups of tests)
+[case_when]{style="color:indianred;"} from the package [dplyr]{style="color:indianred;"} generalises if else to allow several conditions:
+
+```{r}
+dt4 %>% 
+  mutate(category = 
+           case_when(dt4$age < 8 ~ # test for the first case
+               "Young", # value for the first case
+             dt4$age > 10 ~ # test for the second case
+               "Old", # value for the second case
+             TRUE ~ "Medium")) %>% # all the other cases
+  mutate(category = as.factor(category)) # transform to factor
+```
+
+::: notes
+Her we do several tests sequentially => the the created factors can have more than 2 categories
+:::
+
+## Function [case_when]{style="color:indianred;"} {.scrollable}
+
+The tests performed by [case_when]{style="color:indianred;"} and [if_else]{style="color:indianred;"} can be combinations of tests (using operators like [&]{style="color:indianred;"}, [|]{style="color:indianred;"}, and [!]{style="color:indianred;"}):
 
 ```{r}
 dt4 %>% 
@@ -1732,12 +1807,18 @@ str_split(v3, pattern = " ",
 ```
 :::
 
-[[*NB: if we want to separate columns of a data frame, we can also use [separate]{style="color:indianred;"}.*]{style="font-size: 30px"}]{.fragment}
+[[*NB: if we want to separate a column of a data frame, we can also use [separate]{style="color:indianred;"}.*]{style="font-size: 30px"}]{.fragment}
+
+[[*But [str_split]{style="color:indianred;"} is more flexible as it allows the number of splits to vary between values.*]{style="font-size: 30px"}]{.fragment}
 
 :::
 :::::
 
+::: notes
+But [str_split] is more flexible has it allows the number of split to vary between values => ex: some values split in 2, some split in 3...
 
+you will see this in the exercice
+:::
 
 ## More useful functions for character strings
 
@@ -1850,6 +1931,10 @@ delaing with dates can be complicated in R, if you need to use dates, check the 
 
 :::::
 
+:::
+
+::: notes
+and now you know how to do all of this with the tidyverse
 :::
 
 

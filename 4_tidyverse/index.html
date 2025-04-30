@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-29">
+  <meta name="dcterms.date" content="2025-04-30">
   <title>Introduction to the tidyverse</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-29</p>
+  <p class="date">2025-04-30</p>
 </section>
 <section>
 <section id="what-is-the-tidyverse" class="title-slide slide level1 center">
@@ -2081,6 +2081,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div></div>
 <aside class="notes">
+<p>What did we do? Let’s look at the dimension</p>
 <p>in some of the table, some columns are now missing</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2116,6 +2117,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 <p><span class="fragment">When the columns were missing in some tables, the values have been filled with <em>NA</em>.</span></p>
+<aside class="notes">
+<p>so we have our 7 rows and the 13 colums, with missing value</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="bind_rows-2" class="slide level2 scrollable">
 <h2>bind_rows</h2>
@@ -2169,6 +2183,20 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 <p><span class="fragment">⚠️ The columns are matched only by position, so the rows needs to correspond (and there must be the same number of rows). A safer option is to use <em>joins</em> to combine several tables by columns.</span></p>
+<aside class="notes">
+<p>what did we do to make the subset?</p>
+<p>show what the cbind does on the blackboard</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="the-joins" class="slide level2">
 <h2>The joins</h2>
@@ -2187,7 +2215,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </ul>
 </div></div>
 <aside class="notes">
-<p>say here that very important to check the dim</p>
+<p>show what is a key on the backboard, and explain how it is different from a bind_cols</p>
+<p>we are going to see the 4 types of join</p>
+<p>say here that very important to check the dim of the output</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2264,6 +2294,22 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>left_join keeps all rows in x</p>
+<p>here show what is the 1st data set (traits_sub) and the second (sp_com_sub), so we will keep all the rows in traits_sub =&gt; see the dim</p>
+<p>show tha the coluns have been matches, and that the key is not repeated</p>
+<p>we find the chawari from the previous session</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="left_join-1" class="slide level2">
 <h2>left_join</h2>
@@ -2335,6 +2381,20 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 <p><span class="fragment">Here as well, <em>NA</em> have been added when there was not match in <em>traits_sub</em>.</span></p>
+<aside class="notes">
+<p>keeps all rows in y</p>
+<p>=&gt; show on the blackboard</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="inner_join" class="slide level2">
 <h2>inner_join</h2>
@@ -2357,6 +2417,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment">The <span style="color:indianred;">inner_join</span> keeps only rows from <em>traits_sub</em> that have a matching key in <em>sp_com_sub</em>.</span></p>
 </div></div>
 <p><span class="fragment">So there are 11 species common to <em>traits_sub</em> and <em>sp_com_sub</em>.</span></p>
+<aside class="notes">
+<p>inner_join keeps only rows from x that have a matching key in y</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="full_join" class="slide level2">
 <h2>full_join</h2>
@@ -2376,7 +2449,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </div><div class="column" style="width:40%;">
-<p><span class="fragment">The <span style="color:indianred;">full_join</span> keeps all the rows in x and y</span></p>
+<p><span class="fragment">The <span style="color:indianred;">full_join</span> keeps all the rows in traits_sub and sp_com_sub</span></p>
 </div></div>
 <p><span class="fragment">So there are 130 species in total in <em>traits_sub</em> and <em>sp_com_sub</em>.</span></p>
 <div class="fragment">
@@ -2390,6 +2463,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 35px">🤔 What did we do here?</span></span> <span class="fragment"><span style="font-size: 35px">We checked that the total number of species is equal to the sum of the number of species in each datasets minus the number of common species.</span></span></p>
+<aside class="notes">
+<p>full_join keeps all the rows in x and y</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="section" class="slide level2">
 <h2></h2>
@@ -2413,7 +2499,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <section>
 <section id="tidy-a-dataset-with-with-the-package-tidyr" class="title-slide slide level1 center">
 <h1>Tidy a dataset with with the package <span style="color:indianred;">tidyr</span></h1>
-
+<aside class="notes">
+<p>last session and today, we have seen how to manipulate dity data, but let’s now see what to do when the data are not tidy</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="the-verbs-of-tidyr" class="slide level2">
 <h2>The verbs of <span style="color:indianred;">tidyr</span></h2>
@@ -2440,6 +2538,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <aside class="notes">
 <p>! with their path</p>
+<p>you see that several dataset have been added</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2500,6 +2599,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div></div>
 <aside class="notes">
 <p><code></code> indicate that these are column names and not numbers</p>
+<p>the columns created have some not very informative names…</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2591,7 +2691,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment">The column <em>taxo</em> contains the family, genus and species names. And there are several values of DBH in a single column.</span></p>
 <aside class="notes">
 <p>cerado trees: Aroeira, Jatoba-da-mata and Pau-jacaré</p>
-<p>there are two problems</p>
+<p>there are two problems, let’s start by the taxo =&gt; what would we like to have?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2677,6 +2777,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <aside class="notes">
 <p>NB: we added a command to put DBH in a numeric otherwise it would be a character</p>
 <p>By default, <span style="color:indianred;">separate_rows</span> uses any character that is not a number or a letter as the separator, so we don’t necesseraly need to specify it</p>
+<p>why do we have 6 row? let’s go back to the previous slide and count them</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2788,6 +2889,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <aside class="notes">
 <p>we won’t explore this package, I just mention it in case you need it.</p>
 <p>could not to it if I’m really late</p>
+<p>what is wrong with these data?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2911,6 +3013,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment"><span style="font-size: 28px">see also <span style="color:indianred;">fct_other</span> and <span style="color:indianred;">fct_lump</span> to create a level <em>Other</em></span></span></p>
 <aside class="notes">
 <p>as always first we put the new one, and then the old one</p>
+<p>fct_other =&gt; keep some levels and put the other ones into a level called “other” (or another name)</p>
+<p>fct_lump =&gt; group levels base on a criteria: ex all the levels that have a too small occurences groupes together</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2997,6 +3101,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 <aside class="notes">
 <p>here if_gives a character so we then transform it to a factor</p>
+<p>her we perfom one test =&gt; so it created to category, one for the results that are TRUE and one for the ones that are FALSE</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -3011,17 +3116,62 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="function-case_when" class="slide level2 scrollable">
 <h2>Function <span style="color:indianred;">case_when</span></h2>
-<p><span style="color:indianred;">case_when</span> from the package <span style="color:indianred;">dplyr</span> generalise if else to several tests (or groups of tests)</p>
+<p><span style="color:indianred;">case_when</span> from the package <span style="color:indianred;">dplyr</span> generalises if else to allow several conditions:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb166"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb166-1"><a href=""></a>dt4 <span class="sc">%&gt;%</span> </span>
 <span id="cb166-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">category =</span> </span>
-<span id="cb166-3"><a href=""></a>           <span class="fu">case_when</span>(</span>
-<span id="cb166-4"><a href=""></a>             dt4<span class="sc">$</span>past_landuse <span class="sc">!=</span> <span class="st">"Pasture"</span> <span class="sc">&amp;</span> dt4<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="co"># tests for the first case</span></span>
-<span id="cb166-5"><a href=""></a>               <span class="st">"Young after agriculture"</span>, <span class="co"># value for the first case</span></span>
-<span id="cb166-6"><a href=""></a>             dt4<span class="sc">$</span>past_landuse <span class="sc">==</span> <span class="st">"Pasture"</span> <span class="sc">&amp;</span> dt4<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="co"># tests for the second case</span></span>
-<span id="cb166-7"><a href=""></a>               <span class="st">"Young after pasture"</span>, <span class="co"># value for the second case</span></span>
-<span id="cb166-8"><a href=""></a>             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"old"</span>)) <span class="sc">%&gt;%</span> <span class="co"># all the other cases</span></span>
-<span id="cb166-9"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">category =</span> <span class="fu">as.factor</span>(category)) <span class="co"># transform to factor</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb166-3"><a href=""></a>           <span class="fu">case_when</span>(dt4<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">8</span> <span class="sc">~</span> <span class="co"># test for the first case</span></span>
+<span id="cb166-4"><a href=""></a>               <span class="st">"Young"</span>, <span class="co"># value for the first case</span></span>
+<span id="cb166-5"><a href=""></a>             dt4<span class="sc">$</span>age <span class="sc">&gt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="co"># test for the second case</span></span>
+<span id="cb166-6"><a href=""></a>               <span class="st">"Old"</span>, <span class="co"># value for the second case</span></span>
+<span id="cb166-7"><a href=""></a>             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"Medium"</span>)) <span class="sc">%&gt;%</span> <span class="co"># all the other cases</span></span>
+<span id="cb166-8"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">category =</span> <span class="fu">as.factor</span>(category)) <span class="co"># transform to factor</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 27 × 3
+   past_landuse   age category
+   &lt;fct&gt;        &lt;dbl&gt; &lt;fct&gt;   
+ 1 Soybeans        12 Old     
+ 2 Pasture         14 Old     
+ 3 Soybeans         8 Medium  
+ 4 Pasture          7 Young   
+ 5 Sugarcane        8 Medium  
+ 6 Sugarcane        7 Young   
+ 7 Pasture          9 Medium  
+ 8 Soybeans        10 Medium  
+ 9 Soybeans         6 Young   
+10 Pasture         11 Old     
+# ℹ 17 more rows</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Her we do several tests sequentially =&gt; the the created factors can have more than 2 categories</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="function-case_when-1" class="slide level2 scrollable">
+<h2>Function <span style="color:indianred;">case_when</span></h2>
+<p>The tests performed by <span style="color:indianred;">case_when</span> and <span style="color:indianred;">if_else</span> can be combinations of tests (using operators like <span style="color:indianred;">&amp;</span>, <span style="color:indianred;">|</span>, and <span style="color:indianred;">!</span>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb168"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb168-1"><a href=""></a>dt4 <span class="sc">%&gt;%</span> </span>
+<span id="cb168-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">category =</span> </span>
+<span id="cb168-3"><a href=""></a>           <span class="fu">case_when</span>(</span>
+<span id="cb168-4"><a href=""></a>             dt4<span class="sc">$</span>past_landuse <span class="sc">!=</span> <span class="st">"Pasture"</span> <span class="sc">&amp;</span> dt4<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="co"># tests for the first case</span></span>
+<span id="cb168-5"><a href=""></a>               <span class="st">"Young after agriculture"</span>, <span class="co"># value for the first case</span></span>
+<span id="cb168-6"><a href=""></a>             dt4<span class="sc">$</span>past_landuse <span class="sc">==</span> <span class="st">"Pasture"</span> <span class="sc">&amp;</span> dt4<span class="sc">$</span>age <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="co"># tests for the second case</span></span>
+<span id="cb168-7"><a href=""></a>               <span class="st">"Young after pasture"</span>, <span class="co"># value for the second case</span></span>
+<span id="cb168-8"><a href=""></a>             <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"old"</span>)) <span class="sc">%&gt;%</span> <span class="co"># all the other cases</span></span>
+<span id="cb168-9"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">category =</span> <span class="fu">as.factor</span>(category)) <span class="co"># transform to factor</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3062,9 +3212,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>Function <span style="color:indianred;">cut</span></h2>
 <p><span style="color:indianred;">cut</span> from the package <span style="color:indianred;">base</span> divides a vector into classes:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb168"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb168-1"><a href=""></a>dt4 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age_class =</span></span>
-<span id="cb168-2"><a href=""></a>                 <span class="fu">cut</span>(dt4<span class="sc">$</span>age, <span class="co"># vector to divide</span></span>
-<span id="cb168-3"><a href=""></a>                     <span class="at">breaks =</span> <span class="dv">4</span>)) <span class="co"># number of class</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb170"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href=""></a>dt4 <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">age_class =</span></span>
+<span id="cb170-2"><a href=""></a>                 <span class="fu">cut</span>(dt4<span class="sc">$</span>age, <span class="co"># vector to divide</span></span>
+<span id="cb170-3"><a href=""></a>                     <span class="at">breaks =</span> <span class="dv">4</span>)) <span class="co"># number of class</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3094,10 +3244,10 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <h2>Concatenate character strings</h2>
 <p>The function <span style="color:indianred;">paste</span> from the package <span style="color:indianred;">base</span> concatenate two vectors of characters:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb170"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb170-1"><a href=""></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dark"</span>, <span class="st">"dark"</span>, <span class="st">"ligth"</span>, <span class="st">"dark"</span>, <span class="st">"light"</span>)</span>
-<span id="cb170-2"><a href=""></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"pink"</span>, <span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"pink"</span>)</span>
-<span id="cb170-3"><a href=""></a></span>
-<span id="cb170-4"><a href=""></a><span class="fu">paste</span>(v1, v2, <span class="at">sep=</span><span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href=""></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"dark"</span>, <span class="st">"dark"</span>, <span class="st">"ligth"</span>, <span class="st">"dark"</span>, <span class="st">"light"</span>)</span>
+<span id="cb172-2"><a href=""></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"pink"</span>, <span class="st">"red"</span>, <span class="st">"yellow"</span>, <span class="st">"pink"</span>)</span>
+<span id="cb172-3"><a href=""></a></span>
+<span id="cb172-4"><a href=""></a><span class="fu">paste</span>(v1, v2, <span class="at">sep=</span><span class="st">" "</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3107,8 +3257,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment">It is equivalent to the function <span style="color:indianred;">str_c</span> from the package <span style="color:indianred;">stringr</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb172"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb172-1"><a href=""></a>v3 <span class="ot">&lt;-</span> <span class="fu">str_c</span>(v1, v2, <span class="at">sep=</span><span class="st">" "</span>)</span>
-<span id="cb172-2"><a href=""></a>v3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href=""></a>v3 <span class="ot">&lt;-</span> <span class="fu">str_c</span>(v1, v2, <span class="at">sep=</span><span class="st">" "</span>)</span>
+<span id="cb174-2"><a href=""></a>v3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3124,8 +3274,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb174"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb174-1"><a href=""></a><span class="fu">str_split</span>(v3, <span class="co"># vector to split</span></span>
-<span id="cb174-2"><a href=""></a>          <span class="at">pattern =</span> <span class="st">" "</span>) <span class="co"># where to split</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href=""></a><span class="fu">str_split</span>(v3, <span class="co"># vector to split</span></span>
+<span id="cb176-2"><a href=""></a>          <span class="at">pattern =</span> <span class="st">" "</span>) <span class="co"># where to split</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3150,8 +3300,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment">or a matrix if we use simplify = TRUE:</span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb176"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb176-1"><a href=""></a><span class="fu">str_split</span>(v3, <span class="at">pattern =</span> <span class="st">" "</span>, </span>
-<span id="cb176-2"><a href=""></a>          <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href=""></a><span class="fu">str_split</span>(v3, <span class="at">pattern =</span> <span class="st">" "</span>, </span>
+<span id="cb178-2"><a href=""></a>          <span class="at">simplify =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3164,8 +3314,23 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </div>
-<p><span class="fragment"><span style="font-size: 30px"><em>NB: if we want to separate columns of a data frame, we can also use <span style="color:indianred;">separate</span>.</em></span></span></p>
+<p><span class="fragment"><span style="font-size: 30px"><em>NB: if we want to separate a column of a data frame, we can also use <span style="color:indianred;">separate</span>.</em></span></span></p>
+<p><span class="fragment"><span style="font-size: 30px"><em>But <span style="color:indianred;">str_split</span> is more flexible as it allows the number of splits to vary between values.</em></span></span></p>
 </div></div>
+<aside class="notes">
+<p>But [str_split] is more flexible has it allows the number of split to vary between values =&gt; ex: some values split in 2, some split in 3…</p>
+<p>you will see this in the exercice</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="more-useful-functions-for-character-strings" class="slide level2">
 <h2>More useful functions for character strings</h2>
@@ -3176,15 +3341,15 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb178"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb178-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"one"</span>, <span class="st">"two"</span>)</span>
-<span id="cb178-2"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">str_to_upper</span>(v)</span>
-<span id="cb178-3"><a href=""></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"one"</span>, <span class="st">"two"</span>)</span>
+<span id="cb180-2"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">str_to_upper</span>(v)</span>
+<span id="cb180-3"><a href=""></a>v</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "ONE" "TWO"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb180"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb180-1"><a href=""></a><span class="fu">str_to_lower</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href=""></a><span class="fu">str_to_lower</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "one" "two"</code></pre>
 </div>
@@ -3196,8 +3361,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb182"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb182-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Brasil"</span>, <span class="st">"Mexico"</span>)</span>
-<span id="cb182-2"><a href=""></a><span class="fu">str_sub</span>(v, <span class="at">start=</span><span class="dv">1</span>, <span class="at">end=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb184"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Brasil"</span>, <span class="st">"Mexico"</span>)</span>
+<span id="cb184-2"><a href=""></a><span class="fu">str_sub</span>(v, <span class="at">start=</span><span class="dv">1</span>, <span class="at">end=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3213,8 +3378,8 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb184"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb184-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Brasil"</span>, <span class="st">"Mexico"</span>)</span>
-<span id="cb184-2"><a href=""></a><span class="fu">str_detect</span>(v, <span class="st">"Br"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb186"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb186-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Brasil"</span>, <span class="st">"Mexico"</span>)</span>
+<span id="cb186-2"><a href=""></a><span class="fu">str_detect</span>(v, <span class="st">"Br"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3228,9 +3393,9 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb186"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb186-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Avenida Paulista"</span>, </span>
-<span id="cb186-2"><a href=""></a>       <span class="st">"Avenida Atlântica"</span>)</span>
-<span id="cb186-3"><a href=""></a><span class="fu">str_replace_all</span>(v, <span class="st">"Avenida"</span>, <span class="st">"AV."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb188"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb188-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Avenida Paulista"</span>, </span>
+<span id="cb188-2"><a href=""></a>       <span class="st">"Avenida Atlântica"</span>)</span>
+<span id="cb188-3"><a href=""></a><span class="fu">str_replace_all</span>(v, <span class="st">"Avenida"</span>, <span class="st">"AV."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -3287,6 +3452,19 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </ul>
 </div></div>
 </div>
+<aside class="notes">
+<p>and now you know how to do all of this with the tidyverse</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 
 <section id="graphics-with-the-package-ggplot" class="title-slide slide level1 center">
