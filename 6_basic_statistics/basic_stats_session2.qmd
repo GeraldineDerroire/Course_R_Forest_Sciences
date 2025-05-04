@@ -56,7 +56,7 @@ $$\sigma^2_x = \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n}$$
 
 ::: fragment
 
-[The covariance between two quantitative variables *x* and *y* is the mean of the product of the deviations of *x* and *y* from their respective mean:]{style="font-size: 30px"}
+[The covariance between two numerical variables *x* and *y* is the mean of the product of the deviations of *x* and *y* from their respective mean:]{style="font-size: 30px"}
 
 $$cov_{xy} = \frac{\sum_{i=1}^n (x_i-\bar{x}) \times (y_i-\bar{y})}{n}$$
 
@@ -212,6 +212,8 @@ A linear regression is a model of the mathematical relationship between:
 
 
 ## Uses of regressions
+
+<!-- TO DO: start the lesson with this if I move the correlation in the previous lesson?-->
 
 * Study the relationship between several variables (without assuming causality)
 
@@ -701,7 +703,7 @@ dt_nou_sub <- dt_nou %>% filter(family %in% fam3$family) # select them
 
 ## What if the predictor is categorical? {.smaller}
 
-[We can fit the model in the same way as for a quantitative variable:]{style="font-size: 30px"}
+[We can fit the model in the same way as for a numerical variable:]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="70%"}
@@ -748,7 +750,7 @@ see the value of the f-statistics and the overal p-value
 ::: 
 
 
-
+<!--
 # Multiple linear regression - One quanti and one quali
 
 maybe go directly to several quanti... so I can talk about collinearity and selection
@@ -761,7 +763,123 @@ voir si je parle de emmean ou plutôt de ggstats::ggcoef_model() dans Lamaranche
 
 je pourrais continuer avec les H/diam mais qu'un seul prédicteur continue...
 
-# Multiple linear regression - Several quanti
+
+-->
+
+# Multiple linear regression 
+
+## Equation 
+
+A multiple linear regression is a regression with several explanatory variables:
+
+$$y \sim \mathcal N(\alpha + \beta_1 \times x_1 + \beta_2 \times x_2 + ... + \beta_n \times x_n,  \sigma^2)$$
+which we can also write:
+
+
+$$y \sim \mathcal N(\alpha + \sum_{i=1}^n\beta_n \times x_n ,  \sigma^2)$$
+[💡 Explanatory variables can be numerical or categorical.]{.fragment}
+
+## Fitting a multiple linear regression
+
+Let's predict the best record time in bicycle races in Scotland (*time*), with the explanatory variables distance (*distance*) and altitude gained (*climb*), using the dataset *hills* from the MASS package:
+
+::::: columns
+::: {.column width="40%"}
+
+```{r}
+library(MASS)
+```
+
+:::
+
+::: {.column width="60%"}
+```{r}
+data(hills)
+detach("package:MASS", unload = TRUE)
+summary(hills)
+```
+
+:::
+:::::
+
+::: notes
+we detach the package to avoid select being masked
+
+note that dist is in miles and varies between 2 and 28
+
+climb is in meters and varies between 300 and 7500 feets.
+:::
+
+## Fitting a multiple linear regression
+
+[We fit a multiple linear regression in the same way than a simple one:]{style="font-size: 30px"}
+
+```{r}
+mod_hills <- lm(time ~ dist + climb, hills)
+summary(mod_hills)
+```
+
+## Model validation
+
+<!-- TO DO with ggdiagnose cf Marchanc -->
+
+## Standardising explanatory variables
+
+<!-- TO DO check if there is a way to scale with tidyverse and avoid the [,]-->
+
+[To compare the effects of the explanatory variables, we can standardise them using the function [scale]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+hills <- hills %>% 
+  mutate(dist_sd = scale(dist)[,1],
+         climb_sd = scale(climb)[,1])
+```
+
+[[Variables are scaled by subtracting the mean to each values and then dividing it by the standard deviation.]{style="font-size: 30px"}]{.fragment}
+[[**This brings the variables to the same scale*.** 
+They now have a mean of 0 and a standard deviation = 1:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+hills %>% summarise(dist_mean = mean(dist_sd),
+                    dist_sd = sd(dist_sd),
+                    climb_mean = mean(climb_sd),
+                    climb_sd = sd(climb_sd))
+```
+:::
+
+## Standardising explanatory variables {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+mod_hills2 <- lm(time ~ dist_sd + climb_sd, hills)
+summary(mod_hills2)
+```
+:::
+
+::: {.column width="50%"}
+[[**Interpretation**: When the explanatory variable increases by one standard deviation, the response increases by the value of the coefficient.]{style="font-size: 30px"}]{.fragment}
+
+[[We can therefore compare the effect of explanatory variables.]{style="font-size: 30px"}]{.fragment}
+
+[[The intercept is the value of the response when all explanatory variables are taken at their mean.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+explain for dist and clim, and show the equation on the blackboard
+:::
+:::
+:::::
+
+## Interactions
+
+<!-- TO DO see on the piece of paper -->
+
+
+
+
+
+##
 
 follow marchand et Eric 
 

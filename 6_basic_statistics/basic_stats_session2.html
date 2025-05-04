@@ -452,7 +452,7 @@ Géraldine Derroire
 <p>We have seen that the variance of a variable <em>x</em> is the mean of squared deviations from the mean:</p>
 <p><span class="math display">\[\sigma^2_x = \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n}\]</span></p>
 <div class="fragment">
-<p><span style="font-size: 30px">The covariance between two quantitative variables <em>x</em> and <em>y</em> is the mean of the product of the deviations of <em>x</em> and <em>y</em> from their respective mean:</span></p>
+<p><span style="font-size: 30px">The covariance between two numerical variables <em>x</em> and <em>y</em> is the mean of the product of the deviations of <em>x</em> and <em>y</em> from their respective mean:</span></p>
 <p><span class="math display">\[cov_{xy} = \frac{\sum_{i=1}^n (x_i-\bar{x}) \times (y_i-\bar{y})}{n}\]</span></p>
 </div>
 </section>
@@ -669,6 +669,7 @@ or maybe the data from the Nouragues
 </section>
 <section id="uses-of-regressions" class="slide level2">
 <h2>Uses of regressions</h2>
+<!-- TO DO: start the lesson with this if I move the correlation in the previous lesson?-->
 <ul>
 <li class="fragment"><p>Study the relationship between several variables (without assuming causality)</p></li>
 <li class="fragment"><p>Study the effect of numerical or categorical variables on another variables</p></li>
@@ -1269,7 +1270,7 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="what-if-the-predictor-is-categorical-1" class="slide level2 smaller">
 <h2>What if the predictor is categorical?</h2>
-<p><span style="font-size: 30px">We can fit the model in the same way as for a quantitative variable:</span></p>
+<p><span style="font-size: 30px">We can fit the model in the same way as for a numerical variable:</span></p>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
@@ -1349,24 +1350,209 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+<!--
+# Multiple linear regression - One quanti and one quali
+
+maybe go directly to several quanti... so I can talk about collinearity and selection
+
+follow marchand et Eric 
+
+voir si je parle de emmean ou plutôt de ggstats::ggcoef_model() dans Lamaranche
+
+## Data
+
+je pourrais continuer avec les H/diam mais qu'un seul prédicteur continue...
+
+
+-->
 </section></section>
 <section>
-<section id="multiple-linear-regression---one-quanti-and-one-quali" class="title-slide slide level1 center">
-<h1>Multiple linear regression - One quanti and one quali</h1>
-<p>maybe go directly to several quanti… so I can talk about collinearity and selection</p>
+<section id="multiple-linear-regression" class="title-slide slide level1 center">
+<h1>Multiple linear regression</h1>
+
+</section>
+<section id="equation" class="slide level2">
+<h2>Equation</h2>
+<p>A multiple linear regression is a regression with several explanatory variables:</p>
+<p><span class="math display">\[y \sim \mathcal N(\alpha + \beta_1 \times x_1 + \beta_2 \times x_2 + ... + \beta_n \times x_n,  \sigma^2)\]</span> which we can also write:</p>
+<p><span class="math display">\[y \sim \mathcal N(\alpha + \sum_{i=1}^n\beta_n \times x_n ,  \sigma^2)\]</span> <span class="fragment">💡 Explanatory variables can be numerical or categorical.</span></p>
+</section>
+<section id="fitting-a-multiple-linear-regression" class="slide level2">
+<h2>Fitting a multiple linear regression</h2>
+<p>Let’s predict the best record time in bicycle races in Scotland (<em>time</em>), with the explanatory variables distance (<em>distance</em>) and altitude gained (<em>climb</em>), using the dataset <em>hills</em> from the MASS package:</p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'MASS'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:gtsummary':
+
+    select</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    select</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="fu">data</span>(hills)</span>
+<span id="cb51-2"><a href=""></a><span class="fu">detach</span>(<span class="st">"package:MASS"</span>, <span class="at">unload =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb51-3"><a href=""></a><span class="fu">summary</span>(hills)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>      dist            climb           time       
+ Min.   : 2.000   Min.   : 300   Min.   : 15.95  
+ 1st Qu.: 4.500   1st Qu.: 725   1st Qu.: 28.00  
+ Median : 6.000   Median :1000   Median : 39.75  
+ Mean   : 7.529   Mean   :1815   Mean   : 57.88  
+ 3rd Qu.: 8.000   3rd Qu.:2200   3rd Qu.: 68.62  
+ Max.   :28.000   Max.   :7500   Max.   :204.62  </code></pre>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>we detach the package to avoid select being masked</p>
+<p>note that dist is in miles and varies between 2 and 28</p>
+<p>climb is in meters and varies between 300 and 7500 feets.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="fitting-a-multiple-linear-regression-1" class="slide level2">
+<h2>Fitting a multiple linear regression</h2>
+<p><span style="font-size: 30px">We fit a multiple linear regression in the same way than a simple one:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a>mod_hills <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist <span class="sc">+</span> climb, hills)</span>
+<span id="cb53-2"><a href=""></a><span class="fu">summary</span>(mod_hills)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = time ~ dist + climb, data = hills)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-16.215  -7.129  -1.186   2.371  65.121 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -8.992039   4.302734  -2.090   0.0447 *  
+dist         6.217956   0.601148  10.343 9.86e-12 ***
+climb        0.011048   0.002051   5.387 6.45e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 14.68 on 32 degrees of freedom
+Multiple R-squared:  0.9191,    Adjusted R-squared:  0.914 
+F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</section>
+<section id="model-validation-2" class="slide level2">
+<h2>Model validation</h2>
+<!-- TO DO with ggdiagnose cf Marchanc -->
+</section>
+<section id="standardising-explanatory-variables" class="slide level2">
+<h2>Standardising explanatory variables</h2>
+<!-- TO DO check if there is a way to scale with tidyverse and avoid the [,]-->
+<p><span style="font-size: 30px">To compare the effects of the explanatory variables, we can standardise them using the function <span style="color:indianred;">scale</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a>hills <span class="ot">&lt;-</span> hills <span class="sc">%&gt;%</span> </span>
+<span id="cb55-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">dist_sd =</span> <span class="fu">scale</span>(dist)[,<span class="dv">1</span>],</span>
+<span id="cb55-3"><a href=""></a>         <span class="at">climb_sd =</span> <span class="fu">scale</span>(climb)[,<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment"><span style="font-size: 30px">Variables are scaled by subtracting the mean to each values and then dividing it by the standard deviation.</span></span> <span class="fragment"><span style="font-size: 30px">**This brings the variables to the same scale*.** They now have a mean of 0 and a standard deviation = 1:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a>hills <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">dist_mean =</span> <span class="fu">mean</span>(dist_sd),</span>
+<span id="cb56-2"><a href=""></a>                    <span class="at">dist_sd =</span> <span class="fu">sd</span>(dist_sd),</span>
+<span id="cb56-3"><a href=""></a>                    <span class="at">climb_mean =</span> <span class="fu">mean</span>(climb_sd),</span>
+<span id="cb56-4"><a href=""></a>                    <span class="at">climb_sd =</span> <span class="fu">sd</span>(climb_sd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     dist_mean dist_sd   climb_mean climb_sd
+1 4.188118e-18       1 1.072741e-17        1</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="standardising-explanatory-variables-1" class="slide level2 smaller">
+<h2>Standardising explanatory variables</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a>mod_hills2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd <span class="sc">+</span> climb_sd, hills)</span>
+<span id="cb58-2"><a href=""></a><span class="fu">summary</span>(mod_hills2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = time ~ dist_sd + climb_sd, data = hills)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-16.215  -7.129  -1.186   2.371  65.121 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   57.876      2.481  23.331  &lt; 2e-16 ***
+dist_sd       34.348      3.321  10.343 9.86e-12 ***
+climb_sd      17.888      3.321   5.387 6.45e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 14.68 on 32 degrees of freedom
+Multiple R-squared:  0.9191,    Adjusted R-squared:  0.914 
+F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="fragment"><span style="font-size: 30px"><strong>Interpretation</strong>: When the explanatory variable increases by one standard deviation, the response increases by the value of the coefficient.</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">We can therefore compare the effect of explanatory variables.</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">The intercept is the value of the response when all explanatory variables are taken at their mean.</span></span></p>
+<aside class="notes">
+<p>explain for dist and clim, and show the equation on the blackboard</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div></div>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
 <p>follow marchand et Eric</p>
-<p>voir si je parle de emmean ou plutôt de ggstats::ggcoef_model() dans Lamaranche</p>
 </section>
 <section id="data" class="slide level2">
-<h2>Data</h2>
-<p>je pourrais continuer avec les H/diam mais qu’un seul prédicteur continue…</p>
-</section></section>
-<section>
-<section id="multiple-linear-regression---several-quanti" class="title-slide slide level1 center">
-<h1>Multiple linear regression - Several quanti</h1>
-<p>follow marchand et Eric</p>
-</section>
-<section id="data-1" class="slide level2">
 <h2>Data</h2>
 <p>????? could use the msleep de ggplot comme Marchand? ou iris mais !!!! pb de collinearity…</p>
 </section>
@@ -1392,27 +1578,27 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>ggcoef_model of ggstats (see in Lamarange)</p>
 <p>and also a table with the following, which work as well with a simple model</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">tbl_regression</span>(mod_dh_2, <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="fu">tbl_regression</span>(mod_dh_2, <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
-<div id="nsbnmlplba" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#nsbnmlplba table {
+<div id="fiekczommo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fiekczommo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#nsbnmlplba thead, #nsbnmlplba tbody, #nsbnmlplba tfoot, #nsbnmlplba tr, #nsbnmlplba td, #nsbnmlplba th {
+#fiekczommo thead, #fiekczommo tbody, #fiekczommo tfoot, #fiekczommo tr, #fiekczommo td, #fiekczommo th {
   border-style: none;
 }
 
-#nsbnmlplba p {
+#fiekczommo p {
   margin: 0;
   padding: 0;
 }
 
-#nsbnmlplba .gt_table {
+#fiekczommo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1438,12 +1624,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#nsbnmlplba .gt_caption {
+#fiekczommo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#nsbnmlplba .gt_title {
+#fiekczommo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1455,7 +1641,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-width: 0;
 }
 
-#nsbnmlplba .gt_subtitle {
+#fiekczommo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1467,7 +1653,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-top-width: 0;
 }
 
-#nsbnmlplba .gt_heading {
+#fiekczommo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1479,13 +1665,13 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nsbnmlplba .gt_bottom_border {
+#fiekczommo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#nsbnmlplba .gt_col_headings {
+#fiekczommo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1500,7 +1686,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nsbnmlplba .gt_col_heading {
+#fiekczommo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1520,7 +1706,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   overflow-x: hidden;
 }
 
-#nsbnmlplba .gt_column_spanner_outer {
+#fiekczommo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1532,15 +1718,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 4px;
 }
 
-#nsbnmlplba .gt_column_spanner_outer:first-child {
+#fiekczommo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#nsbnmlplba .gt_column_spanner_outer:last-child {
+#fiekczommo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#nsbnmlplba .gt_column_spanner {
+#fiekczommo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1552,11 +1738,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   width: 100%;
 }
 
-#nsbnmlplba .gt_spanner_row {
+#fiekczommo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#nsbnmlplba .gt_group_heading {
+#fiekczommo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1582,7 +1768,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   text-align: left;
 }
 
-#nsbnmlplba .gt_empty_group_heading {
+#fiekczommo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1597,15 +1783,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   vertical-align: middle;
 }
 
-#nsbnmlplba .gt_from_md > :first-child {
+#fiekczommo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#nsbnmlplba .gt_from_md > :last-child {
+#fiekczommo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#nsbnmlplba .gt_row {
+#fiekczommo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1624,7 +1810,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   overflow-x: hidden;
 }
 
-#nsbnmlplba .gt_stub {
+#fiekczommo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1637,7 +1823,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#nsbnmlplba .gt_stub_row_group {
+#fiekczommo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1651,15 +1837,15 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   vertical-align: top;
 }
 
-#nsbnmlplba .gt_row_group_first td {
+#fiekczommo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#nsbnmlplba .gt_row_group_first th {
+#fiekczommo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#nsbnmlplba .gt_summary_row {
+#fiekczommo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1669,16 +1855,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#nsbnmlplba .gt_first_summary_row {
+#fiekczommo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#nsbnmlplba .gt_first_summary_row.thick {
+#fiekczommo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#nsbnmlplba .gt_last_summary_row {
+#fiekczommo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1688,7 +1874,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nsbnmlplba .gt_grand_summary_row {
+#fiekczommo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1698,7 +1884,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#nsbnmlplba .gt_first_grand_summary_row {
+#fiekczommo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1708,7 +1894,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#nsbnmlplba .gt_last_grand_summary_row_top {
+#fiekczommo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1718,11 +1904,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nsbnmlplba .gt_striped {
+#fiekczommo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#nsbnmlplba .gt_table_body {
+#fiekczommo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1731,7 +1917,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#nsbnmlplba .gt_footnotes {
+#fiekczommo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1745,7 +1931,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nsbnmlplba .gt_footnote {
+#fiekczommo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1754,7 +1940,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#nsbnmlplba .gt_sourcenotes {
+#fiekczommo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1768,7 +1954,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#nsbnmlplba .gt_sourcenote {
+#fiekczommo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1776,72 +1962,72 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
   padding-right: 5px;
 }
 
-#nsbnmlplba .gt_left {
+#fiekczommo .gt_left {
   text-align: left;
 }
 
-#nsbnmlplba .gt_center {
+#fiekczommo .gt_center {
   text-align: center;
 }
 
-#nsbnmlplba .gt_right {
+#fiekczommo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#nsbnmlplba .gt_font_normal {
+#fiekczommo .gt_font_normal {
   font-weight: normal;
 }
 
-#nsbnmlplba .gt_font_bold {
+#fiekczommo .gt_font_bold {
   font-weight: bold;
 }
 
-#nsbnmlplba .gt_font_italic {
+#fiekczommo .gt_font_italic {
   font-style: italic;
 }
 
-#nsbnmlplba .gt_super {
+#fiekczommo .gt_super {
   font-size: 65%;
 }
 
-#nsbnmlplba .gt_footnote_marks {
+#fiekczommo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#nsbnmlplba .gt_asterisk {
+#fiekczommo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#nsbnmlplba .gt_indent_1 {
+#fiekczommo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#nsbnmlplba .gt_indent_2 {
+#fiekczommo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#nsbnmlplba .gt_indent_3 {
+#fiekczommo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#nsbnmlplba .gt_indent_4 {
+#fiekczommo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#nsbnmlplba .gt_indent_5 {
+#fiekczommo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#nsbnmlplba .katex-display {
+#fiekczommo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#nsbnmlplba div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#fiekczommo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1943,7 +2129,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <li class="fragment">broom????</li>
 </ul>
 </section>
-<p class="heading" id="section-2"></p>
+<p class="heading" id="section-3"></p>
 <section id="log-normal-distribution" class="slide level2 smaller">
 <h2>Log-normal distribution</h2>
 <p><span class="math inline">\(x \sim log\mathcal{N}(\mu, \sigma^2)\)</span> if <span class="math inline">\(log(x) \sim \mathcal{N}(\mu, \sigma^2)\)</span></p>
@@ -1951,22 +2137,22 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb48-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb48-3"><a href=""></a></span>
-<span id="cb48-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb48-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb48-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
-<span id="cb48-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb48-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
-<span id="cb48-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb48-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb61-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb61-3"><a href=""></a></span>
+<span id="cb61-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb61-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb61-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb61-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb61-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
+<span id="cb61-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb61-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></p>
 </figure>
 </div>
 </div>
