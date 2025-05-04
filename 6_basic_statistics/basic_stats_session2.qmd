@@ -662,24 +662,90 @@ g_preds_2
 ```
 
 
-## Other types of data transformation
+## Data transformation
 
-<!--TO DO -->
+Why transform the data?
 
-see Eric
+* linearise a non-linear relationship (*eg*: quadratic relationship $y = \alpha + \beta \times x^2$, or log-transformation)
 
-But be carrfull, this will change the shape of the relationship.
+* improve normality and homoscedasticity of the residuals (*eg*: square rot of log-transformation...)
+
+<!--TO CHECK AND COMPLEMENT -->
 
 
-## what if the predictor is categorical
+::: notes
+show on the blackboard the shape of a quadratic and square root
 
-* show the equation et do it quickly
+always explore the shape of the relationsing with simulated data, to understand what the transfo does
+:::
 
-compare ANOVA and lm (Marchand)
 
-à faire avec quelques familles de Nouragues?
+## What if the predictor is categorical? 
 
-ne pas faire tout le diagnostic...
+[We now want to model D as a function of the family:]{style="font-size: 30px"} <!-- TO DO : check the equation-->
+
+$$D \sim \mathcal N(\alpha_{fam},  \sigma^2)$$
+
+[[Let's do it on the 3 most abundant families:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+fam3 <- dt_nou %>% count(family) %>% # get the 3 most abundant families
+  arrange(desc(n)) %>%
+  slice_head(n = 3) %>%
+  select(family)
+
+dt_nou_sub <- dt_nou %>% filter(family %in% fam3$family) # select them
+```
+:::
+
+## What if the predictor is categorical? {.smaller}
+
+[We can fit the model in the same way as for a quantitative variable:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="70%"}
+
+```{r}
+mod_dfam <- lm(D ~ family, data = dt_nou_sub)
+summary(mod_dfam)
+```
+
+:::
+
+::: {.column width="30%"}
+
+[[As for the Anova, the intercept corresponds to the first level, and the other coefficients show the difference of each levels with the first level.]{style="font-size: 30px"}]{.fragment}
+
+[[⚠️ Don't forget to check the model assumptions...]{style="font-size: 30px"}]{.fragment}
+
+:::
+:::::
+
+::: notes
+so here the D of mean D of the Chrysobalanaceae is 21
+
+The fabaceae are significantly different with a mean diam of 34
+
+we won't check the model assumption here, done as for a quanti variable
+:::
+
+
+
+## What if the predictor is categorical?
+
+[The simple linear regression with a categorical explanatory variable is equivalent to the ANOVA:]{style="font-size: 30px"}
+
+```{r}
+aov_dfam <- aov(D ~ family, data = dt_nou_sub)
+summary(aov_dfam)
+```
+
+[[⚠️ The t-test performed by *lm* evaluates if the first level is different from the other ones, whereas the Tukey test on an ANOVA consider all pairs of levels.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+see the value of the f-statistics and the overal p-value
+::: 
 
 
 

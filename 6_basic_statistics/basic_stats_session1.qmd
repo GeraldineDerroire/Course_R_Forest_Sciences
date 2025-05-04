@@ -999,7 +999,7 @@ coef(H_aov)
 ```
 [[The *intercept* correspond to the first group (here *Dicorynia*).]{style="font-size: 30px"}]{.fragment}
 
-[[The other coeeficient show the difference of each group with the first group. For instance, the mean of *Sterculia* is:]{style="font-size: 30px"}]{.fragment}
+[[The other coefficient show the difference of each group with the first group. For instance, the mean of *Sterculia* is:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
@@ -1100,22 +1100,6 @@ graph_H
 
 [[If the assumption of homoscedasticity is not met, we can perform a **Welch's ANOVA** using the function [oneway.test]{style="color:indianred;"}]{style="font-size: 30px"}]{.fragment}
 
-
-<!-- TO CONTINUE-->
-
-# Correlation 
-
-à mettre dans la session d'après avec les modèles linéaires?
-
-# correlation linéraire (Pearson)
-
-https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques
-
-https://ericmarcon.github.io/Cours-R-Geeft/TP_5.html#8
-
-# Correlation des rangs (Spearman)
-
-https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques
 
 
 
