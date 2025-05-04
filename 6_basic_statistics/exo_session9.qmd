@@ -9,9 +9,13 @@ execute:
 
 Voir les espèces commerciales et WD (LoggingLab) pour faire des t-test et ANOVA et chi2
 
+VOIR LES LAB DE Marchand
+
 # For next time
 
-* Install the following packages from CRAN: *GGally*, *ggeffects*
+* Install the following packages from CRAN: *GGally*, *ggeffects*, *gtsummary*, *broom.helpers*, *parameters*
+
+CHECK IF ALL NEEDED...
 
 * Download the *RData* file available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData){preview-link="false"}
 and store them in your raw data folder.

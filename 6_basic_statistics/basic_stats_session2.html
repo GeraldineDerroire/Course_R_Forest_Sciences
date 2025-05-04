@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-30">
+  <meta name="dcterms.date" content="2025-05-04">
   <title>Statistics with R - session 2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,14 +407,15 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-30</p>
+  <p class="date">2025-05-04</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
 <p>Let’s load the packages that we will use today</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href=""></a><span class="fu">library</span>(GGally)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href=""></a><span class="fu">library</span>(GGally)</span>
+<span id="cb1-3"><a href=""></a><span class="fu">library</span>(ggeffects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -929,10 +930,11 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </section>
-<section id="prediction-interval" class="slide level2">
+<section id="prediction-interval" class="slide level2 scrollable">
 <h2>Prediction interval</h2>
 <p>The <strong>prediction interval</strong> includes the uncertainty of the predicted mean (like the confidence interval) and the variability of individual prediction by taking into account the residual variance <span class="math inline">\(\sigma^2\)</span>. <span class="fragment">It is therefore wider than the confidence interval and contains most of the observations.</span></p>
 <p><span class="fragment"><span style="font-size: 30px">To calculate it, we can use the function <span style="color:indianred;">predict</span>, with the argument <em>interval = “prediction”</em>, on new data that we created for the prediction:</span></span></p>
+<div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>new_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new,</span>
 <span id="cb23-2"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"prediction"</span>) <span class="co"># calculate the prediction interval</span></span>
@@ -945,6 +947,7 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
       D   fit   lwr   upr
   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 1    10  16.7  7.25  26.1</code></pre>
+</div>
 </div>
 </div>
 </section>
@@ -1137,40 +1140,99 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span class="fragment"><span style="font-size: 30px">😊 We have considerably reduced the leverage effect.</span></span></p>
 </div></div>
 </section>
-<section id="comparaison-de-modèle" class="slide level2">
-<h2>comparaison de modèle</h2>
-<p>Dire qu’on préfère le log-log :</p>
-<p>less pb with model validation, slighly better r2 and more ecological meaning</p>
-<p>entre le lineaire et le log-log !!!!! not with the AIC so more in the next section on multiple linear regression</p>
+<section id="which-model-should-we-choose" class="slide level2">
+<h2>Which model should we choose?</h2>
+<p>Here we would prefer the log-log model because:</p>
+<ul>
+<li class="fragment"><p>it is better regarding the model assumptions and reduced the leverage effect</p></li>
+<li class="fragment"><p>it has a slightly better R<sup>2</sup></p></li>
+<li class="fragment"><p>it make more sense ecologically</p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">⚠️ We will talk later about the AIC to compare models. We <strong>cannot</strong> use it here because the response variables are different (D <em>vs</em> log(D)).</span></span></p>
 </section>
-<section id="predire-avec-des-nouvelles-valeurs" class="slide level2">
-<h2>predire avec des nouvelles valeurs</h2>
-<p>quand transfo de données:</p>
+<section id="presenting-the-results" class="slide level2">
+<h2>Presenting the results</h2>
+<p><span style="font-size: 30px">We have seen how to plot the results, but here we need to back-transform them to their original (non-logged) scale. We use the function <span style="color:indianred;">ggpredict</span> from the package <span style="color:indianred;">ggeffects</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="co"># library(ggeffects)</span></span>
-<span id="cb34-2"><a href=""></a><span class="co"># library(ggplot2)</span></span>
-<span id="cb34-3"><a href=""></a><span class="co"># </span></span>
-<span id="cb34-4"><a href=""></a><span class="co"># # Fit your model</span></span>
-<span id="cb34-5"><a href=""></a><span class="co"># model &lt;- lm(log(H) ~ log(D), data = your_data)</span></span>
-<span id="cb34-6"><a href=""></a><span class="co"># </span></span>
-<span id="cb34-7"><a href=""></a><span class="co"># # Get predictions back on original scale</span></span>
-<span id="cb34-8"><a href=""></a><span class="co"># preds &lt;- ggpredict(model, terms = "D", type = "re")  # "re" = response scale (exp back-transform)</span></span>
-<span id="cb34-9"><a href=""></a><span class="co"># </span></span>
-<span id="cb34-10"><a href=""></a><span class="co"># ggplot(preds, aes(x = x, y = predicted)) +</span></span>
-<span id="cb34-11"><a href=""></a><span class="co">#   geom_line(color = "blue", size = 1) +</span></span>
-<span id="cb34-12"><a href=""></a><span class="co">#   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), fill = "blue", alpha = 0.2) +</span></span>
-<span id="cb34-13"><a href=""></a><span class="co">#   geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.6) +</span></span>
-<span id="cb34-14"><a href=""></a><span class="co">#   labs(x = "D", y = "H", title = "Predicted H vs D (log-log model, back-transformed)") +</span></span>
-<span id="cb34-15"><a href=""></a><span class="co">#   theme_minimal()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="co"># Get predictions back on original scale</span></span>
+<span id="cb34-2"><a href=""></a>preds <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_dh_2, <span class="at">terms =</span> <span class="st">"D"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
-
+<div class="cell-output cell-output-stderr">
+<pre><code>Model has log-transformed response. Back-transforming predictions to
+  original response scale. Standard errors are still on the transformed
+  scale.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="co"># default gives the confidence interval</span></span>
+<span id="cb36-2"><a href=""></a></span>
+<span id="cb36-3"><a href=""></a><span class="co"># plot the results</span></span>
+<span id="cb36-4"><a href=""></a>g_preds_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(preds, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
+<span id="cb36-5"><a href=""></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb36-6"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb36-7"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb36-8"><a href=""></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"D"</span>, <span class="at">y =</span> <span class="st">"H"</span>, <span class="at">title =</span> <span class="st">"Predicted H vs D (log-log model, back-transformed)"</span>) <span class="sc">+</span></span>
+<span id="cb36-9"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="presenting-the-results-1" class="slide level2">
+<h2>Presenting the results</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>g_preds_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="presenting-the-results-2" class="slide level2">
+<h2>Presenting the results</h2>
+<p><span style="font-size: 30px">To add the prediction interval, we set the argument <em>interval</em> to “prediction”:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a><span class="co"># Get predictions back on original scale, with prediction interval</span></span>
+<span id="cb38-2"><a href=""></a>preds_pred <span class="ot">&lt;-</span> ggeffects<span class="sc">::</span><span class="fu">ggpredict</span>(mod_dh_2, <span class="at">terms =</span> <span class="st">"D"</span>, <span class="at">interval =</span> <span class="st">"prediction"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Model has log-transformed response. Back-transforming predictions to
+  original response scale. Standard errors are still on the transformed
+  scale.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="co"># plot the results</span></span>
+<span id="cb40-2"><a href=""></a>g_preds_2 <span class="ot">&lt;-</span> g_preds_2 <span class="sc">+</span></span>
+<span id="cb40-3"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> preds_pred,</span>
+<span id="cb40-4"><a href=""></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), </span>
+<span id="cb40-5"><a href=""></a>              <span class="at">fill =</span> <span class="st">"darkgrey"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="presenting-the-results-3" class="slide level2">
+<h2>Presenting the results</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a>g_preds_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-26-1.png" width="960"></p>
+</figure>
+</div>
+</div>
 </div>
 </section>
 <section id="presentation-des-résultats" class="slide level2">
 <h2>presentation des résultats</h2>
 <p>cf lamaragnge: https://larmarange.github.io/guide-R/analyses/regression-lineaire.html</p>
 <p>gtsummary</p>
+</section>
+<section id="other-types-of-data-transformation" class="slide level2">
+<h2>Other types of data transformation</h2>
+<p>see Eric</p>
+<p>But be carrfull, this will change the shape of the relationship.</p>
 </section>
 <section id="what-if-the-predictor-is-categorical" class="slide level2">
 <h2>what if the predictor is categorical</h2>
@@ -1288,22 +1350,22 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb35-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb35-3"><a href=""></a></span>
-<span id="cb35-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb35-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb35-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
-<span id="cb35-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb35-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
-<span id="cb35-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb35-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb42-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb42-3"><a href=""></a></span>
+<span id="cb42-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb42-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb42-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb42-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb42-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
+<span id="cb42-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb42-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-27-1.png" width="960"></p>
 </figure>
 </div>
 </div>

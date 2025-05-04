@@ -32,6 +32,7 @@ Let's load the packages that we will use today
 library(tidyverse)
 library(GGally)
 library(ggeffects)
+library(gtsummary)
 ```
 
 ::: notes
@@ -609,43 +610,61 @@ Here we would prefer the log-log model because:
 
 * it make more sense ecologically
 
-[[⚠️ We will talk later about the AIC to compare models. We cannot use it here because the response variables are different (D *vs* log(D)).]{style="font-size: 30px"}]{.fragment}
+[[⚠️ We will talk later about the AIC to compare models. We **cannot** use it here because the response variables are different (D *vs* log(D)).]{style="font-size: 30px"}]{.fragment}
 
 
 ## Presenting the results
 
-<!--TO DO -->
-
-We have seen how to 
-
-quand transfo de données: from package ggeffects
+[We have seen how to plot the results, but here we need to back-transform them to their original (non-logged) scale. We use the function [ggpredict]{style="color:indianred;"} from the package [ggeffects]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ```{r}
 # Get predictions back on original scale
-preds <- ggeffects::ggpredict(mod_dh_2, terms = "D")  
+preds <- ggpredict(mod_dh_2, terms = "D")  
+# default gives the confidence interval
 
-# check with the D usef for predict don't go above 80cm
-# for prediction interval, apparently add interval = "prediction" but TO CHECK
-
-ggplot(preds, aes(x = x, y = predicted)) +
-  geom_line(color = "blue", size = 1) +
+# plot the results
+g_preds_2 <- ggplot(preds, aes(x = x, y = predicted)) +
+  geom_line(color = "blue", linewidth = 1) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), fill = "blue", alpha = 0.2) +
   geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.6) +
   labs(x = "D", y = "H", title = "Predicted H vs D (log-log model, back-transformed)") +
   theme_minimal()
 ```
 
+## Presenting the results
+
+```{r}
+#| warning: false
+g_preds_2
+```
 
 
+## Presenting the results
 
-## presentation des résultats
+[To add the prediction interval, we set the argument *interval* to "prediction":]{style="font-size: 30px"}
 
-cf lamaragnge: https://larmarange.github.io/guide-R/analyses/regression-lineaire.html
+```{r}
+# Get predictions back on original scale, with prediction interval
+preds_pred <- ggeffects::ggpredict(mod_dh_2, terms = "D", interval = "prediction")  
 
-gtsummary 
+# plot the results
+g_preds_2 <- g_preds_2 +
+  geom_ribbon(data = preds_pred,
+              aes(ymin = conf.low, ymax = conf.high), 
+              fill = "darkgrey", alpha = 0.2)
+```
+
+## Presenting the results
+
+```{r}
+#| warning: false
+g_preds_2
+```
 
 
 ## Other types of data transformation
+
+<!--TO DO -->
 
 see Eric
 
@@ -702,6 +721,16 @@ Eric 57: AIC
 
 et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pas.html#afficher-les-indicateurs-de-performance
 
+## preseting the results
+
+ggcoef_model of ggstats (see in Lamarange)
+
+and also a table with the following, which work as well with a simple model
+
+
+```{r}
+tbl_regression(mod_dh_2, intercept = TRUE)
+```
 
 
 # TO GO FURTHER (not in depth here...)
@@ -735,6 +764,8 @@ or BCI?
 * Marchand P. *Analyses et modélisation des données écologiques* [in French](https://pmarchand1.github.io/ECL7102/){preview-link="false"}
 
 * Marcon E. *cours-R-Geeft* [in French](https://ericmarcon.github.io/Cours-R-Geeft/){preview-link="false"}
+
+* Guide R Lamarange
 
 <!--
 * *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"} 
