@@ -684,7 +684,7 @@ always explore the shape of the relationsing with simulated data, to understand 
 
 ## What if the predictor is categorical? 
 
-[We now want to model D as a function of the family:]{style="font-size: 30px"} <!-- TO DO : check the equation-->
+[We now want to model D as a function of the family:]{style="font-size: 30px"} 
 
 $$D \sim \mathcal N(\alpha_{fam},  \sigma^2)$$
 
@@ -819,9 +819,6 @@ mod_hills <- lm(time ~ dist + climb, hills)
 summary(mod_hills)
 ```
 
-## Model validation
-
-<!-- TO DO with ggdiagnose cf Marchanc -->
 
 ## Standardising explanatory variables
 
@@ -866,46 +863,113 @@ summary(mod_hills2)
 [[The intercept is the value of the response when all explanatory variables are taken at their mean.]{style="font-size: 30px"}]{.fragment}
 
 ::: notes
-explain for dist and clim, and show the equation on the blackboard
+explain for dist and climb, and show the equation on the blackboard
 :::
 :::
 :::::
 
-## Interactions
+## Interaction {.smaller}
+
+[We can add an **interaction** term in the model to test if the effect of an explanatory variable depend of the value taken by another explanatory variable:]{style="font-size: 30px"}
+
+$$y = \alpha + \beta_1 x_1 + \beta_2  x_2 + \beta_{12}  x_1 x_2 + \epsilon$$
+
+[[which is equivalent to]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+
+$$y = \alpha + (\beta_1+\beta_{12} x_2) x_1 + \beta_2  x_2+ \epsilon$$
+:::
+
+[[and]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+
+$$y = \alpha + \beta_1  x_1+ (\beta_2+\beta_{12} x_1) x_2 +  \epsilon$$
+:::
+
+[[$\beta_{12}$ is the coefficient of the interaction. It represent the effect of $x_2$ on the relationship between y and $x_1$, and the effect of $x_1$ on the relationship between y and $x_2$.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+here we carry on with our model with two numerical variables, but could be for 1 cat and one numerical
+
+as alaways epsilon is N(0, sigma2)
+::: 
+
+## Interaction {.smaller}
+
+[To specify an interaction, we use [*]{style="color:indianred;"} in the formula:]{style="font-size: 30px"}
+
+```{r}
+mod_hills_inter <- lm(time ~ dist_sd * climb_sd, hills)
+summary(mod_hills_inter)
+```
+
 
 <!-- TO DO see on the piece of paper -->
 
+## Model validation {.smaller}
+
+<!-- TO DO with my new model with interaction-->
+
+::::: columns
+::: {.column width="33%"}
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(mod_hills, which = 1)
+```
+
+[[]{style="font-size: 30px"}]{.fragment}
+:::
 
 
+::: {.column width="33%"}
+::: fragment
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(mod_dh_2, which = 2)
+```
+:::
+[[]{style="font-size: 30px"}]{.fragment}
+:::
+
+::: {.column width="33%"}
+::: fragment
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(mod_dh_2, which = 4)
+```
+:::
+
+[[😊]{style="font-size: 30px"}]{.fragment}
+
+:::
+:::::
+
+## Model validation
+
+<!-- TO DO with my new model with interaction-->
+
+In addition to the 
+
+library(lindia)
+gg_resX(mod_hills, ncol = 2)
+
+<!-- TO DO with ggdiagnose cf Marchanc -->
+
+## Collinearity
+
+<!-- TO DO with my new model with interaction-->
+
+hyp supplementaire à tester (le faire sur hills)
 
 
-##
+## Presenting the results
 
-follow marchand et Eric 
-
-## Data
-????? could use the msleep de ggplot comme Marchand?
-ou iris mais !!!! pb de collinearity...
-
-## talk about collinearity of predictor
-
-cf Eric 35 and VIF (cf marchand cours 8)
-
-## standardisation des variables
-
-cf Eric 37
-
-## interaction between variable
-
-Eric 36
-
-
-## model selection
-Eric 57: AIC
-
-et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pas.html#afficher-les-indicateurs-de-performance
-
-## preseting the results
+<!-- TO DO with my new model with interaction-->
 
 ggcoef_model of ggstats (see in Lamarange)
 
@@ -915,6 +979,52 @@ and also a table with the following, which work as well with a simple model
 ```{r}
 tbl_regression(mod_dh_2, intercept = TRUE)
 ```
+
+## Presenting the results
+
+ggstats ggcoef_model (Lamarange)
+
+## Presenting the results
+
+gg
+
+marginal prediction with ggpredict: https://larmarange.github.io/guide-R/analyses/estimations-marginales.html#variantes
+
+
+## Model selection
+
+<!-- TO DO with my new model with interaction, comparing it with the model without interaction-->
+
+
+Eric 57: AIC
+
+et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pas.html#afficher-les-indicateurs-de-performance
+
+
+<!-- fin de la partie sur les modèles linéaire multiples brouillon ci-dessous-->
+
+
+
+
+##
+
+follow marchand et Eric 
+
+
+
+## talk about collinearity of predictor
+
+cf Eric 35 and VIF (cf marchand cours 8)
+
+
+## interaction between variable
+
+Eric 36
+
+
+
+
+
 
 
 # TO GO FURTHER (not in depth here...)
@@ -977,7 +1087,7 @@ or BCI?
 
 :::
 
-# Ressources to gop further
+# Ressources to go further
 
 * broom????
 
