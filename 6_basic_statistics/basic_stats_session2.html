@@ -418,7 +418,8 @@ Géraldine Derroire
 <span id="cb1-3"><a href=""></a><span class="fu">library</span>(ggeffects)</span>
 <span id="cb1-4"><a href=""></a><span class="fu">library</span>(gtsummary)</span>
 <span id="cb1-5"><a href=""></a><span class="fu">library</span>(lindia)</span>
-<span id="cb1-6"><a href=""></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-6"><a href=""></a><span class="fu">library</span>(car)</span>
+<span id="cb1-7"><a href=""></a><span class="fu">library</span>(AICcmodavg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1468,12 +1469,11 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="standardising-explanatory-variables" class="slide level2">
 <h2>Standardising explanatory variables</h2>
-<!-- TO DO check if there is a way to scale with tidyverse and avoid the [,]-->
 <p><span style="font-size: 30px">To compare the effects of the explanatory variables, we can standardise them using the function <span style="color:indianred;">scale</span>:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a>hills <span class="ot">&lt;-</span> hills <span class="sc">%&gt;%</span> </span>
-<span id="cb55-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">dist_sd =</span> <span class="fu">scale</span>(dist)[,<span class="dv">1</span>],</span>
-<span id="cb55-3"><a href=""></a>         <span class="at">climb_sd =</span> <span class="fu">scale</span>(climb)[,<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb55-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">dist_sd =</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(dist)), <span class="co"># scale return a matrix so need to transform </span></span>
+<span id="cb55-3"><a href=""></a>         <span class="at">climb_sd =</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(climb)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -2362,35 +2362,110 @@ F-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">The prediction lines are no longer parallel, because of the interaction term.</span></span></p>
 </section>
-<section id="model-selection" class="slide level2">
-<h2>Model selection</h2>
-<!-- TO DO with my new model with interaction, comparing it with the model without interaction-->
-<p>Eric 57: AIC</p>
-<p>et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pas.html#afficher-les-indicateurs-de-performance</p>
+<section id="model-comparison" class="slide level2">
+<h2>Model comparison</h2>
+<p><span style="font-size: 30px">To compare several models, we can use the AIC (Akaike information criterium).</span></p>
+<p><span style="font-size: 30px">The AIC take into account the likelihood of the model while penalising a more complex model (<em>i.e.</em> a model with more parameters) to avoid over-fitting.</span></p>
+<p><span class="fragment"><span style="font-size: 30px">To compare models using the AIC, they need to:</span></span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">have the same response variable (not possible to compare a model with a transformation of the response variable with a model without transformation)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">be fitted on the same data (so be careful with NAs)</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px"><strong>The model with the lowest AIC is the best model</strong> (we usually consider a model difference of at least 2).</span></span></p>
+<aside class="notes">
+<p>explain overfitting: when a model fit the data too closely, capturing random noise and fluctuation in addition to the true underlying pattern</p>
+<p>the value of AIC has no meaning, it needs to be used to compare models</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="model-comparison-1" class="slide level2">
+<h2>Model comparison</h2>
+<p><span style="font-size: 30px">Let’s compare our models with and without interactions, and models with only one explanatory variable. We use the function <span style="color:indianred;">aictab</span> of the package <span style="color:indianred;">AICcmodavg</span>:</span></p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a><span class="co"># fit two additional simple linear models</span></span>
+<span id="cb76-2"><a href=""></a>mod_hills_dist <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd, <span class="at">data =</span> hills) </span>
+<span id="cb76-3"><a href=""></a>mod_hills_climb <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> climb_sd, <span class="at">data =</span> hills)</span>
+<span id="cb76-4"><a href=""></a><span class="co"># make a list with all the models</span></span>
+<span id="cb76-5"><a href=""></a>list_mod <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">hills_dist =</span> mod_hills_dist, </span>
+<span id="cb76-6"><a href=""></a>                 <span class="at">hills_climb =</span> mod_hills_climb, </span>
+<span id="cb76-7"><a href=""></a>                 <span class="at">hills2 =</span> mod_hills2, </span>
+<span id="cb76-8"><a href=""></a>                 <span class="at">hills_inter =</span> mod_hills_inter)</span>
+<span id="cb76-9"><a href=""></a><span class="co"># compare the AIC</span></span>
+<span id="cb76-10"><a href=""></a><span class="fu">aictab</span>(list_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Model selection based on AICc:
+
+            K   AICc Delta_AICc AICcWt Cum.Wt      LL
+hills_inter 5 286.29       0.00   0.97   0.97 -137.11
+hills2      4 293.56       7.27   0.03   1.00 -142.11
+hills_dist  3 313.59      27.30   0.00   1.00 -153.41
+hills_climb 3 342.40      56.11   0.00   1.00 -167.81</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment"><span style="font-size: 30px">The model with interaction has the lowest AIC, it is therefore the best model.</span></span></p>
+</div></div>
+<aside class="notes">
+<p>here compute the AICc because we have a small number of observations</p>
+<p>we get the K: number of paramaters</p>
+<p>the LL is the log-likelihood</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <!-- fin de la partie sur les modèles linéaire multiples brouillon ci-dessous-->
-</section>
-<section id="section-2" class="slide level2">
-<h2></h2>
-<p>follow marchand et Eric</p>
-</section>
-<section id="talk-about-collinearity-of-predictor" class="slide level2">
-<h2>talk about collinearity of predictor</h2>
-<p>cf Eric 35 and VIF (cf marchand cours 8)</p>
-</section>
-<section id="interaction-between-variable" class="slide level2">
-<h2>interaction between variable</h2>
-<p>Eric 36</p>
+<!-- think about moving the part on correlation if I decide to move it-->
 </section></section>
-<section id="to-go-further-not-in-depth-here" class="title-slide slide level1 center">
-<h1>TO GO FURTHER (not in depth here…)</h1>
+<section>
+<section id="to-go-further" class="title-slide slide level1 center">
+<h1>To go further</h1>
 
 </section>
-
-<section id="what-if-the-observation-are-not-independant-mixed-effect-models" class="title-slide slide level1 center">
-<h1>What if the observation are not independant ? mixed-effect models</h1>
-<p>Nouragues per plot?</p>
+<section id="what-if-the-observations-are-not-independent" class="slide level2">
+<h2>What if the observations are not independent?</h2>
+<p>An linear regression assumes that all observations are <strong>independent</strong>.</p>
+<p>When observations grouped, they are not independent (<em>e.g.</em> several observations on a same site, on a same individual, in a same year…).</p>
+<ul>
+<li class="fragment"><p>We can include the group as a categorical explanatory variable. This evaluate the effect of each group.</p></li>
+<li class="fragment"><p>When the number of groups is too high and we are not interested in the effect of each group, we can use a <strong>linear mixed model</strong>.</p></li>
+</ul>
 </section>
-
+<section id="linear-mixed-model" class="slide level2 smaller">
+<h2>Linear mixed model</h2>
+<p><span style="font-size: 30px">Linear mixed models have a hierarchical structure.</span></p>
+<div class="fragment">
+<p><span style="font-size: 30px">One or more of their coefficients (the intercept or the response to explanatory variable) varies between groups <em>j</em>:</span></p>
+<p><span class="math display">\[y_k \sim \mathcal N(\alpha_{j[k]} + \beta_1 \times x_1 + \beta_2 \times x_2 + ... ,  \sigma^2)\]</span></p>
+</div>
+<div class="fragment">
+<p><span style="font-size: 30px">and this variation is modelled by a distribution:</span></p>
+<p><span class="math display">\[\alpha_j \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})\]</span></p>
+<p><span style="font-size: 22px"><em>NB: here we represent the effect of the group only on the intercept, but we can include this effect on the other coefficients as well.</em></span></p>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">💡 See here for a detailed explanation of linear mixed model.</span></span></p>
+<!-- TO DO add a link here -->
+</section></section>
 <section>
 <section id="what-if-the-data-are-not-normal-glm" class="title-slide slide level1 center">
 <h1>What if the data are not normal ? GLM</h1>
@@ -2445,7 +2520,7 @@ F-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li class="fragment">broom????</li>
 </ul>
 </section>
-<p class="heading" id="section-3"></p>
+<p class="heading" id="section-2"></p>
 <section id="log-normal-distribution" class="slide level2 smaller">
 <h2>Log-normal distribution</h2>
 <p><span class="math inline">\(x \sim log\mathcal{N}(\mu, \sigma^2)\)</span> if <span class="math inline">\(log(x) \sim \mathcal{N}(\mu, \sigma^2)\)</span></p>
@@ -2453,22 +2528,22 @@ F-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb76-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb76-3"><a href=""></a></span>
-<span id="cb76-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb76-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb76-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
-<span id="cb76-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb76-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
-<span id="cb76-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb76-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb78-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb78-3"><a href=""></a></span>
+<span id="cb78-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb78-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb78-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb78-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb78-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
+<span id="cb78-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb78-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-49-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-50-1.png" width="960"></p>
 </figure>
 </div>
 </div>

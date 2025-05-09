@@ -35,6 +35,7 @@ library(ggeffects)
 library(gtsummary)
 library(lindia)
 library(car)
+library(AICcmodavg)
 ```
 
 ::: notes
@@ -823,14 +824,12 @@ summary(mod_hills)
 
 ## Standardising explanatory variables
 
-<!-- TO DO check if there is a way to scale with tidyverse and avoid the [,]-->
-
 [To compare the effects of the explanatory variables, we can standardise them using the function [scale]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ```{r}
 hills <- hills %>% 
-  mutate(dist_sd = scale(dist)[,1],
-         climb_sd = scale(climb)[,1])
+  mutate(dist_sd = as.numeric(scale(dist)), # scale return a matrix so need to transform 
+         climb_sd = as.numeric(scale(climb)))
 ```
 
 [[Variables are scaled by subtracting the mean to each values and then dividing it by the standard deviation.]{style="font-size: 30px"}]{.fragment}
@@ -1111,14 +1110,62 @@ p_mod_inter_dist
 
 [[The prediction lines are no longer parallel, because of the interaction term.]{style="font-size: 30px"}]{.fragment}
 
-## Model selection
+## Model comparison
 
-<!-- TO DO with my new model with interaction, comparing it with the model without interaction-->
+[To compare several models, we can use the AIC (Akaike information criterium).]{style="font-size: 30px"}
+
+[The AIC take into account the likelihood of the model while penalising a more complex model (*i.e.* a model with more parameters) to avoid over-fitting.]{style="font-size: 30px"}
+
+[[To compare models using the AIC, they need to:]{style="font-size: 30px"}]{.fragment}
+
+* [have the same response variable (not possible to compare a model with a transformation of the response variable with a model without transformation)]{style="font-size: 30px"}
+
+* [be fitted on the same data (so be careful with NAs)]{style="font-size: 30px"}
+
+[[**The model with the lowest AIC is the best model** (we usually consider a model difference of at least 2).]{style="font-size: 30px"}]{.fragment}
 
 
-Eric 57: AIC
+::: notes
+explain overfitting: when a model fit the data too closely, capturing random noise and fluctuation in addition to the true underlying pattern
 
-et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pas.html#afficher-les-indicateurs-de-performance
+the value of AIC has no meaning, it needs to be used to compare models
+:::
+
+
+## Model comparison 
+
+[Let's compare our models with and without interactions, and models with only one explanatory variable. 
+We use the function [aictab]{style="color:indianred;"} of the package [AICcmodavg]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="70%"}
+
+```{r}
+# fit two additional simple linear models
+mod_hills_dist <- lm(time ~ dist_sd, data = hills) 
+mod_hills_climb <- lm(time ~ climb_sd, data = hills)
+# make a list with all the models
+list_mod <- list(hills_dist = mod_hills_dist, 
+                 hills_climb = mod_hills_climb, 
+                 hills2 = mod_hills2, 
+                 hills_inter = mod_hills_inter)
+# compare the AIC
+aictab(list_mod)
+```
+:::
+
+::: {.column width="30%"}
+[[The model with interaction has the lowest AIC, it is therefore the best model.]{style="font-size: 30px"}]{.fragment}
+:::
+:::::
+
+::: notes
+here compute the AICc because we have a small number of observations
+
+we get the K: number of paramaters
+
+the LL is the log-likelihood
+:::
 
 
 <!-- fin de la partie sur les modèles linéaire multiples brouillon ci-dessous-->
@@ -1126,14 +1173,65 @@ et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pa
 <!-- think about moving the part on correlation if I decide to move it-->
 
 
-# TO GO FURTHER (not in depth here...)
+# To go further
 
-# What if the observation are not independant ? mixed-effect models
+## What if the observations are not independent? 
 
-Nouragues per plot?
+An linear regression assumes that all observations are **independent**.
+
+When observations grouped, they are not independent (*e.g.* several observations on a same site, on a same individual, in a same year...).
+
+* We can include the group as a categorical explanatory variable. This evaluate the effect of each group.
+
+* When the number of groups is too high and we are not interested in the effect of each group, we can use a **linear mixed model**.
+
+## Linear mixed model {.smaller}
+
+[Linear mixed models have a hierarchical structure.]{style="font-size: 30px"}
+
+::: fragment
+
+[One or more of their coefficients (the intercept or the response to explanatory variable) varies between groups *j*:]{style="font-size: 30px"}
+
+$$y_k \sim \mathcal N(\alpha_{j[k]} + \beta_1 \times x_1 + \beta_2 \times x_2 + ... ,  \sigma^2)$$
+:::
+
+::: fragment
+
+[and this variation is modelled by a distribution:]{style="font-size: 30px"}
+
+$$\alpha_j \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})$$
+
+[*NB: here we represent the effect of the group only on the intercept, but we can include this effect on the other coefficients as well.*]{style="font-size: 22px"}
+
+:::
+
+[[💡 See here for a detailed explanation of linear mixed model.]{style="font-size: 30px"}]{.fragment}
+
+<!-- TO DO add a link here -->
 
 
-# What if the data are not normal ? GLM
+## What if the data are not normally distributed?
+
+dire que certaines données ne sont pas normalement distribuées et donc normale pas possible
+
+* données de comptes => Poisson
+
+* données de succès/échec
+
+... voir mes slides non -utilisées
+
+https://ben18785.shinyapps.io/distribution-zoo/
+
+
+## Generalised linear models
+
+voir Marchand 
+=> expliquer link function, distribution, et formule
+
+##
+
+GLM
 
 ## Logistic regression
 
@@ -1199,39 +1297,7 @@ Ressource : https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/
 #########
 
 
-## Log-normal distribution {.smaller}
 
-$x \sim log\mathcal{N}(\mu, \sigma^2)$ if $log(x) \sim \mathcal{N}(\mu, \sigma^2)$
-
-[We use the function [rnorm]{style="color:indianred;"} to randomly draw data from a normal distribution:]{style="font-size: 30px"}
-
-::::: columns
-::: {.column width="60%"}
-
-
-```{r}
-#| warning: false
-dt1 <- data.frame(x = rlnorm(n = 100000, mean = 0, sd = 1))
-dt2 <- data.frame(x = rlnorm(n = 100000, mean = 1, sd = 1))
-
-ggplot() + 
-  geom_density(data = dt1, aes(x = x), 
-               color = "blue") + 
-  geom_density(data = dt2, aes(x = x), 
-               color = "green") + 
-  scale_x_continuous(limits =c(0,20)) +
-  theme_minimal()
-```
-:::
-
-::: {.column width="40%"}
-
-* The values are stricty positive.
-
-* The variance increases when the mean increases. 
-
-:::
-:::::
 
 
 

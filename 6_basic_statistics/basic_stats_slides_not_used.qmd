@@ -1,0 +1,146 @@
+---
+title: "Statistics with R - slides not used"
+author: Géraldine Derroire
+institute: Cirad - UnB
+date: last-modified
+format: 
+  revealjs:
+    theme: solarized
+    output-location: fragment 
+    slide-number: true
+    preview-links: true
+    chalkboard: true
+    link-external-icon: true
+    link-external-newwindow: true
+    incremental: true
+execute:
+  echo: true   
+  warning: true
+  message: true 
+  cache: true
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r}
+library(ggplot2)
+```
+
+
+## Log-normal distribution {.smaller}
+
+$x \sim log\mathcal{N}(\mu, \sigma^2)$ if $log(x) \sim \mathcal{N}(\mu, \sigma^2)$
+
+[We use the function [rnorm]{style="color:indianred;"} to randomly draw data from a normal distribution:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="60%"}
+
+
+```{r}
+#| warning: false
+dt1 <- data.frame(x = rlnorm(n = 100000, mean = 0, sd = 1))
+dt2 <- data.frame(x = rlnorm(n = 100000, mean = 1, sd = 1))
+
+ggplot() + 
+  geom_density(data = dt1, aes(x = x), 
+               color = "blue") + 
+  geom_density(data = dt2, aes(x = x), 
+               color = "green") + 
+  scale_x_continuous(limits =c(0,20)) +
+  theme_minimal()
+```
+:::
+
+::: {.column width="40%"}
+
+* The values are stricty positive.
+
+* The variance increases when the mean increases. 
+
+:::
+:::::
+
+
+## Bernoulli and Binomial distribution {.scrollable}
+
+$$\mathcal{B}(n, p)$$
+
+[The binomial distribution represent the number of successes when performing ***n*** independent experiment having a constant probability of success ***p***.]{style="font-size: 30px"}
+
+[It is a discrete distribution taking only **positive integer values**.{style="font-size: 30px"}
+
+> [[It can be use for proportion: *eg* proportion of trees browsed in a plot.]{style="font-size: 30px"}{.fragment}
+
+::: fragment
+[The Bernoulli distribution is a special case of the binomial distribution where ***n=1***.]{style="font-size: 30px"}
+
+It is a discrete distribution taking only the values **0 (failure) or 1 (success)**.]{style="font-size: 30px"}
+:::
+
+> [It can be use for presence/abscence and success/failure data: *eg* probability that a tree is browsed.]{style="font-size: 30px"}]{.fragment}
+
+
+
+## Bernoulli and binomial distribution {.scrollable}
+
+We use the function [rbinom]{style="color:indianred;"} to randomly draw data from a binomial or a Bernoulli distribution:
+
+::::: columns
+::: {.column width="33%"}
+```{r}
+dt1 <- data.frame(x = 
+          rbinom(n = 100000, 
+                 size  = 20, 
+                 p = 0.5))
+ggplot() + 
+  geom_bar(data = dt1, 
+           aes(x = x)) +
+  theme_minimal()
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+dt2 <- data.frame(x = 
+          rbinom(n = 100000, 
+                 size = 20, 
+                 p = 0.7))
+ggplot() + 
+  geom_bar(data = dt2, 
+           aes(x = x)) +
+  theme_minimal()
+```
+:::
+
+::: {.column width="33%"}
+```{r}
+# Bernoulli distribution
+dt3 <- data.frame(x = 
+          rbinom(n = 100000, 
+                 size = 1, 
+                 p = 0.5))
+ggplot() +
+  geom_bar(data = dt3, 
+           aes(x = x)) +
+  theme_minimal()
+```
+:::
+:::::
+
+
+## Poisson
+
+TO DO OR TO MOVE TO SESSION 2
+
+discrete
+
+cf Eric: 1 slide et Marchand
+
+## To go further on distribution
+
+TO PUT IN THE RESOURCES OF SESSION 2/3
+
+distribution zoo + wikipedia pages (in english)
+
