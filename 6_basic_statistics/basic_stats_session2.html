@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-05">
+  <meta name="dcterms.date" content="2025-05-09">
   <title>Statistics with R - session 2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-05</p>
+  <p class="date">2025-05-09</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
@@ -416,7 +416,9 @@ Géraldine Derroire
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href=""></a><span class="fu">library</span>(GGally)</span>
 <span id="cb1-3"><a href=""></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb1-4"><a href=""></a><span class="fu">library</span>(gtsummary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href=""></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb1-5"><a href=""></a><span class="fu">library</span>(lindia)</span>
+<span id="cb1-6"><a href=""></a><span class="fu">library</span>(car)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -603,7 +605,7 @@ sample estimates:
 </section>
 <section id="nouragues-tree-data" class="slide level2 scrollable">
 <h2>Nouragues tree data</h2>
-<p><span style="font-size: 30px">We will work on a modified version of Nouragues tree data from the package BIOMASS (available <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData" data-preview-link="false">here</a>)</span> <span style="font-size: 30px">These data have been modified to exclude the non fully determined trees, and add the family.</span></p>
+<p><span style="font-size: 30px">We will work on a modified version of Nouragues tree data from the package BIOMASS (available <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData" data-preview-link="false">here</a>).</span> <span style="font-size: 30px">These data have been modified to exclude the non fully determined trees, and add the family.</span></p>
 <p><span style="font-size: 30px"><em>Heights and diameters of trees in two 1-ha plots from the Nouragues forest (French Guiana)</em></span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_statistics_2.RData"</span>)</span>
@@ -1157,7 +1159,7 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span style="font-size: 30px">We have seen how to plot the results, but here we need to back-transform them to their original (non-logged) scale. We use the function <span style="color:indianred;">ggpredict</span> from the package <span style="color:indianred;">ggeffects</span>:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="co"># Get predictions back on original scale</span></span>
-<span id="cb34-2"><a href=""></a>preds <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_dh_2, <span class="at">terms =</span> <span class="st">"D"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-2"><a href=""></a>preds <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_dh_2, <span class="at">terms =</span> <span class="st">"D"</span>) <span class="co"># default gives the confidence interval</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -1165,15 +1167,13 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
   original response scale. Standard errors are still on the transformed
   scale.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="co"># default gives the confidence interval</span></span>
-<span id="cb36-2"><a href=""></a></span>
-<span id="cb36-3"><a href=""></a><span class="co"># plot the results</span></span>
-<span id="cb36-4"><a href=""></a>g_preds_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(preds, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
-<span id="cb36-5"><a href=""></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb36-6"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb36-7"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb36-8"><a href=""></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"D"</span>, <span class="at">y =</span> <span class="st">"H"</span>, <span class="at">title =</span> <span class="st">"Predicted H vs D (log-log model, back-transformed)"</span>) <span class="sc">+</span></span>
-<span id="cb36-9"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="co"># plot the results</span></span>
+<span id="cb36-2"><a href=""></a>g_preds_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(preds, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
+<span id="cb36-3"><a href=""></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb36-4"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb36-5"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb36-6"><a href=""></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"D"</span>, <span class="at">y =</span> <span class="st">"H"</span>, <span class="at">title =</span> <span class="st">"Predicted H vs D (log-log model, back-transformed)"</span>) <span class="sc">+</span></span>
+<span id="cb36-7"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="presenting-the-results-1" class="slide level2">
@@ -1478,7 +1478,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell fragment">
 
 </div>
-<p><span class="fragment"><span style="font-size: 30px">Variables are scaled by subtracting the mean to each values and then dividing it by the standard deviation.</span></span> <span class="fragment"><span style="font-size: 30px">**This brings the variables to the same scale*.** They now have a mean of 0 and a standard deviation = 1:</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">Variables are scaled by subtracting the mean to each values and then dividing it by the standard deviation.</span></span> <span class="fragment"><span style="font-size: 30px"><strong>This brings the variables to the same scale.</strong> They now have a mean of 0 and a standard deviation of 1:</span></span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a>hills <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">dist_mean =</span> <span class="fu">mean</span>(dist_sd),</span>
@@ -1544,6 +1544,722 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
       }</style></aside>
 </div></div>
 </section>
+<section id="model-validation-2" class="slide level2 smaller">
+<h2>Model validation</h2>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="fu">plot</span>(mod_hills2, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-36-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="fu">plot</span>(mod_hills2, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-37-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="fu">plot</span>(mod_hills2, <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-38-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px">Here we see that a few observations have a strong effect, it would be worth inspecting these observations…</span></span></p>
+</section>
+<section id="model-validation-3" class="slide level2">
+<h2>Model validation</h2>
+<p><span style="font-size: 30px">For multiple linear regression, it is important to also check the effect of each explanatory variable individually by plotting the residuals against them.</span> <span class="fragment"><span style="font-size: 30px">We use the function <span style="color:indianred;">gg_resX</span> of the <span style="color:indianred;">lindia</span> package:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a><span class="fu">gg_resX</span>(mod_hills2, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-39-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">💡 the function <span style="color:indianred;">gg_diagnose</span> does all the diagnostic plots.</span></span></p>
+<aside class="notes">
+<p>Here the diagnostic is reasonably ok, except for the effect of the influential observations</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="collinearity" class="slide level2">
+<h2>Collinearity</h2>
+<p><span style="font-size: 30px">For multiple linear regression we need to check the absence of collinearity of the explanatory variables.</span></p>
+<p><span style="font-size: 30px"><strong>If an explanatory variable is a linear combination of the other, this impedes the model fitting.</strong></span></p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="fragment">
+<p><span style="font-size: 30px">We can look at the correlation between variables:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a><span class="fu">cor</span>(hills<span class="sc">$</span>dist_sd, hills<span class="sc">$</span>climb_sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.6523461</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><span style="font-size: 30px">We also check that the VIF (<em>variance inflation factor</em>):</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="fu">vif</span>(mod_hills2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> dist_sd climb_sd 
+1.740812 1.740812 </code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment"><span style="font-size: 30px">⚠️ If the VIF of some explanatory variables is above 10 (or even 5), some explanatory variables should be excluded from the regression.</span></span></p>
+</div></div>
+<aside class="notes">
+<p>if the explanatory variables vary together, difficult to estimate their individual effects…</p>
+<p>here we test the correlation between the standardised variables, but this would be the same for the non standardised…</p>
+<p>there is some correlation</p>
+<p>no strict rule for the VIF, this is context dependant. Check from 5</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="presenting-the-results-4" class="slide level2">
+<h2>Presenting the results</h2>
+<p><span style="font-size: 30px">To represent graphically the effect of an explanatory variable, we can set the values of the other explanatory variables to a constant (for example their mean).</span> <span class="fragment"><span style="font-size: 30px">Here we represent the effect of <em>dist_sd</em> setting <em>climb_sd</em> at the mean, -1 sd, + 1 sd:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a><span class="co"># create new values for the prediction</span></span>
+<span id="cb68-2"><a href=""></a>hills_new_dist <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="co"># create a table with all the combinaison of </span></span>
+<span id="cb68-3"><a href=""></a>  <span class="at">dist_sd =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.2</span>), <span class="co"># new values for dist_sd</span></span>
+<span id="cb68-4"><a href=""></a>  <span class="at">climb_sd =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="co"># -1 sd, mean and +1 sd of climb_sd</span></span>
+<span id="cb68-5"><a href=""></a></span>
+<span id="cb68-6"><a href=""></a><span class="co"># predict for new values</span></span>
+<span id="cb68-7"><a href=""></a>hills_pred_dist <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_hills2, <span class="at">newdata =</span> hills_new_dist, <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
+<span id="cb68-8"><a href=""></a>hills_pred_dist <span class="ot">&lt;-</span> <span class="fu">cbind</span>(hills_new_dist, hills_pred_dist)</span>
+<span id="cb68-9"><a href=""></a></span>
+<span id="cb68-10"><a href=""></a><span class="co"># make the plot</span></span>
+<span id="cb68-11"><a href=""></a>p_mod2_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hills_pred_dist, <span class="fu">aes</span>(<span class="at">x =</span> dist_sd, <span class="at">y =</span> fit, </span>
+<span id="cb68-12"><a href=""></a>                            <span class="at">color =</span> <span class="fu">as.factor</span>(climb_sd), </span>
+<span id="cb68-13"><a href=""></a>                            <span class="at">fill =</span> <span class="fu">as.factor</span>(climb_sd))) <span class="sc">+</span></span>
+<span id="cb68-14"><a href=""></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb68-15"><a href=""></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<aside class="notes">
+<p>as the variables are standardise, we can take -1, 0, 1</p>
+<p>We can obviously do the same for climb_sd</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="presenting-the-results-5" class="slide level2">
+<h2>Presenting the results</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a>p_mod2_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>the line are parallel</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="presenting-the-results-6" class="slide level2">
+<h2>Presenting the results</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">If we have many explanatory variables, we can plot all the coefficients with their confidence interval, using the function <span style="color:indianred;">ggcoef_model</span> of the package <span style="color:indianred;">ggstats</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a><span class="fu">ggcoef_model</span>(mod_hills2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">or present a table of the coefficients, using <span style="color:indianred;">tbl_regression</span> from the package <span style="color:indianred;">gtsummary</span></span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href=""></a><span class="fu">tbl_regression</span>(mod_hills2, </span>
+<span id="cb71-2"><a href=""></a>               <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div id="mvrpuqhvrh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#mvrpuqhvrh table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#mvrpuqhvrh thead, #mvrpuqhvrh tbody, #mvrpuqhvrh tfoot, #mvrpuqhvrh tr, #mvrpuqhvrh td, #mvrpuqhvrh th {
+  border-style: none;
+}
+
+#mvrpuqhvrh p {
+  margin: 0;
+  padding: 0;
+}
+
+#mvrpuqhvrh .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mvrpuqhvrh .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mvrpuqhvrh .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mvrpuqhvrh .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mvrpuqhvrh .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mvrpuqhvrh .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mvrpuqhvrh .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mvrpuqhvrh .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mvrpuqhvrh .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mvrpuqhvrh .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mvrpuqhvrh .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mvrpuqhvrh .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mvrpuqhvrh .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#mvrpuqhvrh .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mvrpuqhvrh .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mvrpuqhvrh .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mvrpuqhvrh .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mvrpuqhvrh .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mvrpuqhvrh .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mvrpuqhvrh .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mvrpuqhvrh .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mvrpuqhvrh .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#mvrpuqhvrh .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mvrpuqhvrh .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mvrpuqhvrh .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mvrpuqhvrh .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mvrpuqhvrh .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mvrpuqhvrh .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mvrpuqhvrh .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mvrpuqhvrh .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mvrpuqhvrh .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mvrpuqhvrh .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mvrpuqhvrh .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mvrpuqhvrh .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mvrpuqhvrh .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mvrpuqhvrh .gt_left {
+  text-align: left;
+}
+
+#mvrpuqhvrh .gt_center {
+  text-align: center;
+}
+
+#mvrpuqhvrh .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mvrpuqhvrh .gt_font_normal {
+  font-weight: normal;
+}
+
+#mvrpuqhvrh .gt_font_bold {
+  font-weight: bold;
+}
+
+#mvrpuqhvrh .gt_font_italic {
+  font-style: italic;
+}
+
+#mvrpuqhvrh .gt_super {
+  font-size: 65%;
+}
+
+#mvrpuqhvrh .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#mvrpuqhvrh .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mvrpuqhvrh .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mvrpuqhvrh .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mvrpuqhvrh .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mvrpuqhvrh .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mvrpuqhvrh .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#mvrpuqhvrh .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#mvrpuqhvrh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
+<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
+<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
+<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">(Intercept)</td>
+<td class="gt_row gt_center" headers="estimate">58</td>
+<td class="gt_row gt_center" headers="conf.low">53, 63</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">dist_sd</td>
+<td class="gt_row gt_center" headers="estimate">34</td>
+<td class="gt_row gt_center" headers="conf.low">28, 41</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">climb_sd</td>
+<td class="gt_row gt_center" headers="estimate">18</td>
+<td class="gt_row gt_center" headers="conf.low">11, 25</td>
+<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
+</tr>
+</tbody><tfoot class="gt_sourcenotes">
+<tr class="even">
+<td colspan="4" class="gt_sourcenote">Abbreviation: CI = Confidence Interval</td>
+</tr>
+</tfoot>
+
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</div></div>
+</section>
 <section id="interaction" class="slide level2 smaller">
 <h2>Interaction</h2>
 <p><span style="font-size: 30px">We can add an <strong>interaction</strong> term in the model to test if the effect of an explanatory variable depend of the value taken by another explanatory variable:</span></p>
@@ -1576,8 +2292,8 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Interaction</h2>
 <p><span style="font-size: 30px">To specify an interaction, we use <span style="color:indianred;">*</span> in the formula:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a>mod_hills_inter <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd <span class="sc">*</span> climb_sd, hills)</span>
-<span id="cb60-2"><a href=""></a><span class="fu">summary</span>(mod_hills_inter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a>mod_hills_inter <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd <span class="sc">*</span> climb_sd, hills)</span>
+<span id="cb72-2"><a href=""></a><span class="fu">summary</span>(mod_hills_inter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1603,576 +2319,55 @@ Multiple R-squared:  0.9392,    Adjusted R-squared:  0.9333
 F-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
-<!-- TO DO see on the piece of paper -->
 </section>
-<section id="model-validation-2" class="slide level2">
-<h2>Model validation</h2>
-</section>
-<section id="model-validation-3" class="slide level2 smaller">
-<h2>Model validation</h2>
-<div class="columns">
-<div class="column" style="width:33%;">
+<section id="visualisation-of-a-model-with-interaction" class="slide level2">
+<h2>Visualisation of a model with interaction</h2>
+<p><span style="font-size: 30px">We can make a graph of the predictions as we did for the model without interaction:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="fu">plot</span>(mod_hills, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a><span class="co"># create new values for the prediction</span></span>
+<span id="cb74-2"><a href=""></a>hills_inter_new_dist <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="co"># create a table with all the combinaison of </span></span>
+<span id="cb74-3"><a href=""></a>  <span class="at">dist_sd =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.2</span>), <span class="co"># new values for dist_sd</span></span>
+<span id="cb74-4"><a href=""></a>  <span class="at">climb_sd =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="co"># -1 sd, mean and +1 sd of climb_sd</span></span>
+<span id="cb74-5"><a href=""></a></span>
+<span id="cb74-6"><a href=""></a><span class="co"># predict for new values</span></span>
+<span id="cb74-7"><a href=""></a>hills_inter_pred_dist <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_hills_inter, </span>
+<span id="cb74-8"><a href=""></a>                                 <span class="at">newdata =</span> hills_inter_new_dist, </span>
+<span id="cb74-9"><a href=""></a>                                 <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
+<span id="cb74-10"><a href=""></a>hills_inter_new_dist <span class="ot">&lt;-</span> <span class="fu">cbind</span>(hills_inter_new_dist, hills_inter_pred_dist)</span>
+<span id="cb74-11"><a href=""></a></span>
+<span id="cb74-12"><a href=""></a><span class="co"># make the plot</span></span>
+<span id="cb74-13"><a href=""></a>p_mod_inter_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hills_inter_new_dist, <span class="fu">aes</span>(<span class="at">x =</span> dist_sd, <span class="at">y =</span> fit, </span>
+<span id="cb74-14"><a href=""></a>                            <span class="at">color =</span> <span class="fu">as.factor</span>(climb_sd), </span>
+<span id="cb74-15"><a href=""></a>                            <span class="at">fill =</span> <span class="fu">as.factor</span>(climb_sd))) <span class="sc">+</span></span>
+<span id="cb74-16"><a href=""></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb74-17"><a href=""></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</section>
+<section id="visualisation-of-a-model-with-interaction-1" class="slide level2">
+<h2>Visualisation of a model with interaction</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a>p_mod_inter_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-37-1.png" width="384"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-48-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
-<p><span class="fragment"><span style="font-size: 30px"></span></span></p>
-</div><div class="column" style="width:33%;">
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a><span class="fu">plot</span>(mod_dh_2, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-38-1.png" width="384"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p><span class="fragment"><span style="font-size: 30px"></span></span></p>
-</div><div class="column" style="width:33%;">
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a><span class="fu">plot</span>(mod_dh_2, <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-39-1.png" width="384"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<p><span class="fragment"><span style="font-size: 30px">😊</span></span></p>
-</div></div>
-<p>In addition to the</p>
-<p>library(lindia) gg_resX(mod_hills, ncol = 2)</p>
-<!-- TO DO with ggdiagnose cf Marchanc -->
-</section>
-<section id="collinearity" class="slide level2">
-<h2>Collinearity</h2>
-<p>hyp supplementaire à tester (le faire sur hills)</p>
-</section>
-<section id="presenting-the-results-4" class="slide level2">
-<h2>Presenting the results</h2>
-<p>ggcoef_model of ggstats (see in Lamarange)</p>
-<p>and also a table with the following, which work as well with a simple model</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href=""></a><span class="fu">tbl_regression</span>(mod_dh_2, <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output-display">
-<div id="wxvghuiakx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#wxvghuiakx table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#wxvghuiakx thead, #wxvghuiakx tbody, #wxvghuiakx tfoot, #wxvghuiakx tr, #wxvghuiakx td, #wxvghuiakx th {
-  border-style: none;
-}
-
-#wxvghuiakx p {
-  margin: 0;
-  padding: 0;
-}
-
-#wxvghuiakx .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#wxvghuiakx .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#wxvghuiakx .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#wxvghuiakx .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#wxvghuiakx .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#wxvghuiakx .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#wxvghuiakx .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#wxvghuiakx .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#wxvghuiakx .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#wxvghuiakx .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#wxvghuiakx .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#wxvghuiakx .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#wxvghuiakx .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#wxvghuiakx .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#wxvghuiakx .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#wxvghuiakx .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#wxvghuiakx .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#wxvghuiakx .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#wxvghuiakx .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#wxvghuiakx .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#wxvghuiakx .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#wxvghuiakx .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#wxvghuiakx .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#wxvghuiakx .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#wxvghuiakx .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#wxvghuiakx .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#wxvghuiakx .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#wxvghuiakx .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#wxvghuiakx .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#wxvghuiakx .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#wxvghuiakx .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#wxvghuiakx .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#wxvghuiakx .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#wxvghuiakx .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#wxvghuiakx .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#wxvghuiakx .gt_left {
-  text-align: left;
-}
-
-#wxvghuiakx .gt_center {
-  text-align: center;
-}
-
-#wxvghuiakx .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#wxvghuiakx .gt_font_normal {
-  font-weight: normal;
-}
-
-#wxvghuiakx .gt_font_bold {
-  font-weight: bold;
-}
-
-#wxvghuiakx .gt_font_italic {
-  font-style: italic;
-}
-
-#wxvghuiakx .gt_super {
-  font-size: 65%;
-}
-
-#wxvghuiakx .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#wxvghuiakx .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#wxvghuiakx .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#wxvghuiakx .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#wxvghuiakx .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#wxvghuiakx .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#wxvghuiakx .gt_indent_5 {
-  text-indent: 25px;
-}
-
-#wxvghuiakx .katex-display {
-  display: inline-flex !important;
-  margin-bottom: 0.75em !important;
-}
-
-#wxvghuiakx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
-  height: 0px !important;
-}
-</style>
-
-<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="header gt_col_headings">
-<th id="label" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col"><strong>Characteristic</strong></th>
-<th id="estimate" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Beta</strong></th>
-<th id="conf.low" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>95% CI</strong></th>
-<th id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong></th>
-</tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">(Intercept)</td>
-<td class="gt_row gt_center" headers="estimate">1.5</td>
-<td class="gt_row gt_center" headers="conf.low">1.4, 1.6</td>
-<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
-</tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">log(D)</td>
-<td class="gt_row gt_center" headers="estimate">0.49</td>
-<td class="gt_row gt_center" headers="conf.low">0.46, 0.53</td>
-<td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
-</tr>
-</tbody><tfoot class="gt_sourcenotes">
-<tr class="odd">
-<td colspan="4" class="gt_sourcenote">Abbreviation: CI = Confidence Interval</td>
-</tr>
-</tfoot>
-
-</table>
-
-</div>
-</div>
-</div>
-</section>
-<section id="presenting-the-results-5" class="slide level2">
-<h2>Presenting the results</h2>
-<p>ggstats ggcoef_model (Lamarange)</p>
-</section>
-<section id="presenting-the-results-6" class="slide level2">
-<h2>Presenting the results</h2>
-<p>gg</p>
-<p>marginal prediction with ggpredict: https://larmarange.github.io/guide-R/analyses/estimations-marginales.html#variantes</p>
+<p><span class="fragment"><span style="font-size: 30px">The prediction lines are no longer parallel, because of the interaction term.</span></span></p>
 </section>
 <section id="model-selection" class="slide level2">
 <h2>Model selection</h2>
+<!-- TO DO with my new model with interaction, comparing it with the model without interaction-->
 <p>Eric 57: AIC</p>
 <p>et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pas.html#afficher-les-indicateurs-de-performance</p>
-<!-- brouillon ci-dessous-->
+<!-- fin de la partie sur les modèles linéaire multiples brouillon ci-dessous-->
 </section>
 <section id="section-2" class="slide level2">
 <h2></h2>
@@ -2208,6 +2403,7 @@ F-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="poisson" class="slide level2">
 <h2>Poisson</h2>
 <p>karnataka count of a family per plot? mais pas de prédicteur? or BCI?</p>
+<p>Ressource : https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/</p>
 </section></section>
 <section id="acknowledgments" class="title-slide slide level1 smaller center">
 <h1>Acknowledgments</h1>
@@ -2257,22 +2453,22 @@ F-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb66-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb66-3"><a href=""></a></span>
-<span id="cb66-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb66-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb66-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
-<span id="cb66-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb66-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
-<span id="cb66-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb66-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb76-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb76-3"><a href=""></a></span>
+<span id="cb76-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb76-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb76-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb76-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb76-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
+<span id="cb76-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb76-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-41-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-49-1.png" width="960"></p>
 </figure>
 </div>
 </div>

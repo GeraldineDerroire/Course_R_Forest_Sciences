@@ -33,6 +33,8 @@ library(tidyverse)
 library(GGally)
 library(ggeffects)
 library(gtsummary)
+library(lindia)
+library(car)
 ```
 
 ::: notes
@@ -160,7 +162,7 @@ more complicated if we want other type of correlation than Pearson
 
 ## Nouragues tree data {.scrollable}
 
-[We will work on a modified version of Nouragues tree data from the package BIOMASS (available     [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData){preview-link="false"})]{style="font-size: 30px"}
+[We will work on a modified version of Nouragues tree data from the package BIOMASS (available     [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData){preview-link="false"}).]{style="font-size: 30px"}
 [These data have been modified to exclude the non fully determined trees, and add the family.]{style="font-size: 30px"}
 
 [*Heights and diameters of trees in two 1-ha plots from the Nouragues forest (French Guiana)*]{style="font-size: 30px"}
@@ -621,8 +623,7 @@ Here we would prefer the log-log model because:
 
 ```{r}
 # Get predictions back on original scale
-preds <- ggpredict(mod_dh_2, terms = "D")  
-# default gives the confidence interval
+preds <- ggpredict(mod_dh_2, terms = "D") # default gives the confidence interval
 
 # plot the results
 g_preds_2 <- ggplot(preds, aes(x = x, y = predicted)) +
@@ -833,8 +834,8 @@ hills <- hills %>%
 ```
 
 [[Variables are scaled by subtracting the mean to each values and then dividing it by the standard deviation.]{style="font-size: 30px"}]{.fragment}
-[[**This brings the variables to the same scale*.** 
-They now have a mean of 0 and a standard deviation = 1:]{style="font-size: 30px"}]{.fragment}
+[[**This brings the variables to the same scale.** 
+They now have a mean of 0 and a standard deviation of 1:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
@@ -867,6 +868,179 @@ explain for dist and climb, and show the equation on the blackboard
 :::
 :::
 :::::
+
+
+
+## Model validation {.smaller}
+
+
+::::: columns
+::: {.column width="33%"}
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(mod_hills2, which = 1)
+```
+
+:::
+
+
+::: {.column width="33%"}
+::: fragment
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(mod_hills2, which = 2)
+```
+:::
+:::
+
+::: {.column width="33%"}
+::: fragment
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(mod_hills2, which = 4)
+```
+:::
+:::
+:::::
+
+[[Here we see that a few observations have a strong effect, it would be worth inspecting these observations...]{style="font-size: 30px"}]{.fragment}
+
+## Model validation
+
+
+[For multiple linear regression, it is important to also check the effect of each explanatory variable individually by plotting the residuals against them.]{style="font-size: 30px"}
+[[We use the function [gg_resX]{style="color:indianred;"} of the [lindia]{style="color:indianred;"} package:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+#| fig.width: 6
+#| fig.height: 3
+gg_resX(mod_hills2, ncol = 2)
+```
+:::
+
+[[💡 the function [gg_diagnose]{style="color:indianred;"} does all the diagnostic plots.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+Here the diagnostic is reasonably ok, except for the effect of the influential observations
+:::
+
+
+## Collinearity
+
+[For multiple linear regression we need to check the absence of collinearity of the explanatory variables.]{style="font-size: 30px"}
+
+[**If an explanatory variable is a linear combination of the other, this impedes the model fitting.**]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="70%"}
+
+::: fragment 
+[We can look at the correlation between variables:]{style="font-size: 30px"}
+
+```{r}
+cor(hills$dist_sd, hills$climb_sd)
+```
+:::
+
+::: fragment 
+[We also check that the VIF (*variance inflation factor*):]{style="font-size: 30px"}
+
+```{r}
+vif(mod_hills2)
+```
+:::
+
+:::
+
+::: {.column width="30%"}
+
+[[⚠️ If the VIF of some explanatory variables is above 10 (or even 5), some explanatory variables should be excluded from the regression.]{style="font-size: 30px"}]{.fragment}
+
+:::
+:::::
+
+::: notes
+if the explanatory variables vary together, difficult to estimate their individual effects...
+
+here we test the correlation between the standardised variables, but this would be the same for the non standardised...
+
+there is some correlation
+
+no strict rule for the VIF, this is context dependant. Check from 5
+:::
+
+
+## Presenting the results
+
+[To represent graphically the effect of an explanatory variable, we can set the values of the other explanatory variables to a constant (for example their mean).]{style="font-size: 30px"}
+[[Here we represent the effect of *dist_sd* setting *climb_sd* at the mean, -1 sd, + 1 sd:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+# create new values for the prediction
+hills_new_dist <- expand.grid( # create a table with all the combinaison of 
+  dist_sd = seq(-2, 2, 0.2), # new values for dist_sd
+  climb_sd = c(-1, 0, 1)) # -1 sd, mean and +1 sd of climb_sd
+
+# predict for new values
+hills_pred_dist <- predict(mod_hills2, newdata = hills_new_dist, interval = "confidence")
+hills_pred_dist <- cbind(hills_new_dist, hills_pred_dist)
+
+# make the plot
+p_mod2_dist <- ggplot(hills_pred_dist, aes(x = dist_sd, y = fit, 
+                            color = as.factor(climb_sd), 
+                            fill = as.factor(climb_sd))) +
+    geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.3) +
+    geom_line()
+```
+:::
+
+::: notes
+as the variables are standardise, we can take -1, 0, 1
+
+We can obviously do the same for climb_sd
+:::
+
+## Presenting the results
+
+```{r}
+p_mod2_dist
+```
+
+::: notes
+the line are parallel
+:::
+
+## Presenting the results
+
+::::: columns
+::: {.column width="50%"}
+[If we have many explanatory variables, we can plot all the coefficients with their confidence interval, using the function 
+[ggcoef_model]{style="color:indianred;"} of the package [ggstats]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+ggcoef_model(mod_hills2)
+```
+
+:::
+
+::: {.column width="50%"}
+
+::: fragment
+[or present a table of the coefficients, using [tbl_regression]{style="color:indianred;"} from the package [gtsummary]{style="color:indianred;"}]{style="font-size: 30px"}
+
+```{r}
+tbl_regression(mod_hills2, 
+               intercept = TRUE)
+```
+:::
+:::
+:::::
+
 
 ## Interaction {.smaller}
 
@@ -905,91 +1079,37 @@ mod_hills_inter <- lm(time ~ dist_sd * climb_sd, hills)
 summary(mod_hills_inter)
 ```
 
+## Visualisation of a model with interaction
 
-<!-- TO DO see on the piece of paper -->
-
-## Model validation {.smaller}
-
-<!-- TO DO with my new model with interaction-->
-
-::::: columns
-::: {.column width="33%"}
-```{r}
-#| fig-width: 4
-#| fig-height: 4
-plot(mod_hills, which = 1)
-```
-
-[[]{style="font-size: 30px"}]{.fragment}
-:::
-
-
-::: {.column width="33%"}
-::: fragment
-```{r}
-#| fig-width: 4
-#| fig-height: 4
-plot(mod_dh_2, which = 2)
-```
-:::
-[[]{style="font-size: 30px"}]{.fragment}
-:::
-
-::: {.column width="33%"}
-::: fragment
-```{r}
-#| fig-width: 4
-#| fig-height: 4
-plot(mod_dh_2, which = 4)
-```
-:::
-
-[[😊]{style="font-size: 30px"}]{.fragment}
-
-:::
-:::::
-
-## Model validation
-
-<!-- TO DO with my new model with interaction-->
-
-In addition to the 
-
-library(lindia)
-gg_resX(mod_hills, ncol = 2)
-
-<!-- TO DO with ggdiagnose cf Marchanc -->
-
-## Collinearity
-
-<!-- TO DO with my new model with interaction-->
-
-hyp supplementaire à tester (le faire sur hills)
-
-
-## Presenting the results
-
-<!-- TO DO with my new model with interaction-->
-
-ggcoef_model of ggstats (see in Lamarange)
-
-and also a table with the following, which work as well with a simple model
-
+[We can make a graph of the predictions as we did for the model without interaction:]{style="font-size: 30px"}
 
 ```{r}
-tbl_regression(mod_dh_2, intercept = TRUE)
+# create new values for the prediction
+hills_inter_new_dist <- expand.grid( # create a table with all the combinaison of 
+  dist_sd = seq(-2, 2, 0.2), # new values for dist_sd
+  climb_sd = c(-1, 0, 1)) # -1 sd, mean and +1 sd of climb_sd
+
+# predict for new values
+hills_inter_pred_dist <- predict(mod_hills_inter, 
+                                 newdata = hills_inter_new_dist, 
+                                 interval = "confidence")
+hills_inter_new_dist <- cbind(hills_inter_new_dist, hills_inter_pred_dist)
+
+# make the plot
+p_mod_inter_dist <- ggplot(hills_inter_new_dist, aes(x = dist_sd, y = fit, 
+                            color = as.factor(climb_sd), 
+                            fill = as.factor(climb_sd))) +
+    geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.3) +
+    geom_line()
 ```
 
-## Presenting the results
+## Visualisation of a model with interaction
 
-ggstats ggcoef_model (Lamarange)
+```{r}
+p_mod_inter_dist
+```
 
-## Presenting the results
-
-gg
-
-marginal prediction with ggpredict: https://larmarange.github.io/guide-R/analyses/estimations-marginales.html#variantes
-
+[[The prediction lines are no longer parallel, because of the interaction term.]{style="font-size: 30px"}]{.fragment}
 
 ## Model selection
 
@@ -1003,28 +1123,7 @@ et broom https://larmarange.github.io/guide-R/analyses/selection-modele-pas-a-pa
 
 <!-- fin de la partie sur les modèles linéaire multiples brouillon ci-dessous-->
 
-
-
-
-##
-
-follow marchand et Eric 
-
-
-
-## talk about collinearity of predictor
-
-cf Eric 35 and VIF (cf marchand cours 8)
-
-
-## interaction between variable
-
-Eric 36
-
-
-
-
-
+<!-- think about moving the part on correlation if I decide to move it-->
 
 
 # TO GO FURTHER (not in depth here...)
@@ -1045,6 +1144,8 @@ or BCI?
 
 karnataka count of a family per plot? mais pas de prédicteur?
 or BCI?
+
+Ressource : https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/
 
 
 
