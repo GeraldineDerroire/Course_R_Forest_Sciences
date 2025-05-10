@@ -18,7 +18,7 @@ library(patchwork)
 
 For this part, there is no need to improve the appearance of the plots.
 
-Let's work with the *wdData* from a previous version of the package *BIOMASS* (v 2.1.11). These data are available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/data/wdData.csv){preview-link="false"}, and the metadata [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/data/wdData.csv){preview-link="false"}
+Let's work with the *wdData* from a previous version of the package *BIOMASS* (v 2.1.11). These data are available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/data/wdData.csv){preview-link="false"}, and the metadata [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/data/wdData.csv){preview-link="false"}.
 
 * Read these data as a tibble
 
