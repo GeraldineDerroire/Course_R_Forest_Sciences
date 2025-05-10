@@ -17,16 +17,14 @@ For all the following exercises, use functions from the tidyverse whenever possi
 # Karnataka forest dataset
 
 You are going to work on data from forests of the central Western Ghats of India.
-These data are available in the package BIOMASS, and are called 
-KarnatakaForest.
+These data were available in a previous version of the package BIOMASS (v 2.1.11), and are called KarnatakaForest.
+You can access these data in a csv file [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/KarnatakaForest.csv){preview-link="false"}.
 
-* Load the data (don't forget to look at the metadata in the help of the package). 
+* Read the data using the function read.csv (don't forget to look at the metadata in the help available here [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/description-_KarnatakaForest.pdf){preview-link="false"}). 
 Rename the data to facilitate the writing of the script.
 
 ```{r}
-data(KarnatakaForest)
-dt_WG <- KarnatakaForest
-rm(KarnatakaForest)
+dt_WG <- read.csv("data/KarnatakaForest.csv")
 ```
 
 * Get an overview of the data and check their class.

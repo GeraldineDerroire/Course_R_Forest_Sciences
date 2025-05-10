@@ -1,0 +1,53 @@
+---
+title: "Metadata on KarnatakaForest data"
+format:
+  pdf
+---
+
+This is the description of the data KarnatakaForest, that were available in a previous version of the package BIOMASS (v 2.1.11).
+You can access these data in a csv file [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/KarnatakaForest.csv){preview-link="false"}.
+
+# Karnataka forest dataset
+
+## Description
+
+Dataset from 96 forest plots (1 ha) established in the central Western Ghats of India by Ramesh et al. (2010).
+
+## Usage
+
+```{r, eval = FALSE}
+data("KarnatakaForest")
+```
+
+
+## Format
+
+A data frame with 65889 observations on the following 8 variables :
+
+* plotId: Names of the plots
+
+* treeId: Tree Id, contains a letter (A, B, C...) when an individual has multiple stems
+
+* family: Family
+
+* genus: Genus
+
+* species: Species
+
+* D: Diameter (cm)
+
+* lat: Latitude
+
+* long: Longitude
+
+## References
+
+Ramesh, B. R. et al. (2010). *Forest stand structure and composition in 96 sites along environmental gradients in the central Western Ghats of India* Ecological Archives E091-216. Ecology, 91(10), 3118-3118.
+
+## Examples
+
+```{r, eval = FALSE}
+data(KarnatakaForest)
+str(KarnatakaForest)
+```
+
