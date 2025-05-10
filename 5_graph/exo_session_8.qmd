@@ -11,7 +11,6 @@ execute:
 #| message: false
 library(tidyverse)
 library(patchwork)
-library(BIOMASS)
 ```
 
   
@@ -19,10 +18,12 @@ library(BIOMASS)
 
 For this part, there is no need to improve the appearance of the plots.
 
-Let's work with the *wdData* from the *BIOMASS* package.
+Let's work with the *wdData* from a previous version of the package *BIOMASS* (v 2.1.11). These data are available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/data/wdData.csv){preview-link="false"}, and the metadata [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/data/wdData.csv){preview-link="false"}
+
+* Read these data as a tibble
 
 ```{r}
-data("wdData")
+wdData <- read_csv("data/wdData.csv")
 ```
 
 * Make a histogram of wood density for each of the following three regions, using facets: South_America_(tropical), Australia/PNG_(tropical), Africa_(tropical)
@@ -153,7 +154,7 @@ p1 /(p2 | p3)
   
 * Install the following package from CRAN: *multcompView*
 
-* Make sur you have the following packages: *questionr*, *tidyverse*, *BIOMASS*
+* Make sure you have the following packages: *questionr*, *tidyverse*, *BIOMASS*
   
 * Download the *RData* file available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_1.RData){preview-link="false"}
 and store them in your raw data folder.
