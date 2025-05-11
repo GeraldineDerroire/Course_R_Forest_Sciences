@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-28">
+  <meta name="dcterms.date" content="2025-05-11">
   <title>Statistics with R - session 1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-28</p>
+  <p class="date">2025-05-11</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
@@ -415,13 +415,14 @@ Géraldine Derroire
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href=""></a><span class="fu">library</span>(questionr)</span>
-<span id="cb1-3"><a href=""></a><span class="fu">library</span>(BIOMASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href=""></a><span class="fu">library</span>(BIOMASS)</span>
+<span id="cb1-4"><a href=""></a><span class="fu">library</span>(GGally)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <aside class="notes">
-<p>tidyverse for data manip and graph questionr for usefull function for exploration and visualisation BIOMASS for data</p>
+<p>tidyverse for data manip and graph questionr for usefull function for exploration and visualisation BIOMASS for data GGally to see pair-correlation</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -723,124 +724,6 @@ Géraldine Derroire
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<!--
-
-
-## Bernoulli and Binomial distribution
-
-$$\mathcal{B}(n, p)$$
-
-[The binomial distribution represent the number of successes when performing ***n*** independent experiment having a constant probability of success ***p***.]{style="font-size: 30px"}
-
-[It is a discrete distribution taking only **positive integer values**.{style="font-size: 30px"}
-
-> [[It can be use for proportion: *eg* proportion of trees browsed in a plot.]{style="font-size: 30px"}{.fragment}
-
-::: fragment
-[The Bernoulli distribution is a special case of the binomial distribution where ***n=1***.]{style="font-size: 30px"}
-
-It is a discrete distribution taking only the values **0 (failure) or 1 (success)**.]{style="font-size: 30px"}
-:::
-
-> [It can be use for presence/abscence and success/failure data: *eg* probability that a tree is browsed.]{style="font-size: 30px"}]{.fragment}
-
-
-
-## Bernoulli and binomial distribution {.smaller}
-
-We use the function [rbinom]{style="color:indianred;"} to randomly draw data from a binomial or a Bernoulli distribution:
-
-::::: columns
-::: {.column width="33%"}
-
-
-::: {.cell}
-
-```{.r .cell-code}
-dt1 <- data.frame(x = 
-          rbinom(n = 100000, 
-                 size  = 20, 
-                 p = 0.5))
-ggplot() + 
-  geom_bar(data = dt1, 
-           aes(x = x)) +
-  theme_minimal()
-```
-
-::: {.cell-output-display}
-![](basic_stats_session1_files/figure-revealjs/unnamed-chunk-12-1.png){width=960}
-:::
-:::
-
-
-:::
-
-::: {.column width="33%"}
-
-
-::: {.cell}
-
-```{.r .cell-code}
-dt2 <- data.frame(x = 
-          rbinom(n = 100000, 
-                 size = 20, 
-                 p = 0.7))
-ggplot() + 
-  geom_bar(data = dt2, 
-           aes(x = x)) +
-  theme_minimal()
-```
-
-::: {.cell-output-display}
-![](basic_stats_session1_files/figure-revealjs/unnamed-chunk-13-1.png){width=960}
-:::
-:::
-
-
-:::
-
-::: {.column width="33%"}
-
-
-::: {.cell}
-
-```{.r .cell-code}
-# Bernoulli distribution
-dt3 <- data.frame(x = 
-          rbinom(n = 100000, 
-                 size = 1, 
-                 p = 0.5))
-ggplot() +
-  geom_bar(data = dt3, 
-           aes(x = x)) +
-  theme_minimal()
-```
-
-::: {.cell-output-display}
-![](basic_stats_session1_files/figure-revealjs/unnamed-chunk-14-1.png){width=960}
-:::
-:::
-
-
-:::
-:::::
-
-
-## Poisson
-
-TO DO OR TO MOVE TO SESSION 2
-
-discrete
-
-cf Eric: 1 slide et Marchand
-
-## To go further on distribution
-
-TO PUT IN THE RESOURCES OF SESSION 2/3
-
-distribution zoo + wikipedia pages (in english)
-
--->
 </section></section>
 <section>
 <section id="testing-the-association-between-two-categorical-variables" class="title-slide slide level1 center">
@@ -996,7 +879,7 @@ distribution zoo + wikipedia pages (in english)
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1119,7 +1002,7 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-24-1.png" style="width:80.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -1171,7 +1054,7 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-27-1.png" style="width:80.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-24-1.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -1223,7 +1106,7 @@ W = 0.98494, p-value = 0.8708</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-30-1.png" width="268"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-27-1.png" width="268"></p>
 </figure>
 </div>
 </div>
@@ -1237,13 +1120,13 @@ W = 0.98494, p-value = 0.8708</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-31-1.png" width="268"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-28-1.png" width="268"></p>
 </figure>
 </div>
 </div>
 </div>
 </div></div>
-<p><span class="fragment"><span style="font-size: 25px"><em>A QQ plot compares the quantiles of the observed distribution against a normal distribution. If the points fall reasonably on the diagonal line, we consider the data as normally distributed.</em></span></span></p>
+<p><span style="font-size: 25px">The points fall reasonably on the diagonal line, we can consider the data as normally distributed.</span>]{.fragment}</p>
 </section>
 <section id="t-test" class="slide level2 smaller">
 <h2>t-test</h2>
@@ -1302,7 +1185,7 @@ mean in group Dicorynia   mean in group Protium
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-33-1.png" style="width:80.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-30-1.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -1354,7 +1237,7 @@ W = 0.88607, p-value = 0.0001987</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-36-1.png" width="268"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-33-1.png" width="268"></p>
 </figure>
 </div>
 </div>
@@ -1368,7 +1251,7 @@ W = 0.88607, p-value = 0.0001987</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-37-1.png" width="268"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-34-1.png" width="268"></p>
 </figure>
 </div>
 </div>
@@ -1414,9 +1297,9 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </section>
 <section id="what-if-the-data-are-paired" class="slide level2">
 <h2>What if the data are paired?</h2>
-<p><span style="font-size: 30px">Let’s load some data:</span></p>
+<p><span style="font-size: 30px">Let’s load some data:</span> (available <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_1.RData" data-preview-link="false">here</a>)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_statistics.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_statistics_1.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1431,7 +1314,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <pre><code>tibble [200 × 3] (S3: tbl_df/tbl/data.frame)
  $ treeID: Factor w/ 100 levels "1","2","3","4",..: 1 1 2 2 3 3 4 4 5 5 ...
  $ treat : Factor w/ 2 levels "before","after": 1 2 1 2 1 2 1 2 1 2 ...
- $ growth: num [1:200] 0.109 0.143 0.349 0.28 0.231 ...</code></pre>
+ $ growth: num [1:200] 0.0487 0.4031 0.1384 0.356 0.185 ...</code></pre>
 </div>
 </div>
 </div>
@@ -1447,7 +1330,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-41-1.png" style="width:80.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-38-1.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
@@ -1468,11 +1351,11 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <pre><code># A tibble: 5 × 3
   treeID before after
   &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;
-1 1       0.109 0.143
-2 2       0.349 0.280
-3 3       0.231 0.188
-4 4       0.173 0.480
-5 5       0.133 0.340</code></pre>
+1 1      0.0487 0.403
+2 2      0.138  0.356
+3 3      0.185  0.504
+4 4      0.203  0.311
+5 5      0.296  0.269</code></pre>
 </div>
 </div>
 </section>
@@ -1489,7 +1372,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-43-1.png" width="288"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-40-1.png" width="288"></p>
 </figure>
 </div>
 </div>
@@ -1503,7 +1386,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-44-1.png" width="288"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-41-1.png" width="288"></p>
 </figure>
 </div>
 </div>
@@ -1544,13 +1427,13 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
     Paired t-test
 
 data:  dt_thin_w$before and dt_thin_w$after
-t = -13.002, df = 99, p-value &lt; 2.2e-16
+t = -13.366, df = 99, p-value &lt; 2.2e-16
 alternative hypothesis: true mean difference is not equal to 0
 95 percent confidence interval:
- -0.2422825 -0.1781252
+ -0.2822526 -0.2092826
 sample estimates:
 mean difference 
-     -0.2102039 </code></pre>
+     -0.2457676 </code></pre>
 </div>
 </div>
 </div><div class="column" style="width:40%;">
@@ -1580,7 +1463,7 @@ mean difference
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.868284e-23</code></pre>
+<pre><code>[1] 6.719727e-24</code></pre>
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">A significant p-value indicates that it is highly improbable to have the observed effect if the null hypothesis is true. So we can conclude that the two groups differ. <strong>⚠️ However, this does not inform on the magnitude of the difference.</strong></span></span></p>
@@ -1597,7 +1480,7 @@ mean difference
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>mean difference 
-     -0.2102039 </code></pre>
+     -0.2457676 </code></pre>
 </div>
 </div>
 </div>
@@ -1611,7 +1494,7 @@ mean difference
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.2422825 -0.1781252
+<pre><code>[1] -0.2822526 -0.2092826
 attr(,"conf.level")
 [1] 0.95</code></pre>
 </div>
@@ -1657,7 +1540,7 @@ attr(,"conf.level")
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-49-1.png" style="width:70.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-46-1.png" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -1697,7 +1580,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-51-1.png" width="480"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-48-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1723,7 +1606,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-52-1.png" width="480"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-49-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1765,7 +1648,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">The <em>intercept</em> correspond to the first group (here <em>Dicorynia</em>).</span></span></p>
-<p><span class="fragment"><span style="font-size: 30px">The other coeeficient show the difference of each group with the first group. For instance, the mean of <em>Sterculia</em> is:</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">The other coefficient show the difference of each group with the first group. For instance, the mean of <em>Sterculia</em> is:</span></span></p>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href=""></a><span class="fu">coef</span>(H_aov)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(H_aov)[<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1940,7 +1823,7 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-60-1.png" style="width:120.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-57-1.png" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
@@ -1955,24 +1838,167 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <li class="fragment"><p><span style="font-size: 30px">Perform a <strong>generalised linear model</strong> (GLM)</span></p></li>
 </ul>
 <p><span class="fragment"><span style="font-size: 30px">If the assumption of homoscedasticity is not met, we can perform a <strong>Welch’s ANOVA</strong> using the function <span style="color:indianred;">oneway.test</span></span></span></p>
-<!-- TO CONTINUE-->
 </section></section>
-<section id="correlation" class="title-slide slide level1 center">
-<h1>Correlation</h1>
-<p>à mettre dans la session d’après avec les modèles linéaires?</p>
+<section id="section-1" class="title-slide slide level1 center">
+<h1></h1>
+<p>So far, we saw how to test for differences between variables.</p>
+<p>Now and iin the next session we are going to look at <strong>relationships between variables</strong>.</p>
 </section>
 
-<section id="correlation-linéraire-pearson" class="title-slide slide level1 center">
-<h1>correlation linéraire (Pearson)</h1>
-<p>https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques</p>
-<p>https://ericmarcon.github.io/Cours-R-Geeft/TP_5.html#8</p>
-</section>
+<section>
+<section id="covariance-and-correlation" class="title-slide slide level1 center">
+<h1>Covariance and correlation</h1>
 
-<section id="correlation-des-rangs-spearman" class="title-slide slide level1 center">
-<h1>Correlation des rangs (Spearman)</h1>
-<p>https://juba.github.io/tidyverse/04-bivarie.html#tests-statistiques</p>
 </section>
+<section id="covariance" class="slide level2 scrollable">
+<h2>Covariance</h2>
+<p>We have seen that the variance of a variable <em>x</em> is the mean of squared deviations from the mean:</p>
+<p><span class="math display">\[\sigma^2_x = \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n}\]</span></p>
+<div class="fragment">
+<p><span style="font-size: 30px">The covariance between two numerical variables <em>x</em> and <em>y</em> is the mean of the product of the deviations of <em>x</em> and <em>y</em> from their respective mean:</span></p>
+<p><span class="math display">\[cov_{xy} = \frac{\sum_{i=1}^n (x_i-\bar{x}) \times (y_i-\bar{y})}{n}\]</span></p>
+</div>
+</section>
+<section id="covariance-1" class="slide level2">
+<h2>Covariance</h2>
+<p>We use the function <span style="color:indianred;">cov</span> to get the covariance between two variables.</p>
+<p>Let’s test this with the iris data set, which you graphically explore in a last exercise. We focus on the species <em>versicolor</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a><span class="fu">data</span>(iris)</span>
+<span id="cb81-2"><a href=""></a>iris <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(iris)</span>
+<span id="cb81-3"><a href=""></a>iris_vers <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"versicolor"</span>)</span>
+<span id="cb81-4"><a href=""></a><span class="fu">cov</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07310204</code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">⚠️ The unit of the covariance is the product of the unit of x and of y…</span></span></p>
+</section>
+<section id="correlation-of-pearson" class="slide level2">
+<h2>Correlation of Pearson</h2>
+<p><span style="font-size: 30px">To help with the interpretation of the covariance, we standardise the covariance by the product of the standard deviations.</span></p>
+<p><span style="font-size: 30px">This is the <strong>coefficient of correlation of Pearson</strong>, which is between -1 and 1:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">a coefficient = -1 (respectively 1) means that the variables are perfectly negatively (respectively positively) correlated</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">a coefficient = 0 shows an absence of correlation</span></p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><span class="fragment"><span style="font-size: 30px">We use the function <span style="color:indianred;">cor</span> to get the correlation between two variables (the default method is Pearson correlation).</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href=""></a><span class="fu">cor</span>(iris_vers<span class="sc">$</span>Petal.Length, </span>
+<span id="cb83-2"><a href=""></a>    iris_vers<span class="sc">$</span>Petal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7866681</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px"><em>There is a strong positive correlation.</em></span></span></p>
+</div></div>
+<aside class="notes">
+<p>So here strong positive correlation</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="correlation-of-spearman" class="slide level2">
+<h2>Correlation of Spearman</h2>
+<p><span style="font-size: 30px">Pearson correlation makes the hypothesis that the relationship is linear.</span></p>
+<p><span style="font-size: 30px">If this is not the case, we can use the <em>rank correlation of Spearman</em>, by specifying the method:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href=""></a><span class="fu">cor</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width,</span>
+<span id="cb85-2"><a href=""></a>    <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7870096</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>here, not much difference</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="test-of-correlation" class="slide level2">
+<h2>Test of correlation</h2>
+<p><span style="font-size: 30px">To test if the correlation is significant, we do a test of correlation with the function <span style="color:indianred;">cor.test</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href=""></a><span class="fu">cor.test</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width,</span>
+<span id="cb87-2"><a href=""></a>         <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
 
+data:  iris_vers$Petal.Length and iris_vers$Petal.Width
+t = 8.828, df = 48, p-value = 1.272e-11
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.6508311 0.8737034
+sample estimates:
+      cor 
+0.7866681 </code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px"><em>The correlation is significant.</em></span></span></p>
+</section>
+<section id="visualise-correlations" class="slide level2">
+<h2>Visualise correlations</h2>
+<p><span style="font-size: 30px">Pearson correlations between multiple pairs of variables can be visualised using the function <span style="color:indianred;">ggpairs</span> of the package <span style="color:indianred;">GGally</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href=""></a><span class="fu">ggpairs</span>(iris_vers, <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>,</span>
+<span id="cb89-2"><a href=""></a>                               <span class="st">"Petal.Length"</span>, <span class="st">"Petal.Width"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-62-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href=""></a><span class="co"># this is equivalent to </span></span>
+<span id="cb90-2"><a href=""></a> <span class="co"># ggpairs(iris_vers, columns = 1:4)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>we get the correlation coef and its significance</p>
+<p>more complicated if we want other type of correlation than Pearson</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
 <section id="acknowledgments" class="title-slide slide level1 smaller center">
 <h1>Acknowledgments</h1>
 <div>

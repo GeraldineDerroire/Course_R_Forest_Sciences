@@ -30,7 +30,6 @@ Let's load the packages that we will use today
 ```{r}
 #| message: false
 library(tidyverse)
-library(GGally)
 library(ggeffects)
 library(gtsummary)
 library(lindia)
@@ -38,125 +37,6 @@ library(car)
 library(AICcmodavg)
 ```
 
-::: notes
-GGally to see pair-correlation
-:::
-
-#
-
-Last session, we saw how to test for differences between variables.
-
-Today we are going to look at **relationships between variables**.
-
-
-# Covariance and correlation
-
-## Covariance {.scrollable}
-
-We have seen that the variance of a variable *x* is the mean of squared deviations from the mean:
-
-$$\sigma^2_x = \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n}$$
-
-::: fragment
-
-[The covariance between two numerical variables *x* and *y* is the mean of the product of the deviations of *x* and *y* from their respective mean:]{style="font-size: 30px"}
-
-$$cov_{xy} = \frac{\sum_{i=1}^n (x_i-\bar{x}) \times (y_i-\bar{y})}{n}$$
-
-:::
-
-## Covariance
-
-We use the function [cov]{style="color:indianred;"} to get the covariance between two variables.
-
-Let's test this with the iris data set, which you graphically explore in a last exercise. We focus on the species *versicolor*:
-
-```{r}
-data(iris)
-iris <- as_tibble(iris)
-iris_vers <- iris %>% filter(Species == "versicolor")
-cov(iris_vers$Petal.Length, iris_vers$Petal.Width)
-```
-[[⚠️ The unit of the covariance is the product of the unit of x and of y...]{style="font-size: 30px"}]{.fragment}
-
-
-## Correlation of Pearson
-
-[To help with the interpretation of the covariance, we standardise the covariance by the product of the standard deviations.]{style="font-size: 30px"}
-
-[This is the **coefficient of correlation of Pearson**, which is between -1 and 1:]{style="font-size: 30px"}
-
-::::: columns
-::: {.column width="50%"}
-
-* [a coefficient = -1 (respectively 1) means that the variables are perfectly negatively (respectively positively) correlated]{style="font-size: 30px"}
-
-* [a coefficient = 0 shows an absence of correlation]{style="font-size: 30px"}
-:::
-
-::: {.column width="50%"}
-
-[[We use the function [cor]{style="color:indianred;"} to get the correlation between two variables (the default method is Pearson correlation).]{style="font-size: 30px"}]{.fragment}
-
-::: fragment
-```{r}
-cor(iris_vers$Petal.Length, 
-    iris_vers$Petal.Width)
-```
-:::
-
-[[*There is a strong positive correlation.*]{style="font-size: 30px"}]{.fragment}
-
-:::
-:::::
-
-
-::: notes
-So here strong positive correlation
-:::
-
-## Correlation of Spearman
-
-[Pearson correlation makes the hypothesis that the relationship is linear.]{style="font-size: 30px"}
-
-[If this is not the case, we can use the *rank correlation of Spearman*, by specifying the method:]{style="font-size: 30px"}
-
-```{r}
-cor(iris_vers$Petal.Length, iris_vers$Petal.Width,
-    method = "spearman")
-```
-::: notes
-here, not much difference
-:::
-
-## Test of correlation
-
-[To test if the correlation is significant, we do a test of correlation with the function [cor.test]{style="color:indianred;"}:]{style="font-size: 30px"}
-
-```{r}
-cor.test(iris_vers$Petal.Length, iris_vers$Petal.Width,
-         method = "pearson")
-```
-
-[[*The correlation is significant.*]{style="font-size: 30px"}]{.fragment}
-
-## Visualise correlations 
-
-[Pearson correlations between multiple pairs of variables can be visualised using the function [ggpairs]{style="color:indianred;"} of the package [GGally]{style="color:indianred;"}:]{style="font-size: 30px"}
-
-```{r}
-#| out.width: 80%
-ggpairs(iris_vers, columns = c("Sepal.Length", "Sepal.Width",
-                               "Petal.Length", "Petal.Width"))
-# this is equivalent to 
- # ggpairs(iris_vers, columns = 1:4)
-```
-
-::: notes
-we get the correlation coef and its significance
-
-more complicated if we want other type of correlation than Pearson
-:::
 
 
 # Simple linear regression
@@ -1213,40 +1093,51 @@ $$\alpha_j \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})$$
 
 ## What if the data are not normally distributed?
 
-dire que certaines données ne sont pas normalement distribuées et donc normale pas possible
+Some data are by nature not normally distributed, so we cannot model them with a normal distribution.
 
-* données de comptes => Poisson
+* count data (*e.g.*: number of individuals of a species in a plot, number of birds heard in a given time) can be modelled with a **Poisson** distribution
 
-* données de succès/échec
+* success/failure data (*e.g*: presence/absence of a species in a plot, proportion of tree browsed in a plot) can be modelled with a **binomial** distribution
 
-... voir mes slides non -utilisées
-
-https://ben18785.shinyapps.io/distribution-zoo/
+[[To know more about these distributions: see the Wikipedia pages, and the [distribution zoo](https://ben18785.shinyapps.io/distribution-zoo/){preview-link="false"}.]{style="font-size: 25px"}]{.fragment}
 
 
 ## Generalised linear models
 
-voir Marchand 
-=> expliquer link function, distribution, et formule
+*Generalised linear models* (**GLM**) are an extension of linear models allowing different distributions of the response variable.
 
-##
+[[They have 3 component:]{style="font-size: 30px"}]{.fragment}
 
-GLM
+* [a **linear predictor**: a linear combination of explanatory variables]{style="font-size: 30px"}
+
+* [a **distribution** of individual responses around their mean]{style="font-size: 30px"}
+
+* [a **link function** between the predictor (defined on $\mathbb{R}$) and the mean response (not necessarily defined on $\mathbb{R}$)]{style="font-size: 30px"}
+
+[[In the linear model seen before, the distribution is *Normal* and the link function the *identity*.]{style="font-size: 25px"}]{.fragment}
+
 
 ## Logistic regression
 
-karnataka pres/abs of a family per plot? mais pas de prédicteur?
-or BCI?
+[The logistic regression is a **GLM** with a **binomial distribution** and a **logit link function**. It models a probability of success.]{style="font-size: 30px"}
+
+* [The binomial distribution $\mathcal{B}(n, p)$ represents the number of successes when performing ***n*** independent experiment having a constant probability of success ***p***. ]{style="font-size: 30px"}[[It is a discrete distribution taking only **positive integer values**.]{style="font-size: 30px"}]{.fragment}
+
+* [The logit link function links the modelled probability of success (which is between 0 and 1) to the linear predictor.]{style="font-size: 30px"}
+
+[[The Bernoulli distribution is a special case of a binomial when n=1.]{style="font-size: 25px"}]{.fragment}
+
+[[💡 See [here](https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Logistic-Regression/Logistic-Regression-in-R---An-Example/index.html){preview-link="false"} for a detailed explanation of the logistic regression.]{style="font-size: 30px"}]{.fragment}
 
 ## Poisson
 
-karnataka count of a family per plot? mais pas de prédicteur?
-or BCI?
+[The Poisson regression is a **GLM** with a **Poisson distribution** and a **logarithm link function**. It models the number of observations of an event in a defined sampling unit.]{style="font-size: 30px"}
 
-Ressource : https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/
+* [The Poisson distribution $\mathcal{P}(\lambda)$ represents the mean number of observations **$\lambda$** in a sampling unit.]{style="font-size: 30px"}
 
+* [The logarithm link function links **$\lambda$** (which is positive) to the linear predictor.]{style="font-size: 30px"} 
 
-
+[[💡 See [here](https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/){preview-link="false"} and [here](https://rpubs.com/Julian_Sampedro/1047952){preview-link="false"} for detailed explanations of the Poisson regression.]{style="font-size: 30px"}]{.fragment}
 
 
 
@@ -1258,15 +1149,8 @@ Ressource : https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/
 
 * Marcon E. *cours-R-Geeft* [in French](https://ericmarcon.github.io/Cours-R-Geeft/){preview-link="false"}
 
-* Guide R Lamarange
+* Barnier J. *Guide-R Guide pour l'analyse de données d'enquêtes avec R* [in French](https://larmarange.github.io/guide-R/){preview-link="false"}
 
-<!--
-* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"} 
-
-* Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
-
-* Rech R. *One-Way ANOVA and Boxplot in R* [here](https://statdoe.com/one-way-anova-and-box-plot-in-r/){preview-link="false"}
--->
 
 :::
 
@@ -1274,47 +1158,10 @@ Ressource : https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/
 
 ::: {.nonincremental}
 
-<!--
+* Lilja D.J. & Linse G.M. * Linear regression using R - An introduction to data modeling* [in English](https://conservancy.umn.edu/server/api/core/bitstreams/2a91814c-7194-4f39-aefb-c2babb7fb582/content){preview-link="false"}
 
-* Dytham C. *Choosing and using statistics - a biologist's guide*, 3rd Edition. Available [here](http://ngc.digitallibrary.co.in/bitstream/123456789/2272/1/Choosing%20and%20using%20statistics_A%20Biologist%27s%20Guide%20%283rd%20edition%29%40Dytham.pdf){preview-link="false"}
-
-* Rech R. *One-Way ANOVA and Boxplot in R* [here](https://statdoe.com/one-way-anova-and-box-plot-in-r/){preview-link="false"}
-
-* datacamp tutorials on [chi-square test](https://www.datacamp.com/tutorial/chi-square-test-r){preview-link="false"} and [t-test](https://www.datacamp.com/tutorial/t-tests-r-tutorial){preview-link="false"}, among other...
-
--->
+* DataCamp ressources on linear regression in Portuguese  [here](https://www.datacamp.com/pt/tutorial/linear-regression-R){preview-link="false"}, [here](https://www.datacamp.com/pt/tutorial/simple-linear-regression){preview-link="false"} and [here](https://www.datacamp.com/pt/tutorial/multiple-linear-regression-r-tutorial){preview-link="false"}
 
 :::
 
-# Ressources to go further
-
-* broom????
-
-
-
-
-
-#########
-
-
-
-
-
-
-# GLM?
-
-binomial glm: cf p 254 book avec les pinguins
-
-
-
-regression linéaire (en mnetionnant les GLM et les mixed-effect models)
-
-include DHARma for model diagnostics?
-
-Voir ici pour comparaison broom, modelr and DHARMa
-https://chatgpt.com/share/680a764b-476c-8004-9a40-6c99c92a6d35
-
-
-
-https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#2
 

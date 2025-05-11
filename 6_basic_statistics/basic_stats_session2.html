@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-09">
+  <meta name="dcterms.date" content="2025-05-11">
   <title>Statistics with R - session 2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-09</p>
+  <p class="date">2025-05-11</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
@@ -2465,20 +2465,45 @@ hills_climb 3 342.40      56.11   0.00   1.00 -167.81</code></pre>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">💡 See here for a detailed explanation of linear mixed model.</span></span></p>
 <!-- TO DO add a link here -->
-</section></section>
-<section>
-<section id="what-if-the-data-are-not-normal-glm" class="title-slide slide level1 center">
-<h1>What if the data are not normal ? GLM</h1>
-
+</section>
+<section id="what-if-the-data-are-not-normally-distributed" class="slide level2">
+<h2>What if the data are not normally distributed?</h2>
+<p>Some data are by nature not normally distributed, so we cannot model them with a normal distribution.</p>
+<ul>
+<li class="fragment"><p>count data (<em>e.g.</em>: number of individuals of a species in a plot, number of birds heard in a given time) can be modelled with a <strong>Poisson</strong> distribution</p></li>
+<li class="fragment"><p>success/failure data (<em>e.g</em>: presence/absence of a species in a plot, proportion of tree browsed in a plot) can be modelled with a <strong>binomial</strong> distribution</p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 25px">To know more about these distributions: see the Wikipedia pages, and the <a href="https://ben18785.shinyapps.io/distribution-zoo/" data-preview-link="false">distribution zoo</a>.</span></span></p>
+</section>
+<section id="generalised-linear-models" class="slide level2">
+<h2>Generalised linear models</h2>
+<p><em>Generalised linear models</em> (<strong>GLM</strong>) are an extension of linear models allowing different distributions of the response variable.</p>
+<p><span class="fragment"><span style="font-size: 30px">They have 3 component:</span></span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">a <strong>linear predictor</strong>: a linear combination of explanatory variables</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">a <strong>distribution</strong> of individual responses around their mean</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">a <strong>link function</strong> between the predictor (defined on <span class="math inline">\(\mathbb{R}\)</span>) and the mean response (not necessarily defined on <span class="math inline">\(\mathbb{R}\)</span>)</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 25px">In the linear model seen before, the distribution is <em>Normal</em> and the link function the <em>identity</em>.</span></span></p>
 </section>
 <section id="logistic-regression" class="slide level2">
 <h2>Logistic regression</h2>
-<p>karnataka pres/abs of a family per plot? mais pas de prédicteur? or BCI?</p>
+<p><span style="font-size: 30px">The logistic regression is a <strong>GLM</strong> with a <strong>binomial distribution</strong> and a <strong>logit link function</strong>. It models a probability of success.</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">The binomial distribution <span class="math inline">\(\mathcal{B}(n, p)\)</span> represents the number of successes when performing <strong><em>n</em></strong> independent experiment having a constant probability of success <strong><em>p</em></strong>.</span><span class="fragment"><span style="font-size: 30px">It is a discrete distribution taking only <strong>positive integer values</strong>.</span></span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">The logit link function links the modelled probability of success (which is between 0 and 1) to the linear predictor.</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 25px">The Bernoulli distribution is a special case of a binomial when n=1.</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">💡 See <a href="https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Logistic-Regression/Logistic-Regression-in-R---An-Example/index.html" data-preview-link="false">here</a> for a detailed explanation of the logistic regression.</span></span></p>
 </section>
 <section id="poisson" class="slide level2">
 <h2>Poisson</h2>
-<p>karnataka count of a family per plot? mais pas de prédicteur? or BCI?</p>
-<p>Ressource : https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/</p>
+<p><span style="font-size: 30px">The Poisson regression is a <strong>GLM</strong> with a <strong>Poisson distribution</strong> and a <strong>logarithm link function</strong>. It models the number of observations of an event in a defined sampling unit.</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">The Poisson distribution <span class="math inline">\(\mathcal{P}(\lambda)\)</span> represents the mean number of observations <strong><span class="math inline">\(\lambda\)</span></strong> in a sampling unit.</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">The logarithm link function links <strong><span class="math inline">\(\lambda\)</span></strong> (which is positive) to the linear predictor.</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">💡 See <a href="https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/" data-preview-link="false">here</a> and <a href="https://rpubs.com/Julian_Sampedro/1047952" data-preview-link="false">here</a> for detailed explanations of the Poisson regression.</span></span></p>
 </section></section>
 <section id="acknowledgments" class="title-slide slide level1 smaller center">
 <h1>Acknowledgments</h1>
@@ -2486,82 +2511,19 @@ hills_climb 3 342.40      56.11   0.00   1.00 -167.81</code></pre>
 <ul>
 <li><p>Marchand P. <em>Analyses et modélisation des données écologiques</em> <a href="https://pmarchand1.github.io/ECL7102/" data-preview-link="false">in French</a></p></li>
 <li><p>Marcon E. <em>cours-R-Geeft</em> <a href="https://ericmarcon.github.io/Cours-R-Geeft/" data-preview-link="false">in French</a></p></li>
-<li><p>Guide R Lamarange</p></li>
+<li><p>Barnier J. <em>Guide-R Guide pour l’analyse de données d’enquêtes avec R</em> <a href="https://larmarange.github.io/guide-R/" data-preview-link="false">in French</a></p></li>
 </ul>
-<!--
-* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"} 
-
-* Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
-
-* Rech R. *One-Way ANOVA and Boxplot in R* [here](https://statdoe.com/one-way-anova-and-box-plot-in-r/){preview-link="false"}
--->
 </div>
 </section>
 
 <section id="ressources" class="title-slide slide level1 center">
 <h1>Ressources</h1>
 <div>
-<!--
-
-* Dytham C. *Choosing and using statistics - a biologist's guide*, 3rd Edition. Available [here](http://ngc.digitallibrary.co.in/bitstream/123456789/2272/1/Choosing%20and%20using%20statistics_A%20Biologist%27s%20Guide%20%283rd%20edition%29%40Dytham.pdf){preview-link="false"}
-
-* Rech R. *One-Way ANOVA and Boxplot in R* [here](https://statdoe.com/one-way-anova-and-box-plot-in-r/){preview-link="false"}
-
-* datacamp tutorials on [chi-square test](https://www.datacamp.com/tutorial/chi-square-test-r){preview-link="false"} and [t-test](https://www.datacamp.com/tutorial/t-tests-r-tutorial){preview-link="false"}, among other...
-
--->
-</div>
-</section>
-
-<section>
-<section id="ressources-to-go-further" class="title-slide slide level1 center">
-<h1>Ressources to go further</h1>
 <ul>
-<li class="fragment">broom????</li>
+<li><p>Lilja D.J. &amp; Linse G.M. * Linear regression using R - An introduction to data modeling* <a href="https://conservancy.umn.edu/server/api/core/bitstreams/2a91814c-7194-4f39-aefb-c2babb7fb582/content" data-preview-link="false">in English</a></p></li>
+<li><p>DataCamp ressources on linear regression in Portuguese <a href="https://www.datacamp.com/pt/tutorial/linear-regression-R" data-preview-link="false">here</a>, <a href="https://www.datacamp.com/pt/tutorial/simple-linear-regression" data-preview-link="false">here</a> and <a href="https://www.datacamp.com/pt/tutorial/multiple-linear-regression-r-tutorial" data-preview-link="false">here</a></p></li>
 </ul>
-</section>
-<p class="heading" id="section-2"></p>
-<section id="log-normal-distribution" class="slide level2 smaller">
-<h2>Log-normal distribution</h2>
-<p><span class="math inline">\(x \sim log\mathcal{N}(\mu, \sigma^2)\)</span> if <span class="math inline">\(log(x) \sim \mathcal{N}(\mu, \sigma^2)\)</span></p>
-<p><span style="font-size: 30px">We use the function <span style="color:indianred;">rnorm</span> to randomly draw data from a normal distribution:</span></p>
-<div class="columns">
-<div class="column" style="width:60%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb78-2"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rlnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">1</span>, <span class="at">sd =</span> <span class="dv">1</span>))</span>
-<span id="cb78-3"><a href=""></a></span>
-<span id="cb78-4"><a href=""></a><span class="fu">ggplot</span>() <span class="sc">+</span> </span>
-<span id="cb78-5"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb78-6"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
-<span id="cb78-7"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
-<span id="cb78-8"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
-<span id="cb78-9"><a href=""></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
-<span id="cb78-10"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell fragment">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-50-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:40%;">
-<ul>
-<li class="fragment"><p>The values are stricty positive.</p></li>
-<li class="fragment"><p>The variance increases when the mean increases.</p></li>
-</ul>
-</div></div>
-</section></section>
-<section id="glm" class="title-slide slide level1 center">
-<h1>GLM?</h1>
-<p>binomial glm: cf p 254 book avec les pinguins</p>
-<p>regression linéaire (en mnetionnant les GLM et les mixed-effect models)</p>
-<p>include DHARma for model diagnostics?</p>
-<p>Voir ici pour comparaison broom, modelr and DHARMa https://chatgpt.com/share/680a764b-476c-8004-9a40-6c99c92a6d35</p>
-<p>https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#2</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

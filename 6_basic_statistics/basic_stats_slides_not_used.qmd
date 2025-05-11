@@ -71,7 +71,7 @@ $$\mathcal{B}(n, p)$$
 
 [It is a discrete distribution taking only **positive integer values**.{style="font-size: 30px"}
 
-> [[It can be use for proportion: *eg* proportion of trees browsed in a plot.]{style="font-size: 30px"}{.fragment}
+> [[It can be use for proportion: *eg* proportion of trees browsed in a plot.]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 [The Bernoulli distribution is a special case of the binomial distribution where ***n=1***.]{style="font-size: 30px"}
