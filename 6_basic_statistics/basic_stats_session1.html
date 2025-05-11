@@ -416,7 +416,8 @@ Géraldine Derroire
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href=""></a><span class="fu">library</span>(questionr)</span>
 <span id="cb1-3"><a href=""></a><span class="fu">library</span>(BIOMASS)</span>
-<span id="cb1-4"><a href=""></a><span class="fu">library</span>(GGally)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href=""></a><span class="fu">library</span>(GGally)</span>
+<span id="cb1-5"><a href=""></a><span class="fu">library</span>(multcompView)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -726,8 +727,8 @@ Géraldine Derroire
       }</style></aside>
 </section></section>
 <section>
-<section id="testing-the-association-between-two-categorical-variables" class="title-slide slide level1 center">
-<h1>Testing the association between two categorical variables</h1>
+<section id="testing-the-association-between-two-categorical-variables-the-chi2-test" class="title-slide slide level1 center">
+<h1>Testing the association between two categorical variables: the <span class="math inline">\(\chi^2\)</span> test</h1>
 
 </section>
 <section id="lets-work-with-the-the-nouragues-tree-data" class="slide level2">
@@ -1009,8 +1010,8 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 </div>
 </section></section>
 <section>
-<section id="testing-if-two-groups-differ-considering-a-quantitative-variable" class="title-slide slide level1 center">
-<h1>Testing if two groups differ considering a quantitative variable</h1>
+<section id="testing-if-two-groups-differ-considering-a-quantitative-variable-the-t-test" class="title-slide slide level1 center">
+<h1>Testing if two groups differ considering a quantitative variable: the t-test</h1>
 
 </section>
 <section id="lets-work-with-the-nouragues-tree-data" class="slide level2">
@@ -1126,7 +1127,7 @@ W = 0.98494, p-value = 0.8708</code></pre>
 </div>
 </div>
 </div></div>
-<p><span style="font-size: 25px">The points fall reasonably on the diagonal line, we can consider the data as normally distributed.</span>]{.fragment}</p>
+<p><span class="fragment"><span style="font-size: 25px">The points fall reasonably on the diagonal line, we can consider the data as normally distributed.</span></span></p>
 </section>
 <section id="t-test" class="slide level2 smaller">
 <h2>t-test</h2>
@@ -1280,7 +1281,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">The result is significant, so we can reject the null hypothesis, and conclude that the two genus differ in diameter.</span></span></p>
-<p>[💡 A non-parametric test is a test that does not make any assumption regarding the distribution of the observations.]</p>
+<p><span style="font-size: 25px">💡 A non-parametric test is a test that does not make any assumption regarding the distribution of the observations.</span></p>
 <aside class="notes">
 <p>The test assume all values to be different, but there are some ties (equal values) so the p-value is approximates =&gt; here very small so OK</p>
 <style type="text/css">
@@ -1516,8 +1517,8 @@ attr(,"conf.level")
       }</style></aside>
 </section></section>
 <section>
-<section id="testing-difference-between-more-than-two-groups" class="title-slide slide level1 center">
-<h1>Testing difference between more than two groups</h1>
+<section id="testing-difference-between-more-than-two-groups-the-anova" class="title-slide slide level1 center">
+<h1>Testing difference between more than two groups: the ANOVA</h1>
 
 </section>
 <section id="analysis-of-variance-anova" class="slide level2">
@@ -1743,9 +1744,8 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <h2>Graphical presentation of the results</h2>
 <p><span style="font-size: 30px">We use the function <span style="color:indianred;">multcompLetters4</span> from the package <span style="color:indianred;">multcompView</span> to get the letters indicating identical groups:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a><span class="fu">library</span>(multcompView)</span>
-<span id="cb75-2"><a href=""></a>H_letters <span class="ot">&lt;-</span> <span class="fu">multcompLetters4</span>(H_aov, H_tukey)</span>
-<span id="cb75-3"><a href=""></a>H_letters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a>H_letters <span class="ot">&lt;-</span> <span class="fu">multcompLetters4</span>(H_aov, H_tukey)</span>
+<span id="cb75-2"><a href=""></a>H_letters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1842,7 +1842,7 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <section id="section-1" class="title-slide slide level1 center">
 <h1></h1>
 <p>So far, we saw how to test for differences between variables.</p>
-<p>Now and iin the next session we are going to look at <strong>relationships between variables</strong>.</p>
+<p>Now and in the next session we are going to look at <strong>relationships between variables</strong>.</p>
 </section>
 
 <section>

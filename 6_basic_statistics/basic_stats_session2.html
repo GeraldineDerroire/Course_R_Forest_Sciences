@@ -12,7 +12,7 @@
 
   <meta name="author" content="Géraldine Derroire">
   <meta name="dcterms.date" content="2025-05-11">
-  <title>Statistics with R - session 2</title>
+  <title>Statistics with R - session 2 - Linear regressions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -394,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Statistics with R - session 2</h1>
+  <h1 class="title">Statistics with R - session 2 - Linear regressions</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -409,14 +409,15 @@ Géraldine Derroire
 
   <p class="date">2025-05-11</p>
 </section>
+<section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
 <p>Let’s load the packages that we will use today</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href=""></a><span class="fu">library</span>(GGally)</span>
-<span id="cb1-3"><a href=""></a><span class="fu">library</span>(ggeffects)</span>
-<span id="cb1-4"><a href=""></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb1-2"><a href=""></a><span class="fu">library</span>(ggeffects)</span>
+<span id="cb1-3"><a href=""></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb1-4"><a href=""></a><span class="fu">library</span>(ggstats)</span>
 <span id="cb1-5"><a href=""></a><span class="fu">library</span>(lindia)</span>
 <span id="cb1-6"><a href=""></a><span class="fu">library</span>(car)</span>
 <span id="cb1-7"><a href=""></a><span class="fu">library</span>(AICcmodavg)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -424,180 +425,22 @@ Géraldine Derroire
 <div class="cell fragment">
 
 </div>
-<aside class="notes">
-<p>GGally to see pair-correlation</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
-
-<section id="section-1" class="title-slide slide level1 center">
-<h1></h1>
-<p>Last session, we saw how to test for differences between variables.</p>
-<p>Today we are going to look at <strong>relationships between variables</strong>.</p>
-</section>
-
-<section>
-<section id="covariance-and-correlation" class="title-slide slide level1 center">
-<h1>Covariance and correlation</h1>
-
-</section>
-<section id="covariance" class="slide level2 scrollable">
-<h2>Covariance</h2>
-<p>We have seen that the variance of a variable <em>x</em> is the mean of squared deviations from the mean:</p>
-<p><span class="math display">\[\sigma^2_x = \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n}\]</span></p>
-<div class="fragment">
-<p><span style="font-size: 30px">The covariance between two numerical variables <em>x</em> and <em>y</em> is the mean of the product of the deviations of <em>x</em> and <em>y</em> from their respective mean:</span></p>
-<p><span class="math display">\[cov_{xy} = \frac{\sum_{i=1}^n (x_i-\bar{x}) \times (y_i-\bar{y})}{n}\]</span></p>
-</div>
-</section>
-<section id="covariance-1" class="slide level2">
-<h2>Covariance</h2>
-<p>We use the function <span style="color:indianred;">cov</span> to get the covariance between two variables.</p>
-<p>Let’s test this with the iris data set, which you graphically explore in a last exercise. We focus on the species <em>versicolor</em>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">data</span>(iris)</span>
-<span id="cb2-2"><a href=""></a>iris <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(iris)</span>
-<span id="cb2-3"><a href=""></a>iris_vers <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"versicolor"</span>)</span>
-<span id="cb2-4"><a href=""></a><span class="fu">cov</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.07310204</code></pre>
-</div>
-</div>
-<p><span class="fragment"><span style="font-size: 30px">⚠️ The unit of the covariance is the product of the unit of x and of y…</span></span></p>
-</section>
-<section id="correlation-of-pearson" class="slide level2">
-<h2>Correlation of Pearson</h2>
-<p><span style="font-size: 30px">To help with the interpretation of the covariance, we standardise the covariance by the product of the standard deviations.</span></p>
-<p><span style="font-size: 30px">This is the <strong>coefficient of correlation of Pearson</strong>, which is between -1 and 1:</span></p>
-<div class="columns">
-<div class="column" style="width:50%;">
+<section id="uses-of-regressions" class="slide level2">
+<h2>Uses of regressions</h2>
 <ul>
-<li class="fragment"><p><span style="font-size: 30px">a coefficient = -1 (respectively 1) means that the variables are perfectly negatively (respectively positively) correlated</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">a coefficient = 0 shows an absence of correlation</span></p></li>
+<li class="fragment"><p>Study the relationship between several variables (without assuming causality)</p></li>
+<li class="fragment"><p>Study the effect of numerical or categorical variables on another variables</p></li>
+<li class="fragment"><p>Use these relationships to predict the values of the modelled variable for new observations.</p></li>
 </ul>
-</div><div class="column" style="width:50%;">
-<p><span class="fragment"><span style="font-size: 30px">We use the function <span style="color:indianred;">cor</span> to get the correlation between two variables (the default method is Pearson correlation).</span></span></p>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">cor</span>(iris_vers<span class="sc">$</span>Petal.Length, </span>
-<span id="cb4-2"><a href=""></a>    iris_vers<span class="sc">$</span>Petal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7866681</code></pre>
-</div>
-</div>
-</div>
-<p><span class="fragment"><span style="font-size: 30px"><em>There is a strong positive correlation.</em></span></span></p>
-</div></div>
-<aside class="notes">
-<p>So here strong positive correlation</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
-<section id="correlation-of-spearman" class="slide level2">
-<h2>Correlation of Spearman</h2>
-<p><span style="font-size: 30px">Pearson correlation makes the hypothesis that the relationship is linear.</span></p>
-<p><span style="font-size: 30px">If this is not the case, we can use the <em>rank correlation of Spearman</em>, by specifying the method:</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">cor</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width,</span>
-<span id="cb6-2"><a href=""></a>    <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7870096</code></pre>
-</div>
-</div>
-<aside class="notes">
-<p>here, not much difference</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="test-of-correlation" class="slide level2">
-<h2>Test of correlation</h2>
-<p><span style="font-size: 30px">To test if the correlation is significant, we do a test of correlation with the function <span style="color:indianred;">cor.test</span>:</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">cor.test</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width,</span>
-<span id="cb8-2"><a href=""></a>         <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Pearson's product-moment correlation
-
-data:  iris_vers$Petal.Length and iris_vers$Petal.Width
-t = 8.828, df = 48, p-value = 1.272e-11
-alternative hypothesis: true correlation is not equal to 0
-95 percent confidence interval:
- 0.6508311 0.8737034
-sample estimates:
-      cor 
-0.7866681 </code></pre>
-</div>
-</div>
-<p><span class="fragment"><span style="font-size: 30px"><em>The correlation is significant.</em></span></span></p>
-</section>
-<section id="visualise-correlations" class="slide level2">
-<h2>Visualise correlations</h2>
-<p><span style="font-size: 30px">Pearson correlations between multiple pairs of variables can be visualised using the function <span style="color:indianred;">ggpairs</span> of the package <span style="color:indianred;">GGally</span>:</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">ggpairs</span>(iris_vers, <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>,</span>
-<span id="cb10-2"><a href=""></a>                               <span class="st">"Petal.Length"</span>, <span class="st">"Petal.Width"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-6-1.png" style="width:80.0%"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a><span class="co"># this is equivalent to </span></span>
-<span id="cb11-2"><a href=""></a> <span class="co"># ggpairs(iris_vers, columns = 1:4)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<aside class="notes">
-<p>we get the correlation coef and its significance</p>
-<p>more complicated if we want other type of correlation than Pearson</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section id="structure-of-a-linear-regression" class="slide level2">
+<h2>Structure of a linear regression</h2>
+<p>A linear regression is a model of the mathematical relationship between:</p>
+<ul>
+<li class="fragment"><p>A <strong>response variable</strong>, also called <em>dependent variable</em></p></li>
+<li class="fragment"><p>One or several <strong>explanatory variables</strong>, also called <em>predictors</em> or <em>independent variables</em></p></li>
+</ul>
 </section></section>
 <section>
 <section id="simple-linear-regression" class="title-slide slide level1 center">
@@ -609,8 +452,8 @@ sample estimates:
 <p><span style="font-size: 30px">We will work on a modified version of Nouragues tree data from the package BIOMASS (available <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData" data-preview-link="false">here</a>).</span> <span style="font-size: 30px">These data have been modified to exclude the non fully determined trees, and add the family.</span></p>
 <p><span style="font-size: 30px"><em>Heights and diameters of trees in two 1-ha plots from the Nouragues forest (French Guiana)</em></span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_statistics_2.RData"</span>)</span>
-<span id="cb12-2"><a href=""></a>dt_nou</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_statistics_2.RData"</span>)</span>
+<span id="cb2-2"><a href=""></a>dt_nou</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -630,55 +473,30 @@ sample estimates:
 # ℹ 444 more rows</code></pre>
 </div>
 </div>
-<!-- could be plant growth rate as a function of soil humidity:
-https://pmarchand1.github.io/ECL7102/notes_cours/6-Regression_lineaire.html
-
-or maybe the data from the Nouragues
-=> modelling heigth ~ D
-=> then talking about log transfor
-=> selection of the best model
-! voir si je peux aussi m'en servir pour tester avec Category? Famille (à importer avec Biomass) ou plot?
-=> tester puis rajouter interaction entre D et famille?
-=> et effet aléatoire famille?
--->
 </section>
 <section id="relationship-between-d-and-h" class="slide level2">
 <h2>Relationship between D and H</h2>
 <p><span style="font-size: 30px">Let’s explore the relationship between tree diameter and height graphically:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span> </span>
-<span id="cb14-2"><a href=""></a>  <span class="fu">geom_point</span>() </span>
-<span id="cb14-3"><a href=""></a>g <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H)) <span class="sc">+</span> </span>
+<span id="cb4-2"><a href=""></a>  <span class="fu">geom_point</span>() </span>
+<span id="cb4-3"><a href=""></a>g <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:80.0%"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-3-1.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="structure-of-a-linear-regression" class="slide level2">
-<h2>Structure of a linear regression</h2>
-<p>A linear regression is a model of the mathematical relationship between:</p>
-<ul>
-<li class="fragment"><p>A <strong>response variable</strong>, also called <em>dependent variable</em></p></li>
-<li class="fragment"><p>One or several <strong>explanatory variables</strong>, also called <em>predictors</em> or <em>independent variables</em></p></li>
-</ul>
-<p><span class="fragment"><span style="font-size: 30px">In our case, we want to model the relationship between <em>D</em> (the explanatory variable) and <em>H</em> (the response variable).</span></span></p>
+<section id="relationship-between-d-and-h-1" class="slide level2">
+<h2>Relationship between D and H</h2>
+<p><span style="font-size: 30px">We want to model the relationship between <em>D</em> (the explanatory variable) and <em>H</em> (the response variable).</span></p>
 <p><span class="fragment"><span style="font-size: 30px">As our model has only one explanatory variable, it is called <em>simple</em> linear regression.</span></span></p>
-</section>
-<section id="uses-of-regressions" class="slide level2">
-<h2>Uses of regressions</h2>
-<!-- TO DO: start the lesson with this if I move the correlation in the previous lesson?-->
-<ul>
-<li class="fragment"><p>Study the relationship between several variables (without assuming causality)</p></li>
-<li class="fragment"><p>Study the effect of numerical or categorical variables on another variables</p></li>
-<li class="fragment"><p>Use these relationships to predict the values of the modelled variable for new observations.</p></li>
-</ul>
-<p><span class="fragment"><span style="font-size: 30px">In our case, we want to model a tree dimension by another tree dimension. This is an <em>allometric model</em>. Allometric models are often used to predict a variable difficult to measure from a variable more broadly available</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">We want to model a tree dimension by another tree dimension. This is an <em>allometric model</em>. Allometric models are often used to predict a variable difficult to measure from a variable more broadly available</span></span></p>
 </section>
 <section id="theory" class="slide level2">
 <h2>Theory</h2>
@@ -744,8 +562,8 @@ or maybe the data from the Nouragues
 <h2>Fitting a simple linear regression</h2>
 <p><span style="font-size: 30px">We use the function <span style="color:indianred;">lm</span> to fit a linear regression:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>mod_dh_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(H <span class="sc">~</span> D, <span class="co"># formula</span></span>
-<span id="cb15-2"><a href=""></a>               <span class="at">data =</span> dt_nou)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>mod_dh_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(H <span class="sc">~</span> D, <span class="co"># formula</span></span>
+<span id="cb5-2"><a href=""></a>               <span class="at">data =</span> dt_nou)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -763,7 +581,7 @@ or maybe the data from the Nouragues
 <div class="column" style="width:50%;">
 <p><span style="font-size: 30px"><span class="math display">\[y = \alpha + \beta \times x + \epsilon\]</span></span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">summary</span>(mod_dh_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">summary</span>(mod_dh_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -819,7 +637,7 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="column" style="width:50%;">
 <p><span style="font-size: 30px"><span class="math display">\[y = \alpha + \beta \times x + \epsilon\]</span></span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">summary</span>(mod_dh_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a><span class="fu">summary</span>(mod_dh_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -882,11 +700,11 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span class="fragment"><span style="font-size: 30px">To calculate it, we can use the function <span style="color:indianred;">predict</span>, with the argument <em>interval = “confidence”</em>, on new data that we create for the prediction:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a>new <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">D =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">10</span>, <span class="at">to =</span> <span class="dv">160</span>, <span class="at">by=</span> <span class="dv">10</span>)) <span class="co"># create new data</span></span>
-<span id="cb20-2"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new, </span>
-<span id="cb20-3"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"confidence"</span>) <span class="co"># calculate the confidence interval</span></span>
-<span id="cb20-4"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(new, new_conf) <span class="co"># combine the two</span></span>
-<span id="cb20-5"><a href=""></a><span class="fu">slice_head</span>(new_conf, <span class="at">n=</span><span class="dv">3</span>) <span class="co"># visualise to check</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>new <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">D =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">10</span>, <span class="at">to =</span> <span class="dv">160</span>, <span class="at">by=</span> <span class="dv">10</span>)) <span class="co"># create new data</span></span>
+<span id="cb10-2"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new, </span>
+<span id="cb10-3"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"confidence"</span>) <span class="co"># calculate the confidence interval</span></span>
+<span id="cb10-4"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(new, new_conf) <span class="co"># combine the two</span></span>
+<span id="cb10-5"><a href=""></a><span class="fu">slice_head</span>(new_conf, <span class="at">n=</span><span class="dv">3</span>) <span class="co"># visualise to check</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -918,18 +736,18 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Confidence interval</h2>
 <p><span style="font-size: 30px">We can then plot the confidence interval:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>gpred <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(new_conf, <span class="fu">aes</span>(<span class="at">x=</span> D)) <span class="sc">+</span></span>
-<span id="cb22-2"><a href=""></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fit), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> <span class="co"># prediction mean</span></span>
-<span id="cb22-3"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span> <span class="co"># CI</span></span>
-<span id="cb22-4"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="co"># observations</span></span>
-<span id="cb22-5"><a href=""></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb22-6"><a href=""></a>gpred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>gpred <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(new_conf, <span class="fu">aes</span>(<span class="at">x=</span> D)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href=""></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fit), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> <span class="co"># prediction mean</span></span>
+<span id="cb12-3"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span> <span class="co"># CI</span></span>
+<span id="cb12-4"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="co"># observations</span></span>
+<span id="cb12-5"><a href=""></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb12-6"><a href=""></a>gpred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-13-1.png" style="width:70.0%"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -941,10 +759,10 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span class="fragment"><span style="font-size: 30px">To calculate it, we can use the function <span style="color:indianred;">predict</span>, with the argument <em>interval = “prediction”</em>, on new data that we created for the prediction:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>new_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new,</span>
-<span id="cb23-2"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"prediction"</span>) <span class="co"># calculate the prediction interval</span></span>
-<span id="cb23-3"><a href=""></a>new_pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(new, new_pred)</span>
-<span id="cb23-4"><a href=""></a><span class="fu">slice_head</span>(new_pred) <span class="co"># visualise to check</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>new_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new,</span>
+<span id="cb13-2"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"prediction"</span>) <span class="co"># calculate the prediction interval</span></span>
+<span id="cb13-3"><a href=""></a>new_pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(new, new_pred)</span>
+<span id="cb13-4"><a href=""></a><span class="fu">slice_head</span>(new_pred) <span class="co"># visualise to check</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -960,17 +778,17 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Prediction interval</h2>
 <p><span style="font-size: 30px">We can then add the prediction interval to the plot:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a>gpred <span class="ot">&lt;-</span> gpred <span class="sc">+</span></span>
-<span id="cb25-2"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> new_pred, <span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), </span>
-<span id="cb25-3"><a href=""></a>              <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"lightgrey"</span>) <span class="sc">+</span></span>
-<span id="cb25-4"><a href=""></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb25-5"><a href=""></a>gpred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>gpred <span class="ot">&lt;-</span> gpred <span class="sc">+</span></span>
+<span id="cb15-2"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> new_pred, <span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), </span>
+<span id="cb15-3"><a href=""></a>              <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"lightgrey"</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href=""></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb15-5"><a href=""></a>gpred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-15-1.png" style="width:70.0%"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-10-1.png" style="width:70.0%"></p>
 </figure>
 </div>
 </div>
@@ -991,13 +809,13 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">plot</span>(mod_dh_1, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">plot</span>(mod_dh_1, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-16-1.png" width="384"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-11-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1014,13 +832,13 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">plot</span>(mod_dh_1, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a><span class="fu">plot</span>(mod_dh_1, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-17-1.png" width="384"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-12-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1034,13 +852,13 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:40%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="fu">plot</span>(mod_dh_1, <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">plot</span>(mod_dh_1, <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-18-1.png" width="384"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-13-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1067,8 +885,8 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="fitting-the-log-log-model" class="slide level2 smaller">
 <h2>Fitting the log-log model</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a>mod_dh_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(H) <span class="sc">~</span> <span class="fu">log</span>(D), <span class="at">data =</span> dt_nou)</span>
-<span id="cb29-2"><a href=""></a><span class="fu">summary</span>(mod_dh_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>mod_dh_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(H) <span class="sc">~</span> <span class="fu">log</span>(D), <span class="at">data =</span> dt_nou)</span>
+<span id="cb19-2"><a href=""></a><span class="fu">summary</span>(mod_dh_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1099,13 +917,13 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:33%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">plot</span>(mod_dh_2, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">plot</span>(mod_dh_2, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-20-1.png" width="384"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-15-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1114,13 +932,13 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div><div class="column" style="width:33%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">plot</span>(mod_dh_2, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">plot</span>(mod_dh_2, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-21-1.png" width="384"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-16-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1130,13 +948,13 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div><div class="column" style="width:33%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">plot</span>(mod_dh_2, <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">plot</span>(mod_dh_2, <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-22-1.png" width="384"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-17-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1159,8 +977,8 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Presenting the results</h2>
 <p><span style="font-size: 30px">We have seen how to plot the results, but here we need to back-transform them to their original (non-logged) scale. We use the function <span style="color:indianred;">ggpredict</span> from the package <span style="color:indianred;">ggeffects</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="co"># Get predictions back on original scale</span></span>
-<span id="cb34-2"><a href=""></a>preds <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_dh_2, <span class="at">terms =</span> <span class="st">"D"</span>) <span class="co"># default gives the confidence interval</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="co"># Get predictions back on original scale</span></span>
+<span id="cb24-2"><a href=""></a>preds <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_dh_2, <span class="at">terms =</span> <span class="st">"D"</span>) <span class="co"># default gives the confidence interval</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -1168,25 +986,25 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
   original response scale. Standard errors are still on the transformed
   scale.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="co"># plot the results</span></span>
-<span id="cb36-2"><a href=""></a>g_preds_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(preds, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
-<span id="cb36-3"><a href=""></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb36-4"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb36-5"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb36-6"><a href=""></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"D"</span>, <span class="at">y =</span> <span class="st">"H"</span>, <span class="at">title =</span> <span class="st">"Predicted H vs D (log-log model, back-transformed)"</span>) <span class="sc">+</span></span>
-<span id="cb36-7"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="co"># plot the results</span></span>
+<span id="cb26-2"><a href=""></a>g_preds_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(preds, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href=""></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href=""></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"D"</span>, <span class="at">y =</span> <span class="st">"H"</span>, <span class="at">title =</span> <span class="st">"Predicted H vs D (log-log model, back-transformed)"</span>) <span class="sc">+</span></span>
+<span id="cb26-7"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="presenting-the-results-1" class="slide level2">
 <h2>Presenting the results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a>g_preds_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a>g_preds_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1196,8 +1014,8 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Presenting the results</h2>
 <p><span style="font-size: 30px">To add the prediction interval, we set the argument <em>interval</em> to “prediction”:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a><span class="co"># Get predictions back on original scale, with prediction interval</span></span>
-<span id="cb38-2"><a href=""></a>preds_pred <span class="ot">&lt;-</span> ggeffects<span class="sc">::</span><span class="fu">ggpredict</span>(mod_dh_2, <span class="at">terms =</span> <span class="st">"D"</span>, <span class="at">interval =</span> <span class="st">"prediction"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="co"># Get predictions back on original scale, with prediction interval</span></span>
+<span id="cb28-2"><a href=""></a>preds_pred <span class="ot">&lt;-</span> ggeffects<span class="sc">::</span><span class="fu">ggpredict</span>(mod_dh_2, <span class="at">terms =</span> <span class="st">"D"</span>, <span class="at">interval =</span> <span class="st">"prediction"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -1205,23 +1023,23 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
   original response scale. Standard errors are still on the transformed
   scale.</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="co"># plot the results</span></span>
-<span id="cb40-2"><a href=""></a>g_preds_2 <span class="ot">&lt;-</span> g_preds_2 <span class="sc">+</span></span>
-<span id="cb40-3"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> preds_pred,</span>
-<span id="cb40-4"><a href=""></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), </span>
-<span id="cb40-5"><a href=""></a>              <span class="at">fill =</span> <span class="st">"darkgrey"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="co"># plot the results</span></span>
+<span id="cb30-2"><a href=""></a>g_preds_2 <span class="ot">&lt;-</span> g_preds_2 <span class="sc">+</span></span>
+<span id="cb30-3"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> preds_pred,</span>
+<span id="cb30-4"><a href=""></a>              <span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), </span>
+<span id="cb30-5"><a href=""></a>              <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="presenting-the-results-3" class="slide level2">
 <h2>Presenting the results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a>g_preds_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a>g_preds_2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-26-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1231,12 +1049,12 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Data transformation</h2>
 <p>Why transform the data?</p>
 <ul>
-<li class="fragment"><p>linearise a non-linear relationship (<em>eg</em>: quadratic relationship <span class="math inline">\(y = \alpha + \beta \times x^2\)</span>, or log-transformation)</p></li>
-<li class="fragment"><p>improve normality and homoscedasticity of the residuals (<em>eg</em>: square rot of log-transformation…)</p></li>
+<li class="fragment"><p>linearise a non-linear relationship (<em>eg</em>: quadratic relationship <span class="math inline">\(y = \alpha + \beta_1 \times x + \beta_2 \times x^2\)</span>, square root or log-transformation…)</p></li>
+<li class="fragment"><p>improve normality and homoscedasticity of the residuals (<em>eg</em>: square root of log-transformation…)</p></li>
+<li class="fragment"><p>reduce the influence of outliers (<em>eg</em>: log-transformation…)</p></li>
 </ul>
-<!--TO CHECK AND COMPLEMENT -->
 <aside class="notes">
-<p>show on the blackboard the shape of a quadratic and square root</p>
+<p>show on the blackboard the shape of a quadratic and square root (as log)</p>
 <p>always explore the shape of the relationsing with simulated data, to understand what the transfo does</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1257,12 +1075,12 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span class="fragment"><span style="font-size: 30px">Let’s do it on the 3 most abundant families:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a>fam3 <span class="ot">&lt;-</span> dt_nou <span class="sc">%&gt;%</span> <span class="fu">count</span>(family) <span class="sc">%&gt;%</span> <span class="co"># get the 3 most abundant families</span></span>
-<span id="cb42-2"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb42-3"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb42-4"><a href=""></a>  <span class="fu">select</span>(family)</span>
-<span id="cb42-5"><a href=""></a></span>
-<span id="cb42-6"><a href=""></a>dt_nou_sub <span class="ot">&lt;-</span> dt_nou <span class="sc">%&gt;%</span> <span class="fu">filter</span>(family <span class="sc">%in%</span> fam3<span class="sc">$</span>family) <span class="co"># select them</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>fam3 <span class="ot">&lt;-</span> dt_nou <span class="sc">%&gt;%</span> <span class="fu">count</span>(family) <span class="sc">%&gt;%</span> <span class="co"># get the 3 most abundant families</span></span>
+<span id="cb32-2"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href=""></a>  <span class="fu">select</span>(family)</span>
+<span id="cb32-5"><a href=""></a></span>
+<span id="cb32-6"><a href=""></a>dt_nou_sub <span class="ot">&lt;-</span> dt_nou <span class="sc">%&gt;%</span> <span class="fu">filter</span>(family <span class="sc">%in%</span> fam3<span class="sc">$</span>family) <span class="co"># select them</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1275,8 +1093,8 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a>mod_dfam <span class="ot">&lt;-</span> <span class="fu">lm</span>(D <span class="sc">~</span> family, <span class="at">data =</span> dt_nou_sub)</span>
-<span id="cb43-2"><a href=""></a><span class="fu">summary</span>(mod_dfam)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a>mod_dfam <span class="ot">&lt;-</span> <span class="fu">lm</span>(D <span class="sc">~</span> family, <span class="at">data =</span> dt_nou_sub)</span>
+<span id="cb33-2"><a href=""></a><span class="fu">summary</span>(mod_dfam)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1306,7 +1124,7 @@ F-statistic: 12.92 on 2 and 169 DF,  p-value: 6.02e-06</code></pre>
 <p><span class="fragment"><span style="font-size: 30px">⚠️ Don’t forget to check the model assumptions…</span></span></p>
 </div></div>
 <aside class="notes">
-<p>so here the D of mean D of the Chrysobalanaceae is 21</p>
+<p>so here the mean D of the Chrysobalanaceae is 21</p>
 <p>The fabaceae are significantly different with a mean diam of 34</p>
 <p>we won’t check the model assumption here, done as for a quanti variable</p>
 <style type="text/css">
@@ -1325,8 +1143,8 @@ F-statistic: 12.92 on 2 and 169 DF,  p-value: 6.02e-06</code></pre>
 <h2>What if the predictor is categorical?</h2>
 <p><span style="font-size: 30px">The simple linear regression with a categorical explanatory variable is equivalent to the ANOVA:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>aov_dfam <span class="ot">&lt;-</span> <span class="fu">aov</span>(D <span class="sc">~</span> family, <span class="at">data =</span> dt_nou_sub)</span>
-<span id="cb45-2"><a href=""></a><span class="fu">summary</span>(aov_dfam)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>aov_dfam <span class="ot">&lt;-</span> <span class="fu">aov</span>(D <span class="sc">~</span> family, <span class="at">data =</span> dt_nou_sub)</span>
+<span id="cb35-2"><a href=""></a><span class="fu">summary</span>(aov_dfam)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1351,21 +1169,6 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<!--
-# Multiple linear regression - One quanti and one quali
-
-maybe go directly to several quanti... so I can talk about collinearity and selection
-
-follow marchand et Eric 
-
-voir si je parle de emmean ou plutôt de ggstats::ggcoef_model() dans Lamaranche
-
-## Data
-
-je pourrais continuer avec les H/diam mais qu'un seul prédicteur continue...
-
-
--->
 </section></section>
 <section>
 <section id="multiple-linear-regression" class="title-slide slide level1 center">
@@ -1384,7 +1187,7 @@ je pourrais continuer avec les H/diam mais qu'un seul prédicteur continue...
 <div class="columns">
 <div class="column" style="width:40%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a><span class="fu">library</span>(MASS)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -1404,11 +1207,15 @@ Attaching package: 'MASS'</code></pre>
 </div>
 </div><div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="fu">data</span>(hills)</span>
-<span id="cb51-2"><a href=""></a><span class="fu">detach</span>(<span class="st">"package:MASS"</span>, <span class="at">unload =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb51-3"><a href=""></a><span class="fu">summary</span>(hills)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="fu">data</span>(hills)</span>
+<span id="cb41-2"><a href=""></a><span class="fu">detach</span>(<span class="st">"package:MASS"</span>, <span class="at">unload =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: 'MASS' namespace cannot be unloaded:
+  namespace 'MASS' is imported by 'unmarked', 'lindia', 'AICcmodavg' so cannot be unloaded</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">summary</span>(hills)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      dist            climb           time       
  Min.   : 2.000   Min.   : 300   Min.   : 15.95  
@@ -1440,8 +1247,8 @@ Attaching package: 'MASS'</code></pre>
 <h2>Fitting a multiple linear regression</h2>
 <p><span style="font-size: 30px">We fit a multiple linear regression in the same way than a simple one:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a>mod_hills <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist <span class="sc">+</span> climb, hills)</span>
-<span id="cb53-2"><a href=""></a><span class="fu">summary</span>(mod_hills)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>mod_hills <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist <span class="sc">+</span> climb, hills)</span>
+<span id="cb45-2"><a href=""></a><span class="fu">summary</span>(mod_hills)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1471,9 +1278,9 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Standardising explanatory variables</h2>
 <p><span style="font-size: 30px">To compare the effects of the explanatory variables, we can standardise them using the function <span style="color:indianred;">scale</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a>hills <span class="ot">&lt;-</span> hills <span class="sc">%&gt;%</span> </span>
-<span id="cb55-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">dist_sd =</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(dist)), <span class="co"># scale return a matrix so need to transform </span></span>
-<span id="cb55-3"><a href=""></a>         <span class="at">climb_sd =</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(climb)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>hills <span class="ot">&lt;-</span> hills <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">dist_sd =</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(dist)), <span class="co"># scale return a matrix so need to transform </span></span>
+<span id="cb47-3"><a href=""></a>         <span class="at">climb_sd =</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(climb)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1481,10 +1288,10 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span class="fragment"><span style="font-size: 30px">Variables are scaled by subtracting the mean to each values and then dividing it by the standard deviation.</span></span> <span class="fragment"><span style="font-size: 30px"><strong>This brings the variables to the same scale.</strong> They now have a mean of 0 and a standard deviation of 1:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a>hills <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">dist_mean =</span> <span class="fu">mean</span>(dist_sd),</span>
-<span id="cb56-2"><a href=""></a>                    <span class="at">dist_sd =</span> <span class="fu">sd</span>(dist_sd),</span>
-<span id="cb56-3"><a href=""></a>                    <span class="at">climb_mean =</span> <span class="fu">mean</span>(climb_sd),</span>
-<span id="cb56-4"><a href=""></a>                    <span class="at">climb_sd =</span> <span class="fu">sd</span>(climb_sd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a>hills <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">dist_mean =</span> <span class="fu">mean</span>(dist_sd),</span>
+<span id="cb48-2"><a href=""></a>                    <span class="at">dist_sd =</span> <span class="fu">sd</span>(dist_sd),</span>
+<span id="cb48-3"><a href=""></a>                    <span class="at">climb_mean =</span> <span class="fu">mean</span>(climb_sd),</span>
+<span id="cb48-4"><a href=""></a>                    <span class="at">climb_sd =</span> <span class="fu">sd</span>(climb_sd))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1499,8 +1306,8 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a>mod_hills2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd <span class="sc">+</span> climb_sd, hills)</span>
-<span id="cb58-2"><a href=""></a><span class="fu">summary</span>(mod_hills2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a>mod_hills2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd <span class="sc">+</span> climb_sd, hills)</span>
+<span id="cb50-2"><a href=""></a><span class="fu">summary</span>(mod_hills2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1549,13 +1356,13 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:33%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="fu">plot</span>(mod_hills2, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a><span class="fu">plot</span>(mod_hills2, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-36-1.png" width="384"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-31-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1563,13 +1370,13 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div><div class="column" style="width:33%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="fu">plot</span>(mod_hills2, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a><span class="fu">plot</span>(mod_hills2, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-37-1.png" width="384"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-32-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1578,13 +1385,13 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div><div class="column" style="width:33%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="fu">plot</span>(mod_hills2, <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a><span class="fu">plot</span>(mod_hills2, <span class="at">which =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-38-1.png" width="384"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-33-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1598,13 +1405,13 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span style="font-size: 30px">For multiple linear regression, it is important to also check the effect of each explanatory variable individually by plotting the residuals against them.</span> <span class="fragment"><span style="font-size: 30px">We use the function <span style="color:indianred;">gg_resX</span> of the <span style="color:indianred;">lindia</span> package:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a><span class="fu">gg_resX</span>(mod_hills2, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="fu">gg_resX</span>(mod_hills2, <span class="at">ncol =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-39-1.png" width="576"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-34-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1634,7 +1441,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="fragment">
 <p><span style="font-size: 30px">We can look at the correlation between variables:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a><span class="fu">cor</span>(hills<span class="sc">$</span>dist_sd, hills<span class="sc">$</span>climb_sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a><span class="fu">cor</span>(hills<span class="sc">$</span>dist_sd, hills<span class="sc">$</span>climb_sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1645,7 +1452,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="fragment">
 <p><span style="font-size: 30px">We also check that the VIF (<em>variance inflation factor</em>):</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="fu">vif</span>(mod_hills2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="fu">vif</span>(mod_hills2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1679,21 +1486,21 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span style="font-size: 30px">To represent graphically the effect of an explanatory variable, we can set the values of the other explanatory variables to a constant (for example their mean).</span> <span class="fragment"><span style="font-size: 30px">Here we represent the effect of <em>dist_sd</em> setting <em>climb_sd</em> at the mean, -1 sd, + 1 sd:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a><span class="co"># create new values for the prediction</span></span>
-<span id="cb68-2"><a href=""></a>hills_new_dist <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="co"># create a table with all the combinaison of </span></span>
-<span id="cb68-3"><a href=""></a>  <span class="at">dist_sd =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.2</span>), <span class="co"># new values for dist_sd</span></span>
-<span id="cb68-4"><a href=""></a>  <span class="at">climb_sd =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="co"># -1 sd, mean and +1 sd of climb_sd</span></span>
-<span id="cb68-5"><a href=""></a></span>
-<span id="cb68-6"><a href=""></a><span class="co"># predict for new values</span></span>
-<span id="cb68-7"><a href=""></a>hills_pred_dist <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_hills2, <span class="at">newdata =</span> hills_new_dist, <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
-<span id="cb68-8"><a href=""></a>hills_pred_dist <span class="ot">&lt;-</span> <span class="fu">cbind</span>(hills_new_dist, hills_pred_dist)</span>
-<span id="cb68-9"><a href=""></a></span>
-<span id="cb68-10"><a href=""></a><span class="co"># make the plot</span></span>
-<span id="cb68-11"><a href=""></a>p_mod2_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hills_pred_dist, <span class="fu">aes</span>(<span class="at">x =</span> dist_sd, <span class="at">y =</span> fit, </span>
-<span id="cb68-12"><a href=""></a>                            <span class="at">color =</span> <span class="fu">as.factor</span>(climb_sd), </span>
-<span id="cb68-13"><a href=""></a>                            <span class="at">fill =</span> <span class="fu">as.factor</span>(climb_sd))) <span class="sc">+</span></span>
-<span id="cb68-14"><a href=""></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb68-15"><a href=""></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="co"># create new values for the prediction</span></span>
+<span id="cb60-2"><a href=""></a>hills_new_dist <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="co"># create a table with all the combinaison of </span></span>
+<span id="cb60-3"><a href=""></a>  <span class="at">dist_sd =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.2</span>), <span class="co"># new values for dist_sd</span></span>
+<span id="cb60-4"><a href=""></a>  <span class="at">climb_sd =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="co"># -1 sd, mean and +1 sd of climb_sd</span></span>
+<span id="cb60-5"><a href=""></a></span>
+<span id="cb60-6"><a href=""></a><span class="co"># predict for new values</span></span>
+<span id="cb60-7"><a href=""></a>hills_pred_dist <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_hills2, <span class="at">newdata =</span> hills_new_dist, <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
+<span id="cb60-8"><a href=""></a>hills_pred_dist <span class="ot">&lt;-</span> <span class="fu">cbind</span>(hills_new_dist, hills_pred_dist)</span>
+<span id="cb60-9"><a href=""></a></span>
+<span id="cb60-10"><a href=""></a><span class="co"># make the plot</span></span>
+<span id="cb60-11"><a href=""></a>p_mod2_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hills_pred_dist, <span class="fu">aes</span>(<span class="at">x =</span> dist_sd, <span class="at">y =</span> fit, </span>
+<span id="cb60-12"><a href=""></a>                            <span class="at">color =</span> <span class="fu">as.factor</span>(climb_sd), </span>
+<span id="cb60-13"><a href=""></a>                            <span class="at">fill =</span> <span class="fu">as.factor</span>(climb_sd))) <span class="sc">+</span></span>
+<span id="cb60-14"><a href=""></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb60-15"><a href=""></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1717,13 +1524,13 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="presenting-the-results-5" class="slide level2">
 <h2>Presenting the results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a>p_mod2_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a>p_mod2_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-38-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1748,13 +1555,13 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="column" style="width:50%;">
 <p><span style="font-size: 30px">If we have many explanatory variables, we can plot all the coefficients with their confidence interval, using the function <span style="color:indianred;">ggcoef_model</span> of the package <span style="color:indianred;">ggstats</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a><span class="fu">ggcoef_model</span>(mod_hills2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="fu">ggcoef_model</span>(mod_hills2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-39-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1763,28 +1570,28 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="fragment">
 <p><span style="font-size: 30px">or present a table of the coefficients, using <span style="color:indianred;">tbl_regression</span> from the package <span style="color:indianred;">gtsummary</span></span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href=""></a><span class="fu">tbl_regression</span>(mod_hills2, </span>
-<span id="cb71-2"><a href=""></a>               <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a><span class="fu">tbl_regression</span>(mod_hills2, </span>
+<span id="cb63-2"><a href=""></a>               <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
-<div id="mvrpuqhvrh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#mvrpuqhvrh table {
+<div id="vtdakgmmax" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vtdakgmmax table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mvrpuqhvrh thead, #mvrpuqhvrh tbody, #mvrpuqhvrh tfoot, #mvrpuqhvrh tr, #mvrpuqhvrh td, #mvrpuqhvrh th {
+#vtdakgmmax thead, #vtdakgmmax tbody, #vtdakgmmax tfoot, #vtdakgmmax tr, #vtdakgmmax td, #vtdakgmmax th {
   border-style: none;
 }
 
-#mvrpuqhvrh p {
+#vtdakgmmax p {
   margin: 0;
   padding: 0;
 }
 
-#mvrpuqhvrh .gt_table {
+#vtdakgmmax .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1810,12 +1617,12 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#mvrpuqhvrh .gt_caption {
+#vtdakgmmax .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mvrpuqhvrh .gt_title {
+#vtdakgmmax .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1827,7 +1634,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#mvrpuqhvrh .gt_subtitle {
+#vtdakgmmax .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1839,7 +1646,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#mvrpuqhvrh .gt_heading {
+#vtdakgmmax .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1851,13 +1658,13 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#mvrpuqhvrh .gt_bottom_border {
+#vtdakgmmax .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mvrpuqhvrh .gt_col_headings {
+#vtdakgmmax .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1872,7 +1679,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#mvrpuqhvrh .gt_col_heading {
+#vtdakgmmax .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1892,7 +1699,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#mvrpuqhvrh .gt_column_spanner_outer {
+#vtdakgmmax .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1904,15 +1711,15 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#mvrpuqhvrh .gt_column_spanner_outer:first-child {
+#vtdakgmmax .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mvrpuqhvrh .gt_column_spanner_outer:last-child {
+#vtdakgmmax .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mvrpuqhvrh .gt_column_spanner {
+#vtdakgmmax .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1924,11 +1731,11 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#mvrpuqhvrh .gt_spanner_row {
+#vtdakgmmax .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mvrpuqhvrh .gt_group_heading {
+#vtdakgmmax .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1954,7 +1761,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#mvrpuqhvrh .gt_empty_group_heading {
+#vtdakgmmax .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1969,15 +1776,15 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#mvrpuqhvrh .gt_from_md > :first-child {
+#vtdakgmmax .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mvrpuqhvrh .gt_from_md > :last-child {
+#vtdakgmmax .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mvrpuqhvrh .gt_row {
+#vtdakgmmax .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1996,7 +1803,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#mvrpuqhvrh .gt_stub {
+#vtdakgmmax .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2009,7 +1816,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#mvrpuqhvrh .gt_stub_row_group {
+#vtdakgmmax .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2023,15 +1830,15 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#mvrpuqhvrh .gt_row_group_first td {
+#vtdakgmmax .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mvrpuqhvrh .gt_row_group_first th {
+#vtdakgmmax .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mvrpuqhvrh .gt_summary_row {
+#vtdakgmmax .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2041,16 +1848,16 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#mvrpuqhvrh .gt_first_summary_row {
+#vtdakgmmax .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mvrpuqhvrh .gt_first_summary_row.thick {
+#vtdakgmmax .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mvrpuqhvrh .gt_last_summary_row {
+#vtdakgmmax .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2060,7 +1867,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#mvrpuqhvrh .gt_grand_summary_row {
+#vtdakgmmax .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2070,7 +1877,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#mvrpuqhvrh .gt_first_grand_summary_row {
+#vtdakgmmax .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2080,7 +1887,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#mvrpuqhvrh .gt_last_grand_summary_row_top {
+#vtdakgmmax .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2090,11 +1897,11 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#mvrpuqhvrh .gt_striped {
+#vtdakgmmax .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mvrpuqhvrh .gt_table_body {
+#vtdakgmmax .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2103,7 +1910,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#mvrpuqhvrh .gt_footnotes {
+#vtdakgmmax .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2117,7 +1924,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#mvrpuqhvrh .gt_footnote {
+#vtdakgmmax .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2126,7 +1933,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#mvrpuqhvrh .gt_sourcenotes {
+#vtdakgmmax .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2140,7 +1947,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#mvrpuqhvrh .gt_sourcenote {
+#vtdakgmmax .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2148,72 +1955,72 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#mvrpuqhvrh .gt_left {
+#vtdakgmmax .gt_left {
   text-align: left;
 }
 
-#mvrpuqhvrh .gt_center {
+#vtdakgmmax .gt_center {
   text-align: center;
 }
 
-#mvrpuqhvrh .gt_right {
+#vtdakgmmax .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mvrpuqhvrh .gt_font_normal {
+#vtdakgmmax .gt_font_normal {
   font-weight: normal;
 }
 
-#mvrpuqhvrh .gt_font_bold {
+#vtdakgmmax .gt_font_bold {
   font-weight: bold;
 }
 
-#mvrpuqhvrh .gt_font_italic {
+#vtdakgmmax .gt_font_italic {
   font-style: italic;
 }
 
-#mvrpuqhvrh .gt_super {
+#vtdakgmmax .gt_super {
   font-size: 65%;
 }
 
-#mvrpuqhvrh .gt_footnote_marks {
+#vtdakgmmax .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mvrpuqhvrh .gt_asterisk {
+#vtdakgmmax .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mvrpuqhvrh .gt_indent_1 {
+#vtdakgmmax .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mvrpuqhvrh .gt_indent_2 {
+#vtdakgmmax .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mvrpuqhvrh .gt_indent_3 {
+#vtdakgmmax .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mvrpuqhvrh .gt_indent_4 {
+#vtdakgmmax .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mvrpuqhvrh .gt_indent_5 {
+#vtdakgmmax .gt_indent_5 {
   text-indent: 25px;
 }
 
-#mvrpuqhvrh .katex-display {
+#vtdakgmmax .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#mvrpuqhvrh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vtdakgmmax div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2292,8 +2099,8 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Interaction</h2>
 <p><span style="font-size: 30px">To specify an interaction, we use <span style="color:indianred;">*</span> in the formula:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a>mod_hills_inter <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd <span class="sc">*</span> climb_sd, hills)</span>
-<span id="cb72-2"><a href=""></a><span class="fu">summary</span>(mod_hills_inter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a>mod_hills_inter <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd <span class="sc">*</span> climb_sd, hills)</span>
+<span id="cb64-2"><a href=""></a><span class="fu">summary</span>(mod_hills_inter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2324,23 +2131,23 @@ F-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Visualisation of a model with interaction</h2>
 <p><span style="font-size: 30px">We can make a graph of the predictions as we did for the model without interaction:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a><span class="co"># create new values for the prediction</span></span>
-<span id="cb74-2"><a href=""></a>hills_inter_new_dist <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="co"># create a table with all the combinaison of </span></span>
-<span id="cb74-3"><a href=""></a>  <span class="at">dist_sd =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.2</span>), <span class="co"># new values for dist_sd</span></span>
-<span id="cb74-4"><a href=""></a>  <span class="at">climb_sd =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="co"># -1 sd, mean and +1 sd of climb_sd</span></span>
-<span id="cb74-5"><a href=""></a></span>
-<span id="cb74-6"><a href=""></a><span class="co"># predict for new values</span></span>
-<span id="cb74-7"><a href=""></a>hills_inter_pred_dist <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_hills_inter, </span>
-<span id="cb74-8"><a href=""></a>                                 <span class="at">newdata =</span> hills_inter_new_dist, </span>
-<span id="cb74-9"><a href=""></a>                                 <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
-<span id="cb74-10"><a href=""></a>hills_inter_new_dist <span class="ot">&lt;-</span> <span class="fu">cbind</span>(hills_inter_new_dist, hills_inter_pred_dist)</span>
-<span id="cb74-11"><a href=""></a></span>
-<span id="cb74-12"><a href=""></a><span class="co"># make the plot</span></span>
-<span id="cb74-13"><a href=""></a>p_mod_inter_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hills_inter_new_dist, <span class="fu">aes</span>(<span class="at">x =</span> dist_sd, <span class="at">y =</span> fit, </span>
-<span id="cb74-14"><a href=""></a>                            <span class="at">color =</span> <span class="fu">as.factor</span>(climb_sd), </span>
-<span id="cb74-15"><a href=""></a>                            <span class="at">fill =</span> <span class="fu">as.factor</span>(climb_sd))) <span class="sc">+</span></span>
-<span id="cb74-16"><a href=""></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb74-17"><a href=""></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="co"># create new values for the prediction</span></span>
+<span id="cb66-2"><a href=""></a>hills_inter_new_dist <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="co"># create a table with all the combinaison of </span></span>
+<span id="cb66-3"><a href=""></a>  <span class="at">dist_sd =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.2</span>), <span class="co"># new values for dist_sd</span></span>
+<span id="cb66-4"><a href=""></a>  <span class="at">climb_sd =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="co"># -1 sd, mean and +1 sd of climb_sd</span></span>
+<span id="cb66-5"><a href=""></a></span>
+<span id="cb66-6"><a href=""></a><span class="co"># predict for new values</span></span>
+<span id="cb66-7"><a href=""></a>hills_inter_pred_dist <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_hills_inter, </span>
+<span id="cb66-8"><a href=""></a>                                 <span class="at">newdata =</span> hills_inter_new_dist, </span>
+<span id="cb66-9"><a href=""></a>                                 <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
+<span id="cb66-10"><a href=""></a>hills_inter_new_dist <span class="ot">&lt;-</span> <span class="fu">cbind</span>(hills_inter_new_dist, hills_inter_pred_dist)</span>
+<span id="cb66-11"><a href=""></a></span>
+<span id="cb66-12"><a href=""></a><span class="co"># make the plot</span></span>
+<span id="cb66-13"><a href=""></a>p_mod_inter_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hills_inter_new_dist, <span class="fu">aes</span>(<span class="at">x =</span> dist_sd, <span class="at">y =</span> fit, </span>
+<span id="cb66-14"><a href=""></a>                            <span class="at">color =</span> <span class="fu">as.factor</span>(climb_sd), </span>
+<span id="cb66-15"><a href=""></a>                            <span class="at">fill =</span> <span class="fu">as.factor</span>(climb_sd))) <span class="sc">+</span></span>
+<span id="cb66-16"><a href=""></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb66-17"><a href=""></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -2349,13 +2156,13 @@ F-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="visualisation-of-a-model-with-interaction-1" class="slide level2">
 <h2>Visualisation of a model with interaction</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a>p_mod_inter_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href=""></a>p_mod_inter_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-48-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -2387,22 +2194,22 @@ F-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="model-comparison-1" class="slide level2">
+<section id="model-comparison-1" class="slide level2 smaller">
 <h2>Model comparison</h2>
 <p><span style="font-size: 30px">Let’s compare our models with and without interactions, and models with only one explanatory variable. We use the function <span style="color:indianred;">aictab</span> of the package <span style="color:indianred;">AICcmodavg</span>:</span></p>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a><span class="co"># fit two additional simple linear models</span></span>
-<span id="cb76-2"><a href=""></a>mod_hills_dist <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd, <span class="at">data =</span> hills) </span>
-<span id="cb76-3"><a href=""></a>mod_hills_climb <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> climb_sd, <span class="at">data =</span> hills)</span>
-<span id="cb76-4"><a href=""></a><span class="co"># make a list with all the models</span></span>
-<span id="cb76-5"><a href=""></a>list_mod <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">hills_dist =</span> mod_hills_dist, </span>
-<span id="cb76-6"><a href=""></a>                 <span class="at">hills_climb =</span> mod_hills_climb, </span>
-<span id="cb76-7"><a href=""></a>                 <span class="at">hills2 =</span> mod_hills2, </span>
-<span id="cb76-8"><a href=""></a>                 <span class="at">hills_inter =</span> mod_hills_inter)</span>
-<span id="cb76-9"><a href=""></a><span class="co"># compare the AIC</span></span>
-<span id="cb76-10"><a href=""></a><span class="fu">aictab</span>(list_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a><span class="co"># fit two additional simple linear models</span></span>
+<span id="cb68-2"><a href=""></a>mod_hills_dist <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd, <span class="at">data =</span> hills) </span>
+<span id="cb68-3"><a href=""></a>mod_hills_climb <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> climb_sd, <span class="at">data =</span> hills)</span>
+<span id="cb68-4"><a href=""></a><span class="co"># make a list with all the models</span></span>
+<span id="cb68-5"><a href=""></a>list_mod <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">hills_dist =</span> mod_hills_dist, </span>
+<span id="cb68-6"><a href=""></a>                 <span class="at">hills_climb =</span> mod_hills_climb, </span>
+<span id="cb68-7"><a href=""></a>                 <span class="at">hills2 =</span> mod_hills2, </span>
+<span id="cb68-8"><a href=""></a>                 <span class="at">hills_inter =</span> mod_hills_inter)</span>
+<span id="cb68-9"><a href=""></a><span class="co"># compare the AIC</span></span>
+<span id="cb68-10"><a href=""></a><span class="fu">aictab</span>(list_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2434,8 +2241,6 @@ hills_climb 3 342.40      56.11   0.00   1.00 -167.81</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<!-- fin de la partie sur les modèles linéaire multiples brouillon ci-dessous-->
-<!-- think about moving the part on correlation if I decide to move it-->
 </section></section>
 <section>
 <section id="to-go-further" class="title-slide slide level1 center">
@@ -2463,8 +2268,7 @@ hills_climb 3 342.40      56.11   0.00   1.00 -167.81</code></pre>
 <p><span class="math display">\[\alpha_j \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})\]</span></p>
 <p><span style="font-size: 22px"><em>NB: here we represent the effect of the group only on the intercept, but we can include this effect on the other coefficients as well.</em></span></p>
 </div>
-<p><span class="fragment"><span style="font-size: 30px">💡 See here for a detailed explanation of linear mixed model.</span></span></p>
-<!-- TO DO add a link here -->
+<p><span class="fragment"><span style="font-size: 30px">💡 See <a href="https://meghan.rbind.io/blog/2022-06-28-a-beginners-guide-to-mixed-effects-models/" data-preview-link="false">here</a> for a detailed explanation of linear mixed model.</span></span></p>
 </section>
 <section id="what-if-the-data-are-not-normally-distributed" class="slide level2">
 <h2>What if the data are not normally distributed?</h2>

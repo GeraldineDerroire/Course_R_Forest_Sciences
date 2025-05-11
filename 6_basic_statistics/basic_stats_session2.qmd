@@ -1,5 +1,5 @@
 ---
-title: "Statistics with R - session 2"
+title: "Statistics with R - session 2 - Linear regressions"
 author: Géraldine Derroire
 institute: Cirad - UnB
 date: last-modified
@@ -32,10 +32,29 @@ Let's load the packages that we will use today
 library(tidyverse)
 library(ggeffects)
 library(gtsummary)
+library(ggstats)
 library(lindia)
 library(car)
 library(AICcmodavg)
 ```
+
+
+## Uses of regressions
+
+* Study the relationship between several variables (without assuming causality)
+
+* Study the effect of numerical or categorical variables on another variables 
+
+* Use these relationships to predict the values of the modelled variable for new observations.
+
+
+## Structure of a linear regression
+
+A linear regression is a model of the mathematical relationship between:
+
+* A **response variable**, also called *dependent variable*
+
+* One or several **explanatory variables**, also called *predictors* or *independent variables*
 
 
 
@@ -55,18 +74,6 @@ dt_nou
 ```
 
 
-<!-- could be plant growth rate as a function of soil humidity:
-https://pmarchand1.github.io/ECL7102/notes_cours/6-Regression_lineaire.html
-
-or maybe the data from the Nouragues
-=> modelling heigth ~ D
-=> then talking about log transfor
-=> selection of the best model
-! voir si je peux aussi m'en servir pour tester avec Category? Famille (à importer avec Biomass) ou plot?
-=> tester puis rajouter interaction entre D et famille?
-=> et effet aléatoire famille?
---> 
-
 ## Relationship between D and H
 
 [Let's explore the relationship between tree diameter and height graphically:]{style="font-size: 30px"}
@@ -80,31 +87,14 @@ g + geom_smooth(method = "lm", se = FALSE)
 ```
 
 
-## Structure of a linear regression
+## Relationship between D and H
 
-A linear regression is a model of the mathematical relationship between:
-
-* A **response variable**, also called *dependent variable*
-
-* One or several **explanatory variables**, also called *predictors* or *independent variables*
-
-[[In our case, we want to model the relationship between *D* (the explanatory variable) and *H* (the response variable).]{style="font-size: 30px"}]{.fragment}
+[We want to model the relationship between *D* (the explanatory variable) and *H* (the response variable).]{style="font-size: 30px"}
 
 [[As our model has only one explanatory variable, it is called *simple* linear regression.]{style="font-size: 30px"}]{.fragment}
 
 
-
-## Uses of regressions
-
-<!-- TO DO: start the lesson with this if I move the correlation in the previous lesson?-->
-
-* Study the relationship between several variables (without assuming causality)
-
-* Study the effect of numerical or categorical variables on another variables 
-
-* Use these relationships to predict the values of the modelled variable for new observations.
-
-[[In our case, we want to model a tree dimension by another tree dimension. This is an *allometric model*. Allometric models are often used to predict a variable difficult to measure from a variable more broadly available]{style="font-size: 30px"}]{.fragment}
+[[We want to model a tree dimension by another tree dimension. This is an *allometric model*. Allometric models are often used to predict a variable difficult to measure from a variable more broadly available]{style="font-size: 30px"}]{.fragment}
 
 
 ## Theory 
@@ -535,7 +525,7 @@ preds_pred <- ggeffects::ggpredict(mod_dh_2, terms = "D", interval = "prediction
 g_preds_2 <- g_preds_2 +
   geom_ribbon(data = preds_pred,
               aes(ymin = conf.low, ymax = conf.high), 
-              fill = "darkgrey", alpha = 0.2)
+              fill = "lightblue", alpha = 0.4)
 ```
 
 ## Presenting the results
@@ -545,20 +535,19 @@ g_preds_2 <- g_preds_2 +
 g_preds_2
 ```
 
-
 ## Data transformation
 
 Why transform the data?
 
-* linearise a non-linear relationship (*eg*: quadratic relationship $y = \alpha + \beta \times x^2$, or log-transformation)
+* linearise a non-linear relationship (*eg*: quadratic relationship $y = \alpha + \beta_1 \times x + \beta_2 \times x^2$, square root or log-transformation...)
 
-* improve normality and homoscedasticity of the residuals (*eg*: square rot of log-transformation...)
+* improve normality and homoscedasticity of the residuals (*eg*: square root of log-transformation...)
 
-<!--TO CHECK AND COMPLEMENT -->
+* reduce the influence of outliers (*eg*: log-transformation...)
 
 
 ::: notes
-show on the blackboard the shape of a quadratic and square root
+show on the blackboard the shape of a quadratic and square root (as log) 
 
 always explore the shape of the relationsing with simulated data, to understand what the transfo does
 :::
@@ -607,7 +596,7 @@ summary(mod_dfam)
 :::::
 
 ::: notes
-so here the D of mean D of the Chrysobalanaceae is 21
+so here the mean D of the Chrysobalanaceae is 21
 
 The fabaceae are significantly different with a mean diam of 34
 
@@ -631,22 +620,6 @@ summary(aov_dfam)
 see the value of the f-statistics and the overal p-value
 ::: 
 
-
-<!--
-# Multiple linear regression - One quanti and one quali
-
-maybe go directly to several quanti... so I can talk about collinearity and selection
-
-follow marchand et Eric 
-
-voir si je parle de emmean ou plutôt de ggstats::ggcoef_model() dans Lamaranche
-
-## Data
-
-je pourrais continuer avec les H/diam mais qu'un seul prédicteur continue...
-
-
--->
 
 # Multiple linear regression 
 
@@ -1012,7 +985,7 @@ the value of AIC has no meaning, it needs to be used to compare models
 :::
 
 
-## Model comparison 
+## Model comparison {.smaller}
 
 [Let's compare our models with and without interactions, and models with only one explanatory variable. 
 We use the function [aictab]{style="color:indianred;"} of the package [AICcmodavg]{style="color:indianred;"}:]{style="font-size: 30px"}
@@ -1048,10 +1021,6 @@ the LL is the log-likelihood
 :::
 
 
-<!-- fin de la partie sur les modèles linéaire multiples brouillon ci-dessous-->
-
-<!-- think about moving the part on correlation if I decide to move it-->
-
 
 # To go further
 
@@ -1086,9 +1055,8 @@ $$\alpha_j \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})$$
 
 :::
 
-[[💡 See here for a detailed explanation of linear mixed model.]{style="font-size: 30px"}]{.fragment}
+[[💡 See [here](https://meghan.rbind.io/blog/2022-06-28-a-beginners-guide-to-mixed-effects-models/){preview-link="false"} for a detailed explanation of linear mixed model.]{style="font-size: 30px"}]{.fragment}
 
-<!-- TO DO add a link here -->
 
 
 ## What if the data are not normally distributed?
@@ -1141,7 +1109,7 @@ Some data are by nature not normally distributed, so we cannot model them with a
 
 
 
-# Acknowledgments {.smaller}
+# Acknowledgments
 
 ::: {.nonincremental}
 

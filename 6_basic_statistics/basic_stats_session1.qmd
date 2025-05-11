@@ -33,6 +33,7 @@ library(tidyverse)
 library(questionr)
 library(BIOMASS)
 library(GGally)
+library(multcompView)
 ```
 
 ::: notes
@@ -291,7 +292,7 @@ if we see that they both follow a normal distribution, but the match is better w
 :::
 
 
-# Testing the association between two categorical variables
+# Testing the association between two categorical variables: the $\chi^2$ test
 
 ## Let's work with the the Nouragues tree data
 
@@ -465,7 +466,7 @@ mosaicplot(tab_abd,
 ```
 
 
-# Testing if two groups differ considering a quantitative variable
+# Testing if two groups differ considering a quantitative variable: the t-test
 
 ## Let's work with the Nouragues tree data
 
@@ -551,7 +552,7 @@ qqline(d_Prot$H)
 :::
 :::::
 
-[The points fall reasonably on the diagonal line, we can consider the data as normally distributed.]{style="font-size: 25px"}]{.fragment}
+[[The points fall reasonably on the diagonal line, we can consider the data as normally distributed.]{style="font-size: 25px"}]{.fragment}
 
 
 ## t-test {.smaller}
@@ -651,7 +652,7 @@ wilcox.test(dt_sub$H ~dt_sub$genus)
 
 [[The result is significant, so we can reject the null hypothesis, and conclude that the two genus differ in diameter.]{style="font-size: 30px"}]{.fragment}
 
-[💡 A non-parametric test is a test that does not make any assumption regarding the distribution of the observations.]
+[💡 A non-parametric test is a test that does not make any assumption regarding the distribution of the observations.]{style="font-size: 25px"}
 
 
 ::: notes
@@ -802,7 +803,7 @@ the attr 0.95 is the confidence level (95% by default, but this can be changed
 
 
 
-# Testing difference between more than two groups
+# Testing difference between more than two groups: the ANOVA
 
 
 ## Analysis of variance: ANOVA
@@ -944,7 +945,6 @@ We get the comparison of all pairs
 [We use the function [multcompLetters4]{style="color:indianred;"} from the package [multcompView]{style="color:indianred;"} to get the letters indicating identical groups:]{style="font-size: 30px"}
 
 ```{r}
-library(multcompView)
 H_letters <- multcompLetters4(H_aov, H_tukey)
 H_letters
 ```
@@ -1021,7 +1021,7 @@ graph_H
 
 So far, we saw how to test for differences between variables.
 
-Now and iin the next session we are going to look at **relationships between variables**.
+Now and in the next session we are going to look at **relationships between variables**.
 
 
 # Covariance and correlation
@@ -1067,6 +1067,7 @@ cov(iris_vers$Petal.Length, iris_vers$Petal.Width)
 * [a coefficient = -1 (respectively 1) means that the variables are perfectly negatively (respectively positively) correlated]{style="font-size: 30px"}
 
 * [a coefficient = 0 shows an absence of correlation]{style="font-size: 30px"}
+
 :::
 
 ::: {.column width="50%"}
