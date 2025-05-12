@@ -23,6 +23,188 @@ editor:
     wrap: sentence
 ---
 
+# Intro on multivariate analysis
+
+more than one variable at a time or multivariate response (sp composition)
+
+=> distribution conjointe de serveral variables
+
+in those 
+
+ * clustering
+
+* ordination methods aiming at arraning in a low-dimensional space => reduction de la dimensionalité assuming that we can find a small number of axes of covariation
+
+(axes of covariation, spectrum...) + community ecology
+
+structure des données => observations of variables
+
+eg: site (obs) et var enviro (variable)
+
+site (obs) et composition floristique (sp = variable)
+
+species (obs) and functional traits (variable)
+
+<!-- TO DO -->
+
+
+## Package *vegan*
+
+There are many packages to do multivariate analyses: [stats]{style="color:indianred;"} (base package), [ade4]{style="color:indianred;"}, [FactoMine]{style="color:indianred;"}, [vegan]{style="color:indianred;"}.
+
+We will mostly work with [vegan]{style="color:indianred;"}, let's load it:
+
+```{r}
+library(vegan)
+```
+
+
+## Let's work with data on lichen
+
+* EXPLAIN
+
+```{r}
+data(varespec)
+head(varespec)
+```
+
+* Soil data on the 24 plots 
+
+```{r}
+data(varechem)
+head(varechem)
+```
+
+
+::: notes 
+we have already worked with these data (in the class on working with data)
+:::
+
+# Unconstrained ordination methods
+
+<!-- ressource
+
+https://gavinsimpson.github.io/physalia-multivariate/03-wednesday/slides.html#1
+
+https://r.qcbs.ca/workshop09/book-en/setting-up-our-goals.html
+
+Marchand + Eric --> 
+
+explain what is unconstrained
+
+how are the different samples similar / different
+
+<!-- three following points from Gavin => to rephrase -->
+* Principal Components Analysis (PCA) is a linear method — most useful for environmental data or sometimes with species data and short gradients
+
+* Correspondence Analysis (CA) is a unimodal method — most useful for species data, especially where non-linear responses are observed
+
+* Principal Coordinates Analysis (PCO) and Non-metric Multidimensional Scaling (NMDS) — can be used for any kind of data
+
+
+<!-- voir aussi Marchand session 2 sur l'explication des différentes distances--> 
+
+## PCA
+
+euclidian distance (strait line) cf schéma Eric => distance between samples increases linearly along the gradient => find axes to summarise variation
+
+cloud of point in n-dimension
+
+1rst axis capture the max of variabilité, then a second orthogonal one capturing the maximyl of residual variability, than a 3rd one, than...
+
+equivalent of looking at several correlation at a time, and that it assumes linear distance
+
+## PCA
+
+penser à centrer réduire les variables (cf Marchand)
+
+## PCA
+
+faire la PCA
+
+## PCA
+
+hist des variances expliquées => combien d'axes choisir?
+
+## PCA
+
+biplot
+
+## CA
+
+chi2 distance, unimodal => good for sp presence/abs or abundance if we assume a unimodal (optimum response) to an enviro gradient
+
+look at relative abundance (so double 0 are affecting the distance )
+
+give more weight to rare species than other methods (euclidian or Bray curtis) 
+
+when strong enviro gradient and rare sp are important
+
+## PCoA
+
+any distance: no assumption of euclidian or chi2 distance we can choose among many distances (including euclidian, going back to a PCA)
+
+often used with Bray-curtis distance for species abundance data (or Jaccard for presence/absence)
+
+Bray curtis from 0 (identical species composition) to 1 (no shared species)
+
+focus on shared abundances => more shared, more similar (so ignore double 0 which are not informative)
+
+sensitive to abundant species ()
+
+## NMDS
+
+non-metric => ignore the actual distance, focus on the rank (which are closer/farther), so often the more appropriate for species data
+
+very felxible and robust for non-linear, many 0...
+
+<!-- for each 1 slide theo: how does it work, what is it used for, than practice -->
+
+
+# Clusturing
+
+<!-- TO DO et voir ou je le met après les méthodes pas contraintes pour faire des groupes (et éventuellement les mettres sur le plot des PCA (non car je vais faire la PCA sur les données enviro-->
+
+
+# Constrained ordination methods
+
+<!-- ressource
+
+https://r.qcbs.ca/workshop10/book-en/multivariate-regression-tree.html
+
+https://gavinsimpson.github.io/physalia-multivariate/03-wednesday/slides.html#1
+
+Marchand + Eric --> 
+
+explain difference between samples using external variables
+
+=> eg: enviro to explain sp composition
+
+<!--
+
+Explained what is constrained
+
+RDA: constrained equivalent of PCA => needs Hellinguer transfo (say that we could also do a hellinguer transfo for a PCA on species data, but not shown)
+
+CCA: constrained equivalent to CCA
+
+equivalent of PCoA and NMDS???
+
+Permanova??? Permanova is not an ordination methods
+
+-->
+
+
+## Resources
+
+to go further the ggvegan package (not on cran) to make ggplot style graph from ordination results
+
+
+
+<!-- brouillon -->
+
+##
+
 analyses multivariées
 
 https://ericmarcon.github.io/Cours-R-Geeft/Ordination.html#43
