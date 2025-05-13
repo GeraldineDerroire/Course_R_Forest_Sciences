@@ -99,7 +99,7 @@ sp_big5 <- big5 %>%
 ```{r}
 dt_med_diam <- dt_WG %>% 
   group_by(plotId) %>% # group by plotId
-  summarize(median_d = median(diam)) # takje the median by plotId
+  summarize(median_d = median(diam)) # take the median by plotId
 dt_med_diam
 ```
 

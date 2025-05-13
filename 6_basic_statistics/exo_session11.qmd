@@ -1,5 +1,5 @@
 ---
-title: "Exercices on session *Statistics with R session 3*"
+title: "Exercices on session *Statistics with R session 3/3*"
 format:
   pdf
 execute:

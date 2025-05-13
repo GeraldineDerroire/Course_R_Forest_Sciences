@@ -77,6 +77,10 @@ library(tidyverse)
 ```
 :::
 
+::: notes
+NO NEED for the data to be in a tibble (but they need to be in a tidy format (long format))
+:::
+
 
 ## Let's work with tree data from the Nouragues forest
 
@@ -101,7 +105,7 @@ rm(NouraguesHD) # remove
 ::: notes
 Nouragues in FG
 
-Ignore the message (not useful for us)
+Ignore the message (no message) (not useful for us)
 :::
 
 ## Let's work with tree data from the Nouragues forest 
@@ -206,7 +210,7 @@ We see a positive, monotone and non-linear relationship.
 
 We have a warning message, as there are 163 missing NA in H.
 
-From now on, I will silent the message.
+From now on, I will silent the message (but you will get it)
 :::
 
 ## A more concise synthax
@@ -336,6 +340,12 @@ ggplot(dt_HD,
 :::
 :::::
 
+::: notes
+here the color depends on the plot (categorical) but it could depend on D (continuous)
+
+when the color is constant, no added info, only to make the plot nicer
+:::
+
 
 ## Adding layers
 
@@ -417,6 +427,10 @@ ggplot(dt_HD,
 ```
 :::
 
+::: notes
+Here roughly the same number of indiv in the two plots
+:::
+
 
 ## Distribution of a numerical variable - histogram
 
@@ -478,6 +492,8 @@ dt_HD %>%
 [[💡Here we used a pipe to transform the data and feed them to ggplot.]{style="font-size: 28px"}]{.fragment}
 
 ::: notes
+see how we integrated the ggplot command into a pipe (talk about difference between %>% and +)
+
 What do we see? The Inga seems smaller than the two other genus (pioneer genus).
 :::
 
@@ -519,6 +535,10 @@ dt_HD %>%
 :::
 :::::
 
+::: notes
+Here again we see that the inga are smaller
+:::
+
 ## Relationship between two categorical variables - stacked barplots
 
 [We can see the relationship between two categorical variables using a stacked barplot.]{style="font-size: 28px"}
@@ -541,6 +561,10 @@ dt_HD %>%
 ```
 :::
 :::::
+
+::: notes
+Here Dicorinya only in plot 1, Eperua in plot 2 and Inga in both
+:::
 
 ## Relationship between two categorical variables - stacked barplots
 
@@ -604,6 +628,12 @@ dt_HD %>%
 :::
 :::::
 
+::: notes
+Let's do it for 5 species
+
+NB: for geom_tile, we need to count them before
+:::
+
 ## Relationship between two numerical variables {.scrollable}
 
 [We already saw how to make scatterplots and add trend lines using [geom_point]{style="color:indianred;"} and [geom_smooth]{style="color:indianred;"}:]{style="font-size: 28px"}
@@ -618,6 +648,9 @@ ggplot(dt_HD,
   geom_smooth(method = "loess", color = "blue") # adds a loess trend line
 ```
 
+::: notes
+Here we put 2 trend lines 
+:::
 
 ## Relationship between two numerical variables
 
@@ -710,7 +743,7 @@ But to communicate with others, we want to make plots explicit and pretty
 
 ## {.smaller}
 
-[Let's go back to a plot we already made, save it, and start to improve the visual appearance:]{style="font-size: 28px"}
+[Let's go back to a plot we already made, put it in an object, and start to improve the visual appearance:]{style="font-size: 28px"}
 
 
 ```{r}
@@ -721,9 +754,15 @@ dt_sub <- dt_HD %>%
 
 plot1 <-  ggplot(dt_sub, aes(x = D, y = H, color = genus)) +
   geom_point() +
-  geom_smooth(method = "loess", se = FALSE)
+  geom_smooth(method = "loess", se = FALSE) # se = FALSE to not display the confidence interval
 plot1
 ```
+
+::: notes
+first we filter the data, then make the plot
+
+this is a basic plot, we are going to tweek it little by little to make it pretty
+:::
 
 
 ## Labels {.smaller}
@@ -752,7 +791,9 @@ plot1
 :::::
 
 ::: notes
-note how we add things on the plot by adding + to an existing plotic
+note how we add things on the plot by adding + to an existing plot
+
+of course we don't necessarly need to have a title, a subtitle and a caption
 :::
 
 <!--
@@ -780,6 +821,9 @@ There are several scale functions, all with a name that specify the aesthetic an
 
 * [scale_color_discrete]{style="color:indianred;"} relates to the aesthetic [color]{style="color:indianred;"} which is discrete (in our case *genus*)
 
+::: notes
+these are just examples of scale functions
+:::
 
 ## Scales - Axis ticks 
 
@@ -1037,6 +1081,12 @@ plot1 + plot_ugly
 
 :::
 :::::
+
+::: notes
+we don't go further here with patchwork, but I encourage you to use it (before patchwork, it was quite complicated to assemble plots...)
+
+the vignette is very good
+:::
 
 # Saving plots
 

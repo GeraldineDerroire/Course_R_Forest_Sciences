@@ -78,6 +78,7 @@ BCI_L
 dim(BCI_L)[1] == # number of row in the long format
   (dim(BCI)[2] - 1) * dim(BCI)[1] # number of column (without plot_id) * number of rows in the wide format
 ```
+
 * We now want to add a column for the genus and species name.
 
     * Let's do it with the function *separate* (don't replace the initial data, store the result in a new object).
@@ -104,7 +105,9 @@ view(sp_list)
 **NB**: if you say that you want to split by ".", this will be interpreted as "any character", so you need to write "`\\.`" instead.
    
 ```{r}
-mat_name <- str_split(BCI_L$gen_sp, pattern = "\\.", simplify = TRUE)
+mat_name <- str_split(BCI_L$gen_sp, 
+                      pattern = "\\.", # to split by "." and not by any character
+                      simplify = TRUE) # to get a matrix and not a list
 ```
 
 ```{r, eval = FALSE}

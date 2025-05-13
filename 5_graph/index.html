@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-26">
+  <meta name="dcterms.date" content="2025-05-13">
   <title>Data visualisation with ggplot</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-26</p>
+  <p class="date">2025-05-13</p>
 </section>
 <section id="why-make-plots" class="title-slide slide level1 smaller center">
 <h1>Why make plots?</h1>
@@ -480,6 +480,19 @@ Géraldine Derroire
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>NO NEED for the data to be in a tibble (but they need to be in a tidy format (long format))</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="lets-work-with-tree-data-from-the-nouragues-forest" class="slide level2">
 <h2>Let’s work with tree data from the Nouragues forest</h2>
@@ -504,7 +517,7 @@ Géraldine Derroire
 </div>
 <aside class="notes">
 <p>Nouragues in FG</p>
-<p>Ignore the message (not useful for us)</p>
+<p>Ignore the message (no message) (not useful for us)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -640,7 +653,7 @@ Géraldine Derroire
 <p>We see a positive, monotone and non-linear relationship.</p>
 <p>=&gt; trees with a bigger diameter are taller.</p>
 <p>We have a warning message, as there are 163 missing NA in H.</p>
-<p>From now on, I will silent the message.</p>
+<p>From now on, I will silent the message (but you will get it)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -802,6 +815,20 @@ Géraldine Derroire
 </div>
 <p><span class="fragment"><span style="font-size: 30px">When not in <em>aes</em>, the colour is constant.</span></span></p>
 </div></div>
+<aside class="notes">
+<p>here the color depends on the plot (categorical) but it could depend on D (continuous)</p>
+<p>when the color is constant, no added info, only to make the plot nicer</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="adding-layers" class="slide level2">
 <h2>Adding layers</h2>
@@ -906,6 +933,19 @@ Géraldine Derroire
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Here roughly the same number of indiv in the two plots</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="distribution-of-a-numerical-variable---histogram" class="slide level2">
 <h2>Distribution of a numerical variable - histogram</h2>
@@ -985,6 +1025,7 @@ Géraldine Derroire
 </div></div>
 <p><span class="fragment"><span style="font-size: 28px">💡Here we used a pipe to transform the data and feed them to ggplot.</span></span></p>
 <aside class="notes">
+<p>see how we integrated the ggplot command into a pipe (talk about difference between %&gt;% and +)</p>
 <p>What do we see? The Inga seems smaller than the two other genus (pioneer genus).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1042,6 +1083,19 @@ Géraldine Derroire
 </div>
 </div>
 </div></div>
+<aside class="notes">
+<p>Here again we see that the inga are smaller</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="relationship-between-two-categorical-variables---stacked-barplots" class="slide level2">
 <h2>Relationship between two categorical variables - stacked barplots</h2>
@@ -1067,6 +1121,19 @@ Géraldine Derroire
 </div>
 </div>
 </div></div>
+<aside class="notes">
+<p>Here Dicorinya only in plot 1, Eperua in plot 2 and Inga in both</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="relationship-between-two-categorical-variables---stacked-barplots-1" class="slide level2">
 <h2>Relationship between two categorical variables - stacked barplots</h2>
@@ -1140,6 +1207,20 @@ Géraldine Derroire
 </div>
 </div>
 </div></div>
+<aside class="notes">
+<p>Let’s do it for 5 species</p>
+<p>NB: for geom_tile, we need to count them before</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="relationship-between-two-numerical-variables" class="slide level2 scrollable">
 <h2>Relationship between two numerical variables</h2>
@@ -1160,6 +1241,19 @@ Géraldine Derroire
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Here we put 2 trend lines</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="relationship-between-two-numerical-variables-1" class="slide level2">
 <h2>Relationship between two numerical variables</h2>
@@ -1295,14 +1389,14 @@ Géraldine Derroire
 </section>
 <section id="section" class="slide level2 smaller">
 <h2></h2>
-<p><span style="font-size: 28px">Let’s go back to a plot we already made, save it, and start to improve the visual appearance:</span></p>
+<p><span style="font-size: 28px">Let’s go back to a plot we already made, put it in an object, and start to improve the visual appearance:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a>dt_sub <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
 <span id="cb35-2"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Licania"</span>, <span class="st">"Inga"</span>))</span>
 <span id="cb35-3"><a href=""></a></span>
 <span id="cb35-4"><a href=""></a>plot1 <span class="ot">&lt;-</span>  <span class="fu">ggplot</span>(dt_sub, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H, <span class="at">color =</span> genus)) <span class="sc">+</span></span>
 <span id="cb35-5"><a href=""></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb35-6"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb35-6"><a href=""></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="co"># se = FALSE to not display the confidence interval</span></span>
 <span id="cb35-7"><a href=""></a>plot1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
@@ -1314,6 +1408,20 @@ Géraldine Derroire
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>first we filter the data, then make the plot</p>
+<p>this is a basic plot, we are going to tweek it little by little to make it pretty</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="labels" class="slide level2 smaller">
 <h2>Labels</h2>
@@ -1344,7 +1452,8 @@ Géraldine Derroire
 </div>
 </div></div>
 <aside class="notes">
-<p>note how we add things on the plot by adding + to an existing plotic</p>
+<p>note how we add things on the plot by adding + to an existing plot</p>
+<p>of course we don’t necessarly need to have a title, a subtitle and a caption</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1386,6 +1495,19 @@ annot <- dt_sub %>%
 <li class="fragment"><p><span style="color:indianred;">scale_x_continuous</span> relates to the aesthetic <span style="color:indianred;">x</span> which is continuous (in our case <em>D</em>)</p></li>
 <li class="fragment"><p><span style="color:indianred;">scale_color_discrete</span> relates to the aesthetic <span style="color:indianred;">color</span> which is discrete (in our case <em>genus</em>)</p></li>
 </ul>
+<aside class="notes">
+<p>these are just examples of scale functions</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="scales---axis-ticks" class="slide level2">
 <h2>Scales - Axis ticks</h2>
@@ -1690,6 +1812,20 @@ annot <- dt_sub %>%
 </div>
 </div>
 </div></div>
+<aside class="notes">
+<p>we don’t go further here with patchwork, but I encourage you to use it (before patchwork, it was quite complicated to assemble plots…)</p>
+<p>the vignette is very good</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section id="saving-plots" class="title-slide slide level1 center">
 <h1>Saving plots</h1>
