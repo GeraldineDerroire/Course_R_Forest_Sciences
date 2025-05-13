@@ -3,7 +3,7 @@ title: "Exercices on session *Tidyverse 2/2*"
 format:
   pdf
 execute:
-  echo: false 
+  echo: false
   eval: true 
 ---
 
@@ -50,9 +50,18 @@ BCI <- as_tibble(BCI)
 ```{r}
 BCI <- BCI %>% 
   mutate(plot_ID = paste("BCI",
-                         1:dim(BCI)[1], # so that the code work if the size of the data changes
+                         1:nrow(BCI), # so that the code still works 
+                         # if the size of the data changes
                          sep ="_")
   )
+# this solution makes to code generalisable
+
+# a simpler way to do it (but which wouldn't work if 
+# the number of rows is not longuer 50):
+BCI <- BCI %>% 
+  mutate(plot_ID = paste("BCI",
+                         1:50, 
+                         sep ="_"))
 ```
 
 ```{r, eval = FALSE}
@@ -75,8 +84,9 @@ BCI_L
 * Check the dimension of this new table (try to do it using a test).
 
 ```{r, eval = FALSE}
-dim(BCI_L)[1] == # number of row in the long format
-  (dim(BCI)[2] - 1) * dim(BCI)[1] # number of column (without plot_id) * number of rows in the wide format
+nrow(BCI_L) == # number of row in the long format
+  (ncol(BCI) - 1) * nrow(BCI) 
+  # number of column (without plot_id) * number of rows in the wide format
 ```
 
 * We now want to add a column for the genus and species name.
@@ -99,6 +109,8 @@ sp_list <- BCI_L %>% distinct(gen_sp)
 
 ```{r, eval = FALSE}
 view(sp_list)
+# some gen_sp have more than one . (more than 2 parts), 
+# so it cannot be separated in the two columns
 ```
 
    * We want to keep only the characters that are before the second dot (so the genus and the species, removing the variety and subspecies). Let's split the *gen_sp* column by the separator ".". We want to get a matrix with a column by string separated by ".".
@@ -152,7 +164,8 @@ BCI.env <- as_tibble(BCI.env)
 ```{r}
 BCI.env <- BCI.env %>% 
   mutate(plot_ID = paste("BCI",
-                         1:dim(BCI.env)[1], # so that the code work if the size of the data changes
+                         1:nrow(BCI.env), # so that the code work 
+                         # if the size of the data changes
                          sep ="_")
   )
 ```

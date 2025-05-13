@@ -3,7 +3,7 @@ title: "Exercices on session *Tidyverse 1/2*"
 format:
   pdf
 execute:
-  echo: false 
+  echo: false
   eval: false 
 ---
 
@@ -51,6 +51,10 @@ dt_WG <- dt_WG %>%
          family = as.factor(family),
          genus = as.factor(genus),
          species = as.factor(species))
+
+# alternative solution (not seen in the class)
+dt_WG <- dt_WG %>% 
+  mutate(across(c(plotId, treeId, family, genus, species), as.factor))
 ```
 
 # Diameters
@@ -69,6 +73,14 @@ diam_min <- dt_WG %>%
   select(diam) %>% # keep only the variable diameter
   distinct() # keep only one unique value
 diam_min
+
+# alternative solution
+diam_min <- dt_WG %>% 
+  slice_min(diam, 
+            n = 1, # not needed as this is the default value
+            with_ties = FALSE) %>% # use with_ties = FALSE 
+  # to get only one value even when there are ties
+  select(diam)
 ```
 
 
@@ -80,6 +92,19 @@ big5 <- dt_WG %>%
   slice_head(n=5) %>% # take the first 5 rows
   select(genus, species) # select the columns 
 big5
+
+# alternative solution
+big5 <- dt_WG %>% 
+  slice_max(diam, n=5) %>% 
+  select(genus, species)
+
+# and to add a new colum for the full species name (work with both solutions)
+dt_WG %>% 
+  slice_max(diam, n=5) %>% 
+  unite(full_sp, 
+        genus, species,
+        sep = "_") %>% 
+  select(full_sp)
 ```
 
 * How many different species are amongst these five biggest trees?
@@ -122,11 +147,13 @@ dt_sub <- dt_WG %>%
 view(dt_sub)
 ```
 
-* To how many families do trees that have a diameter in the fourth quartile (bigger than the 3rd quartile) of the whole dataset belong?
+* To how many families do trees that have a diameter in the fourth quartile (*i.e.* in the interval between the 3rd and the 4th quartile, *i.e.* bigger than the 3rd quartile) of the whole dataset belong?
+
+*NB: quartile can refer both to the value (most common use), or to an interval.*
 
 ```{r}
 n_75 <- dt_WG %>% 
-  filter(diam > quantile(diam, probs = 0.75)) %>% # select trees with a diameter in the fourth quartile
+  filter(diam > quantile(diam, probs = 0.75)) %>% # trees with diameter in the 4th quartile
   select(family) %>% # keep only the variable family
   distinct() %>% # keep only a unique row for each family
   count() # count the rows
