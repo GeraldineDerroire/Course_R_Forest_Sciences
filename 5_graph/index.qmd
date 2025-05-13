@@ -583,6 +583,9 @@ dt_HD %>%
  ylab("Proportion of the genus in each plot") # change the axis label
 ```
 
+::: notes
+here we loose the info on the absolute number of indiv per genus, we focus on the relative number per plot
+::: 
 
 ## Relationship between two categorical variables {.scrollable .smaller}
 
@@ -695,6 +698,8 @@ dt_HD %>%
 We could have put the aes color and shape in the aes of ggplot
 
 color can be categorical or numerical (gradient of colors)
+
+here we represent 4 variables, in one graph (maybe a bit too much info?)
 :::
 
 
@@ -893,6 +898,14 @@ plot1
 ```
 :::
 :::::
+
+::: notes
+we may want to replace a color scale:
+
+* only to make the plot more beautiful
+
+*  color semantic / graphical semiology (red is hot and blue cold, or green is low altitude and brown high altitude...)
+:::
 
 
 ## Replacing a color scale
