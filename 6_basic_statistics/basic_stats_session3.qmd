@@ -1,5 +1,5 @@
 ---
-title: "Statistics with R - session 3"
+title: "Statistics with R - session 3 - Multivariate analysis"
 author: Géraldine Derroire
 institute: Cirad - UnB
 date: last-modified
@@ -23,29 +23,42 @@ editor:
     wrap: sentence
 ---
 
-# Intro on multivariate analysis
+## Why multivariate analyses ?
 
-more than one variable at a time or multivariate response (sp composition)
+**Multivariate analysis** are used to study the joint distribution of several variables, *i.e.* the variation of each variable and their correlations.
 
-=> distribution conjointe de serveral variables
+* **Clustering methods** aim to group observations based on similarities across multiple variables.
 
-in those 
+* **Ordination methods** aim to rearrange the observations in a lower-dimensional space to reduce the dimensionality of the data while preserving the main patterns of variation.
 
- * clustering
+## Why multivariate analyses ?
 
-* ordination methods aiming at arraning in a low-dimensional space => reduction de la dimensionalité assuming that we can find a small number of axes of covariation
+**Ordination methods** can be used for: 
 
-(axes of covariation, spectrum...) + community ecology
+  * the identification axes of co-variation between several variables (*eg*: co-variation between climatic variables or soil variables along environmental gradients, co-variation of functional traits along specta of functional strategies...)
+  
+  * the study ecological communities by jointly considering the occurrence or abundance of multiple species
 
-structure des données => observations of variables
+## Structure of multivariate data {.smaller}
 
-eg: site (obs) et var enviro (variable)
 
-site (obs) et composition floristique (sp = variable)
+[*n*]{style="color:indianred;"} observations (in row) of [*p*]{style="color:indianred;"} variables (in column), where [$x_{ij}$]{style="color:indianred;"} is the value of the variable [*j*]{style="color:indianred;"} for observation [*i*]{style="color:indianred;"}:
 
-species (obs) and functional traits (variable)
 
-<!-- TO DO -->
+\begin{bmatrix}
+x_{11} & x_{12} & \cdots & x_{1p} \\
+x_{21} & x_{22} & \cdots & x_{2p} \\
+\vdots & \vdots & \ddots & \vdots \\
+x_{n1} & x_{n2} & \cdots & x_{np}
+\end{bmatrix}
+
+[*Example:*]{.fragment}
+
+* values of *p* environmental variables in *n* sites (observations)
+
+* floristic composition (*p* species = variables) in *n* sites
+
+* values of *p* functional traits (variables) for *n* species (observations)
 
 
 ## Package *vegan*
@@ -59,26 +72,41 @@ library(vegan)
 ```
 
 
-## Let's work with data on lichen
+## Let's work with data on understory vegetation in Fennoscandia {.smaller}
 
-* EXPLAIN
+[These data are available in the package [vegan]{style="color:indianred;"} and include:]{style="font-size: 30px"}
 
+::::: columns
+::: {.column width="50%"}
+
+* [A floristic table of cover of understory vegetation (species in colum and sites in row):]{style="font-size: 30px"}
+
+::: fragment
 ```{r}
 data(varespec)
-head(varespec)
+varespec[1:5, 1:5] # display only a subset
 ```
+:::
 
-* Soil data on the 24 plots 
+:::
 
+::: {.column width="50%"}
+
+* [Soil data on the 24 plots]{style="font-size: 30px"} 
+
+::: fragment
 ```{r}
 data(varechem)
-head(varechem)
+varechem[1:5, 1:5] # display only a subset
 ```
-
-
-::: notes 
-we have already worked with these data (in the class on working with data)
 :::
+
+:::
+:::::
+
+[[For more information on these data see [Väre,Ohtonen and Oksanen (1995)](https://www.researchgate.net/publication/227830523_Effects_of_reindeer_grazing_on_vegetation_in_dry_Pinus_sylvestris_forests){preview-link="false"}]{style="font-size: 22px"}]{.fragment}
+
+
 
 # Unconstrained ordination methods
 
@@ -90,45 +118,176 @@ https://r.qcbs.ca/workshop09/book-en/setting-up-our-goals.html
 
 Marchand + Eric --> 
 
-explain what is unconstrained
+[Unconstrained ordination methods are used to visualise and explore the relationships among variables or observations without imposing any specific constraints on the relationships.]{style="font-size: 30px"}
 
-how are the different samples similar / different
+[The objective is to identify a few axes that capture most of the variation in a multidimensional dataset, allowing for a simplified yet informative representation.]{style="font-size: 30px"}
 
-<!-- three following points from Gavin => to rephrase -->
-* Principal Components Analysis (PCA) is a linear method — most useful for environmental data or sometimes with species data and short gradients
-
-* Correspondence Analysis (CA) is a unimodal method — most useful for species data, especially where non-linear responses are observed
-
-* Principal Coordinates Analysis (PCO) and Non-metric Multidimensional Scaling (NMDS) — can be used for any kind of data
-
+[This allows to visualise similarities among observations, as more similar observations will be closer in the reduced-dimentional spaces.]{style="font-size: 30px"}
 
 <!-- voir aussi Marchand session 2 sur l'explication des différentes distances--> 
 
-## PCA
+## PCA - principle
 
-euclidian distance (strait line) cf schéma Eric => distance between samples increases linearly along the gradient => find axes to summarise variation
+[In a cloud of observations in a p-dimension space (*p* variables), a **Principal Components Analysis** fits:]{style="font-size: 30px"}
 
-cloud of point in n-dimension
+::::: columns
+::: {.column width="60%"}
 
-1rst axis capture the max of variabilité, then a second orthogonal one capturing the maximyl of residual variability, than a 3rd one, than...
+* [a [first line]{style="color:red;"} minimising the **Euclidean distance** between the line and the observations, hence maximising the variance captured.]{style="font-size: 30px"}
 
-equivalent of looking at several correlation at a time, and that it assumes linear distance
+* [a [second line]{style="color:lightgreen;"}, orthogonal to the first one, capturing the maximum remaining variance.]{style="font-size: 30px"}
 
-## PCA
+* [a third, a fourth, .... until we have $p$ lines]{style="font-size: 30px"}
 
-penser à centrer réduire les variables (cf Marchand)
+:::
 
-## PCA
+::: {.column width="40%"}
+![](PCA3.png)
+[Source: [E. Marcon](https://ericmarcon.github.io/Cours-R-Geeft/Ordination.html){preview-link="false"}]{style="font-size: 22px"}
 
-faire la PCA
+:::
+:::::
 
-## PCA
+[[Each of these lines is a **Principal Component** (PC) and is associated with an **eigenvalue** indicating how much variance it explains.]{style="font-size: 30px"}]{.fragment}
 
-hist des variances expliquées => combien d'axes choisir?
+## PCA - principle
 
-## PCA
+[Alternative representation:]{style="font-size: 30px"}
 
-biplot
+![](PCA4.png)
+[Source: [G. Simpson](https://gavinsimpson.github.io/physalia-multivariate/02-tuesday){preview-link="false"}]{style="font-size: 22px"}
+
+
+
+## PCA - Fitting a PCA
+
+Let's fit a PCA on the soil data, using the function [pca]{style="color:indianred;"}:
+
+```{r}
+soil_pca <- pca(varechem, scale = TRUE)
+```
+
+[⚠️ As the PCA is based on Euclidean distances, the variables needs to be express in comparable units. For this, we need to standardised to a mean of 0 and a standard deviation of 1, using the argument *scale = TRUE*]{.fragment}
+
+
+## PCA - Understanding the results {.smaller}
+
+::::: columns
+::: {.column width="70%"}
+
+```{r}
+summary(soil_pca)
+```
+
+:::
+
+::: {.column width="30%"}
+* The inertia is the total variance (all of it is unconstrained).
+
+* The eigenvalues are the variance explained by each PC.
+
+* We also get the proportion of variance explained by each PC, an the cumulative proportion.
+
+:::
+:::::
+
+## PCA - How many PCs are meaningful?
+
+[As the objective is to reduce the dimensionality of our data, we will only interpret a small number of PCs.]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+screeplot(soil_pca, bstick = TRUE)
+```
+:::
+
+::: {.column width="50%"}
+[[The [screeplot]{style="color:indianred;"} shows the variance explained by each PC.]{style="font-size: 30px"}]{.fragment}
+
+[[The broken stick distribution shows the expected distribution of the variance if it was randomly distributed among PCs.]{style="font-size: 30px"}]{.fragment}
+:::
+:::::
+
+[[Here we can focus on the two first PCs]{style="font-size: 30px"}]{.fragment}
+
+
+## PCA - Visualisation
+
+A [biplot]{style="color:indianred;"} shows the observations and variables in a same 2d-space defined by the chosen PCs:
+
+::::: columns
+::: {.column width="60%"}
+```{r}
+#| fig-width: 5
+#| fig-height: 4
+biplot(soil_pca, scaling = "symmetric")
+```
+:::
+
+::: {.column width="40%"}
+[[The red arrows represent the variables, and the black numbers the observations (here the *sites*).]{style="font-size: 30px"}]{.fragment}
+
+[[The longer the arrows, the better the variable is represented by the displayed PCs.]{style="font-size: 30px"}]{.fragment}
+:::
+:::::
+
+## PCA - Visualisation 
+
+::::: columns
+::: {.column width="50%"}
+
+[To focus on the observations, we chose *type 1 scaling* that attempts to preserved the distances.]{style="font-size: 30px"}
+
+```{r}
+#| fig-width: 5
+#| fig-height: 4
+biplot(soil_pca, scaling = 1)
+```
+:::
+
+::: {.column width="50%"}
+[The distance between two observations can be interpreted as their similarity.]{style="font-size: 30px"}
+
+[[💡 In [vegan]{style="color:indianred;"}, type 1 scaling can be obtained by *scaling = "sites"*.]{style="font-size: 25px"}]{.fragment}
+:::
+:::::
+
+## PCA - Visualisation 
+
+::::: columns
+::: {.column width="50%"}
+
+[To focus on the variables, we chose *type 2 scaling*: ]{style="font-size: 30px"}
+
+```{r}
+#| fig-width: 5
+#| fig-height: 4
+biplot(soil_pca, scaling = 2)
+```
+
+:::
+
+::: {.column width="50%"}
+
+[The angles between variables reflect their correlations.]{style="font-size: 30px"}
+
+* [Variables at 180° are negatively correlated.]{style="font-size: 30px"}
+
+* [Variables at 0° are positively correlated.]{style="font-size: 30px"}
+
+* [Variables at 180° are not correlated.]{style="font-size: 30px"}
+
+[[💡 In [vegan]{style="color:indianred;"}, type  scaling can be obtained by *scaling = "species"*.]{style="font-size: 25px"}]{.fragment}
+
+:::
+:::::
+
+
+
+
+
+
 
 ## CA
 
@@ -159,6 +318,15 @@ non-metric => ignore the actual distance, focus on the rank (which are closer/fa
 very felxible and robust for non-linear, many 0...
 
 <!-- for each 1 slide theo: how does it work, what is it used for, than practice -->
+
+## Summary on unconstrained ordination methods
+
+<!-- three following points from Gavin => to rephrase -->
+* Principal Components Analysis (PCA) is a linear method — most useful for environmental data or sometimes with species data and short gradients
+
+* Correspondence Analysis (CA) is a unimodal method — most useful for species data, especially where non-linear responses are observed
+
+* Principal Coordinates Analysis (PCO) and Non-metric Multidimensional Scaling (NMDS) — can be used for any kind of data
 
 
 # Clusturing
@@ -194,11 +362,21 @@ Permanova??? Permanova is not an ordination methods
 
 -->
 
+## Ressources
+
+Marchand
+
+Eric
+
+https://github.com/gavinsimpson/physalia-multivariate?tab=readme-ov-file
+
+https://r.qcbs.ca/workshop09/book-en/ and https://r.qcbs.ca/workshop10/book-en/
+
 
 ## Resources
 
 to go further the ggvegan package (not on cran) to make ggplot style graph from ordination results
-
+https://rdrr.io/github/gavinsimpson/ggvegan/#vignettes
 
 
 <!-- brouillon -->

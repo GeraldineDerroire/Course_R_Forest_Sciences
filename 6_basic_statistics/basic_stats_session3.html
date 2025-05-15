@@ -11,8 +11,8 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-04-24">
-  <title>Basic statistics with R - session 3</title>
+  <meta name="dcterms.date" content="2025-05-15">
+  <title>Statistics with R - session 3 - Multivariate analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="basic_stats_session3_files/libs/revealjs/dist/theme/quarto.css">
   <link href="basic_stats_session3_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -329,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Basic statistics with R - session 3</h1>
+  <h1 class="title">Statistics with R - session 3 - Multivariate analysis</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -342,16 +407,372 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-04-24</p>
+  <p class="date">2025-05-15</p>
 </section>
-<section class="slide level2">
+<section id="why-multivariate-analyses" class="slide level2">
+<h2>Why multivariate analyses ?</h2>
+<p><strong>Multivariate analysis</strong> are used to study the joint distribution of several variables, <em>i.e.</em> the variation of each variable and their correlations.</p>
+<ul>
+<li class="fragment"><p><strong>Clustering methods</strong> aim to group observations based on similarities across multiple variables.</p></li>
+<li class="fragment"><p><strong>Ordination methods</strong> aim to rearrange the observations in a lower-dimensional space to reduce the dimensionality of the data while preserving the main patterns of variation.</p></li>
+</ul>
+</section>
+<section id="why-multivariate-analyses-1" class="slide level2">
+<h2>Why multivariate analyses ?</h2>
+<p><strong>Ordination methods</strong> can be used for:</p>
+<ul>
+<li class="fragment"><p>the identification axes of co-variation between several variables (<em>eg</em>: co-variation between climatic variables or soil variables along environmental gradients, co-variation of functional traits along specta of functional strategies…)</p></li>
+<li class="fragment"><p>the study ecological communities by jointly considering the occurrence or abundance of multiple species</p></li>
+</ul>
+</section>
+<section id="structure-of-multivariate-data" class="slide level2 smaller">
+<h2>Structure of multivariate data</h2>
+<p><span style="color:indianred;"><em>n</em></span> observations (in row) of <span style="color:indianred;"><em>p</em></span> variables (in column), where <span style="color:indianred;"><span class="math inline">\(x_{ij}\)</span></span> is the value of the variable <span style="color:indianred;"><em>j</em></span> for observation <span style="color:indianred;"><em>i</em></span>:</p>
+<span class="math display">\[\begin{bmatrix}
+x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1p} \\
+x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
+\end{bmatrix}\]</span>
+<p><span class="fragment"><em>Example:</em></span></p>
+<ul>
+<li class="fragment"><p>values of <em>p</em> environmental variables in <em>n</em> sites (observations)</p></li>
+<li class="fragment"><p>floristic composition (<em>p</em> species = variables) in <em>n</em> sites</p></li>
+<li class="fragment"><p>values of <em>p</em> functional traits (variables) for <em>n</em> species (observations)</p></li>
+</ul>
+</section>
+<section id="package-vegan" class="slide level2">
+<h2>Package <em>vegan</em></h2>
+<p>There are many packages to do multivariate analyses: <span style="color:indianred;">stats</span> (base package), <span style="color:indianred;">ade4</span>, <span style="color:indianred;">FactoMine</span>, <span style="color:indianred;">vegan</span>.</p>
+<p>We will mostly work with <span style="color:indianred;">vegan</span>, let’s load it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(vegan)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: permute</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lattice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>This is vegan 2.6-8</code></pre>
+</div>
+</div>
+</section>
+<section id="lets-work-with-data-on-understory-vegetation-in-fennoscandia" class="slide level2 smaller">
+<h2>Let’s work with data on understory vegetation in Fennoscandia</h2>
+<p><span style="font-size: 30px">These data are available in the package <span style="color:indianred;">vegan</span> and include:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px">A floristic table of cover of understory vegetation (species in colum and sites in row):</span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">data</span>(varespec)</span>
+<span id="cb5-2"><a href=""></a>varespec[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="co"># display only a subset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>   Callvulg Empenigr Rhodtome Vaccmyrt Vaccviti
+18     0.55    11.13     0.00     0.00    17.80
+15     0.67     0.17     0.00     0.35    12.13
+24     0.10     1.55     0.00     0.00    13.47
+27     0.00    15.13     2.42     5.92    15.97
+23     0.00    12.68     0.00     0.00    23.73</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px">Soil data on the 24 plots</span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">data</span>(varechem)</span>
+<span id="cb7-2"><a href=""></a>varechem[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="co"># display only a subset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>      N    P     K    Ca    Mg
+18 19.8 42.1 139.9 519.4  90.0
+15 13.4 39.1 167.3 356.7  70.7
+24 20.2 67.7 207.1 973.3 209.1
+27 20.6 60.8 233.7 834.0 127.2
+23 23.8 54.5 180.6 777.0 125.8</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 22px">For more information on these data see <a href="https://www.researchgate.net/publication/227830523_Effects_of_reindeer_grazing_on_vegetation_in_dry_Pinus_sylvestris_forests" data-preview-link="false">Väre,Ohtonen and Oksanen (1995)</a></span></span></p>
+</section>
+<section>
+<section id="unconstrained-ordination-methods" class="title-slide slide level1 center">
+<h1>Unconstrained ordination methods</h1>
+<!-- ressource
 
+https://gavinsimpson.github.io/physalia-multivariate/03-wednesday/slides.html#1
+
+https://r.qcbs.ca/workshop09/book-en/setting-up-our-goals.html
+
+Marchand + Eric -->
+<p><span style="font-size: 30px">Unconstrained ordination methods are used to visualise and explore the relationships among variables or observations without imposing any specific constraints on the relationships.</span></p>
+<p><span style="font-size: 30px">The objective is to identify a few axes that capture most of the variation in a multidimensional dataset, allowing for a simplified yet informative representation.</span></p>
+<p><span style="font-size: 30px">This allows to visualise similarities among observations, as more similar observations will be closer in the reduced-dimentional spaces.</span></p>
+<!-- voir aussi Marchand session 2 sur l'explication des différentes distances-->
+</section>
+<section id="pca---principle" class="slide level2">
+<h2>PCA - principle</h2>
+<p><span style="font-size: 30px">In a cloud of observations in a p-dimension space (<em>p</em> variables), a <strong>Principal Components Analysis</strong> fits:</span></p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">a <span style="color:red;">first line</span> minimising the <strong>Euclidean distance</strong> between the line and the observations, hence maximising the variance captured.</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">a <span style="color:lightgreen;">second line</span>, orthogonal to the first one, capturing the maximum remaining variance.</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">a third, a fourth, …. until we have <span class="math inline">\(p\)</span> lines</span></p></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="PCA3.png"> <span style="font-size: 22px">Source: <a href="https://ericmarcon.github.io/Cours-R-Geeft/Ordination.html" data-preview-link="false">E. Marcon</a></span></p>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px">Each of these lines is a <strong>Principal Component</strong> (PC) and is associated with an <strong>eigenvalue</strong> indicating how much variance it explains.</span></span></p>
+</section>
+<section id="pca---principle-1" class="slide level2">
+<h2>PCA - principle</h2>
+<p><span style="font-size: 30px">Alternative representation:</span></p>
+<p><img data-src="PCA4.png"> <span style="font-size: 22px">Source: <a href="https://gavinsimpson.github.io/physalia-multivariate/02-tuesday" data-preview-link="false">G. Simpson</a></span></p>
+</section>
+<section id="pca---fitting-a-pca" class="slide level2">
+<h2>PCA - Fitting a PCA</h2>
+<p>Let’s fit a PCA on the soil data, using the function <span style="color:indianred;">pca</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>soil_pca <span class="ot">&lt;-</span> <span class="fu">pca</span>(varechem, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment">⚠️ As the PCA is based on Euclidean distances, the variables needs to be express in comparable units. For this, we need to standardised to a mean of 0 and a standard deviation of 1, using the argument <em>scale = TRUE</em></span></p>
+</section>
+<section id="pca---understanding-the-results" class="slide level2 smaller">
+<h2>PCA - Understanding the results</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="fu">summary</span>(soil_pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+pca(X = varechem, scale = TRUE) 
+
+Partitioning of correlations:
+              Inertia Proportion
+Total              14          1
+Unconstrained      14          1
+
+Eigenvalues, and their contribution to the correlations 
+
+Importance of components:
+                         PC1    PC2    PC3     PC4     PC5     PC6     PC7
+Eigenvalue            5.1916 3.1928 1.6855 1.06899 0.81599 0.70581 0.43641
+Proportion Explained  0.3708 0.2281 0.1204 0.07636 0.05829 0.05042 0.03117
+Cumulative Proportion 0.3708 0.5989 0.7193 0.79564 0.85392 0.90434 0.93551
+                          PC8    PC9    PC10    PC11    PC12     PC13     PC14
+Eigenvalue            0.36884 0.1707 0.14953 0.08526 0.06986 0.035057 0.023615
+Proportion Explained  0.02635 0.0122 0.01068 0.00609 0.00499 0.002504 0.001687
+Cumulative Proportion 0.96185 0.9740 0.98473 0.99082 0.99581 0.998313 1.000000</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<ul>
+<li class="fragment"><p>The inertia is the total variance (all of it is unconstrained).</p></li>
+<li class="fragment"><p>The eigenvalues are the variance explained by each PC.</p></li>
+<li class="fragment"><p>We also get the proportion of variance explained by each PC, an the cumulative proportion.</p></li>
+</ul>
+</div></div>
+</section>
+<section id="pca---how-many-pcs-are-meaningful" class="slide level2">
+<h2>PCA - How many PCs are meaningful?</h2>
+<p><span style="font-size: 30px">As the objective is to reduce the dimensionality of our data, we will only interpret a small number of PCs.</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">screeplot</span>(soil_pca, <span class="at">bstick =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="fragment"><span style="font-size: 30px">The <span style="color:indianred;">screeplot</span> shows the variance explained by each PC.</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">The broken stick distribution shows the expected distribution of the variance if it was randomly distributed among PCs.</span></span></p>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px">Here we can focus on the two first PCs</span></span></p>
+</section>
+<section id="pca---visualisation" class="slide level2">
+<h2>PCA - Visualisation</h2>
+<p>A <span style="color:indianred;">biplot</span> shows the observations and variables in a same 2d-space defined by the chosen PCs:</p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">biplot</span>(soil_pca, <span class="at">scaling =</span> <span class="st">"symmetric"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-7-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p><span class="fragment"><span style="font-size: 30px">The red arrows represent the variables, and the black numbers the observations (here the <em>sites</em>).</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">The longer the arrows, the better the variable is represented by the displayed PCs.</span></span></p>
+</div></div>
+</section>
+<section id="pca---visualisation-1" class="slide level2">
+<h2>PCA - Visualisation</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">To focus on the observations, we chose <em>type 1 scaling</em> that attempts to preserved the distances.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">biplot</span>(soil_pca, <span class="at">scaling =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-8-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">The distance between two observations can be interpreted as their similarity.</span></p>
+<p><span class="fragment"><span style="font-size: 25px">💡 In <span style="color:indianred;">vegan</span>, type 1 scaling can be obtained by <em>scaling = “sites”</em>.</span></span></p>
+</div></div>
+</section>
+<section id="pca---visualisation-2" class="slide level2">
+<h2>PCA - Visualisation</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">To focus on the variables, we chose <em>type 2 scaling</em>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">biplot</span>(soil_pca, <span class="at">scaling =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-9-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">The angles between variables reflect their correlations.</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">Variables at 180° are negatively correlated.</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Variables at 0° are positively correlated.</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Variables at 180° are not correlated.</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 25px">💡 In <span style="color:indianred;">vegan</span>, type scaling can be obtained by <em>scaling = “species”</em>.</span></span></p>
+</div></div>
+</section>
+<section id="ca" class="slide level2">
+<h2>CA</h2>
+<p>chi2 distance, unimodal =&gt; good for sp presence/abs or abundance if we assume a unimodal (optimum response) to an enviro gradient</p>
+<p>look at relative abundance (so double 0 are affecting the distance )</p>
+<p>give more weight to rare species than other methods (euclidian or Bray curtis)</p>
+<p>when strong enviro gradient and rare sp are important</p>
+</section>
+<section id="pcoa" class="slide level2">
+<h2>PCoA</h2>
+<p>any distance: no assumption of euclidian or chi2 distance we can choose among many distances (including euclidian, going back to a PCA)</p>
+<p>often used with Bray-curtis distance for species abundance data (or Jaccard for presence/absence)</p>
+<p>Bray curtis from 0 (identical species composition) to 1 (no shared species)</p>
+<p>focus on shared abundances =&gt; more shared, more similar (so ignore double 0 which are not informative)</p>
+<p>sensitive to abundant species ()</p>
+</section>
+<section id="nmds" class="slide level2">
+<h2>NMDS</h2>
+<p>non-metric =&gt; ignore the actual distance, focus on the rank (which are closer/farther), so often the more appropriate for species data</p>
+<p>very felxible and robust for non-linear, many 0…</p>
+<!-- for each 1 slide theo: how does it work, what is it used for, than practice -->
+</section>
+<section id="summary-on-unconstrained-ordination-methods" class="slide level2">
+<h2>Summary on unconstrained ordination methods</h2>
+<!-- three following points from Gavin => to rephrase -->
+<ul>
+<li class="fragment"><p>Principal Components Analysis (PCA) is a linear method — most useful for environmental data or sometimes with species data and short gradients</p></li>
+<li class="fragment"><p>Correspondence Analysis (CA) is a unimodal method — most useful for species data, especially where non-linear responses are observed</p></li>
+<li class="fragment"><p>Principal Coordinates Analysis (PCO) and Non-metric Multidimensional Scaling (NMDS) — can be used for any kind of data</p></li>
+</ul>
+</section></section>
+<section id="clusturing" class="title-slide slide level1 center">
+<h1>Clusturing</h1>
+<!-- TO DO et voir ou je le met après les méthodes pas contraintes pour faire des groupes (et éventuellement les mettres sur le plot des PCA (non car je vais faire la PCA sur les données enviro-->
+</section>
+
+<section>
+<section id="constrained-ordination-methods" class="title-slide slide level1 center">
+<h1>Constrained ordination methods</h1>
+<!-- ressource
+
+https://r.qcbs.ca/workshop10/book-en/multivariate-regression-tree.html
+
+https://gavinsimpson.github.io/physalia-multivariate/03-wednesday/slides.html#1
+
+Marchand + Eric -->
+<p>explain difference between samples using external variables</p>
+<p>=&gt; eg: enviro to explain sp composition</p>
+<!--
+
+Explained what is constrained
+
+RDA: constrained equivalent of PCA => needs Hellinguer transfo (say that we could also do a hellinguer transfo for a PCA on species data, but not shown)
+
+CCA: constrained equivalent to CCA
+
+equivalent of PCoA and NMDS???
+
+Permanova??? Permanova is not an ordination methods
+
+-->
+</section>
+<section id="ressources" class="slide level2">
+<h2>Ressources</h2>
+<p>Marchand</p>
+<p>Eric</p>
+<p>https://github.com/gavinsimpson/physalia-multivariate?tab=readme-ov-file</p>
+<p>https://r.qcbs.ca/workshop09/book-en/ and https://r.qcbs.ca/workshop10/book-en/</p>
+</section>
+<section id="resources" class="slide level2">
+<h2>Resources</h2>
+<p>to go further the ggvegan package (not on cran) to make ggplot style graph from ordination results https://rdrr.io/github/gavinsimpson/ggvegan/#vignettes</p>
+<!-- brouillon -->
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<p>analyses multivariées</p>
+<p>https://ericmarcon.github.io/Cours-R-Geeft/Ordination.html#43</p>
+<p>https://pmarchand1.github.io/ECL7102/notes_cours/13-Analyses_multivariees_Partie1.html</p>
+<p>aussi mon livre de stat</p>
+<p>Eric utilise à la fois ade4 et vegan =&gt; voir pourquoi?</p>
+<p>Voir aussi Borcard, Gillet Legendre, numerical ecology with R version de 2018</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -564,6 +985,82 @@ Géraldine Derroire
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
