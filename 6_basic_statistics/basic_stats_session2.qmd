@@ -1117,7 +1117,7 @@ Some data are by nature not normally distributed, so we cannot model them with a
 
 * Marcon E. *cours-R-Geeft* [in French](https://ericmarcon.github.io/Cours-R-Geeft/){preview-link="false"}
 
-* Barnier J. *Guide-R Guide pour l'analyse de données d'enquêtes avec R* [in French](https://larmarange.github.io/guide-R/){preview-link="false"}
+* Lamarange J. *Guide-R Guide pour l'analyse de données d'enquêtes avec R* [in French](https://larmarange.github.io/guide-R/){preview-link="false"}
 
 
 :::

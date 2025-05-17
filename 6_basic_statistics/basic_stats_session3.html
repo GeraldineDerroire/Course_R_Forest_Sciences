@@ -517,9 +517,12 @@ https://gavinsimpson.github.io/physalia-multivariate/03-wednesday/slides.html#1
 https://r.qcbs.ca/workshop09/book-en/setting-up-our-goals.html
 
 Marchand + Eric -->
-<p><span style="font-size: 30px">Unconstrained ordination methods are used to visualise and explore the relationships among variables or observations without imposing any specific constraints on the relationships.</span></p>
+</section>
+<section id="principle" class="slide level2">
+<h2>Principle</h2>
+<p><span style="font-size: 30px">Unconstrained ordination methods are used to <strong>visualise and explore the relationships among variables or observations</strong> without imposing any specific constraints on the relationships.</span></p>
 <p><span style="font-size: 30px">The objective is to identify a few axes that capture most of the variation in a multidimensional dataset, allowing for a simplified yet informative representation.</span></p>
-<p><span style="font-size: 30px">This allows to visualise similarities among observations, as more similar observations will be closer in the reduced-dimentional spaces.</span></p>
+<p><span style="font-size: 30px">This allows to <strong>visualise similarities among observations</strong>, as more similar observations will be closer in the reduced-dimensional spaces.</span></p>
 <!-- voir aussi Marchand session 2 sur l'explication des différentes distances-->
 </section>
 <section id="pca---principle" class="slide level2">
@@ -1455,17 +1458,17 @@ Species: expanded scores based on 'dune' </code></pre>
 <tr class="even">
 <td style="text-align: left;">CA</td>
 <td style="text-align: left;">Unimodal method based on chi<sup>2</sup> distance</td>
-<td style="text-align: left;">Species data with non linear responses, chi<sup>2</sup> give more weight to rare species than Bray-Curtis</td>
+<td style="text-align: left;">Species data with non linear responses. chi<sup>2</sup> give more weight to rare species than Bray-Curtis</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">PCoA</td>
 <td style="text-align: left;">Metric based on several types of distances</td>
-<td style="text-align: left;">Any kind of data, Bray-Curtis more sensitive to abundant species</td>
+<td style="text-align: left;">Any kind of data. Bray-Curtis more sensitive to abundant species</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">NMDS</td>
 <td style="text-align: left;">Based on rank, with several types of distances</td>
-<td style="text-align: left;">Very flexible and robust for non-linear responsez, many zeros…</td>
+<td style="text-align: left;">Very flexible and robust for non-linear responses, many zeros…</td>
 </tr>
 </tbody>
 </table>
@@ -1477,7 +1480,7 @@ Species: expanded scores based on 'dune' </code></pre>
 <h1>Clustering</h1>
 
 </section>
-<section id="principle" class="slide level2">
+<section id="principle-1" class="slide level2">
 <h2>Principle</h2>
 <p><strong>Hierachical clustering</strong> aims to create groups of observations that are similar accross a set of variable.</p>
 <p>Observations are progressively aggregated based on their similarity until all are merged into a single group.</p>
@@ -1672,58 +1675,538 @@ Species: expanded scores based on 'dune' </code></pre>
 </div>
 </div>
 </div></div>
-<p><span class="fragment"><span style="font-size: 30px">💡 Note how we retrieve the scores of the ordination to be able to use ggplot to customise the plot. This can be done for all ordination plots.</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">💡 Note how we retrieve the scores of the ordination to be able to use ggplot to customise the plot.</span></span></p>
+<aside class="notes">
+<p>you can retreive everything from the ordinations, need to check the vignette and help of the package vegan to learn how to do it…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="constrained-ordination-methods" class="title-slide slide level1 center">
 <h1>Constrained ordination methods</h1>
-<!-- ressource
 
-https://r.qcbs.ca/workshop10/book-en/multivariate-regression-tree.html
-
-https://gavinsimpson.github.io/physalia-multivariate/03-wednesday/slides.html#1
-
-Marchand + Eric -->
-<p>explain difference between samples using external variables</p>
-<p>=&gt; eg: enviro to explain sp composition</p>
-<p>TRY them on varespec and varechem (sinon on dune)</p>
-<p>think about transforming data (Hellinguer for RDA) and standardising explanatory variables</p>
-<p>!!! before performing a RDA (or a CCA??) remove collinear explanatory variables</p>
-<!--
-
-Explained what is constrained
-
-RDA: constrained equivalent of PCA => needs Hellinguer transfo (say that we could also do a hellinguer transfo for a PCA on species data, but not shown)
-
-CCA: constrained equivalent to CCA
-
-equivalent of PCoA and NMDS???
-
-Permanova??? Permanova is not an ordination methods
-
--->
 </section>
-<section id="ressources" class="slide level2">
-<h2>Ressources</h2>
-<p>Marchand</p>
-<p>Eric</p>
-<p>https://github.com/gavinsimpson/physalia-multivariate?tab=readme-ov-file</p>
-<p>https://r.qcbs.ca/workshop09/book-en/ and https://r.qcbs.ca/workshop10/book-en/</p>
+<section id="principle-2" class="slide level2">
+<h2>Principle</h2>
+<p><span style="font-size: 30px">In constrained ordination methods, the choice of the axes is based on the response to explanatory variables. These methods combine the concepts of <strong>ordination</strong> and <strong>regression</strong>.</span></p>
+<div class="fragment">
+<p><span style="font-size: 30px">The objective of constrained ordinations is to identify <strong>relationships between a multivariate response table and a multivariate explanatory table</strong>.</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 28px">Constrained ordination can be used to identify relationships between the species composition of communities (here <em>Y</em>) and environmental variables (here <em>X</em>).</span></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="constrained.png"></p>
+</div></div>
+</div>
+</section>
+<section id="collinearity" class="slide level2 smaller">
+<h2>Collinearity</h2>
+<p><span style="font-size: 30px">As in multiple linear regression, we need to avoid collinearity of explanatory variables.</span></p>
+<p><span style="font-size: 30px">In a real study, we will choose the variables to include based on our <strong>hypotheses</strong>.</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">We can look use the PCA of soil variables to choose variables with little correlation:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="fu">biplot</span>(soil_pca, <span class="at">scaling =</span> <span class="dv">2</span>, <span class="at">display =</span> <span class="st">"species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">Let’s choose <em>pH</em>, <em>N</em>, <em>Mo</em>, <em>P</em>, and check how correlated they are:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a>GGally<span class="sc">::</span><span class="fu">ggpairs</span>(soil_norm[,<span class="fu">c</span>(<span class="st">"pH"</span>, <span class="st">"N"</span>, <span class="st">"Mo"</span>, <span class="st">"P"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-44-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="rda---principle" class="slide level2">
+<h2>RDA - Principle</h2>
+<p><strong>Redundancy analysis</strong> (RDA) is the constrained equivalent of Principal Component Analysis (PCA).</p>
+<p>It is therefore based on Euclidean distance and assumes <strong>linear</strong> relationships between species and environmental variables.</p>
+</section>
+<section id="rda---hellinger-transformation" class="slide level2">
+<h2>RDA - Hellinger transformation</h2>
+<p>To do a RDA (or a PCA) on a table of abundance of species, a Hellinger transformation is required. Hellinger distance has a more linear response to changes in species abundance.</p>
+<p>We can do this transformation using <span style="color:indianred;">decostand</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a>spec_hel <span class="ot">&lt;-</span> <span class="fu">decostand</span>(varespec, <span class="at">method  =</span><span class="st">"hellinger"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</section>
+<section id="rda---running-a-rda" class="slide level2">
+<h2>RDA - Running a RDA</h2>
+<p><span style="font-size: 30px">We run the RDA with <span style="color:indianred;">rda</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a>vare_rda <span class="ot">&lt;-</span> <span class="fu">rda</span>(spec_hel <span class="sc">~</span> pH <span class="sc">+</span> N <span class="sc">+</span> Mo <span class="sc">+</span> P, <span class="co"># formula</span></span>
+<span id="cb63-2"><a href=""></a>                <span class="at">data =</span> soil_norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">The formula is quite similar to the formula of a regression, but here the response variable is the abundance table (after Hellinger transformation).</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">We use the soil explanatory variables that we already standardised.</span></p></li>
+</ul>
+</section>
+<section id="rda---output" class="slide level2 smaller">
+<h2>RDA - Output</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a><span class="fu">summary</span>(vare_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+rda(formula = spec_hel ~ pH + N + Mo + P, data = soil_norm) 
+
+Partitioning of variance:
+              Inertia Proportion
+Total          0.3647     1.0000
+Constrained    0.1190     0.3262
+Unconstrained  0.2457     0.6738
+
+Eigenvalues, and their contribution to the variance 
+
+Importance of components:
+                         RDA1    RDA2    RDA3     RDA4    PC1     PC2    PC3
+Eigenvalue            0.06963 0.03131 0.01048 0.007551 0.0919 0.04617 0.0260
+Proportion Explained  0.19095 0.08585 0.02874 0.020707 0.2520 0.12661 0.0713
+Cumulative Proportion 0.19095 0.27680 0.30554 0.326246 0.5782 0.70485 0.7762
+                          PC4     PC5    PC6      PC7      PC8      PC9
+Eigenvalue            0.01782 0.01444 0.0101 0.009309 0.007841 0.006657
+Proportion Explained  0.04886 0.03961 0.0277 0.025527 0.021503 0.018255
+Cumulative Proportion 0.82501 0.86462 0.8923 0.917852 0.939355 0.957610
+                          PC10     PC11     PC12     PC13      PC14      PC15
+Eigenvalue            0.005373 0.003198 0.001731 0.001587 0.0008924 0.0008017
+Proportion Explained  0.014735 0.008770 0.004746 0.004353 0.0024471 0.0021985
+Cumulative Proportion 0.972345 0.981115 0.985861 0.990214 0.9926608 0.9948593
+                           PC16      PC17      PC18      PC19
+Eigenvalue            0.0005982 0.0005343 0.0004444 0.0002977
+Proportion Explained  0.0016404 0.0014652 0.0012187 0.0008164
+Cumulative Proportion 0.9964997 0.9979649 0.9991836 1.0000000
+
+Accumulated constrained eigenvalues
+Importance of components:
+                         RDA1    RDA2    RDA3     RDA4
+Eigenvalue            0.06963 0.03131 0.01048 0.007551
+Proportion Explained  0.58529 0.26315 0.08809 0.063469
+Cumulative Proportion 0.58529 0.84844 0.93653 1.000000</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">The output includes:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">The inertia (<em>i.e.</em> total variance) partitioned into a part explained by the constrained axes, and a residual part (unconstrained).</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">The first axes (RDA1, RDA2, …) are the constrained axes, representing the variation explained by the explanatory variables.</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">The remaining axes (PC1, PC2, …) are unconstrained and represent the residual variation not explained by the explanatory variables.</span></p></li>
+</ul>
+</div></div>
+<aside class="notes">
+<p>not great as not much variation explained by the constrained part…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="rda---goodness-of-fit" class="slide level2">
+<h2>RDA - Goodness of fit</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="fu">RsquareAdj</span>(vare_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>$r.squared
+[1] 0.3262456
+
+$adj.r.squared
+[1] 0.1844026</code></pre>
+</div>
+</div>
+<ul>
+<li class="fragment"><p><span class="math inline">\(R^2\)</span> is the percentage of variance explained by the constrained part (as shown in the output)</p></li>
+<li class="fragment"><p><span class="math inline">\(R^2\)</span> adjusted is corrected to take into account the number of explanatory variables</p></li>
+</ul>
+<aside class="notes">
+<p>as seen, not super good model…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="rda---vif" class="slide level2">
+<h2>RDA - VIF</h2>
+<p>As for a linear regression, we can use the VIF (<em>variance inflation factor</em>) obtained with <span style="color:indianred;">vif.cca</span>, to check that there is not too much collinearity (too much if &gt; 10):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a><span class="fu">vif.cca</span>(vare_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>      pH        N       Mo        P 
+1.034667 1.070768 1.062915 1.096808 </code></pre>
+</div>
+</div>
+</section>
+<section id="rda---significance-testing" class="slide level2 smaller">
+<h2>RDA - Significance testing</h2>
+<p><span style="font-size: 30px">The significance of the RDA is obtained with <span style="color:indianred;">anova.cca</span>.</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">Significance of the whole model:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a><span class="fu">anova.cca</span>(vare_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Permutation test for rda under reduced model
+Permutation: free
+Number of permutations: 999
+
+Model: rda(formula = spec_hel ~ pH + N + Mo + P, data = soil_norm)
+         Df Variance   F Pr(&gt;F)   
+Model     4  0.11897 2.3  0.004 **
+Residual 19  0.24570              
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">Significance of each explanatory variable:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a><span class="fu">anova.cca</span>(vare_rda, <span class="at">by =</span> <span class="st">"term"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>Permutation test for rda under reduced model
+Terms added sequentially (first to last)
+Permutation: free
+Number of permutations: 999
+
+Model: rda(formula = spec_hel ~ pH + N + Mo + P, data = soil_norm)
+         Df Variance      F Pr(&gt;F)   
+pH        1 0.041829 3.2346  0.007 **
+N         1 0.023960 1.8528  0.102   
+Mo        1 0.018360 1.4198  0.202   
+P         1 0.034825 2.6930  0.029 * 
+Residual 19 0.245700                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="rda---visualisation" class="slide level2">
+<h2>RDA - Visualisation</h2>
+<p>RDA is visuallised using a triplot (as it represents the sites, the species and the environmental variables).</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">Scaling 1 focusses on the sites:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a><span class="fu">plot</span>(vare_rda, <span class="at">scaling =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-52-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">Scaling 2 focusses on the species:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a><span class="fu">plot</span>(vare_rda, <span class="at">scaling =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-53-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="cca---principle" class="slide level2">
+<h2>CCA - Principle</h2>
+<p><strong>Canonical Correspondence Analysis</strong> (CCA) is the constrained equivalent of Correspondence Analysis (CA).</p>
+<p>It is therefore based on <span class="math inline">\(\chi^2\)</span> distance and assumes <strong>unimodal</strong> relationships between species and environmental variables.</p>
+</section>
+<section id="cca---running-a-cca" class="slide level2">
+<h2>CCA - Running a CCA</h2>
+<p><span style="font-size: 30px">We run the CCA with <span style="color:indianred;">cca</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a>vare_cca <span class="ot">&lt;-</span> <span class="fu">cca</span>(spec_hel <span class="sc">~</span> pH <span class="sc">+</span> N <span class="sc">+</span> Mo <span class="sc">+</span> P,</span>
+<span id="cb76-2"><a href=""></a>                <span class="at">data =</span> soil_norm)</span>
+<span id="cb76-3"><a href=""></a><span class="fu">summary</span>(vare_cca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+cca(formula = spec_hel ~ pH + N + Mo + P, data = soil_norm) 
+
+Partitioning of scaled Chi-square:
+              Inertia Proportion
+Total          1.0785     1.0000
+Constrained    0.2693     0.2497
+Unconstrained  0.8091     0.7503
+
+Eigenvalues, and their contribution to the scaled Chi-square 
+
+Importance of components:
+                        CCA1    CCA2    CCA3    CCA4    CA1    CA2     CA3
+Eigenvalue            0.1265 0.06809 0.04340 0.03132 0.1696 0.1589 0.09598
+Proportion Explained  0.1173 0.06313 0.04024 0.02904 0.1573 0.1474 0.08899
+Cumulative Proportion 0.1173 0.18046 0.22070 0.24974 0.4070 0.5544 0.64335
+                          CA4     CA5     CA6     CA7     CA8     CA9    CA10
+Eigenvalue            0.07226 0.06689 0.05607 0.04324 0.02831 0.02408 0.02256
+Proportion Explained  0.06700 0.06202 0.05199 0.04009 0.02625 0.02233 0.02092
+Cumulative Proportion 0.71035 0.77238 0.82436 0.86445 0.89071 0.91303 0.93395
+                         CA11    CA12    CA13     CA14     CA15     CA16
+Eigenvalue            0.01736 0.01156 0.01103 0.008615 0.006007 0.005498
+Proportion Explained  0.01609 0.01072 0.01023 0.007988 0.005570 0.005098
+Cumulative Proportion 0.95005 0.96077 0.97100 0.978985 0.984555 0.989653
+                          CA17     CA18     CA19
+Eigenvalue            0.004511 0.003574 0.003073
+Proportion Explained  0.004183 0.003314 0.002850
+Cumulative Proportion 0.993836 0.997150 1.000000
+
+Accumulated constrained eigenvalues
+Importance of components:
+                        CCA1    CCA2   CCA3    CCA4
+Eigenvalue            0.1265 0.06809 0.0434 0.03132
+Proportion Explained  0.4698 0.25280 0.1611 0.11628
+Cumulative Proportion 0.4698 0.72258 0.8837 1.00000</code></pre>
+</div>
+</div>
+</section>
+<section id="cca---interpretation" class="slide level2">
+<h2>CCA - Interpretation</h2>
+<p>The rest is similar to the RDA:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a><span class="fu">RsquareAdj</span>(vare_cca)</span>
+<span id="cb78-2"><a href=""></a><span class="fu">anova.cca</span>(vare_cca)</span>
+<span id="cb78-3"><a href=""></a><span class="fu">anova.cca</span>(vare_cca, <span class="at">by =</span> <span class="st">"term"</span>)</span>
+<span id="cb78-4"><a href=""></a><span class="fu">plot</span>(vare_cca, <span class="at">scaling =</span> <span class="dv">1</span>)</span>
+<span id="cb78-5"><a href=""></a><span class="fu">plot</span>(vare_cca, <span class="at">scaling =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<aside class="notes">
+<p>not ran here, diy</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="db-rda---principle" class="slide level2">
+<h2>db-RDA - Principle</h2>
+<p><strong>Distance-based Redundancy analysis</strong> (db-RDA) is the constrained equivalent of Principal Coordinate Analysis (PCoA).</p>
+<p>It can therefore be used with a variety of distance measures (commonly Bray-Curtis)</p>
+</section>
+<section id="db-rda---running-db-rda" class="slide level2">
+<h2>db-RDA - Running db-RDA</h2>
+<p><span style="font-size: 30px">We run the db-RDA with <span style="color:indianred;">dbrda</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a>vare_dbrda <span class="ot">&lt;-</span> <span class="fu">dbrda</span>(spec_hel <span class="sc">~</span> pH <span class="sc">+</span> N <span class="sc">+</span> Mo <span class="sc">+</span> P,</span>
+<span id="cb79-2"><a href=""></a>                <span class="at">data =</span> soil_norm,</span>
+<span id="cb79-3"><a href=""></a>                <span class="at">distance =</span> <span class="st">"bray"</span>)</span>
+<span id="cb79-4"><a href=""></a><span class="fu">summary</span>(vare_dbrda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+dbrda(formula = spec_hel ~ pH + N + Mo + P, data = soil_norm,      distance = "bray") 
+
+Partitioning of squared Bray distance:
+              Inertia Proportion
+Total          2.4141      1.000
+Constrained    0.7461      0.309
+Unconstrained  1.6680      0.691
+
+Eigenvalues, and their contribution to the squared Bray distance 
+
+Importance of components:
+                      dbRDA1  dbRDA2  dbRDA3  dbRDA4   MDS1   MDS2    MDS3
+Eigenvalue            0.4372 0.19022 0.07914 0.03950 0.5152 0.3889 0.16885
+Proportion Explained  0.1811 0.07879 0.03278 0.01636 0.2134 0.1611 0.06995
+Cumulative Proportion 0.1811 0.25990 0.29269 0.30905 0.5225 0.6836 0.75352
+                         MDS4    MDS5    MDS6    MDS7    MDS8    MDS9   MDS10
+Eigenvalue            0.14887 0.11600 0.10271 0.08099 0.07761 0.04623 0.03680
+Proportion Explained  0.06167 0.04805 0.04255 0.03355 0.03215 0.01915 0.01524
+Cumulative Proportion 0.81519 0.86325 0.90579 0.93934 0.97149 0.99064 1.00589
+                        MDS11    MDS12    MDS13    MDS14     MDS15      iMDS1
+Eigenvalue            0.02591 0.015991 0.008064 0.005511 2.337e-04 -0.0023018
+Proportion Explained  0.01073 0.006624 0.003340 0.002283 9.682e-05 -0.0009535
+Cumulative Proportion 1.01662 1.023246 1.026586 1.028869 1.029e+00  1.0280122
+                          iMDS2    iMDS3    iMDS4
+Eigenvalue            -0.013127 -0.02573 -0.02877
+Proportion Explained  -0.005438 -0.01066 -0.01192
+Cumulative Proportion  1.022574  1.01192  1.00000
+
+Accumulated constrained eigenvalues
+Importance of components:
+                      dbRDA1 dbRDA2  dbRDA3  dbRDA4
+Eigenvalue            0.4372 0.1902 0.07914 0.03950
+Proportion Explained  0.5860 0.2550 0.10608 0.05294
+Cumulative Proportion 0.5860 0.8410 0.94706 1.00000</code></pre>
+</div>
+</div>
+</section>
+<section id="db-rda---interpretation" class="slide level2">
+<h2>db-RDA - Interpretation</h2>
+<p>The rest is similar to the RDA:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a><span class="fu">RsquareAdj</span>(vare_dbrda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>$r.squared
+[1] 0.3090468
+
+$adj.r.squared
+[1] 0.163583</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href=""></a><span class="fu">anova.cca</span>(vare_dbrda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Permutation test for dbrda under reduced model
+Permutation: free
+Number of permutations: 999
+
+Model: dbrda(formula = spec_hel ~ pH + N + Mo + P, data = soil_norm, distance = "bray")
+         Df SumOfSqs      F Pr(&gt;F)   
+Model     4  0.74606 2.1246  0.005 **
+Residual 19  1.66800                 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href=""></a><span class="fu">anova.cca</span>(vare_dbrda, <span class="at">by =</span> <span class="st">"term"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Permutation test for dbrda under reduced model
+Terms added sequentially (first to last)
+Permutation: free
+Number of permutations: 999
+
+Model: dbrda(formula = spec_hel ~ pH + N + Mo + P, data = soil_norm, distance = "bray")
+         Df SumOfSqs      F Pr(&gt;F)  
+pH        1  0.24217 2.7585  0.016 *
+N         1  0.16811 1.9149  0.094 .
+Mo        1  0.11753 1.3387  0.224  
+P         1  0.21825 2.4860  0.038 *
+Residual 19  1.66800                
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href=""></a><span class="fu">plot</span>(vare_dbrda, <span class="at">scaling =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-57-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a><span class="fu">plot</span>(vare_dbrda, <span class="at">scaling =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-57-2.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>not ran here, diy</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="acknowledgments" class="title-slide slide level1 center">
+<h1>Acknowledgments</h1>
+<div>
+<ul>
+<li><p>Marchand P. <em>Analyses et modélisation des données écologiques</em> <a href="https://pmarchand1.github.io/ECL7102/" data-preview-link="false">in French</a></p></li>
+<li><p>Marcon E. <em>cours-R-Geeft</em> <a href="https://ericmarcon.github.io/Cours-R-Geeft/" data-preview-link="false">in French</a></p></li>
+<li><p>Simpson G. <em>Multivariate data analysis with R and vegan</em> <a href="https://github.com/gavinsimpson/physalia-multivariate?tab=readme-ov-file" data-preview-link="false">here</a></p></li>
+<li><p>QCBS R Workshop Series <em>Multivariate Analyses in R</em> <a href="https://r.qcbs.ca/workshop09/book-en/" data-preview-link="false">here</a> and <em>Advanced Multivariate Analyses in R</em> <a href="https://r.qcbs.ca/workshop10/book-en/index.html" data-preview-link="false">here</a></p></li>
+</ul>
+</div>
 </section>
 <section id="resources" class="slide level2">
 <h2>Resources</h2>
-<p>https://gavinsimpson.github.io/physalia-multivariate/02-tuesday/slides.html#62 some advice on how to change the plots</p>
-<p>to go further the ggvegan package (not on cran) to make ggplot style graph from ordination results https://rdrr.io/github/gavinsimpson/ggvegan/#vignettes</p>
-<!-- brouillon -->
+<div>
+<ul>
+<li><p>Simpson G. <em>Multivariate data analysis with R and vegan</em> <a href="https://gavinsimpson.github.io/physalia-multivariate/02-tuesday" data-preview-link="false">here</a> and <a href="https://gavinsimpson.github.io/physalia-multivariate/03-wednesday" data-preview-link="false">here</a> (includes some advice on how to customise the plots and extract the results)</p></li>
+<li><p>QCBS R Workshop Series <em>Multivariate Analyses in R</em> <a href="https://r.qcbs.ca/workshop09/book-en/" data-preview-link="false">here</a> and <em>Advanced Multivariate Analyses in R</em> <a href="https://r.qcbs.ca/workshop10/book-en/index.html" data-preview-link="false">here</a></p></li>
+</ul>
+</div>
 </section>
-<section id="section" class="slide level2">
-<h2></h2>
-<p>analyses multivariées</p>
-<p>https://ericmarcon.github.io/Cours-R-Geeft/Ordination.html#43</p>
-<p>https://pmarchand1.github.io/ECL7102/notes_cours/13-Analyses_multivariees_Partie1.html</p>
-<p>aussi mon livre de stat</p>
-<p>Eric utilise à la fois ade4 et vegan =&gt; voir pourquoi?</p>
-<p>Voir aussi Borcard, Gillet Legendre, numerical ecology with R version de 2018</p>
+<section id="resources-to-go-further" class="slide level2">
+<h2>Resources to go further</h2>
+<p>Package <a href="https://rdrr.io/github/gavinsimpson/ggvegan/#vignettes" data-preview-link="false">ggvegan</a> to make ggplot style graph from ordination results (not on CRAN)</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

@@ -118,11 +118,13 @@ https://r.qcbs.ca/workshop09/book-en/setting-up-our-goals.html
 
 Marchand + Eric --> 
 
-[Unconstrained ordination methods are used to visualise and explore the relationships among variables or observations without imposing any specific constraints on the relationships.]{style="font-size: 30px"}
+## Principle
+
+[Unconstrained ordination methods are used to **visualise and explore the relationships among variables or observations** without imposing any specific constraints on the relationships.]{style="font-size: 30px"}
 
 [The objective is to identify a few axes that capture most of the variation in a multidimensional dataset, allowing for a simplified yet informative representation.]{style="font-size: 30px"}
 
-[This allows to visualise similarities among observations, as more similar observations will be closer in the reduced-dimentional spaces.]{style="font-size: 30px"}
+[This allows to **visualise similarities among observations**, as more similar observations will be closer in the reduced-dimensional spaces.]{style="font-size: 30px"}
 
 <!-- voir aussi Marchand session 2 sur l'explication des différentes distances--> 
 
@@ -735,9 +737,9 @@ resum <- data.frame(Method = c("PCA", "CA", "PCoA", "NMDS"),
                                   "Metric based on several types of distances",
                                   "Based on rank, with several types of distances"),
                     Use = c("Environmental data (or species data on short gradients)",
-                            "Species data with non linear responses, chi^2^ give more weight to rare species than Bray-Curtis",
-                            "Any kind of data, Bray-Curtis more sensitive to abundant species",
-                            "Very flexible and robust for non-linear responsez, many zeros..."))
+                            "Species data with non linear responses. chi^2^ give more weight to rare species than Bray-Curtis",
+                            "Any kind of data. Bray-Curtis more sensitive to abundant species",
+                            "Very flexible and robust for non-linear responses, many zeros..."))
 knitr::kable(resum)
 ```
 
@@ -912,71 +914,297 @@ you can retreive everything from the ordinations, need to check the vignette and
 
 # Constrained ordination methods
 
-<!-- ressource
+## Principle
 
-https://r.qcbs.ca/workshop10/book-en/multivariate-regression-tree.html
+[In constrained ordination methods, the choice of the axes is based on the response to explanatory variables.
+These methods combine the concepts of **ordination** and **regression**.]{style="font-size: 30px"}
 
-https://gavinsimpson.github.io/physalia-multivariate/03-wednesday/slides.html#1
+::: fragment
 
-Marchand + Eric --> 
+[The objective of constrained ordinations is to identify **relationships between a multivariate response table and a multivariate explanatory table**.]{style="font-size: 30px"}
 
-explain difference between samples using external variables
+::::: columns
+::: {.column width="50%"}
 
-=> eg: enviro to explain sp composition
+[Constrained ordination can be used to identify relationships between the species composition of communities (here *Y*) and environmental variables (here *X*).]{style="font-size: 28px"}
+:::
 
-TRY them on varespec and varechem (sinon on dune)
+::: {.column width="50%"}
+![](constrained.png)
+:::
+:::::
+
+:::
+
+## Collinearity {.smaller}
+
+[As in multiple linear regression, we need to avoid collinearity of explanatory variables.]{style="font-size: 30px"}
+
+[In a real study, we will choose the variables to include based on our **hypotheses**.]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+
+[We can look use the PCA of soil variables to choose variables with little correlation:]{style="font-size: 30px"}
+
+```{r}
+#| fig-height: 6
+biplot(soil_pca, scaling = 2, display = "species")
+```
+
+:::
+
+::: {.column width="50%"}
+
+[Let's choose *pH*, *N*, *Mo*, *P*, and check how correlated they are:]{style="font-size: 30px"}
+
+```{r}
+#| message: false
+GGally::ggpairs(soil_norm[,c("pH", "N", "Mo", "P")])
+```
+:::
+:::::
 
 
-think about transforming data (Hellinguer for RDA) and standardising explanatory variables 
+## RDA - Principle
 
-!!! before performing a RDA (or a CCA??) remove collinear explanatory variables
+**Redundancy analysis** (RDA) is the constrained equivalent of Principal Component Analysis (PCA).
 
-<!--
+It is therefore based on Euclidean distance and assumes **linear** relationships between species and environmental variables.
 
-Explained what is constrained
 
-RDA: constrained equivalent of PCA => needs Hellinguer transfo (say that we could also do a hellinguer transfo for a PCA on species data, but not shown)
+## RDA - Hellinger transformation 
 
-CCA: constrained equivalent to CCA
+To do a RDA (or a PCA) on a table of abundance of species, a Hellinger transformation is required. 
+Hellinger distance has a more linear response to changes in species abundance.
 
-equivalent of PCoA and NMDS???
+We can do this transformation using [decostand]{style="color:indianred;"}:
 
-Permanova??? Permanova is not an ordination methods
+```{r}
+spec_hel <- decostand(varespec, method  ="hellinger")
+```
 
--->
 
-## Ressources
+## RDA - Running a RDA 
 
-Marchand
+[We run the RDA with [rda]{style="color:indianred;"}:]{style="font-size: 30px"}
 
-Eric
+```{r}
+vare_rda <- rda(spec_hel ~ pH + N + Mo + P, # formula
+                data = soil_norm)
+```
 
-https://github.com/gavinsimpson/physalia-multivariate?tab=readme-ov-file
+* [The formula is quite similar to the formula of a regression, but here the response variable is the abundance table (after Hellinger transformation).]{style="font-size: 30px"}
 
-https://r.qcbs.ca/workshop09/book-en/ and https://r.qcbs.ca/workshop10/book-en/
+* [We use the soil explanatory variables that we already standardised.]{style="font-size: 30px"}
+
+## RDA - Output {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+
+```{r}
+summary(vare_rda)
+```
+
+:::
+
+::: {.column width="50%"}
+
+[The output includes:]{style="font-size: 30px"}
+
+* [The inertia (*i.e.* total variance) partitioned into a part explained by the constrained axes, and a residual part (unconstrained).]{style="font-size: 30px"}
+
+* [The first axes (RDA1, RDA2, ...) are the constrained axes, representing the variation explained by the explanatory variables.]{style="font-size: 30px"}
+
+* [The remaining axes (PC1, PC2, ...) are unconstrained and represent the residual variation not explained by the explanatory variables.]{style="font-size: 30px"}
+:::
+:::::
+
+::: notes
+not great as not much variation explained by the constrained part...
+:::
+
+
+## RDA - Goodness of fit
+
+```{r}
+RsquareAdj(vare_rda)
+```
+
+* $R^2$ is the percentage of variance explained by the constrained part (as shown in the output)
+
+* $R^2$ adjusted is corrected to take into account the number of explanatory variables 
+
+::: notes
+as seen, not super good model...
+:::
+
+## RDA - VIF
+
+As for a linear regression, we can use the VIF (*variance inflation factor*) obtained with [vif.cca]{style="color:indianred;"}, to check that there is not too much collinearity (too much if > 10):
+
+```{r}
+vif.cca(vare_rda)
+```
+
+
+## RDA - Significance testing {.smaller}
+
+[The significance of the RDA is obtained with [anova.cca]{style="color:indianred;"}.]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+
+[Significance of the whole model:]{style="font-size: 30px"}
+
+```{r}
+anova.cca(vare_rda)
+```
+
+:::
+
+::: {.column width="50%"}
+
+::: fragment
+
+[Significance of each explanatory variable:]{style="font-size: 30px"}
+
+```{r}
+anova.cca(vare_rda, by = "term")
+```
+
+:::
+:::
+:::::
+
+## RDA - Visualisation
+
+RDA is visuallised using a triplot (as it represents the sites, the species and the environmental variables).
+
+::::: columns
+::: {.column width="50%"}
+
+[Scaling 1 focusses on the sites:]{style="font-size: 30px"}
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(vare_rda, scaling = 1)
+```
+
+:::
+
+::: {.column width="50%"}
+
+[Scaling 2 focusses on the species:]{style="font-size: 30px"}
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(vare_rda, scaling = 2)
+```
+
+:::
+:::::
+
+
+## CCA - Principle
+
+**Canonical Correspondence Analysis** (CCA) is the constrained equivalent of Correspondence Analysis (CA).
+
+It is therefore based on $\chi^2$ distance and assumes **unimodal** relationships between species and environmental variables.
+
+
+## CCA - Running a CCA
+
+[We run the CCA with [cca]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+vare_cca <- cca(spec_hel ~ pH + N + Mo + P,
+                data = soil_norm)
+summary(vare_cca)
+```
+
+## CCA - Interpretation
+
+The rest is similar to the RDA:
+
+```{r, eval=FALSE}
+RsquareAdj(vare_cca)
+anova.cca(vare_cca)
+anova.cca(vare_cca, by = "term")
+plot(vare_cca, scaling = 1)
+plot(vare_cca, scaling = 2)
+```
+
+::: notes
+not ran here, diy
+:::
+
+## db-RDA - Principle
+
+**Distance-based Redundancy analysis** (db-RDA) is the constrained equivalent of Principal Coordinate Analysis (PCoA).
+
+It can therefore be used with a variety of distance measures (commonly Bray-Curtis)
+
+
+## db-RDA - Running db-RDA
+
+[We run the db-RDA with [dbrda]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+vare_dbrda <- dbrda(spec_hel ~ pH + N + Mo + P,
+                data = soil_norm,
+                distance = "bray")
+summary(vare_dbrda)
+```
+
+## db-RDA - Interpretation
+
+The rest is similar to the RDA:
+
+```{r}
+RsquareAdj(vare_dbrda)
+anova.cca(vare_dbrda)
+anova.cca(vare_dbrda, by = "term")
+plot(vare_dbrda, scaling = 1)
+plot(vare_dbrda, scaling = 2)
+```
+
+::: notes
+not ran here, diy
+:::
+
+
+# Acknowledgments
+
+::: {.nonincremental}
+
+* Marchand P. *Analyses et modélisation des données écologiques* [in French](https://pmarchand1.github.io/ECL7102/){preview-link="false"}
+
+* Marcon E. *cours-R-Geeft* [in French](https://ericmarcon.github.io/Cours-R-Geeft/){preview-link="false"}
+
+* Simpson G. *Multivariate data analysis with R and vegan* [here](https://github.com/gavinsimpson/physalia-multivariate?tab=readme-ov-file){preview-link="false"}
+
+* QCBS R Workshop Series *Multivariate Analyses in R* [here](https://r.qcbs.ca/workshop09/book-en/){preview-link="false"} and *Advanced Multivariate Analyses in R* [here](https://r.qcbs.ca/workshop10/book-en/index.html){preview-link="false"}
+
+:::
 
 
 ## Resources
 
-https://gavinsimpson.github.io/physalia-multivariate/02-tuesday/slides.html#62
-some advice on how to change the plots
+::: {.nonincremental}
 
-to go further the ggvegan package (not on cran) to make ggplot style graph from ordination results
-https://rdrr.io/github/gavinsimpson/ggvegan/#vignettes
+* Simpson G. *Multivariate data analysis with R and vegan* [here](https://gavinsimpson.github.io/physalia-multivariate/02-tuesday){preview-link="false"} and [here](https://gavinsimpson.github.io/physalia-multivariate/03-wednesday){preview-link="false"} (includes some advice on how to customise the plots and extract the results)
+
+* QCBS R Workshop Series *Multivariate Analyses in R* [here](https://r.qcbs.ca/workshop09/book-en/){preview-link="false"} and *Advanced Multivariate Analyses in R* [here](https://r.qcbs.ca/workshop10/book-en/index.html){preview-link="false"}
+
+:::
 
 
-<!-- brouillon -->
+## Resources to go further
 
-##
+Package [ggvegan](https://rdrr.io/github/gavinsimpson/ggvegan/#vignettes){preview-link="false"}
+to make ggplot style graph from ordination results (not on CRAN)
 
-analyses multivariées
-
-https://ericmarcon.github.io/Cours-R-Geeft/Ordination.html#43
-
-https://pmarchand1.github.io/ECL7102/notes_cours/13-Analyses_multivariees_Partie1.html
-
-aussi mon livre de stat
-
-Eric utilise à la fois ade4 et vegan => voir pourquoi?
-
-Voir aussi Borcard, Gillet Legendre, numerical ecology with R version de 2018
