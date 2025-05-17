@@ -757,33 +757,77 @@ Let's do a clustering of the plots based on the soil data.
 
 * As for the PCA, we first need to standardise the variables:
 
+::: fragment
 ```{r}
 soil_norm <- as.data.frame(scale(varechem))
 ```
+:::
 
 * We then compute the distance matrix:
 
+::: fragment
 ```{r}
 soil_dist <- dist(soil_norm)
 ```
+:::
 
 * We then perform the clustering using [hclust]{style="color:indianred;"}. Here we use the method of Ward:
 
+::: fragment
 ```{r}
 soil_clust <- hclust(soil_dist, method = "ward.D2")
 ```
+:::
 
-## Different methods
+## Different methods of clustering
+
+Different methods of clustering can be used.
+
+* *Ward clustering* minimise intra-group variance
+
+* *single linkage*: connects clusters based on the shortest distance between any two points within those clusters 
+
+* *complete linkage*: connects clusters based on the longest distance between any two points within those clusters
+
+* *average linkage*: connects clusters based on the average distance between all pairs of points within those clusters
+
+[[The best methods depends on the data, but the Ward method is often a good choice.]{style="font-size: 30px"}]{.fragment}
 
 ## Dendrogram
+
+::::: columns
+::: {.column width="70%"}
+
+[We use [plot]{style="color:indianred;"} to get the dendrogram.]{style="font-size: 30px"}
 
 ```{r}
 plot(soil_clust)
 ```
 
-Here we could do 3 or 5 groups
+:::
+
+::: {.column width="30%"}
+* [Horizontal lines represent grouping.]{style="font-size: 30px"}
+
+* [The length of vertical lines correspond to the distance between groupings.]{style="font-size: 30px"}
+
+:::
+:::::
+
+[[Here there is not obvious choice for the number of groups... We can possibly make 3 or 5 groups.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+vertical distance: here for instance, making 2 groups is not very different from making 3 groups
+
+voir aussi around 16, 18, 14
+
+show on the backboard an example where we would have a clear choice
+:::
+
 
 ## Extract the groups
+
+We can extract the groups using [cutree]{style="color:indianred;"}:
 
 ```{r}
 # 3 groups
@@ -795,7 +839,12 @@ soil_5_group # this is a name vector
 ```
 
 
-## Compare groups with PCA
+## Compare groups with PCA {.smaller}
+
+[We can also represent the groups on the PCA biplot:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="65%"}
 
 ```{r}
 # extract the scores of the sites on the two first PCs
@@ -804,34 +853,62 @@ soil_5_group # this is a name vector
                            display = "sites",
                            choices = 1:2))
 # check that plots are in the same order
-all(row.names(dt_soil_groups) == names(soil_3_group))
-all(row.names(dt_soil_groups) == names(soil_5_group))
+  all(row.names(dt_soil_groups) == names(soil_3_group))
+  all(row.names(dt_soil_groups) == names(soil_5_group))
 
-# 
-dt_soil_groups$G3 <- as.factor(soil_3_group)
-dt_soil_groups$G5 <- as.factor(soil_5_group)
+# add groups to the PCs data 
+  dt_soil_groups$G3 <- as.factor(soil_3_group)
+  dt_soil_groups$G5 <- as.factor(soil_5_group)
+```
+
+:::
+
+::: {.column width="35%"}
+```{r}
 
 head(dt_soil_groups)
 ```
 
-## Compare groups with PCA
+:::
+:::::
+
+
+## Compare groups with PCA {.smaller}
+
+::::: columns
+::: {.column width="50%"}
 
 ```{r}
 library(ggplot2)
 ggplot(dt_soil_groups,
        aes(x = PC1, y = PC2, color = G3)) + 
-  geom_text(aes(label = rownames(dt_soil_groups))) 
+  geom_text(aes(label = rownames(dt_soil_groups)), 
+            size = 8) + 
+  theme_classic()
 ```
 
+:::
 
-plot on a pca (et en profiter pour parler du fait qu'on peut custommiser touts les plots avec ggplot, il faut juste extraire les bonnes données)
+::: {.column width="50%"}
 
-to get the scores on PCs:
+```{r}
+#
+ggplot(dt_soil_groups,
+       aes(x = PC1, y = PC2, color = G5)) + 
+  geom_text(aes(label = rownames(dt_soil_groups)),
+            size = 8) + 
+  theme_classic()
+```
 
-scores(soil_pca, scaling = "sites", display = "sites", choices = 1:2)
+:::
+:::::
 
 
+[[💡 Note how we retrieve the scores of the ordination to be able to use ggplot to customise the plot.]{style="font-size: 30px"}]{.fragment}
 
+::: notes
+you can retreive everything from the ordinations, need to check the vignette and help of the package vegan to learn how to do it...
+:::
 
 # Constrained ordination methods
 

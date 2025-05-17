@@ -1489,36 +1489,53 @@ Species: expanded scores based on 'dune' </code></pre>
 <ul>
 <li class="fragment">As for the PCA, we first need to standardise the variables:</li>
 </ul>
+<div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>soil_norm <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(varechem))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
+</div>
 <ul>
 <li class="fragment">We then compute the distance matrix:</li>
 </ul>
+<div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>soil_dist <span class="ot">&lt;-</span> <span class="fu">dist</span>(soil_norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
+</div>
 <ul>
 <li class="fragment">We then perform the clustering using <span style="color:indianred;">hclust</span>. Here we use the method of Ward:</li>
 </ul>
+<div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>soil_clust <span class="ot">&lt;-</span> <span class="fu">hclust</span>(soil_dist, <span class="at">method =</span> <span class="st">"ward.D2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
+</div>
 </section>
-<section id="different-methods" class="slide level2">
-<h2>Different methods</h2>
+<section id="different-methods-of-clustering" class="slide level2">
+<h2>Different methods of clustering</h2>
+<p>Different methods of clustering can be used.</p>
+<ul>
+<li class="fragment"><p><em>Ward clustering</em> minimise intra-group variance</p></li>
+<li class="fragment"><p><em>single linkage</em>: connects clusters based on the shortest distance between any two points within those clusters</p></li>
+<li class="fragment"><p><em>complete linkage</em>: connects clusters based on the longest distance between any two points within those clusters</p></li>
+<li class="fragment"><p><em>average linkage</em>: connects clusters based on the average distance between all pairs of points within those clusters</p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">The best methods depends on the data, but the Ward method is often a good choice.</span></span></p>
 </section>
 <section id="dendrogram" class="slide level2">
 <h2>Dendrogram</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p><span style="font-size: 30px">We use <span style="color:indianred;">plot</span> to get the dendrogram.</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">plot</span>(soil_clust)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1531,10 +1548,32 @@ Species: expanded scores based on 'dune' </code></pre>
 </div>
 </div>
 </div>
-<p>Here we could do 3 or 5 groups</p>
+</div><div class="column" style="width:30%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">Horizontal lines represent grouping.</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">The length of vertical lines correspond to the distance between groupings.</span></p></li>
+</ul>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px">Here there is not obvious choice for the number of groups… We can possibly make 3 or 5 groups.</span></span></p>
+<aside class="notes">
+<p>vertical distance: here for instance, making 2 groups is not very different from making 3 groups</p>
+<p>voir aussi around 16, 18, 14</p>
+<p>show on the backboard an example where we would have a clear choice</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="extract-the-groups" class="slide level2">
 <h2>Extract the groups</h2>
+<p>We can extract the groups using <span style="color:indianred;">cutree</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a><span class="co"># 3 groups</span></span>
 <span id="cb49-2"><a href=""></a>soil_3_group <span class="ot">&lt;-</span> <span class="fu">cutree</span>(soil_clust, <span class="at">k =</span> <span class="dv">3</span>)</span>
@@ -1550,8 +1589,11 @@ Species: expanded scores based on 'dune' </code></pre>
 </div>
 </div>
 </section>
-<section id="compare-groups-with-pca" class="slide level2">
+<section id="compare-groups-with-pca" class="slide level2 smaller">
 <h2>Compare groups with PCA</h2>
+<p><span style="font-size: 30px">We can also represent the groups on the PCA biplot:</span></p>
+<div class="columns">
+<div class="column" style="width:65%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="co"># extract the scores of the sites on the two first PCs</span></span>
 <span id="cb51-2"><a href=""></a>  dt_soil_groups <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scores</span>(soil_pca, </span>
@@ -1559,21 +1601,25 @@ Species: expanded scores based on 'dune' </code></pre>
 <span id="cb51-4"><a href=""></a>                           <span class="at">display =</span> <span class="st">"sites"</span>,</span>
 <span id="cb51-5"><a href=""></a>                           <span class="at">choices =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>))</span>
 <span id="cb51-6"><a href=""></a><span class="co"># check that plots are in the same order</span></span>
-<span id="cb51-7"><a href=""></a><span class="fu">all</span>(<span class="fu">row.names</span>(dt_soil_groups) <span class="sc">==</span> <span class="fu">names</span>(soil_3_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb51-7"><a href=""></a>  <span class="fu">all</span>(<span class="fu">row.names</span>(dt_soil_groups) <span class="sc">==</span> <span class="fu">names</span>(soil_3_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a><span class="fu">all</span>(<span class="fu">row.names</span>(dt_soil_groups) <span class="sc">==</span> <span class="fu">names</span>(soil_5_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a>  <span class="fu">all</span>(<span class="fu">row.names</span>(dt_soil_groups) <span class="sc">==</span> <span class="fu">names</span>(soil_5_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="co"># </span></span>
-<span id="cb55-2"><a href=""></a>dt_soil_groups<span class="sc">$</span>G3 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(soil_3_group)</span>
-<span id="cb55-3"><a href=""></a>dt_soil_groups<span class="sc">$</span>G5 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(soil_5_group)</span>
-<span id="cb55-4"><a href=""></a></span>
-<span id="cb55-5"><a href=""></a><span class="fu">head</span>(dt_soil_groups)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="co"># add groups to the PCs data </span></span>
+<span id="cb55-2"><a href=""></a>  dt_soil_groups<span class="sc">$</span>G3 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(soil_3_group)</span>
+<span id="cb55-3"><a href=""></a>  dt_soil_groups<span class="sc">$</span>G5 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(soil_5_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:35%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a><span class="fu">head</span>(dt_soil_groups)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>           PC1        PC2 G3 G5
 18  0.03121361  0.4015541  1  1
@@ -1584,27 +1630,49 @@ Species: expanded scores based on 'dune' </code></pre>
 19 -0.46389613  0.3523669  1  3</code></pre>
 </div>
 </div>
+</div></div>
 </section>
-<section id="compare-groups-with-pca-1" class="slide level2">
+<section id="compare-groups-with-pca-1" class="slide level2 smaller">
 <h2>Compare groups with PCA</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb57-2"><a href=""></a><span class="fu">ggplot</span>(dt_soil_groups,</span>
-<span id="cb57-3"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> G3)) <span class="sc">+</span> </span>
-<span id="cb57-4"><a href=""></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(dt_soil_groups))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb58-2"><a href=""></a><span class="fu">ggplot</span>(dt_soil_groups,</span>
+<span id="cb58-3"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> G3)) <span class="sc">+</span> </span>
+<span id="cb58-4"><a href=""></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(dt_soil_groups)), </span>
+<span id="cb58-5"><a href=""></a>            <span class="at">size =</span> <span class="dv">8</span>) <span class="sc">+</span> </span>
+<span id="cb58-6"><a href=""></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-40-1.png" width="960"></p>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-41-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>plot on a pca (et en profiter pour parler du fait qu’on peut custommiser touts les plots avec ggplot, il faut juste extraire les bonnes données)</p>
-<p>to get the scores on PCs:</p>
-<p>scores(soil_pca, scaling = “sites”, display = “sites”, choices = 1:2)</p>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a><span class="co">#</span></span>
+<span id="cb59-2"><a href=""></a><span class="fu">ggplot</span>(dt_soil_groups,</span>
+<span id="cb59-3"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> G5)) <span class="sc">+</span> </span>
+<span id="cb59-4"><a href=""></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(dt_soil_groups)),</span>
+<span id="cb59-5"><a href=""></a>            <span class="at">size =</span> <span class="dv">8</span>) <span class="sc">+</span> </span>
+<span id="cb59-6"><a href=""></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-42-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px">💡 Note how we retrieve the scores of the ordination to be able to use ggplot to customise the plot. This can be done for all ordination plots.</span></span></p>
 </section></section>
 <section>
 <section id="constrained-ordination-methods" class="title-slide slide level1 center">
