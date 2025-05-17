@@ -741,13 +741,96 @@ resum <- data.frame(Method = c("PCA", "CA", "PCoA", "NMDS"),
 knitr::kable(resum)
 ```
 
-
-
-
-
 # Clustering
 
-<!-- TO DO et voir ou je le met après les méthodes pas contraintes pour faire des groupes (et éventuellement les mettres sur le plot des PCA (non car je vais faire la PCA sur les données enviro-->
+## Principle
+
+**Hierachical clustering** aims to create groups of observations that are similar accross a set of variable.
+
+Observations are progressively aggregated based on their similarity until all are merged into a single group.
+
+The clustering results in a tree-like structure called **dendrogram**, which illustrates the proximity between observations.
+
+## Performing the clustering
+
+Let's do a clustering of the plots based on the soil data.
+
+* As for the PCA, we first need to standardise the variables:
+
+```{r}
+soil_norm <- as.data.frame(scale(varechem))
+```
+
+* We then compute the distance matrix:
+
+```{r}
+soil_dist <- dist(soil_norm)
+```
+
+* We then perform the clustering using [hclust]{style="color:indianred;"}. Here we use the method of Ward:
+
+```{r}
+soil_clust <- hclust(soil_dist, method = "ward.D2")
+```
+
+## Different methods
+
+## Dendrogram
+
+```{r}
+plot(soil_clust)
+```
+
+Here we could do 3 or 5 groups
+
+## Extract the groups
+
+```{r}
+# 3 groups
+soil_3_group <- cutree(soil_clust, k = 3)
+
+# 5 groups
+soil_5_group <- cutree(soil_clust, k = 5)
+soil_5_group # this is a name vector
+```
+
+
+## Compare groups with PCA
+
+```{r}
+# extract the scores of the sites on the two first PCs
+  dt_soil_groups <- as.data.frame(scores(soil_pca, 
+                           scaling = "sites",
+                           display = "sites",
+                           choices = 1:2))
+# check that plots are in the same order
+all(row.names(dt_soil_groups) == names(soil_3_group))
+all(row.names(dt_soil_groups) == names(soil_5_group))
+
+# 
+dt_soil_groups$G3 <- as.factor(soil_3_group)
+dt_soil_groups$G5 <- as.factor(soil_5_group)
+
+head(dt_soil_groups)
+```
+
+## Compare groups with PCA
+
+```{r}
+library(ggplot2)
+ggplot(dt_soil_groups,
+       aes(x = PC1, y = PC2, color = G3)) + 
+  geom_text(aes(label = rownames(dt_soil_groups))) 
+```
+
+
+plot on a pca (et en profiter pour parler du fait qu'on peut custommiser touts les plots avec ggplot, il faut juste extraire les bonnes données)
+
+to get the scores on PCs:
+
+scores(soil_pca, scaling = "sites", display = "sites", choices = 1:2)
+
+
 
 
 # Constrained ordination methods
@@ -763,6 +846,13 @@ Marchand + Eric -->
 explain difference between samples using external variables
 
 => eg: enviro to explain sp composition
+
+TRY them on varespec and varechem (sinon on dune)
+
+
+think about transforming data (Hellinguer for RDA) and standardising explanatory variables 
+
+!!! before performing a RDA (or a CCA??) remove collinear explanatory variables
 
 <!--
 
@@ -791,7 +881,7 @@ https://r.qcbs.ca/workshop09/book-en/ and https://r.qcbs.ca/workshop10/book-en/
 
 ## Resources
 
-https://gavinsimpson.github.io/physalia-multivariate/02-tuesday/slides.html#70
+https://gavinsimpson.github.io/physalia-multivariate/02-tuesday/slides.html#62
 some advice on how to change the plots
 
 to go further the ggvegan package (not on cran) to make ggplot style graph from ordination results

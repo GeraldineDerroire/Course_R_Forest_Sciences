@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-16">
+  <meta name="dcterms.date" content="2025-05-17">
   <title>Statistics with R - session 3 - Multivariate analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-16</p>
+  <p class="date">2025-05-17</p>
 </section>
 <section id="why-multivariate-analyses" class="slide level2">
 <h2>Why multivariate analyses ?</h2>
@@ -1435,13 +1435,13 @@ Species: expanded scores based on 'dune' </code></pre>
 <div class="cell-output-display">
 <table class="caption-top">
 <colgroup>
-<col style="width: 5%">
-<col style="width: 30%">
-<col style="width: 63%">
+<col style="width: 4%">
+<col style="width: 31%">
+<col style="width: 64%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">Methods</th>
+<th style="text-align: left;">Method</th>
 <th style="text-align: left;">Principle</th>
 <th style="text-align: left;">Use</th>
 </tr>
@@ -1471,19 +1471,141 @@ Species: expanded scores based on 'dune' </code></pre>
 </table>
 </div>
 </div>
-<!-- three following points from Gavin => to rephrase -->
-<ul>
-<li class="fragment"><p>Principal Components Analysis (PCA) is a linear method — most useful for environmental data or sometimes with species data on short gradients</p></li>
-<li class="fragment"><p>Correspondence Analysis (CA) is a unimodal method — most useful for species data, especially where non-linear responses are observed give more weight to rare species than other methods (euclidian or Bray curtis) when strong enviro gradient and rare sp are important</p></li>
-<li class="fragment"><p>Principal Coordinates Analysis (PCO) and Non-metric Multidimensional Scaling (NMDS) — can be used for any kind of data Bray Curtis sensitive to abundant species ()</p></li>
-<li class="fragment"><p>NMDS: often the more appropriate for species data very flexible and robust for non-linear, many 0…</p></li>
-</ul>
 </section></section>
+<section>
 <section id="clustering" class="title-slide slide level1 center">
 <h1>Clustering</h1>
-<!-- TO DO et voir ou je le met après les méthodes pas contraintes pour faire des groupes (et éventuellement les mettres sur le plot des PCA (non car je vais faire la PCA sur les données enviro-->
-</section>
 
+</section>
+<section id="principle" class="slide level2">
+<h2>Principle</h2>
+<p><strong>Hierachical clustering</strong> aims to create groups of observations that are similar accross a set of variable.</p>
+<p>Observations are progressively aggregated based on their similarity until all are merged into a single group.</p>
+<p>The clustering results in a tree-like structure called <strong>dendrogram</strong>, which illustrates the proximity between observations.</p>
+</section>
+<section id="performing-the-clustering" class="slide level2">
+<h2>Performing the clustering</h2>
+<p>Let’s do a clustering of the plots based on the soil data.</p>
+<ul>
+<li class="fragment">As for the PCA, we first need to standardise the variables:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>soil_norm <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(varechem))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<ul>
+<li class="fragment">We then compute the distance matrix:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>soil_dist <span class="ot">&lt;-</span> <span class="fu">dist</span>(soil_norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<ul>
+<li class="fragment">We then perform the clustering using <span style="color:indianred;">hclust</span>. Here we use the method of Ward:</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>soil_clust <span class="ot">&lt;-</span> <span class="fu">hclust</span>(soil_dist, <span class="at">method =</span> <span class="st">"ward.D2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</section>
+<section id="different-methods" class="slide level2">
+<h2>Different methods</h2>
+</section>
+<section id="dendrogram" class="slide level2">
+<h2>Dendrogram</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">plot</span>(soil_clust)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here we could do 3 or 5 groups</p>
+</section>
+<section id="extract-the-groups" class="slide level2">
+<h2>Extract the groups</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a><span class="co"># 3 groups</span></span>
+<span id="cb49-2"><a href=""></a>soil_3_group <span class="ot">&lt;-</span> <span class="fu">cutree</span>(soil_clust, <span class="at">k =</span> <span class="dv">3</span>)</span>
+<span id="cb49-3"><a href=""></a></span>
+<span id="cb49-4"><a href=""></a><span class="co"># 5 groups</span></span>
+<span id="cb49-5"><a href=""></a>soil_5_group <span class="ot">&lt;-</span> <span class="fu">cutree</span>(soil_clust, <span class="at">k =</span> <span class="dv">5</span>)</span>
+<span id="cb49-6"><a href=""></a>soil_5_group <span class="co"># this is a name vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>18 15 24 27 23 19 22 16 28 13 14 20 25  7  5  6  3  4  2  9 12 10 11 21 
+ 1  1  2  3  3  3  3  1  3  2  1  3  3  4  4  4  4  2  4  1  1  5  5  1 </code></pre>
+</div>
+</div>
+</section>
+<section id="compare-groups-with-pca" class="slide level2">
+<h2>Compare groups with PCA</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="co"># extract the scores of the sites on the two first PCs</span></span>
+<span id="cb51-2"><a href=""></a>  dt_soil_groups <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scores</span>(soil_pca, </span>
+<span id="cb51-3"><a href=""></a>                           <span class="at">scaling =</span> <span class="st">"sites"</span>,</span>
+<span id="cb51-4"><a href=""></a>                           <span class="at">display =</span> <span class="st">"sites"</span>,</span>
+<span id="cb51-5"><a href=""></a>                           <span class="at">choices =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>))</span>
+<span id="cb51-6"><a href=""></a><span class="co"># check that plots are in the same order</span></span>
+<span id="cb51-7"><a href=""></a><span class="fu">all</span>(<span class="fu">row.names</span>(dt_soil_groups) <span class="sc">==</span> <span class="fu">names</span>(soil_3_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a><span class="fu">all</span>(<span class="fu">row.names</span>(dt_soil_groups) <span class="sc">==</span> <span class="fu">names</span>(soil_5_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="co"># </span></span>
+<span id="cb55-2"><a href=""></a>dt_soil_groups<span class="sc">$</span>G3 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(soil_3_group)</span>
+<span id="cb55-3"><a href=""></a>dt_soil_groups<span class="sc">$</span>G5 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(soil_5_group)</span>
+<span id="cb55-4"><a href=""></a></span>
+<span id="cb55-5"><a href=""></a><span class="fu">head</span>(dt_soil_groups)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           PC1        PC2 G3 G5
+18  0.03121361  0.4015541  1  1
+15  0.12454124  0.1785911  1  1
+24 -0.93563685 -0.6009084  2  2
+27 -0.76510709  0.2452010  1  3
+23 -0.43359367  0.4118759  1  3
+19 -0.46389613  0.3523669  1  3</code></pre>
+</div>
+</div>
+</section>
+<section id="compare-groups-with-pca-1" class="slide level2">
+<h2>Compare groups with PCA</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb57-2"><a href=""></a><span class="fu">ggplot</span>(dt_soil_groups,</span>
+<span id="cb57-3"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> G3)) <span class="sc">+</span> </span>
+<span id="cb57-4"><a href=""></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(dt_soil_groups))) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-40-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>plot on a pca (et en profiter pour parler du fait qu’on peut custommiser touts les plots avec ggplot, il faut juste extraire les bonnes données)</p>
+<p>to get the scores on PCs:</p>
+<p>scores(soil_pca, scaling = “sites”, display = “sites”, choices = 1:2)</p>
+</section></section>
 <section>
 <section id="constrained-ordination-methods" class="title-slide slide level1 center">
 <h1>Constrained ordination methods</h1>
@@ -1496,6 +1618,9 @@ https://gavinsimpson.github.io/physalia-multivariate/03-wednesday/slides.html#1
 Marchand + Eric -->
 <p>explain difference between samples using external variables</p>
 <p>=&gt; eg: enviro to explain sp composition</p>
+<p>TRY them on varespec and varechem (sinon on dune)</p>
+<p>think about transforming data (Hellinguer for RDA) and standardising explanatory variables</p>
+<p>!!! before performing a RDA (or a CCA??) remove collinear explanatory variables</p>
 <!--
 
 Explained what is constrained
@@ -1519,7 +1644,7 @@ Permanova??? Permanova is not an ordination methods
 </section>
 <section id="resources" class="slide level2">
 <h2>Resources</h2>
-<p>https://gavinsimpson.github.io/physalia-multivariate/02-tuesday/slides.html#70 some advice on how to change the plots</p>
+<p>https://gavinsimpson.github.io/physalia-multivariate/02-tuesday/slides.html#62 some advice on how to change the plots</p>
 <p>to go further the ggvegan package (not on cran) to make ggplot style graph from ordination results https://rdrr.io/github/gavinsimpson/ggvegan/#vignettes</p>
 <!-- brouillon -->
 </section>
