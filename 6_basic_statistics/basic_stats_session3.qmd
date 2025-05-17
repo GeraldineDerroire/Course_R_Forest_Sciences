@@ -126,7 +126,7 @@ Marchand + Eric -->
 
 <!-- voir aussi Marchand session 2 sur l'explication des différentes distances--> 
 
-## PCA - principle
+## PCA - Principle
 
 [In a cloud of observations in a p-dimension space (*p* variables), a **Principal Components Analysis** fits:]{style="font-size: 30px"}
 
@@ -150,7 +150,7 @@ Marchand + Eric -->
 
 [[Each of these lines is a **Principal Component** (PC) and is associated with an **eigenvalue** indicating how much variance it explains.]{style="font-size: 30px"}]{.fragment}
 
-## PCA - principle
+## PCA - Principle
 
 [Alternative representation:]{style="font-size: 30px"}
 
@@ -159,7 +159,7 @@ Marchand + Eric -->
 
 
 
-## PCA - Fitting a PCA
+## PCA - Running a PCA
 
 Let's fit a PCA on the soil data, using the function [pca]{style="color:indianred;"}:
 
@@ -167,10 +167,10 @@ Let's fit a PCA on the soil data, using the function [pca]{style="color:indianre
 soil_pca <- pca(varechem, scale = TRUE)
 ```
 
-[⚠️ As the PCA is based on Euclidean distances, the variables needs to be express in comparable units. For this, we need to standardised to a mean of 0 and a standard deviation of 1, using the argument *scale = TRUE*]{.fragment}
+[⚠️ As the PCA is based on Euclidean distances, the variables needs to be express in comparable units. For this, we need to standardise them to a mean of 0 and a standard deviation of 1, using the argument *scale = TRUE*]{.fragment}
 
 
-## PCA - Understanding the results {.smaller}
+## PCA - Output {.smaller}
 
 ::::: columns
 ::: {.column width="70%"}
@@ -191,7 +191,7 @@ summary(soil_pca)
 :::
 :::::
 
-## PCA - How many PCs are meaningful?
+## PCA - Importance of components
 
 [As the objective is to reduce the dimensionality of our data, we will only interpret a small number of PCs.]{style="font-size: 30px"}
 
@@ -283,53 +283,469 @@ biplot(soil_pca, scaling = 2)
 :::
 :::::
 
+## PCA - Visualisation
+
+[To represent different PCs, we can specify them using the argument *choice*:]{style="font-size: 30px"}
+
+```{r}
+#| fig-width: 5
+#| fig-height: 4
+biplot(soil_pca, scaling = "symmetric", 
+       choices = c(1, 3)) # PCs 1 and 3
+```
+
+<!-- TO DO carry on from here -->
+
+## CA - Principle
+
+[As PCA is based on Euclidean distances, it assumes *linear relationships* between variables, and between variables and underlying gradients.]{style="font-size: 35px"} 
+
+[When analysing **floristic composition along ecological gradients** (with species as variables), this assumption is often violated, as many species exhibit *unimodal distributions* along gradients.]{style="font-size: 35px"} 
+
+::: fragment
+
+[For this type of data, we can use a **Correspondence Analysis** (CA), based on $\chi^2$ distances, which are better suited for detecting unimodal responses.]{style="font-size: 35px"} 
+
+[In addition, CA is *not* affected by double zeros: sites with a lot of shared absences are *not* interpreted as being more similar.]{style="font-size: 35px"} 
+
+:::
+
+## CA - Running a CA
+
+We can run a CA on a floristic table, *i.e.* a contingency table presenting the presence/absence or the abundance of *p* species in *n* sites.
+
+To run a CA in [vegan]{style="color:indianred;"}, we use the function [ca]{style="color:indianred;"}:
+
+```{r}
+veg_ca <- ca(varespec)
+```
+
+## CA - Output {.smaller}
+
+::::: columns
+::: {.column width="70%"}
+
+```{r}
+summary(veg_ca)
+```
+:::
+
+::: {.column width="30%"}
+* The output of a CA is very similar to a PCA.
+
+* We get the eigenvalues explained by each Correspondence Axis (CA).
+
+:::
+:::::
+
+
+## CA - Importance of components
+
+[As with a PCA, we can look at the variance explained by each CA:]{style="font-size: 30px"}
+
+
+```{r}
+screeplot(veg_ca, bstick = TRUE)
+```
+
+::: notes
+here we would consider 5 axes
+:::
+
+
+## CA - Visualisation {.smaller}
+
+[In CA biplots, species are shown as points representing the optima of the species along the gradients. Abundance of species declines in concentric circles away from the optima.]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="33%"}
+```{r}
+#| fig-width: 5
+#| fig-height: 4
+plot(veg_ca, scaling = "species",
+     main = "Scaling: species") # title
+```
+:::
+
+::: {.column width="33%"}
+
+```{r}
+#| fig-width: 5
+#| fig-height: 4
+plot(veg_ca, scaling = "sites",
+     main = "Scaling: sites") # title
+```
+
+:::
+
+::: {.column width="33%"}
+```{r}
+#| fig-width: 5
+#| fig-height: 4
+plot(veg_ca, scaling = "symmetric",
+     main = "Scaling: symmetric") # title
+```
+:::
+:::::
+
+[[💡 To visualise a CA, we use the function [plot]{style="color:indianred;"}. The use of scaling is similar to a PCA.]{style="font-size: 25px"}]{.fragment}
+
+## CA - Visualisation {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+
+[We can focus on the species...]{style="font-size: 30px"}
+
+```{r}
+#| fig-width: 5
+#| fig-height: 4
+plot(veg_ca, scaling = "species",
+     main = "Scaling: species", # title
+     display = "species")
+```
+
+[[The proximity of species indicate that they are presents in similar sites.]{style="font-size: 28px"}]{.fragment}
+
+:::
+
+::: {.column width="50%"}
+
+[... or on the sites.]{style="font-size: 30px"}
+
+```{r}
+#| fig-width: 5
+#| fig-height: 4
+plot(veg_ca, scaling = "sites",
+     main = "Scaling: sites", # title
+     display = "sites")
+```
+
+[[The proximity of sites indicate that they have similar communities.]{style="font-size: 28px"}]{.fragment}
+
+:::
+:::::
+
+::: notes
+look at examples on the plots
+:::
+
+
+## PCoA - Principle
+
+[The **Principal Coordinate Analysis** (PCoA), also called **metric multidimentional scaling** (MDS), is a more general method.]{style="font-size: 30px"}
+
+[PCoA can use many types of distance (not only Euclidean or $\chi^2$):]{style="font-size: 30px"}
+
+* [for abundance data, we often used the distance of **Bray-Curtis**.]{style="font-size: 30px"}
+
+* [for presence/absence data, we often use the distance of Jaccard (*i.e.* 1 - Jaccard Index).]{style="font-size: 30px"}
+
+[[These distances range from 0 (identical species composition) to 1 (no shared species).
+They focus on shared abundance and thus ignore the double absences.]{style="font-size: 30px"}]{.fragment}
+
+[[💡 A PCoA with Euclidian distance is equivalent to a PCA, and with $\chi^2$ distance to a CA.]{style="font-size: 25px"}]{.fragment}
+
+
+## PCoA - Running a PCoA {.smaller}
+
+[Let's do a PCoA on abundance data using Bray-Curtis distance.]{style="font-size: 30px"}
+
+[We first need to calculate the distance between sites, using [vegdist]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+veg_dist <- vegdist(varespec, method = "bray")
+veg_dist
+```
+
+::: notes
+explain the distance matrix between pairs of plots
+:::
+
+## PCoA - Running a PCoA
+
+[We use [pco]{style="color:indianred;"} to run a PCoA.]{style="font-size: 30px"}
+
+[When using Bray-Curtis distance, we can get negative eigenvalues (corresponding to distances in an imaginary space). To avoid this, we can do a Lingoes correction.]{style="font-size: 30px"}
+
+```{r}
+veg_pcoa <- pco(veg_dist, 
+                add = "lingoes") # correction
+```
+
+## PCoA - Output {.smaller}
+
+```{r}
+summary(veg_pcoa)
+```
+
+::: notes 
+we can ignore the warning, if we are just visualising the summary (and not doing anything afterwards)
+
+same kind of output (but here MDS for metric multidimensional scalling)
+:::
+
+## PCoA - Importance of components
+
+```{r}
+screeplot(veg_pcoa, bstick = TRUE)
+```
+
+::: notes
+idem other methods
+:::
+
+## PCoA - Visualisation {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+
+[We plot the observations using [plot]{style="color:indianred;"} and then add the species scores:]{style="font-size: 30px"}
+
+```{r}
+# get species scores
+scrs <- scores(veg_pcoa, 
+               choices = 1:2) # axes
+
+# take the weighted averages scores 
+  # (weighed by abundance)
+spp_scrs <- wascores(scrs,
+                     varespec) # weights
+```
+:::
+
+::: {.column width="50%"}
+
+```{r}
+#| fig-width: 5
+#| fig-height: 5
+# plot the sites
+plot(veg_pcoa)
+
+# add species to the plot
+text(spp_scrs, labels = rownames(spp_scrs), 
+     col = "red", cex = 0.8) # color and size
+```
+:::
+:::::
+
+::: notes
+results are not far from the one obtained with the CA
+:::
+
+## NMDS - Principle
+
+[**Non-metric multidimentional scaling** is an ordination method used in similar contexts as PCA, CA and PCoA, but working very differently:]{style="font-size: 30px"}
+
+* [as in PCoA, we can choose the measure of distance (usually Bray-Curtis)]{style="font-size: 30px"}
+
+* [the number of axes is set *a priori* (usually 2)]{style="font-size: 30px"}
+
+* [an iterative algorithm moves the sites until the distances between sites are the closest possible to the actual multivariate distances (based on the chosen distance metric).]{style="font-size: 30px"}
+
+[[NMDS is non-metric as it focussed on the **rank order of distances** rather than on the actual distance, making it very flexible and robust.]{style="font-size: 30px"}]{.fragment}
+
+
+## NMDS - Running a NMDS
+
+We now work with the [dune]{style="color:indianred;"} data, a floristic table of dune vegetation.
+
+We run the NMDS using [metaMDS]{style="color:indianred;"}. The default number of axes is *2*.
+
+```{r}
+set.seed(22)
+data(dune)
+dune_nmds <- metaMDS(dune, 
+                     distance = "bray", # Bray-Curtis is the default
+                     trace = FALSE)
+```
+
+[[As there is a random component in the analyse, I've set a seed so that we all get the same results.]{style="font-size: 22px"}]{.fragment}
+
+::: notes
+we change the data because varespec doesn't work very well here...
+
+trace = FALSE is to avoid having having the output of each iteration
+
+no need to set the seed, or can be set to any number
+:::
+
+
+
+## NMDS - Output {.smaller}
+
+::::: columns
+::: {.column width="50%"}
+
+```{r}
+dune_nmds
+```
+:::
+
+::: {.column width="50%"}
+[The output gives:]{style="font-size: 30px"}
+
+* [a reminder of the data, the distance metric, the number of dimensions]{style="font-size: 30px"}
+
+* [the **stress**: a value < 0.1 is good, a value < 0.2 is acceptable, a value > 0.2 is poor]{style="font-size: 30px"}
+
+* [the number of times the algorithm converged (number of best solutions). If less than 2 convergence, the result is unstable.]{style="font-size: 30px"}
+
+:::
+:::::
+
+## NMDS - Convergence issue {.smaller}
+
+[If the algorithm does not converge, we can: ]{style="font-size: 30px"} 
+
+::::: columns
+::: {.column width="50%"}
+
+* [add iterations from previous best solution:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+dune_nmds <- metaMDS(dune, 
+                     previous.best = dune_nmds, 
+                     trace = FALSE)
+dune_nmds
+```
+:::
+
+:::
+
+::: {.column width="50%"}
+* [or rerun the NMDS, increasing the number of iterations:]{style="font-size: 30px"}
+
+::: fragment
+```{r, eval = FALSE}
+metaMDS(dune,
+        try = 50, # the default is 20
+        trace = FALSE)
+```
+:::
+
+:::
+:::::
+
+::: notes
+second solution not ran
+:::
+
+## NMDS - Visualisation
+
+```{r}
+#| fig-width: 6
+#| fig-height: 5
+plot(dune_nmds, 
+     type ="t") # display the names of sites and species
+```
+
+
+
+## NMDS - Goodness of fit
+
+::::: columns
+::: {.column width="50%"}
+
+[To assess the goodness of fit, we can plot a Shepard plot with [stressplot]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+stressplot(dune_nmds,
+           main = "Shepard plot")
+```
+
+:::
+
+::: {.column width="50%"}
+
+::: fragment
+
+[The Shepard plot shows ordination distance *vs* observed dissimilarity.]{style="font-size: 30px"}
+
+[It also gives the R^2^, for non-metric fit $$R^2 = 1 - Stress^2$$]{style="font-size: 30px"}
+
+* [The smaller the *stress*, the better the fit.]{style="font-size: 30px"}
+
+* [The higher the *R^2^*, the better the fit.]{style="font-size: 30px"}
+
+:::
+
+:::
+:::::
+
+
+::: notes
+
+steps = groups of tied or nearly tied dissimilarity values being assigned the same rank
+
+:::
+
+## NMDS - Number of dimensions {.smaller}
+
+[To see how the stress decreases when we add dimensions, we can fit a NMDS with number of dimensions ranging from 1 to 10 (or more), and plot the stress *vs* the number of dimensions:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="60%"}
+
+
+```{r}
+k_vec <- 1:10 # number of dimensions
+stress <- numeric(length(k_vec)) # create a vector of numeric
+veg_dij <- metaMDSdist(dune, trace = FALSE) # calculate dissimilarities
+set.seed(25)
+for(i in seq_along(k_vec)) { # run an NMDS for 1 to 10 dimensions
+    sol <- metaMDSiter(veg_dij, k = i, # run the NMDS
+                       trace = FALSE)
+    stress[i] <- sol$stress # extract the stress
+}
+```
+:::
+
+::: {.column width="40%"}
+
+```{r}
+#| fig-width: 4
+#| fig-height: 4
+plot(k_vec, stress, type = "b", 
+     ylab = "Stress", xlab = "Dimensions")
+```
+
+:::
+:::::
+
+
+::: notes
+we will see loops later
+
+here we calculate the dissimilarity outside the loop as it is not random, so no need to do it several tumes
+
+type ="b" give the lines between the dots
+:::
+
+
+## Summary on unconstrained ordination methods {.smaller}
+
+```{r, echo = FALSE}
+resum <- data.frame(Method = c("PCA", "CA", "PCoA", "NMDS"),
+                    Principle = c("Linear method based on Euclidian distance",
+                                  "Unimodal method based on chi^2^ distance",
+                                  "Metric based on several types of distances",
+                                  "Based on rank, with several types of distances"),
+                    Use = c("Environmental data (or species data on short gradients)",
+                            "Species data with non linear responses, chi^2^ give more weight to rare species than Bray-Curtis",
+                            "Any kind of data, Bray-Curtis more sensitive to abundant species",
+                            "Very flexible and robust for non-linear responsez, many zeros..."))
+knitr::kable(resum)
+```
 
 
 
 
 
-
-## CA
-
-chi2 distance, unimodal => good for sp presence/abs or abundance if we assume a unimodal (optimum response) to an enviro gradient
-
-look at relative abundance (so double 0 are affecting the distance )
-
-give more weight to rare species than other methods (euclidian or Bray curtis) 
-
-when strong enviro gradient and rare sp are important
-
-## PCoA
-
-any distance: no assumption of euclidian or chi2 distance we can choose among many distances (including euclidian, going back to a PCA)
-
-often used with Bray-curtis distance for species abundance data (or Jaccard for presence/absence)
-
-Bray curtis from 0 (identical species composition) to 1 (no shared species)
-
-focus on shared abundances => more shared, more similar (so ignore double 0 which are not informative)
-
-sensitive to abundant species ()
-
-## NMDS
-
-non-metric => ignore the actual distance, focus on the rank (which are closer/farther), so often the more appropriate for species data
-
-very felxible and robust for non-linear, many 0...
-
-<!-- for each 1 slide theo: how does it work, what is it used for, than practice -->
-
-## Summary on unconstrained ordination methods
-
-<!-- three following points from Gavin => to rephrase -->
-* Principal Components Analysis (PCA) is a linear method — most useful for environmental data or sometimes with species data and short gradients
-
-* Correspondence Analysis (CA) is a unimodal method — most useful for species data, especially where non-linear responses are observed
-
-* Principal Coordinates Analysis (PCO) and Non-metric Multidimensional Scaling (NMDS) — can be used for any kind of data
-
-
-# Clusturing
+# Clustering
 
 <!-- TO DO et voir ou je le met après les méthodes pas contraintes pour faire des groupes (et éventuellement les mettres sur le plot des PCA (non car je vais faire la PCA sur les données enviro-->
 
@@ -374,6 +790,9 @@ https://r.qcbs.ca/workshop09/book-en/ and https://r.qcbs.ca/workshop10/book-en/
 
 
 ## Resources
+
+https://gavinsimpson.github.io/physalia-multivariate/02-tuesday/slides.html#70
+some advice on how to change the plots
 
 to go further the ggvegan package (not on cran) to make ggplot style graph from ordination results
 https://rdrr.io/github/gavinsimpson/ggvegan/#vignettes

@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-15">
+  <meta name="dcterms.date" content="2025-05-16">
   <title>Statistics with R - session 3 - Multivariate analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-15</p>
+  <p class="date">2025-05-16</p>
 </section>
 <section id="why-multivariate-analyses" class="slide level2">
 <h2>Why multivariate analyses ?</h2>
@@ -523,7 +523,7 @@ Marchand + Eric -->
 <!-- voir aussi Marchand session 2 sur l'explication des différentes distances-->
 </section>
 <section id="pca---principle" class="slide level2">
-<h2>PCA - principle</h2>
+<h2>PCA - Principle</h2>
 <p><span style="font-size: 30px">In a cloud of observations in a p-dimension space (<em>p</em> variables), a <strong>Principal Components Analysis</strong> fits:</span></p>
 <div class="columns">
 <div class="column" style="width:60%;">
@@ -538,12 +538,12 @@ Marchand + Eric -->
 <p><span class="fragment"><span style="font-size: 30px">Each of these lines is a <strong>Principal Component</strong> (PC) and is associated with an <strong>eigenvalue</strong> indicating how much variance it explains.</span></span></p>
 </section>
 <section id="pca---principle-1" class="slide level2">
-<h2>PCA - principle</h2>
+<h2>PCA - Principle</h2>
 <p><span style="font-size: 30px">Alternative representation:</span></p>
 <p><img data-src="PCA4.png"> <span style="font-size: 22px">Source: <a href="https://gavinsimpson.github.io/physalia-multivariate/02-tuesday" data-preview-link="false">G. Simpson</a></span></p>
 </section>
-<section id="pca---fitting-a-pca" class="slide level2">
-<h2>PCA - Fitting a PCA</h2>
+<section id="pca---running-a-pca" class="slide level2">
+<h2>PCA - Running a PCA</h2>
 <p>Let’s fit a PCA on the soil data, using the function <span style="color:indianred;">pca</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>soil_pca <span class="ot">&lt;-</span> <span class="fu">pca</span>(varechem, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -551,10 +551,10 @@ Marchand + Eric -->
 <div class="cell fragment">
 
 </div>
-<p><span class="fragment">⚠️ As the PCA is based on Euclidean distances, the variables needs to be express in comparable units. For this, we need to standardised to a mean of 0 and a standard deviation of 1, using the argument <em>scale = TRUE</em></span></p>
+<p><span class="fragment">⚠️ As the PCA is based on Euclidean distances, the variables needs to be express in comparable units. For this, we need to standardise them to a mean of 0 and a standard deviation of 1, using the argument <em>scale = TRUE</em></span></p>
 </section>
-<section id="pca---understanding-the-results" class="slide level2 smaller">
-<h2>PCA - Understanding the results</h2>
+<section id="pca---output" class="slide level2 smaller">
+<h2>PCA - Output</h2>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
@@ -592,8 +592,8 @@ Cumulative Proportion 0.96185 0.9740 0.98473 0.99082 0.99581 0.998313 1.000000</
 </ul>
 </div></div>
 </section>
-<section id="pca---how-many-pcs-are-meaningful" class="slide level2">
-<h2>PCA - How many PCs are meaningful?</h2>
+<section id="pca---importance-of-components" class="slide level2">
+<h2>PCA - Importance of components</h2>
 <p><span style="font-size: 30px">As the objective is to reduce the dimensionality of our data, we will only interpret a small number of PCs.</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -686,38 +686,801 @@ Cumulative Proportion 0.96185 0.9740 0.98473 0.99082 0.99581 0.998313 1.000000</
 <p><span class="fragment"><span style="font-size: 25px">💡 In <span style="color:indianred;">vegan</span>, type scaling can be obtained by <em>scaling = “species”</em>.</span></span></p>
 </div></div>
 </section>
-<section id="ca" class="slide level2">
-<h2>CA</h2>
-<p>chi2 distance, unimodal =&gt; good for sp presence/abs or abundance if we assume a unimodal (optimum response) to an enviro gradient</p>
-<p>look at relative abundance (so double 0 are affecting the distance )</p>
-<p>give more weight to rare species than other methods (euclidian or Bray curtis)</p>
-<p>when strong enviro gradient and rare sp are important</p>
+<section id="pca---visualisation-3" class="slide level2">
+<h2>PCA - Visualisation</h2>
+<p><span style="font-size: 30px">To represent different PCs, we can specify them using the argument <em>choice</em>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a><span class="fu">biplot</span>(soil_pca, <span class="at">scaling =</span> <span class="st">"symmetric"</span>, </span>
+<span id="cb16-2"><a href=""></a>       <span class="at">choices =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)) <span class="co"># PCs 1 and 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-10-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<!-- TO DO carry on from here -->
 </section>
-<section id="pcoa" class="slide level2">
-<h2>PCoA</h2>
-<p>any distance: no assumption of euclidian or chi2 distance we can choose among many distances (including euclidian, going back to a PCA)</p>
-<p>often used with Bray-curtis distance for species abundance data (or Jaccard for presence/absence)</p>
-<p>Bray curtis from 0 (identical species composition) to 1 (no shared species)</p>
-<p>focus on shared abundances =&gt; more shared, more similar (so ignore double 0 which are not informative)</p>
-<p>sensitive to abundant species ()</p>
+<section id="ca---principle" class="slide level2">
+<h2>CA - Principle</h2>
+<p><span style="font-size: 35px">As PCA is based on Euclidean distances, it assumes <em>linear relationships</em> between variables, and between variables and underlying gradients.</span></p>
+<p><span style="font-size: 35px">When analysing <strong>floristic composition along ecological gradients</strong> (with species as variables), this assumption is often violated, as many species exhibit <em>unimodal distributions</em> along gradients.</span></p>
+<div class="fragment">
+<p><span style="font-size: 35px">For this type of data, we can use a <strong>Correspondence Analysis</strong> (CA), based on <span class="math inline">\(\chi^2\)</span> distances, which are better suited for detecting unimodal responses.</span></p>
+<p><span style="font-size: 35px">In addition, CA is <em>not</em> affected by double zeros: sites with a lot of shared absences are <em>not</em> interpreted as being more similar.</span></p>
+</div>
 </section>
-<section id="nmds" class="slide level2">
-<h2>NMDS</h2>
-<p>non-metric =&gt; ignore the actual distance, focus on the rank (which are closer/farther), so often the more appropriate for species data</p>
-<p>very felxible and robust for non-linear, many 0…</p>
-<!-- for each 1 slide theo: how does it work, what is it used for, than practice -->
+<section id="ca---running-a-ca" class="slide level2">
+<h2>CA - Running a CA</h2>
+<p>We can run a CA on a floristic table, <em>i.e.</em> a contingency table presenting the presence/absence or the abundance of <em>p</em> species in <em>n</em> sites.</p>
+<p>To run a CA in <span style="color:indianred;">vegan</span>, we use the function <span style="color:indianred;">ca</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>veg_ca <span class="ot">&lt;-</span> <span class="fu">ca</span>(varespec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
 </section>
-<section id="summary-on-unconstrained-ordination-methods" class="slide level2">
+<section id="ca---output" class="slide level2 smaller">
+<h2>CA - Output</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">summary</span>(veg_ca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+ca(X = varespec) 
+
+Partitioning of scaled Chi-square:
+              Inertia Proportion
+Total           2.083          1
+Unconstrained   2.083          1
+
+Eigenvalues, and their contribution to the scaled Chi-square 
+
+Importance of components:
+                         CA1    CA2    CA3     CA4     CA5     CA6     CA7
+Eigenvalue            0.5249 0.3568 0.2344 0.19546 0.17762 0.12156 0.11549
+Proportion Explained  0.2520 0.1713 0.1125 0.09383 0.08526 0.05835 0.05544
+Cumulative Proportion 0.2520 0.4233 0.5358 0.62962 0.71489 0.77324 0.82868
+                          CA8     CA9    CA10    CA11    CA12    CA13     CA14
+Eigenvalue            0.08894 0.07318 0.05752 0.04434 0.02546 0.01710 0.014896
+Proportion Explained  0.04269 0.03513 0.02761 0.02129 0.01222 0.00821 0.007151
+Cumulative Proportion 0.87137 0.90650 0.93411 0.95539 0.96762 0.97583 0.982978
+                          CA15     CA16     CA17     CA18     CA19      CA20
+Eigenvalue            0.010160 0.007830 0.006032 0.004008 0.002865 0.0019275
+Proportion Explained  0.004877 0.003759 0.002896 0.001924 0.001375 0.0009253
+Cumulative Proportion 0.987855 0.991614 0.994510 0.996434 0.997809 0.9987341
+                           CA21      CA22      CA23
+Eigenvalue            0.0018074 0.0005864 0.0002434
+Proportion Explained  0.0008676 0.0002815 0.0001168
+Cumulative Proportion 0.9996017 0.9998832 1.0000000</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<ul>
+<li class="fragment"><p>The output of a CA is very similar to a PCA.</p></li>
+<li class="fragment"><p>We get the eigenvalues explained by each Correspondence Axis (CA).</p></li>
+</ul>
+</div></div>
+</section>
+<section id="ca---importance-of-components" class="slide level2">
+<h2>CA - Importance of components</h2>
+<p><span style="font-size: 30px">As with a PCA, we can look at the variance explained by each CA:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">screeplot</span>(veg_ca, <span class="at">bstick =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>here we would consider 5 axes</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ca---visualisation" class="slide level2 smaller">
+<h2>CA - Visualisation</h2>
+<p><span style="font-size: 30px">In CA biplots, species are shown as points representing the optima of the species along the gradients. Abundance of species declines in concentric circles away from the optima.</span></p>
+<div class="columns">
+<div class="column" style="width:33%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"species"</span>,</span>
+<span id="cb21-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: species"</span>) <span class="co"># title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-14-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"sites"</span>,</span>
+<span id="cb22-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: sites"</span>) <span class="co"># title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-15-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"symmetric"</span>,</span>
+<span id="cb23-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: symmetric"</span>) <span class="co"># title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-16-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 25px">💡 To visualise a CA, we use the function <span style="color:indianred;">plot</span>. The use of scaling is similar to a PCA.</span></span></p>
+</section>
+<section id="ca---visualisation-1" class="slide level2 smaller">
+<h2>CA - Visualisation</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">We can focus on the species…</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"species"</span>,</span>
+<span id="cb24-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: species"</span>, <span class="co"># title</span></span>
+<span id="cb24-3"><a href=""></a>     <span class="at">display =</span> <span class="st">"species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-17-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 28px">The proximity of species indicate that they are presents in similar sites.</span></span></p>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">… or on the sites.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"sites"</span>,</span>
+<span id="cb25-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: sites"</span>, <span class="co"># title</span></span>
+<span id="cb25-3"><a href=""></a>     <span class="at">display =</span> <span class="st">"sites"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-18-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 28px">The proximity of sites indicate that they have similar communities.</span></span></p>
+</div></div>
+<aside class="notes">
+<p>look at examples on the plots</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pcoa---principle" class="slide level2">
+<h2>PCoA - Principle</h2>
+<p><span style="font-size: 30px">The <strong>Principal Coordinate Analysis</strong> (PCoA), also called <strong>metric multidimentional scaling</strong> (MDS), is a more general method.</span></p>
+<p><span style="font-size: 30px">PCoA can use many types of distance (not only Euclidean or <span class="math inline">\(\chi^2\)</span>):</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">for abundance data, we often used the distance of <strong>Bray-Curtis</strong>.</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">for presence/absence data, we often use the distance of Jaccard (<em>i.e.</em> 1 - Jaccard Index).</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">These distances range from 0 (identical species composition) to 1 (no shared species). They focus on shared abundance and thus ignore the double absences.</span></span></p>
+<p><span class="fragment"><span style="font-size: 25px">💡 A PCoA with Euclidian distance is equivalent to a PCA, and with <span class="math inline">\(\chi^2\)</span> distance to a CA.</span></span></p>
+</section>
+<section id="pcoa---running-a-pcoa" class="slide level2 smaller">
+<h2>PCoA - Running a PCoA</h2>
+<p><span style="font-size: 30px">Let’s do a PCoA on abundance data using Bray-Curtis distance.</span></p>
+<p><span style="font-size: 30px">We first need to calculate the distance between sites, using <span style="color:indianred;">vegdist</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>veg_dist <span class="ot">&lt;-</span> <span class="fu">vegdist</span>(varespec, <span class="at">method =</span> <span class="st">"bray"</span>)</span>
+<span id="cb26-2"><a href=""></a>veg_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>          18        15        24        27        23        19        22
+15 0.5310021                                                            
+24 0.6680661 0.3597783                                                  
+27 0.5621247 0.4055610 0.4934947                                        
+23 0.3747078 0.3652097 0.5020306 0.4286111                              
+19 0.5094738 0.4560757 0.5092318 0.4878190 0.3606242                    
+22 0.6234419 0.3579517 0.5010050 0.4655224 0.4812706 0.4726483          
+16 0.5337610 0.3976674 0.5907623 0.5683930 0.4094312 0.4496731 0.2678031
+28 0.8418209 0.5225414 0.5736665 0.3027802 0.6979519 0.6431734 0.5985666
+13 0.3453347 0.6063846 0.7576747 0.7543736 0.6221471 0.5739244 0.6948736
+14 0.5449810 0.4803756 0.6533606 0.7467915 0.5645808 0.6331942 0.5357609
+20 0.3879069 0.3784188 0.4346892 0.4957833 0.2877014 0.3953776 0.4627020
+25 0.6318891 0.3376115 0.3369098 0.5001593 0.4258617 0.4311299 0.3822981
+7  0.3603697 0.6717391 0.7931069 0.7792917 0.6390838 0.6958570 0.7459886
+5  0.4955699 0.7178612 0.8561753 0.8732190 0.7295255 0.7898205 0.8611451
+6  0.3382309 0.6355122 0.7441373 0.7496935 0.6252483 0.5684030 0.7249162
+3  0.5277480 0.7578503 0.8382119 0.8090236 0.7128798 0.5302756 0.8026152
+4  0.4694018 0.6843974 0.8309875 0.8413800 0.7117919 0.5177604 0.8015314
+2  0.5724092 0.8206269 0.8372551 0.7581924 0.7249869 0.5389222 0.8321464
+9  0.6583569 0.7761039 0.7590517 0.7415898 0.6693889 0.5393143 0.7725082
+12 0.4688038 0.6794199 0.6894538 0.6253616 0.5384762 0.4288556 0.7051751
+10 0.6248996 0.7644564 0.7842829 0.7096540 0.6625476 0.5059910 0.7875328
+11 0.4458523 0.4716274 0.5677373 0.6322919 0.4710280 0.3293493 0.5812219
+21 0.5560864 0.7607281 0.7272727 0.5456001 0.4951221 0.5315894 0.6771167
+          16        28        13        14        20        25         7
+15                                                                      
+24                                                                      
+27                                                                      
+23                                                                      
+19                                                                      
+22                                                                      
+16                                                                      
+28 0.7015360                                                            
+13 0.5514941 0.8600122                                                  
+14 0.4826350 0.8239667 0.5547565                                        
+20 0.3737797 0.6963560 0.5785542 0.5115258                              
+25 0.4306058 0.6086150 0.7412605 0.5541517 0.4518556                    
+7  0.6596144 0.8960202 0.4533054 0.6550830 0.5959162 0.7556726          
+5  0.7184789 0.9539592 0.5148988 0.7257681 0.7153827 0.8600858 0.3237446
+6  0.6509879 0.9014440 0.3515673 0.6227473 0.5439118 0.7343872 0.1754713
+3  0.6837953 0.9234485 0.4965478 0.7836661 0.6690479 0.8168684 0.5154487
+4  0.6462648 0.9381169 0.3881748 0.6734743 0.6771854 0.8400134 0.5601721
+2  0.7354202 0.9053213 0.5968691 0.8592489 0.6951539 0.8179089 0.6465777
+9  0.8185866 0.8686670 0.7292530 0.8282497 0.6982486 0.7884243 0.8318435
+12 0.6342166 0.8543167 0.5902386 0.7507074 0.5182426 0.7062564 0.6991666
+10 0.7656598 0.9016604 0.7160439 0.8304088 0.6706349 0.7845955 0.7697453
+11 0.5172825 0.7544064 0.4272808 0.6743277 0.4461712 0.6175930 0.5262233
+21 0.7474559 0.7248773 0.7212772 0.8096450 0.6320431 0.7466232 0.7933350
+           5         6         3         4         2         9        12
+15                                                                      
+24                                                                      
+27                                                                      
+23                                                                      
+19                                                                      
+22                                                                      
+16                                                                      
+28                                                                      
+13                                                                      
+14                                                                      
+20                                                                      
+25                                                                      
+7                                                                       
+5                                                                       
+6  0.3984538                                                            
+3  0.5634432 0.4517627                                                  
+4  0.5377506 0.4665100 0.3592689                                        
+2  0.7257597 0.5552754 0.2099203 0.4841145                              
+9  0.9014583 0.7223126 0.3885811 0.6222340 0.2330286                    
+12 0.7808641 0.5762462 0.2641851 0.4870742 0.1846147 0.2277228          
+10 0.8504191 0.6567926 0.3413378 0.5776062 0.1456729 0.1117280 0.1793368
+11 0.5563798 0.4077948 0.3002597 0.3215966 0.4209596 0.5145260 0.3688102
+21 0.8888316 0.6720141 0.7507773 0.7641304 0.6779661 0.5952563 0.5602137
+          10        11
+15                    
+24                    
+27                    
+23                    
+19                    
+22                    
+16                    
+28                    
+13                    
+14                    
+20                    
+25                    
+7                     
+5                     
+6                     
+3                     
+4                     
+2                     
+9                     
+12                    
+10                    
+11 0.5043578          
+21 0.6147874 0.6713363</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>explain the distance matrix between pairs of plots</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pcoa---running-a-pcoa-1" class="slide level2">
+<h2>PCoA - Running a PCoA</h2>
+<p><span style="font-size: 30px">We use <span style="color:indianred;">pco</span> to run a PCoA.</span></p>
+<p><span style="font-size: 30px">When using Bray-Curtis distance, we can get negative eigenvalues (corresponding to distances in an imaginary space). To avoid this, we can do a Lingoes correction.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>veg_pcoa <span class="ot">&lt;-</span> <span class="fu">pco</span>(veg_dist, </span>
+<span id="cb28-2"><a href=""></a>                <span class="at">add =</span> <span class="st">"lingoes"</span>) <span class="co"># correction</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</section>
+<section id="pcoa---output" class="slide level2 smaller">
+<h2>PCoA - Output</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="fu">summary</span>(veg_pcoa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in summ$call &lt;- object$call: Coercing LHS to a list</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+pco(X = veg_dist, add = "lingoes") 
+
+Partitioning of Lingoes adjusted squared Bray distance:
+              Inertia Proportion
+Total            6.25          1
+Unconstrained    6.25          1
+
+Eigenvalues, and their contribution to the Lingoes adjusted squared Bray distance 
+
+Importance of components:
+                        MDS1   MDS2    MDS3    MDS4    MDS5    MDS6    MDS7
+Eigenvalue            1.8294 1.2076 0.51704 0.44394 0.31949 0.27023 0.24925
+Proportion Explained  0.2927 0.1932 0.08273 0.07104 0.05112 0.04324 0.03988
+Cumulative Proportion 0.2927 0.4859 0.56867 0.63971 0.69083 0.73407 0.77395
+                         MDS8    MDS9   MDS10   MDS11  MDS12   MDS13   MDS14
+Eigenvalue            0.20259 0.17130 0.15010 0.13786 0.1325 0.11363 0.09141
+Proportion Explained  0.03242 0.02741 0.02402 0.02206 0.0212 0.01818 0.01463
+Cumulative Proportion 0.80636 0.83377 0.85779 0.87985 0.9010 0.91923 0.93385
+                        MDS15   MDS16   MDS17    MDS18   MDS19    MDS20
+Eigenvalue            0.07924 0.07373 0.06767 0.060824 0.04874 0.036629
+Proportion Explained  0.01268 0.01180 0.01083 0.009732 0.00780 0.005861
+Cumulative Proportion 0.94653 0.95833 0.96916 0.978890 0.98669 0.992551
+                         MDS21    MDS22
+Eigenvalue            0.026132 0.020424
+Proportion Explained  0.004181 0.003268
+Cumulative Proportion 0.996732 1.000000</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>we can ignore the warning, if we are just visualising the summary (and not doing anything afterwards)</p>
+<p>same kind of output (but here MDS for metric multidimensional scalling)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pcoa---importance-of-components" class="slide level2">
+<h2>PCoA - Importance of components</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">screeplot</span>(veg_pcoa, <span class="at">bstick =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>idem other methods</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="pcoa---visualisation" class="slide level2 smaller">
+<h2>PCoA - Visualisation</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">We plot the observations using <span style="color:indianred;">plot</span> and then add the species scores:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="co"># get species scores</span></span>
+<span id="cb33-2"><a href=""></a>scrs <span class="ot">&lt;-</span> <span class="fu">scores</span>(veg_pcoa, </span>
+<span id="cb33-3"><a href=""></a>               <span class="at">choices =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="co"># axes</span></span>
+<span id="cb33-4"><a href=""></a></span>
+<span id="cb33-5"><a href=""></a><span class="co"># take the weighted averages scores </span></span>
+<span id="cb33-6"><a href=""></a>  <span class="co"># (weighed by abundance)</span></span>
+<span id="cb33-7"><a href=""></a>spp_scrs <span class="ot">&lt;-</span> <span class="fu">wascores</span>(scrs,</span>
+<span id="cb33-8"><a href=""></a>                     varespec) <span class="co"># weights</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="co"># plot the sites</span></span>
+<span id="cb34-2"><a href=""></a><span class="fu">plot</span>(veg_pcoa)</span>
+<span id="cb34-3"><a href=""></a></span>
+<span id="cb34-4"><a href=""></a><span class="co"># add species to the plot</span></span>
+<span id="cb34-5"><a href=""></a><span class="fu">text</span>(spp_scrs, <span class="at">labels =</span> <span class="fu">rownames</span>(spp_scrs), </span>
+<span id="cb34-6"><a href=""></a>     <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="fl">0.8</span>) <span class="co"># color and size</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-24-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>results are not far from the one obtained with the CA</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="nmds---principle" class="slide level2">
+<h2>NMDS - Principle</h2>
+<p><span style="font-size: 30px"><strong>Non-metric multidimentional scaling</strong> is an ordination method used in similar contexts as PCA, CA and PCoA, but working very differently:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">as in PCoA, we can choose the measure of distance (usually Bray-Curtis)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">the number of axes is set <em>a priori</em> (usually 2)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">an iterative algorithm moves the sites until the distances between sites are the closest possible to the actual multivariate distances (based on the chosen distance metric).</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">NMDS is non-metric as it focussed on the <strong>rank order of distances</strong> rather than on the actual distance, making it very flexible and robust.</span></span></p>
+</section>
+<section id="nmds---running-a-nmds" class="slide level2">
+<h2>NMDS - Running a NMDS</h2>
+<p>We now work with the <span style="color:indianred;">dune</span> data, a floristic table of dune vegetation.</p>
+<p>We run the NMDS using <span style="color:indianred;">metaMDS</span>. The default number of axes is <em>2</em>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">22</span>)</span>
+<span id="cb35-2"><a href=""></a><span class="fu">data</span>(dune)</span>
+<span id="cb35-3"><a href=""></a>dune_nmds <span class="ot">&lt;-</span> <span class="fu">metaMDS</span>(dune, </span>
+<span id="cb35-4"><a href=""></a>                     <span class="at">distance =</span> <span class="st">"bray"</span>, <span class="co"># Bray-Curtis is the default</span></span>
+<span id="cb35-5"><a href=""></a>                     <span class="at">trace =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment"><span style="font-size: 22px">As there is a random component in the analyse, I’ve set a seed so that we all get the same results.</span></span></p>
+<aside class="notes">
+<p>we change the data because varespec doesn’t work very well here…</p>
+<p>trace = FALSE is to avoid having having the output of each iteration</p>
+<p>no need to set the seed, or can be set to any number</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="nmds---output" class="slide level2 smaller">
+<h2>NMDS - Output</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>dune_nmds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+metaMDS(comm = dune, distance = "bray", trace = FALSE) 
+
+global Multidimensional Scaling using monoMDS
+
+Data:     dune 
+Distance: bray 
+
+Dimensions: 2 
+Stress:     0.1183186 
+Stress type 1, weak ties
+Best solution was repeated 5 times in 20 tries
+The best solution was from try 7 (random start)
+Scaling: centring, PC rotation, halfchange scaling 
+Species: expanded scores based on 'dune' </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">The output gives:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">a reminder of the data, the distance metric, the number of dimensions</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">the <strong>stress</strong>: a value &lt; 0.1 is good, a value &lt; 0.2 is acceptable, a value &gt; 0.2 is poor</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">the number of times the algorithm converged (number of best solutions). If less than 2 convergence, the result is unstable.</span></p></li>
+</ul>
+</div></div>
+</section>
+<section id="nmds---convergence-issue" class="slide level2 smaller">
+<h2>NMDS - Convergence issue</h2>
+<p><span style="font-size: 30px">If the algorithm does not converge, we can:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px">add iterations from previous best solution:</span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>dune_nmds <span class="ot">&lt;-</span> <span class="fu">metaMDS</span>(dune, </span>
+<span id="cb38-2"><a href=""></a>                     <span class="at">previous.best =</span> dune_nmds, </span>
+<span id="cb38-3"><a href=""></a>                     <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-4"><a href=""></a>dune_nmds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+metaMDS(comm = dune, trace = FALSE, previous.best = dune_nmds) 
+
+global Multidimensional Scaling using monoMDS
+
+Data:     dune 
+Distance: bray 
+
+Dimensions: 2 
+Stress:     0.1183186 
+Stress type 1, weak ties
+Best solution was repeated 3 times in 40 tries
+The best solution was from try 36 (random start)
+Scaling: centring, PC rotation, halfchange scaling 
+Species: expanded scores based on 'dune' </code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px">or rerun the NMDS, increasing the number of iterations:</span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">metaMDS</span>(dune,</span>
+<span id="cb40-2"><a href=""></a>        <span class="at">try =</span> <span class="dv">50</span>, <span class="co"># the default is 20</span></span>
+<span id="cb40-3"><a href=""></a>        <span class="at">trace =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>second solution not ran</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="nmds---visualisation" class="slide level2">
+<h2>NMDS - Visualisation</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="fu">plot</span>(dune_nmds, </span>
+<span id="cb41-2"><a href=""></a>     <span class="at">type =</span><span class="st">"t"</span>) <span class="co"># display the names of sites and species</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-29-1.png" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="nmds---goodness-of-fit" class="slide level2">
+<h2>NMDS - Goodness of fit</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">To assess the goodness of fit, we can plot a Shepard plot with <span style="color:indianred;">stressplot</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">stressplot</span>(dune_nmds,</span>
+<span id="cb42-2"><a href=""></a>           <span class="at">main =</span> <span class="st">"Shepard plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-30-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">The Shepard plot shows ordination distance <em>vs</em> observed dissimilarity.</span></p>
+<p><span style="font-size: 30px">It also gives the R<sup>2</sup>, for non-metric fit <span class="math display">\[R^2 = 1 - Stress^2\]</span></span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">The smaller the <em>stress</em>, the better the fit.</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">The higher the <em>R<sup>2</sup></em>, the better the fit.</span></p></li>
+</ul>
+</div>
+</div></div>
+<aside class="notes">
+<p>steps = groups of tied or nearly tied dissimilarity values being assigned the same rank</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="nmds---number-of-dimensions" class="slide level2 smaller">
+<h2>NMDS - Number of dimensions</h2>
+<p><span style="font-size: 30px">To see how the stress decreases when we add dimensions, we can fit a NMDS with number of dimensions ranging from 1 to 10 (or more), and plot the stress <em>vs</em> the number of dimensions:</span></p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a>k_vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="co"># number of dimensions</span></span>
+<span id="cb43-2"><a href=""></a>stress <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(k_vec)) <span class="co"># create a vector of numeric</span></span>
+<span id="cb43-3"><a href=""></a>veg_dij <span class="ot">&lt;-</span> <span class="fu">metaMDSdist</span>(dune, <span class="at">trace =</span> <span class="cn">FALSE</span>) <span class="co"># calculate dissimilarities</span></span>
+<span id="cb43-4"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">25</span>)</span>
+<span id="cb43-5"><a href=""></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(k_vec)) { <span class="co"># run an NMDS for 1 to 10 dimensions</span></span>
+<span id="cb43-6"><a href=""></a>    sol <span class="ot">&lt;-</span> <span class="fu">metaMDSiter</span>(veg_dij, <span class="at">k =</span> i, <span class="co"># run the NMDS</span></span>
+<span id="cb43-7"><a href=""></a>                       <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb43-8"><a href=""></a>    stress[i] <span class="ot">&lt;-</span> sol<span class="sc">$</span>stress <span class="co"># extract the stress</span></span>
+<span id="cb43-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div><div class="column" style="width:40%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">plot</span>(k_vec, stress, <span class="at">type =</span> <span class="st">"b"</span>, </span>
+<span id="cb44-2"><a href=""></a>     <span class="at">ylab =</span> <span class="st">"Stress"</span>, <span class="at">xlab =</span> <span class="st">"Dimensions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-32-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>we will see loops later</p>
+<p>here we calculate the dissimilarity outside the loop as it is not random, so no need to do it several tumes</p>
+<p>type =“b” give the lines between the dots</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="summary-on-unconstrained-ordination-methods" class="slide level2 smaller">
 <h2>Summary on unconstrained ordination methods</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 30%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Methods</th>
+<th style="text-align: left;">Principle</th>
+<th style="text-align: left;">Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">PCA</td>
+<td style="text-align: left;">Linear method based on Euclidian distance</td>
+<td style="text-align: left;">Environmental data (or species data on short gradients)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">CA</td>
+<td style="text-align: left;">Unimodal method based on chi<sup>2</sup> distance</td>
+<td style="text-align: left;">Species data with non linear responses, chi<sup>2</sup> give more weight to rare species than Bray-Curtis</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">PCoA</td>
+<td style="text-align: left;">Metric based on several types of distances</td>
+<td style="text-align: left;">Any kind of data, Bray-Curtis more sensitive to abundant species</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">NMDS</td>
+<td style="text-align: left;">Based on rank, with several types of distances</td>
+<td style="text-align: left;">Very flexible and robust for non-linear responsez, many zeros…</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <!-- three following points from Gavin => to rephrase -->
 <ul>
-<li class="fragment"><p>Principal Components Analysis (PCA) is a linear method — most useful for environmental data or sometimes with species data and short gradients</p></li>
-<li class="fragment"><p>Correspondence Analysis (CA) is a unimodal method — most useful for species data, especially where non-linear responses are observed</p></li>
-<li class="fragment"><p>Principal Coordinates Analysis (PCO) and Non-metric Multidimensional Scaling (NMDS) — can be used for any kind of data</p></li>
+<li class="fragment"><p>Principal Components Analysis (PCA) is a linear method — most useful for environmental data or sometimes with species data on short gradients</p></li>
+<li class="fragment"><p>Correspondence Analysis (CA) is a unimodal method — most useful for species data, especially where non-linear responses are observed give more weight to rare species than other methods (euclidian or Bray curtis) when strong enviro gradient and rare sp are important</p></li>
+<li class="fragment"><p>Principal Coordinates Analysis (PCO) and Non-metric Multidimensional Scaling (NMDS) — can be used for any kind of data Bray Curtis sensitive to abundant species ()</p></li>
+<li class="fragment"><p>NMDS: often the more appropriate for species data very flexible and robust for non-linear, many 0…</p></li>
 </ul>
 </section></section>
-<section id="clusturing" class="title-slide slide level1 center">
-<h1>Clusturing</h1>
+<section id="clustering" class="title-slide slide level1 center">
+<h1>Clustering</h1>
 <!-- TO DO et voir ou je le met après les méthodes pas contraintes pour faire des groupes (et éventuellement les mettres sur le plot des PCA (non car je vais faire la PCA sur les données enviro-->
 </section>
 
@@ -756,6 +1519,7 @@ Permanova??? Permanova is not an ordination methods
 </section>
 <section id="resources" class="slide level2">
 <h2>Resources</h2>
+<p>https://gavinsimpson.github.io/physalia-multivariate/02-tuesday/slides.html#70 some advice on how to change the plots</p>
 <p>to go further the ggvegan package (not on cran) to make ggplot style graph from ordination results https://rdrr.io/github/gavinsimpson/ggvegan/#vignettes</p>
 <!-- brouillon -->
 </section>
