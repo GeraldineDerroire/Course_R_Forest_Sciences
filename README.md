@@ -27,11 +27,11 @@ The course material has been created using quarto and R version 4.4.3.
   * [Exercices](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/exo_session_8.pdf)
 - Statistics with R
   * [Statistics with R session 1/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/basic_stats_session1.html)
-     * [Exercice on session 1/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/exo_session_9.pdf)
+     * [Exercice on session 1/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/exo_session_9.pdf)
   * [Statistics with R session 2/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/basic_stats_session2.html)
-     <!-- * [Exercice on session 2/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/exo_session_10.pdf) -->
+     <!-- * [Exercice on session 2/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/exo_session_10.pdf) -->
   * [Statistics with R session 3/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/basic_stats_session3.html)
-     <!-- * [Exercice on session 3/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/exo_session_11.pdf) -->
+     <!-- * [Exercice on session 3/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/exo_session_11.pdf) -->
 
 <!--
 
