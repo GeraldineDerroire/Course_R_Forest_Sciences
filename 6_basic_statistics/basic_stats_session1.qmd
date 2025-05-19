@@ -663,7 +663,7 @@ The test assume all values to be different, but there are some ties (equal value
 
 ## What if the data are paired?
 
-[Let's load some data:]{style="font-size: 30px"} (available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_1.RData){preview-link="false"})
+[Let's load some data:(available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_1.RData){preview-link="false"})]{style="font-size: 30px"}
 
 ```{r}
 load("data/data_statistics_1.RData")

@@ -7,15 +7,286 @@ execute:
   eval: false 
 ---
 
-Voir les espèces commerciales et WD (LoggingLab) pour faire des t-test et ANOVA et chi2
+Load the package tidyverse
 
-VOIR LES LAB DE Marchand
+```{r}
+library(tidyverse)
+```
+
+# Admission in graduate school in UC Berkeley
+
+*We want to know if the admissions in graduate school in the Department A of UC Berkeley depends on the gender.*
+
+
+* The data are called *UCBAdmissions* and are available in base R. Load the data and look at their structure
+
+```{r}
+data(UCBAdmissions)
+str(UCBAdmissions)
+```
+
+* Get the data for department A (the first element of the array so you need to use the following command)
+
+```{r, echo=TRUE}
+UCBAdmissions[, , 1]
+```
+
+```{r}
+dt_deptA <- UCBAdmissions[, , 1]
+```
+
+* These data give the number of admitted or rejected people per gender. How is this type of table called?
+
+<!-- a contingency table -->
+
+* Perform a $\chi^2$ test to see if the admission depends on the gender, and interpret it
+
+```{r}
+res_chi2 <- chisq.test(dt_deptA)
+res_chi2
+```
+
+<!-- low p-value => yes the admission depends on the gender-->
+
+* Check the expected frequency under the null hypothesis. Is the $\chi^2$ test reliable?
+
+```{r}
+res_chi2$expected
+```
+
+<!-- yes reliable (all expected > 5)-->
+
+* Get the residuals and interpret them
+
+```{r}
+questionr::chisq.residuals(dt_deptA)
+```
+
+<!-- over-repressentation of the female in the admitted => female more admitted than male-->
+
+* Represent the residuals graphically
+
+```{r}
+mosaicplot(dt_deptA, 
+           shade = TRUE,
+           main = "") # remove main title
+```
+
+
+# Weight of cabbages from different cultivars
+
+*We want to know if the weight of cabbages planted on a certain day depends on the cultivar.*
+
+* Load the dataset called *cabbages* in the package *MASS*
+
+```{r}
+library(MASS)
+data("cabbages")
+str(cabbages)
+```
+
+* Make a dataset containing only the cabbages planted at date *d21*
+
+```{r}
+dt_cab <- cabbages %>% filter(Date == "d21")
+```
+
+
+* Make a boxplot to graphically explore if the weight depends on the cultivar. What do you think? 
+
+```{r}
+dt_cab %>% 
+  ggplot(aes(x = Cult, y = HeadWt)) + 
+  geom_boxplot()
+```
+
+
+* Check the normality of the distribution, using a test and graphically
+
+```{r}
+# make a dataset per cultivar
+dt_c39 <- dt_cab %>% filter(Cult == "c39")
+dt_c52 <- dt_cab %>% filter(Cult == "c52")
+```
+
+```{r}
+# Shapiro test of normality (H0: the data are normally distributed)
+shapiro.test(dt_c39$HeadWt)
+shapiro.test(dt_c52$HeadWt)
+# not significant so the data are normally distributed
+```
+
+```{r}
+# Q-Q plots
+qqnorm(dt_c39$HeadWt)
+qqline(dt_c39$HeadWt)
+
+# Q-Q plots
+qqnorm(dt_c52$HeadWt)
+qqline(dt_c52$HeadWt)
+
+# very little points, so hard to interpret...
+```
+
+
+* Perform a t-test
+
+```{r}
+res_ttest <- t.test(dt_cab$HeadWt ~ dt_cab$Cult)
+res_ttest
+```
+
+* Get the p-value, the mean estimated difference between the two groups and its confidence interval. What do you conclude?
+
+```{r}
+res_ttest$p.value
+```
+
+<!-- The difference is significant-->
+
+```{r}
+cab_est <- res_ttest$estimate
+abs(cab_est[1] - cab_est[2])
+# or 
+abs(cab_est[2] - cab_est[1])
+```
+
+<!-- The difference between group is big (compared to the mean per group) -->
+
+```{r}
+res_ttest$conf.int
+```
+
+<!-- big confidence interval -->
+
+# Effect of the planting date on the content of vitamin C in cabbages
+
+*We want to know if the content of vitamin C in cabbages of the cultivar c52 depends on the planting date.*
+
+* Make a dataset containing only the cabbages of the cultivar *c52*
+
+```{r}
+dt_cab2 <- cabbages %>% filter(Cult == "c52")
+```
+
+* Make a boxplot to explore the question graphically. What do you think?
+
+```{r}
+dt_cab2 %>% 
+  ggplot(aes(x = Date, y = VitC)) + 
+  geom_boxplot()
+```
+
+* Perform an ANOVA
+
+```{r}
+aov_cab <- aov(VitC ~ Date, data = dt_cab2)
+summary(aov_cab)
+```
+
+<!-- the test is significant => the content of vitamin C depend on the planting date -->
+
+* Check the model assumptions
+
+```{r}
+# check homoscedasticity
+plot(aov_cab, which = 1)
+# => OK
+```
+
+```{r}
+# check normality of the residuals
+plot(aov_cab, which = 2)
+# => OK
+```
+
+* Get the estimated mean of each groups 
+
+```{r}
+coef(aov_cab)
+
+# d16
+coef(aov_cab)[1]
+
+# d20
+coef(aov_cab)[1] + coef(aov_cab)[2]
+
+# d21
+coef(aov_cab)[1] + coef(aov_cab)[3]
+```
+
+* Perform a Tukey test see which groups are different, and interpret it
+
+```{r}
+tukey_cab <- TukeyHSD(aov_cab)
+tukey_cab
+```
+
+<!-- d21 differs from the two others --> 
+
+* Represent the results of the ANOVA graphically
+
+```{r}
+# get the letters
+cab_let <- multcompView::multcompLetters4(aov_cab, tukey_cab)
+
+# put them in a tibble
+cab_let_tb <- tibble(
+  Date = names(cab_let$Date$Letters),
+  letter = as.character(cab_let$Date$Letters)
+  )
+
+# make a tibble with the dates, the letters and the 75th percentile
+cab_let_pos <- dt_cab2 %>% 
+  group_by(Date) %>% 
+  summarise(q_75 = quantile(VitC, probs = 0.75, na.rm = TRUE)) %>% 
+  inner_join(cab_let_tb)
+
+ggplot() +
+  geom_boxplot(data = dt_cab2, 
+               aes(x = Date, y = VitC, fill = Date),
+               show.legend = FALSE) +
+  geom_text(data = cab_let_pos,
+            aes(x = Date, y = q_75, # position of the label
+                label = letter), # labels are the letters
+            size = 5, # size of the labels
+            vjust = -1, hjust = -1) + # adjusts position of the labels
+  scale_fill_brewer(palette = "Blues") + 
+  theme_bw()
+```
+
+
+# Brain and body weights in mamals
+
+*We want to know if there is a correlation between the brain and the body weights in mamals.*
+
+* Load the dataset called *mammals* in the package *MASS*
+
+```{r}
+data(mammals)
+str(mammals)
+```
+
+* Get the Pearson correlation coefficient
+
+```{r}
+cor(mammals$body, mammals$brain)
+```
+
+* Do a Pearson correlation test and interpret it
+
+```{r}
+cor.test(mammals$body, mammals$brain,
+         method = "pearson")
+```
+<!-- There is a strong significant positive relationship between boday and brain mass-->
+
 
 # For next time
 
-* Install the following packages from CRAN: *GGally*, *ggeffects*, *gtsummary*, *broom.helpers*, *parameters*
+* Install the following packages from CRAN: *ggeffects*, *gtsummary*, *ggstats*, *lindia*, *car*, *AICcmodavg*
 
-CHECK IF ALL NEEDED... and UPDATE 
+* Make sure the following packages are already installed: *tidyverse*, *MASS*, 
 
 * Download the *RData* file available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData){preview-link="false"}
 and store them in your raw data folder.
