@@ -1,0 +1,539 @@
+---
+title: "Going further with R - session 1/2"
+author: Géraldine Derroire
+institute: Cirad - UnB
+date: last-modified
+format: 
+  revealjs:
+    theme: solarized
+    output-location: fragment 
+    slide-number: true
+    preview-links: true
+    chalkboard: true
+    link-external-icon: true
+    link-external-newwindow: true
+    incremental: true
+execute:
+  echo: true   
+  warning: true
+  message: true 
+  cache: true
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+<!-- session 1-->
+
+```{r, echo=FALSE}
+set.seed(14)
+```
+
+# Vector creation
+
+::: notes
+some reminders of things already seen + some new things
+
+these will be usefull if you need to simulate data (for exemple for predictions using a model)
+:::
+
+## Combine elements into a vector
+
+[We already saw how to use [c]{style="color:indianred;"} to combine values to create a vector.
+This function is applicable to any mode of vector:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+vec_num <- c(1, 25, 8, 32, 9, 15.3)
+mode(vec_num)
+```
+:::
+
+::: fragment
+```{r}
+vec_name <- c("Lucas", "Gabriel", "Ana", "Maria", "João")
+mode(vec_name)
+```
+:::
+
+::: fragment
+```{r}
+vec_bool <- c(TRUE, TRUE, FALSE, TRUE, FALSE, FALSE)
+mode(vec_bool)
+```
+:::
+
+## Repeat elements
+
+[We can also use [repeat]{style="color:indianred;"} to repeat individuals values of any mode:]{style="font-size: 30px"}
+
+* [repeating a vector several **times**:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+rep(c("A", "B", "C"), times = 3)
+```
+:::
+
+* [repeating **each** value several times:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+rep(c("A", "B", "C"), each = 3)
+```
+:::
+
+* [specifying the **output length** of the vector:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+rep(c("A", "B", "C"), length.out = 5)
+```
+:::
+
+## Create numeric sequences
+
+[We have seen how to use [:]{style="color:indianred;"} to create a numeric sequence:]{style="font-size: 30px"}
+
+```{r}
+1:10
+```
+
+[[We can also use [seq]{style="color:indianred;"}, which allow selecting]{style="font-size: 30px"}]{.fragment}
+
+::::: columns
+::: {.column width="50%"}
+
+* [the length:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+seq(from = 1, to = 10, 
+    length.out = 4)
+```
+:::
+
+* [the step size:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+seq(from = 1, to = 5, 
+    by = 0.5)
+```
+:::
+
+:::
+
+::: {.column width="50%"}
+
+* [or both:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+seq(from = 10, 
+    by = -2, 
+    length.out = 5)
+```
+:::
+
+:::
+:::::
+
+## Predefined letter vectors
+
+::::: columns
+::: {.column width="50%"}
+
+[[letters]{style="color:indianred;"} and [LETTERS]{style="color:indianred;"} are predefined vectors of letters:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+str(letters)
+str(LETTERS)
+```
+:::
+
+:::
+
+::: {.column width="50%"}
+
+[[and [month.name]{style="color:indianred;"} and [month.abb]{style="color:indianred;"} are predefined vectors of months:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+str(month.name)
+str(month.abb)
+```
+:::
+
+:::
+:::::
+
+[[They can be used with other functions:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+rep(month.abb, length.out = 20)
+rep(LETTERS[1:3], each = 2)
+```
+:::
+
+::: notes
+these ARE NOT FUNCTIONS 
+::: 
+
+## Generate factor levels
+
+[[gl]{style="color:indianred;"} creates factors of a given number of level *n* and a given number of replications *k*:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+gl(n = 2, k = 3)
+```
+:::
+
+[[The levels can also be specified:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+gl(n = 3, k = 2, 
+   labels = c("blue", "green", "red"))
+```
+:::
+
+## Generate empty vectors
+
+[Empty vectors with a specified mode can be generated with [numeric]{style="color:indianred;"}, [logical]{style="color:indianred;"} and [character]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+
+```{r}
+numeric(length = 3)
+```
+
+```{r}
+logical(length = 5)
+```
+
+```{r}
+character(length = 4)
+```
+
+:::
+
+::: {.column width="50%"}
+
+::: fragment
+
+[⚠️ Note the default values! To get NA:]{style="font-size: 30px"}
+
+```{r}
+rep(NA_real_, 3)
+# or 
+as.numeric(rep(NA, 3))
+```
+:::
+
+::: fragment
+```{r}
+rep(NA_character_, 4)
+```
+:::
+
+::: fragment
+```{r}
+mode(rep(NA,5))
+```
+:::
+
+:::
+:::::
+
+::: notes
+_NA_logical doesn't exist as NA is already logical
+:::
+
+## Random sampling
+
+[Random samples can be drawn using [sample]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+sample(vec_name, # vector from which to draw
+       size = 2) # number of elements to draw
+```
+[[By default, sampling is done without replacement:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r, eval=FALSE}
+sample(month.name, size = 13)
+```
+
+```{r, echo=FALSE}
+try(sample(month.name, size = 13))
+```
+:::
+
+[[We can specify if sampling is done with replacement:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+sample(1:3, size = 10, replace = TRUE)
+```
+:::
+
+## Random sampling
+
+[[sample]{style="color:indianred;"} can be used to shuffle values:]{style="font-size: 30px"}
+
+```{r}
+sample(month.abb, size = length(month.abb))
+```
+
+[[💡 As the sampling is done randomly, the result is different each time:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+sample(month.abb, size = length(month.abb))
+```
+:::
+
+## Generate random numbers from distributions
+
+[We have seen how to randomly draw numbers from a uniform distribution:]{style="font-size: 30px"}
+
+```{r}
+runif(n = 5, min = -3, max = 3)
+```
+
+[[and from a normal distribution:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+rnorm(n=5, mean = 3, sd = 0.5)
+```
+:::
+
+## Generate random numbers from distributions
+
+[Other distributions can be used:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+
+* [Binomial (number of success in a fixed number of trials):]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+rbinom(n = 4, size = 25, 
+       prob = 0.8) # probability of success
+```
+:::
+:::
+
+::: {.column width="50%"}
+
+* [Bernoulli (binomial distribution with one trial):]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+rbinom(n = 4, size = 1, 
+       prob = 0.5) # probability of success
+```
+:::
+:::
+:::::
+
+* [Poisson (discrete positive integers, typically used for counts):]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+rpois(n = 10, 
+      lambda = 5) # expected mean
+```
+:::
+
+
+
+# Saving objects
+
+[We have seen how to export data frames to CSV files, plot to image files. But in R, we can also save **objects** in a way that retains their internal structure and type.]{style="font-size: 30px"}
+
+[In R, almost everything is an object (including vectors, lists, data frames, functions, models, and plots). This makes it possible to save and reload them exactly as they were.]{style="font-size: 30px"}
+
+::: notes
+so what we are going to see works with any type of object
+:::
+
+## Saving a single object
+
+We can save a single object to a **.rds file** using the function [saveRDS]{style="color:indianred;"}:
+
+```{r}
+saveRDS(vec_name, # object
+     file = "data/my_vec.rds")
+```
+
+::: fragment
+
+A *.rds* can be open with [readRDS]{style="color:indianred;"}:
+
+```{r}
+readRDS("data/my_vec.rds")
+```
+
+:::
+
+::: fragment
+
+This only reads the object, so we would need to assign it to an object to load it into the environment.
+
+The name of an object is **not preserved** when saved as *.rds*.
+
+:::
+
+## Saving one or several objects
+
+We can save one or multiple objects into a single **.RData** file using the function [save]{style="color:indianred;"}:
+
+```{r}
+save(vec_name, vec_num, #multiple object
+     file = "data/my_data.RData")
+```
+
+::: fragment
+
+A *.Rdata* can be open with [load]{style="color:indianred;"}:
+
+```{r}
+load("data/my_data.RData")
+```
+
+:::
+
+::: fragment
+
+This loads **all** the objects contained in the file directly into the environment.
+
+The name of the objects are **preserved**.
+
+:::
+
+## Saving the entire workspace
+
+All the objects of a work session can be saved together as a **.RData file** using the function [save.image]{style="color:indianred;"}:
+
+```{r, eval=FALSE}
+save.image(file = "data/my_work_space.RData")
+```
+
+::: fragment
+
+and restored with [load]{style="color:indianred;"}:
+
+```{r, eval = FALSE}
+load("data/my_work_space.RData")
+```
+
+:::
+
+::: notes
+this can be usefull to save time, but can cause problem of reproductability is the code is modified, so use it with care
+:::
+
+
+# Function
+
+reprendre en gros la structure de Juba en commençant par pourquoi 
+
+inlcure la hierarchie enviro
+
+inclure some tips on how to write a function
+
+et débuggage basique 
+
+https://www.dataquest.io/blog/write-functions-in-r/
+
+
+# Utiliser les fonctions avec dplyr et purr
+
+cf Juba
+
+inclure purr::map? ici ou avec accross ? juste le mentionner ici et revenir dessus avec accross?
+
+
+# Interactive graph
+
+graph interactif? en fin de première session ? ou ne pas en parler et le rajouter dans les slides sur ggplot => oui
+
+
+<!-- session 2 -->
+
+# Advanced dplyr 
+
+accross, where, everything => follow Juba
+
+mentionner apply family
+
+# Execution conditionnelle
+
+if...else 
+
+utilisation dans les fonctions avec return, stop, warning => follow Juba
+
+comparaison if... else avec case_when et if_else de tidyverse
+
+# Loops
+
+for, while, repeat, next, break...
+
+inclure some tips on how to write
+
+and debugging?
+
+
+
+# Acknowledgments {.smaller}
+
+::: {.nonincremental}
+
+* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"} 
+
+* Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
+
+
+:::
+
+
+<!-- draft 
+
+# Possible content: 
+
+# saving object 
+  * NOT SURE We've seen it before (check) 
+
+# conditional execution (if... else, ) 
+
+# loops for, while, repeat...
+  * https://frbcesab.github.io/tips-and-tricks/posts/2024-11-19-the-apply-function-family/
+  * https://ericmarcon.github.io/Cours-travailleR/31-Langage.html#72
+
+# vectorial function (apply, etc, BUT see if it overlaps with accross and stuff in the tidyverse)
+
+# map and purr???
+
+# writing function (probably start with this as it will be used in apply or ...)
+  * ressource: https://www.dataquest.io/blog/write-functions-in-r/ 
+  * function synthax
+  * default arguments
+  * message, warning, stop... (after if_else...)
+  * enviro
+  * nested functions
+  * Debugging tools: print(), browser(), traceback()
+
+# debuggage?
+
+# target
+  * https://rdatatoolbox.github.io/chapters/course-targets.html
+  
+-->  

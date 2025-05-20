@@ -1132,4 +1132,9 @@ Some data are by nature not normally distributed, so we cannot model them with a
 
 :::
 
+# Ressources to go further
+
+* DHARMa package (F. Hartig) for model diagnostic with GLM [vignette](https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html){preview-link="false"}
+
+
 
