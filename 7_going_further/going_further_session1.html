@@ -982,15 +982,481 @@ Levels: blue green red</code></pre>
           display:block!important;
       }</style></aside>
 </section></section>
-<section id="function" class="title-slide slide level1 center">
-<h1>Function</h1>
+<section>
+<section id="writing-your-own-functions" class="title-slide slide level1 center">
+<h1>Writing your own functions</h1>
+
+</section>
+<section id="what-is-a-function" class="slide level2">
+<h2>What is a function?</h2>
+<p>As previously seen, a function take one or several <strong>arguments</strong> (data, parameters, options) as in put, performs some code, and returns a result:</p>
+
+<img data-src="function_1.png" class="r-stretch"></section>
+<section id="why-writing-functions" class="slide level2">
+<h2>Why writing functions?</h2>
+<p><span style="font-size: 30px">When you need to repeat the same actions more than twice, it is recommanded to write a function. This helps:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">Avoid code duplication</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Make your code reusable across multiple scripts and projects — and even organise it into a package</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">⚠️ Copying and pasting has several drawbacks:</span></span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">It’s error-prone (e.g., updating some but not all instances of a variable)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">If you want to modify/update/correct the code, you have to modify it everywhere manually</span></p></li>
+</ul>
+<aside class="notes">
+<p>a package can be written for oneself</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="structure-of-a-function" class="slide level2">
+<h2>Structure of a function</h2>
+<p>To create a function, we use the instruction <span style="color:indianred;">function</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a><span class="cf">function</span>() {</span>
+<span id="cb78-2"><a href=""></a>  </span>
+<span id="cb78-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<ul>
+<li class="fragment"><p>the <strong>arguments</strong> will be specified in the <span style="color:indianred;">()</span></p></li>
+<li class="fragment"><p>the code of the function will be written in the <span style="color:indianred;">{}</span>, which is the <strong>body</strong> of the function</p></li>
+</ul>
+</section>
+<section id="structure-of-a-function---name" class="slide level2">
+<h2>Structure of a function - name</h2>
+<p>To be able to call a function to use it, we need to give it a <strong>name</strong>.</p>
+<p>Let’s create a function called <em>my_first_function</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a>my_first_function <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb79-2"><a href=""></a>  </span>
+<span id="cb79-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment"><span style="font-size: 30px">⚠️ Be careful not to give the name of an already existing function to your function. This would replace the existing function until you restart your session.</span></span></p>
+</section>
+<section id="structure-of-a-function---result" class="slide level2">
+<h2>Structure of a function - result</h2>
+<p>This function will say <em>hello</em> (what a lovely function 😊).</p>
+<p>This mean that it will <strong>return</strong> a character string saying <em>hello</em> as a result:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href=""></a>my_first_function <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb80-2"><a href=""></a>  <span class="fu">return</span>(<span class="st">"Hello!"</span>)</span>
+<span id="cb80-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<div class="fragment">
+<p>Let’s use it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a><span class="fu">my_first_function</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello!"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="structure-of-a-function---argument-and-body" class="slide level2">
+<h2>Structure of a function - argument and body</h2>
+<p><span style="font-size: 30px">We now want to personalise our greeting…</span></p>
+<p>Let’s add an <strong>argument</strong> that we call <em>name</em> to our function, and use it in the code that we write in the <strong>body</strong> of the function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href=""></a>my_first_function <span class="ot">&lt;-</span> <span class="cf">function</span>(name) {</span>
+<span id="cb83-2"><a href=""></a>  greeting <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Hello"</span>, name, <span class="st">"!"</span>)</span>
+<span id="cb83-3"><a href=""></a>  <span class="fu">return</span>(greeting)</span>
+<span id="cb83-4"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<div class="fragment">
+<p><span style="font-size: 30px">We can now pass a value to this argument when running the function:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a><span class="fu">my_first_function</span>(<span class="at">name =</span> <span class="st">"João"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello João !"</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p><span style="font-size: 30px">Note that we can also pass a vector:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href=""></a><span class="fu">my_first_function</span>(<span class="at">name =</span> vec_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Hello Lucas !"   "Hello Gabriel !" "Hello Ana !"     "Hello Maria !"  
+[5] "Hello João !"   </code></pre>
+</div>
+</div>
+</div>
+<p>:::</p>
+<aside class="notes">
+<p>you have written a function! easy!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="structure-of-a-function-1" class="slide level2">
+<h2>Structure of a function</h2>
+
+<img data-src="function_str.png" class="r-stretch"></section>
+<section id="arguments" class="slide level2">
+<h2>Arguments</h2>
+<p><span style="font-size: 30px">A function can have several arguments:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb88-2"><a href=""></a>  <span class="fu">return</span>(x <span class="sc">+</span> y)</span>
+<span id="cb88-3"><a href=""></a>} </span>
+<span id="cb88-4"><a href=""></a><span class="fu">my_sum</span>(<span class="dv">2</span>, <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">or none (see our very first function)…</span></span></p>
+<div class="fragment">
+<p><span style="font-size: 30px">⚠️Passing an incorrect number of values to the arguments of a function will result in an error:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href=""></a><span class="fu">my_sum</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Error in my_sum(1) : argument "y" is missing, with no default</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="loading-and-updating-a-function" class="slide level2">
+<h2>Loading and updating a function</h2>
+<p>To be able to use a function, it must be <strong>loaded in the environment</strong>.</p>
+<p>To do this, we execute the code of the function (<em>i.e.</em> the code that creates the function).</p>
+<p><span class="fragment">⚠️ After updating a function, you must execute the code again to load the updated version.</span></p>
+</section>
+<section id="writing-a-function-step-by-step" class="slide level2 smaller">
+<h2>Writing a function step by step</h2>
+<p><em>We now want to write a function that calculates the mean diameter (in m) when given a vector of circumference (in cm).</em></p>
+<p><strong>Step 1: plan</strong></p>
+<p>Let’s start identifying the arguments and planning the operations (without running the code):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href=""></a><span class="co"># Arguments</span></span>
+<span id="cb92-2"><a href=""></a>  circ <span class="co"># a vector of circumference in cm</span></span>
+<span id="cb92-3"><a href=""></a>  </span>
+<span id="cb92-4"><a href=""></a><span class="co"># Body of the function</span></span>
+<span id="cb92-5"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
+<span id="cb92-6"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
+<span id="cb92-7"><a href=""></a>  <span class="co"># Return the diameter</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</section>
+<section id="writing-a-function-step-by-step-1" class="slide level2 smaller">
+<h2>Writing a function step by step</h2>
+<p><strong>Step 2: create test data and argument</strong></p>
+<p>Try to create data as close as possible to the one you will be using.</p>
+<p><em>Here we create a vector of circumference that contain NA:</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href=""></a>test_circ <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">9</span>, </span>
+<span id="cb93-2"><a href=""></a>                     <span class="at">min =</span> <span class="dv">30</span>, <span class="at">max =</span> <span class="dv">250</span>),</span>
+<span id="cb93-3"><a href=""></a>               <span class="cn">NA</span>)</span>
+<span id="cb93-4"><a href=""></a>test_circ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 134.80511  68.87829  51.43124  93.98743  33.58599  59.05333  70.86809
+ [8] 206.05621 190.59417        NA</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>test data don’t necessaryly need to be created from scratch, they can be a subset of our real data</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="writing-a-function-step-by-step-2" class="slide level2 smaller">
+<h2>Writing a function step by step</h2>
+<p><strong>Step 3: develop the code</strong></p>
+<p>The code is developed line by line, testing every line (or almost every line…) :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href=""></a><span class="co"># Arguments</span></span>
+<span id="cb95-2"><a href=""></a>  circ <span class="ot">&lt;-</span> test_circ <span class="co"># vector of circumference in cm</span></span>
+<span id="cb95-3"><a href=""></a></span>
+<span id="cb95-4"><a href=""></a><span class="co"># Body of the function</span></span>
+<span id="cb95-5"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
+<span id="cb95-6"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb95-7"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
+<span id="cb95-8"><a href=""></a>  <span class="co"># Return the diameter</span></span>
+<span id="cb95-9"><a href=""></a>    </span>
+<span id="cb95-10"><a href=""></a>diam    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.4290980 0.2192464 0.1637107 0.2991713 0.1069075 0.1879726 0.2255801
+ [8] 0.6558973 0.6066801        NA</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>all good</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="writing-a-function-step-by-step-3" class="slide level2 smaller">
+<h2>Writing a function step by step</h2>
+<p><strong>Step 3: develop the code</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href=""></a><span class="co"># Arguments</span></span>
+<span id="cb97-2"><a href=""></a>  circ <span class="ot">&lt;-</span> test_circ <span class="co"># vector of circumference in cm</span></span>
+<span id="cb97-3"><a href=""></a></span>
+<span id="cb97-4"><a href=""></a><span class="co"># Body of the function</span></span>
+<span id="cb97-5"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
+<span id="cb97-6"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb97-7"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
+<span id="cb97-8"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam)</span>
+<span id="cb97-9"><a href=""></a>  <span class="co"># Return the diameter</span></span>
+<span id="cb97-10"><a href=""></a>    </span>
+<span id="cb97-11"><a href=""></a>mean_diam    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p><span class="fragment"><em>Because of the NA, the mean is not calculated… How do we want to handle this? We can let the user decide…</em></span></p>
+</section>
+<section id="writing-a-function-step-by-step-4" class="slide level2 smaller">
+<h2>Writing a function step by step</h2>
+<p><strong>Step 3: develop the code… and add arguments if needed</strong></p>
+<p><em>Let’s add an argument to let the user choose what to do with NA, and give it a test value</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href=""></a><span class="co"># Arguments</span></span>
+<span id="cb99-2"><a href=""></a>  circ <span class="ot">&lt;-</span> test_circ <span class="co"># vector of circumference in cm</span></span>
+<span id="cb99-3"><a href=""></a>  na_act <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="co"># boolean: remove NA?</span></span>
+<span id="cb99-4"><a href=""></a></span>
+<span id="cb99-5"><a href=""></a><span class="co"># Body of the function</span></span>
+<span id="cb99-6"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
+<span id="cb99-7"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb99-8"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
+<span id="cb99-9"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act)</span>
+<span id="cb99-10"><a href=""></a>  <span class="co"># Return the diameter</span></span>
+<span id="cb99-11"><a href=""></a>    </span>
+<span id="cb99-12"><a href=""></a>mean_diam    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3215849</code></pre>
+</div>
+</div>
+<p><span class="fragment">💡 <em>na.rm</em> is an argument of the function mean. We pass it an argument of our own function.</span></p>
+<aside class="notes">
+<p>all good</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="writing-a-function-step-by-step-5" class="slide level2 smaller">
+<h2>Writing a function step by step</h2>
+<p><strong>Step 3: develop the code… and add arguments if needed</strong></p>
+<p><em>We would like to round the mean diameter, let’s add an new operation and an argument giving the number of decimals.</em></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href=""></a><span class="co"># Arguments</span></span>
+<span id="cb101-2"><a href=""></a>  circ <span class="ot">&lt;-</span> test_circ <span class="co"># vector of circumference in cm</span></span>
+<span id="cb101-3"><a href=""></a>  na_act <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="co"># boolean: remove NA?</span></span>
+<span id="cb101-4"><a href=""></a>  digits <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># integer: number of digits to keep</span></span>
+<span id="cb101-5"><a href=""></a></span>
+<span id="cb101-6"><a href=""></a><span class="co"># Body of the function</span></span>
+<span id="cb101-7"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
+<span id="cb101-8"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb101-9"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
+<span id="cb101-10"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act)</span>
+<span id="cb101-11"><a href=""></a>  <span class="co"># Round the diameter</span></span>
+<span id="cb101-12"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">round</span>(mean_diam, <span class="at">digits =</span> digits)</span>
+<span id="cb101-13"><a href=""></a>  <span class="co"># Return the mean diameter</span></span>
+<span id="cb101-14"><a href=""></a>    mean_diam    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.32</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>one of our argument can take the same name as in the function in which we use it</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="writing-a-function-step-by-step-6" class="slide level2 smaller">
+<h2>Writing a function step by step</h2>
+<p><strong>Step 4: create the function</strong>: add a name, add he instruction <em>function</em>, put the argument in <em>()</em> and the code in <em>{}</em>, add <em>return</em> (optional)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href=""></a>mean_diam_func <span class="ot">&lt;-</span> <span class="cf">function</span>(circ, na_act, digits) {</span>
+<span id="cb103-2"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
+<span id="cb103-3"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb103-4"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
+<span id="cb103-5"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act)</span>
+<span id="cb103-6"><a href=""></a>  <span class="co"># Round the diameter</span></span>
+<span id="cb103-7"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">round</span>(mean_diam, <span class="at">digits =</span> digits)</span>
+<span id="cb103-8"><a href=""></a>  <span class="co"># Return the mean diameter</span></span>
+<span id="cb103-9"><a href=""></a>    <span class="fu">return</span>(mean_diam)</span>
+<span id="cb103-10"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</section>
+<section id="writing-a-function-step-by-step-7" class="slide level2 smaller">
+<h2>Writing a function step by step</h2>
+<p><strong>Step 5: test the function</strong></p>
+<div class="fragment">
+<p>⚠️ Don’t forget to remove the test arguments from the environment before testing.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href=""></a><span class="co"># remove test argument</span></span>
+<span id="cb104-2"><a href=""></a> <span class="fu">rm</span>(circ, digits, na_act)</span>
+<span id="cb104-3"><a href=""></a><span class="co"># new data</span></span>
+<span id="cb104-4"><a href=""></a> new_circ <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">35</span>, <span class="at">min =</span> <span class="dv">30</span>, <span class="at">max =</span> <span class="dv">250</span>), <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href=""></a><span class="co"># first test</span></span>
+<span id="cb105-2"><a href=""></a> <span class="fu">mean_diam_func</span>(<span class="at">circ =</span> new_circ, <span class="at">digits =</span> <span class="dv">1</span>, <span class="at">na_act =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href=""></a><span class="co"># second test</span></span>
+<span id="cb107-2"><a href=""></a><span class="fu">mean_diam_func</span>(<span class="at">circ =</span> new_circ, <span class="at">digits =</span> <span class="dv">4</span>, <span class="at">na_act =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4015</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href=""></a><span class="co"># third test</span></span>
+<span id="cb109-2"><a href=""></a><span class="fu">mean_diam_func</span>(<span class="at">circ =</span> new_circ, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">na_act =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>we will see later why removing the test arguments</p>
+<p>here we really decompose the writing, when you get more confident, the code can be more compact (and use pipe if we want)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="side-effects" class="slide level2">
+<h2>Side effects</h2>
+<p>The objective of a function may not be to return a result, but to perform an action, such as returning a graph, printing a message or a value, saving a file…</p>
+<p>These actions are called side effects.</p>
+<p>In these case, we will not need <em>return</em>.</p>
+<p>To print a value in the console, we can use <span style="color:indianred;">print</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb111"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb111-1"><a href=""></a>my_sum2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb111-2"><a href=""></a>  <span class="fu">print</span>(x <span class="sc">+</span> y)</span>
+<span id="cb111-3"><a href=""></a>}</span>
+<span id="cb111-4"><a href=""></a><span class="fu">my_sum2</span>(<span class="dv">5</span>, <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14</code></pre>
+</div>
+</div>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
 <p>reprendre en gros la structure de Juba en commençant par pourquoi</p>
 <p>inlcure la hierarchie enviro</p>
 <p>inclure some tips on how to write a function</p>
+<p>sourcing a function</p>
 <p>et débuggage basique</p>
 <p>https://www.dataquest.io/blog/write-functions-in-r/</p>
-</section>
-
+</section></section>
 <section id="utiliser-les-fonctions-avec-dplyr-et-purr" class="title-slide slide level1 center">
 <h1>Utiliser les fonctions avec dplyr et purr</h1>
 <p>cf Juba</p>
@@ -1013,6 +1479,7 @@ Levels: blue green red</code></pre>
 <h1>Execution conditionnelle</h1>
 <p>if…else</p>
 <p>utilisation dans les fonctions avec return, stop, warning =&gt; follow Juba</p>
+<p>possible de mettre un test pour la langue dans notre function my_first_function (et ou l’heure du jour hello vs bom dia / boa tarde)</p>
 <p>comparaison if… else avec case_when et if_else de tidyverse</p>
 </section>
 
@@ -1030,6 +1497,7 @@ Levels: blue green red</code></pre>
 <li><p><em>Introduction à l’analyse d’enquêtes avec R et RStudio</em> - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette <a href="https://larmarange.github.io/analyse-R/" data-preview-link="false">in French</a></p></li>
 <li><p>Barnier J. <em>Introduction à R et au tidyverse</em> <a href="https://juba.github.io/tidyverse/" data-preview-link="false">in French</a></p></li>
 </ul>
+<!-- Vincyane???? -->
 </div>
 <!-- draft 
 

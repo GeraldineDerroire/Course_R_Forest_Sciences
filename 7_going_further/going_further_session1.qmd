@@ -442,13 +442,400 @@ this can be usefull to save time, but can cause problem of reproductability is t
 :::
 
 
-# Function
+# Writing your own functions
+
+## What is a function?
+
+As previously seen, a function take one or several **arguments** (data, parameters, options) as in put, performs some code, and returns a result:
+
+![](function_1.png)
+
+## Why writing functions?
+
+[When you need to repeat the same actions more than twice, it is recommanded to write a function. This helps:]{style="font-size: 30px"}
+
+* [Avoid code duplication]{style="font-size: 30px"}
+
+* [Make your code reusable across multiple scripts and projects — and even organise it into a package]{style="font-size: 30px"}
+
+[[⚠️ Copying and pasting has several drawbacks:]{style="font-size: 30px"}]{.fragment}
+
+* [It's error-prone (e.g., updating some but not all instances of a variable)]{style="font-size: 30px"}
+
+* [If you want to modify/update/correct the code, you have to modify it everywhere manually]{style="font-size: 30px"}
+
+::: notes
+a package can be written for oneself
+:::
+
+## Structure of a function
+
+To create a function, we use the instruction [function]{style="color:indianred;"}:
+
+```{r, eval= FALSE}
+function() {
+  
+}
+```
+
+* the **arguments** will be specified in the [()]{style="color:indianred;"}
+
+* the code of the function will be written in the [{}]{style="color:indianred;"}, which is the **body** of the function
+
+## Structure of a function - name
+
+To be able to call a function to use it, we need to give it a **name**.
+
+Let's create a function called *my_first_function*:
+
+```{r, eval= FALSE}
+my_first_function <- function() {
+  
+}
+```
+
+[[⚠️ Be careful not to give the name of an already existing function to your function. This would replace the existing function until you restart your session.]{style="font-size: 30px"}]{.fragment}
+
+## Structure of a function - result
+
+This function will say *hello* (what a lovely function 😊). 
+
+This mean that it will **return** a character string saying *hello* as a result:
+
+```{r}
+my_first_function <- function() {
+  return("Hello!")
+}
+```
+
+::: fragment
+
+Let's use it:
+
+```{r}
+my_first_function()
+```
+:::
+
+## Structure of a function - argument and body
+
+[We now want to personalise our greeting...]{style="font-size: 30px"}
+
+Let's add an **argument** that we call *name* to our function, and use it in the code that we write in the **body** of the function:
+
+```{r}
+my_first_function <- function(name) {
+  greeting <- paste("Hello", name, "!")
+  return(greeting)
+}
+```
+
+::: fragment
+
+[We can now pass a value to this argument when running the function:]{style="font-size: 30px"}
+
+```{r}
+my_first_function(name = "João")
+```
+
+:::
+
+::: fragment
+
+[Note that we can also pass a vector:]{style="font-size: 30px"}
+
+```{r}
+my_first_function(name = vec_name)
+```
+:::
+:::
+
+::: notes
+you have written a function! easy!
+:::
+
+## Structure of a function
+
+![](function_str.png)
+
+## Arguments
+
+[A function can have several arguments:]{style="font-size: 30px"}
+
+```{r}
+my_sum <- function(x, y) {
+  return(x + y)
+} 
+my_sum(2, 8)
+```
+
+[[or none (see our very first function)...]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+
+[⚠️Passing an incorrect number of values to the arguments of a function will result in an error:]{style="font-size: 30px"}
+
+```{r, eval = FALSE}
+my_sum(1)
+```
+
+```{r, echo=FALSE}
+try(my_sum(1))
+```
+
+:::
+
+
+## Loading and updating a function
+
+To be able to use a function, it must be **loaded in the environment**.
+
+To do this, we execute the code of the function (*i.e.* the code that creates the function).
+
+[⚠️ After updating a function, you must execute the code again to load the updated version.]{.fragment}
+
+
+
+## Writing a function step by step {.smaller}
+
+*We now want to write a function that calculates the mean diameter (in m) when given a vector of circumference (in cm).*
+
+**Step 1: plan**
+
+Let's start identifying the arguments and planning the operations (without running the code):
+
+```{r, eval = FALSE}
+# Arguments
+  circ # a vector of circumference in cm
+  
+# Body of the function
+  # Calculate diameters in m
+  # Calculate the mean value
+  # Return the diameter
+```
+
+
+## Writing a function step by step {.smaller}
+
+**Step 2: create test data and argument**
+
+Try to create data as close as possible to the one you will be using.
+
+*Here we create a vector of circumference that contain NA:*
+
+```{r}
+test_circ <- c(runif(n = 9, 
+                     min = 30, max = 250),
+               NA)
+test_circ
+```
+::: notes
+test data don't necessaryly need to be created from scratch, they can be a subset of our real data
+:::
+
+## Writing a function step by step {.smaller}
+
+**Step 3: develop the code**
+
+The code is developed line by line, testing every line (or almost every line...) :
+
+```{r}
+# Arguments
+  circ <- test_circ # vector of circumference in cm
+
+# Body of the function
+  # Calculate diameters in m
+    diam <- circ / (pi * 100)
+  # Calculate the mean value
+  # Return the diameter
+    
+diam    
+```
+
+::: notes
+all good
+:::
+
+## Writing a function step by step {.smaller}
+
+**Step 3: develop the code**
+
+```{r}
+# Arguments
+  circ <- test_circ # vector of circumference in cm
+
+# Body of the function
+  # Calculate diameters in m
+    diam <- circ / (pi * 100)
+  # Calculate the mean value
+    mean_diam <- mean(diam)
+  # Return the diameter
+    
+mean_diam    
+```
+
+[*Because of the NA, the mean is not calculated... How do we want to handle this? We can let the user decide...*]{.fragment}
+
+## Writing a function step by step {.smaller}
+
+**Step 3: develop the code... and add arguments if needed**
+
+*Let's add an argument to let the user choose what to do with NA, and give it a test value*
+
+```{r}
+# Arguments
+  circ <- test_circ # vector of circumference in cm
+  na_act <- TRUE # boolean: remove NA?
+
+# Body of the function
+  # Calculate diameters in m
+    diam <- circ / (pi * 100)
+  # Calculate the mean value
+    mean_diam <- mean(diam, na.rm = na_act)
+  # Return the diameter
+    
+mean_diam    
+```
+[💡 *na.rm* is an argument of the function mean. We pass it an argument of our own function.]{.fragment}
+
+::: notes
+all good
+:::
+
+## Writing a function step by step {.smaller}
+
+**Step 3: develop the code... and add arguments if needed**
+
+*We would like to round the mean diameter, let's add an new operation and an argument giving the number of decimals.*
+
+```{r}
+# Arguments
+  circ <- test_circ # vector of circumference in cm
+  na_act <- TRUE # boolean: remove NA?
+  digits <- 2 # integer: number of digits to keep
+
+# Body of the function
+  # Calculate diameters in m
+    diam <- circ / (pi * 100)
+  # Calculate the mean value
+    mean_diam <- mean(diam, na.rm = na_act)
+  # Round the diameter
+    mean_diam <- round(mean_diam, digits = digits)
+  # Return the mean diameter
+    mean_diam    
+```
+
+::: notes
+one of our argument can take the same name as in the function in which we use it
+:::
+
+## Writing a function step by step {.smaller}
+
+**Step 4: create the function**: add a name, add he instruction *function*, put the argument in *()* and the code in *{}*, add *return* (optional) 
+
+```{r}
+mean_diam_func <- function(circ, na_act, digits) {
+  # Calculate diameters in m
+    diam <- circ / (pi * 100)
+  # Calculate the mean value
+    mean_diam <- mean(diam, na.rm = na_act)
+  # Round the diameter
+    mean_diam <- round(mean_diam, digits = digits)
+  # Return the mean diameter
+    return(mean_diam)
+}
+```
+
+## Writing a function step by step {.smaller}
+
+**Step 5: test the function**
+
+::: fragment
+
+⚠️ Don't forget to remove the test arguments from the environment before testing.
+
+```{r}
+# remove test argument
+ rm(circ, digits, na_act)
+# new data
+ new_circ <- c(runif(n = 35, min = 30, max = 250), NA)
+``` 
+
+:::
+
+::: fragment
+
+```{r}
+# first test
+ mean_diam_func(circ = new_circ, digits = 1, na_act = TRUE)
+```
+
+:::
+
+::: fragment
+```{r}
+# second test
+mean_diam_func(circ = new_circ, digits = 4, na_act = TRUE)
+```
+:::
+
+::: fragment
+```{r}
+# third test
+mean_diam_func(circ = new_circ, digits = 3, na_act = FALSE)
+```
+:::
+
+::: notes 
+we will see later why removing the test arguments
+
+here we really decompose the writing, when you get more confident, the code can be more compact (and use pipe if we want)
+:::
+
+## Side effects
+
+The objective of a function may not be to return a result, but to perform an action, such as returning a graph, printing a message or a value, saving a file...
+
+These actions are called side effects.
+
+In these case, we will not need *return*.
+
+## Side effects
+
+[For a function aiming to print a value in the console, we can use [print]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+my_sum2 <- function(x, y) {
+  print(x + y)
+}
+my_sum2(5, 9)
+```
+
+::: fragment
+
+[or [cat] if we want to print a character string:]]{style="font-size: 30px"}
+
+```{r}
+my_sum3 <- function(x, y) {
+  cat("The sum is ", x + y)
+}
+my_sum3(11, 3)
+```
+
+:::
+
+## 
+
+
+
 
 reprendre en gros la structure de Juba en commençant par pourquoi 
 
 inlcure la hierarchie enviro
 
 inclure some tips on how to write a function
+
+sourcing a function
 
 et débuggage basique 
 
@@ -481,6 +868,8 @@ if...else
 
 utilisation dans les fonctions avec return, stop, warning => follow Juba
 
+possible de mettre un test pour la langue dans notre function my_first_function (et ou l'heure du jour hello vs bom dia / boa tarde)
+
 comparaison if... else avec case_when et if_else de tidyverse
 
 # Loops
@@ -500,6 +889,8 @@ and debugging?
 * *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"} 
 
 * Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
+
+<!-- Vincyane???? -->
 
 
 :::
