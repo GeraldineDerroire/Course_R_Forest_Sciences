@@ -491,14 +491,27 @@ Géraldine Derroire
 </section>
 <section id="descriptive-statistics-vs-parameters" class="slide level2">
 <h2>Descriptive statistics <em>vs</em> parameters</h2>
-<p><span style="font-size: 30px"><strong>Descriptive statistics</strong> are calculated from the observations (the data). These observations are a sample of a theoretical population that we don’t measure.</span></p>
+<p><span style="font-size: 30px"><strong>Descriptive statistics</strong> are calculated from the observations (the data).</span></p>
 <blockquote>
 <p><span style="font-size: 30px"><em>eg</em>: The trees that we can measure in a forest plot are a sample of the population of the trees in the considered forest. We can <strong>calculate</strong> the mean diameter of this sample.</span></p>
 </blockquote>
-<p><span style="font-size: 30px">A theoretical population can be described by its <strong>parameters</strong>, that are not measured.</span></p>
+<p><span style="font-size: 30px">The observations are a sample of a theoretical population that we don’t measure. The theoretical population can be described by its <strong>parameters</strong>, that are not measured.</span></p>
 <blockquote>
 <p><span style="font-size: 30px"><em>eg</em>: The mean diameter of the population of trees in the considered forest is a parameter. It cannot be measured but can be <strong>estimated</strong>.</span></p>
 </blockquote>
+<aside class="notes">
+<p>taht’s what we want to do with the stats, use observations to understand the theoretical population</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="statistical-distributions" class="slide level2">
 <h2>Statistical distributions</h2>
@@ -524,6 +537,7 @@ Géraldine Derroire
 </div></div>
 <aside class="notes">
 <p>The density function does not give the probability of being equal to a value, as for a continuous variable, this probability would be null.</p>
+<p>so here much higher proba of being between -1 and 1, tha between -4 and -2</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1298,7 +1312,7 @@ mean in group Dicorynia   mean in group Protium
 </div></div>
 <p><span class="fragment"><span style="font-size: 25px">💡 The result indicates that we performed a <em>Welch t-test</em>, which doesn’t assume homoscedasticity (equality of variance). If we want to run a t-test assuming homoscedasticity, we need to use the argument <em>var.equal = TRUE</em>.</span></span></p>
 <aside class="notes">
-<p>the Welch modification is done because it handle better unequal variances and unequal sample size</p>
+<p>the Welch modification is done because it handle better unequal variances and unequal sample size =&gt; here clearly heterosceasticity (non homogeneity of variance)</p>
 <p>the test tell us</p>
 <ul>
 <li><p>the estimated mean per group</p></li>
@@ -2072,6 +2086,19 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">⚠️ The unit of the covariance is the product of the unit of x and of y…</span></span></p>
+<aside class="notes">
+<p>is this high? low? hard to say…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="correlation-of-pearson" class="slide level2">
 <h2>Correlation of Pearson</h2>
@@ -2229,6 +2256,15 @@ sample estimates:
 <li><p>Dytham C. <em>Choosing and using statistics - a biologist’s guide</em>, 3rd Edition. Available <a href="http://ngc.digitallibrary.co.in/bitstream/123456789/2272/1/Choosing%20and%20using%20statistics_A%20Biologist%27s%20Guide%20%283rd%20edition%29%40Dytham.pdf" data-preview-link="false">here</a></p></li>
 <li><p>Rech R. <em>One-Way ANOVA and Boxplot in R</em> <a href="https://statdoe.com/one-way-anova-and-box-plot-in-r/" data-preview-link="false">here</a></p></li>
 <li><p>datacamp tutorials on <a href="https://www.datacamp.com/tutorial/chi-square-test-r" data-preview-link="false">chi-square test</a> and <a href="https://www.datacamp.com/tutorial/t-tests-r-tutorial" data-preview-link="false">t-test</a>, among other…</p></li>
+</ul>
+</div>
+</section>
+
+<section id="ressources-to-go-further" class="title-slide slide level1 center">
+<h1>Ressources to go further</h1>
+<div>
+<ul>
+<li>Lambert B. &amp; Cooper F. <em>The distribution zoo</em> <a href="https://ben18785.shinyapps.io/distribution-zoo/" data-preview-link="false">here</a></li>
 </ul>
 </div>
 <div class="quarto-auto-generated-content">

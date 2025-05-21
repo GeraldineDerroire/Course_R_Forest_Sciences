@@ -83,13 +83,18 @@ $$CV = \frac{standard\:deviation}{mean}$$
 
 ## Descriptive statistics *vs* parameters
 
-[**Descriptive statistics** are calculated from the observations (the data). These observations are a sample of a theoretical population that we don't measure.]{style="font-size: 30px"}
+[**Descriptive statistics** are calculated from the observations (the data). ]{style="font-size: 30px"}
 
 > [*eg*: The trees that we can measure in a forest plot are a sample of the population of the trees in the considered forest. We can **calculate** the mean diameter of this sample.]{style="font-size: 30px"}
 
-[A theoretical population can be described by its **parameters**, that are not measured.]{style="font-size: 30px"}
+[The observations are a sample of a theoretical population that we don't measure.
+The theoretical population can be described by its **parameters**, that are not measured.]{style="font-size: 30px"}
 
 > [*eg*: The mean diameter of the population of trees in the considered forest is a parameter. It cannot be measured but can be **estimated**.]{style="font-size: 30px"}
+
+::: notes
+taht's what we want to do with the stats, use observations to understand the theoretical population
+:::
 
 
 ## Statistical distributions
@@ -128,6 +133,8 @@ p <- ggplot(v, aes(x = x)) + geom_density(color = "blue") + theme_minimal()
 
 ::: notes
 The density function does not give the probability of being equal to a value, as for a continuous variable, this probability would be null.
+
+so here much higher proba of being between -1 and 1, tha between -4 and -2
 
 :::
 
@@ -635,7 +642,7 @@ t.test(dt_sub$H ~ dt_sub$genus)
 [[💡 The result indicates that we performed a *Welch t-test*, which doesn't assume homoscedasticity (equality of variance). If we want to run a t-test assuming homoscedasticity, we need to use the argument *var.equal = TRUE*. ]{style="font-size: 25px"}]{.fragment}
 
 ::: notes
-the Welch modification is done because it handle better unequal variances and unequal sample size
+the Welch modification is done because it handle better unequal variances and unequal sample size => here clearly heterosceasticity (non homogeneity of variance)
 
 the test tell us 
 
@@ -1137,6 +1144,10 @@ cov(iris_vers$Petal.Length, iris_vers$Petal.Width)
 ```
 [[⚠️ The unit of the covariance is the product of the unit of x and of y...]{style="font-size: 30px"}]{.fragment}
 
+::: notes
+is this high? low? hard to say...
+:::
+
 
 ## Correlation of Pearson
 
@@ -1252,4 +1263,10 @@ more complicated if we want other type of correlation than Pearson
 
 :::
 
+# Ressources to go further
 
+::: {.nonincremental}
+
+* Lambert B. & Cooper F. *The distribution zoo* [here](https://ben18785.shinyapps.io/distribution-zoo/){preview-link="false"}
+
+:::
