@@ -1101,6 +1101,18 @@ we don't go further here with patchwork, but I encourage you to use it (before p
 the vignette is very good
 :::
 
+## Interactive plots with plotly
+
+[The function [ggplotly]{style="color:indianred;"} of the package [plotly]{style="color:indianred;"} allows to (quite magically...) transform any plot into an interactive plot:]{style="font-size: 30px"}
+
+```{r}
+#| warning: false
+#| out.width: 65%
+library(plotly)
+ggplotly(plot1)
+```
+
+
 # Saving plots
 
 To save a plot, we use the function [ggsave]{style="color:indianred;"}:
