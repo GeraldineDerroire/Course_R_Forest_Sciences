@@ -65,14 +65,27 @@ wdData %>%
   ggplot(aes(x = family, y = wd)) + 
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+## Alternative
+abd_10 <- wdData %>% 
+  count(family) %>% 
+  arrange(desc(n)) %>% 
+  slice_head(n = 10) %>% 
+  pull(family)
+
+wdData %>% 
+  filter(family %in% abd_10) %>% 
+  ggplot(aes(x = family, y = wd)) + 
+  geom_boxplot() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
-* Show the number of observation per *family* and *regionId*
+* Show the number of observation per *family* and *regionId* for the 10 most abundant families
 
 ```{r}
 # 1st possibility: heatmap
 wdData %>% 
-  filter(family %in% abd_10$family) %>% 
+  filter(family %in% abd_10) %>% 
   count(family, regionId) %>% 
   ggplot(aes(x = family, y = regionId)) + 
   geom_tile(aes(fill = n)) +
@@ -83,10 +96,20 @@ wdData %>%
 ```{r}
 # 2nd possibility: bubble plot
 wdData %>% 
-  filter(family %in% abd_10$family) %>% 
+  filter(family %in% abd_10) %>% 
   ggplot(aes(x = family, y = regionId)) + 
   geom_count()
 ```
+
+```{r}
+# 3rd possibility: a stacked barplot
+wdData %>% 
+  filter(family %in% abd_10) %>% 
+  ggplot(aes(x= family, fill = regionId)) + 
+  geom_bar(position="stack") 
+# but here difficult to find a palette with so many diverging colors
+```
+
 
 
 # Iris data

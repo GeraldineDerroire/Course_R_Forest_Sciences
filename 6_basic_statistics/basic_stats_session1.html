@@ -1446,7 +1446,7 @@ W = 0.88607, p-value = 0.0001987</code></pre>
 <h2>Wikcoxon rank test</h2>
 <p><span style="font-size: 30px">We can do a Wilcoxon rank test, which is the non-parametric equivalent to the t-test, using the function <span style="color:indianred;">wilcox.test</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a><span class="fu">wilcox.test</span>(dt_sub<span class="sc">$</span>H <span class="sc">~</span>dt_sub<span class="sc">$</span>genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a><span class="fu">wilcox.test</span>(dt_sub<span class="sc">$</span>D <span class="sc">~</span>dt_sub<span class="sc">$</span>genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -1457,8 +1457,8 @@ compute exact p-value with ties</code></pre>
 <pre><code>
     Wilcoxon rank sum test with continuity correction
 
-data:  dt_sub$H by dt_sub$genus
-W = 649.5, p-value = 3.305e-05
+data:  dt_sub$D by dt_sub$genus
+W = 882, p-value = 0.0001225
 alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 </div>
@@ -1936,7 +1936,7 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="graphical-presentation-of-the-results" class="slide level2">
+<section id="graphical-presentation-of-the-results" class="slide level2 smaller">
 <h2>Graphical presentation of the results</h2>
 <p><span style="font-size: 30px">We use the function <span style="color:indianred;">multcompLetters4</span> from the package <span style="color:indianred;">multcompView</span> to get the letters indicating identical groups:</span></p>
 <div class="cell">
@@ -1952,21 +1952,29 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
         "d"         "d"         "d"         "d" </code></pre>
 </div>
 </div>
-<p><span class="fragment"><span style="font-size: 30px">This gives a list, from which we extract the letters:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a>H_letters_tb <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb77-2"><a href=""></a>  <span class="at">genus =</span> <span class="fu">names</span>(H_letters[[<span class="dv">1</span>]]<span class="sc">$</span>Letters),</span>
-<span id="cb77-3"><a href=""></a>  <span class="at">letter =</span> <span class="fu">as.character</span>(H_letters[[<span class="dv">1</span>]]<span class="sc">$</span>Letters)</span>
-<span id="cb77-4"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a><span class="fu">str</span>(H_letters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
-
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 1
+ $ genus:List of 3
+  ..$ Letters          : Named chr [1:10] "a" "ab" "bc" "bcd" ...
+  .. ..- attr(*, "names")= chr [1:10] "Dicorynia" "Sterculia" "Qualea" "Pouteria" ...
+  ..$ monospacedLetters: Named chr [1:10] "a   " "ab  " " bc " " bcd" ...
+  .. ..- attr(*, "names")= chr [1:10] "Dicorynia" "Sterculia" "Qualea" "Pouteria" ...
+  ..$ LetterMatrix     : logi [1:10, 1:4] TRUE TRUE FALSE FALSE FALSE FALSE ...
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : chr [1:10] "Dicorynia" "Sterculia" "Qualea" "Pouteria" ...
+  .. .. ..$ : chr [1:4] "a" "b" "c" "d"
+  ..- attr(*, "class")= chr "multcompLetters"</code></pre>
 </div>
 </div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">This gives a list of list: the letters are in the named vector H_letters$genus$Letters.</span></span></p>
 <aside class="notes">
 <p>we want to make a nice graph showing the results of the anova</p>
-<p>to understand why we do that str(H_letters)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1981,12 +1989,38 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 </section>
 <section id="graphical-presentation-of-the-results-1" class="slide level2">
 <h2>Graphical presentation of the results</h2>
+<p><span style="font-size: 30px">We extract the letters from that vector:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a>H_letters_tb <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb79-2"><a href=""></a>  <span class="at">genus =</span> <span class="fu">names</span>(H_letters<span class="sc">$</span>genus<span class="sc">$</span>Letters),</span>
+<span id="cb79-3"><a href=""></a>  <span class="at">letter =</span> <span class="fu">as.character</span>(H_letters<span class="sc">$</span>genus<span class="sc">$</span>Letters)</span>
+<span id="cb79-4"><a href=""></a>  )</span>
+<span id="cb79-5"><a href=""></a><span class="fu">head</span>(H_letters_tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  genus     letter
+  &lt;chr&gt;     &lt;chr&gt; 
+1 Dicorynia a     
+2 Sterculia ab    
+3 Qualea    bc    
+4 Pouteria  bcd   
+5 Licania   d     
+6 Eperua    cd    </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="graphical-presentation-of-the-results-2" class="slide level2">
+<h2>Graphical presentation of the results</h2>
 <p><span style="font-size: 30px">We then make a tibble containing the groups, the letters and the 75th percentile (to position the letter above the box):</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a>H_letters_pos <span class="ot">&lt;-</span> dt_sub10 <span class="sc">%&gt;%</span> </span>
-<span id="cb78-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
-<span id="cb78-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">q_75 =</span> <span class="fu">quantile</span>(H, <span class="at">probs =</span> <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb78-4"><a href=""></a>  <span class="fu">inner_join</span>(H_letters_tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a>H_letters_pos <span class="ot">&lt;-</span> dt_sub10 <span class="sc">%&gt;%</span> </span>
+<span id="cb81-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">q_75 =</span> <span class="fu">quantile</span>(H, <span class="at">probs =</span> <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-4"><a href=""></a>  <span class="fu">inner_join</span>(H_letters_tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1994,33 +2028,33 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <p><span class="fragment"><span style="font-size: 30px">And we make the plot:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a>graph_H <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb79-2"><a href=""></a>  <span class="fu">geom_boxplot</span>(<span class="at">data =</span> dt_sub10, </span>
-<span id="cb79-3"><a href=""></a>               <span class="fu">aes</span>(<span class="at">x =</span> genus, <span class="at">y =</span> H, <span class="at">fill =</span> genus),</span>
-<span id="cb79-4"><a href=""></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb79-5"><a href=""></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> H_letters_pos,</span>
-<span id="cb79-6"><a href=""></a>            <span class="fu">aes</span>(<span class="at">x =</span> genus, <span class="at">y =</span> q_75, <span class="co"># position of the label</span></span>
-<span id="cb79-7"><a href=""></a>                <span class="at">label =</span> letter), <span class="co"># labels are the letters</span></span>
-<span id="cb79-8"><a href=""></a>            <span class="at">size =</span> <span class="dv">5</span>, <span class="co"># size of the labels</span></span>
-<span id="cb79-9"><a href=""></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span> <span class="co"># adjusts position of the labels</span></span>
-<span id="cb79-10"><a href=""></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>) <span class="sc">+</span> </span>
-<span id="cb79-11"><a href=""></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href=""></a>graph_H <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb82-2"><a href=""></a>  <span class="fu">geom_boxplot</span>(<span class="at">data =</span> dt_sub10, </span>
+<span id="cb82-3"><a href=""></a>               <span class="fu">aes</span>(<span class="at">x =</span> genus, <span class="at">y =</span> H, <span class="at">fill =</span> genus),</span>
+<span id="cb82-4"><a href=""></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb82-5"><a href=""></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> H_letters_pos,</span>
+<span id="cb82-6"><a href=""></a>            <span class="fu">aes</span>(<span class="at">x =</span> genus, <span class="at">y =</span> q_75, <span class="co"># position of the label</span></span>
+<span id="cb82-7"><a href=""></a>                <span class="at">label =</span> letter), <span class="co"># labels are the letters</span></span>
+<span id="cb82-8"><a href=""></a>            <span class="at">size =</span> <span class="dv">5</span>, <span class="co"># size of the labels</span></span>
+<span id="cb82-9"><a href=""></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span> <span class="co"># adjusts position of the labels</span></span>
+<span id="cb82-10"><a href=""></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>) <span class="sc">+</span> </span>
+<span id="cb82-11"><a href=""></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </div>
 </section>
-<section id="graphical-presentation-of-the-results-2" class="slide level2">
+<section id="graphical-presentation-of-the-results-3" class="slide level2">
 <h2>Graphical presentation of the results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href=""></a>graph_H</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href=""></a>graph_H</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-57-1.png" style="width:120.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-58-1.png" style="width:120.0%"></p>
 </figure>
 </div>
 </div>
@@ -2075,10 +2109,10 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <p>We use the function <span style="color:indianred;">cov</span> to get the covariance between two variables.</p>
 <p>Let’s test this with the iris data set, which you graphically explore in a last exercise. We focus on the species <em>versicolor</em>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a><span class="fu">data</span>(iris)</span>
-<span id="cb81-2"><a href=""></a>iris <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(iris)</span>
-<span id="cb81-3"><a href=""></a>iris_vers <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"versicolor"</span>)</span>
-<span id="cb81-4"><a href=""></a><span class="fu">cov</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a><span class="fu">data</span>(iris)</span>
+<span id="cb84-2"><a href=""></a>iris <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(iris)</span>
+<span id="cb84-3"><a href=""></a>iris_vers <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"versicolor"</span>)</span>
+<span id="cb84-4"><a href=""></a><span class="fu">cov</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2114,8 +2148,8 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <p><span class="fragment"><span style="font-size: 30px">We use the function <span style="color:indianred;">cor</span> to get the correlation between two variables (the default method is Pearson correlation).</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href=""></a><span class="fu">cor</span>(iris_vers<span class="sc">$</span>Petal.Length, </span>
-<span id="cb83-2"><a href=""></a>    iris_vers<span class="sc">$</span>Petal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href=""></a><span class="fu">cor</span>(iris_vers<span class="sc">$</span>Petal.Length, </span>
+<span id="cb86-2"><a href=""></a>    iris_vers<span class="sc">$</span>Petal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2144,8 +2178,8 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <p><span style="font-size: 30px">Pearson correlation makes the hypothesis that the relationship is linear.</span></p>
 <p><span style="font-size: 30px">If this is not the case, we can use the <em>rank correlation of Spearman</em>, by specifying the method:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href=""></a><span class="fu">cor</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width,</span>
-<span id="cb85-2"><a href=""></a>    <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a><span class="fu">cor</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width,</span>
+<span id="cb88-2"><a href=""></a>    <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2170,8 +2204,8 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <h2>Test of correlation</h2>
 <p><span style="font-size: 30px">To test if the correlation is significant, we do a test of correlation with the function <span style="color:indianred;">cor.test</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href=""></a><span class="fu">cor.test</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width,</span>
-<span id="cb87-2"><a href=""></a>         <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href=""></a><span class="fu">cor.test</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width,</span>
+<span id="cb90-2"><a href=""></a>         <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2207,19 +2241,19 @@ sample estimates:
 <h2>Visualise correlations</h2>
 <p><span style="font-size: 30px">Pearson correlations between multiple pairs of variables can be visualised using the function <span style="color:indianred;">ggpairs</span> of the package <span style="color:indianred;">GGally</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href=""></a><span class="fu">ggpairs</span>(iris_vers, <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>,</span>
-<span id="cb89-2"><a href=""></a>                               <span class="st">"Petal.Length"</span>, <span class="st">"Petal.Width"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href=""></a><span class="fu">ggpairs</span>(iris_vers, <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>,</span>
+<span id="cb92-2"><a href=""></a>                               <span class="st">"Petal.Length"</span>, <span class="st">"Petal.Width"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-62-1.png" style="width:80.0%"></p>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-63-1.png" style="width:80.0%"></p>
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href=""></a><span class="co"># this is equivalent to </span></span>
-<span id="cb90-2"><a href=""></a> <span class="co"># ggpairs(iris_vers, columns = 1:4)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href=""></a><span class="co"># this is equivalent to </span></span>
+<span id="cb93-2"><a href=""></a> <span class="co"># ggpairs(iris_vers, columns = 1:4)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <aside class="notes">
 <p>we get the correlation coef and its significance</p>

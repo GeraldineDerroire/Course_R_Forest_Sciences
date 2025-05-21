@@ -722,7 +722,7 @@ note what a QQ-plot looks like when the distribution is not the one expected
 [We can do a Wilcoxon rank test, which is the non-parametric equivalent to the t-test, using the function [wilcox.test]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ```{r}
-wilcox.test(dt_sub$H ~dt_sub$genus)
+wilcox.test(dt_sub$D ~dt_sub$genus)
 ```
 
 [[The result is significant, so we can reject the null hypothesis, and conclude that the two genus differ in diameter.]{style="font-size: 30px"}]{.fragment}
@@ -1023,7 +1023,7 @@ mean difference (and lower and upper 95% confidence interval)
 p-values telling if the two groups are significantly different
 :::
 
-## Graphical presentation of the results 
+## Graphical presentation of the results {.smaller}
 
 [We use the function [multcompLetters4]{style="color:indianred;"} from the package [multcompView]{style="color:indianred;"} to get the letters indicating identical groups:]{style="font-size: 30px"}
 
@@ -1032,23 +1032,33 @@ H_letters <- multcompLetters4(H_aov, H_tukey)
 H_letters
 ```
 
-[[This gives a list, from which we extract the letters:]{style="font-size: 30px"}]{.fragment}
+::: fragment
+```{r}
+str(H_letters)
+```
+:::
+
+
+[[This gives a list of list: the letters are in the named vector H_letters\$genus\$Letters.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+we want to make a nice graph showing the results of the anova
+:::
+
+
+## Graphical presentation of the results 
+
+[We extract the letters from that vector:]{style="font-size: 30px"}
 
 ::: fragment
 ```{r}
 H_letters_tb <- tibble(
-  genus = names(H_letters[[1]]$Letters),
-  letter = as.character(H_letters[[1]]$Letters)
+  genus = names(H_letters$genus$Letters),
+  letter = as.character(H_letters$genus$Letters)
   )
+head(H_letters_tb)
 ```
 :::
-
-::: notes
-we want to make a nice graph showing the results of the anova
-
-to understand why we do that str(H_letters)
-:::
-
 
 ## Graphical presentation of the results 
 
