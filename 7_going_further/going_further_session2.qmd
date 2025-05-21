@@ -22,3 +22,30 @@ editor:
   markdown: 
     wrap: sentence
 ---
+
+
+<!-- session 2 -->
+
+# Advanced dplyr 
+
+accross, where, everything => follow Juba
+
+mentionner apply family
+
+# Execution conditionnelle
+
+if...else 
+
+utilisation dans les fonctions avec return, stop, warning => follow Juba
+
+possible de mettre un test pour la langue dans notre function my_first_function (et ou l'heure du jour hello vs bom dia / boa tarde)
+
+comparaison if... else avec case_when et if_else de tidyverse
+
+# Loops
+
+for, while, repeat, next, break...
+
+inclure some tips on how to write
+
+and debugging?

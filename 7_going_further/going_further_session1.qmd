@@ -25,6 +25,16 @@ editor:
 
 <!-- session 1-->
 
+# 
+
+Let's load the package we will use:
+
+```{r}
+library(tidyverse)
+```
+
+
+
 ```{r, echo=FALSE}
 set.seed(14)
 ```
@@ -802,6 +812,21 @@ In these case, we will not need *return*.
 
 ## Side effects
 
+[The following function is an example of a function with side effect:]{style="font-size: 30px"}
+
+```{r, warning = FALSE, message = FALSE}
+#| fig-width: 4
+#| fig-height: 3
+my_hist <- function(vec) {
+  ggplot(as_tibble(vec), (aes(x = value))) + geom_histogram()
+}
+
+my_hist(new_circ)
+```
+
+
+## Side effects
+
 [For a function aiming to print a value in the console, we can use [print]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ```{r}
@@ -813,27 +838,304 @@ my_sum2(5, 9)
 
 ::: fragment
 
-[or [cat] if we want to print a character string:]]{style="font-size: 30px"}
+[or [cat]{style="color:indianred;"} if we want to print a character string:]{style="font-size: 30px"}
 
 ```{r}
 my_sum3 <- function(x, y) {
-  cat("The sum is ", x + y)
+  cat("The sum is", x + y)
 }
 my_sum3(11, 3)
 ```
 
 :::
 
-## 
+## Message
+
+[We can also include a [message] in a function:]{style="font-size: 30px"}
+
+```{r}
+min_rand <- function(n) {
+  message("Random generation of ", n, " numbers.")
+  v <- runif(n)
+  cat("The smallest generated number is", min(v))
+}
+
+min_rand(100)
+```
+
+## Passing arguments to a function
+
+[When passing arguments to a function, we can specify them]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+
+* [by their names:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+median(x = vec_num, na.rm = TRUE)
+```
+:::
+
+* [by their position]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+median(vec_num, TRUE)
+```
+:::
+:::
+
+
+::: {.column width="50%"}
+
+* [by a combination of both]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+median(vec_num, na.rm = TRUE)
+```
+:::
+:::
+:::::
+
+[[💡 Usually the data are passed by position, and the rest by name.]{style="font-size: 30px"}]{.fragment}
+
+## Default values of arguments {.smaller}
+
+[Let's go back to our [mean_diam_func]{style="color:indianred;"} function:]{style="font-size: 30px"}
+
+```{r, eval = FALSE}
+mean_diam_func(new_circ)
+```
+
+```{r, echo = FALSE}
+try(mean_diam_func(new_circ))
+```
+
+[and specify **default** values that are taken by the arguments if no values is passed :]{style="font-size: 30px"}
+
+```{r}
+mean_diam_func2 <- function(circ, 
+                             na_act = TRUE, # default value
+                             digits = 2) { # default value
+  diam <- circ / (pi * 100)
+  mean_diam <- mean(diam, na.rm = na_act)
+  mean_diam <- round(mean_diam, digits = digits)
+  return(mean_diam)
+}
+
+mean_diam_func2(new_circ)
+```
+[[⚠️ Argument with a default value are *optional*, but the other ones are *compulsory*.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+here I have removed the comments from the function, but it's only to save space. They could be kept
+:::
+
+## The ... argument
+
+[We can add [...]{style="color:indianred;"} to allow passing all possible arguments to a function we call inside our function, without needing to specify them explicitly:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="70%"}
+
+```{r, warning = FALSE, message = FALSE}
+#| fig-width: 4
+#| fig-height: 3
+my_hist2 <- function(vec, ...) {
+  ggplot(as_tibble(vec), (aes(x = value))) +
+    geom_histogram(...)
+}
+
+my_hist2(new_circ, 
+         col = "blue", fill = "lightblue")
+```
+
+:::
+
+::: {.column width="30%"}
+
+[[The argument *col* and *fill* have been passed to [geom_histogram]{style="color:indianred;"}.]{style="font-size: 30px"}]{.fragment}
+
+:::
+:::::
+
+## Result of a function
+
+[We don't necessary have to use [return]{style="color:indianred;"} to return the result of a function:]{style="font-size: 30px"}
+
+```{r}
+my_sum <- function(x, y) {
+  res <- x + y
+  return(res)
+} 
+```
+
+[can be written]{style="font-size: 30px"} 
+
+```{r}
+my_sum <- function(x, y) {
+  res <- x + y
+  res
+} 
+```
+
+[or even]{style="font-size: 30px"} 
+
+```{r}
+my_sum <- function(x, y) {
+  x + y
+} 
+```
 
 
 
+## Result of a function
 
-reprendre en gros la structure de Juba en commençant par pourquoi 
+::::: columns
+::: {.column width="50%"}
 
-inlcure la hierarchie enviro
+[The instruction [return]{style="color:indianred;"} ends the execution of a function, **so we cannot use [return]{style="color:indianred;"} twice:**]{style="font-size: 30px"}
 
-inclure some tips on how to write a function
+```{r}
+my_summary <- function(v) {
+  return(mean(v))
+  return(median(v))
+}
+
+my_summary(vec_num)
+```
+:::
+
+::: {.column width="50%"}
+
+[[To return several results for a function, the best solution is to store them in a **named list**:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+my_summary <- function(v) {
+  list(mean = mean(v),
+       median = median(v))
+}
+
+res <- my_summary(vec_num)
+res
+```
+:::
+:::
+:::::
+
+# Scope of variables
+
+Objects created in a script are **global variables**, they can be accessed at any point of a session.
+
+Objects created in a function are **local variables**.
+
+## Scope of variables - Rule 1
+
+[If a function uses a local object that was not created within the function, nor passed as an argument, we get an error:]{style="font-size: 30px"}
+
+```{r, eval = FALSE}
+my_func <- function() {
+  print(obj)
+}
+
+my_func()
+```
+
+::: fragment
+```{r, echo = FALSE}
+my_func <- function() {
+  print(obj)
+}
+
+try(my_func())
+```
+:::
+
+[[But if the object is present in the global environment (global object), the function can access it (**Rule 1**):]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+obj <- 3
+
+my_func()
+```
+:::
+
+::: notes
+this is why I told you to remove test data before testing a function
+
+otherwise, the function will work even if you forgot to add them as argument, but the function may not work next time
+:::
+
+## Scope of variables - Rule 2
+
+[An object created within a function exists **only within the function** (if it it not returned as a result):]{style="font-size: 30px"}
+
+```{r, , eval=FALSE}
+my_random <- function(n) {
+  random_vec <- runif(n)
+}
+
+random_vec
+```
+
+::: fragment
+```{r, echo=FALSE}
+my_random <- function(n) {
+  random_vec <- runif(n)
+}
+try(random_vec)
+```
+:::
+
+## Scope of variables - rule 3
+
+A **local** object created within a function or passed as an argument has priority over a **global object**:
+
+```{r}
+f <- function() {
+  obj <- 10
+  obj
+}
+
+obj <- 3
+f()
+```
+
+::: fragment
+```{r}
+f <- function(obj) {
+  obj
+}
+
+obj <- 3
+f(20)
+```
+:::
+
+
+## Scope of variables - Rule 4
+
+The consequence of rule 3 is that a function cannot modify a global object:
+
+```{r}
+f <- function() {
+  obj <- 10
+  message("Value of obj within the function: ", obj)
+}
+
+obj <- 3
+f()
+obj
+```
+
+##
+
+<!-- STILL TO ADD SOMEWHERE --> 
 
 sourcing a function
 
@@ -842,43 +1144,22 @@ et débuggage basique
 https://www.dataquest.io/blog/write-functions-in-r/
 
 
+<!-- TO DO --> 
+
 # Utiliser les fonctions avec dplyr et purr
 
 cf Juba
 
 inclure purr::map? ici ou avec accross ? juste le mentionner ici et revenir dessus avec accross?
 
+et voir si j'ai besoin de revenir là dessus : https://juba.github.io/tidyverse/14-fonctions.html#les-fonctions-comme-objets
 
 # Interactive graph
 
 graph interactif? en fin de première session ? ou ne pas en parler et le rajouter dans les slides sur ggplot => oui
 
 
-<!-- session 2 -->
 
-# Advanced dplyr 
-
-accross, where, everything => follow Juba
-
-mentionner apply family
-
-# Execution conditionnelle
-
-if...else 
-
-utilisation dans les fonctions avec return, stop, warning => follow Juba
-
-possible de mettre un test pour la langue dans notre function my_first_function (et ou l'heure du jour hello vs bom dia / boa tarde)
-
-comparaison if... else avec case_when et if_else de tidyverse
-
-# Loops
-
-for, while, repeat, next, break...
-
-inclure some tips on how to write
-
-and debugging?
 
 
 
