@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-11">
+  <meta name="dcterms.date" content="2025-05-21">
   <title>Statistics with R - session 1</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-11</p>
+  <p class="date">2025-05-21</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
@@ -493,11 +493,11 @@ Géraldine Derroire
 <h2>Descriptive statistics <em>vs</em> parameters</h2>
 <p><span style="font-size: 30px"><strong>Descriptive statistics</strong> are calculated from the observations (the data). These observations are a sample of a theoretical population that we don’t measure.</span></p>
 <blockquote>
-<p><span style="font-size: 30px"><em>eg</em>: The trees that we can measure in a forest plot are a sample of the population of the trees in the considered forest. We can calculate the mean diameter.</span></p>
+<p><span style="font-size: 30px"><em>eg</em>: The trees that we can measure in a forest plot are a sample of the population of the trees in the considered forest. We can <strong>calculate</strong> the mean diameter of this sample.</span></p>
 </blockquote>
 <p><span style="font-size: 30px">A theoretical population can be described by its <strong>parameters</strong>, that are not measured.</span></p>
 <blockquote>
-<p><span style="font-size: 30px"><em>eg</em>: The mean diameter of the population of tree in the considered forest is a parameter.</span></p>
+<p><span style="font-size: 30px"><em>eg</em>: The mean diameter of the population of trees in the considered forest is a parameter. It cannot be measured but can be <strong>estimated</strong>.</span></p>
 </blockquote>
 </section>
 <section id="statistical-distributions" class="slide level2">
@@ -540,7 +540,7 @@ Géraldine Derroire
 <section id="uniform-distribution" class="slide level2">
 <h2>Uniform distribution</h2>
 <p><span class="math display">\[\mathcal{U}(a, b)\]</span></p>
-<p><span style="font-size: 30px"><span class="math inline">\([-a, b]\)</span> is the range of possible values</span></p>
+<p><span style="font-size: 30px"><span class="math inline">\([a, b]\)</span> is the range of possible values (so <em>a</em> is the minimum value and <em>b</em> the maximum value)</span></p>
 <div class="columns">
 <div class="column" style="width:30%;">
 <p><span style="font-size: 30px"><em>e.g.</em> for <span class="math inline">\(\mathcal{U}(2, 5)\)</span></span></p>
@@ -555,6 +555,19 @@ Géraldine Derroire
 </div>
 </div>
 </div></div>
+<aside class="notes">
+<p>x &lt; a : proba nulle a &lt; x &lt; b : equi proba x &gt; b: proba nulle</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="uniform-distribution-1" class="slide level2">
 <h2>Uniform distribution</h2>
@@ -616,6 +629,21 @@ Géraldine Derroire
 </div>
 </div></div>
 <p><span class="fragment"><strong>The larger the size of the random sample, the closer the distribution of observed values is to the distribution of the theoretical population.</strong></span></p>
+<aside class="notes">
+<p>if we draw a small number of obs in a uniform, we don’t quite get the expected density</p>
+<p>But if we draw a very large number, we do</p>
+<p>show on the blackboard</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="normal-distribution" class="slide level2">
 <h2>Normal distribution</h2>
@@ -667,6 +695,21 @@ Géraldine Derroire
 </div>
 </div>
 </div></div>
+<aside class="notes">
+<p>let’s draw values in 3 different normal distribution and put them in a dataframe</p>
+<p>then add them on a plot</p>
+<p>the mean is where the peak (the mode) is the larger the sd, the less peaky</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="centred-reduced-normal-distribution" class="slide level2">
 <h2>Centred reduced normal distribution</h2>
@@ -674,6 +717,19 @@ Géraldine Derroire
 <p>then <span class="math inline">\(z = \frac{x - \mu}{\sigma}\)</span> follows a <strong>centred reduced normal distribution</strong>:</p>
 <p><span class="math inline">\(z \sim \mathcal{N}(0, 1)\)</span></p>
 <p><span class="fragment"><span style="font-size: 30px">💡 When to variable are measured in different scales, it can be usefull to standardise them by centring and reducing them, to be able to compare them.</span></span></p>
+<aside class="notes">
+<p>give an example of things measured in very different units</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="qq-plot" class="slide level2 smaller">
 <h2>QQ-plot</h2>
@@ -713,6 +769,7 @@ Géraldine Derroire
 </div>
 </div></div>
 <aside class="notes">
+<p>let’s first draw a small number of obs in a normal distribution and make the Q-Q plot x axis: with a theorical normal distrib y axis: observation =&gt; if parfaitly normally distributed the quantile distribution should be similar so all dots should be on the line</p>
 <p>if we see that they both follow a normal distribution, but the match is better when we increase the sampling size</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -814,6 +871,19 @@ Géraldine Derroire
   Sterculia       7    15</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>contigency table =&gt; very important</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="percentages-per-category" class="slide level2">
 <h2>Percentages per category</h2>
@@ -844,7 +914,7 @@ Géraldine Derroire
 <p><span class="fragment"><span style="font-size: 30px">⚠️ Here we look at the frequency per column because we are interested in the effect of the plot and the plot is in column. The function <span style="color:indianred;">lprop</span> also exists to look at frequency per row.</span></span></p>
 </div></div>
 <aside class="notes">
-<p>We see that the occurence of most genus seems to depend on the plot</p>
+<p>We see that the occurence of most genus seems to depend on the plot (remember our buble plots last session!)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -885,6 +955,19 @@ Géraldine Derroire
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>confirm what we saw with the percentage =&gt; occurence of genus seems to depend on the plot</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="chi2-test" class="slide level2 smaller">
 <h2><span class="math inline">\(\chi^2\)</span> test</h2>
@@ -915,6 +998,19 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 <li class="fragment"><p><span style="font-size: 28px"><em>df</em> is the number of degrees of freedom</span></p></li>
 <li class="fragment"><p><span style="font-size: 28px"><em>p-value</em> is the probability to get such a <em>X-squared</em> value under the assumption of independence.</span> <span class="fragment"><span style="font-size: 28px"><strong>Here the <em>p-value</em> is very low, so we can reject the null hypothesis of independence.</strong></span></span></p></li>
 </ul>
+<aside class="notes">
+<p>the test concludes that the occurence of these 10 genus depends on the plot</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="chi2-test-1" class="slide level2 smaller">
 <h2><span class="math inline">\(\chi^2\)</span> test</h2>
@@ -989,6 +1085,20 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 </ul>
 <p><span class="fragment"><span style="font-size: 30px"><em>The threshold of 2 correspond to a 95% confidence interval.</em></span></span></p>
 </div></div>
+<aside class="notes">
+<p>residuals are the difference between observed and predicted under the null hypothesis</p>
+<p>explore the results together</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="residuals-1" class="slide level2">
 <h2>Residuals</h2>
@@ -1008,6 +1118,19 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>take some time to explain the graph</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="testing-if-two-groups-differ-considering-a-quantitative-variable-the-t-test" class="title-slide slide level1 center">
@@ -1060,10 +1183,25 @@ X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>yes, it seems so</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="are-the-distribution-of-height-in-both-genus-normal" class="slide level2">
 <h2>Are the distribution of height in both genus normal?</h2>
+<p><span style="font-size: 30px">An assumption of the t-test is that the data are <strong>normally distributed</strong>.</span></p>
 <p><span style="font-size: 30px">To decide which test to use, we first check the normality of the distribution with a Shapiro-Wilk test, using the function <span style="color:indianred;">shapiro.test</span></span></p>
+<p><span style="font-size: 30px"><strong>H0 of the Shapiro-Wilk test: the distribution is normal</strong></span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
@@ -1161,7 +1299,11 @@ mean in group Dicorynia   mean in group Protium
 <p><span class="fragment"><span style="font-size: 25px">💡 The result indicates that we performed a <em>Welch t-test</em>, which doesn’t assume homoscedasticity (equality of variance). If we want to run a t-test assuming homoscedasticity, we need to use the argument <em>var.equal = TRUE</em>.</span></span></p>
 <aside class="notes">
 <p>the Welch modification is done because it handle better unequal variances and unequal sample size</p>
-<p>the test tell us that the difference between the two is between 6.67 and 17.18 meters (95% confidence)</p>
+<p>the test tell us</p>
+<ul>
+<li><p>the estimated mean per group</p></li>
+<li><p>that the difference between the two is between 6.67 and 17.18 meters (95% confidence)</p></li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1191,6 +1333,19 @@ mean in group Dicorynia   mean in group Protium
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>new question</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="are-the-distribution-of-diameter-in-both-genus-normal" class="slide level2">
 <h2>Are the distribution of diameter in both genus normal?</h2>
@@ -1259,6 +1414,19 @@ W = 0.88607, p-value = 0.0001987</code></pre>
 </div>
 </div></div>
 <p><span class="fragment"><span style="font-size: 30px">The distributions of diameters are not normal, so we cannot use a t-test.</span></span></p>
+<aside class="notes">
+<p>note what a QQ-plot looks like when the distribution is not the one expected</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="wikcoxon-rank-test" class="slide level2">
 <h2>Wikcoxon rank test</h2>
@@ -1298,7 +1466,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </section>
 <section id="what-if-the-data-are-paired" class="slide level2">
 <h2>What if the data are paired?</h2>
-<p><span style="font-size: 30px">Let’s load some data:</span> (available <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_1.RData" data-preview-link="false">here</a>)</p>
+<p><span style="font-size: 30px">Let’s load some data:(available <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_1.RData" data-preview-link="false">here</a>)</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_statistics_1.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1593,6 +1761,19 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 <p><span style="font-size: 30px"><strong>We can consider that the assumptions of homoscedasticity is respected.</strong></span></p>
 </div>
 </div></div>
+<aside class="notes">
+<p>the function plot, when used on the results of a statistical test, provides several very usefull graphs to diagnose the test</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="checking-the-model-assumptions-1" class="slide level2">
 <h2>Checking the model assumptions</h2>
@@ -1634,7 +1815,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 </section>
 <section id="estimated-mean-per-group" class="slide level2">
 <h2>Estimated mean per group</h2>
-<p><span style="font-size: 30px">The get the estimated mean of each group, we use the function <span style="color:indianred;">coef</span>:</span></p>
+<p><span style="font-size: 30px">To get the estimated mean of each group, we use the function <span style="color:indianred;">coef</span>:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a><span class="fu">coef</span>(H_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1728,6 +1909,7 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 </div>
 <aside class="notes">
 <p>We get the comparison of all pairs</p>
+<p>mean difference (and lower and upper 95% confidence interval) p-values telling if the two groups are significantly different</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1769,6 +1951,7 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 </div>
 </div>
 <aside class="notes">
+<p>we want to make a nice graph showing the results of the anova</p>
 <p>to understand why we do that str(H_letters)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1838,6 +2021,20 @@ Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
 <li class="fragment"><p><span style="font-size: 30px">Perform a <strong>generalised linear model</strong> (GLM)</span></p></li>
 </ul>
 <p><span class="fragment"><span style="font-size: 30px">If the assumption of homoscedasticity is not met, we can perform a <strong>Welch’s ANOVA</strong> using the function <span style="color:indianred;">oneway.test</span></span></span></p>
+<aside class="notes">
+<p>we will talk about data transfo next session</p>
+<p>we will mention GLM, but not in depth</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section id="section-1" class="title-slide slide level1 center">
 <h1></h1>
@@ -1965,6 +2162,19 @@ sample estimates:
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 30px"><em>The correlation is significant.</em></span></span></p>
+<aside class="notes">
+<p>the test gives us the coeff of correlation (and its CI) + its significantivity</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="visualise-correlations" class="slide level2">
 <h2>Visualise correlations</h2>

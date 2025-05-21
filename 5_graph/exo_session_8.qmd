@@ -24,6 +24,7 @@ Let's work with the *wdData* from a previous version of the package *BIOMASS* (v
 
 ```{r}
 wdData <- read_csv("data/wdData.csv")
+str(wdData)
 ```
 
 * Make a histogram of wood density for each of the following three regions, using facets: South_America_(tropical), Australia/PNG_(tropical), Africa_(tropical)
@@ -65,9 +66,11 @@ wdData %>%
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
+
 * Show the number of observation per *family* and *regionId*
 
 ```{r}
+# 1st possibility: heatmap
 wdData %>% 
   filter(family %in% abd_10$family) %>% 
   count(family, regionId) %>% 
@@ -76,7 +79,9 @@ wdData %>%
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   scale_fill_viridis_c()
 ```
+
 ```{r}
+# 2nd possibility: bubble plot
 wdData %>% 
   filter(family %in% abd_10$family) %>% 
   ggplot(aes(x = family, y = regionId)) + 
@@ -92,6 +97,7 @@ Let's now work with the *iris* dataset (available from datasets, which is a pack
 
 ```{r}
 data(iris)
+str(iris)
 ```
 
 Reproduce the following graph made with the *iris* dataset.
@@ -102,49 +108,51 @@ The colours are *steelblue3*, *plum* and *darkolivegreen3* and the theme *bw*.
 #| fig-width: 8
 #| fig-height: 8
 #| message: false
+
+# 1st plot
 p1 <- ggplot(iris, aes(x = Petal.Length, y=Petal.Width, 
                        color = Species)) + 
   geom_point() + 
   geom_smooth(method = lm) + 
-  labs(x = "Petal length (cm)",
-       y = "Petal width (cm)",
-       color = "",
-       title = "Relationship between petal lenght and width") + 
-  scale_x_continuous(breaks = 1:8) + 
-  scale_y_continuous(breaks = seq(0, 2.5, by=0.5)) + 
-  scale_color_manual(values = c("setosa" = "steelblue3",
+  labs(x = "Petal length (cm)", # x axis label
+       y = "Petal width (cm)",  # y axis label
+       color = "",              # no title for the legend
+       title = "Relationship between petal lenght and width") + # plot title
+  scale_x_continuous(breaks = 1:8) + # change tick marks on x axis
+  scale_y_continuous(breaks = seq(0, 2.5, by=0.5)) + # change tick marks on y axis
+  scale_color_manual(values = c("setosa" = "steelblue3", # set the colours
                                 "versicolor" = "plum",
                                 "virginica" = "darkolivegreen3")) + 
-  theme_bw() +
-  theme(legend.position = "bottom")
+  theme_bw() + # change the theme
+  theme(legend.position = "bottom") # change the position of the legend
 
+# 2nd plot
 p2 <- ggplot(iris, aes(x = Species, y = Petal.Length, fill = Species)) +
   geom_boxplot() + 
-  labs(x = "",
-       y = "Petal length (cm)",
-       color = "",
-       title = "Distribution of petal length") + 
-  scale_y_continuous(breaks = 1:8) + 
-  scale_fill_manual(values = c("setosa" = "steelblue3",
+  labs(x = "", # x axis label
+       y = "Petal length (cm)", # y axis label
+       title = "Distribution of petal length") + # plot title
+  scale_y_continuous(breaks = 1:8) + # change tick marks on y axis
+  scale_fill_manual(values = c("setosa" = "steelblue3", # set the colours
                                 "versicolor" = "plum",
                                 "virginica" = "darkolivegreen3")) + 
-  theme_bw() + 
-  theme(legend.position = "none")
+  theme_bw() + # change the theme
+  theme(legend.position = "none") # remove the legend
 
+# 3rd plot
 p3 <- ggplot(iris, aes(x = Species, y = Petal.Width, fill = Species)) +
   geom_boxplot() + 
-  labs(x = "",
-       y = "Petal width (cm)",
-       color = "",
-       title = "Distribution of petal width") + 
-  scale_y_continuous(breaks = seq(0, 2.5, by=0.5)) +
-  scale_fill_manual(values = c("setosa" = "steelblue3",
+  labs(x = "", # x axis label
+       y = "Petal width (cm)", # y axis label
+       title = "Distribution of petal width") + # plot title
+  scale_y_continuous(breaks = seq(0, 2.5, by=0.5)) + # change tick marks on y axis
+  scale_fill_manual(values = c("setosa" = "steelblue3", # set the colours
                                 "versicolor" = "plum",
                                 "virginica" = "darkolivegreen3")) + 
-  theme_bw() + 
-  theme(legend.position = "none")
+  theme_bw() + # change the theme
+  theme(legend.position = "none") # remove the legend
 
-p1 /(p2 | p3)
+p1 /(p2 | p3) # assemble the plots with patchwork
 ```
 
 

@@ -85,11 +85,11 @@ $$CV = \frac{standard\:deviation}{mean}$$
 
 [**Descriptive statistics** are calculated from the observations (the data). These observations are a sample of a theoretical population that we don't measure.]{style="font-size: 30px"}
 
-> [*eg*: The trees that we can measure in a forest plot are a sample of the population of the trees in the considered forest. We can calculate the mean diameter.]{style="font-size: 30px"}
+> [*eg*: The trees that we can measure in a forest plot are a sample of the population of the trees in the considered forest. We can **calculate** the mean diameter of this sample.]{style="font-size: 30px"}
 
 [A theoretical population can be described by its **parameters**, that are not measured.]{style="font-size: 30px"}
 
-> [*eg*: The mean diameter of the population of tree in the considered forest is a parameter.]{style="font-size: 30px"}
+> [*eg*: The mean diameter of the population of trees in the considered forest is a parameter. It cannot be measured but can be **estimated**.]{style="font-size: 30px"}
 
 
 ## Statistical distributions
@@ -137,7 +137,7 @@ The density function does not give the probability of being equal to a value, as
 
 $$\mathcal{U}(a, b)$$
 
-[$[-a, b]$ is the range of possible values]{style="font-size: 30px"}
+[$[a, b]$ is the range of possible values (so *a* is the minimum value and *b* the maximum value)]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="30%"}
@@ -161,7 +161,12 @@ ggplot() + geom_line(data = dt, aes(x=x, y=y), colour = "blue", linetype="dashed
 ```
 :::
 :::::
- 
+
+::: notes
+x < a : proba nulle
+a < x < b : equi proba
+x > b: proba nulle
+::: 
 
 ## Uniform distribution
 
@@ -200,7 +205,13 @@ hist(runif(n = 100000,
 
 [**The larger the size of the random sample, the closer the distribution of observed values is to the distribution of the theoretical population.**]{.fragment}
 
+::: notes
+if we draw a small number of obs in a uniform, we don't quite get the expected density
 
+But if we draw a very large number, we do
+
+show on the blackboard
+:::
 
 ## Normal distribution
 
@@ -246,6 +257,15 @@ g
 :::
 :::::
 
+::: notes
+let's draw values in 3 different normal distribution and put them in a dataframe
+
+then add them on a plot
+
+the mean is where the peak (the mode) is
+the larger the sd, the less peaky
+:::
+
 ## Centred reduced normal distribution
 
 If $x \sim \mathcal{N}(\mu, \sigma^2)$
@@ -255,6 +275,10 @@ then $z = \frac{x - \mu}{\sigma}$ follows a **centred reduced normal distributio
 $z \sim \mathcal{N}(0, 1)$
 
 [[💡 When to variable are measured in different scales, it can be usefull to standardise them by centring and reducing them, to be able to compare them.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+give an example of things measured in very different units
+:::
 
 
 ## QQ-plot {.smaller}
@@ -288,6 +312,11 @@ qqline(v2)
 :::::
 
 ::: notes
+let's first draw a small number of obs in a normal distribution and make the Q-Q plot
+x axis: with a theorical normal distrib
+y axis: observation
+=> if parfaitly normally distributed the quantile distribution should be similar so all dots should be on the line
+
 if we see that they both follow a normal distribution, but the match is better when we increase the sampling size
 :::
 
@@ -350,6 +379,10 @@ tab_abd <- table(dt_sub10$genus, dt_sub10$plotId)
 tab_abd
 ```
 
+::: notes
+contigency table => very important
+:::
+
 ## Percentages per category
 
 [We can look at the percentages per column (*here* per plot), using the function [cprop]{style="color:indianred;"} of the package [questionr]{style="color:indianred;"}:]{style="font-size: 30px"}
@@ -367,7 +400,7 @@ cprop(tab_abd)
 :::::
 
 ::: notes
-We see that the occurence of most genus seems to depend on the plot
+We see that the occurence of most genus seems to depend on the plot (remember our buble plots last session!)
 :::
 
 ::: notes
@@ -381,6 +414,10 @@ here in columns because...
 ```{r}
 mosaicplot(tab_abd)
 ```
+
+::: notes
+confirm what we saw with the percentage => occurence of genus seems to depend on the plot
+:::
 
 ## $\chi^2$ test {.smaller}
 
@@ -411,6 +448,9 @@ res_chi2
 * [*p-value* is the probability to get such a *X-squared* value under the assumption of independence.]{style="font-size: 28px"}
 [[**Here the *p-value* is very low, so we can reject the null hypothesis of independence.**]{style="font-size: 28px"}]{.fragment}
 
+::: notes
+the test concludes that the occurence of these 10 genus depends on the plot
+:::
 
 ## $\chi^2$ test {.smaller}
 
@@ -453,6 +493,12 @@ chisq.residuals(tab_abd)
 
 ::::
 
+::: notes
+residuals are the difference between observed and predicted under the null hypothesis
+
+explore the results together
+:::
+
 ## Residuals
 
 [We can also present the residuals graphically with the argument *shade = TRUE* in the function [mosaicplot]{style="color:indianred;"}:]{style="font-size: 30px"}
@@ -465,6 +511,9 @@ mosaicplot(tab_abd,
            main = "") # remove main title
 ```
 
+::: notes
+take some time to explain the graph
+:::
 
 # Testing if two groups differ considering a quantitative variable: the t-test
 
@@ -506,10 +555,17 @@ dt_sub %>%
   geom_boxplot()
 ```
 
+::: notes
+yes, it seems so
+:::
 
 ## Are the distribution of height in both genus normal?
 
+[An assumption of the t-test is that the data are **normally distributed**.]{style="font-size: 30px"}
+
 [To decide which test to use, we first check the normality of the distribution with a Shapiro-Wilk test, using the function [shapiro.test]{style="color:indianred;"}]{style="font-size: 30px"}
+
+[**H0 of the Shapiro-Wilk test: the distribution is normal**]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -581,7 +637,11 @@ t.test(dt_sub$H ~ dt_sub$genus)
 ::: notes
 the Welch modification is done because it handle better unequal variances and unequal sample size
 
-the test tell us that the difference between the two is between 6.67 and 17.18 meters (95% confidence)
+the test tell us 
+
+* the estimated mean per group
+
+* that the difference between the two is between 6.67 and 17.18 meters (95% confidence)
 ::: 
 
 ## Do the two genus differ in diameter?
@@ -595,6 +655,10 @@ dt_sub %>%
   ggplot(aes(x=genus, y=D)) + 
   geom_boxplot()
 ```
+
+::: notes
+new question
+:::
 
 ## Are the distribution of diameter in both genus normal?
 
@@ -641,6 +705,10 @@ qqline(d_Prot$D)
 :::::
 
 [[The distributions of diameters are not normal, so we cannot use a t-test.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+note what a QQ-plot looks like when the distribution is not the one expected
+:::
 
 ## Wikcoxon rank test
 
@@ -874,6 +942,10 @@ plot(H_aov, which = 1)
 :::
 :::::
 
+::: notes
+the function plot, when used on the results of a statistical test, provides several very usefull graphs to diagnose the test
+:::
+
 ## Checking the model assumptions
 
 [The ANOVA assumes that the **residuals are normally distributed**.]{style="font-size: 30px"}
@@ -909,11 +981,12 @@ we don't check that the values are normally distributed, but the residuals
 
 ## Estimated mean per group
 
-[The get the estimated mean of each group, we use the function [coef]{style="color:indianred;"}:]{style="font-size: 30px"}
+[To get the estimated mean of each group, we use the function [coef]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ```{r}
 coef(H_aov)
 ```
+
 [[The *intercept* correspond to the first group (here *Dicorynia*).]{style="font-size: 30px"}]{.fragment}
 
 [[The other coefficient show the difference of each group with the first group. For instance, the mean of *Sterculia* is:]{style="font-size: 30px"}]{.fragment}
@@ -938,6 +1011,9 @@ H_tukey
 
 ::: notes
 We get the comparison of all pairs
+
+mean difference (and lower and upper 95% confidence interval)
+p-values telling if the two groups are significantly different
 :::
 
 ## Graphical presentation of the results 
@@ -961,6 +1037,8 @@ H_letters_tb <- tibble(
 :::
 
 ::: notes
+we want to make a nice graph showing the results of the anova
+
 to understand why we do that str(H_letters)
 :::
 
@@ -1016,6 +1094,11 @@ graph_H
 
 [[If the assumption of homoscedasticity is not met, we can perform a **Welch's ANOVA** using the function [oneway.test]{style="color:indianred;"}]{style="font-size: 30px"}]{.fragment}
 
+::: notes
+we will talk about data transfo next session
+
+we will mention GLM, but not in depth
+:::
 
 # 
 
@@ -1115,6 +1198,10 @@ cor.test(iris_vers$Petal.Length, iris_vers$Petal.Width,
 ```
 
 [[*The correlation is significant.*]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+the test gives us the coeff of correlation (and its CI) + its significantivity
+:::
 
 ## Visualise correlations 
 

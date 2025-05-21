@@ -1148,16 +1148,35 @@ https://www.dataquest.io/blog/write-functions-in-r/
 
 # Utiliser les fonctions avec dplyr et purr
 
-cf Juba
+cf Juba: https://juba.github.io/tidyverse/15-dplyr-avance.html#appliquer-ses-propres-fonctions
+
+pour l'exemple de mutate, repartir des données de l'IFN brésilien
+
 
 inclure purr::map? ici ou avec accross ? juste le mentionner ici et revenir dessus avec accross?
 
+<!--🔹 Option 1 – map() en session 1
+Si tu veux :
+
+renforcer l’utilité des fonctions personnalisées,
+
+montrer un usage concret et rapide,
+
+ne pas alourdir la session 2.
+
+🔹 Option 2 – map() en session 2
+Si tu veux :
+
+regrouper les approches “apply-like” (across, map, etc.),
+
+comparer différents paradigmes d’application de fonctions (par colonnes, par éléments, par lignes),
+
+introduire map2() ou pmap() avec les autres constructions avancées.
+
+--> 
+
+
 et voir si j'ai besoin de revenir là dessus : https://juba.github.io/tidyverse/14-fonctions.html#les-fonctions-comme-objets
-
-# Interactive graph
-
-graph interactif? en fin de première session ? ou ne pas en parler et le rajouter dans les slides sur ggplot => oui
-
 
 
 
