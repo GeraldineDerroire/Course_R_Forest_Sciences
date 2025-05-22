@@ -299,6 +299,52 @@ graph_var(v_num)
 vec_logical <- sample(c(TRUE, FALSE), 100, replace = TRUE)
 graph_var(vec_logical)
 ```
+
+## Writing conditions
+
+[To write conditions, we use can:]{style="font-size: 30px"}
+
+* [logical operator: [<]{style="color:indianred;"}, [>]{style="color:indianred;"}, [<=]{style="color:indianred;"}, [>=]{style="color:indianred;"}, [%in%]{style="color:indianred;"}, [==]{style="color:indianred;"}, [!=]{style="color:indianred;"}, [any]{style="color:indianred;"}, [all]{style="color:indianred;"}...]{style="font-size: 30px"}
+
+* [type checking functions: [is.numeric]{style="color:indianred;"}, [is.character]{style="color:indianred;"}, [is.logical]{style="color:indianred;"}...]{style="font-size: 30px"}
+
+[[and combine them using [&&]{style="color:indianred;"} and [||]{style="color:indianred;"}]{style="font-size: 30px"}]{.fragment}
+
+[[💡 [&&]{style="color:indianred;"} and [||]{style="color:indianred;"} are equivalent to [&]{style="color:indianred;"} and [|]{style="color:indianred;"} but only work for vector of length one. There are therefore safer to use in if/else conditions, as they need to return only one value.]{style="font-size: 30px"}]{.fragment}
+
+
+## More complex conditions
+
+```{r}
+check_input <- function(x, valid_val) {
+  if(length(x) != 1 || !(x %in% valid_val)) {
+    cat(x, "is an invalid input.")
+  } else {
+    cat(x, "is a valid input.")
+  }
+}
+```
+
+::: fragment
+```{r}
+check_input(x = 2, valid_val = 1:10)
+```
+:::
+
+::: fragment
+```{r}
+check_input(x = 25, valid_val = 1:10)
+```
+:::
+
+::: fragment
+```{r}
+check_input(x = c(2,3), valid_val = 1:10)
+```
+:::
+
+
+
 ## More complex conditions
 
 Should we go the the party?
@@ -314,8 +360,6 @@ tricky_decision <- function(cool_people, good_music) { # booleans
   }
 }
 ```
-
-[💡 && and || are equivalent to & and | but only work for vector of length one. There are therefore safer to use in if/else conditions, as they need to return only one value.]{style="font-size: 30px"}
 
 [💡 As the expected values for the two arguments are booleans, we don't need to write == TRUE.]{style="font-size: 30px"}
 
@@ -342,26 +386,142 @@ tricky_decision(cool_people = FALSE, good_music = TRUE)
 tricky_decision(cool_people = FALSE, good_music = FALSE)
 ```
 
-##
+## if/else and ifelse
 
-Autre ex avec des == et des != dans les conditions
+[⚠️ [if/else]{style="color:indianred;"} and [ifelse]{style="color:indianred;"} (or its [tidyverse]{style="color:indianred;"} equivalent [if_else]{style="color:indianred;"}) are very different:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+
+* [[if/else]{style="color:indianred;"} is used when testing a single condition and execute different blocks of code depending on its result:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+x <- 5
+if (x >= 10) {
+    message(">=10")
+} else {
+    message("<10")
+}
+```
+:::
+:::
+
+::: {.column width="50%"}
+* [[ifelse]{style="color:indianred;"} and [if_else]{style="color:indianred;"} apply a test to all the elements of a vector and return a vector whose elements depend on the result of each test:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+x <- 5:15
+ifelse(x >= 10, ">=10", "<10")
+```
+:::
+:::
+:::::
 
 
-et que pas forcement in a function.
+## Using [if/else]{style="color:indianred;"} to control the execution of a function
 
-## 
+[Our function [mean_diam]{style="color:indianred;"} is meant to be used on a numerical vector. It returns an error otherwise:]{style="font-size: 30px"}
 
-if...else 
+```{r, eval = FALSE}
+vec_char <- c("A", "B")
+mean_diam(vec_char)
+```
+```{r, echo= FALSE}
+vec_char <- c("A", "B")
+try(mean_diam(vec_char))
+```
 
-utilisation dans les fonctions avec return, stop, warning => follow Juba
+[[This error is not explicit for a user, as they don't know what *circ/(pi \* 100)* is used for...]{style="font-size: 30px"}]{.fragment}
 
-ex of party function => add a test to see if boolean
 
-possible de mettre un test pour la langue dans notre function my_first_function (et ou l'heure du jour hello vs bom dia / boa tarde)
+## Using [if/else]{style="color:indianred;"} with [warning]{style="color:indianred;"}
 
-comparaison if... else avec case_when et if_else de tidyverse
+[We can add a test to return *NA* when *circ* is not numeric, and add an explicit warning message:]{style="font-size: 30px"}
+
+```{r}
+mean_diam <- function(circ, na_act = TRUE, digits = NULL) {
+    if(!(is.numeric(circ))) {
+      warning("circ is not numeric, the result is NA")
+      return(NA) # if circ is not numeric, the execution stops here
+    }
+  
+    diam <- circ / (pi * 100) # Calculate diameters in m
+    mean_diam <- mean(diam, na.rm = na_act) # Calculate the mean 
+    if(!(is.null(digits))) { # Round the diameter only if a value is provided for digits
+      mean_diam <- round(mean_diam, digits = digits)
+    }
+    return(mean_diam) # Return the mean diameter
+}
+```
+
+::: fragment
+```{r}
+mean_diam(vec_char)
+```
+:::
+
+::: notes
+Many parenthesis, click on a closing one to see which one it closes
+:::
+
+## Using [if/else]{style="color:indianred;"} with [stop]{style="color:indianred;"}
+
+[[warning]{style="color:indianred;"} does not stop the execution of the function (in our previous slide it's [return]{style="color:indianred;"} that stopped it).]{style="font-size: 30px"}
+
+::: fragment
+[[On the contrary, [stop]{style="color:indianred;"} triggers an error that stops the execution:]{style="font-size: 30px"}]{.fragment}
+
+```{r}
+mean_diam <- function(circ, na_act = TRUE, digits = NULL) {
+    if(!(is.numeric(circ))) {
+      stop("circ must be numeric")
+      }
+  
+    diam <- circ / (pi * 100) # Calculate diameters in m
+    mean_diam <- mean(diam, na.rm = na_act) # Calculate the mean 
+    if(!(is.null(digits))) { # Round the diameter only if a value is provided for digits
+      mean_diam <- round(mean_diam, digits = digits)
+    }
+    return(mean_diam) # Return the mean diameter
+}
+```
+:::
+
+::: fragment
+```{r, eval = FALSE}
+mean_diam(vec_char)
+```
+
+```{r, echo = FALSE}
+try(mean_diam(vec_char))
+```
+:::
+
+::: notes
+warning can be used independently of return, in this case the execution continues
+:::
+
+## Using [if/else]{style="color:indianred;"} outside a function
+
+We have seen many examples of use of [if/else]{style="color:indianred;"} inside a function, but we can also use it outside:
+
+* at the beginning of a script, together with a warning or a stop, to check if the data are valid
+
+* in a Quarto or R Markdown document, to adapt the output of a chunk depending on it result
+
+* ...
+
+
+::: notes
+for quarto => we could either print "the statistical test is significant" or "the statistical test not significant", by performing a test on the p-value
+:::
+
 
 # Loops
+
+<!-- TO CONTINUE-->
 
 for, while, repeat, next, break...
 

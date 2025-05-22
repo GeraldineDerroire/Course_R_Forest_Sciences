@@ -763,24 +763,78 @@ Géraldine Derroire
 </div>
 </div>
 </section>
+<section id="writing-conditions" class="slide level2">
+<h2>Writing conditions</h2>
+<p><span style="font-size: 30px">To write conditions, we use can:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">logical operator: <span style="color:indianred;">&lt;</span>, <span style="color:indianred;">&gt;</span>, <span style="color:indianred;">&lt;=</span>, <span style="color:indianred;">&gt;=</span>, <span style="color:indianred;">%in%</span>, <span style="color:indianred;">==</span>, <span style="color:indianred;">!=</span>, <span style="color:indianred;">any</span>, <span style="color:indianred;">all</span>…</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">type checking functions: <span style="color:indianred;">is.numeric</span>, <span style="color:indianred;">is.character</span>, <span style="color:indianred;">is.logical</span>…</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">and combine them using <span style="color:indianred;">&amp;&amp;</span> and <span style="color:indianred;">||</span></span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">💡 <span style="color:indianred;">&amp;&amp;</span> and <span style="color:indianred;">||</span> are equivalent to <span style="color:indianred;">&amp;</span> and <span style="color:indianred;">|</span> but only work for vector of length one. There are therefore safer to use in if/else conditions, as they need to return only one value.</span></span></p>
+</section>
 <section id="more-complex-conditions" class="slide level2">
 <h2>More complex conditions</h2>
-<p>Should we go the the party?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>tricky_decision <span class="ot">&lt;-</span> <span class="cf">function</span>(cool_people, good_music) { <span class="co"># booleans</span></span>
-<span id="cb32-2"><a href=""></a>  <span class="cf">if</span>(cool_people <span class="sc">&amp;&amp;</span> good_music) {</span>
-<span id="cb32-3"><a href=""></a>    <span class="fu">message</span>(<span class="st">"Go!"</span>) </span>
-<span id="cb32-4"><a href=""></a>  } <span class="cf">else</span> <span class="cf">if</span> (cool_people <span class="sc">||</span> good_music) {</span>
-<span id="cb32-5"><a href=""></a>    <span class="fu">message</span>(<span class="st">"Maybe..."</span>)</span>
-<span id="cb32-6"><a href=""></a>  } <span class="cf">else</span> {</span>
-<span id="cb32-7"><a href=""></a>    <span class="fu">message</span>(<span class="st">"No way!"</span>)</span>
-<span id="cb32-8"><a href=""></a>  }</span>
-<span id="cb32-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>check_input <span class="ot">&lt;-</span> <span class="cf">function</span>(x, valid_val) {</span>
+<span id="cb32-2"><a href=""></a>  <span class="cf">if</span>(<span class="fu">length</span>(x) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span> <span class="sc">!</span>(x <span class="sc">%in%</span> valid_val)) {</span>
+<span id="cb32-3"><a href=""></a>    <span class="fu">cat</span>(x, <span class="st">"is an invalid input."</span>)</span>
+<span id="cb32-4"><a href=""></a>  } <span class="cf">else</span> {</span>
+<span id="cb32-5"><a href=""></a>    <span class="fu">cat</span>(x, <span class="st">"is a valid input."</span>)</span>
+<span id="cb32-6"><a href=""></a>  }</span>
+<span id="cb32-7"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
-<p><span style="font-size: 30px">💡 &amp;&amp; and || are equivalent to &amp; and | but only work for vector of length one. There are therefore safer to use in if/else conditions, as they need to return only one value.</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">check_input</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">valid_val =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>2 is a valid input.</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">check_input</span>(<span class="at">x =</span> <span class="dv">25</span>, <span class="at">valid_val =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>25 is an invalid input.</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a><span class="fu">check_input</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">valid_val =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>2 3 is an invalid input.</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="more-complex-conditions-1" class="slide level2">
+<h2>More complex conditions</h2>
+<p>Should we go the the party?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>tricky_decision <span class="ot">&lt;-</span> <span class="cf">function</span>(cool_people, good_music) { <span class="co"># booleans</span></span>
+<span id="cb39-2"><a href=""></a>  <span class="cf">if</span>(cool_people <span class="sc">&amp;&amp;</span> good_music) {</span>
+<span id="cb39-3"><a href=""></a>    <span class="fu">message</span>(<span class="st">"Go!"</span>) </span>
+<span id="cb39-4"><a href=""></a>  } <span class="cf">else</span> <span class="cf">if</span> (cool_people <span class="sc">||</span> good_music) {</span>
+<span id="cb39-5"><a href=""></a>    <span class="fu">message</span>(<span class="st">"Maybe..."</span>)</span>
+<span id="cb39-6"><a href=""></a>  } <span class="cf">else</span> {</span>
+<span id="cb39-7"><a href=""></a>    <span class="fu">message</span>(<span class="st">"No way!"</span>)</span>
+<span id="cb39-8"><a href=""></a>  }</span>
+<span id="cb39-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
 <p><span style="font-size: 30px">💡 As the expected values for the two arguments are booleans, we don’t need to write == TRUE.</span></p>
 <aside class="notes">
 <p>Let’s see if you remember how to combine tests… What does this function do?</p>
@@ -796,10 +850,10 @@ Géraldine Derroire
           display:block!important;
       }</style></aside>
 </section>
-<section id="more-complex-conditions-1" class="slide level2">
+<section id="more-complex-conditions-2" class="slide level2">
 <h2>More complex conditions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">TRUE</span>, <span class="at">good_music =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">TRUE</span>, <span class="at">good_music =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -807,7 +861,7 @@ Géraldine Derroire
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">TRUE</span>, <span class="at">good_music =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">TRUE</span>, <span class="at">good_music =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -815,7 +869,7 @@ Géraldine Derroire
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">FALSE</span>, <span class="at">good_music =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">FALSE</span>, <span class="at">good_music =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -823,7 +877,7 @@ Géraldine Derroire
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">FALSE</span>, <span class="at">good_music =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">FALSE</span>, <span class="at">good_music =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -831,21 +885,187 @@ Géraldine Derroire
 </div>
 </div>
 </section>
-<section id="section-2" class="slide level2">
-<h2></h2>
-<p>Autre ex avec des == et des != dans les conditions</p>
-<p>et que pas forcement in a function.</p>
+<section id="ifelse-and-ifelse" class="slide level2">
+<h2>if/else and ifelse</h2>
+<p><span style="font-size: 30px">⚠️ <span style="color:indianred;">if/else</span> and <span style="color:indianred;">ifelse</span> (or its <span style="color:indianred;">tidyverse</span> equivalent <span style="color:indianred;">if_else</span>) are very different:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px"><span style="color:indianred;">if/else</span> is used when testing a single condition and execute different blocks of code depending on its result:</span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span>
+<span id="cb48-2"><a href=""></a><span class="cf">if</span> (x <span class="sc">&gt;=</span> <span class="dv">10</span>) {</span>
+<span id="cb48-3"><a href=""></a>    <span class="fu">message</span>(<span class="st">"&gt;=10"</span>)</span>
+<span id="cb48-4"><a href=""></a>} <span class="cf">else</span> {</span>
+<span id="cb48-5"><a href=""></a>    <span class="fu">message</span>(<span class="st">"&lt;10"</span>)</span>
+<span id="cb48-6"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>&lt;10</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px"><span style="color:indianred;">ifelse</span> and <span style="color:indianred;">if_else</span> apply a test to all the elements of a vector and return a vector whose elements depend on the result of each test:</span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a>x <span class="ot">&lt;-</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">15</span></span>
+<span id="cb50-2"><a href=""></a><span class="fu">ifelse</span>(x <span class="sc">&gt;=</span> <span class="dv">10</span>, <span class="st">"&gt;=10"</span>, <span class="st">"&lt;10"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "&lt;10"  "&lt;10"  "&lt;10"  "&lt;10"  "&lt;10"  "&gt;=10" "&gt;=10" "&gt;=10" "&gt;=10" "&gt;=10"
+[11] "&gt;=10"</code></pre>
+</div>
+</div>
+</div>
+</div></div>
 </section>
-<section id="section-3" class="slide level2">
-<h2></h2>
-<p>if…else</p>
-<p>utilisation dans les fonctions avec return, stop, warning =&gt; follow Juba</p>
-<p>ex of party function =&gt; add a test to see if boolean</p>
-<p>possible de mettre un test pour la langue dans notre function my_first_function (et ou l’heure du jour hello vs bom dia / boa tarde)</p>
-<p>comparaison if… else avec case_when et if_else de tidyverse</p>
+<section id="using-ifelse-to-control-the-execution-of-a-function" class="slide level2">
+<h2>Using <span style="color:indianred;">if/else</span> to control the execution of a function</h2>
+<p><span style="font-size: 30px">Our function <span style="color:indianred;">mean_diam</span> is meant to be used on a numerical vector. It returns an error otherwise:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a>vec_char <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>)</span>
+<span id="cb52-2"><a href=""></a><span class="fu">mean_diam</span>(vec_char)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Error in circ/(pi * 100) : non-numeric argument to binary operator</code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">This error is not explicit for a user, as they don’t know what <em>circ/(pi * 100)</em> is used for…</span></span></p>
+</section>
+<section id="using-ifelse-with-warning" class="slide level2">
+<h2>Using <span style="color:indianred;">if/else</span> with <span style="color:indianred;">warning</span></h2>
+<p><span style="font-size: 30px">We can add a test to return <em>NA</em> when <em>circ</em> is not numeric, and add an explicit warning message:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a>mean_diam <span class="ot">&lt;-</span> <span class="cf">function</span>(circ, <span class="at">na_act =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb54-2"><a href=""></a>    <span class="cf">if</span>(<span class="sc">!</span>(<span class="fu">is.numeric</span>(circ))) {</span>
+<span id="cb54-3"><a href=""></a>      <span class="fu">warning</span>(<span class="st">"circ is not numeric, the result is NA"</span>)</span>
+<span id="cb54-4"><a href=""></a>      <span class="fu">return</span>(<span class="cn">NA</span>) <span class="co"># if circ is not numeric, the execution stops here</span></span>
+<span id="cb54-5"><a href=""></a>    }</span>
+<span id="cb54-6"><a href=""></a>  </span>
+<span id="cb54-7"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>) <span class="co"># Calculate diameters in m</span></span>
+<span id="cb54-8"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act) <span class="co"># Calculate the mean </span></span>
+<span id="cb54-9"><a href=""></a>    <span class="cf">if</span>(<span class="sc">!</span>(<span class="fu">is.null</span>(digits))) { <span class="co"># Round the diameter only if a value is provided for digits</span></span>
+<span id="cb54-10"><a href=""></a>      mean_diam <span class="ot">&lt;-</span> <span class="fu">round</span>(mean_diam, <span class="at">digits =</span> digits)</span>
+<span id="cb54-11"><a href=""></a>    }</span>
+<span id="cb54-12"><a href=""></a>    <span class="fu">return</span>(mean_diam) <span class="co"># Return the mean diameter</span></span>
+<span id="cb54-13"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="fu">mean_diam</span>(vec_char)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in mean_diam(vec_char): circ is not numeric, the result is NA</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Many parenthesis, click on a closing one to see which one it closes</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="using-ifelse-with-stop" class="slide level2">
+<h2>Using <span style="color:indianred;">if/else</span> with <span style="color:indianred;">stop</span></h2>
+<p><span style="font-size: 30px"><span style="color:indianred;">warning</span> does not stop the execution of the function (in our previous slide it’s <span style="color:indianred;">return</span> that stopped it).</span></p>
+<div class="fragment">
+<p><span class="fragment"><span style="font-size: 30px">On the contrary, <span style="color:indianred;">stop</span> triggers an error that stops the execution:</span></span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a>mean_diam <span class="ot">&lt;-</span> <span class="cf">function</span>(circ, <span class="at">na_act =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="cn">NULL</span>) {</span>
+<span id="cb58-2"><a href=""></a>    <span class="cf">if</span>(<span class="sc">!</span>(<span class="fu">is.numeric</span>(circ))) {</span>
+<span id="cb58-3"><a href=""></a>      <span class="fu">stop</span>(<span class="st">"circ must be numeric"</span>)</span>
+<span id="cb58-4"><a href=""></a>      }</span>
+<span id="cb58-5"><a href=""></a>  </span>
+<span id="cb58-6"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>) <span class="co"># Calculate diameters in m</span></span>
+<span id="cb58-7"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act) <span class="co"># Calculate the mean </span></span>
+<span id="cb58-8"><a href=""></a>    <span class="cf">if</span>(<span class="sc">!</span>(<span class="fu">is.null</span>(digits))) { <span class="co"># Round the diameter only if a value is provided for digits</span></span>
+<span id="cb58-9"><a href=""></a>      mean_diam <span class="ot">&lt;-</span> <span class="fu">round</span>(mean_diam, <span class="at">digits =</span> digits)</span>
+<span id="cb58-10"><a href=""></a>    }</span>
+<span id="cb58-11"><a href=""></a>    <span class="fu">return</span>(mean_diam) <span class="co"># Return the mean diameter</span></span>
+<span id="cb58-12"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a><span class="fu">mean_diam</span>(vec_char)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Error in mean_diam(vec_char) : circ must be numeric</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>warning can be used independently of return, in this case the execution continues</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="using-ifelse-outside-a-function" class="slide level2">
+<h2>Using <span style="color:indianred;">if/else</span> outside a function</h2>
+<p>We have seen many examples of use of <span style="color:indianred;">if/else</span> inside a function, but we can also use it outside:</p>
+<ul>
+<li class="fragment"><p>at the beginning of a script, together with a warning or a stop, to check if the data are valid</p></li>
+<li class="fragment"><p>in a Quarto or R Markdown document, to adapt the output of a chunk depending on it result</p></li>
+<li class="fragment"><p>…</p></li>
+</ul>
+<aside class="notes">
+<p>for quarto =&gt; we could either print “the statistical test is significant” or “the statistical test not significant”, by performing a test on the p-value</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section id="loops" class="title-slide slide level1 center">
 <h1>Loops</h1>
+<!-- TO CONTINUE-->
 <p>for, while, repeat, next, break…</p>
 <p>inclure some tips on how to write</p>
 <ul>
