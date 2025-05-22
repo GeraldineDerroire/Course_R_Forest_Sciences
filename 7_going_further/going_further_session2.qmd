@@ -23,14 +23,52 @@ editor:
     wrap: sentence
 ---
 
+# 
 
-<!-- session 2 -->
+Let's load the package we will use:
+
+```{r}
+#| message: false
+library(tidyverse)
+```
+
+
+```{r, echo=FALSE}
+set.seed(14)
+```
 
 # Advanced dplyr 
 
 accross, where, everything => follow Juba
+reprendre mon example de Likert scale but do it accross columns
+
+purr::map ici (avec un exemple using mean_diam_func on dataset in a list par ex)
+
+rowwise and c_across
 
 mentionner apply family
+
+inclure purr::map? ici ou avec accross ? juste le mentionner ici et revenir dessus avec accross?
+
+<!--🔹 Option 1 – map() en session 1
+Si tu veux :
+
+renforcer l’utilité des fonctions personnalisées,
+
+montrer un usage concret et rapide,
+
+ne pas alourdir la session 2.
+
+🔹 Option 2 – map() en session 2
+Si tu veux :
+
+regrouper les approches “apply-like” (across, map, etc.),
+
+comparer différents paradigmes d’application de fonctions (par colonnes, par éléments, par lignes),
+
+introduire map2() ou pmap() avec les autres constructions avancées.
+
+--> 
 
 # Execution conditionnelle
 
@@ -48,4 +86,9 @@ for, while, repeat, next, break...
 
 inclure some tips on how to write
 
-and debugging?
+* https://frbcesab.github.io/tips-and-tricks/posts/2024-11-19-the-apply-function-family/
+  * https://ericmarcon.github.io/Cours-travailleR/31-Langage.html#72
+
+# debugging?
+
+et débuggage basique avec print (cf Juba https://juba.github.io/tidyverse/20-debuggage-performance.html) mais le faire à la fin de session 2 car possible aussi dans une boucle hors function

@@ -23,16 +23,15 @@ editor:
     wrap: sentence
 ---
 
-<!-- session 1-->
 
 # 
 
 Let's load the package we will use:
 
 ```{r}
+#| message: false
 library(tidyverse)
 ```
-
 
 
 ```{r, echo=FALSE}
@@ -75,7 +74,7 @@ mode(vec_bool)
 
 ## Repeat elements
 
-[We can also use [repeat]{style="color:indianred;"} to repeat individuals values of any mode:]{style="font-size: 30px"}
+[We can also use [rep]{style="color:indianred;"} to repeat individuals values of any mode:]{style="font-size: 30px"}
 
 * [repeating a vector several **times**:]{style="font-size: 30px"}
 
@@ -290,6 +289,10 @@ try(sample(month.name, size = 13))
 ```{r}
 sample(1:3, size = 10, replace = TRUE)
 ```
+:::
+
+::: notes
+all of the above is deterministic => we get the same results everytime. But these are random
 :::
 
 ## Random sampling
@@ -716,7 +719,7 @@ all good
 
 **Step 3: develop the code... and add arguments if needed**
 
-*We would like to round the mean diameter, let's add an new operation and an argument giving the number of decimals.*
+*We would like to round the mean diameter, let's add a new operation and an argument giving the number of decimals.*
 
 ```{r}
 # Arguments
@@ -744,7 +747,7 @@ one of our argument can take the same name as in the function in which we use it
 **Step 4: create the function**: add a name, add he instruction *function*, put the argument in *()* and the code in *{}*, add *return* (optional) 
 
 ```{r}
-mean_diam_func <- function(circ, na_act, digits) {
+mean_diam <- function(circ, na_act, digits) {
   # Calculate diameters in m
     diam <- circ / (pi * 100)
   # Calculate the mean value
@@ -777,7 +780,7 @@ mean_diam_func <- function(circ, na_act, digits) {
 
 ```{r}
 # first test
- mean_diam_func(circ = new_circ, digits = 1, na_act = TRUE)
+ mean_diam(circ = new_circ, digits = 1, na_act = TRUE)
 ```
 
 :::
@@ -785,14 +788,14 @@ mean_diam_func <- function(circ, na_act, digits) {
 ::: fragment
 ```{r}
 # second test
-mean_diam_func(circ = new_circ, digits = 4, na_act = TRUE)
+mean_diam(circ = new_circ, digits = 4, na_act = TRUE)
 ```
 :::
 
 ::: fragment
 ```{r}
 # third test
-mean_diam_func(circ = new_circ, digits = 3, na_act = FALSE)
+mean_diam(circ = new_circ, digits = 3, na_act = FALSE)
 ```
 :::
 
@@ -806,9 +809,11 @@ here we really decompose the writing, when you get more confident, the code can 
 
 The objective of a function may not be to return a result, but to perform an action, such as returning a graph, printing a message or a value, saving a file...
 
-These actions are called side effects.
+These actions are called **side effects**.
 
 In these case, we will not need *return*.
+
+<!--
 
 ## Side effects
 
@@ -824,6 +829,7 @@ my_hist <- function(vec) {
 my_hist(new_circ)
 ```
 
+-->
 
 ## Side effects
 
@@ -851,7 +857,7 @@ my_sum3(11, 3)
 
 ## Message
 
-[We can also include a [message] in a function:]{style="font-size: 30px"}
+[We can also include a [message]{style="color:indianred;"} in a function:]{style="font-size: 30px"}
 
 ```{r}
 min_rand <- function(n) {
@@ -904,33 +910,36 @@ median(vec_num, na.rm = TRUE)
 
 ## Default values of arguments {.smaller}
 
-[Let's go back to our [mean_diam_func]{style="color:indianred;"} function:]{style="font-size: 30px"}
+[Let's go back to our [mean_diam]{style="color:indianred;"} function. If we don't specify the values for all the arguments, we get an error:]{style="font-size: 30px"}
 
 ```{r, eval = FALSE}
-mean_diam_func(new_circ)
+mean_diam(new_circ)
 ```
 
 ```{r, echo = FALSE}
-try(mean_diam_func(new_circ))
+try(mean_diam(new_circ))
 ```
 
-[and specify **default** values that are taken by the arguments if no values is passed :]{style="font-size: 30px"}
+[We can specify **default** values that are taken by the arguments if no values is passed :]{style="font-size: 30px"}
 
 ```{r}
-mean_diam_func2 <- function(circ, 
-                             na_act = TRUE, # default value
-                             digits = 2) { # default value
+mean_diam <- function(circ, 
+                      na_act = TRUE, # default value
+                      digits = 2) { # default value
   diam <- circ / (pi * 100)
   mean_diam <- mean(diam, na.rm = na_act)
   mean_diam <- round(mean_diam, digits = digits)
   return(mean_diam)
 }
 
-mean_diam_func2(new_circ)
+mean_diam(new_circ)
 ```
-[[⚠️ Argument with a default value are *optional*, but the other ones are *compulsory*.]{style="font-size: 30px"}]{.fragment}
+
+[[⚠️ When using a function, providing a value for an argument with a default value is *optional*, but it is *compulsory* for the arguments without default values.]{style="font-size: 30px"}]{.fragment}
 
 ::: notes
+if we don't specify the values of an argument, we get an error
+
 here I have removed the comments from the function, but it's only to save space. They could be kept
 :::
 
@@ -966,7 +975,7 @@ my_hist2(new_circ,
 
 [We don't necessary have to use [return]{style="color:indianred;"} to return the result of a function:]{style="font-size: 30px"}
 
-```{r}
+```{r, eval = FALSE}
 my_sum <- function(x, y) {
   res <- x + y
   return(res)
@@ -975,7 +984,7 @@ my_sum <- function(x, y) {
 
 [can be written]{style="font-size: 30px"} 
 
-```{r}
+```{r, eval = FALSE}
 my_sum <- function(x, y) {
   res <- x + y
   res
@@ -984,7 +993,7 @@ my_sum <- function(x, y) {
 
 [or even]{style="font-size: 30px"} 
 
-```{r}
+```{r, eval = FALSE}
 my_sum <- function(x, y) {
   x + y
 } 
@@ -1026,6 +1035,96 @@ res
 :::
 :::
 :::::
+
+## Functions within functions
+
+[It is possible to use a function (including a home made one) within a function.]{style="font-size: 30px"}
+
+::: fragment
+
+[Splitting a big function into smaller nested ones makes each step clearer and easier to maintain.]{style="font-size: 30px"} 
+
+[In addition, these small functions can potentially be reused in other parts of your code.]{style="font-size: 30px"}
+
+:::
+
+## Sourcing a function
+
+[It is recommended to write each function in a separate script and place these scripts in a dedicated folder within your project, usually called *R*.
+**An exception can be made for small functions or functions used only once in a single script.**]{style="font-size: 30px"}
+
+::: fragment
+[A function saved in a separate file can be made available in your script by **sourcing** it:]{style="font-size: 30px"}
+
+```{r, eval=FALSE}
+source("R/my_function.R")
+```
+
+:::
+
+::: notes
+about the organisation of a project, see the second lesson
+:::
+
+## Using our own functions with [dplyr]{style="color:indianred;"} {.smaller}
+
+[Let's create an example data set containing responses to an opinion poll, coded on a Likert scale:]{style="font-size: 30px"}
+
+```{r}
+dt_Likert <- tibble(
+  id = LETTERS[1:6],
+  Question1 = as.factor(sample(1:5, 6, replace = TRUE)),
+  Question2 = as.factor(sample(1:5, 6, replace = TRUE)),
+  Question3 = as.factor(sample(1:5, 6, replace = TRUE)), 
+  Question4 = as.factor(sample(1:5, 6, replace = TRUE))
+)
+dt_Likert
+```
+
+[[We want to recode the responses to make them more explicit. We could recode each variables manually using [mutate]{style="color:indianred;"} and [fct_recode]{style="color:indianred;"} but this would be very tedious...]{style="font-size: 30px"}]{.fragment}
+
+## Using our own functions with [dplyr]{style="color:indianred;"} {.smaller}
+
+::::: columns
+::: {.column width="75%"}
+
+[We can instead create a function to do the recoding:]{style="font-size: 30px"}
+
+```{r}
+recode_Likert <- function(v) {
+  fct_recode(v,
+             "Strongly disagree" = "1",
+             "Disagree" = "2",
+             "Neutral" = "3",
+             "Agree" = "4",
+             "Strongly agree" = "5")
+}
+```
+
+[and use it with mutate to recode all variables:]{style="font-size: 30px"}
+
+```{r}
+#| warning: FALSE
+dt_Likert %>% 
+  mutate(Question1 = recode_Likert(Question1),
+         Question2 = recode_Likert(Question2),
+         Question3 = recode_Likert(Question3),
+         Question4 = recode_Likert(Question4),
+         )
+```
+:::
+
+::: {.column width="25%"}
+
+[[*This is just an example with [mutate]{style="color:indianred;"}, but we can use our own function with many [dplr]{style="color:indianred;"} functions.*]{style="font-size: 25px"}]{.fragment}
+
+:::
+:::::
+
+::: notes
+we will see in the next session a even more concise way of doing this
+:::
+
 
 # Scope of variables
 
@@ -1133,47 +1232,13 @@ f()
 obj
 ```
 
-##
-
-<!-- STILL TO ADD SOMEWHERE --> 
-
-sourcing a function
-
-et débuggage basique 
-
-https://www.dataquest.io/blog/write-functions-in-r/
-
-
 <!-- TO DO --> 
 
-# Utiliser les fonctions avec dplyr et purr
-
-cf Juba: https://juba.github.io/tidyverse/15-dplyr-avance.html#appliquer-ses-propres-fonctions
-
-pour l'exemple de mutate, repartir des données de l'IFN brésilien
 
 
-inclure purr::map? ici ou avec accross ? juste le mentionner ici et revenir dessus avec accross?
 
-<!--🔹 Option 1 – map() en session 1
-Si tu veux :
 
-renforcer l’utilité des fonctions personnalisées,
 
-montrer un usage concret et rapide,
-
-ne pas alourdir la session 2.
-
-🔹 Option 2 – map() en session 2
-Si tu veux :
-
-regrouper les approches “apply-like” (across, map, etc.),
-
-comparer différents paradigmes d’application de fonctions (par colonnes, par éléments, par lignes),
-
-introduire map2() ou pmap() avec les autres constructions avancées.
-
---> 
 
 
 et voir si j'ai besoin de revenir là dessus : https://juba.github.io/tidyverse/14-fonctions.html#les-fonctions-comme-objets
@@ -1186,45 +1251,22 @@ et voir si j'ai besoin de revenir là dessus : https://juba.github.io/tidyverse/
 
 ::: {.nonincremental}
 
-* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"} 
-
 * Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
 
-<!-- Vincyane???? -->
-
+* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"} 
 
 :::
 
+# Ressources
 
-<!-- draft 
+::: {.nonincremental}
 
-# Possible content: 
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*  - Chapter on functions [in English](https://r4ds.had.co.nz/functions.html) and [in Portuguese](https://pt.r4ds.hadley.nz/functions.html){preview-link="false"}
 
-# saving object 
-  * NOT SURE We've seen it before (check) 
+* Wickham H. *Advanced R*  - Chapter on functions [in English](https://adv-r.hadley.nz/functions.html){preview-link="false"}
 
-# conditional execution (if... else, ) 
+:::
 
-# loops for, while, repeat...
-  * https://frbcesab.github.io/tips-and-tricks/posts/2024-11-19-the-apply-function-family/
-  * https://ericmarcon.github.io/Cours-travailleR/31-Langage.html#72
-
-# vectorial function (apply, etc, BUT see if it overlaps with accross and stuff in the tidyverse)
-
-# map and purr???
-
-# writing function (probably start with this as it will be used in apply or ...)
-  * ressource: https://www.dataquest.io/blog/write-functions-in-r/ 
-  * function synthax
-  * default arguments
-  * message, warning, stop... (after if_else...)
-  * enviro
-  * nested functions
-  * Debugging tools: print(), browser(), traceback()
-
-# debuggage?
-
-# target
-  * https://rdatatoolbox.github.io/chapters/course-targets.html
-  
--->  
+::: notes
+second one more advanced
+:::

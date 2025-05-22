@@ -724,6 +724,8 @@ we will see loops later
 
 here we calculate the dissimilarity outside the loop as it is not random, so no need to do it several tumes
 
+and seq_along generate a sequence of interger of the same length as k_vec
+
 type ="b" give the lines between the dots
 :::
 

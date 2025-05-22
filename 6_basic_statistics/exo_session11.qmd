@@ -13,7 +13,10 @@ ville du monde PCA
 
 BCI + BCIenv pour RDA ou CCA
 
+#
 
 pour la prochaine fois
 
 revoir les opérateurs conditions et logiques 
+
+ 
