@@ -37,7 +37,347 @@ library(tidyverse)
 set.seed(14)
 ```
 
-# Advanced dplyr 
+
+# Conditional execution
+
+**Conditional execution** means running different blocks of code depending on whether a condition is TRUE or FALSE.
+
+## if
+
+[Let's write a function saying *Bom dia* only in the morning:]{style="font-size: 30px"}
+
+```{r}
+greeting <- function(time) {
+  time <- hm(time) 
+  time_limit <- hm("11:59")
+  if (time < time_limit) {
+    message("Bom dia !")
+  } 
+}
+```
+
+[💡 The function [hm]{style="color:indianred;"} from [lubridate]{style="color:indianred;"} convert a character to a period object.]{style="font-size: 25px"}
+
+::: fragment
+```{r}
+greeting("8:13")
+```
+:::
+
+::: fragment
+```{r}
+greeting("14:25")
+```
+:::
+
+::: notes
+very important function for me!!!
+:::
+
+## if 
+
+![](if.png)
+
+The command [if]{style="color:indianred;"} is used with:
+
+* a condition (in parentheses)
+
+* a block of code (in curly brackets) that is executed only if the condition is TRUE
+
+
+## if / else
+
+[Let's update our function to say *Boa tarde* in the afternoon:]{style="font-size: 30px"}
+
+```{r}
+greeting <- function(time) {
+  time <- hm(time) 
+  time_limit <- hm("11:59")
+  if (time < time_limit) {
+    message("Bom dia !")
+  } else {
+    message("Boa tarde !")
+  }
+}
+```
+
+[[and test it:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+greeting("8:13")
+```
+:::
+
+::: fragment
+```{r}
+greeting("14:25")
+```
+:::
+
+## if/else
+
+An [if]{style="color:indianred;"} instruction can be followed by a [else]{style="color:indianred;"} that is executed if the condition of [if]{style="color:indianred;"} is FALSE.
+
+![](if_else.png)
+
+## if/else if/else
+
+[But what to say in the evening?]{style="font-size: 30px"}
+
+```{r}
+greeting <- function(time) {
+  time <- hm(time) 
+  time_limit1 <- hm("11:59")
+  time_limit2 <- hm("17:59")
+  if (time < time_limit1) {
+    message("Bom dia !")
+  } else if (time < time_limit2) {
+    message("Boa tarde !")
+  } else {
+    message("Boa noite !")
+  }
+}
+```
+
+[[let's check]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+greeting("8:13")
+```
+:::
+
+::: fragment
+```{r}
+greeting("14:25")
+```
+:::
+
+::: fragment
+```{r}
+greeting("20:17")
+```
+:::
+
+## if/else if/else
+
+We can add a second condition with [else if]{style="color:indianred;"}. 
+The second condition is tested only if the 1st condition is FALSE.
+
+![](if_else_if_else.png)
+
+
+## Order of conditions
+
+[Only the block of the first TRUE condition is executed.]{style="font-size: 30px"}
+
+[⚠️ **The order of conditions is therefore important!**]{style="font-size: 30px"}
+
+```{r}
+greeting_wrong <- function(time) {
+  time <- hm(time) 
+  time_limit1 <- hm("11:59")
+  time_limit2 <- hm("17:59")
+  if (time < time_limit2) {
+    message("Boa tarde !")
+  } else if (time < time_limit1) {
+    message("Bom dia !")
+  } else {
+    message("Boa noite !")
+  }
+}
+```
+
+::: fragment
+
+🥴
+
+```{r}
+greeting_wrong("8:13")
+```
+:::
+
+::: notes
+explain what happen following the code
+:::
+
+## 
+
+[💡 Now that we understand, we can use a more concise syntax for our function:]{style="font-size: 30px"}
+
+```{r}
+greeting <- function(time) {
+  if (hm(time)  < hm("11:59")) {
+    message("Bom dia !")
+  } else if (hm(time)  < hm("17:59")) {
+    message("Boa tarde !")
+  } else {
+    message("Boa noite !")
+  }
+}
+```
+
+::: notes
+if removed the 3 first lines and included the hm() in the tests
+:::
+
+
+## Example of use
+
+[We can modify our function *mean_diam* so that it rounds the diameter only if a value is given to the argument digits.]{style="font-size: 30px"}
+[[For that we give the default value NULL to the argument *digits*, and add a test before rounding:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+mean_diam <- function(circ, na_act = TRUE, digits = NULL) {
+    diam <- circ / (pi * 100) # Calculate diameters in m
+    mean_diam <- mean(diam, na.rm = na_act) # Calculate the mean 
+  # Round the diameter only if a value is provided for digits
+    if(!(is.null(digits))) {
+      mean_diam <- round(mean_diam, digits = digits)
+    }
+    return(mean_diam) # Return the mean diameter
+}
+```
+:::
+
+::: fragment
+```{r}
+new_circ <- runif(n = 35, min = 30, max = 250)
+mean_diam(new_circ)
+```
+::: 
+
+::: fragment
+```{r}
+mean_diam(new_circ, digits = 3)
+```
+::: 
+
+## Another example 
+
+What does this function do?
+
+```{r}
+graph_var <- function(v) { # v: a vector
+    if (is.character(v)) {
+        barplot(table(v))
+    } else if (is.numeric(v)) {
+        hist(v)
+    } else {
+        message("The type of v is not supported by the function")
+    }
+}
+```
+
+## Another example 
+
+[Let's check:]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="50%"}
+```{r}
+v_char <- sample(LETTERS[1:5], 100, 
+                 replace = TRUE)
+graph_var(v_char)
+```
+
+
+:::
+
+::: {.column width="50%"}
+```{r}
+v_num <- runif(100, min=0, max=10)
+graph_var(v_num)
+```
+
+:::
+:::::
+
+```{r}
+vec_logical <- sample(c(TRUE, FALSE), 100, replace = TRUE)
+graph_var(vec_logical)
+```
+## More complex conditions
+
+Should we go the the party?
+
+```{r}
+tricky_decision <- function(cool_people, good_music) { # booleans
+  if(cool_people && good_music) {
+    message("Go!") 
+  } else if (cool_people || good_music) {
+    message("Maybe...")
+  } else {
+    message("No way!")
+  }
+}
+```
+
+[💡 && and || are equivalent to & and | but only work for vector of length one. There are therefore safer to use in if/else conditions, as they need to return only one value.]{style="font-size: 30px"}
+
+[💡 As the expected values for the two arguments are booleans, we don't need to write == TRUE.]{style="font-size: 30px"}
+
+::: notes
+Let's see if you remember how to combine tests...
+What does this function do?
+:::
+
+## More complex conditions
+
+```{r}
+tricky_decision(cool_people = TRUE, good_music = TRUE)
+```
+
+```{r}
+tricky_decision(cool_people = TRUE, good_music = FALSE)
+```
+
+```{r}
+tricky_decision(cool_people = FALSE, good_music = TRUE)
+```
+
+```{r}
+tricky_decision(cool_people = FALSE, good_music = FALSE)
+```
+
+##
+
+Autre ex avec des == et des != dans les conditions
+
+
+et que pas forcement in a function.
+
+## 
+
+if...else 
+
+utilisation dans les fonctions avec return, stop, warning => follow Juba
+
+ex of party function => add a test to see if boolean
+
+possible de mettre un test pour la langue dans notre function my_first_function (et ou l'heure du jour hello vs bom dia / boa tarde)
+
+comparaison if... else avec case_when et if_else de tidyverse
+
+# Loops
+
+for, while, repeat, next, break...
+
+inclure some tips on how to write
+
+* https://frbcesab.github.io/tips-and-tricks/posts/2024-11-19-the-apply-function-family/
+  * https://ericmarcon.github.io/Cours-travailleR/31-Langage.html#72
+
+# debugging?
+
+et débuggage basique avec print (cf Juba https://juba.github.io/tidyverse/20-debuggage-performance.html) mais le faire à la fin de session 2 car possible aussi dans une boucle hors function
+
+
+# Functional and scoped programming with the [tidyverse]{style="color:indianred;"}
+
+
 
 accross, where, everything => follow Juba
 reprendre mon example de Likert scale but do it accross columns
@@ -70,25 +410,3 @@ introduire map2() ou pmap() avec les autres constructions avancées.
 
 --> 
 
-# Execution conditionnelle
-
-if...else 
-
-utilisation dans les fonctions avec return, stop, warning => follow Juba
-
-possible de mettre un test pour la langue dans notre function my_first_function (et ou l'heure du jour hello vs bom dia / boa tarde)
-
-comparaison if... else avec case_when et if_else de tidyverse
-
-# Loops
-
-for, while, repeat, next, break...
-
-inclure some tips on how to write
-
-* https://frbcesab.github.io/tips-and-tricks/posts/2024-11-19-the-apply-function-family/
-  * https://ericmarcon.github.io/Cours-travailleR/31-Langage.html#72
-
-# debugging?
-
-et débuggage basique avec print (cf Juba https://juba.github.io/tidyverse/20-debuggage-performance.html) mais le faire à la fin de session 2 car possible aussi dans une boucle hors function
