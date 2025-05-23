@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-22">
+  <meta name="dcterms.date" content="2025-05-23">
   <title>Going further with R - session 2/2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-22</p>
+  <p class="date">2025-05-23</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
@@ -529,6 +529,8 @@ Géraldine Derroire
 <section id="ifelse-ifelse" class="slide level2">
 <h2>if/else if/else</h2>
 <p><span style="font-size: 30px">But what to say in the evening?</span></p>
+<div class="columns">
+<div class="column" style="width:60%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>greeting <span class="ot">&lt;-</span> <span class="cf">function</span>(time) {</span>
 <span id="cb11-2"><a href=""></a>  time <span class="ot">&lt;-</span> <span class="fu">hm</span>(time) </span>
@@ -546,6 +548,7 @@ Géraldine Derroire
 <div class="cell fragment">
 
 </div>
+</div><div class="column" style="width:40%;">
 <p><span class="fragment"><span style="font-size: 30px">let’s check</span></span></p>
 <div class="fragment">
 <div class="cell">
@@ -577,6 +580,7 @@ Géraldine Derroire
 </div>
 </div>
 </div>
+</div></div>
 </section>
 <section id="ifelse-ifelse-1" class="slide level2">
 <h2>if/else if/else</h2>
@@ -692,7 +696,7 @@ Géraldine Derroire
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">mean_diam</span>(new_circ, <span class="at">digits =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">mean_diam</span>(new_circ, <span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -700,6 +704,19 @@ Géraldine Derroire
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>function mean_diam seen in the previous session: change the units of diameter, take the mean and round it</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="another-example" class="slide level2">
 <h2>Another example</h2>
@@ -775,62 +792,17 @@ Géraldine Derroire
 </section>
 <section id="more-complex-conditions" class="slide level2">
 <h2>More complex conditions</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>check_input <span class="ot">&lt;-</span> <span class="cf">function</span>(x, valid_val) {</span>
-<span id="cb32-2"><a href=""></a>  <span class="cf">if</span>(<span class="fu">length</span>(x) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span> <span class="sc">!</span>(x <span class="sc">%in%</span> valid_val)) {</span>
-<span id="cb32-3"><a href=""></a>    <span class="fu">cat</span>(x, <span class="st">"is an invalid input."</span>)</span>
-<span id="cb32-4"><a href=""></a>  } <span class="cf">else</span> {</span>
-<span id="cb32-5"><a href=""></a>    <span class="fu">cat</span>(x, <span class="st">"is a valid input."</span>)</span>
-<span id="cb32-6"><a href=""></a>  }</span>
-<span id="cb32-7"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-
-</div>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">check_input</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">valid_val =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>2 is a valid input.</code></pre>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">check_input</span>(<span class="at">x =</span> <span class="dv">25</span>, <span class="at">valid_val =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>25 is an invalid input.</code></pre>
-</div>
-</div>
-</div>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a><span class="fu">check_input</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">valid_val =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>2 3 is an invalid input.</code></pre>
-</div>
-</div>
-</div>
-</section>
-<section id="more-complex-conditions-1" class="slide level2">
-<h2>More complex conditions</h2>
 <p>Should we go the the party?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a>tricky_decision <span class="ot">&lt;-</span> <span class="cf">function</span>(cool_people, good_music) { <span class="co"># booleans</span></span>
-<span id="cb39-2"><a href=""></a>  <span class="cf">if</span>(cool_people <span class="sc">&amp;&amp;</span> good_music) {</span>
-<span id="cb39-3"><a href=""></a>    <span class="fu">message</span>(<span class="st">"Go!"</span>) </span>
-<span id="cb39-4"><a href=""></a>  } <span class="cf">else</span> <span class="cf">if</span> (cool_people <span class="sc">||</span> good_music) {</span>
-<span id="cb39-5"><a href=""></a>    <span class="fu">message</span>(<span class="st">"Maybe..."</span>)</span>
-<span id="cb39-6"><a href=""></a>  } <span class="cf">else</span> {</span>
-<span id="cb39-7"><a href=""></a>    <span class="fu">message</span>(<span class="st">"No way!"</span>)</span>
-<span id="cb39-8"><a href=""></a>  }</span>
-<span id="cb39-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>tricky_decision <span class="ot">&lt;-</span> <span class="cf">function</span>(cool_people, good_music) { <span class="co"># booleans</span></span>
+<span id="cb32-2"><a href=""></a>  <span class="cf">if</span>(cool_people <span class="sc">&amp;&amp;</span> good_music) {</span>
+<span id="cb32-3"><a href=""></a>    <span class="fu">message</span>(<span class="st">"Go!"</span>) </span>
+<span id="cb32-4"><a href=""></a>  } <span class="cf">else</span> <span class="cf">if</span> (cool_people <span class="sc">||</span> good_music) {</span>
+<span id="cb32-5"><a href=""></a>    <span class="fu">message</span>(<span class="st">"Maybe..."</span>)</span>
+<span id="cb32-6"><a href=""></a>  } <span class="cf">else</span> {</span>
+<span id="cb32-7"><a href=""></a>    <span class="fu">message</span>(<span class="st">"No way!"</span>)</span>
+<span id="cb32-8"><a href=""></a>  }</span>
+<span id="cb32-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -850,10 +822,10 @@ Géraldine Derroire
           display:block!important;
       }</style></aside>
 </section>
-<section id="more-complex-conditions-2" class="slide level2">
+<section id="more-complex-conditions-1" class="slide level2">
 <h2>More complex conditions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">TRUE</span>, <span class="at">good_music =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">TRUE</span>, <span class="at">good_music =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -861,7 +833,7 @@ Géraldine Derroire
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">TRUE</span>, <span class="at">good_music =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">TRUE</span>, <span class="at">good_music =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -869,7 +841,7 @@ Géraldine Derroire
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">FALSE</span>, <span class="at">good_music =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">FALSE</span>, <span class="at">good_music =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -877,13 +849,72 @@ Géraldine Derroire
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">FALSE</span>, <span class="at">good_music =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">tricky_decision</span>(<span class="at">cool_people =</span> <span class="cn">FALSE</span>, <span class="at">good_music =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
 <pre><code>No way!</code></pre>
 </div>
 </div>
+</section>
+<section id="more-complex-conditions-2" class="slide level2">
+<h2>More complex conditions</h2>
+<p>What does this function do?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a>check_input <span class="ot">&lt;-</span> <span class="cf">function</span>(x, valid_val) {</span>
+<span id="cb41-2"><a href=""></a>  <span class="cf">if</span>(<span class="fu">length</span>(x) <span class="sc">!=</span> <span class="dv">1</span> <span class="sc">||</span> <span class="sc">!</span>(x <span class="sc">%in%</span> valid_val)) {</span>
+<span id="cb41-3"><a href=""></a>    <span class="fu">cat</span>(x, <span class="st">"is an invalid input."</span>)</span>
+<span id="cb41-4"><a href=""></a>  } <span class="cf">else</span> {</span>
+<span id="cb41-5"><a href=""></a>    <span class="fu">cat</span>(x, <span class="st">"is a valid input."</span>)</span>
+<span id="cb41-6"><a href=""></a>  }</span>
+<span id="cb41-7"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">check_input</span>(<span class="at">x =</span> <span class="dv">2</span>, <span class="at">valid_val =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>2 is a valid input.</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">check_input</span>(<span class="at">x =</span> <span class="dv">25</span>, <span class="at">valid_val =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>25 is an invalid input.</code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">check_input</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="at">valid_val =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>2 3 is an invalid input.</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>a valid input is in the list of valid input and has a lenght of 1</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="ifelse-and-ifelse" class="slide level2">
 <h2>if/else and ifelse</h2>
@@ -928,7 +959,7 @@ Géraldine Derroire
 </section>
 <section id="using-ifelse-to-control-the-execution-of-a-function" class="slide level2">
 <h2>Using <span style="color:indianred;">if/else</span> to control the execution of a function</h2>
-<p><span style="font-size: 30px">Our function <span style="color:indianred;">mean_diam</span> is meant to be used on a numerical vector. It returns an error otherwise:</span></p>
+<p><span style="font-size: 30px">Our function <span style="color:indianred;">mean_diam</span> is intended to be used on a numerical vector. It returns an error otherwise:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a>vec_char <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>)</span>
 <span id="cb52-2"><a href=""></a><span class="fu">mean_diam</span>(vec_char)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -994,8 +1025,8 @@ Géraldine Derroire
 <section id="using-ifelse-with-stop" class="slide level2">
 <h2>Using <span style="color:indianred;">if/else</span> with <span style="color:indianred;">stop</span></h2>
 <p><span style="font-size: 30px"><span style="color:indianred;">warning</span> does not stop the execution of the function (in our previous slide it’s <span style="color:indianred;">return</span> that stopped it).</span></p>
-<div class="fragment">
 <p><span class="fragment"><span style="font-size: 30px">On the contrary, <span style="color:indianred;">stop</span> triggers an error that stops the execution:</span></span></p>
+<div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a>mean_diam <span class="ot">&lt;-</span> <span class="cf">function</span>(circ, <span class="at">na_act =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="cn">NULL</span>) {</span>
 <span id="cb58-2"><a href=""></a>    <span class="cf">if</span>(<span class="sc">!</span>(<span class="fu">is.numeric</span>(circ))) {</span>
@@ -1063,30 +1094,322 @@ Géraldine Derroire
           display:block!important;
       }</style></aside>
 </section></section>
+<section>
 <section id="loops" class="title-slide slide level1 center">
 <h1>Loops</h1>
+<p>A loop allows to repeatedly executes a block of code.</p>
+</section>
+<section id="for-loop" class="slide level2">
+<h2><span style="color:indianred;">for</span> loop</h2>
+<p>Let’s take a simple example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="cf">for</span> (item <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb61-2"><a href=""></a>    <span class="fu">print</span>(item)</span>
+<span id="cb61-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5</code></pre>
+</div>
+</div>
+</section>
+<section id="for-loop-1" class="slide level2">
+<h2><span style="color:indianred;">for</span> loop</h2>
+
+<img data-src="for_loop.png" style="width:350.0%" class="r-stretch"><div class="columns">
+<div class="column" style="width:60%;">
+<p>A <span style="color:indianred;">for</span> loop executes a block of code for each element of a vector. For each iteration, the loop sequentially assigns a value from the vector to the loop iterator.</p>
+</div><div class="column" style="width:40%;">
+<div class="fragment">
+<p><span style="font-size: 25px"><em>In our example:</em> <em>item</em> take the value 1, and the block of code prints it, then <em>item</em> take the value 2, and the block of code prints it, then …, then <em>item</em> take the value 5, and the block of code prints it</span></p>
+</div>
+</div></div>
+</section>
+<section id="for-loop-2" class="slide level2">
+<h2><span style="color:indianred;">for</span> loop</h2>
+<p>The vector can be of any mode, and we can give any name to the iterator (usually we use <em>n</em> or <em>i</em>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a>vec_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Lucas"</span>, <span class="st">"Gabriel"</span>, <span class="st">"Ana"</span>, <span class="st">"Maria"</span>, <span class="st">"João"</span>)</span>
+<span id="cb63-2"><a href=""></a><span class="cf">for</span> (name <span class="cf">in</span> vec_name) {</span>
+<span id="cb63-3"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, name, <span class="st">"!"</span>)</span>
+<span id="cb63-4"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Lucas!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Gabriel!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Ana!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Maria!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello João!</code></pre>
+</div>
+</div>
+<p><span class="fragment">Here the vector is of type <em>character</em> and the iterator is called <em>name</em>.</span></p>
+</section>
+<section id="iterating-over-elements" class="slide level2">
+<h2>Iterating over elements</h2>
+<p>In the previous example</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a><span class="cf">for</span> (name <span class="cf">in</span> vec_name) {</span>
+<span id="cb69-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, name, <span class="st">"!"</span>)</span>
+<span id="cb69-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p>we iterate over the <strong>elements</strong> (the values) of a vector.</p>
+<!--
+
+* iterer sur une valeur (cf Juba) 
+
+
+across colum? -->
+</section>
+<section id="iterating-over-numeric-indices" class="slide level2">
+<h2>Iterating over numeric indices</h2>
+<p>We can also iterate over <strong>numeric indices</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">seq_along</span>(vec_name)) {</span>
+<span id="cb70-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, vec_name[[n]], <span class="st">"!"</span>)</span>
+<span id="cb70-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Lucas!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Gabriel!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Ana!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Maria!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello João!</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>The function <span style="color:indianred;">seq_along</span> returns a sequence of integers from 1 to the length of a vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a><span class="fu">seq_along</span>(vec_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3 4 5</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="iterating-over-numeric-indices-1" class="slide level2">
+<h2>Iterating over numeric indices</h2>
+<p>Instead of <em>seq_along(vec_name)</em>, we could also write <em>1:length(vec_name)</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(vec_name)) {</span>
+<span id="cb78-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, vec_name[[n]], <span class="st">"!"</span>)</span>
+<span id="cb78-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Lucas!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Gabriel!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Ana!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Maria!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello João!</code></pre>
+</div>
+</div>
+<p><span class="fragment">⚠️ seq_along is safer</span></p>
+</section>
+<section id="iterating-over-numeric-indices-2" class="slide level2 smaller">
+<h2>Iterating over numeric indices</h2>
+<p><span style="font-size: 30px">Let’s take a vector of length 0:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a>vec_null <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb84-2"><a href=""></a><span class="fu">length</span>(vec_null)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">The loop should not be executed:</span></span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px">Using <em>1:length()</em> will not behave as expected:</span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(vec_null)) {</span>
+<span id="cb86-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, vec_null[[n]], <span class="st">"!"</span>)</span>
+<span id="cb86-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello !
+Hello !</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px">Using will behave as expected (it does nothing):</span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">seq_along</span>(vec_null)) {</span>
+<span id="cb88-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, vec_null[[n]], <span class="st">"!"</span>)</span>
+<span id="cb88-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px">Why is that?</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(vec_null)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 0</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href=""></a><span class="fu">seq_along</span>(vec_null)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>integer(0)</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="iterating-over-numeric-indices-3" class="slide level2 scrollable">
+<h2>Iterating over numeric indices</h2>
+<p><span style="font-size: 30px">Iterating over numeric indices is useful when we want to use the index (the iterator) in more than one purpose within the loop:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href=""></a><span class="cf">for</span> (m <span class="cf">in</span> <span class="fu">seq_along</span>(month.name)) {</span>
+<span id="cb93-2"><a href=""></a>  month <span class="ot">&lt;-</span> month.name[[m]]</span>
+<span id="cb93-3"><a href=""></a>  rank <span class="ot">&lt;-</span> m</span>
+<span id="cb93-4"><a href=""></a>  <span class="fu">message</span>(month, <span class="st">" is the month "</span>, rank)</span>
+<span id="cb93-5"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>January is the month 1</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>February is the month 2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>March is the month 3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>April is the month 4</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>May is the month 5</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>June is the month 6</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>July is the month 7</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>August is the month 8</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>September is the month 9</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>October is the month 10</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>November is the month 11</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>December is the month 12</code></pre>
+</div>
+</div>
+<!-- CONTINUE FROM HERE -->
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<ul>
+<li class="fragment">iterate over names (cf r4ds)</li>
+</ul>
+<p>across colum?</p>
+<p>across element of a list</p>
+<ul>
+<li class="fragment">output of a loop</li>
+</ul>
+<p>r4ds: importance to create the output of the loop instead of increasing the output at every step (faster)</p>
+<p>see also https://adv-r.hadley.nz/control-flow.html#control-flow common pitfall</p>
+<ul>
+<li class="fragment">loop to modify</li>
+</ul>
+<p>r4ds</p>
+<ul>
+<li class="fragment">interateur kept out of the loop (Juba)</li>
+</ul>
+</section>
+<section id="while-loops" class="slide level2">
+<h2><span style="color:indianred;">while</span> loops</h2>
+<ul>
+<li class="fragment"><p>juba</p></li>
+<li class="fragment"><p>ex of r4ds flipping a coin</p></li>
+</ul>
+</section>
+<section id="next-and-break" class="slide level2">
+<h2>next and break</h2>
+</section>
+<section id="repeat-loop" class="slide level2">
+<h2>repeat loop</h2>
+<p>? untill a break</p>
+</section>
+<section id="when-not-to-use-a-loop" class="slide level2">
+<h2>when not to use a loop</h2>
+<p>when vectorised alternative Juba and here https://thinkr.fr/comment-faire-des-boucles-en-r-ou-pas/</p>
+<p>group by and summarise rather than for loop per group</p>
+<p>et enchainer sur accross and purr…</p>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
 <!-- TO CONTINUE-->
 <p>for, while, repeat, next, break…</p>
 <p>inclure some tips on how to write</p>
-<ul>
-<li class="fragment">https://frbcesab.github.io/tips-and-tricks/posts/2024-11-19-the-apply-function-family/
-<ul>
-<li class="fragment">https://ericmarcon.github.io/Cours-travailleR/31-Langage.html#72</li>
-</ul></li>
-</ul>
-</section>
-
-<section id="debugging" class="title-slide slide level1 center">
-<h1>debugging?</h1>
-<p>et débuggage basique avec print (cf Juba https://juba.github.io/tidyverse/20-debuggage-performance.html) mais le faire à la fin de session 2 car possible aussi dans une boucle hors function</p>
-</section>
-
+</section></section>
+<section>
 <section id="functional-and-scoped-programming-with-the-tidyverse" class="title-slide slide level1 center">
 <h1>Functional and scoped programming with the <span style="color:indianred;">tidyverse</span></h1>
+<p>voir si je commence avec map???</p>
 <p>accross, where, everything =&gt; follow Juba reprendre mon example de Likert scale but do it accross columns</p>
-<p>purr::map ici (avec un exemple using mean_diam_func on dataset in a list par ex)</p>
 <p>rowwise and c_across</p>
-<p>mentionner apply family</p>
+<p>purr::map ici (avec un exemple using mean_diam_func on dataset in a list par ex) parler aussi de walk (in r4ds) parler aussi de reduce??? r4ds</p>
+</section>
+<section id="the-apply-family" class="slide level2">
+<h2>The <span style="color:indianred;">apply</span> family</h2>
+<p>Not covered but here is a good ressource:</p>
+<p>https://frbcesab.github.io/tips-and-tricks/posts/2024-11-19-the-apply-function-family/</p>
 <p>inclure purr::map? ici ou avec accross ? juste le mentionner ici et revenir dessus avec accross?</p>
 <!--🔹 Option 1 – map() en session 1
 Si tu veux :
@@ -1107,6 +1430,51 @@ comparer différents paradigmes d’application de fonctions (par colonnes, par 
 introduire map2() ou pmap() avec les autres constructions avancées.
 
 -->
+</section></section>
+<section>
+<section id="debugging" class="title-slide slide level1 center">
+<h1>Debugging</h1>
+
+<img data-src="debugging.png" style="width:90.0%" class="r-stretch"><aside class="notes">
+<p>what is important is how happy you feel when you manage!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section-4" class="slide level2">
+<h2></h2>
+<p>a good start: avoid having to debug by checking the code (especially in function and loops) carrefully =&gt; select some sensible test data, try to anticipate potential problem…</p>
+<p>but we cannot think of everything… Here just some basic way of debugging</p>
+<p>if not too long, run a function or a loop line by one with the problematic dataset, to see where it buggs</p>
+<p>otherwise : use print</p>
+<p>et débuggage basique avec print (cf Juba https://juba.github.io/tidyverse/20-debuggage-performance.html) mais le faire à la fin de session 2 car possible aussi dans une boucle hors function</p>
+<p>there are more advanced debugging tools…</p>
+</section></section>
+<section id="acknowledgments" class="title-slide slide level1 smaller center">
+<h1>Acknowledgments</h1>
+<div>
+<ul>
+<li>Barnier J. <em>Introduction à R et au tidyverse</em> <a href="https://juba.github.io/tidyverse/" data-preview-link="false">in French</a></li>
+</ul>
+<!--
+* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"}
+-->
+</div>
+</section>
+
+<section id="ressources" class="title-slide slide level1 center">
+<h1>Ressources</h1>
+<div>
+
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 

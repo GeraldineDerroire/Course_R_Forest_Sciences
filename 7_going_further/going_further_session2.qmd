@@ -125,6 +125,9 @@ An [if]{style="color:indianred;"} instruction can be followed by a [else]{style=
 
 [But what to say in the evening?]{style="font-size: 30px"}
 
+::::: columns
+::: {.column width="60%"}
+
 ```{r}
 greeting <- function(time) {
   time <- hm(time) 
@@ -139,6 +142,10 @@ greeting <- function(time) {
   }
 }
 ```
+
+:::
+
+::: {.column width="40%"}
 
 [[let's check]{style="font-size: 30px"}]{.fragment}
 
@@ -159,6 +166,8 @@ greeting("14:25")
 greeting("20:17")
 ```
 :::
+:::
+:::::
 
 ## if/else if/else
 
@@ -251,9 +260,13 @@ mean_diam(new_circ)
 
 ::: fragment
 ```{r}
-mean_diam(new_circ, digits = 3)
+mean_diam(new_circ, digits = 2)
 ```
 ::: 
+
+::: notes
+function mean_diam seen in the previous session: change the units of diameter, take the mean and round it
+:::
 
 ## Another example 
 
@@ -312,39 +325,6 @@ graph_var(vec_logical)
 
 [[💡 [&&]{style="color:indianred;"} and [||]{style="color:indianred;"} are equivalent to [&]{style="color:indianred;"} and [|]{style="color:indianred;"} but only work for vector of length one. There are therefore safer to use in if/else conditions, as they need to return only one value.]{style="font-size: 30px"}]{.fragment}
 
-
-## More complex conditions
-
-```{r}
-check_input <- function(x, valid_val) {
-  if(length(x) != 1 || !(x %in% valid_val)) {
-    cat(x, "is an invalid input.")
-  } else {
-    cat(x, "is a valid input.")
-  }
-}
-```
-
-::: fragment
-```{r}
-check_input(x = 2, valid_val = 1:10)
-```
-:::
-
-::: fragment
-```{r}
-check_input(x = 25, valid_val = 1:10)
-```
-:::
-
-::: fragment
-```{r}
-check_input(x = c(2,3), valid_val = 1:10)
-```
-:::
-
-
-
 ## More complex conditions
 
 Should we go the the party?
@@ -386,6 +366,46 @@ tricky_decision(cool_people = FALSE, good_music = TRUE)
 tricky_decision(cool_people = FALSE, good_music = FALSE)
 ```
 
+## More complex conditions
+
+What does this function do?
+
+```{r}
+check_input <- function(x, valid_val) {
+  if(length(x) != 1 || !(x %in% valid_val)) {
+    cat(x, "is an invalid input.")
+  } else {
+    cat(x, "is a valid input.")
+  }
+}
+```
+
+::: fragment
+```{r}
+check_input(x = 2, valid_val = 1:10)
+```
+:::
+
+::: fragment
+```{r}
+check_input(x = 25, valid_val = 1:10)
+```
+:::
+
+::: fragment
+```{r}
+check_input(x = c(2,3), valid_val = 1:10)
+```
+:::
+
+::: notes
+a valid input is in the list of valid input and has a lenght of 1
+:::
+
+
+
+
+
 ## if/else and ifelse
 
 [⚠️ [if/else]{style="color:indianred;"} and [ifelse]{style="color:indianred;"} (or its [tidyverse]{style="color:indianred;"} equivalent [if_else]{style="color:indianred;"}) are very different:]{style="font-size: 30px"}
@@ -422,7 +442,7 @@ ifelse(x >= 10, ">=10", "<10")
 
 ## Using [if/else]{style="color:indianred;"} to control the execution of a function
 
-[Our function [mean_diam]{style="color:indianred;"} is meant to be used on a numerical vector. It returns an error otherwise:]{style="font-size: 30px"}
+[Our function [mean_diam]{style="color:indianred;"} is intended to be used on a numerical vector. It returns an error otherwise:]{style="font-size: 30px"}
 
 ```{r, eval = FALSE}
 vec_char <- c("A", "B")
@@ -470,9 +490,10 @@ Many parenthesis, click on a closing one to see which one it closes
 
 [[warning]{style="color:indianred;"} does not stop the execution of the function (in our previous slide it's [return]{style="color:indianred;"} that stopped it).]{style="font-size: 30px"}
 
-::: fragment
+
 [[On the contrary, [stop]{style="color:indianred;"} triggers an error that stops the execution:]{style="font-size: 30px"}]{.fragment}
 
+::: fragment
 ```{r}
 mean_diam <- function(circ, na_act = TRUE, digits = NULL) {
     if(!(is.numeric(circ))) {
@@ -521,32 +542,249 @@ for quarto => we could either print "the statistical test is significant" or "th
 
 # Loops
 
+A loop allows to repeatedly executes a block of code.
+
+## [for]{style="color:indianred;"} loop
+
+Let's take a simple example:
+
+```{r}
+for (item in 1:5) {
+    print(item)
+}
+```
+## [for]{style="color:indianred;"} loop
+
+![](for_loop.png){width=350%}
+
+
+
+::::: columns
+::: {.column width="60%"}
+
+A [for]{style="color:indianred;"} loop executes a block of code for each element of a vector.
+For each iteration, the loop sequentially assigns a value from the vector to the loop iterator.
+
+:::
+
+::: {.column width="40%"}
+
+::: fragment
+
+[*In our example:* *item* take the value 1, and the block of code prints it, then 
+*item* take the value 2, and the block of code prints it, then ..., then 
+*item* take the value 5, and the block of code prints it]{style="font-size: 25px"}
+
+:::
+
+:::
+:::::
+
+
+## [for]{style="color:indianred;"} loop
+
+The vector can be of any mode, and we can give any name to the  iterator (usually we use *n* or *i*)
+
+```{r}
+vec_name <- c("Lucas", "Gabriel", "Ana", "Maria", "João")
+for (name in vec_name) {
+  message("Hello ", name, "!")
+}
+```
+[Here the vector is of type *character* and the iterator is called *name*.]{.fragment}
+
+## Iterating over elements
+
+In the previous example
+
+```{r, eval = FALSE}
+for (name in vec_name) {
+  message("Hello ", name, "!")
+}
+```
+
+
+we iterate over the **elements** (the values) of a vector.
+
+
+<!--
+
+* iterer sur une valeur (cf Juba) 
+
+
+across colum? -->
+
+## Iterating over numeric indices
+
+We can also iterate over **numeric indices**:
+
+```{r}
+for (n in seq_along(vec_name)) {
+  message("Hello ", vec_name[[n]], "!")
+}
+```
+
+::: fragment
+
+The function [seq_along]{style="color:indianred;"} returns a sequence of integers from 1 to the length of a vector.
+
+```{r}
+seq_along(vec_name)
+```
+:::
+
+## Iterating over numeric indices
+
+Instead of *seq_along(vec_name)*, we could also write *1:length(vec_name)*:
+
+```{r}
+for (n in 1:length(vec_name)) {
+  message("Hello ", vec_name[[n]], "!")
+}
+```
+
+[⚠️ seq_along is safer]{.fragment}
+
+## Iterating over numeric indices {.smaller}
+
+[Let's take a vector of length 0:]{style="font-size: 30px"}
+
+```{r}
+vec_null <- NULL
+length(vec_null)
+```
+
+[[The loop should not be executed:]{style="font-size: 30px"}]{.fragment}
+
+::::: columns
+::: {.column width="50%"}
+
+* [Using *1:length()* will not behave as expected:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+for (n in 1:length(vec_null)) {
+  message("Hello ", vec_null[[n]], "!")
+}
+```
+:::
+:::
+
+::: {.column width="50%"}
+
+* [Using will behave as expected (it does nothing):]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+for (n in seq_along(vec_null)) {
+  message("Hello ", vec_null[[n]], "!")
+}
+```
+:::
+:::
+:::::
+
+[[Why is that?]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+1:length(vec_null)
+seq_along(vec_null)
+```
+:::
+
+## Iterating over numeric indices {.scrollable}
+
+[Iterating over numeric indices is useful when we want to use the index (the iterator) in more than one purpose within the loop:]{style="font-size: 30px"}
+
+```{r}
+for (m in seq_along(month.name)) {
+  month <- month.name[[m]]
+  rank <- m
+  message(month, " is the month ", rank)
+}
+```
+<!-- CONTINUE FROM HERE -->
+
+## 
+ 
+* iterate over names (cf r4ds) 
+
+across colum? 
+
+across element of a list
+
+* output of a loop 
+
+r4ds: importance to create the output of the loop instead of increasing the output at every step (faster)
+
+see also https://adv-r.hadley.nz/control-flow.html#control-flow common pitfall
+
+* loop to modify
+
+r4ds
+
+* interateur kept out of the loop (Juba)
+
+
+## [while]{style="color:indianred;"} loops
+
+* juba
+
+* ex of r4ds flipping a coin
+
+## next and break
+
+## repeat loop
+
+?
+untill a break 
+
+
+## when not to use a loop
+
+when vectorised alternative Juba and here https://thinkr.fr/comment-faire-des-boucles-en-r-ou-pas/
+
+group by and summarise rather than for loop per group
+
+et enchainer sur accross and purr...
+
+
+
+
+
+##
+
 <!-- TO CONTINUE-->
 
 for, while, repeat, next, break...
 
 inclure some tips on how to write
 
-* https://frbcesab.github.io/tips-and-tricks/posts/2024-11-19-the-apply-function-family/
-  * https://ericmarcon.github.io/Cours-travailleR/31-Langage.html#72
 
-# debugging?
 
-et débuggage basique avec print (cf Juba https://juba.github.io/tidyverse/20-debuggage-performance.html) mais le faire à la fin de session 2 car possible aussi dans une boucle hors function
+
+
 
 
 # Functional and scoped programming with the [tidyverse]{style="color:indianred;"}
 
-
+voir si je commence avec map???
 
 accross, where, everything => follow Juba
 reprendre mon example de Likert scale but do it accross columns
 
-purr::map ici (avec un exemple using mean_diam_func on dataset in a list par ex)
-
 rowwise and c_across
 
-mentionner apply family
+purr::map ici (avec un exemple using mean_diam_func on dataset in a list par ex)
+parler aussi de walk (in r4ds)
+parler aussi de reduce??? r4ds
+
+## The [apply]{style="color:indianred;"} family
+
+Not covered but here is a good ressource:
+
+https://frbcesab.github.io/tips-and-tricks/posts/2024-11-19-the-apply-function-family/
 
 inclure purr::map? ici ou avec accross ? juste le mentionner ici et revenir dessus avec accross?
 
@@ -570,3 +808,43 @@ introduire map2() ou pmap() avec les autres constructions avancées.
 
 --> 
 
+# Debugging
+
+![](debugging.png){width=90%}
+
+::: notes
+what is important is how happy you feel when you manage!
+::: 
+
+##
+
+a good start: avoid having to debug by checking the code (especially in function and loops) carrefully => select some sensible test data, try to anticipate potential problem...
+
+but we cannot think of everything...
+Here just some basic way of debugging
+
+if not too long, run a function or a loop line by one with the problematic dataset, to see where it buggs
+
+otherwise : use print
+
+et débuggage basique avec print (cf Juba https://juba.github.io/tidyverse/20-debuggage-performance.html) mais le faire à la fin de session 2 car possible aussi dans une boucle hors function
+
+there are more advanced debugging tools...
+
+# Acknowledgments {.smaller}
+
+::: {.nonincremental}
+
+* Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
+
+<!--
+* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"}
+-->
+
+:::
+
+# Ressources
+
+::: {.nonincremental}
+
+:::
