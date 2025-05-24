@@ -252,17 +252,32 @@ mean_diam <- function(circ, na_act = TRUE, digits = NULL) {
 :::
 
 ::: fragment
+[Let's test it:]{style="font-size: 30px"}
+
 ```{r}
-new_circ <- runif(n = 35, min = 30, max = 250)
+new_circ <- runif(n = 35, min = 30, max = 250) # create new data
+```
+:::
+
+
+::::: columns
+::: {.column width="50%"}
+
+::: fragment
+```{r}
 mean_diam(new_circ)
 ```
 ::: 
+:::
 
+::: {.column width="50%"}
 ::: fragment
 ```{r}
 mean_diam(new_circ, digits = 2)
 ```
 ::: 
+:::
+:::::
 
 ::: notes
 function mean_diam seen in the previous session: change the units of diameter, take the mean and round it
@@ -934,20 +949,225 @@ As for a function, a loop needs to be write **step by step**:
 
 
 
+# Functional with the [tidyverse]{style="color:indianred;"}
+
+**Functionnal programming** is a way of writing code based on the use of small functions.
+
+It is often used as an alternative to loops. 
+
+::: notes
+most of the example that we are going to see could have been writen as a loop 
+
+but are faster, but more importantly more concice
+:::
+
+## [map]{style="color:indianred;"} {.scrollable}
+
+[[map]{style="color:indianred;"} is a function from the package [purr]{style="color:indianred;"} used to apply a function to each element of a vector or a list:]{style="font-size: 30px"}
+
+::: fragment
+
+[Let's first create a **vector** and a small function:]{style="font-size: 30px"}
+
+```{r}
+vec_num <- c(2, 8, 4) # create a vector
+# create a function giving TRUE is x > 5, FALSE otherwise
+sup_5 <- function(x) {x > 5} 
+```
+
+:::
+
+[[To use [map]{style="color:indianred;"}, we first pass the vector/list on which to apply a function, and then the function to apply]{style="font-size: 30px"}]{.fragment}
+
+::::: columns
+::: {.column width="50%"}
+
+::: fragment
+```{r}
+map(vec_num, # vector 
+    sup_5)   # function 
+```
+
+:::
+:::
+
+::: {.column width="50%"}
+
+::: fragment
+```{r}
+# or using a pipe
+vec_num %>% map(sup_5)
+```
+
+:::
+:::
+
+:::::
+
+
+## [map]{style="color:indianred;"}
+
+[Let's use our function mean_diam on a **list** of vectors of circumferences:]{style="font-size: 30px"}
+
+```{r}
+# create the list
+circ_list <- list(sample1 = runif(n = 35, min = 30, max = 250),
+                 sample2 = runif(n = 35, min = 30, max = 250),
+                 sample3 = runif(n = 35, min = 30, max = 250))
+# apply the function on the list
+circ_list %>% map(mean_diam)
+```
+
+
+
+## Variants of [map]{style="color:indianred;"} 
+
+[[map]{style="color:indianred;"} always return a list.]{style="font-size: 30px"}
+
+[But several variants of [map]{style="color:indianred;"} returning vectors also exist:]{style="font-size: 30px"}
+
+* [map_int]{style="color:indianred;"} and map_dbl]{style="color:indianred;"} return a vector of **integer** and **double**, respectivelly
+
+```{r}
+circ_list %>% map_dbl(mean_diam)
+```
+
+* [map_lgl]{style="color:indianred;"} returns a vector of **logical**
+
+```{r}
+vec_num %>% map_lgl(sup_5)
+```
+
+* [map_chr]{style="color:indianred;"} returns a vector of **character**
+
+<!--(ex dessert à reprendre de plus bas, essayer d'y mettre une function?)-->
+
+::: notes 
+ex to do the same thing than in the two example before but returning a vector
+:::
+
+
+## Variants of [map]{style="color:indianred;"}  {.smaller}
+
+[Here is an example of use of [map_chr]{style="color:indianred;"} on the list *desserts* (that we created before):]{style="font-size: 30px"}
+
+```{r}
+# create a function
+love_dessert <- function(x) {
+  paste("I loves", x,"!")
+}
+
+desserts %>% map_chr(love_dessert)
+```
+::: fragment
+
+[Note that this is an alternative to the following loop:]{style="font-size: 30px"}
+
+```{r}
+out_dessert <- vector(length = length(desserts), mode = "character") # vector to store the result
+for (i in seq_along(desserts)) {
+  names(out_dessert)[i] <- names(desserts)[i]
+  out_dessert[i] <- paste("I loves", desserts[i],"!")
+}
+out_dessert
+```
+:::
+
+
+## Using anonymous functions with [map]{style="color:indianred;"}
+
+[For a small function that we don't want to reuse, we can define the function directly inside [map]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+desserts %>% map_chr(function(x) {
+  paste("I loves", x,"!")
+})
+```
+
+::: fragment
+
+[We can also use the abbreviated syntax, where [function(...){}]{style="color:indianred;"} is replaced by [\\(...)]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+desserts %>% map_chr(\(x) paste("I loves", x,"!"))
+```
+
+:::
+
+::: notes
+this is advanced, not problem if you don't understand / remember
+::: 
+
+
+## [walk]{style="color:indianred;"} for side effects
+
+[The function [walk]{style="color:indianred;"} is used when you want to perform an action for its side effect (e.g., printing a message, creating a plot, or saving a file). It doesn't return a result:]{style="font-size: 30px"}
+
+```{r}
+vec_name %>% # vector of names created earlier
+  walk(
+    function(name) {message("Hello ", name, "!")}
+    )
+```
+
+[[💡This is equivalent to the [for]{style="color:indianred;"} loop we wrote before.]{style="font-size: 30px"}]{.fragment}
+
+<!--
+
+## Apply a function to several columns with [across]{style="color:indianred;"}
+
+give some example above with mutate (recodage likert) and some with summarise (mean)
+
+reprendre mon example de Likert scale but do it accross columns
+
+-->
+
+## Apply a function to several columns with [across]{style="color:indianred;"}
+
+plage de colum can be specify with c(), with :
+
+ou starts_with, end_with or contains
+
+ou num_range
+
+or where (including where with a complex test)
+
+or with everything
+
+and more : https://dplyr.tidyverse.org/reference/select.html
+
+##
+
+pass some more argument to the function called in accross
+
+## Names of the column created by accross and mutate
+
+## Apply several function to several columns
+
+## across or map ?
+
+https://juba.github.io/tidyverse/18-purrr.html#it%C3%A9rer-sur-les-colonnes-dun-tableau-de-donn%C3%A9es
+
+
+## Apply a transformation line by line with [rowwise]
+
+essayer de prendre l'ex d'un runif
+
+## Apply a transformation line by line with [rowwise] and [c_accross]
+
+faire la moyenne des notes de likert
 
 
 
 
+ 
 
 
-# Functional and scoped programming with the [tidyverse]{style="color:indianred;"}
+
+
 
 voir si je commence avec map???
 
-accross, where, everything => follow Juba
-reprendre mon example de Likert scale but do it accross columns
-
-rowwise and c_across
 
 purr::map ici (avec un exemple using mean_diam_func on dataset in a list par ex)
 parler aussi de walk (in r4ds)
@@ -958,6 +1178,10 @@ parler aussi de reduce??? r4ds
 Not covered but here is a good ressource:
 
 https://frbcesab.github.io/tips-and-tricks/posts/2024-11-19-the-apply-function-family/
+
+et voir aussi ici pour comparaison https://r4ds.had.co.nz/iteration.html#base-r
+
+##
 
 inclure purr::map? ici ou avec accross ? juste le mentionner ici et revenir dessus avec accross?
 
@@ -1073,6 +1297,8 @@ Must preserve execution order
 for (i in 1:5) {
   message("Processing item ", i)
 }
+
+!!!! en fait, je crois que c'est possible avec imap, donc ne pas le mentionner...
 
 ## Multiple Outputs or Complex Accumulation
 
