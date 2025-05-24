@@ -643,7 +643,7 @@ test_circ <- c(runif(n = 9,
 test_circ
 ```
 ::: notes
-test data don't necessaryly need to be created from scratch, they can be a subset of our real data
+test data don't necessarily need to be created from scratch, they can be a subset of our real data
 :::
 
 ## Writing a function step by step {.smaller}

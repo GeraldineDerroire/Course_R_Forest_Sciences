@@ -586,12 +586,21 @@ For each iteration, the loop sequentially assigns a value from the vector to the
 The vector can be of any mode, and we can give any name to the  iterator (usually we use *n* or *i*)
 
 ```{r}
-vec_name <- c("Lucas", "Gabriel", "Ana", "Maria", "João")
+vec_name <- c("Lucas", "Gabriel", "Ana")
 for (name in vec_name) {
   message("Hello ", name, "!")
 }
 ```
-[Here the vector is of type *character* and the iterator is called *name*.]{.fragment}
+[[Here the vector is of type *character* and the iterator is called *name*.]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+[Note that the iterator is conserved when the loop finishes, with its last value:]{style="font-size: 30px"}
+
+```{r}
+name
+```
+:::
+
 
 ## Iterating over elements
 
@@ -607,12 +616,77 @@ for (name in vec_name) {
 we iterate over the **elements** (the values) of a vector.
 
 
-<!--
+## Iterating over names
 
-* iterer sur une valeur (cf Juba) 
+We can also iterate over **names** :
+
+::::: columns
+::: {.column width="42%"}
+
+* of a named vector:
+
+::: fragment
+```{r}
+# create a named vector
+vec <- c(a = 2, b = 4, c = 3)
+
+for (i in names(vec)) {
+  print(vec[[i]])
+}
+
+```
+:::
+:::
 
 
-across colum? -->
+::: {.column width="58%"}
+
+* of a named list:
+
+::: fragment
+```{r}
+# create a name list
+desserts <- list(Sophia = "banana bread", 
+                 Eliott = "pancakes", 
+                 Karina = "chocolate cake")
+
+for (n in names(desserts)) {
+  message(n, " loves ", desserts[[n]])
+}
+```
+:::
+
+:::
+:::::
+
+## Iterating over names {.scrollable}
+
+[or over names of columns of a data frame:]{style="font-size: 30px"}
+
+```{r}
+# take a subset of iris
+iris_sub <- iris %>%  filter(Species == "setosa") %>% select(-Species) 
+
+# Create a new data frame with the same structure as iris_sub
+  # to store the scale data
+iris_sub_scaled <- iris_sub
+
+# replace the values in each colum by the scaled values
+  # iterating by column names
+for (col in names(iris_sub)) {
+  iris_sub_scaled[[col]] <- as.vector(scale(iris_sub[[col]]))
+}
+
+summary(iris_sub_scaled)
+```
+
+::: notes
+subset of iris: keep only 1 species and only numerical columns
+
+note that here we modify an existing object (iris_sub_scaled)
+
+check: the mean is indeed 0
+:::
 
 ## Iterating over numeric indices
 
@@ -672,7 +746,7 @@ for (n in 1:length(vec_null)) {
 
 ::: {.column width="50%"}
 
-* [Using will behave as expected (it does nothing):]{style="font-size: 30px"}
+* [Using *seq_along* will behave as expected (it does nothing):]{style="font-size: 30px"}
 
 ::: fragment
 ```{r}
@@ -695,7 +769,7 @@ seq_along(vec_null)
 
 ## Iterating over numeric indices {.scrollable}
 
-[Iterating over numeric indices is useful when we want to use the index (the iterator) in more than one purpose within the loop:]{style="font-size: 30px"}
+[Iterating over numeric indices is the most common form. It is useful when we want to use the index (the iterator) for more than one purpose within the loop:]{style="font-size: 30px"}
 
 ```{r}
 for (m in seq_along(month.name)) {
@@ -704,62 +778,161 @@ for (m in seq_along(month.name)) {
   message(month, " is the month ", rank)
 }
 ```
-<!-- CONTINUE FROM HERE -->
 
-## 
- 
-* iterate over names (cf r4ds) 
+## Output of a loop 
 
-across colum? 
+[When a loop generates data, it is important to pre-allocate the output to the required size rather than grow it inside a loop, because pre-allocation avoids repeated memory copying and is significantly **faster** and **more efficient**, especially for large outputs]{style="font-size: 30px"}
 
-across element of a list
+::::: columns
+::: {.column width="50%"}
 
-* output of a loop 
+::: fragment
 
-r4ds: importance to create the output of the loop instead of increasing the output at every step (faster)
+[Preferred way:]{style="font-size: 30px"}
 
-see also https://adv-r.hadley.nz/control-flow.html#control-flow common pitfall
+```{r}
+# create an output 
+ # of the required size
+out <- vector("integer", 
+              length = 10)
+for (i in seq_along(out)) {
+  out[[i]] <- i
+}
+out  
+```
+:::
+:::
 
-* loop to modify
+::: {.column width="50%"}
 
-r4ds
+::: fragment
 
-* interateur kept out of the loop (Juba)
+[Much slower and less efficient way:]{style="font-size: 30px"}
 
+```{r}
+# create an empty output 
+  # and grow it inside the loop
+out <- integer()
+for (i in 1:10) {
+  out <- c(out, i)
+}
+out
+```
+:::
+
+:::
+:::::
+
+[[*This is particularly important for especially for large outputs.*]{style="font-size: 25px"}]{.fragment}
 
 ## [while]{style="color:indianred;"} loops
 
-* juba
+Let's take an example of a [while]{style="color:indianred;"} loop that simulate flipping a coin util we obtain a head:
 
-* ex of r4ds flipping a coin
+```{r}
+res <- ""
+while (res != "head") {
+    res <- sample(c("head", "tail"), size = 1)
+    print(res)
+}
+```
 
-## next and break
+::: fragment
 
-## repeat loop
+[Let's try again:]{style="font-size: 30px"}
 
-?
-untill a break 
+```{r}
+res <- ""
+while (res != "head") {
+    res <- sample(c("head", "tail"), size = 1)
+    print(res)
+}
+```
+:::
+
+## [while]{style="color:indianred;"} loops
+
+![](while.png)
+
+A [while]{style="color:indianred;"} loop executes a block of code as long as the conditions is true.
 
 
-## when not to use a loop
+## Using [next]{style="color:indianred;"} within a loop
 
-when vectorised alternative Juba and here https://thinkr.fr/comment-faire-des-boucles-en-r-ou-pas/
+[We can use [next]{style="color:indianred;"} within a loop to skip the rest of the current iteration and move directly to the next one under a given condition.]{style="font-size: 30px"}
 
-group by and summarise rather than for loop per group
+::::: columns
+::: {.column width="50%"}
 
-et enchainer sur accross and purr...
+::: fragment
+
+[Let's work with a subset of the data starwars:]{style="font-size: 25px"}
+
+```{r}
+starwars <- starwars[,1:4] 
+head(starwars, 3)
+```
+
+:::
+:::
+
+::: {.column width="50%"}
+::: fragment
+
+```{r}
+for(var in names(starwars)) {
+  if(!is.numeric(starwars[[var]])) {
+    next
+  }
+  message("The mean of ", var, 
+          " is ", 
+          mean(starwars[[var]], 
+               na.rm = TRUE))
+}
+```
+
+:::
+:::
+:::::
+
+[[*Here we create a loop returning the mean of numeric columns of a data frame. We use [next]{style="color:indianred;"} to skip any column that is not numeric:*]{style="font-size: 30px"}]{.fragment}
 
 
+::: notes
+here we can round it...
+:::
+
+## Using [break]{style="color:indianred;"} within a loop
+
+[We can use also use [break]{style="color:indianred;"}, which stop the whole loop under a given condition.]{style="font-size: 30px"}
+
+```{r}
+for(var in names(starwars)) {
+  if(!is.numeric(starwars[[var]])) {
+    break
+  }
+  message("The mean of ", var, 
+          " is ", 
+          mean(starwars[[var]], 
+               na.rm = TRUE))
+}
+```
+
+[[*Here nothing is return as the first column is not numeric, so the loop stops at the first iteration.*]{style="font-size: 30px"}]{.fragment}
+
+## Writing a loop
+
+As for a function, a loop needs to be write **step by step**:
+
+* Plan the loop before you start coding.
+
+* Set the iterator to its first value while writing the loop.
+
+* Test each line of code as you write it, using that initial iterator value.
+
+* Once finished, test the full loop with the entire dataset.
 
 
-
-##
-
-<!-- TO CONTINUE-->
-
-for, while, repeat, next, break...
-
-inclure some tips on how to write
 
 
 
@@ -807,6 +980,130 @@ comparer différents paradigmes d’application de fonctions (par colonnes, par 
 introduire map2() ou pmap() avec les autres constructions avancées.
 
 --> 
+
+# Using a loop or not?
+
+<!-- put this at the very end, after seeing the functional programming things--> 
+
+## when not to use a loop
+
+1/ when group by and summarise rather than for loop per group
+
+2/ when vectorised alternative Juba and here https://thinkr.fr/comment-faire-des-boucles-en-r-ou-pas/
+
+ * ex iris_sub scale rather than our loop
+ 
+```{r}
+test <- as.data.frame(scale(iris_sub))
+summary(test)
+```
+ 
+ 
+3/ when when accross and purr... can be used
+
+  * ex1: standardised iris_sub but with a side effect that prints the  (cannot be vectorised but used with accross) or the starwar example?
+  
+```{r}
+# A ADAPTER AVEC iris_sub (ou pas...)
+
+df <- iris %>%
+  mutate(across(where(is.numeric), ~ {
+    message("Standardizing column: ", cur_column())
+    (. - mean(.)) / sd(.)
+  }))
+
+```
+  
+  * ex2: favorite dessert avec purr::map_chr (ex in the help of purr)
+
+## When to use a loop
+
+[Loops are usefull when each iteration depends on the result of the previous one.]{style="font-size: 30px"}
+
+::: fragment
+
+::::: columns
+::: {.column width="80%"}
+
+[Let's build a [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence){preview-link="false"}, defined as:]{style="font-size: 30px"} 
+
+[$F_0 = 0$, $F_1 = 1$ and for $n>1$ $F_n = F_{n-1} + F_{n-2}$]{style="font-size: 30px"} 
+:::
+
+::: {.column width="20%"}
+![](fibonacci.png)
+:::
+:::::
+
+```{r}
+n = 20 # length of the sequence
+fib <- numeric(n) # Fibonacci sequence
+fib[1] <- 0 # F0
+fib[2] <- 1 # F1
+
+for (i in seq_along(fib)[3:n]) {
+  fib[i] <- fib[i - 1] + fib[i - 2]
+}
+
+fib
+```
+
+:::
+
+<!-- THIS IS FROM CHAT, NEEDS TO BE CHECKED AND REWRITTEN
+
+## When to use a loop
+
+## Early Exit Conditions
+
+Stop when a condition is met
+Not possible with vectorized functions
+
+for (i in 1:100) {
+  if (value[i] > threshold) break
+}
+
+## Side Effects (In Order)
+
+Writing files, printing, logging
+
+Must preserve execution order
+
+
+for (i in 1:5) {
+  message("Processing item ", i)
+}
+
+## Multiple Outputs or Complex Accumulation
+
+Updating multiple objects in sync
+
+Example: two interdependent numeric vectors
+
+
+
+for (i in 2:10) {
+  a[i] <- a[i-1] + i
+  b[i] <- b[i-1] + a[i]
+}
+
+## Dynamic or Growing Structures
+
+BUT CHECK r4ds about what to do when we don't know the size of the output...
+
+Structure changes during loop
+
+Useful in data cleaning or recursive tasks
+
+
+
+result <- list()
+for (i in 1:10) {
+  result[[i]] <- runif(i)
+}
+
+-->
+
 
 # Debugging
 

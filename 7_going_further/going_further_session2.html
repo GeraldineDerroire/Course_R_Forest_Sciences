@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-23">
+  <meta name="dcterms.date" content="2025-05-24">
   <title>Going further with R - session 2/2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-23</p>
+  <p class="date">2025-05-24</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
@@ -1133,7 +1133,7 @@ Géraldine Derroire
 <h2><span style="color:indianred;">for</span> loop</h2>
 <p>The vector can be of any mode, and we can give any name to the iterator (usually we use <em>n</em> or <em>i</em>)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a>vec_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Lucas"</span>, <span class="st">"Gabriel"</span>, <span class="st">"Ana"</span>, <span class="st">"Maria"</span>, <span class="st">"João"</span>)</span>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a>vec_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Lucas"</span>, <span class="st">"Gabriel"</span>, <span class="st">"Ana"</span>)</span>
 <span id="cb63-2"><a href=""></a><span class="cf">for</span> (name <span class="cf">in</span> vec_name) {</span>
 <span id="cb63-3"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, name, <span class="st">"!"</span>)</span>
 <span id="cb63-4"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1148,14 +1148,19 @@ Géraldine Derroire
 <div class="cell-output cell-output-stderr">
 <pre><code>Hello Ana!</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Hello Maria!</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Hello João!</code></pre>
+<p><span class="fragment"><span style="font-size: 30px">Here the vector is of type <em>character</em> and the iterator is called <em>name</em>.</span></span></p>
+<div class="fragment">
+<p><span style="font-size: 30px">Note that the iterator is conserved when the loop finishes, with its last value:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href=""></a>name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Ana"</code></pre>
 </div>
 </div>
-<p><span class="fragment">Here the vector is of type <em>character</em> and the iterator is called <em>name</em>.</span></p>
+</div>
 </section>
 <section id="iterating-over-elements" class="slide level2">
 <h2>Iterating over elements</h2>
@@ -1169,55 +1174,112 @@ Géraldine Derroire
 
 </div>
 <p>we iterate over the <strong>elements</strong> (the values) of a vector.</p>
-<!--
-
-* iterer sur une valeur (cf Juba) 
-
-
-across colum? -->
+</section>
+<section id="iterating-over-names" class="slide level2">
+<h2>Iterating over names</h2>
+<p>We can also iterate over <strong>names</strong> :</p>
+<div class="columns">
+<div class="column" style="width:42%;">
+<ul>
+<li class="fragment">of a named vector:</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a><span class="co"># create a named vector</span></span>
+<span id="cb70-2"><a href=""></a>vec <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="at">a =</span> <span class="dv">2</span>, <span class="at">b =</span> <span class="dv">4</span>, <span class="at">c =</span> <span class="dv">3</span>)</span>
+<span id="cb70-3"><a href=""></a></span>
+<span id="cb70-4"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">names</span>(vec)) {</span>
+<span id="cb70-5"><a href=""></a>  <span class="fu">print</span>(vec[[i]])</span>
+<span id="cb70-6"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2
+[1] 4
+[1] 3</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:58%;">
+<ul>
+<li class="fragment">of a named list:</li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a><span class="co"># create a name list</span></span>
+<span id="cb72-2"><a href=""></a>desserts <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">Sophia =</span> <span class="st">"banana bread"</span>, </span>
+<span id="cb72-3"><a href=""></a>                 <span class="at">Eliott =</span> <span class="st">"pancakes"</span>, </span>
+<span id="cb72-4"><a href=""></a>                 <span class="at">Karina =</span> <span class="st">"chocolate cake"</span>)</span>
+<span id="cb72-5"><a href=""></a></span>
+<span id="cb72-6"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">names</span>(desserts)) {</span>
+<span id="cb72-7"><a href=""></a>  <span class="fu">message</span>(n, <span class="st">" loves "</span>, desserts[[n]])</span>
+<span id="cb72-8"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Sophia loves banana bread</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Eliott loves pancakes</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Karina loves chocolate cake</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="iterating-over-names-1" class="slide level2 scrollable">
+<h2>Iterating over names</h2>
+<p><span style="font-size: 30px">or over names of columns of a data frame:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a><span class="co"># take a subset of iris</span></span>
+<span id="cb76-2"><a href=""></a>iris_sub <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span>  <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"setosa"</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>Species) </span>
+<span id="cb76-3"><a href=""></a></span>
+<span id="cb76-4"><a href=""></a><span class="co"># Create a new data frame with the same structure as iris_sub</span></span>
+<span id="cb76-5"><a href=""></a>  <span class="co"># to store the scale data</span></span>
+<span id="cb76-6"><a href=""></a>iris_sub_scaled <span class="ot">&lt;-</span> iris_sub</span>
+<span id="cb76-7"><a href=""></a></span>
+<span id="cb76-8"><a href=""></a><span class="co"># replace the values in each colum by the scaled values</span></span>
+<span id="cb76-9"><a href=""></a>  <span class="co"># iterating by column names</span></span>
+<span id="cb76-10"><a href=""></a><span class="cf">for</span> (col <span class="cf">in</span> <span class="fu">names</span>(iris_sub)) {</span>
+<span id="cb76-11"><a href=""></a>  iris_sub_scaled[[col]] <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">scale</span>(iris_sub[[col]]))</span>
+<span id="cb76-12"><a href=""></a>}</span>
+<span id="cb76-13"><a href=""></a></span>
+<span id="cb76-14"><a href=""></a><span class="fu">summary</span>(iris_sub_scaled)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length       Sepal.Width        Petal.Length      Petal.Width     
+ Min.   :-2.00290   Min.   :-2.97575   Min.   :-2.6603   Min.   :-1.3854  
+ 1st Qu.:-0.58441   1st Qu.:-0.60148   1st Qu.:-0.3570   1st Qu.:-0.4365  
+ Median :-0.01702   Median :-0.07387   Median : 0.2188   Median :-0.4365  
+ Mean   : 0.00000   Mean   : 0.00000   Mean   : 0.0000   Mean   : 0.0000  
+ 3rd Qu.: 0.55037   3rd Qu.: 0.65160   3rd Qu.: 0.6507   3rd Qu.: 0.5124  
+ Max.   : 2.25255   Max.   : 2.56421   Max.   : 2.5221   Max.   : 3.3591  </code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>subset of iris: keep only 1 species and only numerical columns</p>
+<p>note that here we modify an existing object (iris_sub_scaled)</p>
+<p>check: the mean is indeed 0</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="iterating-over-numeric-indices" class="slide level2">
 <h2>Iterating over numeric indices</h2>
 <p>We can also iterate over <strong>numeric indices</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">seq_along</span>(vec_name)) {</span>
-<span id="cb70-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, vec_name[[n]], <span class="st">"!"</span>)</span>
-<span id="cb70-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stderr">
-<pre><code>Hello Lucas!</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Hello Gabriel!</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Hello Ana!</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Hello Maria!</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Hello João!</code></pre>
-</div>
-</div>
-<div class="fragment">
-<p>The function <span style="color:indianred;">seq_along</span> returns a sequence of integers from 1 to the length of a vector.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a><span class="fu">seq_along</span>(vec_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1 2 3 4 5</code></pre>
-</div>
-</div>
-</div>
-</section>
-<section id="iterating-over-numeric-indices-1" class="slide level2">
-<h2>Iterating over numeric indices</h2>
-<p>Instead of <em>seq_along(vec_name)</em>, we could also write <em>1:length(vec_name)</em>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(vec_name)) {</span>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">seq_along</span>(vec_name)) {</span>
 <span id="cb78-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, vec_name[[n]], <span class="st">"!"</span>)</span>
 <span id="cb78-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -1231,11 +1293,36 @@ across colum? -->
 <div class="cell-output cell-output-stderr">
 <pre><code>Hello Ana!</code></pre>
 </div>
+</div>
+<div class="fragment">
+<p>The function <span style="color:indianred;">seq_along</span> returns a sequence of integers from 1 to the length of a vector.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href=""></a><span class="fu">seq_along</span>(vec_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 2 3</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="iterating-over-numeric-indices-1" class="slide level2">
+<h2>Iterating over numeric indices</h2>
+<p>Instead of <em>seq_along(vec_name)</em>, we could also write <em>1:length(vec_name)</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(vec_name)) {</span>
+<span id="cb84-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, vec_name[[n]], <span class="st">"!"</span>)</span>
+<span id="cb84-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
 <div class="cell-output cell-output-stderr">
-<pre><code>Hello Maria!</code></pre>
+<pre><code>Hello Lucas!</code></pre>
 </div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Hello João!</code></pre>
+<pre><code>Hello Gabriel!</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Hello Ana!</code></pre>
 </div>
 </div>
 <p><span class="fragment">⚠️ seq_along is safer</span></p>
@@ -1244,8 +1331,8 @@ across colum? -->
 <h2>Iterating over numeric indices</h2>
 <p><span style="font-size: 30px">Let’s take a vector of length 0:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a>vec_null <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
-<span id="cb84-2"><a href=""></a><span class="fu">length</span>(vec_null)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a>vec_null <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb88-2"><a href=""></a><span class="fu">length</span>(vec_null)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1260,9 +1347,9 @@ across colum? -->
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(vec_null)) {</span>
-<span id="cb86-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, vec_null[[n]], <span class="st">"!"</span>)</span>
-<span id="cb86-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(vec_null)) {</span>
+<span id="cb90-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, vec_null[[n]], <span class="st">"!"</span>)</span>
+<span id="cb90-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -1273,13 +1360,13 @@ Hello !</code></pre>
 </div>
 </div><div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><span style="font-size: 30px">Using will behave as expected (it does nothing):</span></li>
+<li class="fragment"><span style="font-size: 30px">Using <em>seq_along</em> will behave as expected (it does nothing):</span></li>
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">seq_along</span>(vec_null)) {</span>
-<span id="cb88-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, vec_null[[n]], <span class="st">"!"</span>)</span>
-<span id="cb88-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href=""></a><span class="cf">for</span> (n <span class="cf">in</span> <span class="fu">seq_along</span>(vec_null)) {</span>
+<span id="cb92-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Hello "</span>, vec_null[[n]], <span class="st">"!"</span>)</span>
+<span id="cb92-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1289,13 +1376,13 @@ Hello !</code></pre>
 <p><span class="fragment"><span style="font-size: 30px">Why is that?</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(vec_null)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href=""></a><span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(vec_null)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 0</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href=""></a><span class="fu">seq_along</span>(vec_null)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href=""></a><span class="fu">seq_along</span>(vec_null)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>integer(0)</code></pre>
 </div>
@@ -1304,13 +1391,13 @@ Hello !</code></pre>
 </section>
 <section id="iterating-over-numeric-indices-3" class="slide level2 scrollable">
 <h2>Iterating over numeric indices</h2>
-<p><span style="font-size: 30px">Iterating over numeric indices is useful when we want to use the index (the iterator) in more than one purpose within the loop:</span></p>
+<p><span style="font-size: 30px">Iterating over numeric indices is the most common form. It is useful when we want to use the index (the iterator) for more than one purpose within the loop:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href=""></a><span class="cf">for</span> (m <span class="cf">in</span> <span class="fu">seq_along</span>(month.name)) {</span>
-<span id="cb93-2"><a href=""></a>  month <span class="ot">&lt;-</span> month.name[[m]]</span>
-<span id="cb93-3"><a href=""></a>  rank <span class="ot">&lt;-</span> m</span>
-<span id="cb93-4"><a href=""></a>  <span class="fu">message</span>(month, <span class="st">" is the month "</span>, rank)</span>
-<span id="cb93-5"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href=""></a><span class="cf">for</span> (m <span class="cf">in</span> <span class="fu">seq_along</span>(month.name)) {</span>
+<span id="cb97-2"><a href=""></a>  month <span class="ot">&lt;-</span> month.name[[m]]</span>
+<span id="cb97-3"><a href=""></a>  rank <span class="ot">&lt;-</span> m</span>
+<span id="cb97-4"><a href=""></a>  <span class="fu">message</span>(month, <span class="st">" is the month "</span>, rank)</span>
+<span id="cb97-5"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -1350,53 +1437,176 @@ Hello !</code></pre>
 <pre><code>December is the month 12</code></pre>
 </div>
 </div>
-<!-- CONTINUE FROM HERE -->
 </section>
-<section id="section-2" class="slide level2">
-<h2></h2>
-<ul>
-<li class="fragment">iterate over names (cf r4ds)</li>
-</ul>
-<p>across colum?</p>
-<p>across element of a list</p>
-<ul>
-<li class="fragment">output of a loop</li>
-</ul>
-<p>r4ds: importance to create the output of the loop instead of increasing the output at every step (faster)</p>
-<p>see also https://adv-r.hadley.nz/control-flow.html#control-flow common pitfall</p>
-<ul>
-<li class="fragment">loop to modify</li>
-</ul>
-<p>r4ds</p>
-<ul>
-<li class="fragment">interateur kept out of the loop (Juba)</li>
-</ul>
+<section id="output-of-a-loop" class="slide level2">
+<h2>Output of a loop</h2>
+<p><span style="font-size: 30px">When a loop generates data, it is important to pre-allocate the output to the required size rather than grow it inside a loop, because pre-allocation avoids repeated memory copying and is significantly <strong>faster</strong> and <strong>more efficient</strong>, especially for large outputs</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">Preferred way:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href=""></a><span class="co"># create an output </span></span>
+<span id="cb110-2"><a href=""></a> <span class="co"># of the required size</span></span>
+<span id="cb110-3"><a href=""></a>out <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"integer"</span>, </span>
+<span id="cb110-4"><a href=""></a>              <span class="at">length =</span> <span class="dv">10</span>)</span>
+<span id="cb110-5"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(out)) {</span>
+<span id="cb110-6"><a href=""></a>  out[[i]] <span class="ot">&lt;-</span> i</span>
+<span id="cb110-7"><a href=""></a>}</span>
+<span id="cb110-8"><a href=""></a>out  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">Much slower and less efficient way:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href=""></a><span class="co"># create an empty output </span></span>
+<span id="cb112-2"><a href=""></a>  <span class="co"># and grow it inside the loop</span></span>
+<span id="cb112-3"><a href=""></a>out <span class="ot">&lt;-</span> <span class="fu">integer</span>()</span>
+<span id="cb112-4"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb112-5"><a href=""></a>  out <span class="ot">&lt;-</span> <span class="fu">c</span>(out, i)</span>
+<span id="cb112-6"><a href=""></a>}</span>
+<span id="cb112-7"><a href=""></a>out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 25px"><em>This is particularly important for especially for large outputs.</em></span></span></p>
 </section>
 <section id="while-loops" class="slide level2">
 <h2><span style="color:indianred;">while</span> loops</h2>
+<p>Let’s take an example of a <span style="color:indianred;">while</span> loop that simulate flipping a coin util we obtain a head:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href=""></a>res <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<span id="cb114-2"><a href=""></a><span class="cf">while</span> (res <span class="sc">!=</span> <span class="st">"head"</span>) {</span>
+<span id="cb114-3"><a href=""></a>    res <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"head"</span>, <span class="st">"tail"</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb114-4"><a href=""></a>    <span class="fu">print</span>(res)</span>
+<span id="cb114-5"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tail"
+[1] "head"</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p><span style="font-size: 30px">Let’s try again:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href=""></a>res <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<span id="cb116-2"><a href=""></a><span class="cf">while</span> (res <span class="sc">!=</span> <span class="st">"head"</span>) {</span>
+<span id="cb116-3"><a href=""></a>    res <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"head"</span>, <span class="st">"tail"</span>), <span class="at">size =</span> <span class="dv">1</span>)</span>
+<span id="cb116-4"><a href=""></a>    <span class="fu">print</span>(res)</span>
+<span id="cb116-5"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "head"</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="while-loops-1" class="slide level2">
+<h2><span style="color:indianred;">while</span> loops</h2>
+
+<img data-src="while.png" class="r-stretch"><p>A <span style="color:indianred;">while</span> loop executes a block of code as long as the conditions is true.</p>
+</section>
+<section id="using-next-within-a-loop" class="slide level2">
+<h2>Using <span style="color:indianred;">next</span> within a loop</h2>
+<p><span style="font-size: 30px">We can use <span style="color:indianred;">next</span> within a loop to skip the rest of the current iteration and move directly to the next one under a given condition.</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 25px">Let’s work with a subset of the data starwars:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href=""></a>starwars <span class="ot">&lt;-</span> starwars[,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] </span>
+<span id="cb118-2"><a href=""></a><span class="fu">head</span>(starwars, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  name           height  mass hair_color
+  &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;     
+1 Luke Skywalker    172    77 blond     
+2 C-3PO             167    75 &lt;NA&gt;      
+3 R2-D2              96    32 &lt;NA&gt;      </code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href=""></a><span class="cf">for</span>(var <span class="cf">in</span> <span class="fu">names</span>(starwars)) {</span>
+<span id="cb120-2"><a href=""></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.numeric</span>(starwars[[var]])) {</span>
+<span id="cb120-3"><a href=""></a>    <span class="cf">next</span></span>
+<span id="cb120-4"><a href=""></a>  }</span>
+<span id="cb120-5"><a href=""></a>  <span class="fu">message</span>(<span class="st">"The mean of "</span>, var, </span>
+<span id="cb120-6"><a href=""></a>          <span class="st">" is "</span>, </span>
+<span id="cb120-7"><a href=""></a>          <span class="fu">mean</span>(starwars[[var]], </span>
+<span id="cb120-8"><a href=""></a>               <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb120-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>The mean of height is 174.604938271605</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The mean of mass is 97.3118644067797</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px"><em>Here we create a loop returning the mean of numeric columns of a data frame. We use <span style="color:indianred;">next</span> to skip any column that is not numeric:</em></span></span></p>
+<aside class="notes">
+<p>here we can round it…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="using-break-within-a-loop" class="slide level2">
+<h2>Using <span style="color:indianred;">break</span> within a loop</h2>
+<p><span style="font-size: 30px">We can use also use <span style="color:indianred;">break</span>, which stop the whole loop under a given condition.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href=""></a><span class="cf">for</span>(var <span class="cf">in</span> <span class="fu">names</span>(starwars)) {</span>
+<span id="cb123-2"><a href=""></a>  <span class="cf">if</span>(<span class="sc">!</span><span class="fu">is.numeric</span>(starwars[[var]])) {</span>
+<span id="cb123-3"><a href=""></a>    <span class="cf">break</span></span>
+<span id="cb123-4"><a href=""></a>  }</span>
+<span id="cb123-5"><a href=""></a>  <span class="fu">message</span>(<span class="st">"The mean of "</span>, var, </span>
+<span id="cb123-6"><a href=""></a>          <span class="st">" is "</span>, </span>
+<span id="cb123-7"><a href=""></a>          <span class="fu">mean</span>(starwars[[var]], </span>
+<span id="cb123-8"><a href=""></a>               <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb123-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment"><span style="font-size: 30px"><em>Here nothing is return as the first column is not numeric, so the loop stops at the first iteration.</em></span></span></p>
+</section>
+<section id="writing-a-loop" class="slide level2">
+<h2>Writing a loop</h2>
+<p>As for a function, a loop needs to be write step by step:</p>
 <ul>
-<li class="fragment"><p>juba</p></li>
-<li class="fragment"><p>ex of r4ds flipping a coin</p></li>
+<li class="fragment"><p>Plan the loop before you start coding.</p></li>
+<li class="fragment"><p>Set the iterator to its first value while writing the loop.</p></li>
+<li class="fragment"><p>Test each line of code as you write it, using that initial iterator value.</p></li>
+<li class="fragment"><p>Once finished, test the full loop with the entire dataset.</p></li>
 </ul>
-</section>
-<section id="next-and-break" class="slide level2">
-<h2>next and break</h2>
-</section>
-<section id="repeat-loop" class="slide level2">
-<h2>repeat loop</h2>
-<p>? untill a break</p>
-</section>
-<section id="when-not-to-use-a-loop" class="slide level2">
-<h2>when not to use a loop</h2>
-<p>when vectorised alternative Juba and here https://thinkr.fr/comment-faire-des-boucles-en-r-ou-pas/</p>
-<p>group by and summarise rather than for loop per group</p>
-<p>et enchainer sur accross and purr…</p>
-</section>
-<section id="section-3" class="slide level2">
-<h2></h2>
-<!-- TO CONTINUE-->
-<p>for, while, repeat, next, break…</p>
-<p>inclure some tips on how to write</p>
 </section></section>
 <section>
 <section id="functional-and-scoped-programming-with-the-tidyverse" class="title-slide slide level1 center">
@@ -1432,6 +1642,148 @@ introduire map2() ou pmap() avec les autres constructions avancées.
 -->
 </section></section>
 <section>
+<section id="using-a-loop-or-not" class="title-slide slide level1 center">
+<h1>Using a loop or not?</h1>
+<!-- put this at the very end, after seeing the functional programming things-->
+</section>
+<section id="when-not-to-use-a-loop" class="slide level2">
+<h2>when not to use a loop</h2>
+<p>1/ when group by and summarise rather than for loop per group</p>
+<p>2/ when vectorised alternative Juba and here https://thinkr.fr/comment-faire-des-boucles-en-r-ou-pas/</p>
+<ul>
+<li class="fragment">ex iris_sub scale rather than our loop</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href=""></a>test <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(iris_sub))</span>
+<span id="cb124-2"><a href=""></a><span class="fu">summary</span>(test)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length       Sepal.Width        Petal.Length      Petal.Width     
+ Min.   :-2.00290   Min.   :-2.97575   Min.   :-2.6603   Min.   :-1.3854  
+ 1st Qu.:-0.58441   1st Qu.:-0.60148   1st Qu.:-0.3570   1st Qu.:-0.4365  
+ Median :-0.01702   Median :-0.07387   Median : 0.2188   Median :-0.4365  
+ Mean   : 0.00000   Mean   : 0.00000   Mean   : 0.0000   Mean   : 0.0000  
+ 3rd Qu.: 0.55037   3rd Qu.: 0.65160   3rd Qu.: 0.6507   3rd Qu.: 0.5124  
+ Max.   : 2.25255   Max.   : 2.56421   Max.   : 2.5221   Max.   : 3.3591  </code></pre>
+</div>
+</div>
+<p>3/ when when accross and purr… can be used</p>
+<ul>
+<li class="fragment">ex1: standardised iris_sub but with a side effect that prints the (cannot be vectorised but used with accross) or the starwar example?</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href=""></a><span class="co"># A ADAPTER AVEC iris_sub (ou pas...)</span></span>
+<span id="cb126-2"><a href=""></a></span>
+<span id="cb126-3"><a href=""></a>df <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
+<span id="cb126-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span> {</span>
+<span id="cb126-5"><a href=""></a>    <span class="fu">message</span>(<span class="st">"Standardizing column: "</span>, <span class="fu">cur_column</span>())</span>
+<span id="cb126-6"><a href=""></a>    (. <span class="sc">-</span> <span class="fu">mean</span>(.)) <span class="sc">/</span> <span class="fu">sd</span>(.)</span>
+<span id="cb126-7"><a href=""></a>  }))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Standardizing column: Sepal.Length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Standardizing column: Sepal.Width</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Standardizing column: Petal.Length</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Standardizing column: Petal.Width</code></pre>
+</div>
+</div>
+<ul>
+<li class="fragment">ex2: favorite dessert avec purr::map_chr (ex in the help of purr)</li>
+</ul>
+</section>
+<section id="when-to-use-a-loop" class="slide level2">
+<h2>When to use a loop</h2>
+<p><span style="font-size: 30px">Loops are usefull when each iteration depends on the result of the previous one.</span></p>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:80%;">
+<p><span style="font-size: 30px">Let’s build a <a href="https://en.wikipedia.org/wiki/Fibonacci_sequence" data-preview-link="false">Fibonacci sequence</a>, defined as:</span></p>
+<p><span style="font-size: 30px"><span class="math inline">\(F_0 = 0\)</span>, <span class="math inline">\(F_1 = 1\)</span> and for <span class="math inline">\(n&gt;1\)</span> <span class="math inline">\(F_n = F_{n-1} + F_{n-2}\)</span></span></p>
+</div><div class="column" style="width:20%;">
+<p><img data-src="fibonacci.png"></p>
+</div></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href=""></a>n <span class="ot">=</span> <span class="dv">20</span> <span class="co"># length of the sequence</span></span>
+<span id="cb131-2"><a href=""></a>fib <span class="ot">&lt;-</span> <span class="fu">numeric</span>(n) <span class="co"># Fibonacci sequence</span></span>
+<span id="cb131-3"><a href=""></a>fib[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># F0</span></span>
+<span id="cb131-4"><a href=""></a>fib[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="co"># F1</span></span>
+<span id="cb131-5"><a href=""></a></span>
+<span id="cb131-6"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(fib)[<span class="dv">3</span><span class="sc">:</span>n]) {</span>
+<span id="cb131-7"><a href=""></a>  fib[i] <span class="ot">&lt;-</span> fib[i <span class="sc">-</span> <span class="dv">1</span>] <span class="sc">+</span> fib[i <span class="sc">-</span> <span class="dv">2</span>]</span>
+<span id="cb131-8"><a href=""></a>}</span>
+<span id="cb131-9"><a href=""></a></span>
+<span id="cb131-10"><a href=""></a>fib</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]    0    1    1    2    3    5    8   13   21   34   55   89  144  233  377
+[16]  610  987 1597 2584 4181</code></pre>
+</div>
+</div>
+</div>
+<!-- THIS IS FROM CHAT, NEEDS TO BE CHECKED AND REWRITTEN
+
+## When to use a loop
+
+## Early Exit Conditions
+
+Stop when a condition is met
+Not possible with vectorized functions
+
+for (i in 1:100) {
+  if (value[i] > threshold) break
+}
+
+## Side Effects (In Order)
+
+Writing files, printing, logging
+
+Must preserve execution order
+
+
+for (i in 1:5) {
+  message("Processing item ", i)
+}
+
+## Multiple Outputs or Complex Accumulation
+
+Updating multiple objects in sync
+
+Example: two interdependent numeric vectors
+
+
+
+for (i in 2:10) {
+  a[i] <- a[i-1] + i
+  b[i] <- b[i-1] + a[i]
+}
+
+## Dynamic or Growing Structures
+
+BUT CHECK r4ds about what to do when we don't know the size of the output...
+
+Structure changes during loop
+
+Useful in data cleaning or recursive tasks
+
+
+
+result <- list()
+for (i in 1:10) {
+  result[[i]] <- runif(i)
+}
+
+-->
+</section></section>
+<section>
 <section id="debugging" class="title-slide slide level1 center">
 <h1>Debugging</h1>
 
@@ -1449,7 +1801,7 @@ introduire map2() ou pmap() avec les autres constructions avancées.
           display:block!important;
       }</style></aside>
 </section>
-<section id="section-4" class="slide level2">
+<section id="section-2" class="slide level2">
 <h2></h2>
 <p>a good start: avoid having to debug by checking the code (especially in function and loops) carrefully =&gt; select some sensible test data, try to anticipate potential problem…</p>
 <p>but we cannot think of everything… Here just some basic way of debugging</p>
