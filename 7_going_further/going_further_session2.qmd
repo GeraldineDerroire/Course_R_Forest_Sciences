@@ -25,13 +25,18 @@ editor:
 
 # 
 
-Let's load the package we will use:
+Let's load the package we will use
 
 ```{r}
 #| message: false
 library(tidyverse)
 ```
 
+and some objects we save last session.
+
+```{r}
+load("data/usefull_object.RData")
+```
 
 ```{r, echo=FALSE}
 set.seed(14)
@@ -949,9 +954,9 @@ As for a function, a loop needs to be write **step by step**:
 
 
 
-# Functional with the [tidyverse]{style="color:indianred;"}
+# Functional programmingwith the [tidyverse]{style="color:indianred;"}
 
-**Functionnal programming** is a way of writing code based on the use of small functions.
+**Functional programming** is a way of writing code based on the use of small functions.
 
 It is often used as an alternative to loops. 
 
@@ -961,7 +966,7 @@ most of the example that we are going to see could have been writen as a loop
 but are faster, but more importantly more concice
 :::
 
-## [map]{style="color:indianred;"} {.scrollable}
+## [map]{style="color:indianred;"}: apply a function to a vector or a list {.scrollable}
 
 [[map]{style="color:indianred;"} is a function from the package [purr]{style="color:indianred;"} used to apply a function to each element of a vector or a list:]{style="font-size: 30px"}
 
@@ -1005,7 +1010,7 @@ vec_num %>% map(sup_5)
 :::::
 
 
-## [map]{style="color:indianred;"}
+## [map]{style="color:indianred;"}: apply a function to a vector or a list
 
 [Let's use our function mean_diam on a **list** of vectors of circumferences:]{style="font-size: 30px"}
 
@@ -1026,21 +1031,24 @@ circ_list %>% map(mean_diam)
 
 [But several variants of [map]{style="color:indianred;"} returning vectors also exist:]{style="font-size: 30px"}
 
-* [map_int]{style="color:indianred;"} and map_dbl]{style="color:indianred;"} return a vector of **integer** and **double**, respectivelly
+* [[map_int]{style="color:indianred;"} and [map_dbl]{style="color:indianred;"} return a vector of **integer** and **double**, respectively]{style="font-size: 30px"}
 
+::: fragment
 ```{r}
 circ_list %>% map_dbl(mean_diam)
 ```
+:::
 
-* [map_lgl]{style="color:indianred;"} returns a vector of **logical**
+* [[map_lgl]{style="color:indianred;"} returns a vector of **logical**]{style="font-size: 30px"}
 
+::: fragment
 ```{r}
 vec_num %>% map_lgl(sup_5)
 ```
+:::
 
-* [map_chr]{style="color:indianred;"} returns a vector of **character**
+* [[map_chr]{style="color:indianred;"} returns a vector of **character**]{style="font-size: 30px"}
 
-<!--(ex dessert à reprendre de plus bas, essayer d'y mettre une function?)-->
 
 ::: notes 
 ex to do the same thing than in the two example before but returning a vector
@@ -1112,262 +1120,320 @@ vec_name %>% # vector of names created earlier
 
 [[💡This is equivalent to the [for]{style="color:indianred;"} loop we wrote before.]{style="font-size: 30px"}]{.fragment}
 
-<!--
 
-## Apply a function to several columns with [across]{style="color:indianred;"}
+## [across]{style="color:indianred;"}: apply a function to tibble {.scrollable}
 
-give some example above with mutate (recodage likert) and some with summarise (mean)
+[[across]{style="color:indianred;"} is a function of the package [dplyr]{style="color:indianred;"} used to apply a function to several columns of a tibble.]{style="font-size: 30px"}
 
-reprendre mon example de Likert scale but do it accross columns
+[[[across]{style="color:indianred;"} takes 2 arguments: the definition of he columns to transform, and the function to apply:]{style="font-size: 30px"}]{.fragment}
 
--->
-
-## Apply a function to several columns with [across]{style="color:indianred;"}
-
-plage de colum can be specify with c(), with :
-
-ou starts_with, end_with or contains
-
-ou num_range
-
-or where (including where with a complex test)
-
-or with everything
-
-and more : https://dplyr.tidyverse.org/reference/select.html
-
-##
-
-pass some more argument to the function called in accross
-
-## Names of the column created by accross and mutate
-
-## Apply several function to several columns
-
-## across or map ?
-
-https://juba.github.io/tidyverse/18-purrr.html#it%C3%A9rer-sur-les-colonnes-dun-tableau-de-donn%C3%A9es
-
-
-## Apply a transformation line by line with [rowwise]
-
-essayer de prendre l'ex d'un runif
-
-## Apply a transformation line by line with [rowwise] and [c_accross]
-
-faire la moyenne des notes de likert
-
-
-
-
- 
-
-
-
-
-
-voir si je commence avec map???
-
-
-purr::map ici (avec un exemple using mean_diam_func on dataset in a list par ex)
-parler aussi de walk (in r4ds)
-parler aussi de reduce??? r4ds
-
-## The [apply]{style="color:indianred;"} family
-
-Not covered but here is a good ressource:
-
-https://frbcesab.github.io/tips-and-tricks/posts/2024-11-19-the-apply-function-family/
-
-et voir aussi ici pour comparaison https://r4ds.had.co.nz/iteration.html#base-r
-
-##
-
-inclure purr::map? ici ou avec accross ? juste le mentionner ici et revenir dessus avec accross?
-
-<!--🔹 Option 1 – map() en session 1
-Si tu veux :
-
-renforcer l’utilité des fonctions personnalisées,
-
-montrer un usage concret et rapide,
-
-ne pas alourdir la session 2.
-
-🔹 Option 2 – map() en session 2
-Si tu veux :
-
-regrouper les approches “apply-like” (across, map, etc.),
-
-comparer différents paradigmes d’application de fonctions (par colonnes, par éléments, par lignes),
-
-introduire map2() ou pmap() avec les autres constructions avancées.
-
---> 
-
-# Using a loop or not?
-
-<!-- put this at the very end, after seeing the functional programming things--> 
-
-## when not to use a loop
-
-1/ when group by and summarise rather than for loop per group
-
-2/ when vectorised alternative Juba and here https://thinkr.fr/comment-faire-des-boucles-en-r-ou-pas/
-
- * ex iris_sub scale rather than our loop
- 
+::: fragment
 ```{r}
-test <- as.data.frame(scale(iris_sub))
-summary(test)
+#| warning: FALSE
+dt_Likert %>% 
+  mutate(across(
+         c(Question1, Question2, 
+           Question3, Question4), # columns to transform
+         recode_Likert) # function to apply
+  )
 ```
- 
- 
-3/ when when accross and purr... can be used
+:::
 
-  * ex1: standardised iris_sub but with a side effect that prints the  (cannot be vectorised but used with accross) or the starwar example?
-  
+::: notes
+the warning just tell us that some of the column don't have all the levels that we try to recode => OK
+:::
+
+
+## [across]{style="color:indianred;"}: apply a function to tibble
+
+[The columns to transform can be specify:]{style="font-size: 30px"}
+
+* [using [c()]{style="color:indianred;"} (as in the last example)]{style="font-size: 30px"}
+
+* [using [:]{style="color:indianred;"}]{style="font-size: 30px"}
+
+::: fragment
+```{r, eval = FALSE}
+dt_Likert %>% 
+  mutate(across(
+         Question1:Question4, # columns to transform
+         recode_Likert) # function to apply
+  )
+```
+:::
+
+* [using [starts_with]{style="color:indianred;"}, [ends_with]{style="color:indianred;"}, [matches]{style="color:indianred;"} or [contains]{style="color:indianred;"}]{style="font-size: 30px"}
+
+::: fragment
+```{r, eval = FALSE}
+dt_Likert %>% 
+  mutate(across(
+         starts_with("Question"), # columns to transform
+         recode_Likert) # function to apply
+  )
+```
+:::
+
+## [across]{style="color:indianred;"}: apply a function to tibble 
+
+[The columns to transform can be specify:]{style="font-size: 30px"}
+
+* [using [num_range]{style="color:indianred;"}]{style="font-size: 30px"}
+
+::: fragment
+```{r, eval = FALSE}
+dt_Likert %>% 
+  mutate(across(
+         num_range("Question", 1:4), # columns to transform
+         recode_Likert) # function to apply
+  )
+```
+:::
+
+## [across]{style="color:indianred;"}: apply a function to tibble {.scrollable}
+
+[The columns to transform can be specify:]{style="font-size: 30px"}
+
+* [using [everything]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+::: fragment
 ```{r}
-# A ADAPTER AVEC iris_sub (ou pas...)
-
-df <- iris %>%
-  mutate(across(where(is.numeric), ~ {
-    message("Standardizing column: ", cur_column())
-    (. - mean(.)) / sd(.)
-  }))
-
+iris_sub %>% 
+  summarise(across(
+    everything(), # columns to transform
+    mean) # function to apply
+    )
 ```
-  
-  * ex2: favorite dessert avec purr::map_chr (ex in the help of purr)
 
-## When to use a loop
+:::
 
-[Loops are usefull when each iteration depends on the result of the previous one.]{style="font-size: 30px"}
+[[💡 Note that here we have used [across]{style="color:indianred;"} with [summarise]{style="color:indianred;"}]{style="font-size: 30px"}]{.fragment}
+
+## [across]{style="color:indianred;"}: apply a function to tibble {.scrollable}
+
+[We can also use [where]{style="color:indianred;"} to specify the columns:]{style="font-size: 30px"}
+
+```{r}
+iris %>% summarise(across(
+    where(is.numeric), # columns to transform
+    mean) # function to apply
+    )
+```
 
 ::: fragment
 
-::::: columns
-::: {.column width="80%"}
-
-[Let's build a [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence){preview-link="false"}, defined as:]{style="font-size: 30px"} 
-
-[$F_0 = 0$, $F_1 = 1$ and for $n>1$ $F_n = F_{n-1} + F_{n-2}$]{style="font-size: 30px"} 
-:::
-
-::: {.column width="20%"}
-![](fibonacci.png)
-:::
-:::::
+[[where]{style="color:indianred;"} can take more complex tests:]{style="font-size: 30px"}
 
 ```{r}
-n = 20 # length of the sequence
-fib <- numeric(n) # Fibonacci sequence
-fib[1] <- 0 # F0
-fib[2] <- 1 # F1
+iris %>% 
+  summarise(across(
+      where(is.numeric) & !Sepal.Length,
+      mean)
+    )
+```
 
-for (i in seq_along(fib)[3:n]) {
-  fib[i] <- fib[i - 1] + fib[i - 2]
-}
 
-fib
+:::
+
+
+## Names of the columns created by [across]{style="color:indianred;"} withing [mutate]{style="color:indianred;"} {.smaller}
+
+[Using [across]{style="color:indianred;"} within [mutate]{style="color:indianred;"} replace the columns.
+To keep them we need to indicate how to name them, using the argument [.names]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+```{r}
+#| warning: FALSE
+dt_Likert %>% 
+  mutate(across(
+         starts_with("Question"), # columns to transform
+         recode_Likert, # function to apply
+         .names = "{.col}_recoded")
+  )
+```
+
+
+## Apply several functions to several columns
+
+[To apply several functions to several columns with [across]{style="color:indianred;"}, we can pass them in a list:]{style="font-size: 30px"}
+
+```{r}
+iris %>% 
+  summarise(across(
+      c(Sepal.Width, Sepal.Length), # columns to transform
+      list(minimum = min, maximum = max) # list of functions to apply
+    )
+  )
+```
+
+## [summarise]{style="color:indianred;"} versus [map]{style="color:indianred;"}
+
+[The two following commands return almost the same results, but:]{style="font-size: 30px"}
+
+* [[map_dbl]{style="color:indianred;"} returns a **vector**]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+iris_sub %>% map_dbl(mean)
+```
+:::
+
+* [[summarise]{style="color:indianred;"} returns a **tibble** with one row:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+iris_sub %>% summarise(
+  across(everything(),
+         mean)
+)
+```
+:::
+
+
+## [rowwise]{style="color:indianred;"}: apply a transformation line by line 
+
+::::: columns
+::: {.column width="40%"}
+
+[Let's create a tibble:]{style="font-size: 30px"}
+
+```{r}
+dt_sim <- tibble(
+  Min = c(1, 25, 300),
+  Max = c(4, 75, 500)
+)
+dt_sim
+```
+
+::: 
+
+::: {.column width="60%"}
+
+::: fragment 
+[We would like to add a random draw taken between Min and Max, for each row:]{style="font-size: 30px"}
+
+```{r}
+dt_sim %>% 
+  mutate(rand_draw = runif(1, min = Min, max = Max))
 ```
 
 :::
+:::
+:::::
 
-<!-- THIS IS FROM CHAT, NEEDS TO BE CHECKED AND REWRITTEN
+[[🥴 This didn't work... [mutate]{style="color:indianred;"} was applied on all rows using Min and Max of the first row... ]{style="font-size: 30px"}]{.fragment}
 
-## When to use a loop
+## [rowwise]{style="color:indianred;"}: apply a transformation line by line 
 
-## Early Exit Conditions
+[We use [rowwise]{style="color:indianred;"} to apply the command **line by line**:]{style="font-size: 30px"}
 
-Stop when a condition is met
-Not possible with vectorized functions
+```{r}
+dt_sim %>% 
+  rowwise() %>% 
+  mutate(rand_draw = runif(1, min = Min, max = Max))
+```
 
-for (i in 1:100) {
-  if (value[i] > threshold) break
-}
+## Apply a transformation line by line with [rowwise]{style="color:indianred;"} and [c_accross]{style="color:indianred;"} {.scrollable}
 
-## Side Effects (In Order)
+[When there are many columns, we can use [c_accross]{style="color:indianred;"} with [rowwise]{style="color:indianred;"} to specify the columns:]{style="font-size: 30px"} 
 
-Writing files, printing, logging
+```{r}
+# Let's first make the responses to questions numeric
+dt_Likert_num <- dt_Likert %>% 
+  mutate(across(Question1:Question4, as.numeric)) 
 
-Must preserve execution order
+# Apply a row-wise transformation
+dt_Likert_num %>% 
+  rowwise() %>% 
+  mutate(
+    Mean = mean(c_across(Question1:Question4))
+  )
+```
 
-
-for (i in 1:5) {
-  message("Processing item ", i)
-}
-
-!!!! en fait, je crois que c'est possible avec imap, donc ne pas le mentionner...
-
-## Multiple Outputs or Complex Accumulation
-
-Updating multiple objects in sync
-
-Example: two interdependent numeric vectors
-
-
-
-for (i in 2:10) {
-  a[i] <- a[i-1] + i
-  b[i] <- b[i-1] + a[i]
-}
-
-## Dynamic or Growing Structures
-
-BUT CHECK r4ds about what to do when we don't know the size of the output...
-
-Structure changes during loop
-
-Useful in data cleaning or recursive tasks
-
-
-
-result <- list()
-for (i in 1:10) {
-  result[[i]] <- runif(i)
-}
-
--->
-
-
-# Debugging
-
-![](debugging.png){width=90%}
+[[*We could of course do everything in a single pipe.*]{style="font-size: 30px"}]{.fragment}
 
 ::: notes
-what is important is how happy you feel when you manage!
-::: 
+here the responses were factors so need to transform them in numeric to take the mean
 
-##
+show in 2 separate pipe to avoid confusion
+:::
 
-a good start: avoid having to debug by checking the code (especially in function and loops) carrefully => select some sensible test data, try to anticipate potential problem...
+## The [apply]{style="color:indianred;"} family
 
-but we cannot think of everything...
-Here just some basic way of debugging
+::::: columns
+::: {.column width="65%"}
 
-if not too long, run a function or a loop line by one with the problematic dataset, to see where it buggs
+The [apply]{style="color:indianred;"} family in base R is an alternative way to perform functional programming,using a different syntax than [map]{style="color:indianred;"} and [across]{style="color:indianred;"}.
 
-otherwise : use print
+[To know more about the [apply]{style="color:indianred;"} family, see [here](https://www.r-bloggers.com/2024/04/exploring-apply-sapply-lapply-and-map-functions-in-r/){preview-link="false"}]{style="font-size: 30px"}
 
-et débuggage basique avec print (cf Juba https://juba.github.io/tidyverse/20-debuggage-performance.html) mais le faire à la fin de session 2 car possible aussi dans une boucle hors function
+:::
 
-there are more advanced debugging tools...
+::: {.column width="35%"}
+![](apply_map.png)
+:::
+:::::
 
-# Acknowledgments {.smaller}
+
+## When not to use a loop?
+
+::::: columns
+::: {.column width="70%"}
+
+* [when a vectorised alternative exists:]{style="font-size: 30px"}
+
+
+[[We will obviously not do this:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+for (i in seq_along(vec_num)) {
+    x[i] <- x[i] + 10
+}
+```
+:::
+
+
+[[when we could do this:]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+```{r}
+vec_num + 10
+```
+:::
+
+
+* [when [across]{style="color:indianred;"} or [map]{style="color:indianred;"} could be used]{style="font-size: 30px"}
+
+:::
+
+::: {.column width="30%"}
+
+[[*But remember that the best code is the code you can write and understand. Loops are fine, especially if you're not chasing efficiency.*]{style="font-size: 25px"}]{.fragment}
+
+:::
+:::::
+
+::: notes
+as seen, many of our loops could be written with accross or map
+
+:::
+
+
+
+## Acknowledgments {.smaller}
 
 ::: {.nonincremental}
 
 * Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
 
-<!--
-* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"}
--->
-
 :::
 
-# Ressources
+## Ressources
 
 ::: {.nonincremental}
+
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*  - Chapter on iterations [in English](https://r4ds.had.co.nz/iteration.html) and [in Portuguese](https://pt.r4ds.had.co.nz/iteration.html){preview-link="false"}
+
+* Wickham H. *Advanced R*  - Chapter on control flow [in English](https://adv-r.hadley.nz/control-flow.html){preview-link="false"}
 
 :::

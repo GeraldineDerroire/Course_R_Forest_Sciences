@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-22">
+  <meta name="dcterms.date" content="2025-05-24">
   <title>Going further with R - session 1/2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-22</p>
+  <p class="date">2025-05-24</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
@@ -902,107 +902,6 @@ Levels: blue green red</code></pre>
 </div>
 </section></section>
 <section>
-<section id="saving-objects" class="title-slide slide level1 center">
-<h1>Saving objects</h1>
-<p><span style="font-size: 30px">We have seen how to export data frames to CSV files, plot to image files. But in R, we can also save <strong>objects</strong> in a way that retains their internal structure and type.</span></p>
-<p><span style="font-size: 30px">In R, almost everything is an object (including vectors, lists, data frames, functions, models, and plots). This makes it possible to save and reload them exactly as they were.</span></p>
-<aside class="notes">
-<p>so what we are going to see works with any type of object</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="saving-a-single-object" class="slide level2">
-<h2>Saving a single object</h2>
-<p>We can save a single object to a <strong>.rds file</strong> using the function <span style="color:indianred;">saveRDS</span>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a><span class="fu">saveRDS</span>(vec_name, <span class="co"># object</span></span>
-<span id="cb72-2"><a href=""></a>     <span class="at">file =</span> <span class="st">"data/my_vec.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-
-</div>
-<div class="fragment">
-<p>A <em>.rds</em> can be open with <span style="color:indianred;">readRDS</span>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href=""></a><span class="fu">readRDS</span>(<span class="st">"data/my_vec.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "Lucas"   "Gabriel" "Ana"     "Maria"   "João"   </code></pre>
-</div>
-</div>
-</div>
-<div class="fragment">
-<p>This only reads the object, so we would need to assign it to an object to load it into the environment.</p>
-<p>The name of an object is <strong>not preserved</strong> when saved as <em>.rds</em>.</p>
-</div>
-</section>
-<section id="saving-one-or-several-objects" class="slide level2">
-<h2>Saving one or several objects</h2>
-<p>We can save one or multiple objects into a single <strong>.RData</strong> file using the function <span style="color:indianred;">save</span>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a><span class="fu">save</span>(vec_name, vec_num, <span class="co">#multiple object</span></span>
-<span id="cb75-2"><a href=""></a>     <span class="at">file =</span> <span class="st">"data/my_data.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-
-</div>
-<div class="fragment">
-<p>A <em>.Rdata</em> can be open with <span style="color:indianred;">load</span>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/my_data.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-
-</div>
-</div>
-<div class="fragment">
-<p>This loads <strong>all</strong> the objects contained in the file directly into the environment.</p>
-<p>The name of the objects are <strong>preserved</strong>.</p>
-</div>
-</section>
-<section id="saving-the-entire-workspace" class="slide level2">
-<h2>Saving the entire workspace</h2>
-<p>All the objects of a work session can be saved together as a <strong>.RData file</strong> using the function <span style="color:indianred;">save.image</span>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a><span class="fu">save.image</span>(<span class="at">file =</span> <span class="st">"data/my_work_space.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-
-</div>
-<div class="fragment">
-<p>and restored with <span style="color:indianred;">load</span>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/my_work_space.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-
-</div>
-</div>
-<aside class="notes">
-<p>this can be usefull to save time, but can cause problem of reproductability is the code is modified, so use it with care</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
 <section id="writing-your-own-functions" class="title-slide slide level1 center">
 <h1>Writing your own functions</h1>
 
@@ -1042,9 +941,9 @@ Levels: blue green red</code></pre>
 <h2>Structure of a function</h2>
 <p>To create a function, we use the instruction <span style="color:indianred;">function</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a><span class="cf">function</span>() {</span>
-<span id="cb79-2"><a href=""></a>  </span>
-<span id="cb79-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a><span class="cf">function</span>() {</span>
+<span id="cb72-2"><a href=""></a>  </span>
+<span id="cb72-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1059,9 +958,9 @@ Levels: blue green red</code></pre>
 <p>To be able to call a function to use it, we need to give it a <strong>name</strong>.</p>
 <p>Let’s create a function called <em>my_first_function</em>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href=""></a>my_first_function <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb80-2"><a href=""></a>  </span>
-<span id="cb80-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href=""></a>my_first_function <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb73-2"><a href=""></a>  </span>
+<span id="cb73-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1073,9 +972,9 @@ Levels: blue green red</code></pre>
 <p>This function will say <em>hello</em> (what a lovely function 😊).</p>
 <p>This mean that it will <strong>return</strong> a character string saying <em>hello</em> as a result:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a>my_first_function <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb81-2"><a href=""></a>  <span class="fu">return</span>(<span class="st">"Hello!"</span>)</span>
-<span id="cb81-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a>my_first_function <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb74-2"><a href=""></a>  <span class="fu">return</span>(<span class="st">"Hello!"</span>)</span>
+<span id="cb74-3"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1083,7 +982,7 @@ Levels: blue green red</code></pre>
 <div class="fragment">
 <p>Let’s use it:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href=""></a><span class="fu">my_first_function</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a><span class="fu">my_first_function</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1097,10 +996,10 @@ Levels: blue green red</code></pre>
 <p><span style="font-size: 30px">We now want to personalise our greeting…</span></p>
 <p>Let’s add an <strong>argument</strong> that we call <em>name</em> to our function, and use it in the code that we write in the <strong>body</strong> of the function:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a>my_first_function <span class="ot">&lt;-</span> <span class="cf">function</span>(name) {</span>
-<span id="cb84-2"><a href=""></a>  greeting <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Hello"</span>, name, <span class="st">"!"</span>)</span>
-<span id="cb84-3"><a href=""></a>  <span class="fu">return</span>(greeting)</span>
-<span id="cb84-4"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a>my_first_function <span class="ot">&lt;-</span> <span class="cf">function</span>(name) {</span>
+<span id="cb77-2"><a href=""></a>  greeting <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Hello"</span>, name, <span class="st">"!"</span>)</span>
+<span id="cb77-3"><a href=""></a>  <span class="fu">return</span>(greeting)</span>
+<span id="cb77-4"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1108,7 +1007,7 @@ Levels: blue green red</code></pre>
 <div class="fragment">
 <p><span style="font-size: 30px">We can now pass a value to this argument when running the function:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href=""></a><span class="fu">my_first_function</span>(<span class="at">name =</span> <span class="st">"João"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a><span class="fu">my_first_function</span>(<span class="at">name =</span> <span class="st">"João"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1119,7 +1018,7 @@ Levels: blue green red</code></pre>
 <div class="fragment">
 <p><span style="font-size: 30px">Note that we can also pass a vector:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href=""></a><span class="fu">my_first_function</span>(<span class="at">name =</span> vec_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href=""></a><span class="fu">my_first_function</span>(<span class="at">name =</span> vec_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1151,10 +1050,10 @@ Levels: blue green red</code></pre>
 <h2>Arguments</h2>
 <p><span style="font-size: 30px">A function can have several arguments:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href=""></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb89-2"><a href=""></a>  <span class="fu">return</span>(x <span class="sc">+</span> y)</span>
-<span id="cb89-3"><a href=""></a>} </span>
-<span id="cb89-4"><a href=""></a><span class="fu">my_sum</span>(<span class="dv">2</span>, <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href=""></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb82-2"><a href=""></a>  <span class="fu">return</span>(x <span class="sc">+</span> y)</span>
+<span id="cb82-3"><a href=""></a>} </span>
+<span id="cb82-4"><a href=""></a><span class="fu">my_sum</span>(<span class="dv">2</span>, <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1165,7 +1064,7 @@ Levels: blue green red</code></pre>
 <div class="fragment">
 <p><span style="font-size: 30px">⚠️Passing an incorrect number of values to the arguments of a function will result in an error:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href=""></a><span class="fu">my_sum</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a><span class="fu">my_sum</span>(<span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1189,13 +1088,13 @@ Levels: blue green red</code></pre>
 <p><strong>Step 1: plan</strong></p>
 <p>Let’s start identifying the arguments and planning the operations (without running the code):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href=""></a><span class="co"># Arguments</span></span>
-<span id="cb93-2"><a href=""></a>  circ <span class="co"># a vector of circumference in cm</span></span>
-<span id="cb93-3"><a href=""></a>  </span>
-<span id="cb93-4"><a href=""></a><span class="co"># Body of the function</span></span>
-<span id="cb93-5"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
-<span id="cb93-6"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
-<span id="cb93-7"><a href=""></a>  <span class="co"># Return the diameter</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href=""></a><span class="co"># Arguments</span></span>
+<span id="cb86-2"><a href=""></a>  circ <span class="co"># a vector of circumference in cm</span></span>
+<span id="cb86-3"><a href=""></a>  </span>
+<span id="cb86-4"><a href=""></a><span class="co"># Body of the function</span></span>
+<span id="cb86-5"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
+<span id="cb86-6"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
+<span id="cb86-7"><a href=""></a>  <span class="co"># Return the diameter</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1207,10 +1106,10 @@ Levels: blue green red</code></pre>
 <p>Try to create data as close as possible to the one you will be using.</p>
 <p><em>Here we create a vector of circumference that contain NA:</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href=""></a>test_circ <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">9</span>, </span>
-<span id="cb94-2"><a href=""></a>                     <span class="at">min =</span> <span class="dv">30</span>, <span class="at">max =</span> <span class="dv">250</span>),</span>
-<span id="cb94-3"><a href=""></a>               <span class="cn">NA</span>)</span>
-<span id="cb94-4"><a href=""></a>test_circ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href=""></a>test_circ <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">9</span>, </span>
+<span id="cb87-2"><a href=""></a>                     <span class="at">min =</span> <span class="dv">30</span>, <span class="at">max =</span> <span class="dv">250</span>),</span>
+<span id="cb87-3"><a href=""></a>               <span class="cn">NA</span>)</span>
+<span id="cb87-4"><a href=""></a>test_circ</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1219,7 +1118,7 @@ Levels: blue green red</code></pre>
 </div>
 </div>
 <aside class="notes">
-<p>test data don’t necessaryly need to be created from scratch, they can be a subset of our real data</p>
+<p>test data don’t necessarily need to be created from scratch, they can be a subset of our real data</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1237,16 +1136,16 @@ Levels: blue green red</code></pre>
 <p><strong>Step 3: develop the code</strong></p>
 <p>The code is developed line by line, testing every line (or almost every line…) :</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href=""></a><span class="co"># Arguments</span></span>
-<span id="cb96-2"><a href=""></a>  circ <span class="ot">&lt;-</span> test_circ <span class="co"># vector of circumference in cm</span></span>
-<span id="cb96-3"><a href=""></a></span>
-<span id="cb96-4"><a href=""></a><span class="co"># Body of the function</span></span>
-<span id="cb96-5"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
-<span id="cb96-6"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb96-7"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
-<span id="cb96-8"><a href=""></a>  <span class="co"># Return the diameter</span></span>
-<span id="cb96-9"><a href=""></a>    </span>
-<span id="cb96-10"><a href=""></a>diam    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href=""></a><span class="co"># Arguments</span></span>
+<span id="cb89-2"><a href=""></a>  circ <span class="ot">&lt;-</span> test_circ <span class="co"># vector of circumference in cm</span></span>
+<span id="cb89-3"><a href=""></a></span>
+<span id="cb89-4"><a href=""></a><span class="co"># Body of the function</span></span>
+<span id="cb89-5"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
+<span id="cb89-6"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb89-7"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
+<span id="cb89-8"><a href=""></a>  <span class="co"># Return the diameter</span></span>
+<span id="cb89-9"><a href=""></a>    </span>
+<span id="cb89-10"><a href=""></a>diam    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1272,17 +1171,17 @@ Levels: blue green red</code></pre>
 <h2>Writing a function step by step</h2>
 <p><strong>Step 3: develop the code</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href=""></a><span class="co"># Arguments</span></span>
-<span id="cb98-2"><a href=""></a>  circ <span class="ot">&lt;-</span> test_circ <span class="co"># vector of circumference in cm</span></span>
-<span id="cb98-3"><a href=""></a></span>
-<span id="cb98-4"><a href=""></a><span class="co"># Body of the function</span></span>
-<span id="cb98-5"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
-<span id="cb98-6"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb98-7"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
-<span id="cb98-8"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam)</span>
-<span id="cb98-9"><a href=""></a>  <span class="co"># Return the diameter</span></span>
-<span id="cb98-10"><a href=""></a>    </span>
-<span id="cb98-11"><a href=""></a>mean_diam    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href=""></a><span class="co"># Arguments</span></span>
+<span id="cb91-2"><a href=""></a>  circ <span class="ot">&lt;-</span> test_circ <span class="co"># vector of circumference in cm</span></span>
+<span id="cb91-3"><a href=""></a></span>
+<span id="cb91-4"><a href=""></a><span class="co"># Body of the function</span></span>
+<span id="cb91-5"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
+<span id="cb91-6"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb91-7"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
+<span id="cb91-8"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam)</span>
+<span id="cb91-9"><a href=""></a>  <span class="co"># Return the diameter</span></span>
+<span id="cb91-10"><a href=""></a>    </span>
+<span id="cb91-11"><a href=""></a>mean_diam    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1296,18 +1195,18 @@ Levels: blue green red</code></pre>
 <p><strong>Step 3: develop the code… and add arguments if needed</strong></p>
 <p><em>Let’s add an argument to let the user choose what to do with NA, and give it a test value</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href=""></a><span class="co"># Arguments</span></span>
-<span id="cb100-2"><a href=""></a>  circ <span class="ot">&lt;-</span> test_circ <span class="co"># vector of circumference in cm</span></span>
-<span id="cb100-3"><a href=""></a>  na_act <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="co"># boolean: remove NA?</span></span>
-<span id="cb100-4"><a href=""></a></span>
-<span id="cb100-5"><a href=""></a><span class="co"># Body of the function</span></span>
-<span id="cb100-6"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
-<span id="cb100-7"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb100-8"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
-<span id="cb100-9"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act)</span>
-<span id="cb100-10"><a href=""></a>  <span class="co"># Return the diameter</span></span>
-<span id="cb100-11"><a href=""></a>    </span>
-<span id="cb100-12"><a href=""></a>mean_diam    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href=""></a><span class="co"># Arguments</span></span>
+<span id="cb93-2"><a href=""></a>  circ <span class="ot">&lt;-</span> test_circ <span class="co"># vector of circumference in cm</span></span>
+<span id="cb93-3"><a href=""></a>  na_act <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="co"># boolean: remove NA?</span></span>
+<span id="cb93-4"><a href=""></a></span>
+<span id="cb93-5"><a href=""></a><span class="co"># Body of the function</span></span>
+<span id="cb93-6"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
+<span id="cb93-7"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb93-8"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
+<span id="cb93-9"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act)</span>
+<span id="cb93-10"><a href=""></a>  <span class="co"># Return the diameter</span></span>
+<span id="cb93-11"><a href=""></a>    </span>
+<span id="cb93-12"><a href=""></a>mean_diam    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1334,20 +1233,20 @@ Levels: blue green red</code></pre>
 <p><strong>Step 3: develop the code… and add arguments if needed</strong></p>
 <p><em>We would like to round the mean diameter, let’s add a new operation and an argument giving the number of decimals.</em></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href=""></a><span class="co"># Arguments</span></span>
-<span id="cb102-2"><a href=""></a>  circ <span class="ot">&lt;-</span> test_circ <span class="co"># vector of circumference in cm</span></span>
-<span id="cb102-3"><a href=""></a>  na_act <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="co"># boolean: remove NA?</span></span>
-<span id="cb102-4"><a href=""></a>  digits <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># integer: number of digits to keep</span></span>
-<span id="cb102-5"><a href=""></a></span>
-<span id="cb102-6"><a href=""></a><span class="co"># Body of the function</span></span>
-<span id="cb102-7"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
-<span id="cb102-8"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb102-9"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
-<span id="cb102-10"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act)</span>
-<span id="cb102-11"><a href=""></a>  <span class="co"># Round the diameter</span></span>
-<span id="cb102-12"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">round</span>(mean_diam, <span class="at">digits =</span> digits)</span>
-<span id="cb102-13"><a href=""></a>  <span class="co"># Return the mean diameter</span></span>
-<span id="cb102-14"><a href=""></a>    mean_diam    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href=""></a><span class="co"># Arguments</span></span>
+<span id="cb95-2"><a href=""></a>  circ <span class="ot">&lt;-</span> test_circ <span class="co"># vector of circumference in cm</span></span>
+<span id="cb95-3"><a href=""></a>  na_act <span class="ot">&lt;-</span> <span class="cn">TRUE</span> <span class="co"># boolean: remove NA?</span></span>
+<span id="cb95-4"><a href=""></a>  digits <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="co"># integer: number of digits to keep</span></span>
+<span id="cb95-5"><a href=""></a></span>
+<span id="cb95-6"><a href=""></a><span class="co"># Body of the function</span></span>
+<span id="cb95-7"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
+<span id="cb95-8"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb95-9"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
+<span id="cb95-10"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act)</span>
+<span id="cb95-11"><a href=""></a>  <span class="co"># Round the diameter</span></span>
+<span id="cb95-12"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">round</span>(mean_diam, <span class="at">digits =</span> digits)</span>
+<span id="cb95-13"><a href=""></a>  <span class="co"># Return the mean diameter</span></span>
+<span id="cb95-14"><a href=""></a>    mean_diam    </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1372,16 +1271,16 @@ Levels: blue green red</code></pre>
 <h2>Writing a function step by step</h2>
 <p><strong>Step 4: create the function</strong>: add a name, add he instruction <em>function</em>, put the argument in <em>()</em> and the code in <em>{}</em>, add <em>return</em> (optional)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href=""></a>mean_diam <span class="ot">&lt;-</span> <span class="cf">function</span>(circ, na_act, digits) {</span>
-<span id="cb104-2"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
-<span id="cb104-3"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb104-4"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
-<span id="cb104-5"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act)</span>
-<span id="cb104-6"><a href=""></a>  <span class="co"># Round the diameter</span></span>
-<span id="cb104-7"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">round</span>(mean_diam, <span class="at">digits =</span> digits)</span>
-<span id="cb104-8"><a href=""></a>  <span class="co"># Return the mean diameter</span></span>
-<span id="cb104-9"><a href=""></a>    <span class="fu">return</span>(mean_diam)</span>
-<span id="cb104-10"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href=""></a>mean_diam <span class="ot">&lt;-</span> <span class="cf">function</span>(circ, na_act, digits) {</span>
+<span id="cb97-2"><a href=""></a>  <span class="co"># Calculate diameters in m</span></span>
+<span id="cb97-3"><a href=""></a>    diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb97-4"><a href=""></a>  <span class="co"># Calculate the mean value</span></span>
+<span id="cb97-5"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act)</span>
+<span id="cb97-6"><a href=""></a>  <span class="co"># Round the diameter</span></span>
+<span id="cb97-7"><a href=""></a>    mean_diam <span class="ot">&lt;-</span> <span class="fu">round</span>(mean_diam, <span class="at">digits =</span> digits)</span>
+<span id="cb97-8"><a href=""></a>  <span class="co"># Return the mean diameter</span></span>
+<span id="cb97-9"><a href=""></a>    <span class="fu">return</span>(mean_diam)</span>
+<span id="cb97-10"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1393,10 +1292,10 @@ Levels: blue green red</code></pre>
 <div class="fragment">
 <p>⚠️ Don’t forget to remove the test arguments from the environment before testing.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href=""></a><span class="co"># remove test argument</span></span>
-<span id="cb105-2"><a href=""></a> <span class="fu">rm</span>(circ, digits, na_act)</span>
-<span id="cb105-3"><a href=""></a><span class="co"># new data</span></span>
-<span id="cb105-4"><a href=""></a> new_circ <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">35</span>, <span class="at">min =</span> <span class="dv">30</span>, <span class="at">max =</span> <span class="dv">250</span>), <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href=""></a><span class="co"># remove test argument</span></span>
+<span id="cb98-2"><a href=""></a> <span class="fu">rm</span>(circ, digits, na_act)</span>
+<span id="cb98-3"><a href=""></a><span class="co"># new data</span></span>
+<span id="cb98-4"><a href=""></a> new_circ <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">35</span>, <span class="at">min =</span> <span class="dv">30</span>, <span class="at">max =</span> <span class="dv">250</span>), <span class="cn">NA</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1404,8 +1303,8 @@ Levels: blue green red</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href=""></a><span class="co"># first test</span></span>
-<span id="cb106-2"><a href=""></a> <span class="fu">mean_diam</span>(<span class="at">circ =</span> new_circ, <span class="at">digits =</span> <span class="dv">1</span>, <span class="at">na_act =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href=""></a><span class="co"># first test</span></span>
+<span id="cb99-2"><a href=""></a> <span class="fu">mean_diam</span>(<span class="at">circ =</span> new_circ, <span class="at">digits =</span> <span class="dv">1</span>, <span class="at">na_act =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1415,8 +1314,8 @@ Levels: blue green red</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href=""></a><span class="co"># second test</span></span>
-<span id="cb108-2"><a href=""></a><span class="fu">mean_diam</span>(<span class="at">circ =</span> new_circ, <span class="at">digits =</span> <span class="dv">4</span>, <span class="at">na_act =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href=""></a><span class="co"># second test</span></span>
+<span id="cb101-2"><a href=""></a><span class="fu">mean_diam</span>(<span class="at">circ =</span> new_circ, <span class="at">digits =</span> <span class="dv">4</span>, <span class="at">na_act =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1426,8 +1325,8 @@ Levels: blue green red</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href=""></a><span class="co"># third test</span></span>
-<span id="cb110-2"><a href=""></a><span class="fu">mean_diam</span>(<span class="at">circ =</span> new_circ, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">na_act =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href=""></a><span class="co"># third test</span></span>
+<span id="cb103-2"><a href=""></a><span class="fu">mean_diam</span>(<span class="at">circ =</span> new_circ, <span class="at">digits =</span> <span class="dv">3</span>, <span class="at">na_act =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1474,7 +1373,7 @@ my_hist(new_circ)
 ```
 
 ::: {.cell-output-display}
-![](going_further_session1_files/figure-revealjs/unnamed-chunk-62-1.png){width=384}
+![](going_further_session1_files/figure-revealjs/unnamed-chunk-56-1.png){width=384}
 :::
 :::
 
@@ -1486,10 +1385,10 @@ my_hist(new_circ)
 <h2>Side effects</h2>
 <p><span style="font-size: 30px">For a function aiming to print a value in the console, we can use <span style="color:indianred;">print</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href=""></a>my_sum2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb112-2"><a href=""></a>  <span class="fu">print</span>(x <span class="sc">+</span> y)</span>
-<span id="cb112-3"><a href=""></a>}</span>
-<span id="cb112-4"><a href=""></a><span class="fu">my_sum2</span>(<span class="dv">5</span>, <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href=""></a>my_sum2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb105-2"><a href=""></a>  <span class="fu">print</span>(x <span class="sc">+</span> y)</span>
+<span id="cb105-3"><a href=""></a>}</span>
+<span id="cb105-4"><a href=""></a><span class="fu">my_sum2</span>(<span class="dv">5</span>, <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1499,10 +1398,10 @@ my_hist(new_circ)
 <div class="fragment">
 <p><span style="font-size: 30px">or <span style="color:indianred;">cat</span> if we want to print a character string:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href=""></a>my_sum3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb114-2"><a href=""></a>  <span class="fu">cat</span>(<span class="st">"The sum is"</span>, x <span class="sc">+</span> y)</span>
-<span id="cb114-3"><a href=""></a>}</span>
-<span id="cb114-4"><a href=""></a><span class="fu">my_sum3</span>(<span class="dv">11</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href=""></a>my_sum3 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb107-2"><a href=""></a>  <span class="fu">cat</span>(<span class="st">"The sum is"</span>, x <span class="sc">+</span> y)</span>
+<span id="cb107-3"><a href=""></a>}</span>
+<span id="cb107-4"><a href=""></a><span class="fu">my_sum3</span>(<span class="dv">11</span>, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1515,13 +1414,13 @@ my_hist(new_circ)
 <h2>Message</h2>
 <p><span style="font-size: 30px">We can also include a <span style="color:indianred;">message</span> in a function:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href=""></a>min_rand <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
-<span id="cb116-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Random generation of "</span>, n, <span class="st">" numbers."</span>)</span>
-<span id="cb116-3"><a href=""></a>  v <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
-<span id="cb116-4"><a href=""></a>  <span class="fu">cat</span>(<span class="st">"The smallest generated number is"</span>, <span class="fu">min</span>(v))</span>
-<span id="cb116-5"><a href=""></a>}</span>
-<span id="cb116-6"><a href=""></a></span>
-<span id="cb116-7"><a href=""></a><span class="fu">min_rand</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href=""></a>min_rand <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb109-2"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Random generation of "</span>, n, <span class="st">" numbers."</span>)</span>
+<span id="cb109-3"><a href=""></a>  v <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
+<span id="cb109-4"><a href=""></a>  <span class="fu">cat</span>(<span class="st">"The smallest generated number is"</span>, <span class="fu">min</span>(v))</span>
+<span id="cb109-5"><a href=""></a>}</span>
+<span id="cb109-6"><a href=""></a></span>
+<span id="cb109-7"><a href=""></a><span class="fu">min_rand</span>(<span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -1542,7 +1441,7 @@ my_hist(new_circ)
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href=""></a><span class="fu">median</span>(<span class="at">x =</span> vec_num, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href=""></a><span class="fu">median</span>(<span class="at">x =</span> vec_num, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1555,7 +1454,7 @@ my_hist(new_circ)
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href=""></a><span class="fu">median</span>(vec_num, <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href=""></a><span class="fu">median</span>(vec_num, <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1569,7 +1468,7 @@ my_hist(new_circ)
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href=""></a><span class="fu">median</span>(vec_num, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href=""></a><span class="fu">median</span>(vec_num, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1584,7 +1483,7 @@ my_hist(new_circ)
 <h2>Default values of arguments</h2>
 <p><span style="font-size: 30px">Let’s go back to our <span style="color:indianred;">mean_diam</span> function. If we don’t specify the values for all the arguments, we get an error:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href=""></a><span class="fu">mean_diam</span>(new_circ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href=""></a><span class="fu">mean_diam</span>(new_circ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1597,16 +1496,16 @@ my_hist(new_circ)
 </div>
 <p><span style="font-size: 30px">We can specify <strong>default</strong> values that are taken by the arguments if no values is passed :</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb127"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb127-1"><a href=""></a>mean_diam <span class="ot">&lt;-</span> <span class="cf">function</span>(circ, </span>
-<span id="cb127-2"><a href=""></a>                      <span class="at">na_act =</span> <span class="cn">TRUE</span>, <span class="co"># default value</span></span>
-<span id="cb127-3"><a href=""></a>                      <span class="at">digits =</span> <span class="dv">2</span>) { <span class="co"># default value</span></span>
-<span id="cb127-4"><a href=""></a>  diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb127-5"><a href=""></a>  mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act)</span>
-<span id="cb127-6"><a href=""></a>  mean_diam <span class="ot">&lt;-</span> <span class="fu">round</span>(mean_diam, <span class="at">digits =</span> digits)</span>
-<span id="cb127-7"><a href=""></a>  <span class="fu">return</span>(mean_diam)</span>
-<span id="cb127-8"><a href=""></a>}</span>
-<span id="cb127-9"><a href=""></a></span>
-<span id="cb127-10"><a href=""></a><span class="fu">mean_diam</span>(new_circ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb120"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb120-1"><a href=""></a>mean_diam <span class="ot">&lt;-</span> <span class="cf">function</span>(circ, </span>
+<span id="cb120-2"><a href=""></a>                      <span class="at">na_act =</span> <span class="cn">TRUE</span>, <span class="co"># default value</span></span>
+<span id="cb120-3"><a href=""></a>                      <span class="at">digits =</span> <span class="dv">2</span>) { <span class="co"># default value</span></span>
+<span id="cb120-4"><a href=""></a>  diam <span class="ot">&lt;-</span> circ <span class="sc">/</span> (pi <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb120-5"><a href=""></a>  mean_diam <span class="ot">&lt;-</span> <span class="fu">mean</span>(diam, <span class="at">na.rm =</span> na_act)</span>
+<span id="cb120-6"><a href=""></a>  mean_diam <span class="ot">&lt;-</span> <span class="fu">round</span>(mean_diam, <span class="at">digits =</span> digits)</span>
+<span id="cb120-7"><a href=""></a>  <span class="fu">return</span>(mean_diam)</span>
+<span id="cb120-8"><a href=""></a>}</span>
+<span id="cb120-9"><a href=""></a></span>
+<span id="cb120-10"><a href=""></a><span class="fu">mean_diam</span>(new_circ)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1635,19 +1534,19 @@ my_hist(new_circ)
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb129"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb129-1"><a href=""></a>my_hist2 <span class="ot">&lt;-</span> <span class="cf">function</span>(vec, ...) {</span>
-<span id="cb129-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">as_tibble</span>(vec), (<span class="fu">aes</span>(<span class="at">x =</span> value))) <span class="sc">+</span></span>
-<span id="cb129-3"><a href=""></a>    <span class="fu">geom_histogram</span>(...)</span>
-<span id="cb129-4"><a href=""></a>}</span>
-<span id="cb129-5"><a href=""></a></span>
-<span id="cb129-6"><a href=""></a><span class="fu">my_hist2</span>(new_circ, </span>
-<span id="cb129-7"><a href=""></a>         <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb122"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb122-1"><a href=""></a>my_hist2 <span class="ot">&lt;-</span> <span class="cf">function</span>(vec, ...) {</span>
+<span id="cb122-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">as_tibble</span>(vec), (<span class="fu">aes</span>(<span class="at">x =</span> value))) <span class="sc">+</span></span>
+<span id="cb122-3"><a href=""></a>    <span class="fu">geom_histogram</span>(...)</span>
+<span id="cb122-4"><a href=""></a>}</span>
+<span id="cb122-5"><a href=""></a></span>
+<span id="cb122-6"><a href=""></a><span class="fu">my_hist2</span>(new_circ, </span>
+<span id="cb122-7"><a href=""></a>         <span class="at">col =</span> <span class="st">"blue"</span>, <span class="at">fill =</span> <span class="st">"lightblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="going_further_session1_files/figure-revealjs/unnamed-chunk-72-1.png" width="384"></p>
+<p><img data-src="going_further_session1_files/figure-revealjs/unnamed-chunk-66-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1660,29 +1559,29 @@ my_hist(new_circ)
 <h2>Result of a function</h2>
 <p><span style="font-size: 30px">We don’t necessary have to use <span style="color:indianred;">return</span> to return the result of a function:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href=""></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb130-2"><a href=""></a>  res <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
-<span id="cb130-3"><a href=""></a>  <span class="fu">return</span>(res)</span>
-<span id="cb130-4"><a href=""></a>} </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href=""></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb123-2"><a href=""></a>  res <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb123-3"><a href=""></a>  <span class="fu">return</span>(res)</span>
+<span id="cb123-4"><a href=""></a>} </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <p><span style="font-size: 30px">can be written</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href=""></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb131-2"><a href=""></a>  res <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
-<span id="cb131-3"><a href=""></a>  res</span>
-<span id="cb131-4"><a href=""></a>} </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb124"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb124-1"><a href=""></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb124-2"><a href=""></a>  res <span class="ot">&lt;-</span> x <span class="sc">+</span> y</span>
+<span id="cb124-3"><a href=""></a>  res</span>
+<span id="cb124-4"><a href=""></a>} </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <p><span style="font-size: 30px">or even</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb132"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb132-1"><a href=""></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
-<span id="cb132-2"><a href=""></a>  x <span class="sc">+</span> y</span>
-<span id="cb132-3"><a href=""></a>} </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb125"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb125-1"><a href=""></a>my_sum <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) {</span>
+<span id="cb125-2"><a href=""></a>  x <span class="sc">+</span> y</span>
+<span id="cb125-3"><a href=""></a>} </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1694,12 +1593,12 @@ my_hist(new_circ)
 <div class="column" style="width:50%;">
 <p><span style="font-size: 30px">The instruction <span style="color:indianred;">return</span> ends the execution of a function, <strong>so we cannot use <span style="color:indianred;">return</span> twice:</strong></span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href=""></a>my_summary <span class="ot">&lt;-</span> <span class="cf">function</span>(v) {</span>
-<span id="cb133-2"><a href=""></a>  <span class="fu">return</span>(<span class="fu">mean</span>(v))</span>
-<span id="cb133-3"><a href=""></a>  <span class="fu">return</span>(<span class="fu">median</span>(v))</span>
-<span id="cb133-4"><a href=""></a>}</span>
-<span id="cb133-5"><a href=""></a></span>
-<span id="cb133-6"><a href=""></a><span class="fu">my_summary</span>(vec_num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb126"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb126-1"><a href=""></a>my_summary <span class="ot">&lt;-</span> <span class="cf">function</span>(v) {</span>
+<span id="cb126-2"><a href=""></a>  <span class="fu">return</span>(<span class="fu">mean</span>(v))</span>
+<span id="cb126-3"><a href=""></a>  <span class="fu">return</span>(<span class="fu">median</span>(v))</span>
+<span id="cb126-4"><a href=""></a>}</span>
+<span id="cb126-5"><a href=""></a></span>
+<span id="cb126-6"><a href=""></a><span class="fu">my_summary</span>(vec_num)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1710,13 +1609,13 @@ my_hist(new_circ)
 <p><span class="fragment"><span style="font-size: 30px">To return several results for a function, the best solution is to store them in a <strong>named list</strong>:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb135"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb135-1"><a href=""></a>my_summary <span class="ot">&lt;-</span> <span class="cf">function</span>(v) {</span>
-<span id="cb135-2"><a href=""></a>  <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(v),</span>
-<span id="cb135-3"><a href=""></a>       <span class="at">median =</span> <span class="fu">median</span>(v))</span>
-<span id="cb135-4"><a href=""></a>}</span>
-<span id="cb135-5"><a href=""></a></span>
-<span id="cb135-6"><a href=""></a>res <span class="ot">&lt;-</span> <span class="fu">my_summary</span>(vec_num)</span>
-<span id="cb135-7"><a href=""></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb128"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb128-1"><a href=""></a>my_summary <span class="ot">&lt;-</span> <span class="cf">function</span>(v) {</span>
+<span id="cb128-2"><a href=""></a>  <span class="fu">list</span>(<span class="at">mean =</span> <span class="fu">mean</span>(v),</span>
+<span id="cb128-3"><a href=""></a>       <span class="at">median =</span> <span class="fu">median</span>(v))</span>
+<span id="cb128-4"><a href=""></a>}</span>
+<span id="cb128-5"><a href=""></a></span>
+<span id="cb128-6"><a href=""></a>res <span class="ot">&lt;-</span> <span class="fu">my_summary</span>(vec_num)</span>
+<span id="cb128-7"><a href=""></a>res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1744,7 +1643,7 @@ $median
 <div class="fragment">
 <p><span style="font-size: 30px">A function saved in a separate file can be made available in your script by <strong>sourcing</strong> it:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb137"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb137-1"><a href=""></a><span class="fu">source</span>(<span class="st">"R/my_function.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb130"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb130-1"><a href=""></a><span class="fu">source</span>(<span class="st">"R/my_function.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1768,14 +1667,14 @@ $median
 <h2>Using our own functions with <span style="color:indianred;">dplyr</span></h2>
 <p><span style="font-size: 30px">Let’s create an example data set containing responses to an opinion poll, coded on a Likert scale:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href=""></a>dt_Likert <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb138-2"><a href=""></a>  <span class="at">id =</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>],</span>
-<span id="cb138-3"><a href=""></a>  <span class="at">Question1 =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">6</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
-<span id="cb138-4"><a href=""></a>  <span class="at">Question2 =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">6</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
-<span id="cb138-5"><a href=""></a>  <span class="at">Question3 =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">6</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)), </span>
-<span id="cb138-6"><a href=""></a>  <span class="at">Question4 =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">6</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb138-7"><a href=""></a>)</span>
-<span id="cb138-8"><a href=""></a>dt_Likert</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb131"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb131-1"><a href=""></a>dt_Likert <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb131-2"><a href=""></a>  <span class="at">id =</span> LETTERS[<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>],</span>
+<span id="cb131-3"><a href=""></a>  <span class="at">Question1 =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">6</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb131-4"><a href=""></a>  <span class="at">Question2 =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">6</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)),</span>
+<span id="cb131-5"><a href=""></a>  <span class="at">Question3 =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">6</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)), </span>
+<span id="cb131-6"><a href=""></a>  <span class="at">Question4 =</span> <span class="fu">as.factor</span>(<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">6</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb131-7"><a href=""></a>)</span>
+<span id="cb131-8"><a href=""></a>dt_Likert</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1798,26 +1697,26 @@ $median
 <div class="column" style="width:75%;">
 <p><span style="font-size: 30px">We can instead create a function to do the recoding:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href=""></a>recode_Likert <span class="ot">&lt;-</span> <span class="cf">function</span>(v) {</span>
-<span id="cb140-2"><a href=""></a>  <span class="fu">fct_recode</span>(v,</span>
-<span id="cb140-3"><a href=""></a>             <span class="st">"Strongly disagree"</span> <span class="ot">=</span> <span class="st">"1"</span>,</span>
-<span id="cb140-4"><a href=""></a>             <span class="st">"Disagree"</span> <span class="ot">=</span> <span class="st">"2"</span>,</span>
-<span id="cb140-5"><a href=""></a>             <span class="st">"Neutral"</span> <span class="ot">=</span> <span class="st">"3"</span>,</span>
-<span id="cb140-6"><a href=""></a>             <span class="st">"Agree"</span> <span class="ot">=</span> <span class="st">"4"</span>,</span>
-<span id="cb140-7"><a href=""></a>             <span class="st">"Strongly agree"</span> <span class="ot">=</span> <span class="st">"5"</span>)</span>
-<span id="cb140-8"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb133"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb133-1"><a href=""></a>recode_Likert <span class="ot">&lt;-</span> <span class="cf">function</span>(v) {</span>
+<span id="cb133-2"><a href=""></a>  <span class="fu">fct_recode</span>(v,</span>
+<span id="cb133-3"><a href=""></a>             <span class="st">"Strongly disagree"</span> <span class="ot">=</span> <span class="st">"1"</span>,</span>
+<span id="cb133-4"><a href=""></a>             <span class="st">"Disagree"</span> <span class="ot">=</span> <span class="st">"2"</span>,</span>
+<span id="cb133-5"><a href=""></a>             <span class="st">"Neutral"</span> <span class="ot">=</span> <span class="st">"3"</span>,</span>
+<span id="cb133-6"><a href=""></a>             <span class="st">"Agree"</span> <span class="ot">=</span> <span class="st">"4"</span>,</span>
+<span id="cb133-7"><a href=""></a>             <span class="st">"Strongly agree"</span> <span class="ot">=</span> <span class="st">"5"</span>)</span>
+<span id="cb133-8"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
 <p><span style="font-size: 30px">and use it with mutate to recode all variables:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb141"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb141-1"><a href=""></a>dt_Likert <span class="sc">%&gt;%</span> </span>
-<span id="cb141-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">Question1 =</span> <span class="fu">recode_Likert</span>(Question1),</span>
-<span id="cb141-3"><a href=""></a>         <span class="at">Question2 =</span> <span class="fu">recode_Likert</span>(Question2),</span>
-<span id="cb141-4"><a href=""></a>         <span class="at">Question3 =</span> <span class="fu">recode_Likert</span>(Question3),</span>
-<span id="cb141-5"><a href=""></a>         <span class="at">Question4 =</span> <span class="fu">recode_Likert</span>(Question4),</span>
-<span id="cb141-6"><a href=""></a>         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb134"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb134-1"><a href=""></a>dt_Likert <span class="sc">%&gt;%</span> </span>
+<span id="cb134-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">Question1 =</span> <span class="fu">recode_Likert</span>(Question1),</span>
+<span id="cb134-3"><a href=""></a>         <span class="at">Question2 =</span> <span class="fu">recode_Likert</span>(Question2),</span>
+<span id="cb134-4"><a href=""></a>         <span class="at">Question3 =</span> <span class="fu">recode_Likert</span>(Question3),</span>
+<span id="cb134-5"><a href=""></a>         <span class="at">Question4 =</span> <span class="fu">recode_Likert</span>(Question4),</span>
+<span id="cb134-6"><a href=""></a>         )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1859,11 +1758,11 @@ $median
 <h2>Scope of variables - Rule 1</h2>
 <p><span style="font-size: 30px">If a function uses a local object that was not created within the function, nor passed as an argument, we get an error:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb143"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb143-1"><a href=""></a>my_func <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb143-2"><a href=""></a>  <span class="fu">print</span>(obj)</span>
-<span id="cb143-3"><a href=""></a>}</span>
-<span id="cb143-4"><a href=""></a></span>
-<span id="cb143-5"><a href=""></a><span class="fu">my_func</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb136"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb136-1"><a href=""></a>my_func <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb136-2"><a href=""></a>  <span class="fu">print</span>(obj)</span>
+<span id="cb136-3"><a href=""></a>}</span>
+<span id="cb136-4"><a href=""></a></span>
+<span id="cb136-5"><a href=""></a><span class="fu">my_func</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1878,9 +1777,9 @@ $median
 <p><span class="fragment"><span style="font-size: 30px">But if the object is present in the global environment (global object), the function can access it (<strong>Rule 1</strong>):</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb145"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb145-1"><a href=""></a>obj <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb145-2"><a href=""></a></span>
-<span id="cb145-3"><a href=""></a><span class="fu">my_func</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb138"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb138-1"><a href=""></a>obj <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb138-2"><a href=""></a></span>
+<span id="cb138-3"><a href=""></a><span class="fu">my_func</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1907,11 +1806,11 @@ $median
 <h2>Scope of variables - Rule 2</h2>
 <p><span style="font-size: 30px">An object created within a function exists <strong>only within the function</strong> (if it it not returned as a result):</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb147"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb147-1"><a href=""></a>my_random <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
-<span id="cb147-2"><a href=""></a>  random_vec <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
-<span id="cb147-3"><a href=""></a>}</span>
-<span id="cb147-4"><a href=""></a></span>
-<span id="cb147-5"><a href=""></a>random_vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb140"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href=""></a>my_random <span class="ot">&lt;-</span> <span class="cf">function</span>(n) {</span>
+<span id="cb140-2"><a href=""></a>  random_vec <span class="ot">&lt;-</span> <span class="fu">runif</span>(n)</span>
+<span id="cb140-3"><a href=""></a>}</span>
+<span id="cb140-4"><a href=""></a></span>
+<span id="cb140-5"><a href=""></a>random_vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1928,13 +1827,13 @@ $median
 <h2>Scope of variables - rule 3</h2>
 <p>A <strong>local</strong> object created within a function or passed as an argument has priority over a <strong>global object</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb149"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb149-1"><a href=""></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb149-2"><a href=""></a>  obj <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb149-3"><a href=""></a>  obj</span>
-<span id="cb149-4"><a href=""></a>}</span>
-<span id="cb149-5"><a href=""></a></span>
-<span id="cb149-6"><a href=""></a>obj <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb149-7"><a href=""></a><span class="fu">f</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb142"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb142-1"><a href=""></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb142-2"><a href=""></a>  obj <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb142-3"><a href=""></a>  obj</span>
+<span id="cb142-4"><a href=""></a>}</span>
+<span id="cb142-5"><a href=""></a></span>
+<span id="cb142-6"><a href=""></a>obj <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb142-7"><a href=""></a><span class="fu">f</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1943,12 +1842,12 @@ $median
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href=""></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(obj) {</span>
-<span id="cb151-2"><a href=""></a>  obj</span>
-<span id="cb151-3"><a href=""></a>}</span>
-<span id="cb151-4"><a href=""></a></span>
-<span id="cb151-5"><a href=""></a>obj <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb151-6"><a href=""></a><span class="fu">f</span>(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb144"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb144-1"><a href=""></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>(obj) {</span>
+<span id="cb144-2"><a href=""></a>  obj</span>
+<span id="cb144-3"><a href=""></a>}</span>
+<span id="cb144-4"><a href=""></a></span>
+<span id="cb144-5"><a href=""></a>obj <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb144-6"><a href=""></a><span class="fu">f</span>(<span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1961,25 +1860,127 @@ $median
 <h2>Scope of variables - Rule 4</h2>
 <p>The consequence of rule 3 is that a function cannot modify a global object:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href=""></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb153-2"><a href=""></a>  obj <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb153-3"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Value of obj within the function: "</span>, obj)</span>
-<span id="cb153-4"><a href=""></a>}</span>
-<span id="cb153-5"><a href=""></a></span>
-<span id="cb153-6"><a href=""></a>obj <span class="ot">&lt;-</span> <span class="dv">3</span></span>
-<span id="cb153-7"><a href=""></a><span class="fu">f</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb146"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb146-1"><a href=""></a>f <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb146-2"><a href=""></a>  obj <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb146-3"><a href=""></a>  <span class="fu">message</span>(<span class="st">"Value of obj within the function: "</span>, obj)</span>
+<span id="cb146-4"><a href=""></a>}</span>
+<span id="cb146-5"><a href=""></a></span>
+<span id="cb146-6"><a href=""></a>obj <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb146-7"><a href=""></a><span class="fu">f</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
 <pre><code>Value of obj within the function: 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href=""></a>obj</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb148"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb148-1"><a href=""></a>obj</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
 </div>
 <!-- TO DO -->
 <p>et voir si j’ai besoin de revenir là dessus : https://juba.github.io/tidyverse/14-fonctions.html#les-fonctions-comme-objets</p>
+</section></section>
+<section>
+<section id="saving-objects" class="title-slide slide level1 center">
+<h1>Saving objects</h1>
+<p><span style="font-size: 30px">We have seen how to export data frames to CSV files, plot to image files. But in R, we can also save <strong>objects</strong> in a way that retains their internal structure and type.</span></p>
+<p><span style="font-size: 30px">In R, almost everything is an object (including vectors, lists, data frames, functions, models, and plots). This makes it possible to save and reload them exactly as they were.</span></p>
+<aside class="notes">
+<p>so what we are going to see works with any type of object</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="saving-a-single-object" class="slide level2">
+<h2>Saving a single object</h2>
+<p>We can save a single object to a <strong>.rds file</strong> using the function <span style="color:indianred;">saveRDS</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb150"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb150-1"><a href=""></a><span class="fu">saveRDS</span>(vec_name, <span class="co"># object</span></span>
+<span id="cb150-2"><a href=""></a>     <span class="at">file =</span> <span class="st">"data/my_vec.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<div class="fragment">
+<p>A <em>.rds</em> can be open with <span style="color:indianred;">readRDS</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb151"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href=""></a><span class="fu">readRDS</span>(<span class="st">"data/my_vec.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Lucas"   "Gabriel" "Ana"     "Maria"   "João"   </code></pre>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>This only reads the object, so we would need to assign it to an object to load it into the environment.</p>
+<p>The name of an object is <strong>not preserved</strong> when saved as <em>.rds</em>.</p>
+</div>
+</section>
+<section id="saving-one-or-several-objects" class="slide level2">
+<h2>Saving one or several objects</h2>
+<p>We can save one or multiple objects into a single <strong>.RData</strong> file using the function <span style="color:indianred;">save</span>:</p>
+<p>Let’s save some objects that we will use in the next session:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb153"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb153-1"><a href=""></a><span class="fu">save</span>(dt_Likert, recode_Likert, <span class="co">#multiple objects</span></span>
+<span id="cb153-2"><a href=""></a>     <span class="at">file =</span> <span class="st">"data/usefull_object.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<div class="fragment">
+<p>A <em>.Rdata</em> can be open with <span style="color:indianred;">load</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb154"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb154-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/usefull_object.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<div class="fragment">
+<p>This loads <strong>all</strong> the objects contained in the file directly into the environment.</p>
+<p>The name of the objects are <strong>preserved</strong>.</p>
+</div>
+</section>
+<section id="saving-the-entire-workspace" class="slide level2">
+<h2>Saving the entire workspace</h2>
+<p>All the objects of a work session can be saved together as a <strong>.RData file</strong> using the function <span style="color:indianred;">save.image</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb155"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb155-1"><a href=""></a><span class="fu">save.image</span>(<span class="at">file =</span> <span class="st">"data/my_work_space.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<div class="fragment">
+<p>and restored with <span style="color:indianred;">load</span>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb156"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb156-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/my_work_space.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<aside class="notes">
+<p>this can be usefull to save time, but can cause problem of reproductability is the code is modified, so use it with care</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section id="acknowledgments" class="title-slide slide level1 smaller center">
 <h1>Acknowledgments</h1>

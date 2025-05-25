@@ -368,91 +368,6 @@ rpois(n = 10,
 
 
 
-# Saving objects
-
-[We have seen how to export data frames to CSV files, plot to image files. But in R, we can also save **objects** in a way that retains their internal structure and type.]{style="font-size: 30px"}
-
-[In R, almost everything is an object (including vectors, lists, data frames, functions, models, and plots). This makes it possible to save and reload them exactly as they were.]{style="font-size: 30px"}
-
-::: notes
-so what we are going to see works with any type of object
-:::
-
-## Saving a single object
-
-We can save a single object to a **.rds file** using the function [saveRDS]{style="color:indianred;"}:
-
-```{r}
-saveRDS(vec_name, # object
-     file = "data/my_vec.rds")
-```
-
-::: fragment
-
-A *.rds* can be open with [readRDS]{style="color:indianred;"}:
-
-```{r}
-readRDS("data/my_vec.rds")
-```
-
-:::
-
-::: fragment
-
-This only reads the object, so we would need to assign it to an object to load it into the environment.
-
-The name of an object is **not preserved** when saved as *.rds*.
-
-:::
-
-## Saving one or several objects
-
-We can save one or multiple objects into a single **.RData** file using the function [save]{style="color:indianred;"}:
-
-```{r}
-save(vec_name, vec_num, #multiple object
-     file = "data/my_data.RData")
-```
-
-::: fragment
-
-A *.Rdata* can be open with [load]{style="color:indianred;"}:
-
-```{r}
-load("data/my_data.RData")
-```
-
-:::
-
-::: fragment
-
-This loads **all** the objects contained in the file directly into the environment.
-
-The name of the objects are **preserved**.
-
-:::
-
-## Saving the entire workspace
-
-All the objects of a work session can be saved together as a **.RData file** using the function [save.image]{style="color:indianred;"}:
-
-```{r, eval=FALSE}
-save.image(file = "data/my_work_space.RData")
-```
-
-::: fragment
-
-and restored with [load]{style="color:indianred;"}:
-
-```{r, eval = FALSE}
-load("data/my_work_space.RData")
-```
-
-:::
-
-::: notes
-this can be usefull to save time, but can cause problem of reproductability is the code is modified, so use it with care
-:::
 
 
 # Writing your own functions
@@ -1244,10 +1159,97 @@ obj
 et voir si j'ai besoin de revenir là dessus : https://juba.github.io/tidyverse/14-fonctions.html#les-fonctions-comme-objets
 
 
+# Saving objects
+
+[We have seen how to export data frames to CSV files, plot to image files. But in R, we can also save **objects** in a way that retains their internal structure and type.]{style="font-size: 30px"}
+
+[In R, almost everything is an object (including vectors, lists, data frames, functions, models, and plots). This makes it possible to save and reload them exactly as they were.]{style="font-size: 30px"}
+
+::: notes
+so what we are going to see works with any type of object
+:::
+
+## Saving a single object
+
+We can save a single object to a **.rds file** using the function [saveRDS]{style="color:indianred;"}:
+
+```{r}
+saveRDS(vec_name, # object
+     file = "data/my_vec.rds")
+```
+
+::: fragment
+
+A *.rds* can be open with [readRDS]{style="color:indianred;"}:
+
+```{r}
+readRDS("data/my_vec.rds")
+```
+
+:::
+
+::: fragment
+
+This only reads the object, so we would need to assign it to an object to load it into the environment.
+
+The name of an object is **not preserved** when saved as *.rds*.
+
+:::
+
+## Saving one or several objects
+
+We can save one or multiple objects into a single **.RData** file using the function [save]{style="color:indianred;"}:
+
+Let's save some objects that we will use in the next session:
+
+```{r}
+save(dt_Likert, recode_Likert, #multiple objects
+     file = "data/usefull_object.RData")
+```
+
+::: fragment
+
+A *.Rdata* can be open with [load]{style="color:indianred;"}:
+
+```{r, eval = FALSE}
+load("data/usefull_object.RData")
+```
+
+:::
+
+::: fragment
+
+This loads **all** the objects contained in the file directly into the environment.
+
+The name of the objects are **preserved**.
+
+:::
+
+## Saving the entire workspace
+
+All the objects of a work session can be saved together as a **.RData file** using the function [save.image]{style="color:indianred;"}:
+
+```{r, eval=FALSE}
+save.image(file = "data/my_work_space.RData")
+```
+
+::: fragment
+
+and restored with [load]{style="color:indianred;"}:
+
+```{r, eval = FALSE}
+load("data/my_work_space.RData")
+```
+
+:::
+
+::: notes
+this can be usefull to save time, but can cause problem of reproductability is the code is modified, so use it with care
+:::
 
 
 
-# Acknowledgments {.smaller}
+## Acknowledgments {.smaller}
 
 ::: {.nonincremental}
 
@@ -1257,13 +1259,13 @@ et voir si j'ai besoin de revenir là dessus : https://juba.github.io/tidyverse/
 
 :::
 
-# Ressources
+## Ressources
 
 ::: {.nonincremental}
 
-* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*  - Chapter on functions [in English](https://r4ds.had.co.nz/functions.html) and [in Portuguese](https://pt.r4ds.hadley.nz/functions.html){preview-link="false"}
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*  - Chapter on functions [in English](https://r4ds.had.co.nz/functions.html) and [in Portuguese](https://pt.r4ds.hadley.nz/iteration.html){preview-link="false"}
 
-* Wickham H. *Advanced R*  - Chapter on functions [in English](https://adv-r.hadley.nz/functions.html){preview-link="false"}
+* Wickham H. *Advanced R*  - Chapter on functions [in English](https://adv-r.hadley.nz/control-flow.html){preview-link="false"}
 
 :::
 
