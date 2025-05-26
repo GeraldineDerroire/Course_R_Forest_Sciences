@@ -799,7 +799,7 @@ cor(hills$dist_sd, hills$climb_sd)
 :::
 
 ::: fragment 
-[We also check that the VIF (*variance inflation factor*):]{style="font-size: 30px"}
+[We can also check the VIF (*variance inflation factor*), using the function [vif]{style="color:indianred;"} from the package [car]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ```{r}
 vif(mod_hills2)
@@ -1126,7 +1126,7 @@ Some data are by nature not normally distributed, so we cannot model them with a
 
 ::: {.nonincremental}
 
-* Lilja D.J. & Linse G.M. * Linear regression using R - An introduction to data modeling* [in English](https://conservancy.umn.edu/server/api/core/bitstreams/2a91814c-7194-4f39-aefb-c2babb7fb582/content){preview-link="false"}
+* Lilja D.J. & Linse G.M. *Linear regression using R - An introduction to data modeling* [in English](https://conservancy.umn.edu/server/api/core/bitstreams/2a91814c-7194-4f39-aefb-c2babb7fb582/content){preview-link="false"}
 
 * DataCamp ressources on linear regression in Portuguese  [here](https://www.datacamp.com/pt/tutorial/linear-regression-R){preview-link="false"}, [here](https://www.datacamp.com/pt/tutorial/simple-linear-regression){preview-link="false"} and [here](https://www.datacamp.com/pt/tutorial/multiple-linear-regression-r-tutorial){preview-link="false"}
 

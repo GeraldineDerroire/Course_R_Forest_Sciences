@@ -7,8 +7,253 @@ execute:
   eval: false 
 ---
 
-faire le VIF sur Iris si pas fait dans le cours
 
-travailler avec le climat des villes du monde?
+Load the packages of the *tidyverse*
+ 
+```{r}
+library(tidyverse)
+```
 
-VOIR LES LAB DE Marchand
+# DATA BLABLA TITRE
+
+BLABLA DATA, where are the data...
+obj: explain species
+
+power relationship
+
+* Load the data as a tibble
+
+```{r}
+dt <- read_csv("data/britain_species.csv")
+summary(dt)
+```
+
+* Transform the variable *soil_types* to a factor
+
+```{r}
+dt <- dt %>% 
+  mutate(soil_types = as.factor(soil_types))
+```
+
+* Count the number of island per soil type
+
+```{r}
+dt  %>% count(soil_types) 
+```
+
+* Let's remove the soil types 4, 5, 6 and 16 that are poorly represented in the data set
+
+```{r}
+dt <- dt %>% 
+  filter(soil_types %in% c(1, 2, 3))
+
+# alternative
+  # dt <- dt %>% 
+  #   filter(!soil_types %in% c(4, 5, 6, 16))
+```
+
+
+# Simple linear regression
+
+blabla linearisation
+
+* Explore graphically the relationship between the log-transformed area and the log-transformed number of species (variable *species*) 
+
+```{r}
+dt %>% 
+  ggplot(aes(x = log(area), y = log(species))) + 
+  geom_point() + 
+  geom_smooth(method = "lm")
+```
+
+* Fit the log-log model, look at the model results and interpret them
+
+EQUATION
+
+```{r}
+mod_1 <- lm(log(species) ~ log(area), data = dt)
+summary(mod_1)
+```
+<!-- 
+* significant positive effect of the log(area)
+* moderate goodness of fit (R2)
+-->
+
+* Do the model validation
+
+```{r}
+plot(mod_1, which = 1)
+```
+
+<!-- 
+* homoscedasticity: not too bad
+* residuals independant of fitted values
+-->
+
+```{r}
+plot(mod_1, which = 2)
+```
+<!-- 
+normality of the residuals... not perfect 
+-->
+
+
+```{r}
+plot(mod_1, which = 4)
+```
+
+<!--
+No strong leverage effect
+-->
+
+# Multiple linear regression
+
+BLABLA, not great R2, let's try to add some variables
+
+* Let's first explore graphically the correlation between all pairs of numerical variables *area* (log-transformed), *elevation*, *latitude*, *dist_britain* (using the package GGally). What do you conclude?
+
+```{r}
+dt <- dt %>% 
+  mutate(log_area = log(area))
+
+GGally::ggpairs(dt, columns = c("log_area", "elevation", "latitude", "dist_britain"))
+```
+
+<!--
+log(area) and elevation correlated
+dist_britan and latitude correlated
+=> don't include them all (and too many for the data we have)
+-->
+
+* Let's also make use boxplots to explore graphically the relationship between these 4 variables and the type of soil. What do you conclude?
+
+```{r}
+g1 <- dt %>% 
+  ggplot(aes(x= soil_types, y= log_area)) + geom_boxplot()
+g2 <- dt %>% 
+  ggplot(aes(x= soil_types, y= elevation)) + geom_boxplot()
+g3 <- dt %>% 
+  ggplot(aes(x= soil_types, y= latitude)) + geom_boxplot()
+g4 <- dt %>% 
+  ggplot(aes(x= soil_types, y= dist_britain)) + geom_boxplot()
+library(patchwork)
+(g1 + g2) / (g3 + g4)
+```
+<!-- 
+soil type too correlated with log_area...
+-->
+
+* Fit the following model, look at the model results and interpret them
+
+GIVE THE EQUATION
+don't standardise the variables
+
+```{r}
+mod_2 <- lm(log(species) ~ log(area) + latitude, data = dt)
+summary(mod_2)
+```
+<!--
+* Goodness of fit (R2) much better
+* log(area) and latitude both have a significant effect
+* number of species increases with area
+* number of species decreases with latitude
+--> 
+
+* Do the model validation
+
+```{r}
+plot(mod_2, which = 1)
+```
+
+<!-- 
+* homoscedasticity: not too bad
+* residuals independent of fitted values
+* three obs concerning
+-->
+
+```{r}
+plot(mod_2, which = 2)
+```
+<!-- 
+normality of the residuals
+three obs concerning
+-->
+
+
+```{r}
+plot(mod_2, which = 4)
+```
+
+<!--
+No strong leverage effect but three obs concerning
+-->
+
+```{r}
+lindia::gg_resX(mod_2, ncol = 2)
+```
+<!-- 
+ok
+--> 
+
+* Check the VIF (from library *car*) to check for the absence of collinarity between the explanatory variables
+
+```{r}
+car::vif(mod_2)
+```
+<!-- ok -->
+
+
+# Presenting the result of the best model
+
+* Compare the AIC of the two models. Which is the best one?
+
+```{r}
+list_mod <- list(mod_1, mod_2)
+AICcmodavg::aictab(list_mod)
+```
+<!-- best model is model 2 -->
+
+* Present the coefficients in a table
+
+```{r}
+gtsummary::tbl_regression(mod_2, intercept = TRUE)
+```
+
+* Present the result graphically
+
+d'abord area avec latutude fixé à sa moyenne
+
+```{r}
+preds4area <- ggpredict(mod_2, terms = "area")
+preds4area
+str(preds4area)
+```
+
+```{r}
+g_preds_area <- ggplot(preds4area, aes(x = x, y = predicted)) +
+  geom_line() + 
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.2) + 
+  geom_point(data = dt, aes(x = area, y = species)) +
+  labs(x = "Area", y = "Species number") +
+  theme_minimal()
+```
+
+puis latitude avec area fixé à sa moyenne
+
+```{r}
+preds4lat <- ggpredict(mod_2, terms = "latitude")
+preds4lat
+str(preds4lat)
+```
+
+```{r}
+g_preds_lat <- ggplot(preds4lat, aes(x = x, y = predicted)) +
+  geom_line() + 
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.2) + 
+  geom_point(data = dt, aes(x = latitude, y = species)) +
+  labs(x = "Latitude", y = "Species number") +
+  theme_minimal()
+```
+
+
+# For next time

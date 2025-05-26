@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-11">
+  <meta name="dcterms.date" content="2025-05-25">
   <title>Statistics with R - session 2 - Linear regressions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-11</p>
+  <p class="date">2025-05-25</p>
 </section>
 <section>
 <section id="section" class="title-slide slide level1 center">
@@ -1450,7 +1450,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 <div class="fragment">
-<p><span style="font-size: 30px">We also check that the VIF (<em>variance inflation factor</em>):</span></p>
+<p><span style="font-size: 30px">We can also check the VIF (<em>variance inflation factor</em>), using the function <span style="color:indianred;">vif</span> from the package <span style="color:indianred;">car</span>:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="fu">vif</span>(mod_hills2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -2309,13 +2309,13 @@ hills_climb 3 342.40      56.11   0.00   1.00 -167.81</code></pre>
 </ul>
 <p><span class="fragment"><span style="font-size: 30px">💡 See <a href="https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/" data-preview-link="false">here</a> and <a href="https://rpubs.com/Julian_Sampedro/1047952" data-preview-link="false">here</a> for detailed explanations of the Poisson regression.</span></span></p>
 </section></section>
-<section id="acknowledgments" class="title-slide slide level1 smaller center">
+<section id="acknowledgments" class="title-slide slide level1 center">
 <h1>Acknowledgments</h1>
 <div>
 <ul>
 <li><p>Marchand P. <em>Analyses et modélisation des données écologiques</em> <a href="https://pmarchand1.github.io/ECL7102/" data-preview-link="false">in French</a></p></li>
 <li><p>Marcon E. <em>cours-R-Geeft</em> <a href="https://ericmarcon.github.io/Cours-R-Geeft/" data-preview-link="false">in French</a></p></li>
-<li><p>Barnier J. <em>Guide-R Guide pour l’analyse de données d’enquêtes avec R</em> <a href="https://larmarange.github.io/guide-R/" data-preview-link="false">in French</a></p></li>
+<li><p>Lamarange J. <em>Guide-R Guide pour l’analyse de données d’enquêtes avec R</em> <a href="https://larmarange.github.io/guide-R/" data-preview-link="false">in French</a></p></li>
 </ul>
 </div>
 </section>
@@ -2324,10 +2324,17 @@ hills_climb 3 342.40      56.11   0.00   1.00 -167.81</code></pre>
 <h1>Ressources</h1>
 <div>
 <ul>
-<li><p>Lilja D.J. &amp; Linse G.M. * Linear regression using R - An introduction to data modeling* <a href="https://conservancy.umn.edu/server/api/core/bitstreams/2a91814c-7194-4f39-aefb-c2babb7fb582/content" data-preview-link="false">in English</a></p></li>
+<li><p>Lilja D.J. &amp; Linse G.M. <em>Linear regression using R - An introduction to data modeling</em> <a href="https://conservancy.umn.edu/server/api/core/bitstreams/2a91814c-7194-4f39-aefb-c2babb7fb582/content" data-preview-link="false">in English</a></p></li>
 <li><p>DataCamp ressources on linear regression in Portuguese <a href="https://www.datacamp.com/pt/tutorial/linear-regression-R" data-preview-link="false">here</a>, <a href="https://www.datacamp.com/pt/tutorial/simple-linear-regression" data-preview-link="false">here</a> and <a href="https://www.datacamp.com/pt/tutorial/multiple-linear-regression-r-tutorial" data-preview-link="false">here</a></p></li>
 </ul>
 </div>
+</section>
+
+<section id="ressources-to-go-further" class="title-slide slide level1 center">
+<h1>Ressources to go further</h1>
+<ul>
+<li class="fragment">DHARMa package (F. Hartig) for model diagnostic with GLM <a href="https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html" data-preview-link="false">vignette</a></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
