@@ -835,7 +835,7 @@ mean_diam(new_circ)
 try(mean_diam(new_circ))
 ```
 
-[We can specify **default** values that are taken by the arguments if no values is passed :]{style="font-size: 30px"}
+[We can specify **default** values that are taken by the arguments if no value is passed :]{style="font-size: 30px"}
 
 ```{r}
 mean_diam <- function(circ, 

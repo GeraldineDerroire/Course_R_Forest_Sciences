@@ -32,7 +32,7 @@ Let's load the package we will use
 library(tidyverse)
 ```
 
-and some objects we save last session.
+and some objects we saved last session
 
 ```{r}
 load("data/usefull_object.RData")
@@ -335,9 +335,9 @@ graph_var(vec_logical)
 
 ## Writing conditions
 
-[To write conditions, we use can:]{style="font-size: 30px"}
+[To write conditions, we can use:]{style="font-size: 30px"}
 
-* [logical operator: [<]{style="color:indianred;"}, [>]{style="color:indianred;"}, [<=]{style="color:indianred;"}, [>=]{style="color:indianred;"}, [%in%]{style="color:indianred;"}, [==]{style="color:indianred;"}, [!=]{style="color:indianred;"}, [any]{style="color:indianred;"}, [all]{style="color:indianred;"}...]{style="font-size: 30px"}
+* [logical operators: [<]{style="color:indianred;"}, [>]{style="color:indianred;"}, [<=]{style="color:indianred;"}, [>=]{style="color:indianred;"}, [%in%]{style="color:indianred;"}, [==]{style="color:indianred;"}, [!=]{style="color:indianred;"}, [any]{style="color:indianred;"}, [all]{style="color:indianred;"}...]{style="font-size: 30px"}
 
 * [type checking functions: [is.numeric]{style="color:indianred;"}, [is.character]{style="color:indianred;"}, [is.logical]{style="color:indianred;"}...]{style="font-size: 30px"}
 
@@ -799,6 +799,35 @@ for (m in seq_along(month.name)) {
 }
 ```
 
+## Example of loop
+
+::::: columns
+::: {.column width="80%"}
+
+[Let's build a [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence){preview-link="false"}, defined as:]{style="font-size: 30px"} 
+
+[$F_0 = 0$, $F_1 = 1$ and for $n>1$ $F_n = F_{n-1} + F_{n-2}$]{style="font-size: 30px"} 
+:::
+
+::: {.column width="20%"}
+![](fibonacci.png)
+:::
+:::::
+
+```{r}
+n = 20 # length of the sequence
+fib <- numeric(n) # Fibonacci sequence
+fib[1] <- 0 # F0
+fib[2] <- 1 # F1
+
+for (i in seq_along(fib)[3:n]) {
+  fib[i] <- fib[i - 1] + fib[i - 2]
+}
+
+fib
+```
+
+
 ## Output of a loop 
 
 [When a loop generates data, it is important to pre-allocate the output to the required size rather than grow it inside a loop, because pre-allocation avoids repeated memory copying and is significantly **faster** and **more efficient**, especially for large outputs]{style="font-size: 30px"}
@@ -1124,8 +1153,9 @@ vec_name %>% # vector of names created earlier
 ## [across]{style="color:indianred;"}: apply a function to tibble {.scrollable}
 
 [[across]{style="color:indianred;"} is a function of the package [dplyr]{style="color:indianred;"} used to apply a function to several columns of a tibble.]{style="font-size: 30px"}
+[[[across]{style="color:indianred;"} takes 2 arguments: the definition of the columns to transform, and the function to apply:]{style="font-size: 30px"}]{.fragment}
 
-[[[across]{style="color:indianred;"} takes 2 arguments: the definition of he columns to transform, and the function to apply:]{style="font-size: 30px"}]{.fragment}
+[[Let's use our function [recode_Likert]{style="color:indianred;"} to recode *dt_Likert*:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
@@ -1211,7 +1241,7 @@ iris_sub %>%
 
 ## [across]{style="color:indianred;"}: apply a function to tibble {.scrollable}
 
-[We can also use [where]{style="color:indianred;"} to specify the columns:]{style="font-size: 30px"}
+[We can also use [where]{style="color:indianred;"} to specify the columns with a condition:]{style="font-size: 30px"}
 
 ```{r}
 iris %>% summarise(across(
@@ -1309,11 +1339,13 @@ dt_sim
 ::: {.column width="60%"}
 
 ::: fragment 
-[We would like to add a random draw taken between Min and Max, for each row:]{style="font-size: 30px"}
+[We would like to add a random number drawn between Min and Max, for each row:]{style="font-size: 30px"}
 
 ```{r}
 dt_sim %>% 
-  mutate(rand_draw = runif(1, min = Min, max = Max))
+  mutate(rand_draw = runif(1, 
+                           min = Min, 
+                           max = Max))
 ```
 
 :::
