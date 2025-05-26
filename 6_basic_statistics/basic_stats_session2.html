@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-25">
+  <meta name="dcterms.date" content="2025-05-26">
   <title>Statistics with R - session 2 - Linear regressions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-25</p>
+  <p class="date">2025-05-26</p>
 </section>
 <section>
 <section id="section" class="title-slide slide level1 center">
@@ -697,29 +697,25 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="confidence-interval" class="slide level2">
 <h2>Confidence interval</h2>
 <p>The <strong>confidence interval</strong> is the interval of confidence of the mean predicted value of y (so of <span class="math inline">\(\mu\)</span>).</p>
-<p><span class="fragment"><span style="font-size: 30px">To calculate it, we can use the function <span style="color:indianred;">predict</span>, with the argument <em>interval = “confidence”</em>, on new data that we create for the prediction:</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">To calculate it, we can use the function <span style="color:indianred;">ggpredict</span> from the package <span style="color:indianred;">ggeffects</span>. The default give the confidence interval:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>new <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">D =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">10</span>, <span class="at">to =</span> <span class="dv">160</span>, <span class="at">by=</span> <span class="dv">10</span>)) <span class="co"># create new data</span></span>
-<span id="cb10-2"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new, </span>
-<span id="cb10-3"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"confidence"</span>) <span class="co"># calculate the confidence interval</span></span>
-<span id="cb10-4"><a href=""></a>new_conf <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(new, new_conf) <span class="co"># combine the two</span></span>
-<span id="cb10-5"><a href=""></a><span class="fu">slice_head</span>(new_conf, <span class="at">n=</span><span class="dv">3</span>) <span class="co"># visualise to check</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a><span class="co"># Get the prediction (default arguments gives the confidence interval)</span></span>
+<span id="cb10-2"><a href=""></a>preds_conf <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_dh_1, <span class="co"># model used for the prediction</span></span>
+<span id="cb10-3"><a href=""></a>                        <span class="at">terms =</span> <span class="st">"D"</span>) <span class="co"># explanatory variable</span></span>
+<span id="cb10-4"><a href=""></a><span class="fu">slice_head</span>(<span class="fu">as.data.frame</span>(preds_conf), <span class="at">n=</span><span class="dv">3</span>) <span class="co"># visualise the results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 4
-      D   fit   lwr   upr
-  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1    10  16.7  16.0  17.3
-2    20  20.1  19.6  20.6
-3    30  23.5  23.0  24.0</code></pre>
+<pre><code>   x predicted std.error conf.low conf.high group
+1 10  16.66305 0.3307480 16.01277  17.31333     1
+2 20  20.06975 0.2558984 19.56663  20.57287     1
+3 30  23.47645 0.2482784 22.98832  23.96459     1</code></pre>
 </div>
 </div>
 </div>
 <aside class="notes">
-<p>why do we create new data? to do less predictions than if we were using the observed D</p>
-<p>no need to take too many points because we have at line</p>
+<p>here the object is a dataframe and an object of class ggeffects so to visualise it better, look at it as a dataframe</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -734,20 +730,22 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="confidence-interval-1" class="slide level2">
 <h2>Confidence interval</h2>
-<p><span style="font-size: 30px">We can then plot the confidence interval:</span></p>
+<p><span style="font-size: 30px">We can then plot the prediction mean and confidence interval:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>gpred <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(new_conf, <span class="fu">aes</span>(<span class="at">x=</span> D)) <span class="sc">+</span></span>
-<span id="cb12-2"><a href=""></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> fit), <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> <span class="co"># prediction mean</span></span>
-<span id="cb12-3"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"darkgrey"</span>) <span class="sc">+</span> <span class="co"># CI</span></span>
-<span id="cb12-4"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> <span class="co"># observations</span></span>
-<span id="cb12-5"><a href=""></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb12-6"><a href=""></a>gpred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a>gpred_1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(preds_conf, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href=""></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># predicted mean</span></span>
+<span id="cb12-3"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="co"># confidence interval</span></span>
+<span id="cb12-4"><a href=""></a>              <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb12-5"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span> <span class="co"># data</span></span>
+<span id="cb12-6"><a href=""></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"D"</span>, <span class="at">y =</span> <span class="st">"H"</span>, <span class="at">title =</span> <span class="st">"Predicted H vs D"</span>) <span class="sc">+</span></span>
+<span id="cb12-7"><a href=""></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb12-8"><a href=""></a>gpred_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:70.0%"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-8-1.png" style="width:60.0%"></p>
 </figure>
 </div>
 </div>
@@ -756,20 +754,21 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="prediction-interval" class="slide level2 scrollable">
 <h2>Prediction interval</h2>
 <p>The <strong>prediction interval</strong> includes the uncertainty of the predicted mean (like the confidence interval) and the variability of individual prediction by taking into account the residual variance <span class="math inline">\(\sigma^2\)</span>. <span class="fragment">It is therefore wider than the confidence interval and contains most of the observations.</span></p>
-<p><span class="fragment"><span style="font-size: 30px">To calculate it, we can use the function <span style="color:indianred;">predict</span>, with the argument <em>interval = “prediction”</em>, on new data that we created for the prediction:</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">To calculate it, we can use the function <span style="color:indianred;">ggpredict</span>, with the argument <em>interval = “prediction”</em>:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a>new_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_dh_1, <span class="at">newdata =</span> new,</span>
-<span id="cb13-2"><a href=""></a>                    <span class="at">interval =</span> <span class="st">"prediction"</span>) <span class="co"># calculate the prediction interval</span></span>
-<span id="cb13-3"><a href=""></a>new_pred <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(new, new_pred)</span>
-<span id="cb13-4"><a href=""></a><span class="fu">slice_head</span>(new_pred) <span class="co"># visualise to check</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="co"># Get the prediction with prediction interval</span></span>
+<span id="cb13-2"><a href=""></a>preds_pred <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_dh_1, <span class="co"># model used for the prediction</span></span>
+<span id="cb13-3"><a href=""></a>                        <span class="at">terms =</span> <span class="st">"D"</span>, <span class="co"># explanatory variable</span></span>
+<span id="cb13-4"><a href=""></a>                        <span class="at">interval =</span> <span class="st">"prediction"</span>)</span>
+<span id="cb13-5"><a href=""></a><span class="fu">slice_head</span>(<span class="fu">as.data.frame</span>(preds_pred), <span class="at">n=</span><span class="dv">3</span>) <span class="co"># visualise the results</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
-      D   fit   lwr   upr
-  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1    10  16.7  7.25  26.1</code></pre>
+<pre><code>   x predicted std.error  conf.low conf.high group
+1 10  16.66305  4.788758  7.247962  26.07813     1
+2 20  20.06975  4.784171 10.663683  29.47582     1
+3 30  23.47645  4.783769 14.071174  32.88173     1</code></pre>
 </div>
 </div>
 </div>
@@ -778,11 +777,11 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Prediction interval</h2>
 <p><span style="font-size: 30px">We can then add the prediction interval to the plot:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>gpred <span class="ot">&lt;-</span> gpred <span class="sc">+</span></span>
-<span id="cb15-2"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> new_pred, <span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), </span>
-<span id="cb15-3"><a href=""></a>              <span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">color =</span> <span class="st">"lightgrey"</span>) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>gpred_1 <span class="ot">&lt;-</span> gpred_1 <span class="sc">+</span></span>
+<span id="cb15-2"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> preds_pred, <span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), </span>
+<span id="cb15-3"><a href=""></a>              <span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
 <span id="cb15-4"><a href=""></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb15-5"><a href=""></a>gpred</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-5"><a href=""></a>gpred_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -975,10 +974,10 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="presenting-the-results" class="slide level2">
 <h2>Presenting the results</h2>
-<p><span style="font-size: 30px">We have seen how to plot the results, but here we need to back-transform them to their original (non-logged) scale. We use the function <span style="color:indianred;">ggpredict</span> from the package <span style="color:indianred;">ggeffects</span>:</span></p>
+<p><span style="font-size: 30px">We have seen how to plot the results, but here we need to back-transform them to their original (non-logged) scale. By default, the function <span style="color:indianred;">ggpredict</span> back-transform the predictions:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="co"># Get predictions back on original scale</span></span>
-<span id="cb24-2"><a href=""></a>preds <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_dh_2, <span class="at">terms =</span> <span class="st">"D"</span>) <span class="co"># default gives the confidence interval</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-2"><a href=""></a>preds_conf <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_dh_2, <span class="at">terms =</span> <span class="st">"D"</span>) <span class="co"># default gives the confidence interval</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -987,7 +986,7 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
   scale.</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="co"># plot the results</span></span>
-<span id="cb26-2"><a href=""></a>g_preds_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(preds, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href=""></a>g_preds_2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(preds_conf, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span></span>
 <span id="cb26-3"><a href=""></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb26-4"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
 <span id="cb26-5"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> dt_nou, <span class="fu">aes</span>(<span class="at">x =</span> D, <span class="at">y =</span> H), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
@@ -1015,7 +1014,7 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span style="font-size: 30px">To add the prediction interval, we set the argument <em>interval</em> to “prediction”:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="co"># Get predictions back on original scale, with prediction interval</span></span>
-<span id="cb28-2"><a href=""></a>preds_pred <span class="ot">&lt;-</span> ggeffects<span class="sc">::</span><span class="fu">ggpredict</span>(mod_dh_2, <span class="at">terms =</span> <span class="st">"D"</span>, <span class="at">interval =</span> <span class="st">"prediction"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-2"><a href=""></a>preds_pred <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_dh_2, <span class="at">terms =</span> <span class="st">"D"</span>, <span class="at">interval =</span> <span class="st">"prediction"</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -1077,10 +1076,9 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a>fam3 <span class="ot">&lt;-</span> dt_nou <span class="sc">%&gt;%</span> <span class="fu">count</span>(family) <span class="sc">%&gt;%</span> <span class="co"># get the 3 most abundant families</span></span>
 <span id="cb32-2"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb32-3"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">3</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb32-4"><a href=""></a>  <span class="fu">select</span>(family)</span>
-<span id="cb32-5"><a href=""></a></span>
-<span id="cb32-6"><a href=""></a>dt_nou_sub <span class="ot">&lt;-</span> dt_nou <span class="sc">%&gt;%</span> <span class="fu">filter</span>(family <span class="sc">%in%</span> fam3<span class="sc">$</span>family) <span class="co"># select them</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-3"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">3</span>) </span>
+<span id="cb32-4"><a href=""></a></span>
+<span id="cb32-5"><a href=""></a>dt_nou_sub <span class="ot">&lt;-</span> dt_nou <span class="sc">%&gt;%</span> <span class="fu">filter</span>(family <span class="sc">%in%</span> fam3<span class="sc">$</span>family) <span class="co"># select them</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1276,7 +1274,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="standardising-explanatory-variables" class="slide level2">
 <h2>Standardising explanatory variables</h2>
-<p><span style="font-size: 30px">To compare the effects of the explanatory variables, we can standardise them using the function <span style="color:indianred;">scale</span>:</span></p>
+<p><span style="font-size: 30px">To compare the effects of the explanatory variables, we can (but we don’t necessarly need) standardise them using the function <span style="color:indianred;">scale</span>:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>hills <span class="ot">&lt;-</span> hills <span class="sc">%&gt;%</span> </span>
 <span id="cb47-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">dist_sd =</span> <span class="fu">as.numeric</span>(<span class="fu">scale</span>(dist)), <span class="co"># scale return a matrix so need to transform </span></span>
@@ -1483,31 +1481,27 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="presenting-the-results-4" class="slide level2">
 <h2>Presenting the results</h2>
-<p><span style="font-size: 30px">To represent graphically the effect of an explanatory variable, we can set the values of the other explanatory variables to a constant (for example their mean).</span> <span class="fragment"><span style="font-size: 30px">Here we represent the effect of <em>dist_sd</em> setting <em>climb_sd</em> at the mean, -1 sd, + 1 sd:</span></span></p>
+<p><span style="font-size: 30px">To represent graphically the effect of an explanatory variable, we can set the values of the other explanatory variables to a constant (for example their mean).</span></p>
+<p><span class="fragment"><span style="font-size: 30px">Here we represent the effect of <em>dist_sd</em> setting <em>climb_sd</em> to its mean. By default, the function <span style="color:indianred;">ggpredict</span> takes the values of explanatory variables not mentioned in the argument <em>terms</em> to their mean:</span></span></p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="co"># create new values for the prediction</span></span>
-<span id="cb60-2"><a href=""></a>hills_new_dist <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="co"># create a table with all the combinaison of </span></span>
-<span id="cb60-3"><a href=""></a>  <span class="at">dist_sd =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.2</span>), <span class="co"># new values for dist_sd</span></span>
-<span id="cb60-4"><a href=""></a>  <span class="at">climb_sd =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="co"># -1 sd, mean and +1 sd of climb_sd</span></span>
-<span id="cb60-5"><a href=""></a></span>
-<span id="cb60-6"><a href=""></a><span class="co"># predict for new values</span></span>
-<span id="cb60-7"><a href=""></a>hills_pred_dist <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_hills2, <span class="at">newdata =</span> hills_new_dist, <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
-<span id="cb60-8"><a href=""></a>hills_pred_dist <span class="ot">&lt;-</span> <span class="fu">cbind</span>(hills_new_dist, hills_pred_dist)</span>
-<span id="cb60-9"><a href=""></a></span>
-<span id="cb60-10"><a href=""></a><span class="co"># make the plot</span></span>
-<span id="cb60-11"><a href=""></a>p_mod2_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hills_pred_dist, <span class="fu">aes</span>(<span class="at">x =</span> dist_sd, <span class="at">y =</span> fit, </span>
-<span id="cb60-12"><a href=""></a>                            <span class="at">color =</span> <span class="fu">as.factor</span>(climb_sd), </span>
-<span id="cb60-13"><a href=""></a>                            <span class="at">fill =</span> <span class="fu">as.factor</span>(climb_sd))) <span class="sc">+</span></span>
-<span id="cb60-14"><a href=""></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb60-15"><a href=""></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="co"># Get the prediction (default arguments gives the confidence interval)</span></span>
+<span id="cb60-2"><a href=""></a>pred_dist_conf <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_hills2, <span class="at">terms =</span> <span class="st">"dist_sd"</span>)</span>
+<span id="cb60-3"><a href=""></a></span>
+<span id="cb60-4"><a href=""></a><span class="co"># Make the plot</span></span>
+<span id="cb60-5"><a href=""></a>p_modhills2_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pred_dist_conf, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span> </span>
+<span id="cb60-6"><a href=""></a>  <span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"blue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span> <span class="co"># predicted mean for climb_sd set to its mean</span></span>
+<span id="cb60-7"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high), <span class="co"># confidence interval</span></span>
+<span id="cb60-8"><a href=""></a>              <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb60-9"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> hills, <span class="fu">aes</span>(<span class="at">x =</span> dist_sd, <span class="at">y =</span> time), <span class="at">alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span> <span class="co"># data </span></span>
+<span id="cb60-10"><a href=""></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"dist_sd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </div>
+<p><span class="fragment"><span style="font-size: 25px">We could also represent <em>climb_sd</em> with <em>dist_sd</em> set to its mean.</span></span></p>
 <aside class="notes">
-<p>as the variables are standardise, we can take -1, 0, 1</p>
 <p>We can obviously do the same for climb_sd</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1524,7 +1518,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="presenting-the-results-5" class="slide level2">
 <h2>Presenting the results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a>p_mod2_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a>p_modhills2_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -1535,33 +1529,125 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
-<aside class="notes">
-<p>the line are parallel</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
-<section id="presenting-the-results-6" class="slide level2">
+<section id="presenting-the-results-6" class="slide level2 smaller">
 <h2>Presenting the results</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><span style="font-size: 30px">If we have many explanatory variables, we can plot all the coefficients with their confidence interval, using the function <span style="color:indianred;">ggcoef_model</span> of the package <span style="color:indianred;">ggstats</span>:</span></p>
+<p><span style="font-size: 30px">We could also represent the effect of <em>dist_sd</em> setting climb_sd at the mean, -1 sd, + 1 sd. For that, we give several explanatory variables to <span style="color:indianred;">ggpredict</span>. All variables except the first one will be set to meaningful values:</span></p>
+<div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="fu">ggcoef_model</span>(mod_hills2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="co"># Get the prediction (default arguments gives the confidence interval)</span></span>
+<span id="cb62-2"><a href=""></a>pred_dist_conf <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_hills2, </span>
+<span id="cb62-3"><a href=""></a>                            <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"dist_sd"</span>, <span class="co"># to predict with</span></span>
+<span id="cb62-4"><a href=""></a>                                      <span class="st">"climb_sd"</span>)) <span class="co"># will be set to a few meaningfull values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px"><em>The values taken for climb_sd are factors, in the variable group.</em></span></span></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a>pred_dist_conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># Predicted values of time
+
+climb_sd: -1
+
+dist_sd | Predicted |         95% CI
+------------------------------------
+  -1.00 |      5.61 |  -1.96,  13.19
+  -0.73 |     14.94 |   7.72,  22.15
+  -0.46 |     24.26 |  16.95,  31.58
+  -0.19 |     33.59 |  25.73,  41.45
+   0.36 |     52.25 |  42.33,  62.17
+   3.71 |    167.28 | 136.93, 197.62
+
+climb_sd: 0
+
+dist_sd | Predicted |         95% CI
+------------------------------------
+  -1.00 |     23.50 |  15.05,  31.95
+  -0.73 |     32.83 |  25.76,  39.89
+  -0.46 |     42.15 |  36.23,  48.08
+  -0.19 |     51.48 |  46.27,  56.69
+   0.36 |     70.13 |  64.53,  75.73
+   3.71 |    185.17 | 159.59, 210.74
+
+climb_sd: 1
+
+dist_sd | Predicted |         95% CI
+------------------------------------
+  -1.00 |     41.39 |  28.09,  54.69
+  -0.73 |     50.71 |  38.92,  62.51
+  -0.46 |     60.04 |  49.64,  70.44
+  -0.19 |     69.37 |  60.20,  78.53
+   0.36 |     88.02 |  80.55,  95.49
+   3.71 |    203.05 | 181.18, 224.93</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Not all rows are shown in the output. Use `print(..., n = Inf)` to show
+  all rows.</code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:60%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="fu">slice_head</span>(<span class="fu">as.data.frame</span>(pred_dist_conf), <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>          x predicted std.error  conf.low conf.high group
+1 -1.000839  5.611072  3.718481 -1.963225  13.18537    -1
+2 -1.000839 23.499302  4.147172 15.051790  31.94681     0
+3 -1.000839 41.387532  6.528790 28.088823  54.68624     1</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="presenting-the-results-7" class="slide level2 smaller">
+<h2>Presenting the results</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a><span class="co"># Make the plot</span></span>
+<span id="cb68-2"><a href=""></a>p_modhills2_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pred_dist_conf, </span>
+<span id="cb68-3"><a href=""></a>                           <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span> </span>
+<span id="cb68-4"><a href=""></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> group), <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># a color per set values of climb_sd </span></span>
+<span id="cb68-5"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high, <span class="at">colour =</span> group), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb68-6"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> hills, <span class="fu">aes</span>(<span class="at">x =</span> dist_sd, <span class="at">y =</span> time, <span class="co"># data</span></span>
+<span id="cb68-7"><a href=""></a>                               <span class="at">size =</span> climb_sd), <span class="co"># size proportional to climb_sd</span></span>
+<span id="cb68-8"><a href=""></a>             <span class="at">alpha =</span> <span class="fl">0.6</span>)  <span class="sc">+</span></span>
+<span id="cb68-9"><a href=""></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"dist_sd"</span>)</span>
+<span id="cb68-10"><a href=""></a>p_modhills2_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-39-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-42-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="presenting-the-results-8" class="slide level2">
+<h2>Presenting the results</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">If we have many explanatory variables, we can plot all the coefficients with their confidence interval, using the function <span style="color:indianred;">ggcoef_model</span> of the package <span style="color:indianred;">ggstats</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a><span class="fu">ggcoef_model</span>(mod_hills2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1570,28 +1656,28 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="fragment">
 <p><span style="font-size: 30px">or present a table of the coefficients, using <span style="color:indianred;">tbl_regression</span> from the package <span style="color:indianred;">gtsummary</span></span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a><span class="fu">tbl_regression</span>(mod_hills2, </span>
-<span id="cb63-2"><a href=""></a>               <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a><span class="fu">tbl_regression</span>(mod_hills2, </span>
+<span id="cb70-2"><a href=""></a>               <span class="at">intercept =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
-<div id="vtdakgmmax" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vtdakgmmax table {
+<div id="lqpzeswuoz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lqpzeswuoz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vtdakgmmax thead, #vtdakgmmax tbody, #vtdakgmmax tfoot, #vtdakgmmax tr, #vtdakgmmax td, #vtdakgmmax th {
+#lqpzeswuoz thead, #lqpzeswuoz tbody, #lqpzeswuoz tfoot, #lqpzeswuoz tr, #lqpzeswuoz td, #lqpzeswuoz th {
   border-style: none;
 }
 
-#vtdakgmmax p {
+#lqpzeswuoz p {
   margin: 0;
   padding: 0;
 }
 
-#vtdakgmmax .gt_table {
+#lqpzeswuoz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1617,12 +1703,12 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-left-color: #D3D3D3;
 }
 
-#vtdakgmmax .gt_caption {
+#lqpzeswuoz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vtdakgmmax .gt_title {
+#lqpzeswuoz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1634,7 +1720,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-width: 0;
 }
 
-#vtdakgmmax .gt_subtitle {
+#lqpzeswuoz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1646,7 +1732,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-width: 0;
 }
 
-#vtdakgmmax .gt_heading {
+#lqpzeswuoz .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1658,13 +1744,13 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vtdakgmmax .gt_bottom_border {
+#lqpzeswuoz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vtdakgmmax .gt_col_headings {
+#lqpzeswuoz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1679,7 +1765,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vtdakgmmax .gt_col_heading {
+#lqpzeswuoz .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1699,7 +1785,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#vtdakgmmax .gt_column_spanner_outer {
+#lqpzeswuoz .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1711,15 +1797,15 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 4px;
 }
 
-#vtdakgmmax .gt_column_spanner_outer:first-child {
+#lqpzeswuoz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vtdakgmmax .gt_column_spanner_outer:last-child {
+#lqpzeswuoz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vtdakgmmax .gt_column_spanner {
+#lqpzeswuoz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1731,11 +1817,11 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   width: 100%;
 }
 
-#vtdakgmmax .gt_spanner_row {
+#lqpzeswuoz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vtdakgmmax .gt_group_heading {
+#lqpzeswuoz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1761,7 +1847,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   text-align: left;
 }
 
-#vtdakgmmax .gt_empty_group_heading {
+#lqpzeswuoz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1776,15 +1862,15 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: middle;
 }
 
-#vtdakgmmax .gt_from_md > :first-child {
+#lqpzeswuoz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vtdakgmmax .gt_from_md > :last-child {
+#lqpzeswuoz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vtdakgmmax .gt_row {
+#lqpzeswuoz .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1803,7 +1889,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   overflow-x: hidden;
 }
 
-#vtdakgmmax .gt_stub {
+#lqpzeswuoz .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1816,7 +1902,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#vtdakgmmax .gt_stub_row_group {
+#lqpzeswuoz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1830,15 +1916,15 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   vertical-align: top;
 }
 
-#vtdakgmmax .gt_row_group_first td {
+#lqpzeswuoz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vtdakgmmax .gt_row_group_first th {
+#lqpzeswuoz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vtdakgmmax .gt_summary_row {
+#lqpzeswuoz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1848,16 +1934,16 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#vtdakgmmax .gt_first_summary_row {
+#lqpzeswuoz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vtdakgmmax .gt_first_summary_row.thick {
+#lqpzeswuoz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vtdakgmmax .gt_last_summary_row {
+#lqpzeswuoz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1867,7 +1953,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#vtdakgmmax .gt_grand_summary_row {
+#lqpzeswuoz .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1877,7 +1963,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#vtdakgmmax .gt_first_grand_summary_row {
+#lqpzeswuoz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1887,7 +1973,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-top-color: #D3D3D3;
 }
 
-#vtdakgmmax .gt_last_grand_summary_row_top {
+#lqpzeswuoz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1897,11 +1983,11 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#vtdakgmmax .gt_striped {
+#lqpzeswuoz .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vtdakgmmax .gt_table_body {
+#lqpzeswuoz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1910,7 +1996,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-bottom-color: #D3D3D3;
 }
 
-#vtdakgmmax .gt_footnotes {
+#lqpzeswuoz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1924,7 +2010,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vtdakgmmax .gt_footnote {
+#lqpzeswuoz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1933,7 +2019,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#vtdakgmmax .gt_sourcenotes {
+#lqpzeswuoz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1947,7 +2033,7 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   border-right-color: #D3D3D3;
 }
 
-#vtdakgmmax .gt_sourcenote {
+#lqpzeswuoz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1955,72 +2041,72 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
   padding-right: 5px;
 }
 
-#vtdakgmmax .gt_left {
+#lqpzeswuoz .gt_left {
   text-align: left;
 }
 
-#vtdakgmmax .gt_center {
+#lqpzeswuoz .gt_center {
   text-align: center;
 }
 
-#vtdakgmmax .gt_right {
+#lqpzeswuoz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vtdakgmmax .gt_font_normal {
+#lqpzeswuoz .gt_font_normal {
   font-weight: normal;
 }
 
-#vtdakgmmax .gt_font_bold {
+#lqpzeswuoz .gt_font_bold {
   font-weight: bold;
 }
 
-#vtdakgmmax .gt_font_italic {
+#lqpzeswuoz .gt_font_italic {
   font-style: italic;
 }
 
-#vtdakgmmax .gt_super {
+#lqpzeswuoz .gt_super {
   font-size: 65%;
 }
 
-#vtdakgmmax .gt_footnote_marks {
+#lqpzeswuoz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vtdakgmmax .gt_asterisk {
+#lqpzeswuoz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vtdakgmmax .gt_indent_1 {
+#lqpzeswuoz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vtdakgmmax .gt_indent_2 {
+#lqpzeswuoz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vtdakgmmax .gt_indent_3 {
+#lqpzeswuoz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vtdakgmmax .gt_indent_4 {
+#lqpzeswuoz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vtdakgmmax .gt_indent_5 {
+#lqpzeswuoz .gt_indent_5 {
   text-indent: 25px;
 }
 
-#vtdakgmmax .katex-display {
+#lqpzeswuoz .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#vtdakgmmax div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lqpzeswuoz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -2099,8 +2185,8 @@ F-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Interaction</h2>
 <p><span style="font-size: 30px">To specify an interaction, we use <span style="color:indianred;">*</span> in the formula:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a>mod_hills_inter <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd <span class="sc">*</span> climb_sd, hills)</span>
-<span id="cb64-2"><a href=""></a><span class="fu">summary</span>(mod_hills_inter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href=""></a>mod_hills_inter <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd <span class="sc">*</span> climb_sd, hills)</span>
+<span id="cb71-2"><a href=""></a><span class="fu">summary</span>(mod_hills_inter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2131,23 +2217,20 @@ F-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16</code></pre>
 <h2>Visualisation of a model with interaction</h2>
 <p><span style="font-size: 30px">We can make a graph of the predictions as we did for the model without interaction:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="co"># create new values for the prediction</span></span>
-<span id="cb66-2"><a href=""></a>hills_inter_new_dist <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>( <span class="co"># create a table with all the combinaison of </span></span>
-<span id="cb66-3"><a href=""></a>  <span class="at">dist_sd =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="fl">0.2</span>), <span class="co"># new values for dist_sd</span></span>
-<span id="cb66-4"><a href=""></a>  <span class="at">climb_sd =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="co"># -1 sd, mean and +1 sd of climb_sd</span></span>
-<span id="cb66-5"><a href=""></a></span>
-<span id="cb66-6"><a href=""></a><span class="co"># predict for new values</span></span>
-<span id="cb66-7"><a href=""></a>hills_inter_pred_dist <span class="ot">&lt;-</span> <span class="fu">predict</span>(mod_hills_inter, </span>
-<span id="cb66-8"><a href=""></a>                                 <span class="at">newdata =</span> hills_inter_new_dist, </span>
-<span id="cb66-9"><a href=""></a>                                 <span class="at">interval =</span> <span class="st">"confidence"</span>)</span>
-<span id="cb66-10"><a href=""></a>hills_inter_new_dist <span class="ot">&lt;-</span> <span class="fu">cbind</span>(hills_inter_new_dist, hills_inter_pred_dist)</span>
-<span id="cb66-11"><a href=""></a></span>
-<span id="cb66-12"><a href=""></a><span class="co"># make the plot</span></span>
-<span id="cb66-13"><a href=""></a>p_mod_inter_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(hills_inter_new_dist, <span class="fu">aes</span>(<span class="at">x =</span> dist_sd, <span class="at">y =</span> fit, </span>
-<span id="cb66-14"><a href=""></a>                            <span class="at">color =</span> <span class="fu">as.factor</span>(climb_sd), </span>
-<span id="cb66-15"><a href=""></a>                            <span class="at">fill =</span> <span class="fu">as.factor</span>(climb_sd))) <span class="sc">+</span></span>
-<span id="cb66-16"><a href=""></a>    <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb66-17"><a href=""></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href=""></a><span class="co"># Get the prediction (default arguments gives the confidence interval)</span></span>
+<span id="cb73-2"><a href=""></a>pred_inter_dist_conf <span class="ot">&lt;-</span> <span class="fu">ggpredict</span>(mod_hills_inter, </span>
+<span id="cb73-3"><a href=""></a>                                  <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">"dist_sd"</span>, <span class="co"># to predict with</span></span>
+<span id="cb73-4"><a href=""></a>                                            <span class="st">"climb_sd"</span>)) <span class="co"># will be set to a few meaningfull values</span></span>
+<span id="cb73-5"><a href=""></a></span>
+<span id="cb73-6"><a href=""></a><span class="co"># Make the plot</span></span>
+<span id="cb73-7"><a href=""></a>p_modinter_dist <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pred_inter_dist_conf, </span>
+<span id="cb73-8"><a href=""></a>                           <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> predicted)) <span class="sc">+</span> </span>
+<span id="cb73-9"><a href=""></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">colour =</span> group), <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span>  <span class="co"># a color per set values of climb_sd </span></span>
+<span id="cb73-10"><a href=""></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> conf.low, <span class="at">ymax =</span> conf.high, <span class="at">colour =</span> group), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb73-11"><a href=""></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> hills, <span class="fu">aes</span>(<span class="at">x =</span> dist_sd, <span class="at">y =</span> time, <span class="co"># data</span></span>
+<span id="cb73-12"><a href=""></a>                               <span class="at">size =</span> climb_sd), <span class="co"># size proportional to climb_sd</span></span>
+<span id="cb73-13"><a href=""></a>             <span class="at">alpha =</span> <span class="fl">0.6</span>)  <span class="sc">+</span></span>
+<span id="cb73-14"><a href=""></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"dist_sd"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -2156,13 +2239,13 @@ F-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16</code></pre>
 <section id="visualisation-of-a-model-with-interaction-1" class="slide level2">
 <h2>Visualisation of a model with interaction</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href=""></a>p_mod_inter_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a>p_modinter_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
+<p><img data-src="basic_stats_session2_files/figure-revealjs/unnamed-chunk-47-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -2200,16 +2283,16 @@ F-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16</code></pre>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a><span class="co"># fit two additional simple linear models</span></span>
-<span id="cb68-2"><a href=""></a>mod_hills_dist <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd, <span class="at">data =</span> hills) </span>
-<span id="cb68-3"><a href=""></a>mod_hills_climb <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> climb_sd, <span class="at">data =</span> hills)</span>
-<span id="cb68-4"><a href=""></a><span class="co"># make a list with all the models</span></span>
-<span id="cb68-5"><a href=""></a>list_mod <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">hills_dist =</span> mod_hills_dist, </span>
-<span id="cb68-6"><a href=""></a>                 <span class="at">hills_climb =</span> mod_hills_climb, </span>
-<span id="cb68-7"><a href=""></a>                 <span class="at">hills2 =</span> mod_hills2, </span>
-<span id="cb68-8"><a href=""></a>                 <span class="at">hills_inter =</span> mod_hills_inter)</span>
-<span id="cb68-9"><a href=""></a><span class="co"># compare the AIC</span></span>
-<span id="cb68-10"><a href=""></a><span class="fu">aictab</span>(list_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a><span class="co"># fit two additional simple linear models</span></span>
+<span id="cb75-2"><a href=""></a>mod_hills_dist <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist_sd, <span class="at">data =</span> hills) </span>
+<span id="cb75-3"><a href=""></a>mod_hills_climb <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> climb_sd, <span class="at">data =</span> hills)</span>
+<span id="cb75-4"><a href=""></a><span class="co"># make a list with all the models</span></span>
+<span id="cb75-5"><a href=""></a>list_mod <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">hills_dist =</span> mod_hills_dist, </span>
+<span id="cb75-6"><a href=""></a>                 <span class="at">hills_climb =</span> mod_hills_climb, </span>
+<span id="cb75-7"><a href=""></a>                 <span class="at">hills2 =</span> mod_hills2, </span>
+<span id="cb75-8"><a href=""></a>                 <span class="at">hills_inter =</span> mod_hills_inter)</span>
+<span id="cb75-9"><a href=""></a><span class="co"># compare the AIC</span></span>
+<span id="cb75-10"><a href=""></a><span class="fu">aictab</span>(list_mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">

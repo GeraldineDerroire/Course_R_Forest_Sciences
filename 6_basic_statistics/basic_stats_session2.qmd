@@ -253,57 +253,57 @@ The **R^2^** is the coefficient of determination: it represents the **fraction o
 
 The **confidence interval** is the interval of confidence of the mean predicted value of y (so of $\mu$).
 
-[[To calculate it, we can use the function [predict]{style="color:indianred;"}, with the argument *interval = "confidence"*, on new data that we create for the prediction:]{style="font-size: 30px"}]{.fragment}
+[[To calculate it, we can use the function [ggpredict]{style="color:indianred;"} from the package [ggeffects]{style="color:indianred;"}. The default give the confidence interval:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
-new <- tibble(D = seq(from = 10, to = 160, by= 10)) # create new data
-new_conf <- predict(mod_dh_1, newdata = new, 
-                    interval = "confidence") # calculate the confidence interval
-new_conf <- bind_cols(new, new_conf) # combine the two
-slice_head(new_conf, n=3) # visualise to check
+# Get the prediction (default arguments gives the confidence interval)
+preds_conf <- ggpredict(mod_dh_1, # model used for the prediction
+                        terms = "D") # explanatory variable
+slice_head(as.data.frame(preds_conf), n=3) # visualise the results
 ```
 :::
 
 ::: notes
-why do we create new data? to do less predictions than if we were using the observed D 
-
-no need to take too many points because we have at line
+here the object is a dataframe and an object of class ggeffects
+so to visualise it better, look at it as a dataframe
 :::
+
 
 ## Confidence interval
 
-[We can then plot the confidence interval:]{style="font-size: 30px"}
+[We can then plot the prediction mean and confidence interval:]{style="font-size: 30px"}
 
 ```{r}
 #| warning: false
-#| out-width: 70%
-gpred <- ggplot(new_conf, aes(x= D)) +
-  geom_line(aes(y = fit), color = "blue") + # prediction mean
-  geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.3, color = "darkgrey") + # CI
-  geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.3) + # observations
-  theme_bw()
-gpred
+#| out-width: 60%
+gpred_1 <- ggplot(preds_conf, aes(x = x, y = predicted)) +
+  geom_line(colour = "blue", linewidth = 1) + # predicted mean
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), # confidence interval
+              fill = "blue", alpha = 0.2) + 
+  geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.6) + # data
+  labs(x = "D", y = "H", title = "Predicted H vs D") +
+  theme_minimal()
+gpred_1
 ```
-
-
-
 
 ## Prediction interval {.scrollable}
 
 The **prediction interval** includes the uncertainty of the predicted mean (like the confidence interval) and the variability of individual prediction by taking into account the residual variance $\sigma^2$.
 [It is therefore wider than the confidence interval and contains most of the observations.]{.fragment}
 
-[[To calculate it, we can use the function [predict]{style="color:indianred;"}, with the argument *interval = "prediction"*, on new data that we created for the prediction:]{style="font-size: 30px"}]{.fragment}
+[[To calculate it, we can use the function [ggpredict]{style="color:indianred;"}, with the argument *interval = "prediction"*:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
-new_pred <- predict(mod_dh_1, newdata = new,
-                    interval = "prediction") # calculate the prediction interval
-new_pred <- bind_cols(new, new_pred)
-slice_head(new_pred) # visualise to check
+# Get the prediction with prediction interval
+preds_pred <- ggpredict(mod_dh_1, # model used for the prediction
+                        terms = "D", # explanatory variable
+                        interval = "prediction")
+slice_head(as.data.frame(preds_pred), n=3) # visualise the results
 ```
 :::
+
 
 ## Prediction interval
 
@@ -312,11 +312,11 @@ slice_head(new_pred) # visualise to check
 ```{r}
 #| warning: false
 #| out-width: 70%
-gpred <- gpred +
-  geom_ribbon(data = new_pred, aes(ymin = lwr, ymax = upr), 
-              alpha = 0.3, color = "lightgrey") +
+gpred_1 <- gpred_1 +
+  geom_ribbon(data = preds_pred, aes(ymin = conf.low, ymax = conf.high), 
+              fill = "lightblue", alpha = 0.4) +
   theme_bw()
-gpred
+gpred_1
 ```
 
 
@@ -490,14 +490,14 @@ Here we would prefer the log-log model because:
 
 ## Presenting the results
 
-[We have seen how to plot the results, but here we need to back-transform them to their original (non-logged) scale. We use the function [ggpredict]{style="color:indianred;"} from the package [ggeffects]{style="color:indianred;"}:]{style="font-size: 30px"}
+[We have seen how to plot the results, but here we need to back-transform them to their original (non-logged) scale. By default, the function [ggpredict]{style="color:indianred;"} back-transform the predictions:]{style="font-size: 30px"}
 
 ```{r}
 # Get predictions back on original scale
-preds <- ggpredict(mod_dh_2, terms = "D") # default gives the confidence interval
+preds_conf <- ggpredict(mod_dh_2, terms = "D") # default gives the confidence interval
 
 # plot the results
-g_preds_2 <- ggplot(preds, aes(x = x, y = predicted)) +
+g_preds_2 <- ggplot(preds_conf, aes(x = x, y = predicted)) +
   geom_line(color = "blue", linewidth = 1) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), fill = "blue", alpha = 0.2) +
   geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.6) +
@@ -519,7 +519,7 @@ g_preds_2
 
 ```{r}
 # Get predictions back on original scale, with prediction interval
-preds_pred <- ggeffects::ggpredict(mod_dh_2, terms = "D", interval = "prediction")  
+preds_pred <- ggpredict(mod_dh_2, terms = "D", interval = "prediction")  
 
 # plot the results
 g_preds_2 <- g_preds_2 +
@@ -565,8 +565,7 @@ $$D \sim \mathcal N(\alpha_{fam},  \sigma^2)$$
 ```{r}
 fam3 <- dt_nou %>% count(family) %>% # get the 3 most abundant families
   arrange(desc(n)) %>%
-  slice_head(n = 3) %>%
-  select(family)
+  slice_head(n = 3) 
 
 dt_nou_sub <- dt_nou %>% filter(family %in% fam3$family) # select them
 ```
@@ -677,7 +676,7 @@ summary(mod_hills)
 
 ## Standardising explanatory variables
 
-[To compare the effects of the explanatory variables, we can standardise them using the function [scale]{style="color:indianred;"}:]{style="font-size: 30px"}
+[To compare the effects of the explanatory variables, we can (but we don't necessarly need) standardise them using the function [scale]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ```{r}
 hills <- hills %>% 
@@ -829,43 +828,89 @@ no strict rule for the VIF, this is context dependant. Check from 5
 ## Presenting the results
 
 [To represent graphically the effect of an explanatory variable, we can set the values of the other explanatory variables to a constant (for example their mean).]{style="font-size: 30px"}
-[[Here we represent the effect of *dist_sd* setting *climb_sd* at the mean, -1 sd, + 1 sd:]{style="font-size: 30px"}]{.fragment}
+
+[[Here we represent the effect of *dist_sd* setting *climb_sd* to its mean. By default, the function [ggpredict]{style="color:indianred;"} takes the values of explanatory variables not mentioned in the argument *terms* to their mean:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
-# create new values for the prediction
-hills_new_dist <- expand.grid( # create a table with all the combinaison of 
-  dist_sd = seq(-2, 2, 0.2), # new values for dist_sd
-  climb_sd = c(-1, 0, 1)) # -1 sd, mean and +1 sd of climb_sd
+# Get the prediction (default arguments gives the confidence interval)
+pred_dist_conf <- ggpredict(mod_hills2, terms = "dist_sd")
 
-# predict for new values
-hills_pred_dist <- predict(mod_hills2, newdata = hills_new_dist, interval = "confidence")
-hills_pred_dist <- cbind(hills_new_dist, hills_pred_dist)
-
-# make the plot
-p_mod2_dist <- ggplot(hills_pred_dist, aes(x = dist_sd, y = fit, 
-                            color = as.factor(climb_sd), 
-                            fill = as.factor(climb_sd))) +
-    geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.3) +
-    geom_line()
+# Make the plot
+p_modhills2_dist <- ggplot(pred_dist_conf, aes(x = x, y = predicted)) + 
+  geom_line(colour = "blue", linewidth = 1) + # predicted mean for climb_sd set to its mean
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), # confidence interval
+              fill = "blue", alpha = 0.2) + 
+  geom_point(data = hills, aes(x = dist_sd, y = time), alpha = 0.6) + # data 
+  labs(x = "dist_sd")
 ```
 :::
 
-::: notes
-as the variables are standardise, we can take -1, 0, 1
+[[We could also represent *climb_sd* with *dist_sd* set to its mean.]{style="font-size: 25px"}]{.fragment}
 
+::: notes
 We can obviously do the same for climb_sd
 :::
 
 ## Presenting the results
 
 ```{r}
-p_mod2_dist
+p_modhills2_dist
 ```
 
-::: notes
-the line are parallel
+## Presenting the results {.smaller}
+
+[We could also represent the effect of *dist_sd* setting climb_sd at the mean, -1 sd, + 1 sd. For that, we give several explanatory variables to [ggpredict]{style="color:indianred;"}. All variables except the first one will be set to meaningful values:]{style="font-size: 30px"}
+
+::: fragment
+```{r}
+# Get the prediction (default arguments gives the confidence interval)
+pred_dist_conf <- ggpredict(mod_hills2, 
+                            terms = c("dist_sd", # to predict with
+                                      "climb_sd")) # will be set to a few meaningfull values
+```
 :::
+
+[[*The values taken for climb_sd are factors, in the variable group.*]{style="font-size: 30px"}]{.fragment}
+
+::::: columns
+::: {.column width="40%"}
+
+::: fragment
+```{r}
+pred_dist_conf
+```
+:::
+:::
+
+::: {.column width="60%"}
+
+::: fragment
+```{r}
+slice_head(as.data.frame(pred_dist_conf), n = 3)
+```
+:::
+
+:::
+:::::
+
+
+## Presenting the results {.smaller}
+
+```{r}
+#| out.width: 80%
+# Make the plot
+p_modhills2_dist <- ggplot(pred_dist_conf, 
+                           aes(x = x, y = predicted)) + 
+  geom_line(aes(colour = group), linewidth = 1) +  # a color per set values of climb_sd 
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, colour = group), alpha = 0.2) + 
+  geom_point(data = hills, aes(x = dist_sd, y = time, # data
+                               size = climb_sd), # size proportional to climb_sd
+             alpha = 0.6)  +
+  labs(x = "dist_sd")
+p_modhills2_dist
+```
+
 
 ## Presenting the results
 
@@ -936,29 +981,26 @@ summary(mod_hills_inter)
 [We can make a graph of the predictions as we did for the model without interaction:]{style="font-size: 30px"}
 
 ```{r}
-# create new values for the prediction
-hills_inter_new_dist <- expand.grid( # create a table with all the combinaison of 
-  dist_sd = seq(-2, 2, 0.2), # new values for dist_sd
-  climb_sd = c(-1, 0, 1)) # -1 sd, mean and +1 sd of climb_sd
+# Get the prediction (default arguments gives the confidence interval)
+pred_inter_dist_conf <- ggpredict(mod_hills_inter, 
+                                  terms = c("dist_sd", # to predict with
+                                            "climb_sd")) # will be set to a few meaningfull values
 
-# predict for new values
-hills_inter_pred_dist <- predict(mod_hills_inter, 
-                                 newdata = hills_inter_new_dist, 
-                                 interval = "confidence")
-hills_inter_new_dist <- cbind(hills_inter_new_dist, hills_inter_pred_dist)
-
-# make the plot
-p_mod_inter_dist <- ggplot(hills_inter_new_dist, aes(x = dist_sd, y = fit, 
-                            color = as.factor(climb_sd), 
-                            fill = as.factor(climb_sd))) +
-    geom_ribbon(aes(ymin = lwr, ymax = upr), alpha = 0.3) +
-    geom_line()
+# Make the plot
+p_modinter_dist <- ggplot(pred_inter_dist_conf, 
+                           aes(x = x, y = predicted)) + 
+  geom_line(aes(colour = group), linewidth = 1) +  # a color per set values of climb_sd 
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, colour = group), alpha = 0.2) + 
+  geom_point(data = hills, aes(x = dist_sd, y = time, # data
+                               size = climb_sd), # size proportional to climb_sd
+             alpha = 0.6)  +
+  labs(x = "dist_sd")
 ```
 
 ## Visualisation of a model with interaction
 
 ```{r}
-p_mod_inter_dist
+p_modinter_dist
 ```
 
 [[The prediction lines are no longer parallel, because of the interaction term.]{style="font-size: 30px"}]{.fragment}
