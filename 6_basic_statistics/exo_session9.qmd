@@ -286,7 +286,7 @@ cor.test(mammals$body, mammals$brain,
 
 * Install the following packages from CRAN: *ggeffects*, *gtsummary*, *ggstats*, *lindia*, *car*, *AICcmodavg*
 
-* Make sure the following packages are already installed: *tidyverse*, *MASS*, 
+* Make sure the following packages are already installed: *tidyverse*, *MASS* 
 
 * Download the *RData* file available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData){preview-link="false"}
 and store them in your raw data folder.

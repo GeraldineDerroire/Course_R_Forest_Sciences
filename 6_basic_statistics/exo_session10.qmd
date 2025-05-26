@@ -5,59 +5,52 @@ format:
 execute:
   echo: false 
   eval: false 
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
-
 Load the packages of the *tidyverse*
- 
+
 ```{r}
 library(tidyverse)
 ```
 
-# DATA BLABLA TITRE
+# Data on vascular plants in the British Islands
 
-BLABLA DATA, where are the data...
-obj: explain species
+The Arrhenius relationship
+[(1921)](https://www.jstor.org/stable/2255763?seq=3){preview-link="false"}
+predicts that the number of species in an ecosystem increases with its
+area to the power z according to the equation $$S=cA^z$$ where S(A) is
+the number of species observed on area A, c is a constant that depends
+on the ecosystems and the taxon considered, and z is the parameter of
+interest.
 
-power relationship
+We are going to explore this relationship using data on the number of
+vascular species in the British Islands (Johnson et Simberloff, 1974),
+available
+[here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/britain_species.csv){preview-link="false"}
 
-* Load the data as a tibble
+-   Load the data as a tibble and look at their structure
 
 ```{r}
 dt <- read_csv("data/britain_species.csv")
 summary(dt)
 ```
 
-* Transform the variable *soil_types* to a factor
-
-```{r}
-dt <- dt %>% 
-  mutate(soil_types = as.factor(soil_types))
-```
-
-* Count the number of island per soil type
-
-```{r}
-dt  %>% count(soil_types) 
-```
-
-* Let's remove the soil types 4, 5, 6 and 16 that are poorly represented in the data set
-
-```{r}
-dt <- dt %>% 
-  filter(soil_types %in% c(1, 2, 3))
-
-# alternative
-  # dt <- dt %>% 
-  #   filter(!soil_types %in% c(4, 5, 6, 16))
-```
-
+The data contains the number of species of vascular plants (variable
+*species*) for different *island*. The other variables give some
+characteristics of these islands, including the *area* in km^2^.
 
 # Simple linear regression
 
-blabla linearisation
+The Arrhenius relation can be linearised by taking the logarithm of S
+and A:
 
-* Explore graphically the relationship between the log-transformed area and the log-transformed number of species (variable *species*) 
+$$log(S) = \beta_0 + \beta_1 log(A)$$
+
+-   Explore graphically the relationship between the log-transformed
+    area and the log-transformed number of species
 
 ```{r}
 dt %>% 
@@ -66,51 +59,67 @@ dt %>%
   geom_smooth(method = "lm")
 ```
 
-* Fit the log-log model, look at the model results and interpret them
+-   Fit the following log-log model, look at the model results and
+    interpret them
 
-EQUATION
+$$log(S) \sim \mathcal N (\beta_0 + \beta_1 \times log(A), \sigma^2)$$
 
 ```{r}
 mod_1 <- lm(log(species) ~ log(area), data = dt)
 summary(mod_1)
 ```
+
+```{=html}
 <!-- 
 * significant positive effect of the log(area)
 * moderate goodness of fit (R2)
 -->
+```
 
-* Do the model validation
+-   Do the model validation
 
 ```{r}
 plot(mod_1, which = 1)
 ```
 
+```{=html}
 <!-- 
 * homoscedasticity: not too bad
 * residuals independant of fitted values
 -->
+```
 
 ```{r}
 plot(mod_1, which = 2)
 ```
+
+```{=html}
 <!-- 
 normality of the residuals... not perfect 
 -->
-
+```
 
 ```{r}
 plot(mod_1, which = 4)
 ```
 
+```{=html}
 <!--
-No strong leverage effect
+No strong leverage effect, the values of cook are small
 -->
+```
 
 # Multiple linear regression
 
-BLABLA, not great R2, let's try to add some variables
+The goodness of fit of the previous model could probably be improved. As
+the variables *elevation*, *latitude*, *dist_britain* and *soil_types*
+could also be influencing the number of species, we could add them as
+explanatory variables in our model.
 
-* Let's first explore graphically the correlation between all pairs of numerical variables *area* (log-transformed), *elevation*, *latitude*, *dist_britain* (using the package GGally). What do you conclude?
+-   Let's first explore graphically the correlation between all pairs of
+    numerical variables, *area* (log-transformed), *elevation*,
+    *latitude*, *dist_britain*, using the package GGally. What do you
+    conclude?
 
 ```{r}
 dt <- dt %>% 
@@ -119,15 +128,22 @@ dt <- dt %>%
 GGally::ggpairs(dt, columns = c("log_area", "elevation", "latitude", "dist_britain"))
 ```
 
+```{=html}
 <!--
 log(area) and elevation correlated
 dist_britan and latitude correlated
 => don't include them all (and too many for the data we have)
 -->
+```
 
-* Let's also make use boxplots to explore graphically the relationship between these 4 variables and the type of soil. What do you conclude?
+-   Let's also make boxplots to explore graphically the relationship
+    between these 4 variables and the type of soil (don't forget to
+    transform the variable *soil_types* to a factor). What do you
+    conclude?
 
 ```{r}
+dt <- dt %>% mutate(soil_types = as.factor(soil_types))
+
 g1 <- dt %>% 
   ggplot(aes(x= soil_types, y= log_area)) + geom_boxplot()
 g2 <- dt %>% 
@@ -139,115 +155,132 @@ g4 <- dt %>%
 library(patchwork)
 (g1 + g2) / (g3 + g4)
 ```
+
+```{=html}
 <!-- 
 soil type too correlated with log_area...
+and some soil types poorly represented
 -->
+```
 
-* Fit the following model, look at the model results and interpret them
+-   Fit the following model (without standardising the variables), look
+    at the model results and interpret them
 
-GIVE THE EQUATION
-don't standardise the variables
+$$log(S) \sim \mathcal N (\beta_0 + \beta_1 \times log(A) + \beta_2 \times latitude, \sigma^2)$$
 
 ```{r}
 mod_2 <- lm(log(species) ~ log(area) + latitude, data = dt)
 summary(mod_2)
 ```
+
+```{=html}
 <!--
 * Goodness of fit (R2) much better
 * log(area) and latitude both have a significant effect
 * number of species increases with area
 * number of species decreases with latitude
---> 
+-->
+```
 
-* Do the model validation
+-   Do the model validation
 
 ```{r}
 plot(mod_2, which = 1)
 ```
 
+```{=html}
 <!-- 
 * homoscedasticity: not too bad
 * residuals independent of fitted values
 * three obs concerning
 -->
+```
 
 ```{r}
 plot(mod_2, which = 2)
 ```
+
+```{=html}
 <!-- 
 normality of the residuals
 three obs concerning
 -->
-
+```
 
 ```{r}
 plot(mod_2, which = 4)
 ```
 
+```{=html}
 <!--
 No strong leverage effect but three obs concerning
 -->
+```
 
 ```{r}
 lindia::gg_resX(mod_2, ncol = 2)
 ```
+
+```{=html}
 <!-- 
 ok
---> 
+-->
+```
 
-* Check the VIF (from library *car*) to check for the absence of collinarity between the explanatory variables
+-   Check the VIF (from library *car*) to check for the absence of
+    collinarity between the explanatory variables
 
 ```{r}
 car::vif(mod_2)
 ```
-<!-- ok -->
 
+<!-- ok -->
 
 # Presenting the result of the best model
 
-* Compare the AIC of the two models. Which is the best one?
+-   Compare the AIC of the two models. Which is the best one?
 
 ```{r}
 list_mod <- list(mod_1, mod_2)
 AICcmodavg::aictab(list_mod)
 ```
+
 <!-- best model is model 2 -->
 
-* Present the coefficients in a table
+-   Present the coefficients in a table
 
 ```{r}
 gtsummary::tbl_regression(mod_2, intercept = TRUE)
 ```
 
-* Present the result graphically
-
-d'abord area avec latutude fixé à sa moyenne
+-   Present the result graphically: first, represent the predicted
+    relationship between A and S, setting the latitude to its mean
 
 ```{r}
 preds4area <- ggpredict(mod_2, terms = "area")
 preds4area
-str(preds4area)
+# str(preds4area)
 ```
 
 ```{r}
-g_preds_area <- ggplot(preds4area, aes(x = x, y = predicted)) +
+ggplot(preds4area, aes(x = x, y = predicted)) +
   geom_line() + 
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.2) + 
   geom_point(data = dt, aes(x = area, y = species)) +
-  labs(x = "Area", y = "Species number") +
-  theme_minimal()
+  labs(x = "Area", y = "Species number") 
 ```
 
-puis latitude avec area fixé à sa moyenne
+-   then the predicted relationship between latitude and S, setting the
+    area to its mean
 
 ```{r}
 preds4lat <- ggpredict(mod_2, terms = "latitude")
 preds4lat
-str(preds4lat)
+# str(preds4lat)
 ```
 
 ```{r}
-g_preds_lat <- ggplot(preds4lat, aes(x = x, y = predicted)) +
+ggplot(preds4lat, aes(x = x, y = predicted)) +
   geom_line() + 
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = 0.2) + 
   geom_point(data = dt, aes(x = latitude, y = species)) +
@@ -255,5 +288,15 @@ g_preds_lat <- ggplot(preds4lat, aes(x = x, y = predicted)) +
   theme_minimal()
 ```
 
-
 # For next time
+
+-   Make sure the following packages are already installed: *vegan*,
+    *tidyverse*
+
+# Acknowledgments
+
+-   Marchand P. [*Analyses et modélisation des données
+    écologiques*](https://pmarchand1.github.io/ECL7102/){preview-link="false"}
+
+-   Marcon E.
+    [*cours-R-Geeft*](https://ericmarcon.github.io/Cours-R-Geeft/){preview-link="false"}
