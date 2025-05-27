@@ -22,3 +22,135 @@ editor:
   markdown: 
     wrap: sentence
 ---
+
+
+<!-- ressource 
+
+* Eric: https://ericmarcon.github.io/Cours-travailleR/12-git.html#3: info interessante but not much
+
+* Cesab: https://rdatatoolbox.github.io/chapters/course-git.html => NOPE too complex...
+
+* Cesab: https://rdatatoolbox.github.io/chapters/course-github.html => a few things on github
+
+* !!!! https://happygitwithr.com/ !!!! a regarder en détail, probablement une très bonne base et structure !!!!!!!!!!!!!!!!!
+
+* !!!!! ca aussi !!!!
+https://inbo.github.io/git-course/index.html
+
+* https://frbcesab.github.io/intro-git/#/ => yes good for good practices and full of screen shot to copy Cours Nicolas
+
+
+-->
+
+
+# Intro
+
+figure funny
+
+## What is git /github?
+
+Eric: https://ericmarcon.github.io/Cours-travailleR/12-git.html#3
+
+https://rdatatoolbox.github.io/chapters/course-github.html
+
+https://frbcesab.github.io/intro-git/#/presentation-of-git-1 => good to explain difference between git and github
+
+## Setting it up
+
+already done, see if all good, link to the tuto
+
+## git and github from Rstudio
+
+=> from the console => not covered
+
+=> from Rstudio et github
+
+## alternative to github
+
+https://rdatatoolbox.github.io/chapters/course-github.html
+
+
+# Create a new project / repo
+
+https://happygitwithr.com/usage-intro => me baser bcp là dessus
+
+see Eric 
+
+practice at the same time
+
+* from nothing => in github cf screen shot de Nicoals
+
+* from an existing RStudio project
+
+
+## public/private
+
+## .gitignore
+
+https://frbcesab.github.io/intro-git/#/the-.gitignore
+
+syntax (cf cours nicolas)
+
+# Basic operations
+
+voir ici, also for screen shots: https://frbcesab.github.io/intro-git/#/rstudio-and-git-1
+
+## commit 
+
+info elementaire = ligne (donc bcp de retour à la ligne (permet e minimiser les conflicts cf Eric))
+
+good commit message (Nicolas), when to commit
+
+
+## synchro github (push/pull)
+
+cf Nicolas sur problème pushing: https://frbcesab.github.io/intro-git/#/help-me-i-cant-push
+
+
+
+
+
+
+
+# github visibility 
+
+where to put this? at the end???
+
+https://rdatatoolbox.github.io/chapters/course-github.html
+
+github social network (or in intro?) : https://rdatatoolbox.github.io/chapters/course-github.html
+
+account page, organisation page, repo page => cf cours Nicolas
+
+
+# Collaborate
+
+## collaborate
+
+##  add a collaborator: pull, work, commit, push
+
+## conflict
+
+https://frbcesab.github.io/intro-git/#/help-me-i-cant-pull => super bien expliqué
+
+## suivi de projet avec le diag (les lignes qui se rejoignent)
+
+## github projects
+
+
+
+# Branch
+
+pourquoi ? cf Eric
+
+## create a branch
+
+## merge branch
+
+# Fork and pull request
+
+https://rdatatoolbox.github.io/chapters/course-github.html
+
+# integration continue et github action????
+
+
