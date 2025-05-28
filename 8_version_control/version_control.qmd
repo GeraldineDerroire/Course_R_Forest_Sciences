@@ -1,5 +1,5 @@
 ---
-title: "Version control"
+title: "Introduction to Version Control with Git and GitHub"
 author: Géraldine Derroire
 institute: Cirad - UnB
 date: last-modified
@@ -23,64 +23,310 @@ editor:
     wrap: sentence
 ---
 
+## What is [git]{style="color:indianred;"}?
 
-<!-- ressource 
+::::: columns
+::: {.column width="60%"}
+[git]{style="color:indianred;"} is a free and open source software that runs **on you computer**
 
-* Eric: https://ericmarcon.github.io/Cours-travailleR/12-git.html#3: info interessante but not much
+[git]{style="color:indianred;"} is a **Version Control System** that helps track changes to files over time.
+It allows you to
 
-* Cesab: https://rdatatoolbox.github.io/chapters/course-git.html => NOPE too complex...
+-   keep the full history of a file and a project
 
-* Cesab: https://rdatatoolbox.github.io/chapters/course-github.html => a few things on github
+-   revert back to a previous version
+:::
 
-* !!!! https://happygitwithr.com/ !!!! a regarder en détail, probablement une très bonne base et structure !!!!!!!!!!!!!!!!!
+::: {.column width="40%"}
+![](git.png)
+:::
+:::::
 
-* !!!!! ca aussi !!!!
-https://inbo.github.io/git-course/index.html
+## Why use [git]{style="color:indianred;"}?
 
-* https://frbcesab.github.io/intro-git/#/ => yes good for good practices and full of screen shot to copy Cours Nicolas
+[git]{style="color:indianred;"} helps you to
 
+-   keep your project clean by avoiding saving multiple versions of each file: *no more [script_v1_final_final_OK.R]{style="color:gray;"}*
 
--->
+-   always know what the current version is
 
+-   know what are the difference between versions
 
-# Intro
+## What is [GitHub]{style="color:indianred;"}?
 
-figure funny
+::::: columns
+::: {.column width="55%"}
+[GitHub]{style="color:indianred;"} is an **online platform** for hosting and sharing git repositories.
 
-## What is git /github?
+It connects with [git]{style="color:indianred;"} to support backup, collaboration, and project management.
 
-Eric: https://ericmarcon.github.io/Cours-travailleR/12-git.html#3
+[Other hosting platforms exist: GitLab, BitBucket, SourceForge...]{style="font-size: 30px"}
+:::
 
-https://rdatatoolbox.github.io/chapters/course-github.html
+::: {.column width="45%"}
+![](github.png)
+:::
+:::::
 
-https://frbcesab.github.io/intro-git/#/presentation-of-git-1 => good to explain difference between git and github
+## Why use [GitHub]{style="color:indianred;"}?
+
+[GitHub]{style="color:indianred;"} allows you to:
+
+-   back up your work safely in the cloud
+
+-   store your project history online
+
+-   synchronise changes between computers and collaborators
+
+-   collaborate by tracking and reviewing contributions
+
+-   present your work though a clean interface
+
+-   manage collaborative research projects
+
+## [git]{style="color:indianred;"} and [GitHub]{style="color:indianred;"}
+
+[git]{style="color:indianred;"} and [GitHub]{style="color:indianred;"} are useful tools for **reproducibility**.
+
+They are two different things:
+
+-   🔄 Git manages version control **on your computer**
+
+-   ☁️ GitHub helps you share, back up, and collaborate **online**
 
 ## Setting it up
 
-already done, see if all good, link to the tuto
+You already set up [git]{style="color:indianred;"} and [GitHub]{style="color:indianred;"} following these [instructions](https://geraldinederroire.github.io/Course_R_Forest_Sciences/0_installing_enviro){preview-link="false"}
 
-## git and github from Rstudio
+You should now have:
 
-=> from the console => not covered
+::: nonincremental
+-   [git]{style="color:indianred;"} installed, configurated
 
-=> from Rstudio et github
+-   a [GitHub]{style="color:indianred;"} and a ssh key
+:::
 
-## alternative to github
+::: notes
+all good for everyone?
+:::
 
-https://rdatatoolbox.github.io/chapters/course-github.html
+## A few definitions
+
+[A ]{style="font-size: 30px"}[version]{style="color:indianred;"} is the state of the entire project at a given point in time.
+
+::::: columns
+::: {.column width="55%"}
+[There are three **local areas** in a git repository:]{style="font-size: 30px"}
+
+-   [the ]{style="font-size: 30px"}[working copy]{style="color:indianred;"} is the current state of the directory (what you actually see)
+
+-   [the ]{style="font-size: 30px"}[staging area]{style="color:indianred;"} contains selected files that will be added to the next version
+
+-   [a ]{style="font-size: 30px"}[repository]{style="color:indianred;"} is an area containing all the versions
+:::
+
+::: {.column width="45%"}
+![](local_remote.png)
+
+[The ]{style="font-size: 30px"}[remote repository]{style="color:indianred;"} is a copy of the git project stored on GitHub.
+:::
+:::::
+
+[Source of illustrations: [N. Casajus](https://frbcesab.github.io/intro-git){preview-link="false"}]{style="font-size: 22px"}
+
+## Basic workflow
+
+**Step1: [Stage]{style="color:indianred;"} the changes**
+
+[After you've created or updated your files: Select the files you want to include in the next version (you can select all or only some modified files)]{style="font-size: 30px"}
+
+![](stage.png){fig-align="center" height="80%"}
+
+[Staged files are now in the **staging area**.]{style="font-size: 30px"}
+
+::: notes
+you may decide to commit some files later because they related to a separate task, or you may never commit then (see later gitignore)
+:::
+
+## Basic workflow
+
+**Step2: [Commit]{style="color:indianred;"} the staged files**
+
+[A commit saves a snapshot of your project by creating a new **version**.]{style="font-size: 30px"}
+
+![](commit.png){fig-align="center" height="80%"}
+
+[The commited files are not longer on the staging area.]{style="font-size: 30px"}
+
+## Basic workflow
+
+[A ]{style="font-size: 30px"}[Commit]{style="color:indianred;"} records:
+
+-   [**WHAT**: the specific changes (line-by-line differences) in the files that you staged]{style="font-size: 30px"}
+
+-   [**WHO**: the person who made the changes]{style="font-size: 30px"}
+
+-   [**WHEN**: the date of the commit]{style="font-size: 30px"}
+
+-   [**WHY**: a manually added message stating the reason of the commit (what has been done since the last version)]{style="font-size: 30px"}
+
+::: notes
+go to the line often when typing text
+:::
+
+## Basic workflow
+
+**Step3: [Push]{style="color:indianred;"} your commit(s) from the local to the remote repository (on GitHub)**
+
+[This makes your work visible to collaborators and backs it up online.]{style="font-size: 30px"}
+
+![](push.png){fig-align="center" height="80%"}
+
+## Basic workflow
+
+[**Pull**]{style="color:indianred;"} **these changes from the remote to your working area to update your local version**
+
+![](pull.png){fig-align="center" height="80%"}
+
+## Basic workflow
+
+::::: columns
+::: {.column width="70%"}
+When to [commit]{style="color:indianred;"}?
+
+-   [Commit often (make small commits)]{style="font-size: 30px"}
+
+-   [Commit when you reach a milestone]{style="font-size: 30px"}
+
+-   [Put separate tasks/problems in separate commits]{style="font-size: 30px"}
+
+-   [Commit at the end of a work session]{style="font-size: 30px"}
+
+-   [Commit files that actually work]{style="font-size: 30px"}
+:::
+
+::: {.column width="30%"}
+![](fire.png)
+:::
+:::::
+
+## Basic workflow
+
+[When to ]{.fragment}[push]{style="color:indianred;"}?
+
+-   [Push often (every commits or every few commits)]{style="font-size: 30px"}
+
+-   [Push when you reach a milestone]{style="font-size: 30px"}
+
+-   [Push at the end of a work session]{style="font-size: 30px"}
+
+[When to ]{.fragment}[pull]{style="color:indianred;"}?
+
+-   [Pull before starting a new work session and before pushing (if working with collaborators)]{style="font-size: 30px"}
+
+## git and Github from Rstudio
+
+::::: columns
+::: {.column width="50%"}
+
+[The operations can be performed by writing command lines on the *Terminal*]{style="font-size: 30px"}
+
+![](terminal.png)
+
+[Source of illustration: [K. V. Kulkani](https://opensource.com/article/18/1/step-step-guide-git){preview-link="false"}]{style="font-size: 22px"}
+
+:::
 
 
-# Create a new project / repo
+::: {.column width="50%"}
 
-https://happygitwithr.com/usage-intro => me baser bcp là dessus
+::: fragment
 
-see Eric 
+[But we will do most of them from **RStudio**.]{style="font-size: 30px"}
+
+![](git_rstudio.png)
+:::
+
+:::
+:::::
+
+::: notes
+You will see the git window once you have created a git repo
+:::
+
+# Create a new / repo
+
+https://happygitwithr.com/usage-intro =\> me baser bcp là dessus
+
+see Eric
 
 practice at the same time
 
-* from nothing => in github cf screen shot de Nicoals
+## Create a new project starting with GitHub
 
-* from an existing RStudio project
+BEST WAY
+
+https://happygitwithr.com/new-github-first
+
+-   from nothing =\> in github cf screen shot de Nicoals
+
+-   from an existing RStudio project https://inbo.github.io/git-course/course_rstudio.html#21_Create_a_repository and here https://inbo.github.io/git-course/course_rstudio.html#23_Clone_a_repo_to_work_locally
+
+and from here :
+
+```{=html}
+<!--
+
+## Existing project, GitHub first
+
+https://happygitwithr.com/existing-github-first
+
+Bof car ça veut dire faire un copié-coller de tout...
+but easy if there is no git history
+
+-->
+```
+
+## Create a repository from an existing RStudio project
+
+::::: columns
+::: {.column width="70%"}
+
+::: {.nonincremental}
+1. [Put the project under version control:]{style="font-size: 30px"}
+
+  * [*Tools/Version Control/Project Setup*]{style="font-size: 30px"}
+
+  * [Select *Git*]{style="font-size: 30px"}
+:::
+
+2. [Stage and commit]{style="font-size: 30px"}
+
+::: 
+
+::: {.column width="30%"}
+![](add_git.png)
+:::
+:::::
+
+
+
+3. [Create a GitHub repo and get its URL]{style="font-size: 30px"}
+
+4. [In the RStudio Terminal, run:]{style="font-size: 30px"}
+
+::: fragment
+```{r, eval = FALSE}
+git remote add origin https://github.com/MonCompte/MonDepot.git
+git push -u origin main
+```
+:::
+
+::: notes
+Let's not do this now
+
+To stage and commit: see next section
+:::
 
 
 ## public/private
@@ -95,53 +341,79 @@ syntax (cf cours nicolas)
 
 voir ici, also for screen shots: https://frbcesab.github.io/intro-git/#/rstudio-and-git-1
 
-## commit 
+## commit
 
 info elementaire = ligne (donc bcp de retour à la ligne (permet e minimiser les conflicts cf Eric))
 
-good commit message (Nicolas), when to commit
+good commit message (Nicolas), when to commit (done before)
 
+https://inbo.github.io/git-course/static/presentations/git.pdf
+
+https://happygitwithr.com/new-github-first#make-local-changes-save-commit-1
 
 ## synchro github (push/pull)
 
 cf Nicolas sur problème pushing: https://frbcesab.github.io/intro-git/#/help-me-i-cant-push
 
+https://happygitwithr.com/new-github-first#push-your-local-changes-to-github
 
+## push rejection
 
+https://happygitwithr.com/push-rejected et Casajus
 
+and here https://happygitwithr.com/pull-tricky
 
+# TITLE
 
+## Travel the past
 
-# github visibility 
+https://happygitwithr.com/time-travel-see-past
 
-where to put this? at the end???
+https://inbo.github.io/git-course/course_rstudio.html#212_View_history
+
+## suivi de projet avec le diag (les lignes qui se rejoignent)
+
+# github visibility
+
+where to put this?
+at the end???
 
 https://rdatatoolbox.github.io/chapters/course-github.html
 
 github social network (or in intro?) : https://rdatatoolbox.github.io/chapters/course-github.html
 
-account page, organisation page, repo page => cf cours Nicolas
+account page, organisation page, repo page =\> cf cours Nicolas
 
+## the README.md
+
+https://happygitwithr.com/workflows-browsability
 
 # Collaborate
 
 ## collaborate
 
-##  add a collaborator: pull, work, commit, push
+## add a collaborator:
+
+https://inbo.github.io/git-course/course_rstudio.html#31_Invite_collaborators
+
+pull, work, commit, push
 
 ## conflict
 
-https://frbcesab.github.io/intro-git/#/help-me-i-cant-pull => super bien expliqué
+https://frbcesab.github.io/intro-git/#/help-me-i-cant-pull =\> super bien expliqué
 
-## suivi de projet avec le diag (les lignes qui se rejoignent)
+https://inbo.github.io/git-course/course_rstudio.html#29_Create_a_conflict
+
+## issue
 
 ## github projects
 
-
+here or somewhere else?
 
 # Branch
 
-pourquoi ? cf Eric
+pourquoi ?
+cf Eric
 
 ## create a branch
 
@@ -151,6 +423,22 @@ pourquoi ? cf Eric
 
 https://rdatatoolbox.github.io/chapters/course-github.html
 
+https://happygitwithr.com/common-remote-setups
+
+https://happygitwithr.com/fork-and-clone and following (not sure how far I want to go...)
+
+# Clone
+
+https://happygitwithr.com/clone
+
 # integration continue et github action????
 
+## Acknowledgments {.smaller}
 
+::: nonincremental
+-   Cours Nicolas: https://frbcesab.github.io/intro-git/
+
+-   Cours Eric
+
+-   https://inbo.github.io/git-course/course_rstudio.html
+:::

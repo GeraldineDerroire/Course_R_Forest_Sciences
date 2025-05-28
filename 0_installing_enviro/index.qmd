@@ -162,7 +162,7 @@ git config user.name
 ## Check user email
 git config user.email
 
-## Check user name
+## Check default initial branch
 git config init.defaultbranch
 ```
 

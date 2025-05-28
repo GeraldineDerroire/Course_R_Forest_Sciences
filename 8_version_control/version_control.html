@@ -11,8 +11,8 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-26">
-  <title>Version control</title>
+  <meta name="dcterms.date" content="2025-05-27">
+  <title>Introduction to Version Control with Git and GitHub</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="version_control_files/libs/revealjs/dist/theme/quarto.css">
   <link href="version_control_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -329,7 +394,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Version control</h1>
+  <h1 class="title">Introduction to Version Control with Git and GitHub</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -342,16 +407,434 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-26</p>
+  <p class="date">2025-05-27</p>
 </section>
-<section class="slide level2">
+<section id="what-is-git" class="slide level2">
+<h2>What is <span style="color:indianred;">git</span>?</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><span style="color:indianred;">git</span> is a free and open source software that runs <strong>on you computer</strong></p>
+<p><span style="color:indianred;">git</span> is a <strong>Version Control System</strong> that helps track changes to files over time. It allows you to</p>
+<ul>
+<li class="fragment"><p>keep the full history of a file and a project</p></li>
+<li class="fragment"><p>revert back to a previous version</p></li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="git.png"></p>
+</div></div>
+</section>
+<section id="why-use-git" class="slide level2">
+<h2>Why use <span style="color:indianred;">git</span>?</h2>
+<p><span style="color:indianred;">git</span> helps you to</p>
+<ul>
+<li class="fragment"><p>keep your project clean by avoiding saving multiple versions of each file: <em>no more <span style="color:gray;">script_v1_final_final_OK.R</span></em></p></li>
+<li class="fragment"><p>always know what the current version is</p></li>
+<li class="fragment"><p>know what are the difference between versions</p></li>
+</ul>
+</section>
+<section id="what-is-github" class="slide level2">
+<h2>What is <span style="color:indianred;">GitHub</span>?</h2>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><span style="color:indianred;">GitHub</span> is an <strong>online platform</strong> for hosting and sharing git repositories.</p>
+<p>It connects with <span style="color:indianred;">git</span> to support backup, collaboration, and project management.</p>
+<p><span style="font-size: 30px">Other hosting platforms exist: GitLab, BitBucket, SourceForge…</span></p>
+</div><div class="column" style="width:45%;">
+<p><img data-src="github.png"></p>
+</div></div>
+</section>
+<section id="why-use-github" class="slide level2">
+<h2>Why use <span style="color:indianred;">GitHub</span>?</h2>
+<p><span style="color:indianred;">GitHub</span> allows you to:</p>
+<ul>
+<li class="fragment"><p>back up your work safely in the cloud</p></li>
+<li class="fragment"><p>store your project history online</p></li>
+<li class="fragment"><p>synchronise changes between computers and collaborators</p></li>
+<li class="fragment"><p>collaborate by tracking and reviewing contributions</p></li>
+<li class="fragment"><p>present your work though a clean interface</p></li>
+<li class="fragment"><p>manage collaborative research projects</p></li>
+</ul>
+</section>
+<section id="git-and-github" class="slide level2">
+<h2><span style="color:indianred;">git</span> and <span style="color:indianred;">GitHub</span></h2>
+<p><span style="color:indianred;">git</span> and <span style="color:indianred;">GitHub</span> are useful tools for <strong>reproducibility</strong>.</p>
+<p>They are two different things:</p>
+<ul>
+<li class="fragment"><p>🔄 Git manages version control <strong>on your computer</strong></p></li>
+<li class="fragment"><p>☁️ GitHub helps you share, back up, and collaborate <strong>online</strong></p></li>
+</ul>
+</section>
+<section id="setting-it-up" class="slide level2">
+<h2>Setting it up</h2>
+<p>You already set up <span style="color:indianred;">git</span> and <span style="color:indianred;">GitHub</span> following these <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/0_installing_enviro" data-preview-link="false">instructions</a></p>
+<p>You should now have:</p>
+<div>
+<ul>
+<li><p><span style="color:indianred;">git</span> installed, configurated</p></li>
+<li><p>a <span style="color:indianred;">GitHub</span> and a ssh key</p></li>
+</ul>
+</div>
+<aside class="notes">
+<p>all good for everyone?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-few-definitions" class="slide level2">
+<h2>A few definitions</h2>
+<p><span style="font-size: 30px">A</span><span style="color:indianred;">version</span> is the state of the entire project at a given point in time.</p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><span style="font-size: 30px">There are three <strong>local areas</strong> in a git repository:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">the</span><span style="color:indianred;">working copy</span> is the current state of the directory (what you actually see)</p></li>
+<li class="fragment"><p><span style="font-size: 30px">the</span><span style="color:indianred;">staging area</span> contains selected files that will be added to the next version</p></li>
+<li class="fragment"><p><span style="font-size: 30px">a</span><span style="color:indianred;">repository</span> is an area containing all the versions</p></li>
+</ul>
+</div><div class="column" style="width:45%;">
+<p><img data-src="local_remote.png"></p>
+<p><span style="font-size: 30px">The</span><span style="color:indianred;">remote repository</span> is a copy of the git project stored on GitHub.</p>
+</div></div>
+<p><span style="font-size: 22px">Source of illustrations: <a href="https://frbcesab.github.io/intro-git" data-preview-link="false">N. Casajus</a></span></p>
+</section>
+<section id="basic-workflow" class="slide level2">
+<h2>Basic workflow</h2>
+<p><strong>Step1: <span style="color:indianred;">Stage</span> the changes</strong></p>
+<p><span style="font-size: 30px">After you’ve created or updated your files: Select the files you want to include in the next version (you can select all or only some modified files)</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="stage.png" class="quarto-figure quarto-figure-center" style="height:80.0%"></p>
+</figure>
+</div>
+<p><span style="font-size: 30px">Staged files are now in the <strong>staging area</strong>.</span></p>
+<aside class="notes">
+<p>you may decide to commit some files later because they related to a separate task, or you may never commit then (see later gitignore)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="basic-workflow-1" class="slide level2">
+<h2>Basic workflow</h2>
+<p><strong>Step2: <span style="color:indianred;">Commit</span> the staged files</strong></p>
+<p><span style="font-size: 30px">A commit saves a snapshot of your project by creating a new <strong>version</strong>.</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="commit.png" class="quarto-figure quarto-figure-center" style="height:80.0%"></p>
+</figure>
+</div>
+<p><span style="font-size: 30px">The commited files are not longer on the staging area.</span></p>
+</section>
+<section id="basic-workflow-2" class="slide level2">
+<h2>Basic workflow</h2>
+<p><span style="font-size: 30px">A</span><span style="color:indianred;">Commit</span> records:</p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px"><strong>WHAT</strong>: the specific changes (line-by-line differences) in the files that you staged</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px"><strong>WHO</strong>: the person who made the changes</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px"><strong>WHEN</strong>: the date of the commit</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px"><strong>WHY</strong>: a manually added message stating the reason of the commit (what has been done since the last version)</span></p></li>
+</ul>
+<aside class="notes">
+<p>go to the line often when typing text</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="basic-workflow-3" class="slide level2">
+<h2>Basic workflow</h2>
+<p><strong>Step3: <span style="color:indianred;">Push</span> your commit(s) from the local to the remote repository (on GitHub)</strong></p>
+<p><span style="font-size: 30px">This makes your work visible to collaborators and backs it up online.</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="push.png" class="quarto-figure quarto-figure-center" style="height:80.0%"></p>
+</figure>
+</div>
+</section>
+<section id="basic-workflow-4" class="slide level2">
+<h2>Basic workflow</h2>
+<p><span style="color:indianred;"><strong>Pull</strong></span> <strong>these changes from the remote to your working area to update your local version</strong></p>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="pull.png" class="quarto-figure quarto-figure-center" style="height:80.0%"></p>
+</figure>
+</div>
+</section>
+<section id="basic-workflow-5" class="slide level2">
+<h2>Basic workflow</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<p>When to <span style="color:indianred;">commit</span>?</p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">Commit often (make small commits)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Commit when you reach a milestone</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Put separate tasks/problems in separate commits</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Commit at the end of a work session</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Commit files that actually work</span></p></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<p><img data-src="fire.png"></p>
+</div></div>
+</section>
+<section id="basic-workflow-6" class="slide level2">
+<h2>Basic workflow</h2>
+<p><span class="fragment">When to</span><span style="color:indianred;">push</span>?</p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">Push often (every commits or every few commits)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Push when you reach a milestone</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Push at the end of a work session</span></p></li>
+</ul>
+<p><span class="fragment">When to</span><span style="color:indianred;">pull</span>?</p>
+<ul>
+<li class="fragment"><span style="font-size: 30px">Pull before starting a new work session and before pushing (if working with collaborators)</span></li>
+</ul>
+</section>
+<section id="git-and-github-from-rstudio" class="slide level2">
+<h2>git and Github from Rstudio</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">The operations can be performed by writing command lines on the <em>Terminal</em></span></p>
+<p><img data-src="terminal.png"></p>
+<p><span style="font-size: 22px">Source of illustration: <a href="https://opensource.com/article/18/1/step-step-guide-git" data-preview-link="false">K. V. Kulkani</a></span></p>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">But we will do most of them from <strong>RStudio</strong>.</span></p>
+<p><img data-src="git_rstudio.png"></p>
+</div>
+</div></div>
+<aside class="notes">
+<p>You will see the git window once you have created a git repo</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section>
+<section id="create-a-new-repo" class="title-slide slide level1 center">
+<h1>Create a new / repo</h1>
+<p>https://happygitwithr.com/usage-intro =&gt; me baser bcp là dessus</p>
+<p>see Eric</p>
+<p>practice at the same time</p>
+</section>
+<section id="create-a-new-project-starting-with-github" class="slide level2">
+<h2>Create a new project starting with GitHub</h2>
+<p>BEST WAY</p>
+<p>https://happygitwithr.com/new-github-first</p>
+<ul>
+<li class="fragment"><p>from nothing =&gt; in github cf screen shot de Nicoals</p></li>
+<li class="fragment"><p>from an existing RStudio project https://inbo.github.io/git-course/course_rstudio.html#21_Create_a_repository and here https://inbo.github.io/git-course/course_rstudio.html#23_Clone_a_repo_to_work_locally</p></li>
+</ul>
+<p>and from here :</p>
+<!--
 
+## Existing project, GitHub first
+
+https://happygitwithr.com/existing-github-first
+
+Bof car ça veut dire faire un copié-coller de tout...
+but easy if there is no git history
+
+-->
+</section>
+<section id="create-a-repository-from-an-existing-rstudio-project" class="slide level2">
+<h2>Create a repository from an existing RStudio project</h2>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div>
+<ol type="1">
+<li><span style="font-size: 30px">Put the project under version control:</span></li>
+</ol>
+<ul>
+<li><p><span style="font-size: 30px"><em>Tools/Version Control/Project Setup</em></span></p></li>
+<li><p><span style="font-size: 30px">Select <em>Git</em></span></p></li>
+</ul>
+</div>
+<ol start="2" type="1">
+<li class="fragment"><span style="font-size: 30px">Stage and commit</span></li>
+</ol>
+</div><div class="column" style="width:30%;">
+<p><img data-src="add_git.png"></p>
+</div></div>
+<ol start="3" type="1">
+<li class="fragment"><p><span style="font-size: 30px">Create a GitHub repo and get its URL</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">In the RStudio Terminal, run:</span></p></li>
+</ol>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>git remote add origin https<span class="sc">:</span><span class="er">//</span>github.com<span class="sc">/</span>MonCompte<span class="sc">/</span>MonDepot.git</span>
+<span id="cb1-2"><a href=""></a>git push <span class="sc">-</span>u origin main</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+<aside class="notes">
+<p>Let’s not do this now</p>
+<p>To stage and commit: see next section</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="publicprivate" class="slide level2">
+<h2>public/private</h2>
+</section>
+<section id="gitignore" class="slide level2">
+<h2>.gitignore</h2>
+<p>https://frbcesab.github.io/intro-git/#/the-.gitignore</p>
+<p>syntax (cf cours nicolas)</p>
+</section></section>
+<section>
+<section id="basic-operations" class="title-slide slide level1 center">
+<h1>Basic operations</h1>
+<p>voir ici, also for screen shots: https://frbcesab.github.io/intro-git/#/rstudio-and-git-1</p>
+</section>
+<section id="commit" class="slide level2">
+<h2>commit</h2>
+<p>info elementaire = ligne (donc bcp de retour à la ligne (permet e minimiser les conflicts cf Eric))</p>
+<p>good commit message (Nicolas), when to commit (done before)</p>
+<p>https://inbo.github.io/git-course/static/presentations/git.pdf</p>
+<p>https://happygitwithr.com/new-github-first#make-local-changes-save-commit-1</p>
+</section>
+<section id="synchro-github-pushpull" class="slide level2">
+<h2>synchro github (push/pull)</h2>
+<p>cf Nicolas sur problème pushing: https://frbcesab.github.io/intro-git/#/help-me-i-cant-push</p>
+<p>https://happygitwithr.com/new-github-first#push-your-local-changes-to-github</p>
+</section>
+<section id="push-rejection" class="slide level2">
+<h2>push rejection</h2>
+<p>https://happygitwithr.com/push-rejected et Casajus</p>
+<p>and here https://happygitwithr.com/pull-tricky</p>
+</section></section>
+<section>
+<section id="title" class="title-slide slide level1 center">
+<h1>TITLE</h1>
+
+</section>
+<section id="travel-the-past" class="slide level2">
+<h2>Travel the past</h2>
+<p>https://happygitwithr.com/time-travel-see-past</p>
+<p>https://inbo.github.io/git-course/course_rstudio.html#212_View_history</p>
+</section>
+<section id="suivi-de-projet-avec-le-diag-les-lignes-qui-se-rejoignent" class="slide level2">
+<h2>suivi de projet avec le diag (les lignes qui se rejoignent)</h2>
+</section></section>
+<section>
+<section id="github-visibility" class="title-slide slide level1 center">
+<h1>github visibility</h1>
+<p>where to put this? at the end???</p>
+<p>https://rdatatoolbox.github.io/chapters/course-github.html</p>
+<p>github social network (or in intro?) : https://rdatatoolbox.github.io/chapters/course-github.html</p>
+<p>account page, organisation page, repo page =&gt; cf cours Nicolas</p>
+</section>
+<section id="the-readme.md" class="slide level2">
+<h2>the README.md</h2>
+<p>https://happygitwithr.com/workflows-browsability</p>
+</section></section>
+<section>
+<section id="collaborate" class="title-slide slide level1 center">
+<h1>Collaborate</h1>
+
+</section>
+<section id="collaborate-1" class="slide level2">
+<h2>collaborate</h2>
+</section>
+<section id="add-a-collaborator" class="slide level2">
+<h2>add a collaborator:</h2>
+<p>https://inbo.github.io/git-course/course_rstudio.html#31_Invite_collaborators</p>
+<p>pull, work, commit, push</p>
+</section>
+<section id="conflict" class="slide level2">
+<h2>conflict</h2>
+<p>https://frbcesab.github.io/intro-git/#/help-me-i-cant-pull =&gt; super bien expliqué</p>
+<p>https://inbo.github.io/git-course/course_rstudio.html#29_Create_a_conflict</p>
+</section>
+<section id="issue" class="slide level2">
+<h2>issue</h2>
+</section>
+<section id="github-projects" class="slide level2">
+<h2>github projects</h2>
+<p>here or somewhere else?</p>
+</section></section>
+<section>
+<section id="branch" class="title-slide slide level1 center">
+<h1>Branch</h1>
+<p>pourquoi ? cf Eric</p>
+</section>
+<section id="create-a-branch" class="slide level2">
+<h2>create a branch</h2>
+</section>
+<section id="merge-branch" class="slide level2">
+<h2>merge branch</h2>
+</section></section>
+<section id="fork-and-pull-request" class="title-slide slide level1 center">
+<h1>Fork and pull request</h1>
+<p>https://rdatatoolbox.github.io/chapters/course-github.html</p>
+<p>https://happygitwithr.com/common-remote-setups</p>
+<p>https://happygitwithr.com/fork-and-clone and following (not sure how far I want to go…)</p>
+</section>
+
+<section id="clone" class="title-slide slide level1 center">
+<h1>Clone</h1>
+<p>https://happygitwithr.com/clone</p>
+</section>
+
+<section>
+<section id="integration-continue-et-github-action" class="title-slide slide level1 center">
+<h1>integration continue et github action????</h1>
+
+</section>
+<section id="acknowledgments" class="slide level2 smaller">
+<h2>Acknowledgments</h2>
+<div>
+<ul>
+<li><p>Cours Nicolas: https://frbcesab.github.io/intro-git/</p></li>
+<li><p>Cours Eric</p></li>
+<li><p>https://inbo.github.io/git-course/course_rstudio.html</p></li>
+</ul>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -564,6 +1047,82 @@ Géraldine Derroire
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
