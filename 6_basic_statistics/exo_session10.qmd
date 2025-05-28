@@ -29,7 +29,7 @@ interest.
 We are going to explore this relationship using data on the number of
 vascular species in the British Islands (Johnson et Simberloff, 1974),
 available
-[here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/britain_species.csv){preview-link="false"}
+[here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/britain_species.csv){preview-link="false"}.
 
 -   Load the data as a tibble and look at their structure
 

@@ -123,7 +123,7 @@ all good for everyone?
 
 ## A few definitions
 
-[A ]{style="font-size: 30px"}[version]{style="color:indianred;"} is the state of the entire project at a given point in time.
+[A [version]{style="color:indianred;"} is the state of the entire project at a given point in time.]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="55%"}
@@ -507,31 +507,50 @@ data/raw-data/raw-data.csv
 html or pdf files can be easily recreated
 :::
 
-# Basic operations
+# Basic workflow from RStudio
 
-voir ici, also for screen shots: https://frbcesab.github.io/intro-git/#/rstudio-and-git-1
+<!--voir ici, also for screen shots: https://frbcesab.github.io/intro-git/#/rstudio-and-git-1-->
 
-## commit
+::: notes
+Let's pratice together
+:::
 
-info elementaire = ligne (donc bcp de retour à la ligne (permet e minimiser les conflicts cf Eric))
+## Stage the changes
 
-good commit message (Nicolas), when to commit (done before)
+*Create a new .R file with a few lines of code and save it.*
+
+The new or modified files are listed in the *git* window in RStudio:
+
+explain what we seen on this window
+
+
+
+good commit message (Nicolas)
 
 https://inbo.github.io/git-course/static/presentations/git.pdf
 
 https://happygitwithr.com/new-github-first#make-local-changes-save-commit-1
 
-## synchro github (push/pull)
+## Commit
+
+## Push
+
+## Problem pushing
 
 cf Nicolas sur problème pushing: https://frbcesab.github.io/intro-git/#/help-me-i-cant-push
 
 https://happygitwithr.com/new-github-first#push-your-local-changes-to-github
 
-## push rejection
+## Pull
+
+## Problem pulling
 
 https://happygitwithr.com/push-rejected et Casajus
 
 and here https://happygitwithr.com/pull-tricky
+
+
+
 
 # TITLE
 
@@ -573,6 +592,10 @@ pull, work, commit, push
 https://frbcesab.github.io/intro-git/#/help-me-i-cant-pull =\> super bien expliqué
 
 https://inbo.github.io/git-course/course_rstudio.html#29_Create_a_conflict
+
+info elementaire = ligne (donc bcp de retour à la ligne (permet e minimiser les conflicts cf Eric))
+
+to avoid confict push often
 
 ## issue
 

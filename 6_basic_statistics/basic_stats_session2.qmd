@@ -50,7 +50,7 @@ library(AICcmodavg)
 
 ## Structure of a linear regression
 
-A linear regression is a model of the mathematical relationship between:
+A linear regression is a mathematical model of the relationship between:
 
 * A **response variable**, also called *dependent variable*
 
