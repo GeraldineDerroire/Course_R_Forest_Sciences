@@ -23,6 +23,12 @@ editor:
     wrap: sentence
 ---
 
+# Principle
+
+::: notes
+first the principle but then mostly practicing
+:::
+
 ## What is [git]{style="color:indianred;"}?
 
 ::::: columns
@@ -254,7 +260,11 @@ When to [commit]{style="color:indianred;"}?
 You will see the git window once you have created a git repo
 :::
 
-# Create a new / repo
+# Create a new repository
+
+::: notes
+let's practice
+:::
 
 https://happygitwithr.com/usage-intro =\> me baser bcp là dessus
 
@@ -262,11 +272,13 @@ see Eric
 
 practice at the same time
 
-## Create a new project starting with GitHub
+## Create a new repository starting with GitHub
 
 BEST WAY
 
 https://happygitwithr.com/new-github-first
+
+<!--
 
 -   from nothing =\> in github cf screen shot de Nicoals
 
@@ -274,8 +286,8 @@ https://happygitwithr.com/new-github-first
 
 and from here :
 
-```{=html}
-<!--
+
+
 
 ## Existing project, GitHub first
 
@@ -285,7 +297,7 @@ Bof car ça veut dire faire un copié-coller de tout...
 but easy if there is no git history
 
 -->
-```
+
 
 ## Create a repository from an existing RStudio project
 

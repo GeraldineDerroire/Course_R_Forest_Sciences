@@ -94,19 +94,25 @@ g + geom_smooth(method = "lm", se = FALSE)
 [[As our model has only one explanatory variable, it is called *simple* linear regression.]{style="font-size: 30px"}]{.fragment}
 
 
-[[We want to model a tree dimension by another tree dimension. This is an *allometric model*. Allometric models are often used to predict a variable difficult to measure from a variable more broadly available]{style="font-size: 30px"}]{.fragment}
+[[We want to model a tree dimension by another tree dimension. This is an *allometric model*. Allometric models are often used to predict a variable difficult to measure from a variable more broadly available.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+ex of an allometric model
+:::
 
 
 ## Theory 
 
+::: fragment
 $$y = \alpha + \beta \times x + \epsilon$$
+:::
 
 ::::: columns
 ::: {.column width="50%"}
 
-* [x is the response variable]{style="font-size: 30px"}
+* [y is the response variable]{style="font-size: 30px"}
 
-* [y is the explanatory variable]{style="font-size: 30px"}
+* [x is the explanatory variable]{style="font-size: 30px"}
 
 * [$\alpha$ is the **intercept** (the mean of Y when X = 0)]{style="font-size: 30px"}
 
@@ -114,12 +120,13 @@ $$y = \alpha + \beta \times x + \epsilon$$
 
 * [$\epsilon$ is the **residual** of the model. $\epsilon \sim \mathcal N(0, \sigma^2)$]{style="font-size: 30px"}
 
-* [$\alpha$, $\beta$ and $\epsilon$ are the **parameters** of the model]{style="font-size: 30px"}
 :::
 
 ::: {.column width="50%"}
 
 ::: fragment
+[$\alpha$, $\beta$ and $\epsilon$ are the **parameters** of the model]{style="font-size: 30px"}
+
 [The model can also be written:]{style="font-size: 30px"}
 
 $$y \sim \mathcal N(\alpha + \beta \times x,  \sigma^2)$$
@@ -142,7 +149,7 @@ $$y \sim \mathcal N(\alpha + \beta \times x,  \sigma^2)$$
 ::: {.column width="50%"}
 
 ![](lm.png){width="200%"}
-[Source: [E. Marcon](https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6){preview-link="false"}]{style="font-size: 30px"}
+[Source: [E. Marcon](https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6){preview-link="false"}]{style="font-size: 22px"}
 :::
 
 
@@ -194,9 +201,9 @@ summary(mod_dh_1)
 ::: {.column width="50%"}
 * [*Coefficients* give the estimates of **intercept** ($\alpha$) and the **slope** ($\beta$).]{style="font-size: 30px"}
 
-  * *intercept*: the value of H for D=0 is 0.325
+  * *intercept*: the value of H for D=0 is 13.26
   
-  * *slope*: for every increase of 1 cm DBH, increase of 0.32 m in height
+  * *slope*: for every increase of 1 cm DBH, increase of 0.34 m in height
   
   * [A t-test is performed to see if there are significant (significantly different from 0).]{style="font-size: 30px"}
 
@@ -237,13 +244,14 @@ F-test for only one single explanatory variable is the same as the test for the 
 
 ## Coefficient of determination 
 
-The **R^2^** is the coefficient of determination: it represents the **fraction of variance explained** by the model. The closer the *R^2^* is to 1, the greater the explanatory power of the model.
+**R^2^** is the coefficient of determination: it represents the **proportion of variance of the response variable explained by the model**. The closer *R^2^* is to 1, the greater the explanatory power of the model.
+*R^2^* therefore reflects the **goodness of fit** of the model.
 
-[The adjusted *R^2^* penalise the *R^2^* by the number of explanatory variables (not relevant when there is just one explanatory variable).]{.fragment}
+[Adjusted *R^2^* penalise *R^2^* by the number of explanatory variables (not relevant when there is just one explanatory variable).]{.fragment}
 
 ## *R^2^* and *p-value*
 
-* The **p-value** indicates **significance of the effect** of the explanatory variable: this effect can be small yet highly significant => a small p-value is particularly important for hypothesis testing.
+* The **p-value** indicates the **significance of the effect** of the explanatory variable: this effect can be small yet highly significant => a small p-value is particularly important for hypothesis testing.
 
 
 * The **R^2^** indicates the **goodness of fit** (how well the model fits the observed data) => a high *R^2^* is particularly important for prediction.
@@ -403,6 +411,15 @@ plot(mod_dh_1, which = 4)
 :::
 :::::
 
+::: notes
+for cook distance, several rule of thumbs
+
+* D should be < 1
+
+* D should be <4/n
+
+:::
+
 
 ## Variable transformation
 
@@ -456,7 +473,7 @@ plot(mod_dh_2, which = 1)
 plot(mod_dh_2, which = 2)
 ```
 :::
-[[😊 The residuals are still normally distributed.]{style="font-size: 30px"}]{.fragment}
+[[😊 The residuals are still (reasonably) normally distributed.]{style="font-size: 30px"}]{.fragment}
 :::
 
 ::: {.column width="33%"}
@@ -486,6 +503,10 @@ Here we would prefer the log-log model because:
 * it make more sense ecologically
 
 [[⚠️ We will talk later about the AIC to compare models. We **cannot** use it here because the response variables are different (D *vs* log(D)).]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+it makes more sense ecologically because of the shape of the relationship => for big trees, the increase in height for unit DBH is less
+:::
 
 
 ## Presenting the results
@@ -666,7 +687,7 @@ climb is in meters and varies between 300 and 7500 feets.
 
 ## Fitting a multiple linear regression
 
-[We fit a multiple linear regression in the same way than a simple one:]{style="font-size: 30px"}
+[We fit a multiple linear regression in the same way than a simple one, adding the explanatory variables with a [+]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ```{r}
 mod_hills <- lm(time ~ dist + climb, hills)
@@ -894,6 +915,11 @@ slice_head(as.data.frame(pred_dist_conf), n = 3)
 :::
 :::::
 
+::: notes
+meaningfull values: here -1, 0 and 1 sd
+but we can specify some that we want (look at the help of ggpredic)
+:::
+
 
 ## Presenting the results {.smaller}
 
@@ -911,6 +937,9 @@ p_modhills2_dist <- ggplot(pred_dist_conf,
 p_modhills2_dist
 ```
 
+::: notes
+we add the group (the valus of clim_sd) as a colour for the lines and the ribbons
+:::
 
 ## Presenting the results
 
@@ -949,14 +978,14 @@ $$y = \alpha + \beta_1 x_1 + \beta_2  x_2 + \beta_{12}  x_1 x_2 + \epsilon$$
 
 ::: fragment
 
-$$y = \alpha + (\beta_1+\beta_{12} x_2) x_1 + \beta_2  x_2+ \epsilon$$
+$$y = \alpha + (\beta_1+\beta_{12} x_2) \times x_1 + \beta_2  x_2+ \epsilon$$
 :::
 
 [[and]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 
-$$y = \alpha + \beta_1  x_1+ (\beta_2+\beta_{12} x_1) x_2 +  \epsilon$$
+$$y = \alpha + \beta_1  x_1+ (\beta_2+\beta_{12} x_1) \times x_2 +  \epsilon$$
 :::
 
 [[$\beta_{12}$ is the coefficient of the interaction. It represent the effect of $x_2$ on the relationship between y and $x_1$, and the effect of $x_1$ on the relationship between y and $x_2$.]{style="font-size: 30px"}]{.fragment}
@@ -1057,7 +1086,7 @@ aictab(list_mod)
 ::: notes
 here compute the AICc because we have a small number of observations
 
-we get the K: number of paramaters
+we get the K: number of paramaters (count them, including the sigma)
 
 the LL is the log-likelihood
 :::
@@ -1070,7 +1099,7 @@ the LL is the log-likelihood
 
 An linear regression assumes that all observations are **independent**.
 
-When observations grouped, they are not independent (*e.g.* several observations on a same site, on a same individual, in a same year...).
+When observations are grouped, they are not independent (*e.g.* several observations on a same site, on a same individual, in a same year...).
 
 * We can include the group as a categorical explanatory variable. This evaluate the effect of each group.
 
@@ -1139,6 +1168,12 @@ Some data are by nature not normally distributed, so we cannot model them with a
 
 [[💡 See [here](https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Logistic-Regression/Logistic-Regression-in-R---An-Example/index.html){preview-link="false"} for a detailed explanation of the logistic regression.]{style="font-size: 30px"}]{.fragment}
 
+::: notes
+logit(p) = alpha + beta_1*x_1 +... beta_n*x_n
+
+avec logit(p) = log (p/ (1-p))
+:::
+
 ## Poisson
 
 [The Poisson regression is a **GLM** with a **Poisson distribution** and a **logarithm link function**. It models the number of observations of an event in a defined sampling unit.]{style="font-size: 30px"}
@@ -1149,7 +1184,9 @@ Some data are by nature not normally distributed, so we cannot model them with a
 
 [[💡 See [here](https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/){preview-link="false"} and [here](https://rpubs.com/Julian_Sampedro/1047952){preview-link="false"} for detailed explanations of the Poisson regression.]{style="font-size: 30px"}]{.fragment}
 
-
+::: notes
+log(mu) = alpha + beta_1*x_1 +... beta_n*x_n
+:::
 
 # Acknowledgments
 

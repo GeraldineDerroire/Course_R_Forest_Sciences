@@ -149,12 +149,14 @@ cab_est <- res_ttest$estimate
 abs(cab_est[1] - cab_est[2])
 # or 
 abs(cab_est[2] - cab_est[1])
+# The name of the vector of result is not correct
 ```
 
 <!-- The difference between group is big (compared to the mean per group) -->
 
 ```{r}
 res_ttest$conf.int
+# 0.95 is the confidence level
 ```
 
 <!-- big confidence interval -->
@@ -272,6 +274,7 @@ str(mammals)
 ```{r}
 cor(mammals$body, mammals$brain)
 ```
+<!-- very high correlation-->
 
 * Do a Pearson correlation test and interpret it
 
@@ -279,7 +282,7 @@ cor(mammals$body, mammals$brain)
 cor.test(mammals$body, mammals$brain,
          method = "pearson")
 ```
-<!-- There is a strong significant positive relationship between boday and brain mass-->
+<!-- There is a strong significant positive relationship between body and brain mass-->
 
 
 # For next time

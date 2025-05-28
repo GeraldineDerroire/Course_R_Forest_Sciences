@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-26">
+  <meta name="dcterms.date" content="2025-05-28">
   <title>Statistics with R - session 2 - Linear regressions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-26</p>
+  <p class="date">2025-05-28</p>
 </section>
 <section>
 <section id="section" class="title-slide slide level1 center">
@@ -496,23 +496,38 @@ Géraldine Derroire
 <h2>Relationship between D and H</h2>
 <p><span style="font-size: 30px">We want to model the relationship between <em>D</em> (the explanatory variable) and <em>H</em> (the response variable).</span></p>
 <p><span class="fragment"><span style="font-size: 30px">As our model has only one explanatory variable, it is called <em>simple</em> linear regression.</span></span></p>
-<p><span class="fragment"><span style="font-size: 30px">We want to model a tree dimension by another tree dimension. This is an <em>allometric model</em>. Allometric models are often used to predict a variable difficult to measure from a variable more broadly available</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">We want to model a tree dimension by another tree dimension. This is an <em>allometric model</em>. Allometric models are often used to predict a variable difficult to measure from a variable more broadly available.</span></span></p>
+<aside class="notes">
+<p>ex of an allometric model</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="theory" class="slide level2">
 <h2>Theory</h2>
+<div class="fragment">
 <p><span class="math display">\[y = \alpha + \beta \times x + \epsilon\]</span></p>
+</div>
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li class="fragment"><p><span style="font-size: 30px">x is the response variable</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">y is the explanatory variable</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">y is the response variable</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">x is the explanatory variable</span></p></li>
 <li class="fragment"><p><span style="font-size: 30px"><span class="math inline">\(\alpha\)</span> is the <strong>intercept</strong> (the mean of Y when X = 0)</span></p></li>
 <li class="fragment"><p><span style="font-size: 30px"><span class="math inline">\(\beta\)</span> is the <strong>slope</strong> of the relationship between X and Y</span></p></li>
 <li class="fragment"><p><span style="font-size: 30px"><span class="math inline">\(\epsilon\)</span> is the <strong>residual</strong> of the model. <span class="math inline">\(\epsilon \sim \mathcal N(0, \sigma^2)\)</span></span></p></li>
-<li class="fragment"><p><span style="font-size: 30px"><span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\epsilon\)</span> are the <strong>parameters</strong> of the model</span></p></li>
 </ul>
 </div><div class="column" style="width:50%;">
 <div class="fragment">
+<p><span style="font-size: 30px"><span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\beta\)</span> and <span class="math inline">\(\epsilon\)</span> are the <strong>parameters</strong> of the model</span></p>
 <p><span style="font-size: 30px">The model can also be written:</span></p>
 <p><span class="math display">\[y \sim \mathcal N(\alpha + \beta \times x,  \sigma^2)\]</span></p>
 </div>
@@ -537,7 +552,7 @@ Géraldine Derroire
 <p><span style="font-size: 30px">The model predicts a probability density of Y for any value of X normally distributed around the regression line.</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><img data-src="lm.png" style="width:200.0%"> <span style="font-size: 30px">Source: <a href="https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6" data-preview-link="false">E. Marcon</a></span></p>
+<p><img data-src="lm.png" style="width:200.0%"> <span style="font-size: 22px">Source: <a href="https://ericmarcon.github.io/Cours-R-Geeft/Regression_lineaire.html#6" data-preview-link="false">E. Marcon</a></span></p>
 </div><div class="column" style="width:50%;">
 <ul>
 <li class="fragment"><p><span style="font-size: 30px">The mean value of Y for any value of X is the black line : <span class="math inline">\(\mu = \alpha + \beta \times x\)</span></span></p></li>
@@ -610,8 +625,8 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <ul>
 <li class="fragment"><p><span style="font-size: 30px"><em>Coefficients</em> give the estimates of <strong>intercept</strong> (<span class="math inline">\(\alpha\)</span>) and the <strong>slope</strong> (<span class="math inline">\(\beta\)</span>).</span></p>
 <ul>
-<li class="fragment"><p><em>intercept</em>: the value of H for D=0 is 0.325</p></li>
-<li class="fragment"><p><em>slope</em>: for every increase of 1 cm DBH, increase of 0.32 m in height</p></li>
+<li class="fragment"><p><em>intercept</em>: the value of H for D=0 is 13.26</p></li>
+<li class="fragment"><p><em>slope</em>: for every increase of 1 cm DBH, increase of 0.34 m in height</p></li>
 <li class="fragment"><p><span style="font-size: 30px">A t-test is performed to see if there are significant (significantly different from 0).</span></p></li>
 </ul></li>
 <li class="fragment"><p><span style="font-size: 30px"><em>Residual standard error</em> is the estimate of the <strong>standard deviation</strong> of the residuals (<span class="math inline">\(\sigma\)</span>).</span></p></li>
@@ -684,13 +699,13 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 </section>
 <section id="coefficient-of-determination" class="slide level2">
 <h2>Coefficient of determination</h2>
-<p>The <strong>R<sup>2</sup></strong> is the coefficient of determination: it represents the <strong>fraction of variance explained</strong> by the model. The closer the <em>R<sup>2</sup></em> is to 1, the greater the explanatory power of the model.</p>
-<p><span class="fragment">The adjusted <em>R<sup>2</sup></em> penalise the <em>R<sup>2</sup></em> by the number of explanatory variables (not relevant when there is just one explanatory variable).</span></p>
+<p><strong>R<sup>2</sup></strong> is the coefficient of determination: it represents the <strong>proportion of variance of the response variable explained by the model</strong>. The closer <em>R<sup>2</sup></em> is to 1, the greater the explanatory power of the model. <em>R<sup>2</sup></em> therefore reflects the <strong>goodness of fit</strong> of the model.</p>
+<p><span class="fragment">Adjusted <em>R<sup>2</sup></em> penalise <em>R<sup>2</sup></em> by the number of explanatory variables (not relevant when there is just one explanatory variable).</span></p>
 </section>
 <section id="r2-and-p-value" class="slide level2">
 <h2><em>R<sup>2</sup></em> and <em>p-value</em></h2>
 <ul>
-<li class="fragment"><p>The <strong>p-value</strong> indicates <strong>significance of the effect</strong> of the explanatory variable: this effect can be small yet highly significant =&gt; a small p-value is particularly important for hypothesis testing.</p></li>
+<li class="fragment"><p>The <strong>p-value</strong> indicates the <strong>significance of the effect</strong> of the explanatory variable: this effect can be small yet highly significant =&gt; a small p-value is particularly important for hypothesis testing.</p></li>
 <li class="fragment"><p>The <strong>R<sup>2</sup></strong> indicates the <strong>goodness of fit</strong> (how well the model fits the observed data) =&gt; a high <em>R<sup>2</sup></em> is particularly important for prediction.</p></li>
 </ul>
 </section>
@@ -867,6 +882,23 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p><span style="font-size: 30px">⚠️️ Some observations are highly influential.</span></p>
 </div>
 </div></div>
+<aside class="notes">
+<p>for cook distance, several rule of thumbs</p>
+<ul>
+<li><p>D should be &lt; 1</p></li>
+<li><p>D should be &lt;4/n</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="variable-transformation" class="slide level2">
 <h2>Variable transformation</h2>
@@ -943,7 +975,7 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 </div>
 </div>
-<p><span class="fragment"><span style="font-size: 30px">😊 The residuals are still normally distributed.</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">😊 The residuals are still (reasonably) normally distributed.</span></span></p>
 </div><div class="column" style="width:33%;">
 <div class="fragment">
 <div class="cell">
@@ -971,6 +1003,19 @@ F-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <li class="fragment"><p>it make more sense ecologically</p></li>
 </ul>
 <p><span class="fragment"><span style="font-size: 30px">⚠️ We will talk later about the AIC to compare models. We <strong>cannot</strong> use it here because the response variables are different (D <em>vs</em> log(D)).</span></span></p>
+<aside class="notes">
+<p>it makes more sense ecologically because of the shape of the relationship =&gt; for big trees, the increase in height for unit DBH is less</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="presenting-the-results" class="slide level2">
 <h2>Presenting the results</h2>
@@ -1243,7 +1288,7 @@ Attaching package: 'MASS'</code></pre>
 </section>
 <section id="fitting-a-multiple-linear-regression-1" class="slide level2">
 <h2>Fitting a multiple linear regression</h2>
-<p><span style="font-size: 30px">We fit a multiple linear regression in the same way than a simple one:</span></p>
+<p><span style="font-size: 30px">We fit a multiple linear regression in the same way than a simple one, adding the explanatory variables with a <span style="color:indianred;">+</span>:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>mod_hills <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> dist <span class="sc">+</span> climb, hills)</span>
 <span id="cb45-2"><a href=""></a><span class="fu">summary</span>(mod_hills)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1610,6 +1655,19 @@ Not all rows are shown in the output. Use `print(..., n = Inf)` to show
 </div>
 </div>
 </div></div>
+<aside class="notes">
+<p>meaningfull values: here -1, 0 and 1 sd but we can specify some that we want (look at the help of ggpredic)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="presenting-the-results-7" class="slide level2 smaller">
 <h2>Presenting the results</h2>
@@ -1634,6 +1692,19 @@ Not all rows are shown in the output. Use `print(..., n = Inf)` to show
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>we add the group (the valus of clim_sd) as a colour for the lines and the ribbons</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="presenting-the-results-8" class="slide level2">
 <h2>Presenting the results</h2>
@@ -2159,11 +2230,11 @@ Not all rows are shown in the output. Use `print(..., n = Inf)` to show
 <p><span class="math display">\[y = \alpha + \beta_1 x_1 + \beta_2  x_2 + \beta_{12}  x_1 x_2 + \epsilon\]</span></p>
 <p><span class="fragment"><span style="font-size: 30px">which is equivalent to</span></span></p>
 <div class="fragment">
-<p><span class="math display">\[y = \alpha + (\beta_1+\beta_{12} x_2) x_1 + \beta_2  x_2+ \epsilon\]</span></p>
+<p><span class="math display">\[y = \alpha + (\beta_1+\beta_{12} x_2) \times x_1 + \beta_2  x_2+ \epsilon\]</span></p>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">and</span></span></p>
 <div class="fragment">
-<p><span class="math display">\[y = \alpha + \beta_1  x_1+ (\beta_2+\beta_{12} x_1) x_2 +  \epsilon\]</span></p>
+<p><span class="math display">\[y = \alpha + \beta_1  x_1+ (\beta_2+\beta_{12} x_1) \times x_2 +  \epsilon\]</span></p>
 </div>
 <p><span class="fragment"><span style="font-size: 30px"><span class="math inline">\(\beta_{12}\)</span> is the coefficient of the interaction. It represent the effect of <span class="math inline">\(x_2\)</span> on the relationship between y and <span class="math inline">\(x_1\)</span>, and the effect of <span class="math inline">\(x_1\)</span> on the relationship between y and <span class="math inline">\(x_2\)</span>.</span></span></p>
 <aside class="notes">
@@ -2311,7 +2382,7 @@ hills_climb 3 342.40      56.11   0.00   1.00 -167.81</code></pre>
 </div></div>
 <aside class="notes">
 <p>here compute the AICc because we have a small number of observations</p>
-<p>we get the K: number of paramaters</p>
+<p>we get the K: number of paramaters (count them, including the sigma)</p>
 <p>the LL is the log-likelihood</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2333,7 +2404,7 @@ hills_climb 3 342.40      56.11   0.00   1.00 -167.81</code></pre>
 <section id="what-if-the-observations-are-not-independent" class="slide level2">
 <h2>What if the observations are not independent?</h2>
 <p>An linear regression assumes that all observations are <strong>independent</strong>.</p>
-<p>When observations grouped, they are not independent (<em>e.g.</em> several observations on a same site, on a same individual, in a same year…).</p>
+<p>When observations are grouped, they are not independent (<em>e.g.</em> several observations on a same site, on a same individual, in a same year…).</p>
 <ul>
 <li class="fragment"><p>We can include the group as a categorical explanatory variable. This evaluate the effect of each group.</p></li>
 <li class="fragment"><p>When the number of groups is too high and we are not interested in the effect of each group, we can use a <strong>linear mixed model</strong>.</p></li>
@@ -2382,6 +2453,20 @@ hills_climb 3 342.40      56.11   0.00   1.00 -167.81</code></pre>
 </ul>
 <p><span class="fragment"><span style="font-size: 25px">The Bernoulli distribution is a special case of a binomial when n=1.</span></span></p>
 <p><span class="fragment"><span style="font-size: 30px">💡 See <a href="https://www.geo.fu-berlin.de/en/v/soga-r/Basics-of-statistics/Logistic-Regression/Logistic-Regression-in-R---An-Example/index.html" data-preview-link="false">here</a> for a detailed explanation of the logistic regression.</span></span></p>
+<aside class="notes">
+<p>logit(p) = alpha + beta_1<em>x_1 +… beta_n</em>x_n</p>
+<p>avec logit(p) = log (p/ (1-p))</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="poisson" class="slide level2">
 <h2>Poisson</h2>
@@ -2391,6 +2476,19 @@ hills_climb 3 342.40      56.11   0.00   1.00 -167.81</code></pre>
 <li class="fragment"><p><span style="font-size: 30px">The logarithm link function links <strong><span class="math inline">\(\lambda\)</span></strong> (which is positive) to the linear predictor.</span></p></li>
 </ul>
 <p><span class="fragment"><span style="font-size: 30px">💡 See <a href="https://www.dataquest.io/blog/tutorial-poisson-regression-in-r/" data-preview-link="false">here</a> and <a href="https://rpubs.com/Julian_Sampedro/1047952" data-preview-link="false">here</a> for detailed explanations of the Poisson regression.</span></span></p>
+<aside class="notes">
+<p>log(mu) = alpha + beta_1<em>x_1 +… beta_n</em>x_n</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section id="acknowledgments" class="title-slide slide level1 center">
 <h1>Acknowledgments</h1>
