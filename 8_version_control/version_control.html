@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-27">
+  <meta name="dcterms.date" content="2025-05-28">
   <title>Introduction to Version Control with Git and GitHub</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,24 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-27</p>
+  <p class="date">2025-05-28</p>
+</section>
+<section>
+<section id="principle" class="title-slide slide level1 center">
+<h1>Principle</h1>
+<aside class="notes">
+<p>first the principle but then mostly practicing</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-is-git" class="slide level2">
 <h2>What is <span style="color:indianred;">git</span>?</h2>
@@ -459,10 +476,12 @@ Géraldine Derroire
 <h2><span style="color:indianred;">git</span> and <span style="color:indianred;">GitHub</span></h2>
 <p><span style="color:indianred;">git</span> and <span style="color:indianred;">GitHub</span> are useful tools for <strong>reproducibility</strong>.</p>
 <p>They are two different things:</p>
+<div>
 <ul>
-<li class="fragment"><p>🔄 Git manages version control <strong>on your computer</strong></p></li>
-<li class="fragment"><p>☁️ GitHub helps you share, back up, and collaborate <strong>online</strong></p></li>
+<li><p>🔄 Git manages version control <strong>on your computer</strong></p></li>
+<li><p>☁️ GitHub helps you share, back up, and collaborate <strong>online</strong></p></li>
 </ul>
+</div>
 </section>
 <section id="setting-it-up" class="slide level2">
 <h2>Setting it up</h2>
@@ -495,13 +514,13 @@ Géraldine Derroire
 <div class="column" style="width:55%;">
 <p><span style="font-size: 30px">There are three <strong>local areas</strong> in a git repository:</span></p>
 <ul>
-<li class="fragment"><p><span style="font-size: 30px">the</span><span style="color:indianred;">working copy</span> is the current state of the directory (what you actually see)</p></li>
-<li class="fragment"><p><span style="font-size: 30px">the</span><span style="color:indianred;">staging area</span> contains selected files that will be added to the next version</p></li>
-<li class="fragment"><p><span style="font-size: 30px">a</span><span style="color:indianred;">repository</span> is an area containing all the versions</p></li>
+<li class="fragment"><p><span style="font-size: 30px">the <span style="color:indianred;">working copy</span> is the current state of the directory (what you actually see)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">the <span style="color:indianred;">staging area</span> contains selected files that will be added to the next version</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">a <span style="color:indianred;">repository</span> is an area containing all the versions</span></p></li>
 </ul>
 </div><div class="column" style="width:45%;">
 <p><img data-src="local_remote.png"></p>
-<p><span style="font-size: 30px">The</span><span style="color:indianred;">remote repository</span> is a copy of the git project stored on GitHub.</p>
+<p><span class="fragment"><span style="font-size: 30px">The <span style="color:indianred;">remote repository</span> is a copy of the git project stored on GitHub.</span></span></p>
 </div></div>
 <p><span style="font-size: 22px">Source of illustrations: <a href="https://frbcesab.github.io/intro-git" data-preview-link="false">N. Casajus</a></span></p>
 </section>
@@ -542,7 +561,7 @@ Géraldine Derroire
 </section>
 <section id="basic-workflow-2" class="slide level2">
 <h2>Basic workflow</h2>
-<p><span style="font-size: 30px">A</span><span style="color:indianred;">Commit</span> records:</p>
+<p><span style="font-size: 30px">A <span style="color:indianred;">Commit</span> records:</span></p>
 <ul>
 <li class="fragment"><p><span style="font-size: 30px"><strong>WHAT</strong>: the specific changes (line-by-line differences) in the files that you staged</span></p></li>
 <li class="fragment"><p><span style="font-size: 30px"><strong>WHO</strong>: the person who made the changes</span></p></li>
@@ -600,13 +619,13 @@ Géraldine Derroire
 </section>
 <section id="basic-workflow-6" class="slide level2">
 <h2>Basic workflow</h2>
-<p><span class="fragment">When to</span><span style="color:indianred;">push</span>?</p>
+<p>When to <span style="color:indianred;">push</span>?</p>
 <ul>
 <li class="fragment"><p><span style="font-size: 30px">Push often (every commits or every few commits)</span></p></li>
 <li class="fragment"><p><span style="font-size: 30px">Push when you reach a milestone</span></p></li>
 <li class="fragment"><p><span style="font-size: 30px">Push at the end of a work session</span></p></li>
 </ul>
-<p><span class="fragment">When to</span><span style="color:indianred;">pull</span>?</p>
+<p><span class="fragment">When to <span style="color:indianred;">pull</span>?</span></p>
 <ul>
 <li class="fragment"><span style="font-size: 30px">Pull before starting a new work session and before pushing (if working with collaborators)</span></li>
 </ul>
@@ -637,36 +656,113 @@ Géraldine Derroire
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
+</section></section>
 <section>
-<section id="create-a-new-repo" class="title-slide slide level1 center">
-<h1>Create a new / repo</h1>
-<p>https://happygitwithr.com/usage-intro =&gt; me baser bcp là dessus</p>
-<p>see Eric</p>
-<p>practice at the same time</p>
+<section id="create-a-new-repository" class="title-slide slide level1 center">
+<h1>Create a new repository</h1>
+<aside class="notes">
+<p>let’s practice</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="create-a-new-project-starting-with-github" class="slide level2">
-<h2>Create a new project starting with GitHub</h2>
-<p>BEST WAY</p>
-<p>https://happygitwithr.com/new-github-first</p>
+<section id="create-a-new-repository-from-scratch" class="slide level2">
+<h2>Create a new repository from scratch</h2>
+<p><span style="font-size: 29px">The best practice is to create a git and GitHub repo when you start a new project.</span></p>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div>
+<ol type="1">
+<li><span style="font-size: 30px">Create a new GitHub repository</span></li>
+</ol>
+</div>
 <ul>
-<li class="fragment"><p>from nothing =&gt; in github cf screen shot de Nicoals</p></li>
-<li class="fragment"><p>from an existing RStudio project https://inbo.github.io/git-course/course_rstudio.html#21_Create_a_repository and here https://inbo.github.io/git-course/course_rstudio.html#23_Clone_a_repo_to_work_locally</p></li>
+<li class="fragment"><p><span style="font-size: 25px">Go to <em>Repositories</em> and click on the green button <em>New</em></span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">Give a name to your new repo</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">Add a description</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">Select if you want to make the repo public or private</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">Add a README file</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">You can also change the template of the <em>.gitignore</em> and a license (optional)</span></p></li>
 </ul>
-<p>and from here :</p>
-<!--
-
-## Existing project, GitHub first
-
-https://happygitwithr.com/existing-github-first
-
-Bof car ça veut dire faire un copié-coller de tout...
-but easy if there is no git history
-
--->
+</div><div class="column" style="width:35%;">
+<p><img data-src="new_repo.png"></p>
+</div></div>
+<aside class="notes">
+<p>Let’s do this together</p>
+<p>Name: no spectial caracter, avoid spaces</p>
+<p>gitignore =&gt; see next slides</p>
+<p>readme =&gt; let’s talk about it latter</p>
+<p>License: see the info if you want to add one (only for public repo)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!-- discuss the choice name, private/public, .gitignore later-->
+</section>
+<section id="create-a-new-repository-from-scratch-1" class="slide level2">
+<h2>Create a new repository from scratch</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div>
+<ol start="2" type="1">
+<li><span style="font-size: 30px">Copy the URL of this repo</span></li>
+</ol>
+</div>
+</div><div class="column" style="width:35%;">
+<p><img data-src="clone.png"></p>
+</div></div>
+</section>
+<section id="create-a-new-repository-from-scratch-2" class="slide level2">
+<h2>Create a new repository from scratch</h2>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div>
+<ol start="3" type="1">
+<li><span style="font-size: 30px">Create a new project in RStudio</span></li>
+</ol>
+<ul>
+<li><p><span style="font-size: 30px"><em>File/New Project/Version Control/Git</em></span></p></li>
+<li><p><span style="font-size: 30px">Paste the repo URL</span></p></li>
+<li><p><span style="font-size: 30px">Select the localisation of your project on your computer</span></p></li>
+<li><p><span style="font-size: 30px">Check the box <em>Open in new session</em></span></p></li>
+</ul>
+</div>
+</div><div class="column" style="width:35%;">
+<p><img data-src="new_project.png"></p>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px">Once the new project is created, you should see the git window. Note that a <em>.gitignore</em> file and a <em>README</em> file (if you created one) are added.</span></span></p>
 </section>
 <section id="create-a-repository-from-an-existing-rstudio-project" class="slide level2">
 <h2>Create a repository from an existing RStudio project</h2>
+<aside class="notes">
+<p>Best to avoid doing this, as we should create it from the beginning for reproductibility</p>
+<p>Let’s NOT do this together</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div>
@@ -712,13 +808,96 @@ but easy if there is no git history
           display:block!important;
       }</style></aside>
 </section>
-<section id="publicprivate" class="slide level2">
-<h2>public/private</h2>
+<section id="public-versus-private-repository" class="slide level2">
+<h2>Public versus private repository</h2>
+<p><span style="font-size: 30px">A <strong>public</strong> repo is visible to everyone (but only collaborators can edit it):</span></p>
+<div>
+<ul>
+<li><p><span style="font-size: 30px">for open-science and reproducibility</span></p></li>
+<li><p><span style="font-size: 30px">for visibility</span></p></li>
+<li><p><span style="font-size: 30px">for community contribution</span></p></li>
+</ul>
+</div>
+<div class="fragment">
+<p><span style="font-size: 30px">A <strong>private</strong> repo is visible only by you and collaborators to which you gave access:</span></p>
+<div>
+<ul>
+<li><span style="font-size: 30px">for project containing sensitive information…</span></li>
+</ul>
+</div>
+<p><span style="font-size: 30px">💡 You can still make a repo public is you have information (passwords) or data that you don’t want to share, by including them in the <em>.gitignore</em>.</span></p>
+</div>
+<aside class="notes">
+<p>visibility of your work =&gt; will be used and cited</p>
+<p>visibility of yourself: show your skills</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="gitignore" class="slide level2">
-<h2>.gitignore</h2>
-<p>https://frbcesab.github.io/intro-git/#/the-.gitignore</p>
-<p>syntax (cf cours nicolas)</p>
+<section id="ignoring-files-with-.gitignore" class="slide level2 smaller">
+<h2>Ignoring files with <span style="color:indianred;">.gitignore</span></h2>
+<p><span style="font-size: 30px">You can decide to tell git (and therefore GitHub) <strong>not to track</strong> certain files by listing them in a special file called <span style="color:indianred;">.gitignore.</span></span></p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><span style="font-size: 30px">Typical files to ignore:</span></p>
+<div>
+<ul>
+<li><p><span style="font-size: 30px">non-open or sensitive data</span></p></li>
+<li><p><span style="font-size: 30px">passwords</span></p></li>
+<li><p><span style="font-size: 30px">temporary files</span></p></li>
+<li><p><span style="font-size: 30px">large files</span></p></li>
+<li><p><span style="font-size: 30px">files that can be regenerated easily (e.g.&nbsp;figures, .html, .pdf)</span></p></li>
+</ul>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="fragment">
+<p><span style="font-size: 30px">Syntax of <span style="&quot;color:indianred;">.gitignore</span></span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Ignore a specific file</span></span>
+<span id="cb2-2"><a href=""></a>README.html</span>
+<span id="cb2-3"><a href=""></a></span>
+<span id="cb2-4"><a href=""></a><span class="co"># Ignore all PDF</span></span>
+<span id="cb2-5"><a href=""></a><span class="sc">*</span>.pdf</span>
+<span id="cb2-6"><a href=""></a></span>
+<span id="cb2-7"><a href=""></a><span class="co"># Ignore a folder</span></span>
+<span id="cb2-8"><a href=""></a>data<span class="sc">/</span></span>
+<span id="cb2-9"><a href=""></a></span>
+<span id="cb2-10"><a href=""></a><span class="co"># Ignore a subfolder</span></span>
+<span id="cb2-11"><a href=""></a>data<span class="sc">/</span>raw<span class="sc">-</span>data<span class="sc">/</span></span>
+<span id="cb2-12"><a href=""></a></span>
+<span id="cb2-13"><a href=""></a><span class="co"># Ignore a specific file in a subfolder</span></span>
+<span id="cb2-14"><a href=""></a>data<span class="sc">/</span>raw<span class="sc">-</span>data<span class="sc">/</span>raw<span class="sc">-</span>data.csv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+</div></div>
+<div class="fragment">
+<p><span style="font-size: 30px">⚠️️️Files listed in <span style="color:indianred;">.gitignore</span> will <strong>not</strong> be versioned or uploaded to GitHub.</span></p>
+<p><span style="font-size: 30px">You can edit n <span style="&quot;color:indianred;">.gitignore</span> at any time, but this won’t untrack files that are already tracked.</span></p>
+</div>
+<aside class="notes">
+<p>html or pdf files can be easily recreated</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="basic-operations" class="title-slide slide level1 center">

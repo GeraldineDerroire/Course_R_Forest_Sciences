@@ -96,9 +96,14 @@ It connects with [git]{style="color:indianred;"} to support backup, collaboratio
 
 They are two different things:
 
+::: nonincremental
+
 -   🔄 Git manages version control **on your computer**
 
 -   ☁️ GitHub helps you share, back up, and collaborate **online**
+
+:::
+
 
 ## Setting it up
 
@@ -124,17 +129,17 @@ all good for everyone?
 ::: {.column width="55%"}
 [There are three **local areas** in a git repository:]{style="font-size: 30px"}
 
--   [the ]{style="font-size: 30px"}[working copy]{style="color:indianred;"} is the current state of the directory (what you actually see)
+-   [the [working copy]{style="color:indianred;"} is the current state of the directory (what you actually see)]{style="font-size: 30px"}
 
--   [the ]{style="font-size: 30px"}[staging area]{style="color:indianred;"} contains selected files that will be added to the next version
+-   [the [staging area]{style="color:indianred;"} contains selected files that will be added to the next version]{style="font-size: 30px"}
 
--   [a ]{style="font-size: 30px"}[repository]{style="color:indianred;"} is an area containing all the versions
+-   [a [repository]{style="color:indianred;"} is an area containing all the versions]{style="font-size: 30px"}
 :::
 
 ::: {.column width="45%"}
 ![](local_remote.png)
 
-[The ]{style="font-size: 30px"}[remote repository]{style="color:indianred;"} is a copy of the git project stored on GitHub.
+[[The [remote repository]{style="color:indianred;"} is a copy of the git project stored on GitHub.]{style="font-size: 30px"}]{.fragment}
 :::
 :::::
 
@@ -166,7 +171,7 @@ you may decide to commit some files later because they related to a separate tas
 
 ## Basic workflow
 
-[A ]{style="font-size: 30px"}[Commit]{style="color:indianred;"} records:
+[A [Commit]{style="color:indianred;"} records:]{style="font-size: 30px"}
 
 -   [**WHAT**: the specific changes (line-by-line differences) in the files that you staged]{style="font-size: 30px"}
 
@@ -218,7 +223,7 @@ When to [commit]{style="color:indianred;"}?
 
 ## Basic workflow
 
-[When to ]{.fragment}[push]{style="color:indianred;"}?
+When to [push]{style="color:indianred;"}?
 
 -   [Push often (every commits or every few commits)]{style="font-size: 30px"}
 
@@ -226,7 +231,7 @@ When to [commit]{style="color:indianred;"}?
 
 -   [Push at the end of a work session]{style="font-size: 30px"}
 
-[When to ]{.fragment}[pull]{style="color:indianred;"}?
+[When to [pull]{style="color:indianred;"}?]{.fragment}
 
 -   [Pull before starting a new work session and before pushing (if working with collaborators)]{style="font-size: 30px"}
 
@@ -264,42 +269,113 @@ You will see the git window once you have created a git repo
 
 ::: notes
 let's practice
+
 :::
 
-https://happygitwithr.com/usage-intro =\> me baser bcp là dessus
 
-see Eric
+## Create a new repository from scratch
 
-practice at the same time
-
-## Create a new repository starting with GitHub
-
-BEST WAY
-
-https://happygitwithr.com/new-github-first
-
-<!--
-
--   from nothing =\> in github cf screen shot de Nicoals
-
--   from an existing RStudio project https://inbo.github.io/git-course/course_rstudio.html#21_Create_a_repository and here https://inbo.github.io/git-course/course_rstudio.html#23_Clone_a_repo_to_work_locally
-
-and from here :
+[The best practice is to create a git and GitHub repo when you start a new project.]{style="font-size: 29px"}
 
 
+::::: columns
+::: {.column width="65%"}
+
+::: {.nonincremental}
+1. [Create a new GitHub repository]{style="font-size: 30px"}
+:::
 
 
-## Existing project, GitHub first
+* [Go to *Repositories* and click on the green button *New*]{style="font-size: 25px"}
+    
+* [Give a name to your new repo]{style="font-size: 25px"}
+    
+* [Add a description]{style="font-size: 25px"}
+    
+* [Select if you want to make the repo public or private]{style="font-size: 25px"}
+    
+* [Add a README file]{style="font-size: 25px"}
 
-https://happygitwithr.com/existing-github-first
+* [You can also change the template of the *.gitignore* and a license (optional)]{style="font-size: 25px"}
+    
+:::
 
-Bof car ça veut dire faire un copié-coller de tout...
-but easy if there is no git history
+::: {.column width="35%"}
+![](new_repo.png) 
+:::
+:::::
 
--->
+
+::: notes
+Let's do this together
+
+Name: no spectial caracter, avoid spaces
+
+gitignore => see next slides
+
+readme => let's talk about it latter
+
+License: see the info if you want to add one (only for public repo)
+::: 
+
+<!-- discuss the choice name, private/public, .gitignore later-->
+
+
+    
+## Create a new repository from scratch   
+
+::::: columns
+::: {.column width="65%"}
+
+::: {.nonincremental}
+2. [Copy the URL of this repo]{style="font-size: 30px"}
+:::
+
+:::
+
+::: {.column width="35%"}
+
+![](clone.png)
+:::
+:::::
+
+## Create a new repository from scratch 
+
+::::: columns
+::: {.column width="65%"}
+
+
+::: {.nonincremental}
+3. [Create a new project in RStudio]{style="font-size: 30px"}
+
+
+  * [*File/New Project/Version Control/Git*]{style="font-size: 30px"}
+  
+  * [Paste the repo URL]{style="font-size: 30px"}
+  
+  * [Select the localisation of your project on your computer]{style="font-size: 30px"}
+  
+  * [Check the box *Open in new session*]{style="font-size: 30px"}
+:::  
+
+:::
+
+::: {.column width="35%"}
+![](new_project.png)
+:::
+
+:::::
+
+[[Once the new project is created, you should see the git window. Note that a *.gitignore* file and a *README* file (if you created one) are added.]{style="font-size: 30px"}]{.fragment}
 
 
 ## Create a repository from an existing RStudio project
+
+::: notes
+Best to avoid doing this, as we should create it from the beginning for reproductibility
+
+Let's NOT do this together
+:::
 
 ::::: columns
 ::: {.column width="70%"}
@@ -322,7 +398,6 @@ but easy if there is no git history
 :::::
 
 
-
 3. [Create a GitHub repo and get its URL]{style="font-size: 30px"}
 
 4. [In the RStudio Terminal, run:]{style="font-size: 30px"}
@@ -341,13 +416,96 @@ To stage and commit: see next section
 :::
 
 
-## public/private
+## Public versus private repository
 
-## .gitignore
+[A **public** repo is visible to everyone (but only collaborators can edit it):]{style="font-size: 30px"}
 
-https://frbcesab.github.io/intro-git/#/the-.gitignore
+::: {.nonincremental}
+* [for open-science and reproducibility]{style="font-size: 30px"}
 
-syntax (cf cours nicolas)
+* [for visibility]{style="font-size: 30px"}
+
+* [for community contribution]{style="font-size: 30px"}
+:::
+
+::: fragment
+
+[A **private** repo is visible only by you and collaborators to which you gave access:]{style="font-size: 30px"}
+
+::: {.nonincremental}
+* [for project containing sensitive information...]{style="font-size: 30px"}
+:::
+
+[💡 You can still make a repo public is you have information (passwords) or data that you don't want to share, by including them in the *.gitignore*.]{style="font-size: 30px"}
+
+:::
+
+
+::: notes
+visibility of your work => will be used and cited
+
+visibility of yourself: show your skills
+:::
+
+
+## Ignoring files with [.gitignore]{style="color:indianred;"} {.smaller}
+
+[You can decide to tell git (and therefore GitHub) **not to track** certain files by listing them in a special file called [.gitignore.]{style="color:indianred;"}]{style="font-size: 30px"}
+
+::::: columns
+::: {.column width="55%"}
+[Typical files to ignore:]{style="font-size: 30px"}
+
+::: {.nonincremental}
+* [non-open or sensitive data]{style="font-size: 30px"}
+
+* [passwords]{style="font-size: 30px"}
+
+* [temporary files]{style="font-size: 30px"}
+
+* [large files]{style="font-size: 30px"}
+
+* [files that can be regenerated easily (e.g. figures, .html, .pdf)]{style="font-size: 30px"}
+:::
+
+:::
+
+::: {.column width="45%"}
+
+::: fragment
+[Syntax of [.gitignore]{style="color:indianred;}]{style="font-size: 30px"}
+
+```{r, eval = FALSE}
+# Ignore a specific file
+README.html
+
+# Ignore all PDF
+*.pdf
+
+# Ignore a folder
+data/
+
+# Ignore a subfolder
+data/raw-data/
+
+# Ignore a specific file in a subfolder
+data/raw-data/raw-data.csv
+```
+:::
+
+:::
+:::::
+
+::: fragment
+[⚠️️️Files listed in [.gitignore]{style="color:indianred;"} will **not** be versioned or uploaded to GitHub.]{style="font-size: 30px"}
+
+[You can edit n [.gitignore]{style="color:indianred;} at any time, but this won't untrack files that are already tracked.]{style="font-size: 30px"}
+:::
+
+
+::: notes
+html or pdf files can be easily recreated
+:::
 
 # Basic operations
 
