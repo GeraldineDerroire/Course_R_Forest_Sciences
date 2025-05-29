@@ -908,7 +908,7 @@ pred_dist_conf
 
 ::: fragment
 ```{r}
-slice_head(as.data.frame(pred_dist_conf), n = 3)
+slice_head(as.data.frame(pred_dist_conf), n = 15)
 ```
 :::
 

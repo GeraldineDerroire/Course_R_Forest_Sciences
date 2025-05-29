@@ -436,7 +436,7 @@ Géraldine Derroire
 </section>
 <section id="structure-of-a-linear-regression" class="slide level2">
 <h2>Structure of a linear regression</h2>
-<p>A linear regression is a model of the mathematical relationship between:</p>
+<p>A linear regression is a mathematical model of the relationship between:</p>
 <ul>
 <li class="fragment"><p>A <strong>response variable</strong>, also called <em>dependent variable</em></p></li>
 <li class="fragment"><p>One or several <strong>explanatory variables</strong>, also called <em>predictors</em> or <em>independent variables</em></p></li>
@@ -1643,14 +1643,26 @@ Not all rows are shown in the output. Use `print(..., n = Inf)` to show
 </div><div class="column" style="width:60%;">
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="fu">slice_head</span>(<span class="fu">as.data.frame</span>(pred_dist_conf), <span class="at">n =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="fu">slice_head</span>(<span class="fu">as.data.frame</span>(pred_dist_conf), <span class="at">n =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>          x predicted std.error  conf.low conf.high group
-1 -1.000839  5.611072  3.718481 -1.963225  13.18537    -1
-2 -1.000839 23.499302  4.147172 15.051790  31.94681     0
-3 -1.000839 41.387532  6.528790 28.088823  54.68624     1</code></pre>
+<pre><code>            x predicted std.error  conf.low conf.high group
+1  -1.0008392  5.611072  3.718481 -1.963225  13.18537    -1
+2  -1.0008392 23.499302  4.147172 15.051790  31.94681     0
+3  -1.0008392 41.387532  6.528790 28.088823  54.68624     1
+4  -0.9103240  8.720050  3.636175  1.313403  16.12670    -1
+5  -0.9103240 26.608280  3.910431 18.642993  34.57357     0
+6  -0.9103240 44.496510  6.278160 31.708316  57.28470     1
+7  -0.8198089 11.829028  3.577308  4.542290  19.11577    -1
+8  -0.8198089 29.717258  3.683014 22.215203  37.21931     0
+9  -0.8198089 47.605488  6.032096 35.318510  59.89247     1
+10 -0.7292937 14.938006  3.543047  7.721055  22.15496    -1
+11 -0.7292937 32.826236  3.466758 25.764681  39.88779     0
+12 -0.7292937 50.714466  5.791180 38.918218  62.51071     1
+13 -0.6387785 18.046983  3.534108 10.848241  25.24573    -1
+14 -0.6387785 35.935213  3.263880 29.286907  42.58352     0
+15 -0.6387785 53.823443  5.556081 42.506077  65.14081     1</code></pre>
 </div>
 </div>
 </div>

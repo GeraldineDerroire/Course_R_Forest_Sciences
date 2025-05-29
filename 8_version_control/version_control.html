@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-28">
+  <meta name="dcterms.date" content="2025-05-29">
   <title>Introduction to Version Control with Git and GitHub</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-28</p>
+  <p class="date">2025-05-29</p>
 </section>
 <section>
 <section id="principle" class="title-slide slide level1 center">
@@ -509,7 +509,7 @@ Géraldine Derroire
 </section>
 <section id="a-few-definitions" class="slide level2">
 <h2>A few definitions</h2>
-<p><span style="font-size: 30px">A</span><span style="color:indianred;">version</span> is the state of the entire project at a given point in time.</p>
+<p><span style="font-size: 30px">A <span style="color:indianred;">version</span> is the state of the entire project at a given point in time.</span></p>
 <div class="columns">
 <div class="column" style="width:55%;">
 <p><span style="font-size: 30px">There are three <strong>local areas</strong> in a git repository:</span></p>
@@ -644,7 +644,7 @@ Géraldine Derroire
 </div>
 </div></div>
 <aside class="notes">
-<p>You will see the git window once you have created a git repo</p>
+<p>You will see the git pane once you have created a git repo</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -729,6 +729,7 @@ Géraldine Derroire
 </section>
 <section id="create-a-new-repository-from-scratch-2" class="slide level2">
 <h2>Create a new repository from scratch</h2>
+<p><span style="font-size: 30px">You now need to <strong>clone</strong> the remote repository to download it on your computer:</span></p>
 <div class="columns">
 <div class="column" style="width:65%;">
 <div>
@@ -745,7 +746,7 @@ Géraldine Derroire
 </div><div class="column" style="width:35%;">
 <p><img data-src="new_project.png"></p>
 </div></div>
-<p><span class="fragment"><span style="font-size: 30px">Once the new project is created, you should see the git window. Note that a <em>.gitignore</em> file and a <em>README</em> file (if you created one) are added.</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">Once the new project is created, you should see the git pane. Note that a <em>.gitignore</em> file and a <em>README</em> file (if you created one) are added.</span></span></p>
 </section>
 <section id="create-a-repository-from-an-existing-rstudio-project" class="slide level2">
 <h2>Create a repository from an existing RStudio project</h2>
@@ -900,112 +901,422 @@ Géraldine Derroire
       }</style></aside>
 </section></section>
 <section>
-<section id="basic-operations" class="title-slide slide level1 center">
-<h1>Basic operations</h1>
-<p>voir ici, also for screen shots: https://frbcesab.github.io/intro-git/#/rstudio-and-git-1</p>
+<section id="basic-workflow-from-rstudio" class="title-slide slide level1 center">
+<h1>Basic workflow from RStudio</h1>
+<!--voir ici, also for screen shots: https://frbcesab.github.io/intro-git/#/rstudio-and-git-1-->
+<aside class="notes">
+<p>Let’s pratice together</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="stage-the-changes" class="slide level2">
+<h2>Stage the changes</h2>
+<p><span style="font-size: 25px"><em>Create a new .R file with a few lines of code and save it.</em></span></p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><span style="font-size: 30px">Modified or new files will appear in the <em>git</em> pane in RStudio:</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="modif_files.png"></p>
+</div></div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><span style="font-size: 30px">We can review the changes, by clicking on <em>Commit</em>: green lines for added content, red lines for removed or modified content.</span></p>
+<p><span style="font-size: 30px">To prepare files for the next commit, check the box in the <em>Staged</em> column:</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="stage_rstudio.png"></p>
+</div></div>
+</div>
+</section>
+<section id="stage-the-changes-1" class="slide level2">
+<h2>Stage the changes</h2>
+<p><span style="font-size: 30px">We don’t need to stage <em>all</em> the modified files:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px"><strong>Unstaged</strong> files will not be included in the commit, but can be committed later.</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">We can <strong>ignore</strong> a file by clicking on <img data-src="ignore.png">. This adds it to the <em>gitignore</em> so it won’t be tracked in the future.</span></p></li>
+</ul>
+<aside class="notes">
+<p>as we want to do a commit per task, it can be usefull not to commit all recent changes in one same commit</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="commit" class="slide level2">
-<h2>commit</h2>
-<p>info elementaire = ligne (donc bcp de retour à la ligne (permet e minimiser les conflicts cf Eric))</p>
-<p>good commit message (Nicolas), when to commit (done before)</p>
-<p>https://inbo.github.io/git-course/static/presentations/git.pdf</p>
-<p>https://happygitwithr.com/new-github-first#make-local-changes-save-commit-1</p>
+<h2>Commit</h2>
+<div class="columns">
+<div class="column" style="width:60%;">
+<p><span style="font-size: 30px">Once selected files are staged, we write a commit message and click on <em>Commit</em>:</span></p>
+<p><span style="font-size: 30px">A commit message as a title and an optional body.</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="commit_rstudio.png"></p>
+</div></div>
+<p><span style="font-size: 30px">A good commit message should be <strong>short but informative</strong>: it should explain what was changed and why.</span></p>
+<div class="column" style="width:60%;">
+<p><span style="font-size: 30px"><em>example:</em> ✅ <em>“Fix plot label alignment in Figure 2”</em></span></p>
+</div><div class="column" style="width:40%;">
+<p><span style="font-size: 30px">❌ <em>“Update code”</em></span></p>
+</div></section>
+<section id="push" class="slide level2">
+<h2>Push</h2>
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">After committing, we may see that our local repository is ahead of the remote one.</span></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="push_rstudio.png"></p>
+</div><p><span style="font-size: 30px">This means we have one or more commits that haven’t yet been pushed to GitHub.</span></p>
+<p><span style="font-size: 30px">Click on <em>Push</em> to send these commits to the remote repository on GitHub.</span></p>
 </section>
-<section id="synchro-github-pushpull" class="slide level2">
-<h2>synchro github (push/pull)</h2>
-<p>cf Nicolas sur problème pushing: https://frbcesab.github.io/intro-git/#/help-me-i-cant-push</p>
-<p>https://happygitwithr.com/new-github-first#push-your-local-changes-to-github</p>
-</section>
-<section id="push-rejection" class="slide level2">
-<h2>push rejection</h2>
-<p>https://happygitwithr.com/push-rejected et Casajus</p>
-<p>and here https://happygitwithr.com/pull-tricky</p>
+<section id="pull" class="slide level2">
+<h2>Pull</h2>
+<p><span style="font-size: 30px">To update your local repository with the latest changes from GitHub, click on <em>Pull</em>.</span></p>
+<p><span style="font-size: 30px">This will synchronize your local repository with the remote one, downloading any new commits made by you or your collaborators directly on GitHub.</span></p>
 </section></section>
 <section>
-<section id="title" class="title-slide slide level1 center">
-<h1>TITLE</h1>
+<section id="looking-back" class="title-slide slide level1 center">
+<h1>Looking back</h1>
 
 </section>
-<section id="travel-the-past" class="slide level2">
-<h2>Travel the past</h2>
-<p>https://happygitwithr.com/time-travel-see-past</p>
-<p>https://inbo.github.io/git-course/course_rstudio.html#212_View_history</p>
+<section id="seeing-past-changes-in-rstudio" class="slide level2">
+<h2>Seeing past changes in Rstudio</h2>
+<div class="column" style="width:60%;">
+<p><span style="font-size: 30px">To view the history of previous commits, click on <em>history</em> in the git pane. You can see all the previous commits with their message, author and date.</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="history_rstudio.png"></p>
+</div><div class="fragment">
+<div class="column" style="width:60%;">
+<p><span style="font-size: 30px">To inspect the changes made in a specific commit, click on it. You can see the modification: green lines for added content, red lines for removed or modified content.</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="history_rstudio2.png"></p>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px">💡 Now you understand the importance of having informative commit messages</span></span></p>
 </section>
-<section id="suivi-de-projet-avec-le-diag-les-lignes-qui-se-rejoignent" class="slide level2">
-<h2>suivi de projet avec le diag (les lignes qui se rejoignent)</h2>
+<section id="seeing-past-changes-in-github" class="slide level2">
+<h2>Seeing past changes in GitHub</h2>
+<div class="column" style="width:60%;">
+<p><span style="font-size: 30px">On the main page of the repository, GitHub shows when each file or folder was last modified, along with the message of the most recent commit.</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="history_github1.png"></p>
+</div><div class="fragment">
+<div class="column" style="width:60%;">
+<p><span style="font-size: 30px">Click on the clock icon to view the full commit history of the repository.</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="history_github2.png"></p>
+</div></div>
+<div class="fragment">
+<div class="column" style="width:60%;">
+<p><span style="font-size: 30px">Click on a specific commit to see all the changes it introduced.</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="history_github3.png"></p>
+</div></div>
+</section>
+<section id="going-back-in-time" class="slide level2">
+<h2>Going back in time</h2>
+<p><span style="font-size: 30px">To return to a previous version of your code, you can:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">identify the commit you want to go back to and copy the code you want to restore: <span style="color:green;">safe option</span></span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">use <em>git revert</em> to creates a new commit that undoes the changes introduced by a previous one: <span style="color:orange;">more advanced option</span></span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">use <em>git reset</em> to remove commits from history: <span style="color:red;">risky option</span></span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px"><em>The two last options are more advanced and must be done in the terminal. We won’t cover them here.</em></span></span></p>
 </section></section>
 <section>
-<section id="github-visibility" class="title-slide slide level1 center">
-<h1>github visibility</h1>
-<p>where to put this? at the end???</p>
-<p>https://rdatatoolbox.github.io/chapters/course-github.html</p>
-<p>github social network (or in intro?) : https://rdatatoolbox.github.io/chapters/course-github.html</p>
-<p>account page, organisation page, repo page =&gt; cf cours Nicolas</p>
-</section>
-<section id="the-readme.md" class="slide level2">
-<h2>the README.md</h2>
-<p>https://happygitwithr.com/workflows-browsability</p>
-</section></section>
-<section>
-<section id="collaborate" class="title-slide slide level1 center">
-<h1>Collaborate</h1>
+<section id="collaborate-with-github" class="title-slide slide level1 center">
+<h1>Collaborate with GitHub</h1>
 
 </section>
-<section id="collaborate-1" class="slide level2">
-<h2>collaborate</h2>
+<section id="invite-a-collaborator" class="slide level2">
+<h2>Invite a collaborator</h2>
+<p>On GitHub:</p>
+<div>
+<ul>
+<li><p><span style="font-size: 30px">on the main page of your repository, click on <img data-src="settings.png"></span></p></li>
+<li><p><span style="font-size: 30px">click on <img data-src="collab.png"> (in the left-side menu)</span></p></li>
+<li><p><span style="font-size: 30px">click on <img data-src="add_people.png"></span></p></li>
+<li><p><span style="font-size: 30px">type the GitHub user name of the collaborator you want to invite</span></p></li>
+<li><p><span style="font-size: 30px">click on <em>Add</em></span></p></li>
+</ul>
+</div>
 </section>
-<section id="add-a-collaborator" class="slide level2">
-<h2>add a collaborator:</h2>
-<p>https://inbo.github.io/git-course/course_rstudio.html#31_Invite_collaborators</p>
-<p>pull, work, commit, push</p>
+<section id="invite-a-collaborator-1" class="slide level2">
+<h2>Invite a collaborator</h2>
+<p><span style="font-size: 30px">Your collaborator will need to</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">accept the invitation to start working on your repository (invitation are received by email and also visible on GitHub in <em>notifications</em>)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">clone the repository on their computer (see step 3 of *Create a new repository from scratch)</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">The collaborator can then start working: <em>modify, commit, push</em>.</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">💡 On a personal repository, collaborators have <strong>read</strong> and <strong>write</strong> rights, but not admin rights.</span></span></p>
+<aside class="notes">
+<p>Practice only if we have time: in pairs one invite, then they modified one after the other</p>
+<p>to be able to accept the invitation, you need to b signed in</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="conflict" class="slide level2">
-<h2>conflict</h2>
-<p>https://frbcesab.github.io/intro-git/#/help-me-i-cant-pull =&gt; super bien expliqué</p>
-<p>https://inbo.github.io/git-course/course_rstudio.html#29_Create_a_conflict</p>
+<section id="why-cant-i-push" class="slide level2">
+<h2>Why can’t I push ?</h2>
+<p><span style="font-size: 30px">You may get the following error message when trying to push:</span></p>
+<p><img data-src="pb_push.png" style="height:80.0%"></p>
+<p><span style="font-size: 30px">It happens when the remote repository has changed since your last pull.</span></p>
 </section>
-<section id="issue" class="slide level2">
-<h2>issue</h2>
+<section id="why-cant-i-push-1" class="slide level2">
+<h2>Why can’t I push ?</h2>
+<p><span style="font-size: 30px">The remote may have been modified:</span></p>
+<div>
+<ul>
+<li><p><span style="font-size: 30px">directly on git (by you or by a collaborator)</span></p></li>
+<li><p><span style="font-size: 30px">by a collaborator who pushed their changes before you</span></p></li>
+</ul>
+</div>
+<p><span class="fragment"><strong>💡 Solution: pull before pushing again</strong></span></p>
 </section>
-<section id="github-projects" class="slide level2">
-<h2>github projects</h2>
-<p>here or somewhere else?</p>
+<section id="why-cant-i-push-practice" class="slide level2">
+<h2>Why can’t I push ? practice</h2>
+<div>
+<ul>
+<li><p><span style="font-size: 30px"><em>go on GitHub</em></span></p></li>
+<li><p><span style="font-size: 30px"><em>edit the README (at the bottom of the repo main page) using <img data-src="pen.png"></em></span></p></li>
+<li><p><span style="font-size: 30px"><em>commit this change directly in GitHub <img data-src="commit_github.png"></em></span></p></li>
+<li><p><span style="font-size: 30px"><em>try to push some changes from your local repo, this will generate an error message</em></span></p></li>
+<li><p><span style="font-size: 30px"><em>pull before pushing again</em></span></p></li>
+</ul>
+</div>
+</section>
+<section id="why-cant-i-pull" class="slide level2">
+<h2>Why can’t I pull?</h2>
+<p><span style="font-size: 30px">You may get the following error message when trying to pull:</span></p>
+
+<img data-src="conflict_message.png" class="r-stretch"><p><span class="fragment">You have a <strong>conflict</strong> 💣 …</span></p>
+</section>
+<section id="what-is-a-conflict" class="slide level2">
+<h2>What is a conflict?</h2>
+<div class="column" style="width:70%;">
+<p><span style="font-size: 30px">A <strong>conflict</strong> occurs when Git cannot automatically merge two versions because they contain changes on the same line(s) of the same file(s).</span></p>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="conflict_cartoon.png" class="quarto-figure quarto-figure-center" style="height:70.0%"></p>
+</figure>
+</div>
+</div><div class="fragment">
+<p><span style="font-size: 30px">It usually happens when the remote repository has changed since your last pull <strong>on the same lines</strong> you have edited locally since your last push.</span></p>
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">Local version:</span></p>
+<p><img data-src="readme_local.png" height="50"></p>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">Remote version:</span></p>
+<p><img data-src="readme_github.png" height="50"></p>
+</div></div>
+</section>
+<section id="how-to-solve-a-conflict" class="slide level2">
+<h2>How to solve a conflict?</h2>
+<ul>
+<li class="fragment"><span style="font-size: 30px">open the conflicted file (its name is in the error message)</span></li>
+</ul>
+<div class="fragment">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="conflicted_file.png" class="quarto-figure quarto-figure-center"></p>
+</figure>
+</div>
+</div>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">edit the file manually but removing the version you don’t want to keep (or writting an alternative version)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">delete the conflict markers (&lt;&lt;&lt;&lt;&lt;&lt;&lt;, =======, &gt;&gt;&gt;&gt;&gt;&gt;&gt;)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">commit and push</span></p></li>
+</ul>
+</section>
+<section id="how-to-solve-a-conflict-practice" class="slide level2">
+<h2>How to solve a conflict? practice</h2>
+<p><em>To generate a conflict:</em></p>
+<div>
+<ul>
+<li><p><span style="font-size: 30px"><em>Modify a file directly on GitHub (ex: the README) and commit</em></span></p></li>
+<li><p><span style="font-size: 30px"><em>On the local repo</em></span></p>
+<ul>
+<li><p><span style="font-size: 30px"><em>Don’t pull</em></span></p></li>
+<li><p><span style="font-size: 30px"><em>Modify the same file on the same line</em></span></p></li>
+<li><p><span style="font-size: 30px"><em>Try to push: you can’t</em></span></p></li>
+<li><p><span style="font-size: 30px"><em>Try to pull: this generate a conflict</em></span></p></li>
+</ul></li>
+</ul>
+</div>
+<p><span style="font-size: 30px"><em>You can know solve this conflict!</em></span></p>
+</section>
+<section id="how-to-avoid-conflicts" class="slide level2">
+<h2>How to avoid conflicts?</h2>
+<div class="column" style="width:70%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">Avoid very long lines of code/text: <em>Git resolves changes line by line — shorter lines reduce the chance of overlap</em></span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Pull and push <strong>frequently</strong>: <em>The longer you wait, the more likely others have changed the same parts</em></span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Communicate with collaborators: <em>Know who is working on what — avoid editing the same files</em></span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Use <strong>branches</strong> for bigger changes: <em>Keeps the main branch clean and easier to merge later</em></span></p></li>
+</ul>
+</div><div class="column" style="width:30%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="solving_conflict_cartoon.png" class="quarto-figure quarto-figure-center" style="height:70.0%"></p>
+</figure>
+</div>
+</div></section>
+<section id="using-issues-on-a-collaborative-project" class="slide level2">
+<h2>Using issues on a collaborative project</h2>
+<p><span style="font-size: 30px">A GitHub Issue is a way to track and discuss tasks, bugs, or ideas in a project. This helps a team to organize work and collaborate efficiently.</span></p>
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">It works like a forum. You can:</span></p>
+<div>
+<ul>
+<li><p><span style="font-size: 30px">create to do list</span></p></li>
+<li><p><span style="font-size: 30px">assign tasks to team members</span></p></li>
+<li><p><span style="font-size: 30px">post an answer or a comment</span></p></li>
+<li><p><span style="font-size: 30px">close the issue once completed or solved</span></p></li>
+</ul>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img data-src="issue.png"></p>
+</div><p><span style="font-size: 30px"><a href="https://docs.github.com/en/issues/tracking-your-work-with-issues/configuring-issues/quickstart" data-preview-link="false">More on GitHub issues</a></span></p>
+</section>
+<section id="organising-a-project-with-a-github-project" class="slide level2">
+<h2>Organising a project with a GitHub project</h2>
+<p><span style="font-size: 30px">A GitHub projects helps plan, prioritize, and visualize work in a project.</span></p>
+<p><span style="font-size: 30px">It organises issues on a visual board.</span></p>
+
+<img data-src="project.png" class="r-stretch"><p><span style="font-size: 30px"><a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects" data-preview-link="false">More on GitHub projects</a></span></p>
 </section></section>
 <section>
-<section id="branch" class="title-slide slide level1 center">
-<h1>Branch</h1>
-<p>pourquoi ? cf Eric</p>
+<section id="more-advanced-use" class="title-slide slide level1 center">
+<h1>More advanced use</h1>
+
+</section>
+<section id="branch" class="slide level2">
+<h2>Branch</h2>
+<div class="column" style="width:60%;">
+<p><span style="font-size: 30px">A branch is a parallel line of development of your project where you can safely make changes without affecting the main code.</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="merge.png"></p>
+</div><p><span style="font-size: 30px">Why use a branch? To develop features, fix bugs, or try ideas without breaking the main project — and then merge them back when ready.</span></p>
+<p><span style="font-size: 30px"><a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches" data-preview-link="false">More on branches</a></span></p>
 </section>
 <section id="create-a-branch" class="slide level2">
-<h2>create a branch</h2>
+<h2>Create a branch</h2>
+<p><span style="font-size: 30px">To create a new branch from RStudio, click on <img data-src="new_branch.png"> in the git pane.</span></p>
+<p><span style="font-size: 30px">You can select the branch you want to work on:</span></p>
+<p><img data-src="branches_rstudio.png"></p>
+<p><span style="font-size: 30px">You can now work on this new branch: <em>pull, work, commit, push…pull, work, commit, push…</em></span></p>
 </section>
 <section id="merge-branch" class="slide level2">
-<h2>merge branch</h2>
+<h2>Merge branch</h2>
+<p><span style="font-size: 30px">Once you are ready to merge your branch with the main branch, go on GitHub:</span></p>
+<ul>
+<li class="fragment"><span style="font-size: 30px">create a pull request (a pull request lets you propose merging your changes into the main branch)</span></li>
+</ul>
+<div class="fragment">
+<p><img data-src="merge_branches.png"></p>
+</div>
+<ul>
+<li class="fragment"><span style="font-size: 30px">merge your branch to the main branch</span></li>
+</ul>
+<aside class="notes">
+<p>merging can still generate conflicts</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="fork-and-pull-request" class="slide level2" style="font-size: 30px">
+<h2>Fork and pull request</h2>
+<p>To work on someone else’s project, you can create a <strong>fork</strong>.</p>
+<p><img data-src="fork.png" style="height:50.0%"></p>
+<p>A <strong>fork</strong> is your personal copy of someone else’s repository that allows you to:</p>
+<ul>
+<li class="fragment"><p>make changes without affecting the original repo</p></li>
+<li class="fragment"><p>collaborate on a project that you don’t have write access to (to fix bugs, propose improvements…)</p></li>
+</ul>
+<p><span class="fragment">You can then make a <strong>pull request</strong> to propose to the original repository maintainer to merge your work. They can review your changes before merging.</span></p>
 </section></section>
-<section id="fork-and-pull-request" class="title-slide slide level1 center">
-<h1>Fork and pull request</h1>
-<p>https://rdatatoolbox.github.io/chapters/course-github.html</p>
-<p>https://happygitwithr.com/common-remote-setups</p>
-<p>https://happygitwithr.com/fork-and-clone and following (not sure how far I want to go…)</p>
-</section>
-
-<section id="clone" class="title-slide slide level1 center">
-<h1>Clone</h1>
-<p>https://happygitwithr.com/clone</p>
-</section>
-
 <section>
-<section id="integration-continue-et-github-action" class="title-slide slide level1 center">
-<h1>integration continue et github action????</h1>
+<section id="github-as-a-social-scientific-network" class="title-slide slide level1 center">
+<h1>GitHub as a social (scientific) network</h1>
 
+</section>
+<section id="github-as-a-social-scientific-network-1" class="slide level2">
+<h2>GitHub as a social (scientific) network</h2>
+
+<img data-src="wickham.png" class="r-stretch"><aside class="notes">
+<p>This is the developper of the tidyverse! 26000 followers!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="github-as-a-social-scientific-network-2" class="slide level2" style="font-size: 30px">
+<h2>GitHub as a social (scientific) network</h2>
+<ul>
+<li class="fragment"><p><strong>Follow</strong> other users</p></li>
+<li class="fragment"><p>Follow repository (<strong>Watch</strong>)</p></li>
+<li class="fragment"><p>Give visibility to your work (and to yourself!)</p></li>
+<li class="fragment"><p>Interact and collaborate on projects</p></li>
+<li class="fragment"><p>Create an <strong>Organisation</strong> to group the repositories of a research group</p></li>
+<li class="fragment"><p>Build websites (e.g.&nbsp;project pages, CVs) using GitHub Pages and GitHub Actions</p></li>
+<li class="fragment"><p>…</p></li>
+</ul>
 </section>
 <section id="acknowledgments" class="slide level2 smaller">
 <h2>Acknowledgments</h2>
 <div>
 <ul>
-<li><p>Cours Nicolas: https://frbcesab.github.io/intro-git/</p></li>
-<li><p>Cours Eric</p></li>
-<li><p>https://inbo.github.io/git-course/course_rstudio.html</p></li>
+<li><p>Casajus N. <em>Version control - Introduction to git &amp; GitHub</em> <a href="https://frbcesab.github.io/intro-git/" data-preview-link="false"></a></p></li>
+<li><p>Marcon E. <em>R: Contrôle de Source</em> <a href="https://ericmarcon.github.io/Cours-travailleR/12-git.html" data-preview-link="false">in French</a></p></li>
+<li><p>Van Hoey S., Desmet P., Onkelinx T. <em>Git hands-on session within RStudio</em> <a href="https://inbo.github.io/git-course/course_rstudio.html" data-preview-link="false"></a></p></li>
+<li><p>Bryan J. <em>Happy Git and GitHub for the useR</em> <a href="https://happygitwithr.com" data-preview-link="false"></a></p></li>
+</ul>
+</div>
+</section>
+<section id="ressources" class="slide level2 smaller">
+<h2>Ressources</h2>
+<div>
+<ul>
+<li><p>Van Hoey S., Desmet P., Onkelinx T. <em>Git hands-on session within RStudio</em> <a href="https://inbo.github.io/git-course/course_rstudio.html" data-preview-link="false"></a></p></li>
+<li><p>Get started with GitHub documentation <a href="https://docs.github.com/pt/get-started" data-preview-link="false">in Portuguese</a> and <a href="https://docs.github.com/en/get-started">in English</a></p></li>
+<li><p>GitHub Docs <a href="https://docs.github.com/pt" data-preview-link="false">in Portuguese</a> and <a href="https://docs.github.com/en" data-preview-link="false">in English</a></p></li>
 </ul>
 </div>
 <div class="quarto-auto-generated-content">

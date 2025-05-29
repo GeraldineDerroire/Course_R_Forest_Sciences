@@ -262,7 +262,7 @@ When to [push]{style="color:indianred;"}?
 :::::
 
 ::: notes
-You will see the git window once you have created a git repo
+You will see the git pane once you have created a git repo
 :::
 
 # Create a new repository
@@ -341,6 +341,8 @@ License: see the info if you want to add one (only for public repo)
 
 ## Create a new repository from scratch 
 
+[You now need to **clone** the remote repository to download it on your computer:]{style="font-size: 30px"}
+
 ::::: columns
 ::: {.column width="65%"}
 
@@ -366,7 +368,7 @@ License: see the info if you want to add one (only for public repo)
 
 :::::
 
-[[Once the new project is created, you should see the git window. Note that a *.gitignore* file and a *README* file (if you created one) are added.]{style="font-size: 30px"}]{.fragment}
+[[Once the new project is created, you should see the git pane. Note that a *.gitignore* file and a *README* file (if you created one) are added.]{style="font-size: 30px"}]{.fragment}
 
 
 ## Create a repository from an existing RStudio project
@@ -517,121 +519,489 @@ Let's pratice together
 
 ## Stage the changes
 
-*Create a new .R file with a few lines of code and save it.*
+[*Create a new .R file with a few lines of code and save it.*]{style="font-size: 25px"}
 
-The new or modified files are listed in the *git* window in RStudio:
+::::: columns
+::: {.column width="60%"}
+[Modified or new files will appear in the *git* pane in RStudio:]{style="font-size: 30px"}
+:::
 
-explain what we seen on this window
+::: {.column width="40%"}
+![](modif_files.png)
+:::
+:::::
+
+
+::: fragment
+
+::::: columns
+::: {.column width="60%"}
+[We can review the changes, by clicking on  *Commit*: green lines for added content, red lines for removed or modified content.]{style="font-size: 30px"}
+
+[To prepare files for the next commit, check the box in the *Staged* column:]{style="font-size: 30px"}
+:::
+
+::: {.column width="40%"}
+![](stage_rstudio.png)
+:::
+:::::
+
+:::
+
+## Stage the changes
+
+[We don't need to stage *all* the modified files:]{style="font-size: 30px"}
+
+* [**Unstaged** files will not be included in the commit, but can be committed later.]{style="font-size: 30px"}
+
+* [We can **ignore** a file by clicking on ![](ignore.png). This adds it to the *gitignore* so it won't be tracked in the future.]{style="font-size: 30px"}
+
+::: notes
+as we want to do a commit per task, it can be usefull not to commit all recent changes in one same commit
+:::
 
 
 
-good commit message (Nicolas)
 
-https://inbo.github.io/git-course/static/presentations/git.pdf
-
-https://happygitwithr.com/new-github-first#make-local-changes-save-commit-1
 
 ## Commit
 
+::::: columns
+::: {.column width="60%"}
+[Once selected files are staged, we write a commit message and click on *Commit*:]{style="font-size: 30px"}
+
+[A commit message as a title and an optional body. ]{style="font-size: 30px"}
+:::
+
+::: {.column width="40%"}
+![](commit_rstudio.png)
+:::
+:::::
+
+
+[A good commit message should be **short but informative**: it should explain what was changed and why.]{style="font-size: 30px"}
+
+
+::: {.column width="60%"}
+[*example:* ✅ *"Fix plot label alignment in Figure 2"*]{style="font-size: 30px"}
+:::
+
+::: {.column width="40%"}
+[❌ *"Update code"*]{style="font-size: 30px"}
+:::
+
 ## Push
 
-## Problem pushing
+::: {.column width="50%"}
+[After committing, we may see that our local repository is ahead of the remote one.]{style="font-size: 30px"}
+:::
 
-cf Nicolas sur problème pushing: https://frbcesab.github.io/intro-git/#/help-me-i-cant-push
+::: {.column width="50%"}
+![](push_rstudio.png)
+:::
 
-https://happygitwithr.com/new-github-first#push-your-local-changes-to-github
+[This means we have one or more commits that haven’t yet been pushed to GitHub.]{style="font-size: 30px"}
+
+[Click on *Push* to send these commits to the remote repository on GitHub.]{style="font-size: 30px"}
+
 
 ## Pull
 
-## Problem pulling
+[To update your local repository with the latest changes from GitHub, click on *Pull*.]{style="font-size: 30px"}
 
-https://happygitwithr.com/push-rejected et Casajus
-
-and here https://happygitwithr.com/pull-tricky
+[This will synchronize your local repository with the remote one, downloading any new commits made by you or your collaborators directly on GitHub.]{style="font-size: 30px"}
 
 
+# Looking back
+
+## Seeing past changes in Rstudio
+
+::: {.column width="60%"}
+[To view the history of previous commits, click on *history* in the git pane. You can see all the previous commits with their message, author and date.]{style="font-size: 30px"}
+:::
+
+::: {.column width="40%"}
+![](history_rstudio.png)
+:::
+
+::: fragment
+
+::: {.column width="60%"}
+[To inspect the changes made in a specific commit, click on it. You can see the modification: green lines for added content, red lines for removed or modified content.]{style="font-size: 30px"}
+:::
+
+::: {.column width="40%"}
+![](history_rstudio2.png)
+:::
+
+:::
+
+[[💡 Now you understand the importance of having informative commit messages]{style="font-size: 30px"}]{.fragment}
 
 
-# TITLE
+## Seeing past changes in GitHub
 
-## Travel the past
+::: {.column width="60%"}
+[On the main page of the repository, GitHub shows when each file or folder was last modified, along with the message of the most recent commit.]{style="font-size: 30px"}
+:::
 
-https://happygitwithr.com/time-travel-see-past
+::: {.column width="40%"}
+![](history_github1.png)
+:::
 
-https://inbo.github.io/git-course/course_rstudio.html#212_View_history
+::: fragment
 
-## suivi de projet avec le diag (les lignes qui se rejoignent)
+::: {.column width="60%"}
+[Click on the clock icon to view the full commit history of the repository.]{style="font-size: 30px"}
+:::
 
-# github visibility
+::: {.column width="40%"}
+![](history_github2.png)
+:::
 
-where to put this?
-at the end???
+:::
 
-https://rdatatoolbox.github.io/chapters/course-github.html
+::: fragment
 
-github social network (or in intro?) : https://rdatatoolbox.github.io/chapters/course-github.html
+::: {.column width="60%"}
+[Click on a specific commit to see all the changes it introduced.]{style="font-size: 30px"}
+:::
 
-account page, organisation page, repo page =\> cf cours Nicolas
+::: {.column width="40%"}
+![](history_github3.png)
+:::
 
-## the README.md
+:::
 
-https://happygitwithr.com/workflows-browsability
+## Going back in time
 
-# Collaborate
+[To return to a previous version of your code, you can:]{style="font-size: 30px"}
 
-## collaborate
+* [identify the commit you want to go back to and copy the code you want to restore: [safe option]{style="color:green;"}]{style="font-size: 30px"}
 
-## add a collaborator:
+* [use *git revert*  to creates a new commit that undoes the changes introduced by a previous one: [more advanced option]{style="color:orange;"}]{style="font-size: 30px"}
 
-https://inbo.github.io/git-course/course_rstudio.html#31_Invite_collaborators
+* [use *git reset* to remove commits from history: [risky option]{style="color:red;"}]{style="font-size: 30px"}
 
-pull, work, commit, push
+[[*The two last options are more advanced and must be done in the terminal. We won't cover them here.*]{style="font-size: 30px"}]{.fragment}
 
-## conflict
 
-https://frbcesab.github.io/intro-git/#/help-me-i-cant-pull =\> super bien expliqué
+# Collaborate with GitHub
 
-https://inbo.github.io/git-course/course_rstudio.html#29_Create_a_conflict
+## Invite a collaborator
 
-info elementaire = ligne (donc bcp de retour à la ligne (permet e minimiser les conflicts cf Eric))
+On GitHub:
 
-to avoid confict push often
 
-## issue
+::: nonincremental
+* [on the main page of your repository, click on ![](settings.png)]{style="font-size: 30px"}
 
-## github projects
+* [click on ![](collab.png) (in the left-side menu)]{style="font-size: 30px"}
 
-here or somewhere else?
+* [click on ![](add_people.png)]{style="font-size: 30px"}
 
-# Branch
+* [type the GitHub user name of the collaborator you want to invite]{style="font-size: 30px"}
 
-pourquoi ?
-cf Eric
+* [click on *Add*]{style="font-size: 30px"}
+:::
 
-## create a branch
+## Invite a collaborator
 
-## merge branch
+[Your collaborator will need to]{style="font-size: 30px"}
 
-# Fork and pull request
+*  [accept the invitation to start working on your repository (invitation are received by email and also visible on GitHub in *notifications*)]{style="font-size: 30px"}
 
-https://rdatatoolbox.github.io/chapters/course-github.html
+* [clone the repository on their computer (see step 3 of *Create a new repository from scratch)]{style="font-size: 30px"}
 
-https://happygitwithr.com/common-remote-setups
+[[The collaborator can then start working: *modify, commit, push*.]{style="font-size: 30px"}]{.fragment}
 
-https://happygitwithr.com/fork-and-clone and following (not sure how far I want to go...)
+[[💡 On a personal repository, collaborators have **read** and **write** rights, but not admin rights.]{style="font-size: 30px"}]{.fragment}
 
-# Clone
+::: notes
+Practice only if we have time: in pairs
+one invite, then they modified one after the other
 
-https://happygitwithr.com/clone
+to be able to accept the invitation, you need to b signed in
+:::
 
-# integration continue et github action????
+
+## Why can't I push ?
+
+[You may get the following error message when trying to push:]{style="font-size: 30px"}
+
+![](pb_push.png){height="80%"}
+
+[It happens when the remote repository has changed since your last pull.]{style="font-size: 30px"}
+
+
+## Why can't I push ?
+
+[The remote may have been modified:]{style="font-size: 30px"}
+
+::: nonincremental
+* [directly on git (by you or by a collaborator)]{style="font-size: 30px"}
+
+* [by a collaborator who pushed their changes before you]{style="font-size: 30px"}
+:::
+
+[**💡 Solution: pull before pushing again**]{.fragment}
+
+## Why can't I push ? practice
+
+::: nonincremental
+* [*go on GitHub*]{style="font-size: 30px"}
+
+* [*edit the README (at the bottom of the repo main page) using ![](pen.png)*]{style="font-size: 30px"}
+
+* [*commit this change directly in GitHub ![](commit_github.png)*]{style="font-size: 30px"}
+
+* [*try to push some changes from your local repo, this will generate an error message*]{style="font-size: 30px"}
+
+* [*pull before pushing again*]{style="font-size: 30px"}
+
+:::
+
+
+## Why can't I pull?
+
+[You may get the following error message when trying to pull:]{style="font-size: 30px"}
+
+![](conflict_message.png)
+
+[You have a **conflict** 💣 ...]{.fragment}
+
+
+## What is a conflict?
+
+::: {.column width="70%"}
+[A **conflict** occurs when Git cannot automatically merge two versions because they contain changes on the same line(s) of the same file(s).]{style="font-size: 30px"}
+:::
+
+::: {.column width="30%"}
+![](conflict_cartoon.png){fig-align="center" height="70%"}
+:::
+
+::: fragment
+
+[It usually happens when the remote repository has changed since your last pull **on the same lines** you have edited locally since your last push.]{style="font-size: 30px"}
+
+::: {.column width="50%"}
+[Local version:]{style="font-size: 30px"}
+
+![](readme_local.png){height=50}
+:::
+
+::: {.column width="50%"}
+[Remote version:]{style="font-size: 30px"}
+
+![](readme_github.png){height=50}
+:::
+
+:::
+
+## How to solve a conflict?
+
+* [open the conflicted file (its name is in the error message)]{style="font-size: 30px"}
+
+::: fragment
+![](conflicted_file.png){fig-align="center"}
+:::
+
+* [edit the file manually but removing the version you don't want to keep (or writting an alternative version)]{style="font-size: 30px"}
+
+* [delete the conflict markers (<<<<<<<, =======, >>>>>>>)]{style="font-size: 30px"}
+
+* [commit and push]{style="font-size: 30px"}
+
+
+## How to solve a conflict? practice
+
+*To generate a conflict:*
+
+::: nonincremental
+* [*Modify a file directly on GitHub (ex: the README) and commit*]{style="font-size: 30px"}
+
+* [*On the local repo*]{style="font-size: 30px"}
+
+    * [*Don't pull*]{style="font-size: 30px"}
+    
+    * [*Modify the same file on the same line*]{style="font-size: 30px"}
+    
+    * [*Try to push: you can't*]{style="font-size: 30px"}
+    
+    * [*Try to pull: this generate a conflict*]{style="font-size: 30px"}
+
+:::
+    
+[*You can know solve this conflict!*]{style="font-size: 30px"}
+
+
+## How to avoid conflicts?
+
+::: {.column width="70%"}
+
+* [Avoid very long lines of code/text: *Git resolves changes line by line — shorter lines reduce the chance of overlap*]{style="font-size: 30px"}
+
+* [Pull and push **frequently**: *The longer you wait, the more likely others have changed the same parts*]{style="font-size: 30px"}
+
+* [Communicate with collaborators: *Know who is working on what — avoid editing the same files*]{style="font-size: 30px"}
+
+* [Use **branches** for bigger changes: *Keeps the main branch clean and easier to merge later*]{style="font-size: 30px"}
+
+:::
+
+::: {.column width="30%"}
+![](solving_conflict_cartoon.png){fig-align="center" height="70%"}
+:::
+
+
+## Using issues on a collaborative project
+
+[A GitHub Issue is a way to track and discuss tasks, bugs, or ideas in a project. This helps a team to organize work and collaborate efficiently.]{style="font-size: 30px"}
+
+::: {.column width="50%"}
+
+[It works like a forum. You can:]{style="font-size: 30px"}
+
+::: nonincremental
+* [create to do list]{style="font-size: 30px"}
+
+* [assign tasks to team members]{style="font-size: 30px"}
+
+* [post an answer or a comment]{style="font-size: 30px"}
+
+* [close the issue once completed or solved]{style="font-size: 30px"}
+
+:::
+:::
+
+::: {.column width="50%"}
+![](issue.png)
+:::
+
+[[More on GitHub issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/configuring-issues/quickstart){preview-link="false"}]{style="font-size: 30px"}
+
+## Organising a project with a GitHub project
+
+[A GitHub projects helps plan, prioritize, and visualize work in a project.]{style="font-size: 30px"}
+
+[It organises issues on a visual board.]{style="font-size: 30px"}
+
+![](project.png)
+
+[[More on GitHub projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects){preview-link="false"}]{style="font-size: 30px"}
+
+
+# More advanced use
+
+::: notes
+Here we won't go in depth, just for you to be aware that this exists
+:::
+
+## Branch
+
+::: {.column width="60%"}
+[A branch is a parallel line of development of your project where you can safely make changes without affecting the main code.]{style="font-size: 30px"}
+
+:::
+
+::: {.column width="40%"}
+![](merge.png)
+:::
+
+[Why use a branch? To develop features, fix bugs, or try ideas without breaking the main project — and then merge them back when ready.]{style="font-size: 30px"}
+
+[[More on branches](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches){preview-link="false"}]{style="font-size: 30px"}
+
+## Create a branch
+
+[To create a new branch from RStudio, click on ![](new_branch.png) in the git pane.]{style="font-size: 30px"}
+
+[You can select the branch you want to work on:]{style="font-size: 30px"}
+
+![](branches_rstudio.png)
+
+[You can now work on this new branch: *pull, work, commit, push...pull, work, commit, push...*]{style="font-size: 30px"}
+
+## Merge branch
+
+[Once you are ready to merge your branch with the main branch, go on GitHub:]{style="font-size: 30px"}
+
+* [create a pull request (a pull request lets you propose merging your changes into the main branch)]{style="font-size: 30px"}
+
+::: fragment
+![](merge_branches.png)
+:::
+
+* [merge your branch to the main branch]{style="font-size: 30px"}
+
+::: notes
+merging can still generate conflicts
+:::
+
+## Fork and pull request {style="font-size: 30px"}
+
+To work on someone else's project, you can create a **fork**.
+
+![](fork.png){height="50%"}
+
+A **fork** is your personal copy of someone else's repository that allows you to:
+
+* make changes without affecting the original repo
+
+* collaborate on a project that you don't have write access to (to fix bugs, propose improvements...)
+
+[You can then make a **pull request** to propose to the original repository maintainer to merge your work. They can review your changes before merging.]{.fragment}
+
+# GitHub as a social (scientific) network
+
+## GitHub as a social (scientific) network
+
+![](wickham.png)
+
+::: notes
+This is the developper of the tidyverse! 26000 followers!
+:::
+
+## GitHub as a social (scientific) network {style="font-size: 30px"}
+
+* **Follow** other users
+
+* Follow repository (**Watch**)
+
+* Give visibility to your work (and to yourself!)
+
+* Interact and collaborate on projects
+
+* Create an **Organisation** to group the repositories of a research group
+
+* Build websites (e.g. project pages, CVs) using GitHub Pages and GitHub Actions
+
+* ...
+
 
 ## Acknowledgments {.smaller}
 
 ::: nonincremental
--   Cours Nicolas: https://frbcesab.github.io/intro-git/
 
--   Cours Eric
+* Casajus N. *Version control - Introduction to git & GitHub* [](https://frbcesab.github.io/intro-git/){preview-link="false"}
 
--   https://inbo.github.io/git-course/course_rstudio.html
+* Marcon E. *R: Contrôle de Source* [in French](https://ericmarcon.github.io/Cours-travailleR/12-git.html){preview-link="false"}
+
+* Van Hoey S., Desmet P., Onkelinx T. *Git hands-on session within RStudio* [](https://inbo.github.io/git-course/course_rstudio.html){preview-link="false"}
+
+* Bryan J. *Happy Git and GitHub for the useR* [](https://happygitwithr.com){preview-link="false"}
+
+:::
+
+## Ressources {.smaller}
+
+::: nonincremental
+
+* Van Hoey S., Desmet P., Onkelinx T. *Git hands-on session within RStudio* [](https://inbo.github.io/git-course/course_rstudio.html){preview-link="false"}
+ 
+* Get started with GitHub documentation [in Portuguese](https://docs.github.com/pt/get-started){preview-link="false"} and [in English](https://docs.github.com/en/get-started)
+
+* GitHub Docs [in Portuguese](https://docs.github.com/pt){preview-link="false"} and [in English](https://docs.github.com/en){preview-link="false"}
+
 :::
