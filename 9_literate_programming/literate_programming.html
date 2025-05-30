@@ -11,8 +11,8 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-05-26">
-  <title>Literate programming</title>
+  <meta name="dcterms.date" content="2025-05-30">
+  <title>Literate programming with quarto</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -329,7 +329,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Literate programming</h1>
+  <h1 class="title">Literate programming with quarto</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -342,16 +342,255 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-05-26</p>
+  <p class="date">2025-05-30</p>
 </section>
 <section class="slide level2">
 
+<!-- everywhere, use both the 
+quarto doc
+r4ds
+-->
+</section>
+<section>
+<section id="introduction-to-quarto" class="title-slide slide level1 center">
+<h1>Introduction to <span style="color:indianred;">Quarto</span></h1>
+
+</section>
+<section id="literate-programming" class="slide level2">
+<h2>Literate programming</h2>
+<div class="column" style="width:70%;">
+<p><span style="font-size: 30px"><em>Literate programming is a programming paradigm introduced in 1984 by Donald Knuth in which a computer program is given as an explanation of how it works in a natural language, such as English, interspersed (embedded) with snippets of macros and traditional source code, from which compilable source code can be generated.</em></span></p>
+</div><div class="column" style="width:30%;">
+<p><img data-src="litt_prog.png"></p>
+</div><p>Literate programming mixes <strong>code</strong> with <strong>natural language</strong>.</p>
+<p><span style="font-size: 22px">Source: <a href="https://en.wikipedia.org/wiki/Literate_programming#cite_note-TCJ_LP-1" data-preview-link="false">Wikipedia</a></span></p>
+</section>
+<section id="why-use-literate-programming" class="slide level2">
+<h2>Why use literate programming?</h2>
+<ul>
+<li class="fragment"><p>For yourself: a <strong>modern-day lab notebook</strong> : keep track of what you did, how you did it and why</p></li>
+<li class="fragment"><p>For <strong>collaborating</strong> with other scientists: share results and the code that produced them</p></li>
+<li class="fragment"><p>For a wider audience: <strong>communicate</strong> results clearly while ensuring reproducibility and easy updates</p></li>
+</ul>
+</section>
+<section id="what-is-quarto" class="slide level2">
+<h2>What is <span style="color:indianred;">Quarto</span>?</h2>
+<p><span style="color:indianred;">Quarto</span> is an open-source tool for creating <strong>dynamic documents</strong> that combine code, results and text to produce <strong>reproducible outputs in multiple formats</strong> (reports, websites, slides…).</p>
+
+<img data-src="quarto.png" class="quarto-figure quarto-figure-center r-stretch"></section></section>
+<section>
+<section id="getting-started" class="title-slide slide level1 center">
+<h1>Getting started</h1>
+
+</section>
+<section id="creating-a-new-quarto-document" class="slide level2">
+<h2>Creating a new Quarto document</h2>
+<p><span style="color:indianred;">Quarto</span> is pre-installed with RStudio.</p>
+<div class="column" style="width:60%;">
+<p>To create a new document: <em>File/New File/Quarto Document</em></p>
+<p>You can choose between different types of document. Choose <em>Document</em>, fill in a title and a author name and <em>Create</em></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="new_qmd.png"></p>
+</div><p>This open a document containing plant text and R code.</p>
+</section>
+<section id="rendering" class="slide level2">
+<h2>Rendering</h2>
+<ul>
+<li class="fragment">Click on <img data-src="setting.png"> and choose <em>Preview in Viewer Pane</em></li>
+</ul>
+<div class="fragment">
+<div>
+<ul>
+<li>Click on <img data-src="render.png"></li>
+</ul>
+</div>
+<p><img data-src="rstudio-render.png"></p>
+</div>
+<p><span class="fragment">When <strong>rendering</strong>, Quarto generates a new file that contains selected text, code, and results from the .qmd file. <em>Note that you now have a .html file in the Files pane.</em></span></p>
+</section>
+<section id="rendering-1" class="slide level2">
+<h2>Rendering</h2>
+<p>You can view the rendered document in the Viewer pane:</p>
+
+<img data-src="viewer.png" class="r-stretch"></section>
+<section id="visual-editor" class="slide level2">
+<h2>Visual editor</h2>
+<p>The <strong>Visual editor</strong> is an interface where you can use buttons to easily format text, insert images , tables..</p>
+
+<img data-src="visual.png" class="quarto-figure quarto-figure-center r-stretch"><p>The <strong>Visual editor</strong> save the content of your document in Markdown format.</p>
+<aside class="notes">
+<p>try to add text, format it, play with it</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="source-editor" class="slide level2">
+<h2>Source editor</h2>
+<p>You can view and edit the plain Markdown document in the <strong>Source editor</strong>:</p>
+
+<img data-src="source.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="content-of-a-quarto-document" class="slide level2">
+<h2>Content of a Quarto document</h2>
+<ul>
+<li class="fragment"><p>A YAML header: metadata and output settings</p></li>
+<li class="fragment"><p>Text in Markdown format</p></li>
+<li class="fragment"><p>Chunks of R code</p></li>
+</ul>
+
+<img data-src="content.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>in the YALM title and author + output format</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="write---markdown" class="title-slide slide level1 center">
+<h1>Write - markdown</h1>
+
+</section>
+<section id="using-the-visual-editor" class="slide level2">
+<h2>using the visual editor</h2>
+</section>
+<section id="text-formating" class="slide level2">
+<h2>text formating</h2>
+<p>https://rdatatoolbox.github.io/course-quarto/#/markdown-2</p>
+</section>
+<section id="equation" class="slide level2">
+<h2>equation</h2>
+<p>https://quarto.org/docs/get-started/authoring/rstudio.html#equations</p>
+</section>
+<section id="link" class="slide level2">
+<h2>link</h2>
+</section>
+<section id="image" class="slide level2">
+<h2>image</h2>
+</section>
+<section id="tables" class="slide level2">
+<h2>tables</h2>
+</section>
+<section id="sections-and-toc" class="slide level2">
+<h2>sections and toc</h2>
+<p>https://quarto.org/docs/get-started/authoring/rstudio.html#sections</p>
+</section></section>
+<section>
+<section id="insert-r-code" class="title-slide slide level1 center">
+<h1>Insert R code</h1>
+<p>Chunks of R code surrounded by ```</p>
+<p>https://rdatatoolbox.github.io/course-quarto/#/computations-using-r</p>
+<p>largely follow r4ds</p>
+<p>https://r4ds.hadley.nz/quarto.html#code-chunks</p>
+<p>dire que code cunck can be run with the play button</p>
+</section>
+<section id="chunck-label" class="slide level2">
+<h2>chunck label</h2>
+</section>
+<section id="chunck-option" class="slide level2">
+<h2>chunck option</h2>
+</section>
+<section id="global-option" class="slide level2">
+<h2>global option</h2>
+</section>
+<section id="inline-code" class="slide level2">
+<h2>inline code</h2>
+</section>
+<section id="figure" class="slide level2">
+<h2>figure</h2>
+</section>
+<section id="tables-1" class="slide level2">
+<h2>tables</h2>
+<p>include kable and flextable?</p>
+</section>
+<section id="cache" class="slide level2">
+<h2>cache</h2>
+</section></section>
+<section id="yaml-header" class="title-slide slide level1 center">
+<h1>YAML header</h1>
+<p>A YAML header surrounded by <span style="color:indianred;">—</span></p>
+<p>https://rdatatoolbox.github.io/course-quarto/#/yaml-header-1</p>
+<p>https://r4ds.hadley.nz/quarto.html#yaml-header</p>
+</section>
+
+<section>
+<section id="cross-referencing-and-citations" class="title-slide slide level1 center">
+<h1>Cross-Referencing and Citations</h1>
+
+</section>
+<section id="cross-references" class="slide level2">
+<h2>Cross-references</h2>
+<p>https://rdatatoolbox.github.io/course-quarto/#/cross-references</p>
+<p>https://quarto.org/docs/get-started/authoring/rstudio.html#cross-references</p>
+</section>
+<section id="bibliography" class="slide level2">
+<h2>Bibliography</h2>
+<p>https://rdatatoolbox.github.io/course-quarto/#/citations</p>
+<p>https://quarto.org/docs/get-started/authoring/rstudio.html#citations</p>
+<p>https://r4ds.hadley.nz/quarto.html#bibliographies-and-citations</p>
+</section></section>
+<section>
+<section id="different-formats" class="title-slide slide level1 center">
+<h1>Different formats</h1>
+<p>before that, only do html</p>
+<p>pdf, htms, pres… here</p>
+<p>https://r4ds.hadley.nz/quarto-formats.html</p>
+<p>https://quarto.org/docs/get-started/authoring/rstudio.html#output-formats</p>
+</section>
+<section id="presentations" class="slide level2">
+<h2>presentations</h2>
+<p>quickly….</p>
+<p>https://quarto.org/docs/presentations/</p>
+</section>
+<section id="books" class="slide level2">
+<h2>books</h2>
+<p>https://quarto.org/docs/books/</p>
+</section>
+<section id="multiple-formats" class="slide level2">
+<h2>multiple formats</h2>
+<p>https://quarto.org/docs/get-started/authoring/rstudio.html#multiple-formats</p>
+</section></section>
+<section id="troubleshooting" class="title-slide slide level1 center">
+<h1>Troubleshooting</h1>
+<p>https://r4ds.hadley.nz/quarto.html#troubleshooting</p>
+<p>see where I put that…</p>
+</section>
+
+<section>
+<section id="quarto-projects" class="title-slide slide level1 center">
+<h1>Quarto projects</h1>
+<p>https://rdatatoolbox.github.io/course-quarto/#/quarto-projects</p>
+<!--
+# Integration continue? sites web?
+
+-->
+</section>
+<section id="acknowledgments" class="slide level2 smaller">
+<h2>Acknowledgments</h2>
+<div>
+<p>r4ds</p>
+<p>cours rdatatoolbox</p>
+<p>doc quarto</p>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

@@ -22,3 +22,248 @@ editor:
   markdown: 
     wrap: sentence
 ---
+
+<!-- everywhere, use both the 
+quarto doc
+r4ds
+-->
+
+# Introduction to [Quarto]{style="color:indianred;"}
+
+## Literate programming
+
+::: {.column width="70%"}
+[*Literate programming is a programming paradigm introduced in 1984 by Donald Knuth in which a computer program is given as an explanation of how it works in a natural language, such as English, interspersed (embedded) with snippets of macros and traditional source code, from which compilable source code can be generated.*]{style="font-size: 30px"}
+:::
+
+::: {.column width="30%"}
+![](litt_prog.png)
+:::
+
+Literate programming mixes **code** with **natural language**.
+
+[Source: [Wikipedia](https://en.wikipedia.org/wiki/Literate_programming#cite_note-TCJ_LP-1){preview-link="false"}]{style="font-size: 22px"}
+
+
+## Why use literate programming?
+
+* For yourself: a **modern-day lab notebook** : keep track of what you did, how you did it and why
+
+* For **collaborating** with other scientists: share results and the code that produced them
+
+* For a wider audience: **communicate** results clearly while ensuring reproducibility and easy updates
+
+## What is [Quarto]{style="color:indianred;"}?
+
+[Quarto]{style="color:indianred;"} is an open-source tool for creating **dynamic documents** that combine code, results and text to produce **reproducible outputs in multiple formats** (reports, websites, slides...).
+
+![](quarto.png){fig-align="center"}
+
+
+
+# Getting started
+
+## Creating a new Quarto document
+
+[Quarto]{style="color:indianred;"} is pre-installed with RStudio.
+
+::: {.column width="60%"}
+
+To create a new document: *File/New File/Quarto Document*
+
+You can choose between different types of document. Choose *Document*, fill in a title and a author name and *Create*
+
+:::
+
+::: {.column width="40%"}
+![](new_qmd.png)
+:::
+
+This open a document containing plant text and R code.
+
+
+## Rendering
+
+* Click on ![](setting.png) and choose *Preview in Viewer Pane*
+
+::: fragment
+::: nonincremental
+* Click on ![](render.png)
+:::
+![](rstudio-render.png)
+:::
+
+[When **rendering**, Quarto generates a new file that contains selected text, code, and results from the .qmd file. 
+*Note that you now have a .html file in the Files pane.*]{.fragment}
+
+## Rendering
+
+You can view the rendered document in the Viewer pane:
+
+![](viewer.png)
+
+## Visual editor
+
+The **Visual editor** is an interface where you can use buttons to easily format text, insert images , tables..
+
+![](visual.png){fig-align="center"}
+
+The **Visual editor** save the content of your document in Markdown format.
+
+::: notes
+try to add text, format it, play with it
+:::
+
+## Source editor
+
+You can view and edit the plain Markdown document in the **Source editor**:
+
+![](source.png){fig-align="center"}
+
+
+## Content of a Quarto document
+
+* A YAML header: metadata and output settings
+
+* Text in Markdown format
+
+* Chunks of R code
+
+![](content.png){fig-align="center"}
+
+::: notes
+in the YALM title and author  + output format
+:::
+
+
+# Write - markdown
+
+## using the visual editor
+
+## text formating
+
+
+
+https://rdatatoolbox.github.io/course-quarto/#/markdown-2
+
+## equation
+
+https://quarto.org/docs/get-started/authoring/rstudio.html#equations
+
+## link
+
+## image
+
+## tables
+
+
+
+## sections and toc
+
+https://quarto.org/docs/get-started/authoring/rstudio.html#sections
+
+# Insert R code
+
+Chunks of R code surrounded by ```
+
+https://rdatatoolbox.github.io/course-quarto/#/computations-using-r
+
+largely follow r4ds
+
+https://r4ds.hadley.nz/quarto.html#code-chunks
+
+dire que code cunck can be run with the play button
+
+## chunck label
+
+
+## chunck option
+
+## global option
+
+## inline code
+
+## figure
+
+## tables
+
+include kable and flextable?
+
+## cache
+
+# YAML header
+
+A YAML header surrounded by [---]{style="color:indianred;"}
+
+https://rdatatoolbox.github.io/course-quarto/#/yaml-header-1
+
+https://r4ds.hadley.nz/quarto.html#yaml-header
+
+# Cross-Referencing and Citations
+
+## Cross-references
+
+https://rdatatoolbox.github.io/course-quarto/#/cross-references
+
+https://quarto.org/docs/get-started/authoring/rstudio.html#cross-references
+
+
+## Bibliography
+
+https://rdatatoolbox.github.io/course-quarto/#/citations
+
+https://quarto.org/docs/get-started/authoring/rstudio.html#citations
+
+https://r4ds.hadley.nz/quarto.html#bibliographies-and-citations
+
+# Different formats
+
+before that, only do html
+
+pdf, htms, pres... here 
+
+https://r4ds.hadley.nz/quarto-formats.html
+
+https://quarto.org/docs/get-started/authoring/rstudio.html#output-formats
+
+## presentations
+
+quickly....
+
+https://quarto.org/docs/presentations/
+
+## books
+
+https://quarto.org/docs/books/
+
+## multiple formats
+
+https://quarto.org/docs/get-started/authoring/rstudio.html#multiple-formats
+
+# Troubleshooting
+
+https://r4ds.hadley.nz/quarto.html#troubleshooting
+
+see where I put that...
+
+# Quarto projects
+
+https://rdatatoolbox.github.io/course-quarto/#/quarto-projects
+
+
+<!--
+# Integration continue? sites web?
+
+-->
+
+## Acknowledgments {.smaller}
+
+::: nonincremental
+
+r4ds
+
+cours rdatatoolbox
+
+doc quarto
+
+:::
