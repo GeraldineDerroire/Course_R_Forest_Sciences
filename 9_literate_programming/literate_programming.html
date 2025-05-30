@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="literate_programming_files/libs/revealjs/dist/theme/quarto.css">
   <link href="literate_programming_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -460,87 +525,407 @@ r4ds
       }</style></aside>
 </section></section>
 <section>
-<section id="write---markdown" class="title-slide slide level1 center">
-<h1>Write - markdown</h1>
+<section id="write-with-markdown-syntax" class="title-slide slide level1 center">
+<h1>Write with markdown syntax</h1>
 
 </section>
-<section id="using-the-visual-editor" class="slide level2">
-<h2>using the visual editor</h2>
+<section id="markdown-syntax" class="slide level2">
+<h2>Markdown syntax</h2>
+<p>If you write text in the Visual editor, you can use the buttons and drop-down menu to format the text.</p>
+<p>You can also write using the <span style="color:indianred;">markdown syntax</span> in the Source editor.</p>
+<p><em>Markdown in a markup language used to format plain text in a simple and intuitive way.</em></p>
+<aside class="notes">
+<p>A markup language is a way to annotate text to describe its structure and formatting, using special symbols or tags, so that computers can display it properly.</p>
+<p>html is another markup languages</p>
+<p>why would we use markdown?</p>
+<ul>
+<li><p>easy when used to</p></li>
+<li><p>exaclty as saved so easier to debug, easier with version control</p></li>
+</ul>
+<p>But totally ok to use the Visual editor</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="text-formating" class="slide level2">
-<h2>text formating</h2>
-<p>https://rdatatoolbox.github.io/course-quarto/#/markdown-2</p>
-</section>
-<section id="equation" class="slide level2">
-<h2>equation</h2>
-<p>https://quarto.org/docs/get-started/authoring/rstudio.html#equations</p>
-</section>
-<section id="link" class="slide level2">
-<h2>link</h2>
-</section>
-<section id="image" class="slide level2">
-<h2>image</h2>
+<h2>Text formating</h2>
+<div class="column" style="width:60%;">
+<p><img data-src="syntax_raw.png"></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="syntax_rendered.png"></p>
+</div></section>
+<section id="figures" class="slide level2">
+<h2>Figures</h2>
+<div class="column" style="width:60%;">
+<p><span style="font-size: 30px">To add a figure with a caption:</span></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href=""></a><span class="al">![Caption](quarto_logo.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span style="font-size: 30px">Formatting options:</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href=""></a>Figure size</span>
+<span id="cb2-2"><a href=""></a>  <span class="al">![Caption](quarto_logo.png)</span>{width=300}</span>
+<span id="cb2-3"><a href=""></a>  <span class="al">![Caption](quarto_logo.png)</span>{height=80%}</span>
+<span id="cb2-4"><a href=""></a></span>
+<span id="cb2-5"><a href=""></a>Figure Alignment</span>
+<span id="cb2-6"><a href=""></a>  <span class="al">![Caption](quarto_logo.png)</span>{fig-align="left"}</span>
+<span id="cb2-7"><a href=""></a>  <span class="al">![Caption](quarto_logo.png)</span>{fig-align="center"}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:20%;">
+
+</div><div class="column" style="width:20%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="quarto_logo.png"></p>
+<figcaption>Caption</figcaption>
+</figure>
+</div>
+</div><p><span style="font-size: 30px">Combines option with a space between arguments:</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href=""></a><span class="al">![Caption](quarto_logo.png)</span>{height=80% fig-align="right"}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="tables" class="slide level2">
-<h2>tables</h2>
-</section>
-<section id="sections-and-toc" class="slide level2">
-<h2>sections and toc</h2>
-<p>https://quarto.org/docs/get-started/authoring/rstudio.html#sections</p>
-</section></section>
-<section>
-<section id="insert-r-code" class="title-slide slide level1 center">
-<h1>Insert R code</h1>
-<p>Chunks of R code surrounded by ```</p>
-<p>https://rdatatoolbox.github.io/course-quarto/#/computations-using-r</p>
-<p>largely follow r4ds</p>
-<p>https://r4ds.hadley.nz/quarto.html#code-chunks</p>
-<p>dire que code cunck can be run with the play button</p>
-</section>
-<section id="chunck-label" class="slide level2">
-<h2>chunck label</h2>
-</section>
-<section id="chunck-option" class="slide level2">
-<h2>chunck option</h2>
-</section>
-<section id="global-option" class="slide level2">
-<h2>global option</h2>
-</section>
-<section id="inline-code" class="slide level2">
-<h2>inline code</h2>
-</section>
-<section id="figure" class="slide level2">
-<h2>figure</h2>
-</section>
-<section id="tables-1" class="slide level2">
-<h2>tables</h2>
-<p>include kable and flextable?</p>
-</section>
-<section id="cache" class="slide level2">
-<h2>cache</h2>
-</section></section>
-<section id="yaml-header" class="title-slide slide level1 center">
-<h1>YAML header</h1>
-<p>A YAML header surrounded by <span style="color:indianred;">—</span></p>
-<p>https://rdatatoolbox.github.io/course-quarto/#/yaml-header-1</p>
-<p>https://r4ds.hadley.nz/quarto.html#yaml-header</p>
-</section>
+<h2>Tables</h2>
+<p><span style="font-size: 30px">To add a table with markdown:</span></p>
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href=""></a>| First Header | Second Header |</span>
+<span id="cb4-2"><a href=""></a>|--------------|---------------|</span>
+<span id="cb4-3"><a href=""></a>| Content Cell | Content Cell  |</span>
+<span id="cb4-4"><a href=""></a>| Content Cell | Content Cell  |</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:5%;">
 
-<section>
-<section id="cross-referencing-and-citations" class="title-slide slide level1 center">
-<h1>Cross-Referencing and Citations</h1>
+</div><div class="column" style="width:45%;">
+<div style="font-size: 28px">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>First Header</th>
+<th>Second Header</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr class="even">
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div><p><span style="font-size: 30px">To add a caption and change the width of columns:</span></p>
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href=""></a>| First Header | Second Header |</span>
+<span id="cb5-2"><a href=""></a>|--------------|---------------|</span>
+<span id="cb5-3"><a href=""></a>| Content Cell | Content Cell  |</span>
+<span id="cb5-4"><a href=""></a>| Content Cell | Content Cell  |</span>
+<span id="cb5-5"><a href=""></a></span>
+<span id="cb5-6"><a href=""></a>: Caption {tbl-colwidths="<span class="co">[</span><span class="ot">75,25</span><span class="co">]</span>"}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:5%;">
 
+</div><div class="column" style="width:45%;">
+<div style="font-size: 28px">
+<table class="caption-top">
+<caption>Caption</caption>
+<colgroup>
+<col style="width: 75%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>First Header</th>
+<th>Second Header</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr class="even">
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></section>
+<section id="equations" class="slide level2">
+<h2>Equations</h2>
+<p><span style="font-size: 30px">To write equations in Quarto, we have to use the <strong>LaTex syntax</strong>.</span></p>
+<p><span style="font-size: 30px">Equations can be place in a separate line, with</span><span style="color:lightgreen;">$$…$$</span>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href=""></a>$$y \sim \mathcal N(\alpha + \sum_{i=1}^n\beta_n \times x_n, \sigma^2)$$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span style="font-size: 30px"><span class="math display">\[y \sim \mathcal N(\alpha + \sum_{i=1}^n\beta_n \times x_n,\sigma^2)\]</span></span></p>
+<p><span style="font-size: 30px">They can also be displayed inline, with</span><span style="color:lightgreen;">$…$</span>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href=""></a><span class="an">This equation is displayed inline:</span><span class="co"> $y = e^{\alpha}$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span style="font-size: 25px"><em>This equation is displayed inline:</em> <span class="math inline">\(y = e^{\alpha}\)</span></span></p>
+<p><span style="font-size: 22px"><a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">More about LaTex equations</a></span></p>
+</section>
+<section id="links" class="slide level2">
+<h2>Links</h2>
+<p><span style="font-size: 30px">To add a link:</span></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href=""></a><span class="ot">&lt;https://quarto.org/docs/get-started/hello/rstudio.html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span style="font-size: 30px"><a href="https://quarto.org/docs/get-started/hello/rstudio.html" class="uri">https://quarto.org/docs/get-started/hello/rstudio.html</a></span></p>
+<p><span style="font-size: 30px">To add a named link:</span></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href=""></a><span class="co">[</span><span class="ot">Quarto tutorial</span><span class="co">](https://quarto.org/docs/get-started/hello/rstudio.html)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span style="font-size: 30px"><a href="https://quarto.org/docs/get-started/hello/rstudio.html">Quarto tutorial</a></span></p>
 </section>
 <section id="cross-references" class="slide level2">
 <h2>Cross-references</h2>
-<p>https://rdatatoolbox.github.io/course-quarto/#/cross-references</p>
-<p>https://quarto.org/docs/get-started/authoring/rstudio.html#cross-references</p>
+<p><span style="font-size: 30px">To be able to add a reference to a figure, table, equation, section… in another part of the document, we need to give them an <strong>identifier</strong> in</span><span style="color:indianred;">{#….}</span>:</p>
+<div class="column" style="width:65%;">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href=""></a><span class="al">![Caption](quarto_logo.png)</span>{#fig-quarto}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:25%;">
+<div id="fig-quarto" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="quarto_logo.png" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Caption
+</figcaption>
+</figure>
+</div>
+</div><p><span style="font-size: 30px">We can then refer to it with</span><span style="color:indianred;">@</span>:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href=""></a>@fig-quarto shows the logo of quarto.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><a href="#/cross-references" class="quarto-xref">Figure&nbsp;1</a></p>
+</section>
+<section id="cross-references-1" class="slide level2">
+<h2>Cross-references</h2>
+<p>Identifiers start with the type of item:</p>
+<div>
+<ul>
+<li><p>for a figure: <span style="color:indianred;">fig-</span></p></li>
+<li><p>for a table: <span style="color:indianred;">tbl-</span></p></li>
+<li><p>for an equation: <span style="color:indianred;">eq-</span></p></li>
+<li><p>for a section: <span style="color:indianred;">sec-</span></p></li>
+</ul>
+</div>
 </section>
 <section id="bibliography" class="slide level2">
 <h2>Bibliography</h2>
 <p>https://rdatatoolbox.github.io/course-quarto/#/citations</p>
 <p>https://quarto.org/docs/get-started/authoring/rstudio.html#citations</p>
 <p>https://r4ds.hadley.nz/quarto.html#bibliographies-and-citations</p>
+</section></section>
+<section>
+<section id="comptute-with-r" class="title-slide slide level1 center">
+<h1>Comptute with R</h1>
+
+</section>
+<section id="insert-r-code" class="slide level2">
+<h2>Insert R code</h2>
+<p><span style="font-size: 30px"><strong>Chunks of R code are executed by Quarto when you render the document.</strong></span></p>
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">To add a chunk of R code:</span></p>
+<div>
+<ul>
+<li><p><span style="font-size: 30px">click on <img data-src="add_chunck.png"> and select <em>R</em></span></p></li>
+<li><p><span style="font-size: 30px">or use the shortcut <span style="color:indianred;">Ctrl + Alt + I</span></span></p></li>
+</ul>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">This inserts a code chunk where you can write R code:</span></p>
+<p><img data-src="chunck.png"></p>
+<p><span style="font-size: 30px">Code chunks are surrounded by<span style="color:indianred;">```{r}….```</span>.</span></p>
+</div>
+</div><div class="fragment">
+<p><span style="font-size: 30px">You can use <img data-src="run_up.png"> to run all previous chunks, and <img data-src="run.png"> to run the current chunk.</span></p>
+<p><span style="font-size: 30px">💡Start your document with a chunk that loads the necessary packages.</span></p>
+</div>
+</section>
+<section id="chunk-labels" class="slide level2">
+<h2>Chunk labels</h2>
+<p><span style="font-size: 30px">You can add a label to a chunk:</span></p>
+<p><img data-src="chunk_label_1.png"></p>
+<p><span style="font-size: 30px">This helps you navigate to a specific chunk using the drop down navigator:</span></p>
+<p><img data-src="chunk_label.png" style="height:80.0%"></p>
+<p><span style="font-size: 30px">⚠️ Each chunk label must be unique.</span></p>
+</section>
+<section id="chunk-options" class="slide level2">
+<h2>Chunk options</h2>
+<p><span style="font-size: 30px">Chunk options control how the code will be rendered. The most important are:</span></p>
+<div style="font-size: 50%;">
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Run code</th>
+<th>Show code</th>
+<th>Show output</th>
+<th>Show plots</th>
+<th>Show messages</th>
+<th>Show warnings</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>eval: false</td>
+<td>🚫</td>
+<td>✅</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>🚫</td>
+</tr>
+<tr class="even">
+<td>include: false</td>
+<td>✅</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>🚫</td>
+</tr>
+<tr class="odd">
+<td>echo: false</td>
+<td>✅</td>
+<td>🚫</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>results: hide</td>
+<td>✅</td>
+<td>✅</td>
+<td>🚫</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>fig-show: hide</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>🚫</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>message: false</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>🚫</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>warning: false</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>🚫</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="font-size: 22px"><a href="https://yihui.org/knitr/options/">More about chunk options</a></span></p>
+</section>
+<section id="chunk-options-1" class="slide level2">
+<h2>Chunk options</h2>
+<p><span style="font-size: 30px">Chunk options are added one by one within the chunk:</span></p>
+<p><img data-src="chunk_option2.png"></p>
+<p><span style="font-size: 30px">Some chunk options can also be selected using the <img data-src="setting.png"> button:</span></p>
+<p><img data-src="chunk_option1.png" style="height:75.0%"></p>
+</section>
+<section id="inline-code" class="slide level2">
+<h2>Inline code</h2>
+<p><span style="font-size: 32px">Small R codes can be embedded directly in the text by surrounding them with <span style="color:indianred;">`r… `</span> .</span></p>
+<p><span style="font-size: 30px">This is very useful to present your data or your results, as this will be updated if the data change:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">data</span>(<span class="st">"iris"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb13-1"><a href=""></a>The iris data have `r nrow(iris)` observations. </span>
+<span id="cb13-2"><a href=""></a>The mean sepal length is `r mean(iris$Sepal.Length)`.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span style="font-size: 25px"><em>The iris data have 150 observations. The mean sepal length is 5.8433333.</em></span></p>
+</section>
+<section id="figures-1" class="slide level2">
+<h2>Figures</h2>
+<p><span style="font-size: 30px">Figures can be generated with a code chunk. Chunk options control the layout of the figure:</span></p>
+<p><img data-src="figure.png"></p>
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-iris" class="quarto-float quarto-figure quarto-figure-left" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-iris-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="literate_programming_files/figure-revealjs/fig-iris-1.png" class="quarto-figure quarto-figure-left" width="384">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iris-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Relationship between sepal length and width.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p><span style="font-size: 30px">💡 <em>Figures can then be cross-referenced using their label.</em></span></p>
+</div></section>
+<section id="section" class="slide level2">
+<h2></h2>
+<p>https://rdatatoolbox.github.io/course-quarto/#/computations-using-r</p>
+<p>largely follow r4ds</p>
+<p>https://r4ds.hadley.nz/quarto.html#code-chunks</p>
+</section>
+<section id="tables-1" class="slide level2">
+<h2>tables</h2>
+<p>include kable and flextable?</p>
+</section>
+<section id="cross-ref-for-chunk" class="slide level2">
+<h2>cross ref for chunk</h2>
+<p>https://rdatatoolbox.github.io/course-quarto/#/cross-references-computations</p>
+</section>
+<section id="cache" class="slide level2">
+<h2>cache</h2>
+</section></section>
+<section>
+<section id="yaml-header" class="title-slide slide level1 center">
+<h1>YAML header</h1>
+<p>A YAML header surrounded by <span style="color:indianred;">—</span></p>
+<p>https://rdatatoolbox.github.io/course-quarto/#/yaml-header-1</p>
+<p>https://r4ds.hadley.nz/quarto.html#yaml-header</p>
+</section>
+<section id="sections-and-tables-of-content" class="slide level2">
+<h2>Sections and tables of content</h2>
+<p>https://quarto.org/docs/get-started/authoring/rstudio.html#sections</p>
+</section>
+<section id="global-option" class="slide level2">
+<h2>global option</h2>
+<p>https://r4ds.hadley.nz/quarto.html#global-options</p>
 </section></section>
 <section>
 <section id="different-formats" class="title-slide slide level1 center">
@@ -562,28 +947,28 @@ r4ds
 <section id="multiple-formats" class="slide level2">
 <h2>multiple formats</h2>
 <p>https://quarto.org/docs/get-started/authoring/rstudio.html#multiple-formats</p>
-</section></section>
-<section id="troubleshooting" class="title-slide slide level1 center">
-<h1>Troubleshooting</h1>
-<p>https://r4ds.hadley.nz/quarto.html#troubleshooting</p>
-<p>see where I put that…</p>
 </section>
-
-<section>
-<section id="quarto-projects" class="title-slide slide level1 center">
-<h1>Quarto projects</h1>
+<section id="quarto-projects" class="slide level2">
+<h2>Quarto projects</h2>
 <p>https://rdatatoolbox.github.io/course-quarto/#/quarto-projects</p>
 <!--
 # Integration continue? sites web?
 
 -->
+</section></section>
+<section>
+<section id="troubleshooting" class="title-slide slide level1 center">
+<h1>Troubleshooting</h1>
+<p>https://r4ds.hadley.nz/quarto.html#troubleshooting</p>
+<p>see where I put that…</p>
 </section>
 <section id="acknowledgments" class="slide level2 smaller">
 <h2>Acknowledgments</h2>
 <div>
 <p>r4ds</p>
 <p>cours rdatatoolbox</p>
-<p>doc quarto</p>
+<p>doc quarto et</p>
+<p>https://quarto.org/docs/get-started/authoring/rstudio.html</p>
 </div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
@@ -746,7 +1131,7 @@ r4ds
         hideCursorTime: 5000,
 
         // Opens links in an iframe preview overlay
-        previewLinks: true,
+        previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
         transition: 'none',
@@ -803,6 +1188,82 @@ r4ds
         ]
       });
     </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

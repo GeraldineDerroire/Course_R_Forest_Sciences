@@ -8,7 +8,6 @@ format:
     theme: solarized
     output-location: fragment 
     slide-number: true
-    preview-links: true
     chalkboard: true
     link-external-icon: true
     link-external-newwindow: true
@@ -23,10 +22,12 @@ editor:
     wrap: sentence
 ---
 
+```{=html}
 <!-- everywhere, use both the 
 quarto doc
 r4ds
 -->
+```
 
 # Introduction to [Quarto]{style="color:indianred;"}
 
@@ -44,22 +45,19 @@ Literate programming mixes **code** with **natural language**.
 
 [Source: [Wikipedia](https://en.wikipedia.org/wiki/Literate_programming#cite_note-TCJ_LP-1){preview-link="false"}]{style="font-size: 22px"}
 
-
 ## Why use literate programming?
 
-* For yourself: a **modern-day lab notebook** : keep track of what you did, how you did it and why
+-   For yourself: a **modern-day lab notebook** : keep track of what you did, how you did it and why
 
-* For **collaborating** with other scientists: share results and the code that produced them
+-   For **collaborating** with other scientists: share results and the code that produced them
 
-* For a wider audience: **communicate** results clearly while ensuring reproducibility and easy updates
+-   For a wider audience: **communicate** results clearly while ensuring reproducibility and easy updates
 
 ## What is [Quarto]{style="color:indianred;"}?
 
 [Quarto]{style="color:indianred;"} is an open-source tool for creating **dynamic documents** that combine code, results and text to produce **reproducible outputs in multiple formats** (reports, websites, slides...).
 
 ![](quarto.png){fig-align="center"}
-
-
 
 # Getting started
 
@@ -68,11 +66,10 @@ Literate programming mixes **code** with **natural language**.
 [Quarto]{style="color:indianred;"} is pre-installed with RStudio.
 
 ::: {.column width="60%"}
-
 To create a new document: *File/New File/Quarto Document*
 
-You can choose between different types of document. Choose *Document*, fill in a title and a author name and *Create*
-
+You can choose between different types of document.
+Choose *Document*, fill in a title and a author name and *Create*
 :::
 
 ::: {.column width="40%"}
@@ -81,20 +78,19 @@ You can choose between different types of document. Choose *Document*, fill in a
 
 This open a document containing plant text and R code.
 
-
 ## Rendering
 
-* Click on ![](setting.png) and choose *Preview in Viewer Pane*
+-   Click on ![](setting.png) and choose *Preview in Viewer Pane*
 
-::: fragment
+:::: fragment
 ::: nonincremental
-* Click on ![](render.png)
-:::
-![](rstudio-render.png)
+-   Click on ![](render.png)
 :::
 
-[When **rendering**, Quarto generates a new file that contains selected text, code, and results from the .qmd file. 
-*Note that you now have a .html file in the Files pane.*]{.fragment}
+![](rstudio-render.png)
+::::
+
+[When **rendering**, Quarto generates a new file that contains selected text, code, and results from the .qmd file. *Note that you now have a .html file in the Files pane.*]{.fragment}
 
 ## Rendering
 
@@ -120,51 +116,346 @@ You can view and edit the plain Markdown document in the **Source editor**:
 
 ![](source.png){fig-align="center"}
 
-
 ## Content of a Quarto document
 
-* A YAML header: metadata and output settings
+-   A YAML header: metadata and output settings
 
-* Text in Markdown format
+-   Text in Markdown format
 
-* Chunks of R code
+-   Chunks of R code
 
 ![](content.png){fig-align="center"}
 
 ::: notes
-in the YALM title and author  + output format
+in the YALM title and author + output format
+:::
+
+# Write with markdown syntax
+
+## Markdown syntax
+
+If you write text in the Visual editor, you can use the buttons and drop-down menu to format the text.
+
+You can also write using the [markdown syntax]{style="color:indianred;"} in the Source editor.
+
+*Markdown in a markup language used to format plain text in a simple and intuitive way.*
+
+::: notes
+A markup language is a way to annotate text to describe its structure and formatting, using special symbols or tags, so that computers can display it properly.
+
+html is another markup languages
+
+why would we use markdown?
+
+-   easy when used to
+
+-   exaclty as saved so easier to debug, easier with version control
+
+But totally ok to use the Visual editor
+:::
+
+## Text formating
+
+::: {.column width="60%"}
+![](syntax_raw.png)
+:::
+
+::: {.column width="40%"}
+![](syntax_rendered.png)
+:::
+
+## Figures
+
+::: {.column width="60%"}
+[To add a figure with a caption:]{style="font-size: 30px"}
+
+``` markdown
+![Caption](quarto_logo.png)
+```
+
+[Formatting options:]{style="font-size: 30px"}
+
+``` markdown
+Figure size
+  ![Caption](quarto_logo.png){width=300}
+  ![Caption](quarto_logo.png){height=80%}
+
+Figure Alignment
+  ![Caption](quarto_logo.png){fig-align="left"}
+  ![Caption](quarto_logo.png){fig-align="center"}
+```
+:::
+
+::: {.column width="20%"}
+:::
+
+::: {.column width="20%"}
+![Caption](quarto_logo.png){fig-align="center"}
+:::
+
+[Combines option with a space between arguments:]{style="font-size: 30px"}
+
+``` markdown
+![Caption](quarto_logo.png){height=80% fig-align="right"}
+```
+
+## Tables
+
+[To add a table with markdown:]{style="font-size: 30px"}
+
+::: {.column width="50%"}
+``` markdown
+| First Header | Second Header |
+|--------------|---------------|
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+:::: {.column width="45%"}
+::: {style="font-size: 28px"}
+| First Header | Second Header |
+|--------------|---------------|
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
+:::
+::::
+
+[To add a caption and change the width of columns:]{style="font-size: 30px"}
+
+::: {.column width="50%"}
+``` markdown
+| First Header | Second Header |
+|--------------|---------------|
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
+
+: Caption {tbl-colwidths="[75,25]"}
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+:::: {.column width="45%"}
+::: {style="font-size: 28px"}
+| First Header | Second Header |
+|--------------|---------------|
+| Content Cell | Content Cell  |
+| Content Cell | Content Cell  |
+
+: Caption {tbl-colwidths="\[75,25\]"}
+:::
+::::
+
+## Equations
+
+[To write equations in Quarto, we have to use the **LaTex syntax**.]{style="font-size: 30px"}
+
+[Equations can be place in a separate line, with]{style="font-size: 30px"}[\$\$...\$\$]{style="color:lightgreen;"}:
+
+``` markdown
+$$y \sim \mathcal N(\alpha + \sum_{i=1}^n\beta_n \times x_n, \sigma^2)$$
+```
+
+[$$y \sim \mathcal N(\alpha + \sum_{i=1}^n\beta_n \times x_n,\sigma^2)$$]{style="font-size: 30px"}
+
+[They can also be displayed inline, with]{style="font-size: 30px"}[\$...\$]{style="color:lightgreen;"}:
+
+``` markdown
+This equation is displayed inline: $y = e^{\alpha}$
+```
+
+[*This equation is displayed inline:* $y = e^{\alpha}$]{style="font-size: 25px"}
+
+[[More about LaTex equations](https://en.wikibooks.org/wiki/LaTeX/Mathematics)]{style="font-size: 22px"}
+
+## Links
+
+[To add a link:]{style="font-size: 30px"}
+
+``` markdown
+<https://quarto.org/docs/get-started/hello/rstudio.html>
+```
+
+[<https://quarto.org/docs/get-started/hello/rstudio.html>]{style="font-size: 30px"}
+
+[To add a named link:]{style="font-size: 30px"}
+
+``` markdown
+[Quarto tutorial](https://quarto.org/docs/get-started/hello/rstudio.html)
+```
+
+[[Quarto tutorial](https://quarto.org/docs/get-started/hello/rstudio.html)]{style="font-size: 30px"}
+
+## Cross-references
+
+[To be able to add a reference to a figure, table, equation, section... in another part of the document, we need to give them an **identifier** in]{style="font-size: 30px"}[{#....}]{style="color:indianred;"}:
+
+::: {.column width="65%"}
+``` markdown
+![Caption](quarto_logo.png){#fig-quarto}
+```
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="25%"}
+![Caption](quarto_logo.png){#fig-quarto width="50%"}
+:::
+
+[We can then refer to it with]{style="font-size: 30px"}[\@]{style="color:indianred;"}:
+
+``` markdown
+@fig-quarto shows the logo of quarto.
+```
+
+@fig-quarto [ shows the logo of quarto.]
+
+## Cross-references
+
+Identifiers start with the type of item:
+
+::: nonincremental
+-   for a figure: [fig-]{style="color:indianred;"}
+
+-   for a table: [tbl-]{style="color:indianred;"}
+
+-   for an equation: [eq-]{style="color:indianred;"}
+
+-   for a section: [sec-]{style="color:indianred;"}
+:::
+
+## Bibliography
+
+https://rdatatoolbox.github.io/course-quarto/#/citations
+
+https://quarto.org/docs/get-started/authoring/rstudio.html#citations
+
+https://r4ds.hadley.nz/quarto.html#bibliographies-and-citations
+
+# Comptute with R
+
+## Insert R code
+
+[**Chunks of R code are executed by Quarto when you render the document.**]{style="font-size: 30px"}
+
+::::: {.column width="50%"}
+:::: fragment
+[To add a chunk of R code:]{style="font-size: 30px"}
+
+::: nonincremental
+-   [click on ![](add_chunck.png) and select *R*]{style="font-size: 30px"}
+
+-   [or use the shortcut [Ctrl + Alt + I]{style="color:indianred;"}]{style="font-size: 30px"}
+:::
+::::
+:::::
+
+:::: {.column width="50%"}
+::: fragment
+[This inserts a code chunk where you can write R code:]{style="font-size: 30px"}
+
+![](chunck.png)
+
+[Code chunks are surrounded by[\`\`\`{r}....\`\`\`]{style="color:indianred;"}.]{style="font-size: 30px"} 
+:::
+::::
+
+::: fragment
+[You can use ![](run_up.png) to run all previous chunks, and ![](run.png) to run the current chunk.]{style="font-size: 30px"}
+
+[💡Start your document with a chunk that loads the necessary packages.]{style="font-size: 30px"}
+:::
+
+## Chunk labels
+
+[You can add a label to a chunk:]{style="font-size: 30px"}
+
+![](chunk_label_1.png)
+
+[This helps you navigate to a specific chunk using the drop down navigator:]{style="font-size: 30px"}
+
+![](chunk_label.png){height="80%"}
+
+[⚠️ Each chunk label must be unique.]{style="font-size: 30px"}
+
+## Chunk options
+
+[Chunk options control how the code will be rendered. The most important are:]{style="font-size: 30px"}
+
+::: {style="font-size: 50%;"}
+| Option | Run code | Show code | Show output | Show plots | Show messages | Show warnings |
+|------------|---------|---------|---------|---------|---------|---------|
+| eval: false | 🚫 | ✅ | 🚫 | 🚫 | 🚫 | 🚫 |
+| include: false | ✅ | 🚫 | 🚫 | 🚫 | 🚫 | 🚫 |
+| echo: false | ✅ | 🚫 | ✅ | ✅ | ✅ | ✅ |
+| results: hide | ✅ | ✅ | 🚫 | ✅ | ✅ | ✅ |
+| fig-show: hide | ✅ | ✅ | ✅ | 🚫 | ✅ | ✅ |
+| message: false | ✅ | ✅ | ✅ | ✅ | 🚫 | ✅ |
+| warning: false | ✅ | ✅ | ✅ | ✅ | ✅ | 🚫 |
+:::
+
+[[More about chunk options](https://yihui.org/knitr/options/)]{style="font-size: 22px"}
+
+## Chunk options
+
+[Chunk options are added one by one within the chunk:]{style="font-size: 30px"}
+
+![](chunk_option2.png)
+
+[Some chunk options can also be selected using the ![](setting.png) button:]{style="font-size: 30px"}
+
+![](chunk_option1.png){height=75%}
+
+## Inline code
+
+[Small R codes can be embedded directly in the text by surrounding them with [\`r... \`]{style="color:indianred;"} .]{style="font-size: 32px"}
+
+[This is very useful to present your data or your results, as this will be updated if the data change:]{style="font-size: 30px"}
+
+```{r}
+data("iris")
+```
+
+.
+
+```{text}
+The iris data have `r nrow(iris)` observations. 
+The mean sepal length is `r mean(iris$Sepal.Length)`.
+```
+
+[*The iris data have `r nrow(iris)` observations. The mean sepal length is `r mean(iris$Sepal.Length)`.*]{style="font-size: 25px"}
+
+## Figures
+
+[Figures can be generated with a code chunk. Chunk options control the layout of the figure:]{style="font-size: 30px"}
+
+![](figure.png)
+
+::: {.column width="60%"}
+````{r, echo=FALSE}
+#| label: fig-iris
+#| fig-cap: "Relationship between sepal length and width."
+#| fig-width: 4
+#| fig-height: 2
+#| fig-align: "left"
+library(ggplot2)
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) + 
+  geom_point()
+````
+:::
+
+::: {.column width="40%"}
+[💡 *Figures can then be cross-referenced using their label.*]{style="font-size: 30px"}
 :::
 
 
-# Write - markdown
-
-## using the visual editor
-
-## text formating
-
-
-
-https://rdatatoolbox.github.io/course-quarto/#/markdown-2
-
-## equation
-
-https://quarto.org/docs/get-started/authoring/rstudio.html#equations
-
-## link
-
-## image
-
-## tables
-
-
-
-## sections and toc
-
-https://quarto.org/docs/get-started/authoring/rstudio.html#sections
-
-# Insert R code
-
-Chunks of R code surrounded by ```
+##
 
 https://rdatatoolbox.github.io/course-quarto/#/computations-using-r
 
@@ -172,22 +463,14 @@ largely follow r4ds
 
 https://r4ds.hadley.nz/quarto.html#code-chunks
 
-dire que code cunck can be run with the play button
-
-## chunck label
-
-
-## chunck option
-
-## global option
-
-## inline code
-
-## figure
 
 ## tables
 
 include kable and flextable?
+
+## cross ref for chunk
+
+https://rdatatoolbox.github.io/course-quarto/#/cross-references-computations
 
 ## cache
 
@@ -199,28 +482,20 @@ https://rdatatoolbox.github.io/course-quarto/#/yaml-header-1
 
 https://r4ds.hadley.nz/quarto.html#yaml-header
 
-# Cross-Referencing and Citations
+## Sections and tables of content
 
-## Cross-references
+https://quarto.org/docs/get-started/authoring/rstudio.html#sections
 
-https://rdatatoolbox.github.io/course-quarto/#/cross-references
+## global option
 
-https://quarto.org/docs/get-started/authoring/rstudio.html#cross-references
-
-
-## Bibliography
-
-https://rdatatoolbox.github.io/course-quarto/#/citations
-
-https://quarto.org/docs/get-started/authoring/rstudio.html#citations
-
-https://r4ds.hadley.nz/quarto.html#bibliographies-and-citations
+https://r4ds.hadley.nz/quarto.html#global-options
 
 # Different formats
 
 before that, only do html
 
-pdf, htms, pres... here 
+pdf, htms, pres...
+here
 
 https://r4ds.hadley.nz/quarto-formats.html
 
@@ -240,30 +515,31 @@ https://quarto.org/docs/books/
 
 https://quarto.org/docs/get-started/authoring/rstudio.html#multiple-formats
 
+## Quarto projects
+
+https://rdatatoolbox.github.io/course-quarto/#/quarto-projects
+
+```{=html}
+<!--
+# Integration continue? sites web?
+
+-->
+```
+
 # Troubleshooting
 
 https://r4ds.hadley.nz/quarto.html#troubleshooting
 
 see where I put that...
 
-# Quarto projects
-
-https://rdatatoolbox.github.io/course-quarto/#/quarto-projects
-
-
-<!--
-# Integration continue? sites web?
-
--->
-
 ## Acknowledgments {.smaller}
 
 ::: nonincremental
-
 r4ds
 
 cours rdatatoolbox
 
-doc quarto
+doc quarto et
 
+https://quarto.org/docs/get-started/authoring/rstudio.html
 :::
