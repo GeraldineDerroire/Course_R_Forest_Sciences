@@ -53,6 +53,10 @@ Literate programming mixes **code** with **natural language**.
 
 -   For a wider audience: **communicate** results clearly while ensuring reproducibility and easy updates
 
+::: notes
+Strongly encourage to do a quarto document for a paper, or your thesis
+:::
+
 ## What is [Quarto]{style="color:indianred;"}?
 
 [Quarto]{style="color:indianred;"} is an open-source tool for creating **dynamic documents** that combine code, results and text to produce **reproducible outputs in multiple formats** (reports, websites, slides...).
@@ -338,6 +342,8 @@ https://quarto.org/docs/get-started/authoring/rstudio.html#citations
 
 https://r4ds.hadley.nz/quarto.html#bibliographies-and-citations
 
+TO DO
+
 # Comptute with R
 
 ## Insert R code
@@ -454,41 +460,182 @@ ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
 [💡 *Figures can then be cross-referenced using their label.*]{style="font-size: 30px"}
 :::
 
+## Figure options
 
-##
+::: nonincremental
 
-https://rdatatoolbox.github.io/course-quarto/#/computations-using-r
+* [`fig-cap`: add a caption]{style="font-size: 30px"}
 
-largely follow r4ds
+* [`fig-width` and `fig-height`: set figure size (in inches)]{style="font-size: 30px"}
 
-https://r4ds.hadley.nz/quarto.html#code-chunks
+* [`fig-asp`: control the aspect ratio (the width/height ratio)]{style="font-size: 30px"}
+
+* [`out-width` and `out-height`: control display size in output (in %)]{style="font-size: 30px"}
+
+* [`fig-align`: figure alignment ("left", "right", "center")]{style="font-size: 30px"}
+
+* [`layout-col`: place multiple plots in the same row]{style="font-size: 30px"}
+
+* [`fig-format`: choose output format ("png", "jpeg", "svg", "pdf"). The default depends on output format.]{style="font-size: 30px"}
+
+:::
+
+## Tables
+
+[Tables can be generated with a code chunk:]{style="font-size: 30px"}
+
+![](table.png){height=80%}
+
+```{r}
+#| echo: false
+head(iris[1:3],3)
+```
+
+## Tables with kable
+
+[The function [knitr::kable]{style="color:indianred;"} propose a nicer layout, and additional formatting options (see the help of the function:)]{style="font-size: 30px"}
+
+![](kable.png){height=80%}
+
+```{r}
+#| echo: false
+knitr::kable(head(iris[1:3],3))
+```
+
+[The packages [kableExtra](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) and [flextable](https://ardata-fr.github.io/flextable-book/) proposes additional formating options.]{style="font-size: 30px"}
 
 
-## tables
+## Cross-references
 
-include kable and flextable?
+[The figures and table produced with a code chunk can be cross-referenced by their labels.
+For that, you need to add a label at the beginning of a code chunk:]{style="font-size: 30px"}
 
-## cross ref for chunk
+::: {.column width="45%"}
 
-https://rdatatoolbox.github.io/course-quarto/#/cross-references-computations
+![](table_label.png)
 
-## cache
+``` markdown
+See @tb.iris
+```
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+
+::: fragment
+
+```{r}
+#| echo: false
+#| label: tbl-iris
+#| tbl-cap: "Iris data"
+head(iris[1:3],3)
+```
+
+[See @tbl-iris]{style="font-size: 30px"}
+
+:::
+
+:::
+
+::: notes
+what on the left gives what on the right
+:::
+
+## Caching
+
+[All code chunks are executed every time you render your document.]{style="font-size: 30px"}
+
+[This ensures reproducibility, but can slow things down, especially when chunks take a long time to run. In this case, you can use **caching** for specific chunks.]{style="font-size: 30px"}
+
+![](cache.png){height=80%}
+
+[Caching saves the results of a chunk in a specific file in the *document_name_cache* folder (the name of the folder starts with the name of your document). On subsequent render, cached chunks are only re-run if their code has changed.]{style="font-size: 30px"}
+
+## Caching
+
+[⚠️ **Use caching with caution**: if you change the data in a chunk, this chunk will be run, but the chunks using the data will NOT.]{style="font-size: 30px"}
+
+[💡It is recommended to **regularly clear the cache** by deleting the cache folder manually.]{style="font-size: 30px"}
+
+
 
 # YAML header
 
-A YAML header surrounded by [---]{style="color:indianred;"}
+## YAML header
+
+The YAML header is surrounded by [\-\-\-]{style="color:indianred;"}
+
+::: notes
+we are not going to see all of them...
+:::
+
+It controls many settings for the entire document.
+
+## Global option
+
+[You can define the default options of all code chunks of a document in the YAML, under [execute]{style="color:indianred;"}:]{style="font-size: 30px"}
+
+::: {.column width="40%"}
+![](YAML.png)
+:::
+
+::: {.column width="60%"}
+
+[*With this YAML, all code chunks will be executed but not shown in the output, and their results will be cached.*]{style="font-size: 30px"}
+:::
+
+[💡You can override these defaults for individual chunks using chunk-specific options.]{style="font-size: 30px"}
+
+
+## Section numbers and table of content
+
+::: {.column width="40%"}
+[You can use a **table of contents** ([toc]{style="color:indianred;"} option) and/or **section numbering** ([number-sections]{style="color:indianred;"} option) to make it easier for readers to navigate your document:]{style="font-size: 30px"}
+
+![](YAML_toc.png)
+:::
+
+::: {.column width="60%"}
+![](toc.png)
+:::
+
+
+## Self-contained documents
+
+[A HTML file created with quarto has several external dependencies that are placed in the *document_name_files* folder (for examples, figures created by code chunks).]{style="font-size: 30px"}
+
+[If you want to share the html in an email or a USB drive, you will need to share the HTML file and the *document_name_files* folder.]{style="font-size: 30px"}
+
+[To avoid this, you can created **self-contained documents** specifying the [embed_resources]{style="color:indianred;"} option:]{style="font-size: 30px"}
+
+![](YAML_embed.png)
+
+## Parameters 
+
+[You can specify parameters in the YAML, that will be used in the chunks.]{style="font-size: 30px"}
+
+[For example, This is useful if you want to produce the same document for different subset of your data. *Here, we can rapidly produce the same report for the different species of Iris.*]{style="font-size: 30px"}
+
+::: {.column width="50%"}
+
+![](params_1.png)
+:::
+
+::: {.column width="50%"}
+
+![](params_2.png)
+:::
+
+## Bibliography
 
 https://rdatatoolbox.github.io/course-quarto/#/yaml-header-1
 
 https://r4ds.hadley.nz/quarto.html#yaml-header
 
-## Sections and tables of content
+TO DO
 
-https://quarto.org/docs/get-started/authoring/rstudio.html#sections
-
-## global option
-
-https://r4ds.hadley.nz/quarto.html#global-options
 
 # Different formats
 
@@ -501,6 +648,14 @@ https://r4ds.hadley.nz/quarto-formats.html
 
 https://quarto.org/docs/get-started/authoring/rstudio.html#output-formats
 
+
+## multiple formats
+
+https://quarto.org/docs/get-started/authoring/rstudio.html#multiple-formats
+
+show how to set format specific options
+
+
 ## presentations
 
 quickly....
@@ -511,9 +666,7 @@ https://quarto.org/docs/presentations/
 
 https://quarto.org/docs/books/
 
-## multiple formats
 
-https://quarto.org/docs/get-started/authoring/rstudio.html#multiple-formats
 
 ## Quarto projects
 
