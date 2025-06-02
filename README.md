@@ -40,8 +40,3 @@ The course material has been created using quarto and R version 4.4.3.
 - [Literate programming with quarto]((https://geraldinederroire.github.io/Course_R_Forest_Sciences/9_literate_programming/literate_programming.html)
 -->
 
-
-
-
-
--->
