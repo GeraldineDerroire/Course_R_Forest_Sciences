@@ -853,12 +853,12 @@ soil_5_group # this is a name vector
 ```{r}
 # extract the scores of the sites on the two first PCs
   dt_soil_groups <- as.data.frame(scores(soil_pca, 
-                           scaling = "sites",
-                           display = "sites",
-                           choices = 1:2))
+                           scaling = "sites", # type of scaling
+                           display = "sites", # scores we want
+                           choices = 1:2)) # axes
 # check that plots are in the same order
-  all(row.names(dt_soil_groups) == names(soil_3_group))
-  all(row.names(dt_soil_groups) == names(soil_5_group))
+  all(rownames(dt_soil_groups) == rownames(soil_3_group))
+  all(rownames(dt_soil_groups) == rownames(soil_5_group))
 
 # add groups to the PCs data 
   dt_soil_groups$G3 <- as.factor(soil_3_group)

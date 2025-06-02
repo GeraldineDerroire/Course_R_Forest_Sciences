@@ -1,22 +1,157 @@
 ---
 title: "Exercices on session *Statistics with R session 3/3*"
 format:
-  pdf
+  pdf:
+    link-external-icon: true
 execute:
   echo: false 
   eval: false 
 ---
 
-VOIR LES LAB DE Marchand
+Load the packages *vegan* and *tidyverse*.
 
-ville du monde PCA
+```{r}
+library(tidyverse)
+library(vegan)
+```
 
-BCI + BCIenv pour RDA ou CCA
+# Climate of the cities
 
-#
+In this exercise, you will study the climate of 49 big cities in the world. The data are in the *cities_climate.csv* file available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/cities_climate.csv).
 
-pour la prochaine fois
+-   Load the data as a tibble and look at their structure. These data have been obtained from WorldClim. They contain:
 
-revoir les opérateurs conditions et logiques 
+    - long and lat: the longitude and latitude t_mean: Mean annual temperature (°C)
+    
+    - t_diu: Daily temperature variation, average difference between the maximum and minimum temperature in the same month (°C)
+    
+    -   t_sd: Seasonal temperature variation, standard deviation of the mean temperature between months (°C)
+    
+    -   t_max: Maximum temperature of the warmest month (°C)
+    
+    -   t_min: Minimum temperature of the coldest month (°C)
+    
+    -   p_ann: Annual precipitation (mm)
+    
+    -   p_max: Precipitation in the wettest month (mm)
+    
+    -   p_min: Precipitation of the driest month (mm)
+    
+    -   p_cv: Coefficient of variation of precipitation between months
 
- 
+```{r}
+dt_clim <- read_csv("data/cities_climate.csv")
+dt_clim
+str(dt_clim)
+```
+
+We are going to do a PCA on these data.
+
+-   Remove the latitude and longitude
+
+```{r}
+dt_clim <- dt_clim %>% select(-long, -lat)
+```
+
+-   Put the variable *city* as a row names and remove the corresponding column (to be able to see the name of the cities in the output of the analysis).
+
+<!-- as it has row names, it can no longer be a tibble -->
+
+```{r}
+dt_clim <- column_to_rownames(dt_clim, var = "city") 
+
+# alternatively, if the data were loaded as a dataframe and not a tible
+  # dt_clim <- read.csv("data/cities_climate.csv")
+  # rownames(dt_clim) <- dt_clim$city
+  # dt_clim <- dt_clim[, -1]
+```
+
+-   Do the PCA (don't forget to standardise the variables)
+
+```{r}
+clim_pca <- pca(dt_clim, scale = TRUE)
+```
+
+-   Look at the output: what is the cumulative proportion of variance explained by the two first axes?
+
+```{r}
+summary(clim_pca)
+```
+
+<!-- 71%-->
+
+-   Do a screeplot with a broken stick distribution: how many axes do you want to interpret?
+
+```{r}
+screeplot(clim_pca, bstick = TRUE)
+```
+
+<!-- 2 first axes-->
+
+-   Let's first look at similarity between cities: which scaling do we need for the biplot? Do the biplot and interpret it.
+
+```{r}
+biplot(clim_pca, scaling = 1)
+```
+
+-   Let's now look at correlations between climatic variables: do the corresponding biplot and interpret the axes.
+
+```{r}
+biplot(clim_pca, scaling = 2)
+```
+
+```{=html}
+<!-- 
+first axis: from warm (right) to cold (left)
+2nd axis: from warm with hight seasonality (bottom ) to cold, less seasonal
+-->
+```
+
+-   Let's now prepare the data for a clustering: standardise them and compute the distance matrix.
+
+```{r}
+dt_clim_sd <- as.data.frame(scale(dt_clim))
+clim_dist <- dist(dt_clim_sd)
+```
+
+-   Do the hierarchical clustering using the method of Ward.
+
+```{r}
+clim_clust <- hclust(clim_dist, method = "ward.D2")
+```
+
+-   Plot the dendrogram.
+
+```{r}
+plot(clim_clust)
+```
+
+-   Make 3 groups and extract them.
+
+```{r}
+city_3gr <- cutree(clim_clust, k = 3)
+```
+
+-   Represent the groups on the PCA biplot.
+
+```{r}
+dt_city_gr <- as.data.frame(scores(clim_pca, 
+                                   scaling = "sites",
+                                   display = "sites",
+                                   choices = 1:2))
+# check that plots are in the same order
+all(rownames(city_3gr) == rownames(city_3gr))
+
+# add groups to the PCs data
+dt_city_gr$groups <- as.factor(city_3gr)
+
+# plot
+ggplot(dt_city_gr, aes(x = PC1, y = PC2, colour = groups)) + 
+         geom_text(aes(label = rownames(dt_city_gr)), size = 3) +
+  theme_bw()
+```
+
+
+# For next time
+
+Review what we have seen about logical operators in the session *Getting started with R*.
