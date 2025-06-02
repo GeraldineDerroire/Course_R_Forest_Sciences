@@ -22,12 +22,6 @@ editor:
     wrap: sentence
 ---
 
-```{=html}
-<!-- everywhere, use both the 
-quarto doc
-r4ds
--->
-```
 
 # Introduction to [Quarto]{style="color:indianred;"}
 
@@ -131,7 +125,7 @@ You can view and edit the plain Markdown document in the **Source editor**:
 ![](content.png){fig-align="center"}
 
 ::: notes
-in the YALM title and author + output format
+in the YAML title and author + output format
 :::
 
 # Write with markdown syntax
@@ -334,15 +328,6 @@ Identifiers start with the type of item:
 -   for a section: [sec-]{style="color:indianred;"}
 :::
 
-## Bibliography
-
-https://rdatatoolbox.github.io/course-quarto/#/citations
-
-https://quarto.org/docs/get-started/authoring/rstudio.html#citations
-
-https://r4ds.hadley.nz/quarto.html#bibliographies-and-citations
-
-TO DO
 
 # Comptute with R
 
@@ -565,13 +550,35 @@ what on the left gives what on the right
 
 ## YAML header
 
-The YAML header is surrounded by [\-\-\-]{style="color:indianred;"}
+[The YAML header is surrounded by [\-\-\-]{style="color:indianred;"}]{style="font-size: 30px"}
+
+[It controls many **settings** for the entire document.]{style="font-size: 30px"}
+
+[It is also recommended to write **metadata** in the YAML that will appear in the rendered document. This includes:]{style="font-size: 30px"}
+
+* [**title**: the title of the document]{style="font-size: 30px"}
+
+* [**author**: your name (and the names of your collaborators)]{style="font-size: 30px"}
+
+::: fragment
+
+::: nonincremental
+
+* [**date**: either the creation date, or automatically show the last modification date with:]{style="font-size: 30px"}
+
+:::
+
+``` markdown
+date: last-modified
+```
+:::
+
+ 
 
 ::: notes
 we are not going to see all of them...
 :::
 
-It controls many settings for the entire document.
 
 ## Global option
 
@@ -628,71 +635,208 @@ It controls many settings for the entire document.
 ![](params_2.png)
 :::
 
-## Bibliography
+# Bibliography
 
-https://rdatatoolbox.github.io/course-quarto/#/yaml-header-1
+## Citing references in the Visual editor
 
-https://r4ds.hadley.nz/quarto.html#yaml-header
+[To add bibliographic references to a quarto document, you can use the Visual editor: 
+*Insert / Citation*.]{style="font-size: 30px"}
 
-TO DO
+[You can search an new reference with its **DOI**, or by searching bibliographic platforms (Crossref, PubMed...).]{style="font-size: 30px"}
 
+![](biblio_doi.png)
 
-# Different formats
+## Citing references in the Visual editor
 
-before that, only do html
+[When inserting the first reference of a document, this will:]{style="font-size: 30px"}
 
-pdf, htms, pres...
-here
+::: nonincremental
+* [create a new *.bib* file in your project and add the reference to it. This file will be updated every time you add a new reference]{style="font-size: 30px"}
 
-https://r4ds.hadley.nz/quarto-formats.html
+* [add a bibliography field in the YAML, giving the name of the *.bib* file]{style="font-size: 30px"}
+:::
 
-https://quarto.org/docs/get-started/authoring/rstudio.html#output-formats
+![](biblio_YAML.png){fig-align="center" height="60%"}
 
+## Citing references in the Visual editor
 
-## multiple formats
-
-https://quarto.org/docs/get-started/authoring/rstudio.html#multiple-formats
-
-show how to set format specific options
-
-
-## presentations
-
-quickly....
-
-https://quarto.org/docs/presentations/
-
-## books
-
-https://quarto.org/docs/books/
+[When you have an existing *.bib* file, you can also add a reference from this file, using the Visual editor: *Insert / Citation* ]{style="font-size: 30px"}
 
 
+![](biblio_bib.png)
 
-## Quarto projects
+## Citing references in the Source editor
 
-https://rdatatoolbox.github.io/course-quarto/#/quarto-projects
+[To add a citation using the Source editor, you need to have an existing bibliography file (*.bib* file imported from a reference manager or created with the Visual editor).]{style="font-size: 30px"}
 
-```{=html}
-<!--
-# Integration continue? sites web?
+[You can add the reference using [@]{style="color:indianred;"} followed by the reference **key** (the reference identifier from the bibliography file).]{style="font-size: 30px"}
 
--->
-```
 
-# Troubleshooting
+::: {.column width="30%"}
+![](citation_source.png)
+:::
 
-https://r4ds.hadley.nz/quarto.html#troubleshooting
+::: {.column width="70%"}
+![](citation_source2.png){width="150%"}
+:::
+ 
 
-see where I put that...
+## Rendered
+
+[When rendering your file, quarto will add a bibliography at the end of the document.]{style="font-size: 30px"}
+
+[You will need to manually add a title for this section.]{style="font-size: 30px"}
+
+::: {.column width="50%"}
+![](biblio_md.png)
+:::
+
+::: {.column width="50%"}
+![](biblio_rendered.png)
+:::
+
+
+
+## Bibliographic styles
+
+[To change the style of the citations and the bibliography, you can reference the CSL (*citation style language*) that you want to use in the `csl` field of the YAML:]{style="font-size: 30px"}
+
+![](csl.png)
+
+[This file will need to be added in the same directory than your *.qmd* file (or you can specify an alternative path).]{style="font-size: 30px"}
+
+[You can search for CSL styles [here](https://citationstyles.org/authors/). They may as well be provided by scientific journals.]{style="font-size: 30px"}
+
+
+# Quarto formats
+
+## Quarto formats
+
+[Quarto supports many different formats, including:]{style="font-size: 30px"}
+
+::: nonincremental
+* [**Documents** formats: HTML, PDF, OpenDocument Text, Microsoft Word...]{style="font-size: 30px"}
+
+* [**Presentations** formats: PowerPoint, Revealjs, Beamer]{style="font-size: 30px"}
+
+* [**Books**: combinations of multiple documents (chapters) into a single manuscript (in HTML, PDF, EPUB...) [](https://quarto.org/docs/books/)]{style="font-size: 30px"}
+
+* [**Websites** [](https://quarto.org/docs/websites/)]{style="font-size: 30px"}
+
+* [**Quarto projects**: centralised structure for managing multi-document outputs [](https://rdatatoolbox.github.io/course-quarto/#/quarto-projects)]{style="font-size: 30px"}
+
+* [...]{style="font-size: 30px"}
+:::
+
+[More about Quarto formats [here](https://quarto.org/docs/output-formats/all-formats.html) and [here](https://quarto.org/docs/guide/)]{style="font-size: 22px"} 
+
+::: notes
+We have seen how to do pdf, 
+:::
+
+## Document formats
+
+::: nonincremental
+* [HTML (`html`)]{style="font-size: 30px"}
+
+* [PDF (`pdf`): rendered with LaTex (requires a Latex installation such as [TinyTex](https://yihui.org/tinytex/))]{style="font-size: 30px"}
+
+* [OpenDocument Text (`odt`)]{style="font-size: 30px"}
+
+* [Microsoft Word (`docx`)]{style="font-size: 30px"}
+
+* [...]{style="font-size: 30px"}
+:::
+
+[We have seen how to produce HTML documents, other documents can be produced in a similar way.]{style="font-size: 30px"}
+
+
+## Presentation formats
+
+::: nonincremental
+* [`revealjs`: HTML presentation with Reveal.js (these slides are generated with Reveal.js)]{style="font-size: 30px"}
+
+* [`pptx`: Microsoft PowerPoint]{style="font-size: 30px"}
+
+* [`beamer`: PDF presentation with LaTeX Beamer]{style="font-size: 30px"}
+:::
+
+::: fragment
+
+[Title slides start with [#]{style="color:indianred;"} and all other slide starts with [##]{style="color:indianred;"}.]{style="font-size: 30px"}
+
+[[More about presentations with quarto](https://quarto.org/docs/presentations/)]{style="font-size: 22px"} 
+
+:::
+
+::: notes
+The title of this slide is written ## Presentation formats
+:::
+
+## Define quarto format
+
+::: {.column width="50%"}
+[The format can be chosen when you create a new quarto document:]{style="font-size: 30px"}
+
+![](new_qmd.png)
+:::
+
+::: {.column width="50%"}
+[Or you can specify it into the YAML:]{style="font-size: 30px"}
+
+![](formats3.png)
+:::
+
+
+::: notes
+first solution, this is how we created an html document
+::: 
+
+
+## Multiple formats and options
+
+[You can render to multiple output formats by specifying more than one format in the YAML. Different options can be specify for the different format:]{style="font-size: 30px"}
+
+::: {.column width="60%"}
+[For example, the following will add a table of content and number the sections in the html format, and keep the default options in pdf and docx.]{style="font-size: 25px"}
+:::
+
+::: {.column width="40%"}
+![](formats1.png)
+:::
+
+::: {.column width="60%"}
+[To select the format in which to render:]{style="font-size: 30px"}
+:::
+
+::: {.column width="40%"}
+![](formats2.png)
+:::
+
+[⚠️ Some options are available in all formats, but other are not (see [here](https://quarto.org/docs/output-formats/all-formats.html) for the option available for each format)]{style="font-size: 30px"}
+
+
 
 ## Acknowledgments {.smaller}
 
 ::: nonincremental
-r4ds
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*  - Chapter on Quarto [in English](https://r4ds.hadley.nz/quarto.html) and [in Portuguese](https://pt.r4ds.hadley.nz/quarto.html){preview-link="false"}
 
-cours rdatatoolbox
+* Guilhaumon F. *An introduction to Quarto* [here](https://rdatatoolbox.github.io/course-quarto)
 
-doc quarto et
+* Quarto *Get started* tutorial [here](https://quarto.org/docs/get-started/)
 
-https://quarto.org/docs/get-started/authoring/rstudio.html
+* Quarto guide [here](https://quarto.org/docs/guide/)
+:::
+
+## Ressources {.smaller}
+
+::: nonincremental
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*  - Chapter on Quarto [in English](https://r4ds.hadley.nz/quarto.html) and [in Portuguese](https://pt.r4ds.hadley.nz/quarto.html){preview-link="false"}
+
+* Guilhaumon F. *An introduction to Quarto* [here](https://rdatatoolbox.github.io/course-quarto)
+
+* Quarto *Get started* tutorial [here](https://quarto.org/docs/get-started/)
+
+* Quarto guide [here](https://quarto.org/docs/guide/)
 :::

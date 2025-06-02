@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-06-01">
+  <meta name="dcterms.date" content="2025-06-02">
   <title>Literate programming with quarto</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,14 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-06-01</p>
-</section>
-<section class="slide level2">
-
-<!-- everywhere, use both the 
-quarto doc
-r4ds
--->
+  <p class="date">2025-06-02</p>
 </section>
 <section>
 <section id="introduction-to-quarto" class="title-slide slide level1 center">
@@ -524,7 +517,7 @@ r4ds
 </ul>
 
 <img data-src="content.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
-<p>in the YALM title and author + output format</p>
+<p>in the YAML title and author + output format</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -721,13 +714,6 @@ Figure&nbsp;1: Caption
 <li><p>for a section: <span style="color:indianred;">sec-</span></p></li>
 </ul>
 </div>
-</section>
-<section id="bibliography" class="slide level2">
-<h2>Bibliography</h2>
-<p>https://rdatatoolbox.github.io/course-quarto/#/citations</p>
-<p>https://quarto.org/docs/get-started/authoring/rstudio.html#citations</p>
-<p>https://r4ds.hadley.nz/quarto.html#bibliographies-and-citations</p>
-<p>TO DO</p>
 </section></section>
 <section>
 <section id="comptute-with-r" class="title-slide slide level1 center">
@@ -1032,7 +1018,21 @@ Table&nbsp;1: Iris data
 </section>
 <section id="yaml-header-1" class="slide level2">
 <h2>YAML header</h2>
-<p>The YAML header is surrounded by <span style="color:indianred;">---</span></p>
+<p><span style="font-size: 30px">The YAML header is surrounded by <span style="color:indianred;">---</span></span></p>
+<p><span style="font-size: 30px">It controls many <strong>settings</strong> for the entire document.</span></p>
+<p><span style="font-size: 30px">It is also recommended to write <strong>metadata</strong> in the YAML that will appear in the rendered document. This includes:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px"><strong>title</strong>: the title of the document</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px"><strong>author</strong>: your name (and the names of your collaborators)</span></p></li>
+</ul>
+<div class="fragment">
+<div>
+<ul>
+<li><span style="font-size: 30px"><strong>date</strong>: either the creation date, or automatically show the last modification date with:</span></li>
+</ul>
+</div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href=""></a><span class="an">date:</span><span class="co"> last-modified</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <aside class="notes">
 <p>we are not going to see all of them…</p>
 <style type="text/css">
@@ -1046,7 +1046,6 @@ Table&nbsp;1: Iris data
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<p>It controls many settings for the entire document.</p>
 </section>
 <section id="global-option" class="slide level2">
 <h2>Global option</h2>
@@ -1080,56 +1079,191 @@ Table&nbsp;1: Iris data
 <p><img data-src="params_1.png"></p>
 </div><div class="column" style="width:50%;">
 <p><img data-src="params_2.png"></p>
-</div></section>
-<section id="bibliography-1" class="slide level2">
-<h2>Bibliography</h2>
-<p>https://rdatatoolbox.github.io/course-quarto/#/yaml-header-1</p>
-<p>https://r4ds.hadley.nz/quarto.html#yaml-header</p>
-<p>TO DO</p>
-</section></section>
+</div></section></section>
 <section>
-<section id="different-formats" class="title-slide slide level1 center">
-<h1>Different formats</h1>
-<p>before that, only do html</p>
-<p>pdf, htms, pres… here</p>
-<p>https://r4ds.hadley.nz/quarto-formats.html</p>
-<p>https://quarto.org/docs/get-started/authoring/rstudio.html#output-formats</p>
-</section>
-<section id="multiple-formats" class="slide level2">
-<h2>multiple formats</h2>
-<p>https://quarto.org/docs/get-started/authoring/rstudio.html#multiple-formats</p>
-<p>show how to set format specific options</p>
-</section>
-<section id="presentations" class="slide level2">
-<h2>presentations</h2>
-<p>quickly….</p>
-<p>https://quarto.org/docs/presentations/</p>
-</section>
-<section id="books" class="slide level2">
-<h2>books</h2>
-<p>https://quarto.org/docs/books/</p>
-</section>
-<section id="quarto-projects" class="slide level2">
-<h2>Quarto projects</h2>
-<p>https://rdatatoolbox.github.io/course-quarto/#/quarto-projects</p>
-<!--
-# Integration continue? sites web?
+<section id="bibliography" class="title-slide slide level1 center">
+<h1>Bibliography</h1>
 
--->
+</section>
+<section id="citing-references-in-the-visual-editor" class="slide level2">
+<h2>Citing references in the Visual editor</h2>
+<p><span style="font-size: 30px">To add bibliographic references to a quarto document, you can use the Visual editor: <em>Insert / Citation</em>.</span></p>
+<p><span style="font-size: 30px">You can search an new reference with its <strong>DOI</strong>, or by searching bibliographic platforms (Crossref, PubMed…).</span></p>
+
+<img data-src="biblio_doi.png" class="r-stretch"></section>
+<section id="citing-references-in-the-visual-editor-1" class="slide level2">
+<h2>Citing references in the Visual editor</h2>
+<p><span style="font-size: 30px">When inserting the first reference of a document, this will:</span></p>
+<div>
+<ul>
+<li><p><span style="font-size: 30px">create a new <em>.bib</em> file in your project and add the reference to it. This file will be updated every time you add a new reference</span></p></li>
+<li><p><span style="font-size: 30px">add a bibliography field in the YAML, giving the name of the <em>.bib</em> file</span></p></li>
+</ul>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="biblio_YAML.png" class="quarto-figure quarto-figure-center" style="height:60.0%"></p>
+</figure>
+</div>
+</section>
+<section id="citing-references-in-the-visual-editor-2" class="slide level2">
+<h2>Citing references in the Visual editor</h2>
+<p><span style="font-size: 30px">When you have an existing <em>.bib</em> file, you can also add a reference from this file, using the Visual editor: <em>Insert / Citation</em></span></p>
+
+<img data-src="biblio_bib.png" class="r-stretch"></section>
+<section id="citing-references-in-the-source-editor" class="slide level2">
+<h2>Citing references in the Source editor</h2>
+<p><span style="font-size: 30px">To add a citation using the Source editor, you need to have an existing bibliography file (<em>.bib</em> file imported from a reference manager or created with the Visual editor).</span></p>
+<p><span style="font-size: 30px">You can add the reference using <span style="color:indianred;">@</span> followed by the reference <strong>key</strong> (the reference identifier from the bibliography file).</span></p>
+<div class="column" style="width:30%;">
+<p><img data-src="citation_source.png"></p>
+</div><div class="column" style="width:70%;">
+<p><img data-src="citation_source2.png" style="width:150.0%"></p>
+</div></section>
+<section id="rendered" class="slide level2">
+<h2>Rendered</h2>
+<p><span style="font-size: 30px">When rendering your file, quarto will add a bibliography at the end of the document.</span></p>
+<p><span style="font-size: 30px">You will need to manually add a title for this section.</span></p>
+<div class="column" style="width:50%;">
+<p><img data-src="biblio_md.png"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="biblio_rendered.png"></p>
+</div></section>
+<section id="bibliographic-styles" class="slide level2">
+<h2>Bibliographic styles</h2>
+<p><span style="font-size: 30px">To change the style of the citations and the bibliography, you can reference the CSL (<em>citation style language</em>) that you want to use in the <code>csl</code> field of the YAML:</span></p>
+
+<img data-src="csl.png" class="r-stretch"><p><span style="font-size: 30px">This file will need to be added in the same directory than your <em>.qmd</em> file (or you can specify an alternative path).</span></p>
+<p><span style="font-size: 30px">You can search for CSL styles <a href="https://citationstyles.org/authors/">here</a>. They may as well be provided by scientific journals.</span></p>
 </section></section>
 <section>
-<section id="troubleshooting" class="title-slide slide level1 center">
-<h1>Troubleshooting</h1>
-<p>https://r4ds.hadley.nz/quarto.html#troubleshooting</p>
-<p>see where I put that…</p>
+<section id="quarto-formats" class="title-slide slide level1 center">
+<h1>Quarto formats</h1>
+
+</section>
+<section id="quarto-formats-1" class="slide level2">
+<h2>Quarto formats</h2>
+<p><span style="font-size: 30px">Quarto supports many different formats, including:</span></p>
+<div>
+<ul>
+<li><p><span style="font-size: 30px"><strong>Documents</strong> formats: HTML, PDF, OpenDocument Text, Microsoft Word…</span></p></li>
+<li><p><span style="font-size: 30px"><strong>Presentations</strong> formats: PowerPoint, Revealjs, Beamer</span></p></li>
+<li><p><span style="font-size: 30px"><strong>Books</strong>: combinations of multiple documents (chapters) into a single manuscript (in HTML, PDF, EPUB…) <a href="https://quarto.org/docs/books/"></a></span></p></li>
+<li><p><span style="font-size: 30px"><strong>Websites</strong> <a href="https://quarto.org/docs/websites/"></a></span></p></li>
+<li><p><span style="font-size: 30px"><strong>Quarto projects</strong>: centralised structure for managing multi-document outputs <a href="https://rdatatoolbox.github.io/course-quarto/#/quarto-projects"></a></span></p></li>
+<li><p><span style="font-size: 30px">…</span></p></li>
+</ul>
+</div>
+<p><span style="font-size: 22px">More about Quarto formats <a href="https://quarto.org/docs/output-formats/all-formats.html">here</a> and <a href="https://quarto.org/docs/guide/">here</a></span></p>
+<aside class="notes">
+<p>We have seen how to do pdf,</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="document-formats" class="slide level2">
+<h2>Document formats</h2>
+<div>
+<ul>
+<li><p><span style="font-size: 30px">HTML (<code>html</code>)</span></p></li>
+<li><p><span style="font-size: 30px">PDF (<code>pdf</code>): rendered with LaTex (requires a Latex installation such as <a href="https://yihui.org/tinytex/">TinyTex</a>)</span></p></li>
+<li><p><span style="font-size: 30px">OpenDocument Text (<code>odt</code>)</span></p></li>
+<li><p><span style="font-size: 30px">Microsoft Word (<code>docx</code>)</span></p></li>
+<li><p><span style="font-size: 30px">…</span></p></li>
+</ul>
+</div>
+<p><span style="font-size: 30px">We have seen how to produce HTML documents, other documents can be produced in a similar way.</span></p>
+</section>
+<section id="presentation-formats" class="slide level2">
+<h2>Presentation formats</h2>
+<div>
+<ul>
+<li><p><span style="font-size: 30px"><code>revealjs</code>: HTML presentation with Reveal.js (these slides are generated with Reveal.js)</span></p></li>
+<li><p><span style="font-size: 30px"><code>pptx</code>: Microsoft PowerPoint</span></p></li>
+<li><p><span style="font-size: 30px"><code>beamer</code>: PDF presentation with LaTeX Beamer</span></p></li>
+</ul>
+</div>
+<div class="fragment">
+<p><span style="font-size: 30px">Title slides start with <span style="color:indianred;">#</span> and all other slide starts with <span style="color:indianred;">##</span>.</span></p>
+<p><span style="font-size: 22px"><a href="https://quarto.org/docs/presentations/">More about presentations with quarto</a></span></p>
+</div>
+<aside class="notes">
+<p>The title of this slide is written ## Presentation formats</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="define-quarto-format" class="slide level2">
+<h2>Define quarto format</h2>
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">The format can be chosen when you create a new quarto document:</span></p>
+<p><img data-src="new_qmd.png"></p>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">Or you can specify it into the YAML:</span></p>
+<p><img data-src="formats3.png"></p>
+</div><aside class="notes">
+<p>first solution, this is how we created an html document</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="multiple-formats-and-options" class="slide level2">
+<h2>Multiple formats and options</h2>
+<p><span style="font-size: 30px">You can render to multiple output formats by specifying more than one format in the YAML. Different options can be specify for the different format:</span></p>
+<div class="column" style="width:60%;">
+<p><span style="font-size: 25px">For example, the following will add a table of content and number the sections in the html format, and keep the default options in pdf and docx.</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="formats1.png"></p>
+</div><div class="column" style="width:60%;">
+<p><span style="font-size: 30px">To select the format in which to render:</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="formats2.png"></p>
+</div><p><span style="font-size: 30px">⚠️ Some options are available in all formats, but other are not (see <a href="https://quarto.org/docs/output-formats/all-formats.html">here</a> for the option available for each format)</span></p>
 </section>
 <section id="acknowledgments" class="slide level2 smaller">
 <h2>Acknowledgments</h2>
 <div>
-<p>r4ds</p>
-<p>cours rdatatoolbox</p>
-<p>doc quarto et</p>
-<p>https://quarto.org/docs/get-started/authoring/rstudio.html</p>
+<ul>
+<li><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> - Chapter on Quarto <a href="https://r4ds.hadley.nz/quarto.html">in English</a> and <a href="https://pt.r4ds.hadley.nz/quarto.html" data-preview-link="false">in Portuguese</a></p></li>
+<li><p>Guilhaumon F. <em>An introduction to Quarto</em> <a href="https://rdatatoolbox.github.io/course-quarto">here</a></p></li>
+<li><p>Quarto <em>Get started</em> tutorial <a href="https://quarto.org/docs/get-started/">here</a></p></li>
+<li><p>Quarto guide <a href="https://quarto.org/docs/guide/">here</a></p></li>
+</ul>
+</div>
+</section>
+<section id="ressources" class="slide level2 smaller">
+<h2>Ressources</h2>
+<div>
+<ul>
+<li><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> - Chapter on Quarto <a href="https://r4ds.hadley.nz/quarto.html">in English</a> and <a href="https://pt.r4ds.hadley.nz/quarto.html" data-preview-link="false">in Portuguese</a></p></li>
+<li><p>Guilhaumon F. <em>An introduction to Quarto</em> <a href="https://rdatatoolbox.github.io/course-quarto">here</a></p></li>
+<li><p>Quarto <em>Get started</em> tutorial <a href="https://quarto.org/docs/get-started/">here</a></p></li>
+<li><p>Quarto guide <a href="https://quarto.org/docs/guide/">here</a></p></li>
+</ul>
 </div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
