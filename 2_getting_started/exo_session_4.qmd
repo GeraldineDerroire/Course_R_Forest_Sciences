@@ -3,7 +3,7 @@ title: "Exercices on session *Getting started with R (3/3)*"
 format:
   pdf
 execute:
-  echo: false  
+  echo: false
 ---
   
 # Matrices
@@ -12,9 +12,13 @@ We are going to use a matrix called *occ* to get data on occurrence of species i
 
 * Create the following matrix and check that we have the structure we want.
 
-```{r}
+```{r, echo=FALSE}
 # t.seed(22)
 # occ <- matrix(sample(c(0,1), 20, replace="TRUE"), 4, 5)
+```
+
+
+```{r}
 occ <- matrix(c(1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1), 
               4, 
               5)

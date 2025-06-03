@@ -3,7 +3,7 @@ title: "Exercices on session *Data visualisation*"
 format:
   pdf
 execute:
-  echo: false 
+  echo: false
   eval: false 
 ---
 

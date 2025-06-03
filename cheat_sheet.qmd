@@ -1,0 +1,40 @@
+---
+title: "Untitled"
+format: html
+editor: visual
+---
+
+💡
+
+⚠️
+
+✅
+
+❌
+
+😊
+
+🥴
+
+💣
+
+::::: columns
+::: {.column width="70%"}
+:::
+
+::: {.column width="30%"}
+:::
+:::::
+
+::: nonincremental
+:::
+
+{style="color:indianred;"}
+
+{style="font-size: 30px"}
+
+{height="80%"}
+
+{fig-align="center" height="80%"}
+
+{preview-link="false"}

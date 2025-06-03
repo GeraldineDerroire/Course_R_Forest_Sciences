@@ -3,7 +3,7 @@ title: "Exercices on session *Getting started with R (2/3)*"
 format:
   pdf
 execute:
-  echo: false  
+  echo: false 
 ---
 
 # RStudio project
@@ -20,7 +20,7 @@ We have 2 different forest plots, each containing 4 trees.
 
 * Create two vectors called AGB1_t and AGB2_t and store the AGB of each of the trees in these plots. Use the following AGB values (in tons).
 
-```{r}
+```{r, echo = FALSE}
 AGB <- data.frame(Plot = c("Plot1", "Plot2"),
                   Tree1 = c(0.1, 0.24),
                   Tree2 = c(0.42, 0.29),

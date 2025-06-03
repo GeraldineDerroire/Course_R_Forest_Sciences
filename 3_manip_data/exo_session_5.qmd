@@ -140,7 +140,7 @@ We are working with a fake data set of vegetation survey in the DF, that contain
 * *DBH_max*: DBH (diameter at breast height) of the largest tree on the plot (in cm)
 
 
-```{r}
+```{r, echo=FALSE}
 dt_pb <- data.frame(site = c("Brasilia", "Brasilia", "brasilia", "Taguatinga", "Taguatinga"), # 
                     plot = c(1:4, 4), #
                     height_max = c("10.3", "8.5", "9.6", "4,7", "9.8"), # 
@@ -159,16 +159,15 @@ str(dt_pb)
 summary(dt_pb)
 ```
 
-<!-- There is a uncorrect decimal separator in height_max-->
-
 ```{r}
+# There is a uncorrect decimal separator in height_max
 mode(dt_pb$height_max)
 dt_pb$height_max
 ```
 
-<!-- There is a problem of encoding in site-->
 
 ```{r}
+# There is a problem of encoding in site
 dt_pb$site
 
 # or better:
@@ -178,25 +177,21 @@ levels(dt_pb$site)
 table(dt_pb$site)
 ```
 
-
-<!-- There is an incoherent value in DBH_max -->
-
 ```{r}
+# There is an incoherent value in DBH_max
 summary(dt_pb$DBH_max)
 
 # or
 range(dt_pb$DBH_max)
 ```
 
-<!-- There is a duplicated plot ID -->
 
 ```{r}
+# There is a duplicated plot ID
 table(dt_pb$plot)
 
-# 
+# alternative
 length(unique(table(dt_pb$plot))) ==  1
-
-
 
 # alternative not seen in the class
 length(unique(dt_pb$plot)) == dim(dt_pb)[1]

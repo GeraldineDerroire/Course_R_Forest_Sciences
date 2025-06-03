@@ -55,10 +55,10 @@ dt_clim <- dt_clim %>% select(-long, -lat)
 
 -   Put the variable *city* as a row names and remove the corresponding column (to be able to see the name of the cities in the output of the analysis).
 
-<!-- as it has row names, it can no longer be a tibble -->
-
 ```{r}
 dt_clim <- column_to_rownames(dt_clim, var = "city") 
+
+# as it has row names, it can no longer be a tibble 
 
 # alternatively, if the data were loaded as a dataframe and not a tible
   # dt_clim <- read.csv("data/cities_climate.csv")
@@ -76,17 +76,19 @@ clim_pca <- pca(dt_clim, scale = TRUE)
 
 ```{r}
 summary(clim_pca)
+
+# 71%
 ```
 
-<!-- 71%-->
 
 -   Do a screeplot with a broken stick distribution: how many axes do you want to interpret?
 
 ```{r}
 screeplot(clim_pca, bstick = TRUE)
+
+# 2 first axes
 ```
 
-<!-- 2 first axes-->
 
 -   Let's first look at similarity between cities: which scaling do we need for the biplot? Do the biplot and interpret it.
 
@@ -98,13 +100,10 @@ biplot(clim_pca, scaling = 1)
 
 ```{r}
 biplot(clim_pca, scaling = 2)
-```
 
-```{=html}
-<!-- 
-first axis: from warm (right) to cold (left)
-2nd axis: from warm with hight seasonality (bottom ) to cold, less seasonal
--->
+# interpretation 
+  # first axis: from warm (right) to cold (left)
+  # 2nd axis: from warm with hight seasonality (bottom ) to cold, less seasonal
 ```
 
 -   Let's now prepare the data for a clustering: standardise them and compute the distance matrix.

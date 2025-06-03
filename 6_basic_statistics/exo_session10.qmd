@@ -3,17 +3,18 @@ title: "Exercices on session *Statistics with R session 2/3*"
 format:
   pdf
 execute:
-  echo: false 
+  echo: false
   eval: false 
 editor: 
   markdown: 
     wrap: 72
 ---
 
-Load the packages of the *tidyverse*
+Load the packages of the *tidyverse* and *ggeffects*
 
 ```{r}
 library(tidyverse)
+library(ggeffects)
 ```
 
 # Data on vascular plants in the British Islands
@@ -67,47 +68,38 @@ $$log(S) \sim \mathcal N (\beta_0 + \beta_1 \times log(A), \sigma^2)$$
 ```{r}
 mod_1 <- lm(log(species) ~ log(area), data = dt)
 summary(mod_1)
+
+# interpretation
+  # significant positive effect of the log(area)
+  # moderate goodness of fit (R2)
 ```
 
-```{=html}
-<!-- 
-* significant positive effect of the log(area)
-* moderate goodness of fit (R2)
--->
-```
 
 -   Do the model validation
 
 ```{r}
 plot(mod_1, which = 1)
+
+# interpretation
+  # homoscedasticity: not too bad
+  # residuals independant of fitted values
 ```
 
-```{=html}
-<!-- 
-* homoscedasticity: not too bad
-* residuals independant of fitted values
--->
-```
 
 ```{r}
 plot(mod_1, which = 2)
-```
 
-```{=html}
-<!-- 
-normality of the residuals... not perfect 
--->
+# interpretation
+  # normality of the residuals... not perfect
 ```
 
 ```{r}
 plot(mod_1, which = 4)
+
+# interpretation
+  # No strong leverage effect, the values of cook are small
 ```
 
-```{=html}
-<!--
-No strong leverage effect, the values of cook are small
--->
-```
 
 # Multiple linear regression
 
@@ -126,15 +118,13 @@ dt <- dt %>%
   mutate(log_area = log(area))
 
 GGally::ggpairs(dt, columns = c("log_area", "elevation", "latitude", "dist_britain"))
+
+# interpretation
+  # log(area) and elevation correlated
+  # dist_britan and latitude correlated
+  # => don't include them all (and too many for the data we have)
 ```
 
-```{=html}
-<!--
-log(area) and elevation correlated
-dist_britan and latitude correlated
-=> don't include them all (and too many for the data we have)
--->
-```
 
 -   Let's also make boxplots to explore graphically the relationship
     between these 4 variables and the type of soil (don't forget to
@@ -154,14 +144,12 @@ g4 <- dt %>%
   ggplot(aes(x= soil_types, y= dist_britain)) + geom_boxplot()
 library(patchwork)
 (g1 + g2) / (g3 + g4)
+
+# interpretation
+  # soil type too correlated with log_area...
+  # and some soil types poorly represented
 ```
 
-```{=html}
-<!-- 
-soil type too correlated with log_area...
-and some soil types poorly represented
--->
-```
 
 -   Fit the following model (without standardising the variables), look
     at the model results and interpret them
@@ -171,60 +159,48 @@ $$log(S) \sim \mathcal N (\beta_0 + \beta_1 \times log(A) + \beta_2 \times latit
 ```{r}
 mod_2 <- lm(log(species) ~ log(area) + latitude, data = dt)
 summary(mod_2)
+
+# interpretation
+  # Goodness of fit (R2) much better
+  # log(area) and latitude both have a significant effect
+  # number of species increases with area
+  # number of species decreases with latitude
 ```
 
-```{=html}
-<!--
-* Goodness of fit (R2) much better
-* log(area) and latitude both have a significant effect
-* number of species increases with area
-* number of species decreases with latitude
--->
-```
 
 -   Do the model validation
 
 ```{r}
 plot(mod_2, which = 1)
-```
 
-```{=html}
-<!-- 
-* homoscedasticity: not too bad
-* residuals independent of fitted values
-* three obs concerning
--->
+# interpretation
+  # homoscedasticity: not too bad
+  # residuals independent of fitted values
+  # three obs concerning
 ```
 
 ```{r}
 plot(mod_2, which = 2)
+
+# interpretation
+  # normality of the residuals
+  # three obs concerning
 ```
 
-```{=html}
-<!-- 
-normality of the residuals
-three obs concerning
--->
-```
 
 ```{r}
 plot(mod_2, which = 4)
+
+# interpretation
+  # No strong leverage effect but three obs concerning
 ```
 
-```{=html}
-<!--
-No strong leverage effect but three obs concerning
--->
-```
 
 ```{r}
 lindia::gg_resX(mod_2, ncol = 2)
-```
 
-```{=html}
-<!-- 
-ok
--->
+# interpretation
+  # ok
 ```
 
 -   Check the VIF (from library *car*) to check for the absence of
@@ -232,9 +208,11 @@ ok
 
 ```{r}
 car::vif(mod_2)
+
+# interpretation
+  # ok
 ```
 
-<!-- ok -->
 
 # Presenting the result of the best model
 
@@ -243,9 +221,10 @@ car::vif(mod_2)
 ```{r}
 list_mod <- list(mod_1, mod_2)
 AICcmodavg::aictab(list_mod)
+
+# best model is model 2
 ```
 
-<!-- best model is model 2 -->
 
 -   Present the coefficients in a table
 
