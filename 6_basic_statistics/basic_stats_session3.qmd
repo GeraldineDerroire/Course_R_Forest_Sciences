@@ -31,13 +31,19 @@ editor:
 
 * **Ordination methods** aim to rearrange the observations in a lower-dimensional space to reduce the dimensionality of the data while preserving the main patterns of variation.
 
+::: notes
+last session, when more than 2 variables, there was just one univariate response variable, so different 
+
+explain the reduction of dimensionality
+:::
+
 ## Why multivariate analyses ?
 
 **Ordination methods** can be used for: 
 
   * the identification axes of co-variation between several variables (*eg*: co-variation between climatic variables or soil variables along environmental gradients, co-variation of functional traits along specta of functional strategies...)
   
-  * the study ecological communities by jointly considering the occurrence or abundance of multiple species
+  * the study of ecological communities by jointly considering the occurrence or abundance of multiple species
 
 ## Structure of multivariate data {.smaller}
 
@@ -59,6 +65,12 @@ x_{n1} & x_{n2} & \cdots & x_{np}
 * floristic composition (*p* species = variables) in *n* sites
 
 * values of *p* functional traits (variables) for *n* species (observations)
+
+::: notes
+in the second ex, the species are the variables and the sites the observations
+
+but in 3rd ex, the species are the observation and the functional traits their variables
+:::
 
 
 ## Package *vegan*
@@ -106,7 +118,9 @@ varechem[1:5, 1:5] # display only a subset
 
 [[For more information on these data see [Väre,Ohtonen and Oksanen (1995)](https://www.researchgate.net/publication/227830523_Effects_of_reindeer_grazing_on_vegetation_in_dry_Pinus_sylvestris_forests){preview-link="false"}]{style="font-size: 22px"}]{.fragment}
 
-
+::: notes
+Fennoscandia: Norway + Sweden + Finland + Parts of Russia
+:::
 
 # Unconstrained ordination methods
 
@@ -122,7 +136,7 @@ Marchand + Eric -->
 
 [Unconstrained ordination methods are used to **visualise and explore the relationships among variables or observations** without imposing any specific constraints on the relationships.]{style="font-size: 30px"}
 
-[The objective is to identify a few axes that capture most of the variation in a multidimensional dataset, allowing for a simplified yet informative representation.]{style="font-size: 30px"}
+[The objective is to **identify a few axes that capture most of the variation** in a multidimensional dataset, allowing for a simplified yet informative representation.]{style="font-size: 30px"}
 
 [This allows to **visualise similarities among observations**, as more similar observations will be closer in the reduced-dimensional spaces.]{style="font-size: 30px"}
 
@@ -148,9 +162,15 @@ Marchand + Eric -->
 [Source: [E. Marcon](https://ericmarcon.github.io/Cours-R-Geeft/Ordination.html){preview-link="false"}]{style="font-size: 22px"}
 
 :::
+
 :::::
 
 [[Each of these lines is a **Principal Component** (PC) and is associated with an **eigenvalue** indicating how much variance it explains.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+here we are in 3D but work the same in 4D, 5D, ND...
+:::
+
 
 ## PCA - Principle
 
@@ -169,7 +189,7 @@ Let's fit a PCA on the soil data, using the function [pca]{style="color:indianre
 soil_pca <- pca(varechem, scale = TRUE)
 ```
 
-[⚠️ As the PCA is based on Euclidean distances, the variables needs to be express in comparable units. For this, we need to standardise them to a mean of 0 and a standard deviation of 1, using the argument *scale = TRUE*]{.fragment}
+[⚠️ As the PCA is based on Euclidean distances, the variables needs to be express in comparable units. For this, we need to **standardise** them to a mean of 0 and a standard deviation of 1, using the argument *scale = TRUE*]{.fragment}
 
 
 ## PCA - Output {.smaller}
@@ -211,7 +231,13 @@ screeplot(soil_pca, bstick = TRUE)
 :::
 :::::
 
-[[Here we can focus on the two first PCs]{style="font-size: 30px"}]{.fragment}
+[[Here we can focus on the two first PCs.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+on the y axis, we find the first line ofthe table in the output (the eigenvalues)
+
+her the 2 first axes explained more than if random, the other axes explain less
+:::
 
 
 ## PCA - Visualisation
@@ -234,12 +260,16 @@ biplot(soil_pca, scaling = "symmetric")
 :::
 :::::
 
+::: notes
+the default PCs are the 1 an 2, but we can choose
+:::
+
 ## PCA - Visualisation 
 
 ::::: columns
 ::: {.column width="50%"}
 
-[To focus on the observations, we chose *type 1 scaling* that attempts to preserved the distances.]{style="font-size: 30px"}
+[To focus on the **observations**, we chose *type 1 scaling* that attempts to preserved the distances.]{style="font-size: 30px"}
 
 ```{r}
 #| fig-width: 5
@@ -255,12 +285,16 @@ biplot(soil_pca, scaling = 1)
 :::
 :::::
 
+::: notes
+eg: here sites 5, 6, 7, 3 are clode, so soil more similar
+:::
+
 ## PCA - Visualisation 
 
 ::::: columns
 ::: {.column width="50%"}
 
-[To focus on the variables, we chose *type 2 scaling*: ]{style="font-size: 30px"}
+[To focus on the **variables**, we chose *type 2 scaling*: ]{style="font-size: 30px"}
 
 ```{r}
 #| fig-width: 5
@@ -278,12 +312,19 @@ biplot(soil_pca, scaling = 2)
 
 * [Variables at 0° are positively correlated.]{style="font-size: 30px"}
 
-* [Variables at 180° are not correlated.]{style="font-size: 30px"}
+* [Variables at 90° are not correlated.]{style="font-size: 30px"}
 
 [[💡 In [vegan]{style="color:indianred;"}, type  scaling can be obtained by *scaling = "species"*.]{style="font-size: 25px"}]{.fragment}
 
 :::
 :::::
+
+::: notes
+here: ph, Fe and Al positivelly correlated, 
+and negativelly correlated to Humdepth and Baresoil
+
+P, S and are not correlated to these
+:::
 
 ## PCA - Visualisation
 
@@ -302,7 +343,7 @@ biplot(soil_pca, scaling = "symmetric",
 
 [As PCA is based on Euclidean distances, it assumes *linear relationships* between variables, and between variables and underlying gradients.]{style="font-size: 35px"} 
 
-[When analysing **floristic composition along ecological gradients** (with species as variables), this assumption is often violated, as many species exhibit *unimodal distributions* along gradients.]{style="font-size: 35px"} 
+[When analysing **floristic composition along ecological gradients** (with species as variables), this assumption is often violated, as many species exhibit **unimodal distributions** along gradients.]{style="font-size: 35px"} 
 
 ::: fragment
 
@@ -316,11 +357,21 @@ biplot(soil_pca, scaling = "symmetric",
 
 We can run a CA on a floristic table, *i.e.* a contingency table presenting the presence/absence or the abundance of *p* species in *n* sites.
 
+```{r}
+varespec[1:5, 1:5] # display only a subset
+```
+
+::: fragment
 To run a CA in [vegan]{style="color:indianred;"}, we use the function [ca]{style="color:indianred;"}:
 
 ```{r}
 veg_ca <- ca(varespec)
 ```
+:::
+
+::: notes
+here cover (not abundance) that's why we have decimal numbers
+::: 
 
 ## CA - Output {.smaller}
 
@@ -430,6 +481,10 @@ plot(veg_ca, scaling = "sites",
 
 ::: notes
 look at examples on the plots
+
+species that are encounter together or on the contrary, not encountered together
+
+
 :::
 
 
@@ -441,12 +496,19 @@ look at examples on the plots
 
 * [for abundance data, we often used the distance of **Bray-Curtis**.]{style="font-size: 30px"}
 
-* [for presence/absence data, we often use the distance of Jaccard (*i.e.* 1 - Jaccard Index).]{style="font-size: 30px"}
+* [for presence/absence data, we often use the distance of **Jaccard** (*i.e.* 1 - Jaccard Index).]{style="font-size: 30px"}
 
 [[These distances range from 0 (identical species composition) to 1 (no shared species).
 They focus on shared abundance and thus ignore the double absences.]{style="font-size: 30px"}]{.fragment}
 
 [[💡 A PCoA with Euclidian distance is equivalent to a PCA, and with $\chi^2$ distance to a CA.]{style="font-size: 25px"}]{.fragment}
+
+::: notes
+as seen PCA: euclidian distane
+
+CA: chi2 distance
+
+:::
 
 
 ## PCoA - Running a PCoA {.smaller}
@@ -462,6 +524,8 @@ veg_dist
 
 ::: notes
 explain the distance matrix between pairs of plots
+
+explain why triange (as the matrix is symetrical and diagonale not shown (would be 0))
 :::
 
 ## PCoA - Running a PCoA
@@ -680,6 +744,14 @@ stressplot(dune_nmds,
 
 
 ::: notes
+Shepard plot: 
+
+* x-axis: the observed dissimilarity (here calculated wuth Bray-Curtis)
+
+* y-axis: the distance between sites observations in the NMDS ordination space
+
+* the closser the point are to the diagonal, the better the fit (we don't expect the points to be on a 1:1 diagonal as the distance are not the same)
+
 
 steps = groups of tied or nearly tied dissimilarity values being assigned the same rank
 
@@ -745,11 +817,15 @@ resum <- data.frame(Method = c("PCA", "CA", "PCoA", "NMDS"),
 knitr::kable(resum)
 ```
 
+::: notes
+!!! if PCA on presence/abs or abundance => need to do a transformation before, we will see this in a moment
+:::
+
 # Clustering
 
 ## Principle
 
-**Hierachical clustering** aims to create groups of observations that are similar accross a set of variable.
+**Hierachical clustering** aims to create **groups** of observations that are similar across a set of variables.
 
 Observations are progressively aggregated based on their similarity until all are merged into a single group.
 
@@ -781,6 +857,10 @@ soil_dist <- dist(soil_norm)
 ```{r}
 soil_clust <- hclust(soil_dist, method = "ward.D2")
 ```
+:::
+
+::: notes
+here the distance is euclidian (default value)
 :::
 
 ## Different methods of clustering
@@ -967,6 +1047,10 @@ GGally::ggpairs(soil_norm[,c("pH", "N", "Mo", "P")])
 :::
 :::::
 
+::: notes
+here we are not going to formulate hyp as exercice
+:::
+
 
 ## RDA - Principle
 
@@ -986,6 +1070,12 @@ We can do this transformation using [decostand]{style="color:indianred;"}:
 spec_hel <- decostand(varespec, method  ="hellinger")
 ```
 
+::: notes
+Importance of Hellinger transfo for PCA as well
+
+Obj of Hellinger transfo: reducing the influence of highly abundant species and dealing with the double-zero problem (shared absences)
+::: 
+
 
 ## RDA - Running a RDA 
 
@@ -1000,10 +1090,11 @@ vare_rda <- rda(spec_hel ~ pH + N + Mo + P, # formula
 
 * [We use the soil explanatory variables that we already standardised.]{style="font-size: 30px"}
 
+
 ## RDA - Output {.smaller}
 
 ::::: columns
-::: {.column width="50%"}
+::: {.column width="65%"}
 
 ```{r}
 summary(vare_rda)
@@ -1011,15 +1102,15 @@ summary(vare_rda)
 
 :::
 
-::: {.column width="50%"}
+::: {.column width="35%"}
 
-[The output includes:]{style="font-size: 30px"}
+[The output includes:]{style="font-size: 25px"}
 
-* [The inertia (*i.e.* total variance) partitioned into a part explained by the constrained axes, and a residual part (unconstrained).]{style="font-size: 30px"}
+* [The inertia (*i.e.* total variance) partitioned into a part explained by the constrained axes, and a residual part (unconstrained).]{style="font-size: 25px"}
 
-* [The first axes (RDA1, RDA2, ...) are the constrained axes, representing the variation explained by the explanatory variables.]{style="font-size: 30px"}
+* [The first axes (RDA1, RDA2, ...) are the constrained axes, representing the variation explained by the explanatory variables.]{style="font-size: 25px"}
 
-* [The remaining axes (PC1, PC2, ...) are unconstrained and represent the residual variation not explained by the explanatory variables.]{style="font-size: 30px"}
+* [The remaining axes (PC1, PC2, ...) are unconstrained and represent the residual variation not explained by the explanatory variables.]{style="font-size: 25px"}
 :::
 :::::
 
@@ -1087,7 +1178,7 @@ RDA is visuallised using a triplot (as it represents the sites, the species and 
 ::::: columns
 ::: {.column width="50%"}
 
-[Scaling 1 focusses on the sites:]{style="font-size: 30px"}
+[Scaling 1 focusses on the **sites**:]{style="font-size: 30px"}
 
 ```{r}
 #| fig-width: 4
@@ -1099,7 +1190,7 @@ plot(vare_rda, scaling = 1)
 
 ::: {.column width="50%"}
 
-[Scaling 2 focusses on the species:]{style="font-size: 30px"}
+[Scaling 2 focusses on the **species**:]{style="font-size: 30px"}
 
 ```{r}
 #| fig-width: 4
@@ -1162,11 +1253,15 @@ vare_dbrda <- dbrda(spec_hel ~ pH + N + Mo + P,
 summary(vare_dbrda)
 ```
 
+::: notes
+here we didn't do the Lingoes correction so we have negative eigenvalues
+:::
+
 ## db-RDA - Interpretation
 
 The rest is similar to the RDA:
 
-```{r}
+```{r, eval=FALSE}
 RsquareAdj(vare_dbrda)
 anova.cca(vare_dbrda)
 anova.cca(vare_dbrda, by = "term")
@@ -1179,7 +1274,7 @@ not ran here, diy
 :::
 
 
-# Acknowledgments
+## Acknowledgments
 
 ::: {.nonincremental}
 

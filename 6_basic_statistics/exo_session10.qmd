@@ -45,7 +45,7 @@ characteristics of these islands, including the *area* in km^2^.
 
 # Simple linear regression
 
-The Arrhenius relation can be linearised by taking the logarithm of S
+The Arrhenius relationship can be linearised by taking the logarithm of S
 and A:
 
 $$log(S) = \beta_0 + \beta_1 log(A)$$

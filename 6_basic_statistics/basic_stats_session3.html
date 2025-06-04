@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-06-01">
+  <meta name="dcterms.date" content="2025-06-04">
   <title>Statistics with R - session 3 - Multivariate analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-06-01</p>
+  <p class="date">2025-06-04</p>
 </section>
 <section id="why-multivariate-analyses" class="slide level2">
 <h2>Why multivariate analyses ?</h2>
@@ -416,13 +416,27 @@ Géraldine Derroire
 <li class="fragment"><p><strong>Clustering methods</strong> aim to group observations based on similarities across multiple variables.</p></li>
 <li class="fragment"><p><strong>Ordination methods</strong> aim to rearrange the observations in a lower-dimensional space to reduce the dimensionality of the data while preserving the main patterns of variation.</p></li>
 </ul>
+<aside class="notes">
+<p>last session, when more than 2 variables, there was just one univariate response variable, so different</p>
+<p>explain the reduction of dimensionality</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="why-multivariate-analyses-1" class="slide level2">
 <h2>Why multivariate analyses ?</h2>
 <p><strong>Ordination methods</strong> can be used for:</p>
 <ul>
 <li class="fragment"><p>the identification axes of co-variation between several variables (<em>eg</em>: co-variation between climatic variables or soil variables along environmental gradients, co-variation of functional traits along specta of functional strategies…)</p></li>
-<li class="fragment"><p>the study ecological communities by jointly considering the occurrence or abundance of multiple species</p></li>
+<li class="fragment"><p>the study of ecological communities by jointly considering the occurrence or abundance of multiple species</p></li>
 </ul>
 </section>
 <section id="structure-of-multivariate-data" class="slide level2 smaller">
@@ -440,6 +454,20 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 <li class="fragment"><p>floristic composition (<em>p</em> species = variables) in <em>n</em> sites</p></li>
 <li class="fragment"><p>values of <em>p</em> functional traits (variables) for <em>n</em> species (observations)</p></li>
 </ul>
+<aside class="notes">
+<p>in the second ex, the species are the variables and the sites the observations</p>
+<p>but in 3rd ex, the species are the observation and the functional traits their variables</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="package-vegan" class="slide level2">
 <h2>Package <em>vegan</em></h2>
@@ -506,6 +534,19 @@ x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
 </div>
 </div></div>
 <p><span class="fragment"><span style="font-size: 22px">For more information on these data see <a href="https://www.researchgate.net/publication/227830523_Effects_of_reindeer_grazing_on_vegetation_in_dry_Pinus_sylvestris_forests" data-preview-link="false">Väre,Ohtonen and Oksanen (1995)</a></span></span></p>
+<aside class="notes">
+<p>Fennoscandia: Norway + Sweden + Finland + Parts of Russia</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section>
 <section id="unconstrained-ordination-methods" class="title-slide slide level1 center">
@@ -521,7 +562,7 @@ Marchand + Eric -->
 <section id="principle" class="slide level2">
 <h2>Principle</h2>
 <p><span style="font-size: 30px">Unconstrained ordination methods are used to <strong>visualise and explore the relationships among variables or observations</strong> without imposing any specific constraints on the relationships.</span></p>
-<p><span style="font-size: 30px">The objective is to identify a few axes that capture most of the variation in a multidimensional dataset, allowing for a simplified yet informative representation.</span></p>
+<p><span style="font-size: 30px">The objective is to <strong>identify a few axes that capture most of the variation</strong> in a multidimensional dataset, allowing for a simplified yet informative representation.</span></p>
 <p><span style="font-size: 30px">This allows to <strong>visualise similarities among observations</strong>, as more similar observations will be closer in the reduced-dimensional spaces.</span></p>
 <!-- voir aussi Marchand session 2 sur l'explication des différentes distances-->
 </section>
@@ -539,6 +580,19 @@ Marchand + Eric -->
 <p><img data-src="PCA3.png"> <span style="font-size: 22px">Source: <a href="https://ericmarcon.github.io/Cours-R-Geeft/Ordination.html" data-preview-link="false">E. Marcon</a></span></p>
 </div></div>
 <p><span class="fragment"><span style="font-size: 30px">Each of these lines is a <strong>Principal Component</strong> (PC) and is associated with an <strong>eigenvalue</strong> indicating how much variance it explains.</span></span></p>
+<aside class="notes">
+<p>here we are in 3D but work the same in 4D, 5D, ND…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="pca---principle-1" class="slide level2">
 <h2>PCA - Principle</h2>
@@ -554,7 +608,7 @@ Marchand + Eric -->
 <div class="cell fragment">
 
 </div>
-<p><span class="fragment">⚠️ As the PCA is based on Euclidean distances, the variables needs to be express in comparable units. For this, we need to standardise them to a mean of 0 and a standard deviation of 1, using the argument <em>scale = TRUE</em></span></p>
+<p><span class="fragment">⚠️ As the PCA is based on Euclidean distances, the variables needs to be express in comparable units. For this, we need to <strong>standardise</strong> them to a mean of 0 and a standard deviation of 1, using the argument <em>scale = TRUE</em></span></p>
 </section>
 <section id="pca---output" class="slide level2 smaller">
 <h2>PCA - Output</h2>
@@ -616,7 +670,21 @@ Cumulative Proportion 0.96185 0.9740 0.98473 0.99082 0.99581 0.998313 1.000000</
 <p><span class="fragment"><span style="font-size: 30px">The <span style="color:indianred;">screeplot</span> shows the variance explained by each PC.</span></span></p>
 <p><span class="fragment"><span style="font-size: 30px">The broken stick distribution shows the expected distribution of the variance if it was randomly distributed among PCs.</span></span></p>
 </div></div>
-<p><span class="fragment"><span style="font-size: 30px">Here we can focus on the two first PCs</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">Here we can focus on the two first PCs.</span></span></p>
+<aside class="notes">
+<p>on the y axis, we find the first line ofthe table in the output (the eigenvalues)</p>
+<p>her the 2 first axes explained more than if random, the other axes explain less</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="pca---visualisation" class="slide level2">
 <h2>PCA - Visualisation</h2>
@@ -639,12 +707,25 @@ Cumulative Proportion 0.96185 0.9740 0.98473 0.99082 0.99581 0.998313 1.000000</
 <p><span class="fragment"><span style="font-size: 30px">The red arrows represent the variables, and the black numbers the observations (here the <em>sites</em>).</span></span></p>
 <p><span class="fragment"><span style="font-size: 30px">The longer the arrows, the better the variable is represented by the displayed PCs.</span></span></p>
 </div></div>
+<aside class="notes">
+<p>the default PCs are the 1 an 2, but we can choose</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="pca---visualisation-1" class="slide level2">
 <h2>PCA - Visualisation</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><span style="font-size: 30px">To focus on the observations, we chose <em>type 1 scaling</em> that attempts to preserved the distances.</span></p>
+<p><span style="font-size: 30px">To focus on the <strong>observations</strong>, we chose <em>type 1 scaling</em> that attempts to preserved the distances.</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">biplot</span>(soil_pca, <span class="at">scaling =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -661,12 +742,25 @@ Cumulative Proportion 0.96185 0.9740 0.98473 0.99082 0.99581 0.998313 1.000000</
 <p><span style="font-size: 30px">The distance between two observations can be interpreted as their similarity.</span></p>
 <p><span class="fragment"><span style="font-size: 25px">💡 In <span style="color:indianred;">vegan</span>, type 1 scaling can be obtained by <em>scaling = “sites”</em>.</span></span></p>
 </div></div>
+<aside class="notes">
+<p>eg: here sites 5, 6, 7, 3 are clode, so soil more similar</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="pca---visualisation-2" class="slide level2">
 <h2>PCA - Visualisation</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><span style="font-size: 30px">To focus on the variables, we chose <em>type 2 scaling</em>:</span></p>
+<p><span style="font-size: 30px">To focus on the <strong>variables</strong>, we chose <em>type 2 scaling</em>:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="fu">biplot</span>(soil_pca, <span class="at">scaling =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -684,10 +778,24 @@ Cumulative Proportion 0.96185 0.9740 0.98473 0.99082 0.99581 0.998313 1.000000</
 <ul>
 <li class="fragment"><p><span style="font-size: 30px">Variables at 180° are negatively correlated.</span></p></li>
 <li class="fragment"><p><span style="font-size: 30px">Variables at 0° are positively correlated.</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">Variables at 180° are not correlated.</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Variables at 90° are not correlated.</span></p></li>
 </ul>
 <p><span class="fragment"><span style="font-size: 25px">💡 In <span style="color:indianred;">vegan</span>, type scaling can be obtained by <em>scaling = “species”</em>.</span></span></p>
 </div></div>
+<aside class="notes">
+<p>here: ph, Fe and Al positivelly correlated, and negativelly correlated to Humdepth and Baresoil</p>
+<p>P, S and are not correlated to these</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="pca---visualisation-3" class="slide level2">
 <h2>PCA - Visualisation</h2>
@@ -710,7 +818,7 @@ Cumulative Proportion 0.96185 0.9740 0.98473 0.99082 0.99581 0.998313 1.000000</
 <section id="ca---principle" class="slide level2">
 <h2>CA - Principle</h2>
 <p><span style="font-size: 35px">As PCA is based on Euclidean distances, it assumes <em>linear relationships</em> between variables, and between variables and underlying gradients.</span></p>
-<p><span style="font-size: 35px">When analysing <strong>floristic composition along ecological gradients</strong> (with species as variables), this assumption is often violated, as many species exhibit <em>unimodal distributions</em> along gradients.</span></p>
+<p><span style="font-size: 35px">When analysing <strong>floristic composition along ecological gradients</strong> (with species as variables), this assumption is often violated, as many species exhibit <strong>unimodal distributions</strong> along gradients.</span></p>
 <div class="fragment">
 <p><span style="font-size: 35px">For this type of data, we can use a <strong>Correspondence Analysis</strong> (CA), based on <span class="math inline">\(\chi^2\)</span> distances, which are better suited for detecting unimodal responses.</span></p>
 <p><span style="font-size: 35px">In addition, CA is <em>not</em> affected by double zeros: sites with a lot of shared absences are <em>not</em> interpreted as being more similar.</span></p>
@@ -719,20 +827,48 @@ Cumulative Proportion 0.96185 0.9740 0.98473 0.99082 0.99581 0.998313 1.000000</
 <section id="ca---running-a-ca" class="slide level2">
 <h2>CA - Running a CA</h2>
 <p>We can run a CA on a floristic table, <em>i.e.</em> a contingency table presenting the presence/absence or the abundance of <em>p</em> species in <em>n</em> sites.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>varespec[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>] <span class="co"># display only a subset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>   Callvulg Empenigr Rhodtome Vaccmyrt Vaccviti
+18     0.55    11.13     0.00     0.00    17.80
+15     0.67     0.17     0.00     0.35    12.13
+24     0.10     1.55     0.00     0.00    13.47
+27     0.00    15.13     2.42     5.92    15.97
+23     0.00    12.68     0.00     0.00    23.73</code></pre>
+</div>
+</div>
+<div class="fragment">
 <p>To run a CA in <span style="color:indianred;">vegan</span>, we use the function <span style="color:indianred;">ca</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href=""></a>veg_ca <span class="ot">&lt;-</span> <span class="fu">ca</span>(varespec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a>veg_ca <span class="ot">&lt;-</span> <span class="fu">ca</span>(varespec)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
+</div>
+<aside class="notes">
+<p>here cover (not abundance) that’s why we have decimal numbers</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="ca---output" class="slide level2 smaller">
 <h2>CA - Output</h2>
 <div class="columns">
 <div class="column" style="width:70%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">summary</span>(veg_ca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">summary</span>(veg_ca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -777,13 +913,13 @@ Cumulative Proportion 0.9996017 0.9998832 1.0000000</code></pre>
 <h2>CA - Importance of components</h2>
 <p><span style="font-size: 30px">As with a PCA, we can look at the variance explained by each CA:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">screeplot</span>(veg_ca, <span class="at">bstick =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">screeplot</span>(veg_ca, <span class="at">bstick =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -808,22 +944,8 @@ Cumulative Proportion 0.9996017 0.9998832 1.0000000</code></pre>
 <div class="columns">
 <div class="column" style="width:33%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"species"</span>,</span>
-<span id="cb21-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: species"</span>) <span class="co"># title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-14-1.png" width="480"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:33%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"sites"</span>,</span>
-<span id="cb22-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: sites"</span>) <span class="co"># title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"species"</span>,</span>
+<span id="cb23-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: species"</span>) <span class="co"># title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -836,14 +958,28 @@ Cumulative Proportion 0.9996017 0.9998832 1.0000000</code></pre>
 </div>
 </div><div class="column" style="width:33%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"symmetric"</span>,</span>
-<span id="cb23-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: symmetric"</span>) <span class="co"># title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"sites"</span>,</span>
+<span id="cb24-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: sites"</span>) <span class="co"># title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
 <p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-16-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:33%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"symmetric"</span>,</span>
+<span id="cb25-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: symmetric"</span>) <span class="co"># title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-17-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -857,26 +993,9 @@ Cumulative Proportion 0.9996017 0.9998832 1.0000000</code></pre>
 <div class="column" style="width:50%;">
 <p><span style="font-size: 30px">We can focus on the species…</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"species"</span>,</span>
-<span id="cb24-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: species"</span>, <span class="co"># title</span></span>
-<span id="cb24-3"><a href=""></a>     <span class="at">display =</span> <span class="st">"species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-17-1.png" width="480"></p>
-</figure>
-</div>
-</div>
-</div>
-<p><span class="fragment"><span style="font-size: 28px">The proximity of species indicate that they are presents in similar sites.</span></span></p>
-</div><div class="column" style="width:50%;">
-<p><span style="font-size: 30px">… or on the sites.</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"sites"</span>,</span>
-<span id="cb25-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: sites"</span>, <span class="co"># title</span></span>
-<span id="cb25-3"><a href=""></a>     <span class="at">display =</span> <span class="st">"sites"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"species"</span>,</span>
+<span id="cb26-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: species"</span>, <span class="co"># title</span></span>
+<span id="cb26-3"><a href=""></a>     <span class="at">display =</span> <span class="st">"species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -887,10 +1006,28 @@ Cumulative Proportion 0.9996017 0.9998832 1.0000000</code></pre>
 </div>
 </div>
 </div>
+<p><span class="fragment"><span style="font-size: 28px">The proximity of species indicate that they are presents in similar sites.</span></span></p>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">… or on the sites.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">plot</span>(veg_ca, <span class="at">scaling =</span> <span class="st">"sites"</span>,</span>
+<span id="cb27-2"><a href=""></a>     <span class="at">main =</span> <span class="st">"Scaling: sites"</span>, <span class="co"># title</span></span>
+<span id="cb27-3"><a href=""></a>     <span class="at">display =</span> <span class="st">"sites"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-19-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
 <p><span class="fragment"><span style="font-size: 28px">The proximity of sites indicate that they have similar communities.</span></span></p>
 </div></div>
 <aside class="notes">
 <p>look at examples on the plots</p>
+<p>species that are encounter together or on the contrary, not encountered together</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -909,18 +1046,32 @@ Cumulative Proportion 0.9996017 0.9998832 1.0000000</code></pre>
 <p><span style="font-size: 30px">PCoA can use many types of distance (not only Euclidean or <span class="math inline">\(\chi^2\)</span>):</span></p>
 <ul>
 <li class="fragment"><p><span style="font-size: 30px">for abundance data, we often used the distance of <strong>Bray-Curtis</strong>.</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">for presence/absence data, we often use the distance of Jaccard (<em>i.e.</em> 1 - Jaccard Index).</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">for presence/absence data, we often use the distance of <strong>Jaccard</strong> (<em>i.e.</em> 1 - Jaccard Index).</span></p></li>
 </ul>
 <p><span class="fragment"><span style="font-size: 30px">These distances range from 0 (identical species composition) to 1 (no shared species). They focus on shared abundance and thus ignore the double absences.</span></span></p>
 <p><span class="fragment"><span style="font-size: 25px">💡 A PCoA with Euclidian distance is equivalent to a PCA, and with <span class="math inline">\(\chi^2\)</span> distance to a CA.</span></span></p>
+<aside class="notes">
+<p>as seen PCA: euclidian distane</p>
+<p>CA: chi2 distance</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="pcoa---running-a-pcoa" class="slide level2 smaller">
 <h2>PCoA - Running a PCoA</h2>
 <p><span style="font-size: 30px">Let’s do a PCoA on abundance data using Bray-Curtis distance.</span></p>
 <p><span style="font-size: 30px">We first need to calculate the distance between sites, using <span style="color:indianred;">vegdist</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href=""></a>veg_dist <span class="ot">&lt;-</span> <span class="fu">vegdist</span>(varespec, <span class="at">method =</span> <span class="st">"bray"</span>)</span>
-<span id="cb26-2"><a href=""></a>veg_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>veg_dist <span class="ot">&lt;-</span> <span class="fu">vegdist</span>(varespec, <span class="at">method =</span> <span class="st">"bray"</span>)</span>
+<span id="cb28-2"><a href=""></a>veg_dist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1024,6 +1175,7 @@ Cumulative Proportion 0.9996017 0.9998832 1.0000000</code></pre>
 </div>
 <aside class="notes">
 <p>explain the distance matrix between pairs of plots</p>
+<p>explain why triange (as the matrix is symetrical and diagonale not shown (would be 0))</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1041,8 +1193,8 @@ Cumulative Proportion 0.9996017 0.9998832 1.0000000</code></pre>
 <p><span style="font-size: 30px">We use <span style="color:indianred;">pco</span> to run a PCoA.</span></p>
 <p><span style="font-size: 30px">When using Bray-Curtis distance, we can get negative eigenvalues (corresponding to distances in an imaginary space). To avoid this, we can do a Lingoes correction.</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a>veg_pcoa <span class="ot">&lt;-</span> <span class="fu">pco</span>(veg_dist, </span>
-<span id="cb28-2"><a href=""></a>                <span class="at">add =</span> <span class="st">"lingoes"</span>) <span class="co"># correction</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a>veg_pcoa <span class="ot">&lt;-</span> <span class="fu">pco</span>(veg_dist, </span>
+<span id="cb30-2"><a href=""></a>                <span class="at">add =</span> <span class="st">"lingoes"</span>) <span class="co"># correction</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1051,7 +1203,7 @@ Cumulative Proportion 0.9996017 0.9998832 1.0000000</code></pre>
 <section id="pcoa---output" class="slide level2 smaller">
 <h2>PCoA - Output</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a><span class="fu">summary</span>(veg_pcoa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href=""></a><span class="fu">summary</span>(veg_pcoa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -1106,13 +1258,13 @@ Cumulative Proportion 0.996732 1.000000</code></pre>
 <section id="pcoa---importance-of-components" class="slide level2">
 <h2>PCoA - Importance of components</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">screeplot</span>(veg_pcoa, <span class="at">bstick =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="fu">screeplot</span>(veg_pcoa, <span class="at">bstick =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1137,32 +1289,32 @@ Cumulative Proportion 0.996732 1.000000</code></pre>
 <div class="column" style="width:50%;">
 <p><span style="font-size: 30px">We plot the observations using <span style="color:indianred;">plot</span> and then add the species scores:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href=""></a><span class="co"># get species scores</span></span>
-<span id="cb33-2"><a href=""></a>scrs <span class="ot">&lt;-</span> <span class="fu">scores</span>(veg_pcoa, </span>
-<span id="cb33-3"><a href=""></a>               <span class="at">choices =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="co"># axes</span></span>
-<span id="cb33-4"><a href=""></a></span>
-<span id="cb33-5"><a href=""></a><span class="co"># take the weighted averages scores </span></span>
-<span id="cb33-6"><a href=""></a>  <span class="co"># (weighed by abundance)</span></span>
-<span id="cb33-7"><a href=""></a>spp_scrs <span class="ot">&lt;-</span> <span class="fu">wascores</span>(scrs,</span>
-<span id="cb33-8"><a href=""></a>                     varespec) <span class="co"># weights</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="co"># get species scores</span></span>
+<span id="cb35-2"><a href=""></a>scrs <span class="ot">&lt;-</span> <span class="fu">scores</span>(veg_pcoa, </span>
+<span id="cb35-3"><a href=""></a>               <span class="at">choices =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>) <span class="co"># axes</span></span>
+<span id="cb35-4"><a href=""></a></span>
+<span id="cb35-5"><a href=""></a><span class="co"># take the weighted averages scores </span></span>
+<span id="cb35-6"><a href=""></a>  <span class="co"># (weighed by abundance)</span></span>
+<span id="cb35-7"><a href=""></a>spp_scrs <span class="ot">&lt;-</span> <span class="fu">wascores</span>(scrs,</span>
+<span id="cb35-8"><a href=""></a>                     varespec) <span class="co"># weights</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="co"># plot the sites</span></span>
-<span id="cb34-2"><a href=""></a><span class="fu">plot</span>(veg_pcoa)</span>
-<span id="cb34-3"><a href=""></a></span>
-<span id="cb34-4"><a href=""></a><span class="co"># add species to the plot</span></span>
-<span id="cb34-5"><a href=""></a><span class="fu">text</span>(spp_scrs, <span class="at">labels =</span> <span class="fu">rownames</span>(spp_scrs), </span>
-<span id="cb34-6"><a href=""></a>     <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="fl">0.8</span>) <span class="co"># color and size</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="co"># plot the sites</span></span>
+<span id="cb36-2"><a href=""></a><span class="fu">plot</span>(veg_pcoa)</span>
+<span id="cb36-3"><a href=""></a></span>
+<span id="cb36-4"><a href=""></a><span class="co"># add species to the plot</span></span>
+<span id="cb36-5"><a href=""></a><span class="fu">text</span>(spp_scrs, <span class="at">labels =</span> <span class="fu">rownames</span>(spp_scrs), </span>
+<span id="cb36-6"><a href=""></a>     <span class="at">col =</span> <span class="st">"red"</span>, <span class="at">cex =</span> <span class="fl">0.8</span>) <span class="co"># color and size</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-24-1.png" width="480"></p>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-25-1.png" width="480"></p>
 </figure>
 </div>
 </div>
@@ -1197,11 +1349,11 @@ Cumulative Proportion 0.996732 1.000000</code></pre>
 <p>We now work with the <span style="color:indianred;">dune</span> data, a floristic table of dune vegetation.</p>
 <p>We run the NMDS using <span style="color:indianred;">metaMDS</span>. The default number of axes is <em>2</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">22</span>)</span>
-<span id="cb35-2"><a href=""></a><span class="fu">data</span>(dune)</span>
-<span id="cb35-3"><a href=""></a>dune_nmds <span class="ot">&lt;-</span> <span class="fu">metaMDS</span>(dune, </span>
-<span id="cb35-4"><a href=""></a>                     <span class="at">distance =</span> <span class="st">"bray"</span>, <span class="co"># Bray-Curtis is the default</span></span>
-<span id="cb35-5"><a href=""></a>                     <span class="at">trace =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">22</span>)</span>
+<span id="cb37-2"><a href=""></a><span class="fu">data</span>(dune)</span>
+<span id="cb37-3"><a href=""></a>dune_nmds <span class="ot">&lt;-</span> <span class="fu">metaMDS</span>(dune, </span>
+<span id="cb37-4"><a href=""></a>                     <span class="at">distance =</span> <span class="st">"bray"</span>, <span class="co"># Bray-Curtis is the default</span></span>
+<span id="cb37-5"><a href=""></a>                     <span class="at">trace =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1228,7 +1380,7 @@ Cumulative Proportion 0.996732 1.000000</code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a>dune_nmds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>dune_nmds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1269,10 +1421,10 @@ Species: expanded scores based on 'dune' </code></pre>
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>dune_nmds <span class="ot">&lt;-</span> <span class="fu">metaMDS</span>(dune, </span>
-<span id="cb38-2"><a href=""></a>                     <span class="at">previous.best =</span> dune_nmds, </span>
-<span id="cb38-3"><a href=""></a>                     <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb38-4"><a href=""></a>dune_nmds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>dune_nmds <span class="ot">&lt;-</span> <span class="fu">metaMDS</span>(dune, </span>
+<span id="cb40-2"><a href=""></a>                     <span class="at">previous.best =</span> dune_nmds, </span>
+<span id="cb40-3"><a href=""></a>                     <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb40-4"><a href=""></a>dune_nmds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1301,9 +1453,9 @@ Species: expanded scores based on 'dune' </code></pre>
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a><span class="fu">metaMDS</span>(dune,</span>
-<span id="cb40-2"><a href=""></a>        <span class="at">try =</span> <span class="dv">50</span>, <span class="co"># the default is 20</span></span>
-<span id="cb40-3"><a href=""></a>        <span class="at">trace =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">metaMDS</span>(dune,</span>
+<span id="cb42-2"><a href=""></a>        <span class="at">try =</span> <span class="dv">50</span>, <span class="co"># the default is 20</span></span>
+<span id="cb42-3"><a href=""></a>        <span class="at">trace =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1327,14 +1479,14 @@ Species: expanded scores based on 'dune' </code></pre>
 <section id="nmds---visualisation" class="slide level2">
 <h2>NMDS - Visualisation</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="fu">plot</span>(dune_nmds, </span>
-<span id="cb41-2"><a href=""></a>     <span class="at">type =</span><span class="st">"t"</span>) <span class="co"># display the names of sites and species</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">plot</span>(dune_nmds, </span>
+<span id="cb43-2"><a href=""></a>     <span class="at">type =</span><span class="st">"t"</span>) <span class="co"># display the names of sites and species</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-29-1.png" width="576"></p>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-30-1.png" width="576"></p>
 </figure>
 </div>
 </div>
@@ -1346,14 +1498,14 @@ Species: expanded scores based on 'dune' </code></pre>
 <div class="column" style="width:50%;">
 <p><span style="font-size: 30px">To assess the goodness of fit, we can plot a Shepard plot with <span style="color:indianred;">stressplot</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href=""></a><span class="fu">stressplot</span>(dune_nmds,</span>
-<span id="cb42-2"><a href=""></a>           <span class="at">main =</span> <span class="st">"Shepard plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">stressplot</span>(dune_nmds,</span>
+<span id="cb44-2"><a href=""></a>           <span class="at">main =</span> <span class="st">"Shepard plot"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-30-1.png" width="384"></p>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-31-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1369,6 +1521,12 @@ Species: expanded scores based on 'dune' </code></pre>
 </div>
 </div></div>
 <aside class="notes">
+<p>Shepard plot:</p>
+<ul>
+<li><p>x-axis: the observed dissimilarity (here calculated wuth Bray-Curtis)</p></li>
+<li><p>y-axis: the distance between sites observations in the NMDS ordination space</p></li>
+<li><p>the closser the point are to the diagonal, the better the fit (we don’t expect the points to be on a 1:1 diagonal as the distance are not the same)</p></li>
+</ul>
 <p>steps = groups of tied or nearly tied dissimilarity values being assigned the same rank</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1388,29 +1546,29 @@ Species: expanded scores based on 'dune' </code></pre>
 <div class="columns">
 <div class="column" style="width:60%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a>k_vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="co"># number of dimensions</span></span>
-<span id="cb43-2"><a href=""></a>stress <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(k_vec)) <span class="co"># create a vector of numeric</span></span>
-<span id="cb43-3"><a href=""></a>veg_dij <span class="ot">&lt;-</span> <span class="fu">metaMDSdist</span>(dune, <span class="at">trace =</span> <span class="cn">FALSE</span>) <span class="co"># calculate dissimilarities</span></span>
-<span id="cb43-4"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">25</span>)</span>
-<span id="cb43-5"><a href=""></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(k_vec)) { <span class="co"># run an NMDS for 1 to 10 dimensions</span></span>
-<span id="cb43-6"><a href=""></a>    sol <span class="ot">&lt;-</span> <span class="fu">metaMDSiter</span>(veg_dij, <span class="at">k =</span> i, <span class="co"># run the NMDS</span></span>
-<span id="cb43-7"><a href=""></a>                       <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb43-8"><a href=""></a>    stress[i] <span class="ot">&lt;-</span> sol<span class="sc">$</span>stress <span class="co"># extract the stress</span></span>
-<span id="cb43-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>k_vec <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span> <span class="co"># number of dimensions</span></span>
+<span id="cb45-2"><a href=""></a>stress <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(k_vec)) <span class="co"># create a vector of numeric</span></span>
+<span id="cb45-3"><a href=""></a>veg_dij <span class="ot">&lt;-</span> <span class="fu">metaMDSdist</span>(dune, <span class="at">trace =</span> <span class="cn">FALSE</span>) <span class="co"># calculate dissimilarities</span></span>
+<span id="cb45-4"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">25</span>)</span>
+<span id="cb45-5"><a href=""></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="fu">seq_along</span>(k_vec)) { <span class="co"># run an NMDS for 1 to 10 dimensions</span></span>
+<span id="cb45-6"><a href=""></a>    sol <span class="ot">&lt;-</span> <span class="fu">metaMDSiter</span>(veg_dij, <span class="at">k =</span> i, <span class="co"># run the NMDS</span></span>
+<span id="cb45-7"><a href=""></a>                       <span class="at">trace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb45-8"><a href=""></a>    stress[i] <span class="ot">&lt;-</span> sol<span class="sc">$</span>stress <span class="co"># extract the stress</span></span>
+<span id="cb45-9"><a href=""></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </div><div class="column" style="width:40%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">plot</span>(k_vec, stress, <span class="at">type =</span> <span class="st">"b"</span>, </span>
-<span id="cb44-2"><a href=""></a>     <span class="at">ylab =</span> <span class="st">"Stress"</span>, <span class="at">xlab =</span> <span class="st">"Dimensions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a><span class="fu">plot</span>(k_vec, stress, <span class="at">type =</span> <span class="st">"b"</span>, </span>
+<span id="cb46-2"><a href=""></a>     <span class="at">ylab =</span> <span class="st">"Stress"</span>, <span class="at">xlab =</span> <span class="st">"Dimensions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-32-1.png" width="384"></p>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-33-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1475,6 +1633,19 @@ Species: expanded scores based on 'dune' </code></pre>
 </table>
 </div>
 </div>
+<aside class="notes">
+<p>!!! if PCA on presence/abs or abundance =&gt; need to do a transformation before, we will see this in a moment</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="clustering" class="title-slide slide level1 center">
@@ -1483,7 +1654,7 @@ Species: expanded scores based on 'dune' </code></pre>
 </section>
 <section id="principle-1" class="slide level2">
 <h2>Principle</h2>
-<p><strong>Hierachical clustering</strong> aims to create groups of observations that are similar accross a set of variable.</p>
+<p><strong>Hierachical clustering</strong> aims to create <strong>groups</strong> of observations that are similar across a set of variables.</p>
 <p>Observations are progressively aggregated based on their similarity until all are merged into a single group.</p>
 <p>The clustering results in a tree-like structure called <strong>dendrogram</strong>, which illustrates the proximity between observations.</p>
 </section>
@@ -1495,7 +1666,7 @@ Species: expanded scores based on 'dune' </code></pre>
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a>soil_norm <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(varechem))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>soil_norm <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scale</span>(varechem))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1506,7 +1677,7 @@ Species: expanded scores based on 'dune' </code></pre>
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href=""></a>soil_dist <span class="ot">&lt;-</span> <span class="fu">dist</span>(soil_norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a>soil_dist <span class="ot">&lt;-</span> <span class="fu">dist</span>(soil_norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1517,12 +1688,25 @@ Species: expanded scores based on 'dune' </code></pre>
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href=""></a>soil_clust <span class="ot">&lt;-</span> <span class="fu">hclust</span>(soil_dist, <span class="at">method =</span> <span class="st">"ward.D2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a>soil_clust <span class="ot">&lt;-</span> <span class="fu">hclust</span>(soil_dist, <span class="at">method =</span> <span class="st">"ward.D2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
 </div>
+<aside class="notes">
+<p>here the distance is euclidian (default value)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="different-methods-of-clustering" class="slide level2">
 <h2>Different methods of clustering</h2>
@@ -1541,13 +1725,13 @@ Species: expanded scores based on 'dune' </code></pre>
 <div class="column" style="width:70%;">
 <p><span style="font-size: 30px">We use <span style="color:indianred;">plot</span> to get the dendrogram.</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">plot</span>(soil_clust)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href=""></a><span class="fu">plot</span>(soil_clust)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-37-1.png" width="960"></p>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-38-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1579,12 +1763,12 @@ Species: expanded scores based on 'dune' </code></pre>
 <h2>Extract the groups</h2>
 <p>We can extract the groups using <span style="color:indianred;">cutree</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a><span class="co"># 3 groups</span></span>
-<span id="cb49-2"><a href=""></a>soil_3_group <span class="ot">&lt;-</span> <span class="fu">cutree</span>(soil_clust, <span class="at">k =</span> <span class="dv">3</span>)</span>
-<span id="cb49-3"><a href=""></a></span>
-<span id="cb49-4"><a href=""></a><span class="co"># 5 groups</span></span>
-<span id="cb49-5"><a href=""></a>soil_5_group <span class="ot">&lt;-</span> <span class="fu">cutree</span>(soil_clust, <span class="at">k =</span> <span class="dv">5</span>)</span>
-<span id="cb49-6"><a href=""></a>soil_5_group <span class="co"># this is a name vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="co"># 3 groups</span></span>
+<span id="cb51-2"><a href=""></a>soil_3_group <span class="ot">&lt;-</span> <span class="fu">cutree</span>(soil_clust, <span class="at">k =</span> <span class="dv">3</span>)</span>
+<span id="cb51-3"><a href=""></a></span>
+<span id="cb51-4"><a href=""></a><span class="co"># 5 groups</span></span>
+<span id="cb51-5"><a href=""></a>soil_5_group <span class="ot">&lt;-</span> <span class="fu">cutree</span>(soil_clust, <span class="at">k =</span> <span class="dv">5</span>)</span>
+<span id="cb51-6"><a href=""></a>soil_5_group <span class="co"># this is a name vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1599,29 +1783,29 @@ Species: expanded scores based on 'dune' </code></pre>
 <div class="columns">
 <div class="column" style="width:65%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="co"># extract the scores of the sites on the two first PCs</span></span>
-<span id="cb51-2"><a href=""></a>  dt_soil_groups <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scores</span>(soil_pca, </span>
-<span id="cb51-3"><a href=""></a>                           <span class="at">scaling =</span> <span class="st">"sites"</span>, <span class="co"># type of scaling</span></span>
-<span id="cb51-4"><a href=""></a>                           <span class="at">display =</span> <span class="st">"sites"</span>, <span class="co"># scores we want</span></span>
-<span id="cb51-5"><a href=""></a>                           <span class="at">choices =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)) <span class="co"># axes</span></span>
-<span id="cb51-6"><a href=""></a><span class="co"># check that plots are in the same order</span></span>
-<span id="cb51-7"><a href=""></a>  <span class="fu">all</span>(<span class="fu">rownames</span>(dt_soil_groups) <span class="sc">==</span> <span class="fu">rownames</span>(soil_3_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a><span class="co"># extract the scores of the sites on the two first PCs</span></span>
+<span id="cb53-2"><a href=""></a>  dt_soil_groups <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">scores</span>(soil_pca, </span>
+<span id="cb53-3"><a href=""></a>                           <span class="at">scaling =</span> <span class="st">"sites"</span>, <span class="co"># type of scaling</span></span>
+<span id="cb53-4"><a href=""></a>                           <span class="at">display =</span> <span class="st">"sites"</span>, <span class="co"># scores we want</span></span>
+<span id="cb53-5"><a href=""></a>                           <span class="at">choices =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)) <span class="co"># axes</span></span>
+<span id="cb53-6"><a href=""></a><span class="co"># check that plots are in the same order</span></span>
+<span id="cb53-7"><a href=""></a>  <span class="fu">all</span>(<span class="fu">rownames</span>(dt_soil_groups) <span class="sc">==</span> <span class="fu">rownames</span>(soil_3_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href=""></a>  <span class="fu">all</span>(<span class="fu">rownames</span>(dt_soil_groups) <span class="sc">==</span> <span class="fu">rownames</span>(soil_5_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a>  <span class="fu">all</span>(<span class="fu">rownames</span>(dt_soil_groups) <span class="sc">==</span> <span class="fu">rownames</span>(soil_5_group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="co"># add groups to the PCs data </span></span>
-<span id="cb55-2"><a href=""></a>  dt_soil_groups<span class="sc">$</span>G3 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(soil_3_group)</span>
-<span id="cb55-3"><a href=""></a>  dt_soil_groups<span class="sc">$</span>G5 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(soil_5_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href=""></a><span class="co"># add groups to the PCs data </span></span>
+<span id="cb57-2"><a href=""></a>  dt_soil_groups<span class="sc">$</span>G3 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(soil_3_group)</span>
+<span id="cb57-3"><a href=""></a>  dt_soil_groups<span class="sc">$</span>G5 <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(soil_5_group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:35%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a><span class="fu">head</span>(dt_soil_groups)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="fu">head</span>(dt_soil_groups)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1641,36 +1825,36 @@ Species: expanded scores based on 'dune' </code></pre>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb58-2"><a href=""></a><span class="fu">ggplot</span>(dt_soil_groups,</span>
-<span id="cb58-3"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> G3)) <span class="sc">+</span> </span>
-<span id="cb58-4"><a href=""></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(dt_soil_groups)), </span>
-<span id="cb58-5"><a href=""></a>            <span class="at">size =</span> <span class="dv">8</span>) <span class="sc">+</span> </span>
-<span id="cb58-6"><a href=""></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-41-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href=""></a><span class="co">#</span></span>
-<span id="cb59-2"><a href=""></a><span class="fu">ggplot</span>(dt_soil_groups,</span>
-<span id="cb59-3"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> G5)) <span class="sc">+</span> </span>
-<span id="cb59-4"><a href=""></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(dt_soil_groups)),</span>
-<span id="cb59-5"><a href=""></a>            <span class="at">size =</span> <span class="dv">8</span>) <span class="sc">+</span> </span>
-<span id="cb59-6"><a href=""></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb60-2"><a href=""></a><span class="fu">ggplot</span>(dt_soil_groups,</span>
+<span id="cb60-3"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> G3)) <span class="sc">+</span> </span>
+<span id="cb60-4"><a href=""></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(dt_soil_groups)), </span>
+<span id="cb60-5"><a href=""></a>            <span class="at">size =</span> <span class="dv">8</span>) <span class="sc">+</span> </span>
+<span id="cb60-6"><a href=""></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
 <p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-42-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a><span class="co">#</span></span>
+<span id="cb61-2"><a href=""></a><span class="fu">ggplot</span>(dt_soil_groups,</span>
+<span id="cb61-3"><a href=""></a>       <span class="fu">aes</span>(<span class="at">x =</span> PC1, <span class="at">y =</span> PC2, <span class="at">color =</span> G5)) <span class="sc">+</span> </span>
+<span id="cb61-4"><a href=""></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">rownames</span>(dt_soil_groups)),</span>
+<span id="cb61-5"><a href=""></a>            <span class="at">size =</span> <span class="dv">8</span>) <span class="sc">+</span> </span>
+<span id="cb61-6"><a href=""></a>  <span class="fu">theme_classic</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1717,21 +1901,7 @@ Species: expanded scores based on 'dune' </code></pre>
 <div class="column" style="width:50%;">
 <p><span style="font-size: 30px">We can look use the PCA of soil variables to choose variables with little correlation:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a><span class="fu">biplot</span>(soil_pca, <span class="at">scaling =</span> <span class="dv">2</span>, <span class="at">display =</span> <span class="st">"species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-43-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p><span style="font-size: 30px">Let’s choose <em>pH</em>, <em>N</em>, <em>Mo</em>, <em>P</em>, and check how correlated they are:</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href=""></a>GGally<span class="sc">::</span><span class="fu">ggpairs</span>(soil_norm[,<span class="fu">c</span>(<span class="st">"pH"</span>, <span class="st">"N"</span>, <span class="st">"Mo"</span>, <span class="st">"P"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a><span class="fu">biplot</span>(soil_pca, <span class="at">scaling =</span> <span class="dv">2</span>, <span class="at">display =</span> <span class="st">"species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
@@ -1742,7 +1912,34 @@ Species: expanded scores based on 'dune' </code></pre>
 </div>
 </div>
 </div>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">Let’s choose <em>pH</em>, <em>N</em>, <em>Mo</em>, <em>P</em>, and check how correlated they are:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a>GGally<span class="sc">::</span><span class="fu">ggpairs</span>(soil_norm[,<span class="fu">c</span>(<span class="st">"pH"</span>, <span class="st">"N"</span>, <span class="st">"Mo"</span>, <span class="st">"P"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-45-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
 </div></div>
+<aside class="notes">
+<p>here we are not going to formulate hyp as exercice</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="rda---principle" class="slide level2">
 <h2>RDA - Principle</h2>
@@ -1754,18 +1951,32 @@ Species: expanded scores based on 'dune' </code></pre>
 <p>To do a RDA (or a PCA) on a table of abundance of species, a Hellinger transformation is required. Hellinger distance has a more linear response to changes in species abundance.</p>
 <p>We can do this transformation using <span style="color:indianred;">decostand</span>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a>spec_hel <span class="ot">&lt;-</span> <span class="fu">decostand</span>(varespec, <span class="at">method  =</span><span class="st">"hellinger"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a>spec_hel <span class="ot">&lt;-</span> <span class="fu">decostand</span>(varespec, <span class="at">method  =</span><span class="st">"hellinger"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
 </div>
+<aside class="notes">
+<p>Importance of Hellinger transfo for PCA as well</p>
+<p>Obj of Hellinger transfo: reducing the influence of highly abundant species and dealing with the double-zero problem (shared absences)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="rda---running-a-rda" class="slide level2">
 <h2>RDA - Running a RDA</h2>
 <p><span style="font-size: 30px">We run the RDA with <span style="color:indianred;">rda</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href=""></a>vare_rda <span class="ot">&lt;-</span> <span class="fu">rda</span>(spec_hel <span class="sc">~</span> pH <span class="sc">+</span> N <span class="sc">+</span> Mo <span class="sc">+</span> P, <span class="co"># formula</span></span>
-<span id="cb63-2"><a href=""></a>                <span class="at">data =</span> soil_norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href=""></a>vare_rda <span class="ot">&lt;-</span> <span class="fu">rda</span>(spec_hel <span class="sc">~</span> pH <span class="sc">+</span> N <span class="sc">+</span> Mo <span class="sc">+</span> P, <span class="co"># formula</span></span>
+<span id="cb65-2"><a href=""></a>                <span class="at">data =</span> soil_norm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -1778,9 +1989,9 @@ Species: expanded scores based on 'dune' </code></pre>
 <section id="rda---output" class="slide level2 smaller">
 <h2>RDA - Output</h2>
 <div class="columns">
-<div class="column" style="width:50%;">
+<div class="column" style="width:65%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a><span class="fu">summary</span>(vare_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="fu">summary</span>(vare_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1822,12 +2033,12 @@ Proportion Explained  0.58529 0.26315 0.08809 0.063469
 Cumulative Proportion 0.58529 0.84844 0.93653 1.000000</code></pre>
 </div>
 </div>
-</div><div class="column" style="width:50%;">
-<p><span style="font-size: 30px">The output includes:</span></p>
+</div><div class="column" style="width:35%;">
+<p><span style="font-size: 25px">The output includes:</span></p>
 <ul>
-<li class="fragment"><p><span style="font-size: 30px">The inertia (<em>i.e.</em> total variance) partitioned into a part explained by the constrained axes, and a residual part (unconstrained).</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">The first axes (RDA1, RDA2, …) are the constrained axes, representing the variation explained by the explanatory variables.</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">The remaining axes (PC1, PC2, …) are unconstrained and represent the residual variation not explained by the explanatory variables.</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">The inertia (<em>i.e.</em> total variance) partitioned into a part explained by the constrained axes, and a residual part (unconstrained).</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">The first axes (RDA1, RDA2, …) are the constrained axes, representing the variation explained by the explanatory variables.</span></p></li>
+<li class="fragment"><p><span style="font-size: 25px">The remaining axes (PC1, PC2, …) are unconstrained and represent the residual variation not explained by the explanatory variables.</span></p></li>
 </ul>
 </div></div>
 <aside class="notes">
@@ -1847,7 +2058,7 @@ Cumulative Proportion 0.58529 0.84844 0.93653 1.000000</code></pre>
 <section id="rda---goodness-of-fit" class="slide level2">
 <h2>RDA - Goodness of fit</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href=""></a><span class="fu">RsquareAdj</span>(vare_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a><span class="fu">RsquareAdj</span>(vare_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1880,7 +2091,7 @@ $adj.r.squared
 <h2>RDA - VIF</h2>
 <p>As for a linear regression, we can use the VIF (<em>variance inflation factor</em>) obtained with <span style="color:indianred;">vif.cca</span>, to check that there is not too much collinearity (too much if &gt; 10):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a><span class="fu">vif.cca</span>(vare_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a><span class="fu">vif.cca</span>(vare_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1896,7 +2107,7 @@ $adj.r.squared
 <div class="column" style="width:50%;">
 <p><span style="font-size: 30px">Significance of the whole model:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb70-1"><a href=""></a><span class="fu">anova.cca</span>(vare_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a><span class="fu">anova.cca</span>(vare_rda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1916,7 +2127,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <div class="fragment">
 <p><span style="font-size: 30px">Significance of each explanatory variable:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href=""></a><span class="fu">anova.cca</span>(vare_rda, <span class="at">by =</span> <span class="st">"term"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a><span class="fu">anova.cca</span>(vare_rda, <span class="at">by =</span> <span class="st">"term"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1944,29 +2155,29 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>RDA is visuallised using a triplot (as it represents the sites, the species and the environmental variables).</p>
 <div class="columns">
 <div class="column" style="width:50%;">
-<p><span style="font-size: 30px">Scaling 1 focusses on the sites:</span></p>
+<p><span style="font-size: 30px">Scaling 1 focusses on the <strong>sites</strong>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href=""></a><span class="fu">plot</span>(vare_rda, <span class="at">scaling =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell fragment">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-52-1.png" width="384"></p>
-</figure>
-</div>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p><span style="font-size: 30px">Scaling 2 focusses on the species:</span></p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a><span class="fu">plot</span>(vare_rda, <span class="at">scaling =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a><span class="fu">plot</span>(vare_rda, <span class="at">scaling =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output-display">
 <div>
 <figure>
 <p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-53-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">Scaling 2 focusses on the <strong>species</strong>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a><span class="fu">plot</span>(vare_rda, <span class="at">scaling =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-54-1.png" width="384"></p>
 </figure>
 </div>
 </div>
@@ -1982,9 +2193,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <h2>CCA - Running a CCA</h2>
 <p><span style="font-size: 30px">We run the CCA with <span style="color:indianred;">cca</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href=""></a>vare_cca <span class="ot">&lt;-</span> <span class="fu">cca</span>(spec_hel <span class="sc">~</span> pH <span class="sc">+</span> N <span class="sc">+</span> Mo <span class="sc">+</span> P,</span>
-<span id="cb76-2"><a href=""></a>                <span class="at">data =</span> soil_norm)</span>
-<span id="cb76-3"><a href=""></a><span class="fu">summary</span>(vare_cca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a>vare_cca <span class="ot">&lt;-</span> <span class="fu">cca</span>(spec_hel <span class="sc">~</span> pH <span class="sc">+</span> N <span class="sc">+</span> Mo <span class="sc">+</span> P,</span>
+<span id="cb78-2"><a href=""></a>                <span class="at">data =</span> soil_norm)</span>
+<span id="cb78-3"><a href=""></a><span class="fu">summary</span>(vare_cca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2031,11 +2242,11 @@ Cumulative Proportion 0.4698 0.72258 0.8837 1.00000</code></pre>
 <h2>CCA - Interpretation</h2>
 <p>The rest is similar to the RDA:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href=""></a><span class="fu">RsquareAdj</span>(vare_cca)</span>
-<span id="cb78-2"><a href=""></a><span class="fu">anova.cca</span>(vare_cca)</span>
-<span id="cb78-3"><a href=""></a><span class="fu">anova.cca</span>(vare_cca, <span class="at">by =</span> <span class="st">"term"</span>)</span>
-<span id="cb78-4"><a href=""></a><span class="fu">plot</span>(vare_cca, <span class="at">scaling =</span> <span class="dv">1</span>)</span>
-<span id="cb78-5"><a href=""></a><span class="fu">plot</span>(vare_cca, <span class="at">scaling =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href=""></a><span class="fu">RsquareAdj</span>(vare_cca)</span>
+<span id="cb80-2"><a href=""></a><span class="fu">anova.cca</span>(vare_cca)</span>
+<span id="cb80-3"><a href=""></a><span class="fu">anova.cca</span>(vare_cca, <span class="at">by =</span> <span class="st">"term"</span>)</span>
+<span id="cb80-4"><a href=""></a><span class="fu">plot</span>(vare_cca, <span class="at">scaling =</span> <span class="dv">1</span>)</span>
+<span id="cb80-5"><a href=""></a><span class="fu">plot</span>(vare_cca, <span class="at">scaling =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 
@@ -2063,10 +2274,10 @@ Cumulative Proportion 0.4698 0.72258 0.8837 1.00000</code></pre>
 <h2>db-RDA - Running db-RDA</h2>
 <p><span style="font-size: 30px">We run the db-RDA with <span style="color:indianred;">dbrda</span>:</span></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a>vare_dbrda <span class="ot">&lt;-</span> <span class="fu">dbrda</span>(spec_hel <span class="sc">~</span> pH <span class="sc">+</span> N <span class="sc">+</span> Mo <span class="sc">+</span> P,</span>
-<span id="cb79-2"><a href=""></a>                <span class="at">data =</span> soil_norm,</span>
-<span id="cb79-3"><a href=""></a>                <span class="at">distance =</span> <span class="st">"bray"</span>)</span>
-<span id="cb79-4"><a href=""></a><span class="fu">summary</span>(vare_dbrda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a>vare_dbrda <span class="ot">&lt;-</span> <span class="fu">dbrda</span>(spec_hel <span class="sc">~</span> pH <span class="sc">+</span> N <span class="sc">+</span> Mo <span class="sc">+</span> P,</span>
+<span id="cb81-2"><a href=""></a>                <span class="at">data =</span> soil_norm,</span>
+<span id="cb81-3"><a href=""></a>                <span class="at">distance =</span> <span class="st">"bray"</span>)</span>
+<span id="cb81-4"><a href=""></a><span class="fu">summary</span>(vare_dbrda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -2108,67 +2319,32 @@ Proportion Explained  0.5860 0.2550 0.10608 0.05294
 Cumulative Proportion 0.5860 0.8410 0.94706 1.00000</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>here we didn’t do the Lingoes correction so we have negative eigenvalues</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="db-rda---interpretation" class="slide level2">
 <h2>db-RDA - Interpretation</h2>
 <p>The rest is similar to the RDA:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a><span class="fu">RsquareAdj</span>(vare_dbrda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href=""></a><span class="fu">RsquareAdj</span>(vare_dbrda)</span>
+<span id="cb83-2"><a href=""></a><span class="fu">anova.cca</span>(vare_dbrda)</span>
+<span id="cb83-3"><a href=""></a><span class="fu">anova.cca</span>(vare_dbrda, <span class="at">by =</span> <span class="st">"term"</span>)</span>
+<span id="cb83-4"><a href=""></a><span class="fu">plot</span>(vare_dbrda, <span class="at">scaling =</span> <span class="dv">1</span>)</span>
+<span id="cb83-5"><a href=""></a><span class="fu">plot</span>(vare_dbrda, <span class="at">scaling =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
-<div class="cell-output cell-output-stdout">
-<pre><code>$r.squared
-[1] 0.3090468
 
-$adj.r.squared
-[1] 0.163583</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href=""></a><span class="fu">anova.cca</span>(vare_dbrda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Permutation test for dbrda under reduced model
-Permutation: free
-Number of permutations: 999
-
-Model: dbrda(formula = spec_hel ~ pH + N + Mo + P, data = soil_norm, distance = "bray")
-         Df SumOfSqs      F Pr(&gt;F)   
-Model     4  0.74606 2.1246  0.006 **
-Residual 19  1.66800                 
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href=""></a><span class="fu">anova.cca</span>(vare_dbrda, <span class="at">by =</span> <span class="st">"term"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Permutation test for dbrda under reduced model
-Terms added sequentially (first to last)
-Permutation: free
-Number of permutations: 999
-
-Model: dbrda(formula = spec_hel ~ pH + N + Mo + P, data = soil_norm, distance = "bray")
-         Df SumOfSqs      F Pr(&gt;F)  
-pH        1  0.24217 2.7585  0.019 *
-N         1  0.16811 1.9149  0.077 .
-Mo        1  0.11753 1.3387  0.221  
-P         1  0.21825 2.4860  0.026 *
-Residual 19  1.66800                
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href=""></a><span class="fu">plot</span>(vare_dbrda, <span class="at">scaling =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-57-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a><span class="fu">plot</span>(vare_dbrda, <span class="at">scaling =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="basic_stats_session3_files/figure-revealjs/unnamed-chunk-57-2.png" width="960"></p>
-</figure>
-</div>
-</div>
 </div>
 <aside class="notes">
 <p>not ran here, diy</p>
@@ -2183,10 +2359,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
-<section>
-<section id="acknowledgments" class="title-slide slide level1 center">
-<h1>Acknowledgments</h1>
+</section>
+<section id="acknowledgments" class="slide level2">
+<h2>Acknowledgments</h2>
 <div>
 <ul>
 <li><p>Marchand P. <em>Analyses et modélisation des données écologiques</em> <a href="https://pmarchand1.github.io/ECL7102/" data-preview-link="false">in French</a></p></li>
