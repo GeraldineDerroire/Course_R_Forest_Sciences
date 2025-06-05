@@ -816,6 +816,41 @@ first solution, this is how we created an html document
 [⚠️ Some options are available in all formats, but other are not (see [here](https://quarto.org/docs/output-formats/all-formats.html) for the option available for each format)]{style="font-size: 30px"}
 
 
+# Troubleshooting
+
+## When rendering fails
+
+[Check the *Background Jobs* tab:]{style="font-size: 30px"}
+
+![](background_job.png)
+
+::: notes
+Sometimes (but not always) explicit error messages
+
+here problem that there are two : in the YAML
+:::
+
+## When rendering fails
+
+[Common errors:]{style="font-size: 30px"}
+
+* [Missing R packages(packages non installed)]{style="font-size: 30px"}
+
+* [Problem with file paths and working directory: ⚠️ the default working directory of a Quarto document is the directory where the Quarto document is]{style="font-size: 30px"}
+
+* [Error of syntax in the YAML]{style="font-size: 30px"}
+
+* [Duplicated code chunks labels => check the drop-down chunk navigator]{style="font-size: 30px"}
+
+* [Errors due to the R code itself => run all code chunks in the console (*Code/Run Region/Run all*) or run chunks one by one to identify the problem]{style="font-size: 30px"}
+
+
+## When rendering works but the document has problems
+
+* [If you cannot see the outputs: check the chunk output options as some options prevent outputs from being displayed ]{style="font-size: 30px"}
+
+* [If you get unexpected values/results: can this be a problem with the use f the cache?]{style="font-size: 30px"}
+
 
 ## Acknowledgments {.smaller}
 

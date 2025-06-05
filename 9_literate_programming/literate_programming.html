@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-06-02">
+  <meta name="dcterms.date" content="2025-06-05">
   <title>Literate programming with quarto</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-06-02</p>
+  <p class="date">2025-06-05</p>
 </section>
 <section>
 <section id="introduction-to-quarto" class="title-slide slide level1 center">
@@ -1243,6 +1243,48 @@ Table&nbsp;1: Iris data
 </div><div class="column" style="width:40%;">
 <p><img data-src="formats2.png"></p>
 </div><p><span style="font-size: 30px">⚠️ Some options are available in all formats, but other are not (see <a href="https://quarto.org/docs/output-formats/all-formats.html">here</a> for the option available for each format)</span></p>
+</section></section>
+<section>
+<section id="troubleshooting" class="title-slide slide level1 center">
+<h1>Troubleshooting</h1>
+
+</section>
+<section id="when-rendering-fails" class="slide level2">
+<h2>When rendering fails</h2>
+<p><span style="font-size: 30px">Check the <em>Background Jobs</em> tab:</span></p>
+
+<img data-src="background_job.png" class="r-stretch"><aside class="notes">
+<p>Sometimes (but not always) explicit error messages</p>
+<p>here problem that there are two : in the YAML</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="when-rendering-fails-1" class="slide level2">
+<h2>When rendering fails</h2>
+<p><span style="font-size: 30px">Common errors:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">Missing R packages(packages non installed)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Problem with file paths and working directory: ⚠️ the default working directory of a Quarto document is the directory where the Quarto document is</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Error of syntax in the YAML</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Duplicated code chunks labels =&gt; check the drop-down chunk navigator</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Errors due to the R code itself =&gt; run all code chunks in the console (<em>Code/Run Region/Run all</em>) or run chunks one by one to identify the problem</span></p></li>
+</ul>
+</section>
+<section id="when-rendering-works-but-the-document-has-problems" class="slide level2">
+<h2>When rendering works but the document has problems</h2>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">If you cannot see the outputs: check the chunk output options as some options prevent outputs from being displayed</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">If you get unexpected values/results: can this be a problem with the use f the cache?</span></p></li>
+</ul>
 </section>
 <section id="acknowledgments" class="slide level2 smaller">
 <h2>Acknowledgments</h2>
