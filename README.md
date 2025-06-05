@@ -36,7 +36,6 @@ The course material has been created using quarto and R version 4.4.3.
   * [Going further with R session 1/2](https://geraldinederroire.github.io/Course_R_Forest_Sciences/7_going_further/going_further_session1.html)
   * [Going further with R session 2/2](https://geraldinederroire.github.io/Course_R_Forest_Sciences/7_going_further/going_further_session2.html)
 - [Introduction to Version Control with Git and GitHub](https://geraldinederroire.github.io/Course_R_Forest_Sciences/8_version_control/version_control.html)
-<!--
 - [Literate programming with quarto]((https://geraldinederroire.github.io/Course_R_Forest_Sciences/9_literate_programming/literate_programming.html)
--->
+
 
