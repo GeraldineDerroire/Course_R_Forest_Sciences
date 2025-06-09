@@ -1176,7 +1176,7 @@ the warning just tell us that some of the column don't have all the levels that 
 
 ## [across]{style="color:indianred;"}: apply a function to tibble
 
-[The columns to transform can be specify:]{style="font-size: 30px"}
+[The columns to transform can be specified:]{style="font-size: 30px"}
 
 * [using [c()]{style="color:indianred;"} (as in the last example)]{style="font-size: 30px"}
 
@@ -1206,7 +1206,7 @@ dt_Likert %>%
 
 ## [across]{style="color:indianred;"}: apply a function to tibble 
 
-[The columns to transform can be specify:]{style="font-size: 30px"}
+[The columns to transform can be specified:]{style="font-size: 30px"}
 
 * [using [num_range]{style="color:indianred;"}]{style="font-size: 30px"}
 
@@ -1266,7 +1266,7 @@ iris %>%
 :::
 
 
-## Names of the columns created by [across]{style="color:indianred;"} withing [mutate]{style="color:indianred;"} {.smaller}
+## Names of the columns created by [across]{style="color:indianred;"} within [mutate]{style="color:indianred;"} {.smaller}
 
 [Using [across]{style="color:indianred;"} within [mutate]{style="color:indianred;"} replace the columns.
 To keep them we need to indicate how to name them, using the argument [.names]{style="color:indianred;"}:]{style="font-size: 30px"}

@@ -1,5 +1,5 @@
 ---
-title: "Exercices on session *Data visualisation*"
+title: "Exercices on session *Data visualisation"
 format:
   pdf
 execute:

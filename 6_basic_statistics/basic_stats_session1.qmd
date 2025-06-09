@@ -76,7 +76,7 @@ have them guess
 
 ## Reminder on the descriptive statistics
 
-The coefficient (CV) is a standardised measure of dispersion, that can be used to compared the dispersion of variables measured in different scale:
+The  coefficient of variation (CV) is a standardised measure of dispersion, that can be used to compared the dispersion of variables measured in different scale:
 
 $$CV = \frac{standard\:deviation}{mean}$$
 

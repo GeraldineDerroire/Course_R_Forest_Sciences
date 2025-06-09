@@ -306,13 +306,13 @@ This equation is displayed inline: $y = e^{\alpha}$
 ![Caption](quarto_logo.png){#fig-quarto width="50%"}
 :::
 
-[We can then refer to it with]{style="font-size: 30px"}[\@]{style="color:indianred;"}:
+[We can then refer to it with [\@]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ``` markdown
 @fig-quarto shows the logo of quarto.
 ```
 
-@fig-quarto [ shows the logo of quarto.]
+[@fig-quarto shows the logo of quarto.]{style="font-size: 30px"}
 
 ## Cross-references
 

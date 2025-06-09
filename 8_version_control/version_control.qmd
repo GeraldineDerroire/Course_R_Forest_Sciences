@@ -711,7 +711,7 @@ On GitHub:
 
 *  [accept the invitation to start working on your repository (invitation are received by email and also visible on GitHub in *notifications*)]{style="font-size: 30px"}
 
-* [clone the repository on their computer (see step 3 of *Create a new repository from scratch)]{style="font-size: 30px"}
+* [clone the repository on their computer (see step 3 of *Create a new repository from scratch*)]{style="font-size: 30px"}
 
 [[The collaborator can then start working: *modify, commit, push*.]{style="font-size: 30px"}]{.fragment}
 
@@ -807,7 +807,7 @@ to be able to accept the invitation, you need to b signed in
 ![](conflicted_file.png){fig-align="center"}
 :::
 
-* [edit the file manually but removing the version you don't want to keep (or writting an alternative version)]{style="font-size: 30px"}
+* [edit the file manually by removing the version you don't want to keep (or writting an alternative version)]{style="font-size: 30px"}
 
 * [delete the conflict markers (<<<<<<<, =======, >>>>>>>)]{style="font-size: 30px"}
 

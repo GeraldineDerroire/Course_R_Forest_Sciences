@@ -476,7 +476,7 @@ my_first_function(name = "João")
 my_first_function(name = vec_name)
 ```
 :::
-:::
+
 
 ::: notes
 you have written a function! easy!
