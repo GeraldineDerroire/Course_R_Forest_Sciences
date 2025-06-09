@@ -1,0 +1,273 @@
+---
+title: "Exercices on sessions 1 and 2 of Going further with R"
+format:
+  pdf
+execute:
+  echo: false 
+  eval: false 
+---
+
+Load the package `tidyverse`.
+
+```{r}
+library(tidyverse)
+```
+
+
+# Writing a function
+
+We are going to write a function to standardise a variable to mean 0 and standard deviation 1.
+*There is already an existing function to do this (the function `scale`), so let's forget that this function exists.*
+Remember that to standardise a variable in this way, we need to do the following operation for each value *x* of the variable:
+
+$$ \frac{x - mean}{sd}$$
+In addition to the variable to standardise, we want this function to take a second argument being the number of decimal we want the standardised values to be rounded to. We will give a default value of 2 to this argument.
+
+* plan the function: identify the arguments and the steps
+
+```{r}
+# Arguments
+v # a vector of numerical value
+decim <- 2 # the number of decimal to round the standardise values
+
+# Body of the function
+  # calculate the mean 
+  # calculate the sd
+  # calculate the standardised values
+  # round the standardised values
+```
+
+* create a test vector by randomly drawing 10 values in a normal distribution of mean 16 and standard deviation of 3
+
+```{r}
+v_test <- rnorm(n=10, mean = 16, sd=3)
+v_test
+summary(v_test)
+```
+* write the code of the function (for keeping thing simple, this function will always remove the NA)
+
+```{r}
+# Arguments
+v <- v_test # a vector of numerical value
+decim <- 2 # the number of decimal to round the standardise values
+
+# Body of the function
+  # calculate the mean 
+    m_v <- mean(v, na.rm = TRUE)
+  # calculate the sd
+    sd_v <- sd(v, na.rm = TRUE)
+  # calculate the standardised values
+    v_sd <- (v - m_v) / sd_v
+  # round the standardised values
+    v_final <- round(v_sd, digits = decim)
+```
+
+* create the function
+
+```{r}
+# Arguments
+my_scale <- function(v, decim = 2) {
+    # calculate the mean 
+    m_v <- mean(v, na.rm = TRUE)
+  # calculate the sd
+    sd_v <- sd(v, na.rm = TRUE)
+  # calculate the standardised values
+    v_sd <- (v - m_v) / sd_v
+  # round the standardised values
+    v_final <- round(v_sd, digits = decim)
+  # return
+    return(v_final)
+}
+```
+
+* test the function
+
+```{r}
+# remove test argument
+rm(v, decim)
+
+# test 1 - test the results
+v_test1 <- rnorm(n=1000, mean = 25, sd=8)
+res1 <- my_scale(v_test1)
+mean(res1) # should be close to 0
+sd(res1) # should be close to 1
+
+# test 2 - test if NA handle properly
+v_test2 <-c(v_test1, NA)
+res2 <- my_scale(v_test2)
+table(c(res1, NA) == res2) # should be always true
+
+# test 3 - change the number of decimals
+head(res1)
+head(my_scale(v_test1, decim = 0))
+head(my_scale(v_test1, decim = 4))
+```
+
+# Conditional execution
+
+* Write a function using conditional execution that take 2 arguments: the temperature (numerical) and the rain (boolean). This function will tell the user to: 
+
+    * go to the beach is the temperature is above 25°C and it's not raining
+    * take their umbrella if the temperature is above 25°C and it's raining
+    * take their jumper if the temperature is below 25°C and it's not raining
+    * stay home otherwise
+    
+```{r}
+test_weather <- function(temp, rain) {
+  if (temp > 25 & rain == FALSE) {
+    message("Go to the beach")
+  } else if (temp > 25 & rain == TRUE) {
+    message("Take your umbrella") 
+  } else if (temp < 25 & rain == FALSE) {
+    message("Take your jumper") 
+  } else {
+    message("Stay home")
+  }
+}
+```
+    
+* Test this function
+
+```{r}
+test_weather(temp = 32, rain = FALSE)
+test_weather(temp = 32, rain = TRUE)
+test_weather(temp = 15, rain = FALSE)
+test_weather(temp = 15, rain = TRUE)
+```
+* Add two tests at the beginning of function to check that the arguments are of the correct mode, and stop the execution of the function otherwise
+
+```{r}
+test_weather <- function(temp, rain) {
+  # test the argument
+  if (!(is.numeric(temp)) | !(is.logical(rain))) {
+    stop("check the mode of your arguments")
+  } 
+  
+  # perform the test of wearther
+      if (temp > 25 & rain == FALSE) {
+        message("Go to the beach")
+      } else if (temp > 25 & rain == TRUE) {
+        message("Take your umbrella") 
+      } else if (temp < 25 & rain == FALSE) {
+        message("Take your jumper") 
+      } else {
+        message("Stay home")
+      }
+}
+
+
+# check          
+test_weather(temp= 28, rain =12)  
+test_weather(temp= "blue", rain = TRUE)
+  
+# Alternative
+test_weather <- function(temp, rain) {
+  # test the argument
+  if (!(is.numeric(temp)) ) {
+    stop("temp must be numeric") 
+  } 
+  if (!(is.logical(rain))) {
+     stop("rain must be logical") 
+  }
+        
+  # perform the test of wearther
+      if (temp > 25 & rain == FALSE) {
+        message("Go to the beach")
+      } else if (temp > 25 & rain == TRUE) {
+        message("Take your umbrella") 
+      } else if (temp < 25 & rain == FALSE) {
+        message("Take your jumper") 
+      } else {
+        message("Stay home")
+      }
+}
+
+# check          
+test_weather(temp= 28, rain =12)  
+test_weather(temp= "blue", rain = TRUE)
+```
+
+# Loop
+
+Write a `for` loop that calculate the cumulative sum of a vector. In other words: the first element of the output is the first element of the input, the second element of the output is the sum of the first two elements of the input, ... the n^th^ element of the output is the sum of the n^th^ first element of the input.
+*There is a function called `cumsum` that does this, but let's forget about it for now...*
+To run this loop, make a vector of 10 random draws between 0 and 4.
+
+```{r}
+# create the input vector
+input <- runif(n = 10, min = 0, max = 4)
+
+# create an empty output to store the results
+output <- vector("integer", length = length(input))
+
+# initialise the cumulative sum
+total <- 0
+
+for (i in seq_along(input)) {
+  total <- total + input[i]
+  output[i]  <- total
+}
+
+# for comparison with cumsum
+output == cumsum(input)
+```
+
+# Advanced tidyverse
+
+* Create the following list and use one of the `map` functions from the package `purr` to get the maximum value of H for each plot. 
+
+```{r, eval = TRUE}
+H_list <- list(plot1 = c(8, 25, 12, 16, 14),
+               plot2 = c(31, 25, 18, 19, 29, 24, 16),
+               plot3 = c(15, 12, 13, 17, 19, 11))
+H_list
+```
+```{r}
+map_dbl(H_list, max)
+# or
+map_int(H_list, max)
+# or but less usefull
+map(H_list, max)
+```
+* Use the function `across` with the function function you have created in the first section to standardise all the numerical variables of the data set iris
+
+```{r}
+data("iris")
+iris_sd <- iris %>% mutate(
+  across(where(is.numeric), 
+         my_scale
+         )
+)
+summary(iris_sd)
+```
+* Do the same thing but only for the variables related to sepals
+
+```{r}
+iris_sd2 <- iris %>% mutate(
+  across(starts_with("Sepal"), 
+         my_scale
+         )
+)
+summary(iris_sd2)
+```
+
+
+# For next time
+
+-   Make sure that git is properly installed on your computer and that git and Github are configurated (see the setting up instructions [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/0_installing_enviro){preview-link="false"})  
+
+- Install TinyTex by running the following R commands:
+
+```{r, echo = TRUE}
+install.packages('tinytex')
+tinytex::install_tinytex()
+```
+
+and checking that it is installed:
+
+```{r, echo = TRUE}
+tinytex::is_tinytex() # should be TRUE
+```
+
+
+ 

@@ -1147,17 +1147,6 @@ f()
 obj
 ```
 
-<!-- TO DO --> 
-
-
-
-
-
-
-
-
-et voir si j'ai besoin de revenir là dessus : https://juba.github.io/tidyverse/14-fonctions.html#les-fonctions-comme-objets
-
 
 # Saving objects
 
