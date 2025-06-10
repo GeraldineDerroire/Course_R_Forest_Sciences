@@ -27,14 +27,15 @@ The course material has been created using quarto and R version 4.4.3.
   * [Exercices](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/exo_session_8.pdf)
 - Statistics with R
   * [Statistics with R session 1/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/basic_stats_session1.html)
-     * [Exercice on session 1/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/exo_session9.pdf)
+     * [Exercices on session 1/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/exo_session9.pdf)
   * [Statistics with R session 2/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/basic_stats_session2.html)
-     * [Exercice on session 2/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/exo_session10.pdf)
+     * [Exercices on session 2/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/exo_session10.pdf)
   * [Statistics with R session 3/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/basic_stats_session3.html)
-     * [Exercice on session 3/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/exo_session11.pdf)
+     * [Exercices on session 3/3](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/exo_session11.pdf)
 - Going further with R
   * [Going further with R session 1/2](https://geraldinederroire.github.io/Course_R_Forest_Sciences/7_going_further/going_further_session1.html)
   * [Going further with R session 2/2](https://geraldinederroire.github.io/Course_R_Forest_Sciences/7_going_further/going_further_session2.html)
+  * [Exercices](https://geraldinederroire.github.io/Course_R_Forest_Sciences/7_going_further/exo_session12_13.pdf)
 - [Introduction to Version Control with Git and GitHub](https://geraldinederroire.github.io/Course_R_Forest_Sciences/8_version_control/version_control.html)
 - [Literate programming with quarto](https://geraldinederroire.github.io/Course_R_Forest_Sciences/9_literate_programming/literate_programming.html)
 
