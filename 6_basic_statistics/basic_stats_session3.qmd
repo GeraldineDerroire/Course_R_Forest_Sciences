@@ -1293,7 +1293,7 @@ not ran here, diy
 
 ::: {.nonincremental}
 
-* Simpson G. *Multivariate data analysis with R and vegan* [here](https://gavinsimpson.github.io/physalia-multivariate/02-tuesday){preview-link="false"} and [here](https://gavinsimpson.github.io/physalia-multivariate/03-wednesday){preview-link="false"} (includes some advice on how to customise the plots and extract the results)
+* Simpson G. *Multivariate data analysis with R and vegan* [here](https://gavinsimpson.github.io/physalia-multivariate/02-tuesday/slides.html){preview-link="false"} and [here](https://gavinsimpson.github.io/physalia-multivariate/03-wednesday/slides.html){preview-link="false"} (includes some advice on how to customise the plots and extract the results)
 
 * QCBS R Workshop Series *Multivariate Analyses in R* [here](https://r.qcbs.ca/workshop09/book-en/){preview-link="false"} and *Advanced Multivariate Analyses in R* [here](https://r.qcbs.ca/workshop10/book-en/index.html){preview-link="false"}
 
