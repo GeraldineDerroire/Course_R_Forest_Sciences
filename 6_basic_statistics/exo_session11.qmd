@@ -93,13 +93,19 @@ screeplot(clim_pca, bstick = TRUE)
 -   Let's first look at similarity between cities: which scaling do we need for the biplot? Do the biplot and interpret it.
 
 ```{r}
-biplot(clim_pca, scaling = 1)
+biplot(clim_pca, scaling = 1) # scaling 1 focus on the observations
+
+# to see better, show only the cities
+biplot(clim_pca, scaling = 1, display = "sites")
 ```
 
 -   Let's now look at correlations between climatic variables: do the corresponding biplot and interpret the axes.
 
 ```{r}
-biplot(clim_pca, scaling = 2)
+biplot(clim_pca, scaling = 2) # scaling 2 focuses on the variables
+
+# to see better, show only the variables
+biplot(clim_pca, scaling = 2, display = "species")
 
 # interpretation 
   # first axis: from warm (right) to cold (left)

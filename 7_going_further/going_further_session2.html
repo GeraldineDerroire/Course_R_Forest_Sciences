@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-06-06">
+  <meta name="dcterms.date" content="2025-06-10">
   <title>Going further with R - session 2/2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-06-06</p>
+  <p class="date">2025-06-10</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
@@ -488,6 +488,19 @@ Géraldine Derroire
 <li class="fragment"><p>a condition (in parentheses)</p></li>
 <li class="fragment"><p>a block of code (in curly brackets) that is executed only if the condition is TRUE</p></li>
 </ul>
+<aside class="notes">
+<p>how does that work?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="if-else" class="slide level2">
 <h2>if / else</h2>
@@ -725,6 +738,7 @@ Géraldine Derroire
 </div></div>
 <aside class="notes">
 <p>function mean_diam seen in the previous session: change the units of diameter, take the mean and round it</p>
+<p>before, your default for digits was 2, so we would have had the same results for both</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -808,6 +822,21 @@ Géraldine Derroire
 </ul>
 <p><span class="fragment"><span style="font-size: 30px">and combine them using <span style="color:indianred;">&amp;&amp;</span> and <span style="color:indianred;">||</span></span></span></p>
 <p><span class="fragment"><span style="font-size: 30px">💡 <span style="color:indianred;">&amp;&amp;</span> and <span style="color:indianred;">||</span> are equivalent to <span style="color:indianred;">&amp;</span> and <span style="color:indianred;">|</span> but only work for vector of length one. There are therefore safer to use in if/else conditions, as they need to return only one value.</span></span></p>
+<aside class="notes">
+<p>these is important for writing code with conditional execution</p>
+<p>any is true if at least one is true</p>
+<p>all is true if at least all are true</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="more-complex-conditions" class="slide level2">
 <h2>More complex conditions</h2>
@@ -1079,6 +1108,7 @@ Géraldine Derroire
 </div>
 <aside class="notes">
 <p>warning can be used independently of return, in this case the execution continues</p>
+<p>a stop give an error, this is very different. For example with Quarto, the document would not compiled</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1096,7 +1126,7 @@ Géraldine Derroire
 <p>We have seen many examples of use of <span style="color:indianred;">if/else</span> inside a function, but we can also use it outside:</p>
 <ul>
 <li class="fragment"><p>at the beginning of a script, together with a warning or a stop, to check if the data are valid</p></li>
-<li class="fragment"><p>in a Quarto or R Markdown document, to adapt the output of a chunk depending on it result</p></li>
+<li class="fragment"><p>in a Quarto or R Markdown document, to adapt the output of a chunk depending on its result</p></li>
 <li class="fragment"><p>…</p></li>
 </ul>
 <aside class="notes">
@@ -1279,6 +1309,7 @@ Géraldine Derroire
 </div>
 </div>
 <aside class="notes">
+<p>! if you apply the function scale over a dataframe with only numeric variables, it would actually work without doing a for loop</p>
 <p>subset of iris: keep only 1 species and only numerical columns</p>
 <p>note that here we modify an existing object (iris_sub_scaled)</p>
 <p>check: the mean is indeed 0</p>
@@ -1407,6 +1438,19 @@ Hello !</code></pre>
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>answer after!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="iterating-over-numeric-indices-3" class="slide level2 scrollable">
 <h2>Iterating over numeric indices</h2>
@@ -1487,7 +1531,7 @@ Hello !</code></pre>
 </section>
 <section id="output-of-a-loop" class="slide level2">
 <h2>Output of a loop</h2>
-<p><span style="font-size: 30px">When a loop generates data, it is important to pre-allocate the output to the required size rather than grow it inside a loop, because pre-allocation avoids repeated memory copying and is significantly <strong>faster</strong> and <strong>more efficient</strong>, especially for large outputs</span></p>
+<p><span style="font-size: 30px">When a loop generates data, it is important to <strong>pre-allocate the output to the required size rather than grow it inside a loop</strong>, because pre-allocation avoids repeated memory copying and is significantly <strong>faster</strong> and <strong>more efficient</strong>, especially for large outputs</span></p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="fragment">
@@ -1531,7 +1575,7 @@ Hello !</code></pre>
 </section>
 <section id="while-loops" class="slide level2">
 <h2><span style="color:indianred;">while</span> loops</h2>
-<p>Let’s take an example of a <span style="color:indianred;">while</span> loop that simulate flipping a coin util we obtain a head:</p>
+<p>Let’s take an example of a <span style="color:indianred;">while</span> loop that simulate flipping a coin until we obtain a head:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb118"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb118-1"><a href=""></a>res <span class="ot">&lt;-</span> <span class="st">""</span></span>
 <span id="cb118-2"><a href=""></a><span class="cf">while</span> (res <span class="sc">!=</span> <span class="st">"head"</span>) {</span>
@@ -1555,10 +1599,25 @@ Hello !</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "head"</code></pre>
+<pre><code>[1] "tail"
+[1] "tail"
+[1] "head"</code></pre>
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>other type of loop</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="while-loops-1" class="slide level2">
 <h2><span style="color:indianred;">while</span> loops</h2>
@@ -1655,8 +1714,8 @@ Hello !</code></pre>
 </ul>
 </section></section>
 <section>
-<section id="functional-programmingwith-the-tidyverse" class="title-slide slide level1 center">
-<h1>Functional programmingwith the <span style="color:indianred;">tidyverse</span></h1>
+<section id="functional-programming-with-the-tidyverse" class="title-slide slide level1 center">
+<h1>Functional programming with the <span style="color:indianred;">tidyverse</span></h1>
 <p><strong>Functional programming</strong> is a way of writing code based on the use of small functions.</p>
 <p>It is often used as an alternative to loops.</p>
 <aside class="notes">
@@ -1744,13 +1803,13 @@ Hello !</code></pre>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>$sample1
-[1] 0.4494918
+[1] 0.5204296
 
 $sample2
-[1] 0.4731782
+[1] 0.4655317
 
 $sample3
-[1] 0.4918592</code></pre>
+[1] 0.4369012</code></pre>
 </div>
 </div>
 </section>
@@ -1768,7 +1827,7 @@ $sample3
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>  sample1   sample2   sample3 
-0.4494918 0.4731782 0.4918592 </code></pre>
+0.5204296 0.4655317 0.4369012 </code></pre>
 </div>
 </div>
 </div>
@@ -1789,7 +1848,8 @@ $sample3
 <li class="fragment"><span style="font-size: 30px"><span style="color:indianred;">map_chr</span> returns a vector of <strong>character</strong></span></li>
 </ul>
 <aside class="notes">
-<p>ex to do the same thing than in the two example before but returning a vector</p>
+<p>these ex to do the same thing than in the two examples before but returning a vector</p>
+<p>map_chr on next slide</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1840,6 +1900,19 @@ $sample3
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>the loop is slightly different than the loop that we created before with desserts</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="using-anonymous-functions-with-map" class="slide level2">
 <h2>Using anonymous functions with <span style="color:indianred;">map</span></h2>
@@ -1910,8 +1983,8 @@ $sample3
 <section id="across-apply-a-function-to-tibble" class="slide level2 scrollable">
 <h2><span style="color:indianred;">across</span>: apply a function to tibble</h2>
 <p><span style="font-size: 30px"><span style="color:indianred;">across</span> is a function of the package <span style="color:indianred;">dplyr</span> used to apply a function to several columns of a tibble.</span> <span class="fragment"><span style="font-size: 30px"><span style="color:indianred;">across</span> takes 2 arguments: the definition of the columns to transform, and the function to apply:</span></span></p>
-<p><span class="fragment"><span style="font-size: 30px">Let’s use our function <span style="color:indianred;">recode_Likert</span> to recode <em>dt_Likert</em>:</span></span></p>
 <div class="fragment">
+<p><span style="font-size: 30px">Let’s use our function <span style="color:indianred;">recode_Likert</span> to recode <em>dt_Likert</em>:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb151"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb151-1"><a href=""></a>dt_Likert <span class="sc">%&gt;%</span> </span>
 <span id="cb151-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
@@ -1923,18 +1996,20 @@ $sample3
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 5
-  id    Question1      Question2         Question3      Question4     
-  &lt;chr&gt; &lt;fct&gt;          &lt;fct&gt;             &lt;fct&gt;          &lt;fct&gt;         
-1 A     Agree          Neutral           Agree          Agree         
-2 B     Strongly agree Agree             Strongly agree Strongly agree
-3 C     Agree          Neutral           Agree          Neutral       
-4 D     Agree          Disagree          Disagree       Agree         
-5 E     Agree          Strongly disagree Disagree       Disagree      
-6 F     Strongly agree Strongly disagree Neutral        Disagree      </code></pre>
+  id    Question1         Question2         Question3         Question4        
+  &lt;chr&gt; &lt;fct&gt;             &lt;fct&gt;             &lt;fct&gt;             &lt;fct&gt;            
+1 A     Agree             Agree             Strongly disagree Disagree         
+2 B     Disagree          Disagree          Agree             Agree            
+3 C     Neutral           Disagree          Strongly disagree Disagree         
+4 D     Neutral           Strongly disagree Neutral           Disagree         
+5 E     Strongly disagree Disagree          Strongly disagree Strongly disagree
+6 F     Disagree          Disagree          Strongly agree    Agree            </code></pre>
 </div>
 </div>
 </div>
 <aside class="notes">
+<p>In the previous session, we had to write the name of the function everytime…</p>
+<p>dt_Likert %&gt;% mutate(Question1 = recode_Likert(Question1), Question2 = recode_Likert(Question2), Question3 = recode_Likert(Question3), Question4 = recode_Likert(Question4), )</p>
 <p>the warning just tell us that some of the column don’t have all the levels that we try to recode =&gt; OK</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -2024,6 +2099,19 @@ $sample3
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">💡 Note that here we have used <span style="color:indianred;">across</span> with <span style="color:indianred;">summarise</span></span></span></p>
+<aside class="notes">
+<p>before, it was with mutate</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="across-apply-a-function-to-tibble-4" class="slide level2 scrollable">
 <h2><span style="color:indianred;">across</span>: apply a function to tibble</h2>
@@ -2065,7 +2153,7 @@ $sample3
 <span id="cb162-2"><a href=""></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(</span>
 <span id="cb162-3"><a href=""></a>         <span class="fu">starts_with</span>(<span class="st">"Question"</span>), <span class="co"># columns to transform</span></span>
 <span id="cb162-4"><a href=""></a>         recode_Likert, <span class="co"># function to apply</span></span>
-<span id="cb162-5"><a href=""></a>         <span class="at">.names =</span> <span class="st">"{.col}_recoded"</span>)</span>
+<span id="cb162-5"><a href=""></a>         <span class="at">.names =</span> <span class="st">"{.col}_recoded"</span>) <span class="co"># how to name the new columns</span></span>
 <span id="cb162-6"><a href=""></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell fragment">
@@ -2073,12 +2161,12 @@ $sample3
 <pre><code># A tibble: 6 × 9
   id    Question1 Question2 Question3 Question4 Question1_recoded
   &lt;chr&gt; &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;            
-1 A     4         3         4         4         Agree            
-2 B     5         4         5         5         Strongly agree   
-3 C     4         3         4         3         Agree            
-4 D     4         2         2         4         Agree            
-5 E     4         1         2         2         Agree            
-6 F     5         1         3         2         Strongly agree   
+1 A     4         4         1         2         Agree            
+2 B     2         2         4         4         Disagree         
+3 C     3         2         1         2         Neutral          
+4 D     3         1         3         2         Neutral          
+5 E     1         2         1         1         Strongly disagree
+6 F     2         2         5         4         Disagree         
 # ℹ 3 more variables: Question2_recoded &lt;fct&gt;, Question3_recoded &lt;fct&gt;,
 #   Question4_recoded &lt;fct&gt;</code></pre>
 </div>
@@ -2175,14 +2263,27 @@ $sample3
 <pre><code># A tibble: 3 × 3
     Min   Max rand_draw
   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
-1     1     4      1.08
-2    25    75      1.08
-3   300   500      1.08</code></pre>
+1     1     4      1.97
+2    25    75      1.97
+3   300   500      1.97</code></pre>
 </div>
 </div>
 </div>
 </div></div>
-<p><span class="fragment"><span style="font-size: 30px">🥴 This didn’t work… <span style="color:indianred;">mutate</span> was applied on all rows using Min and Max of the first row…</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">🥴 This didn’t work… <span style="color:indianred;">mutate</span> was applied only once using Min and Max of the first row…</span></span></p>
+<aside class="notes">
+<p>example doesn’t work</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="rowwise-apply-a-transformation-line-by-line-1" class="slide level2">
 <h2><span style="color:indianred;">rowwise</span>: apply a transformation line by line</h2>
@@ -2198,9 +2299,9 @@ $sample3
 # Rowwise: 
     Min   Max rand_draw
   &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
-1     1     4      1.82
-2    25    75     37.4 
-3   300   500    364.  </code></pre>
+1     1     4      1.59
+2    25    75     53.2 
+3   300   500    357.  </code></pre>
 </div>
 </div>
 </section>
@@ -2225,15 +2326,28 @@ $sample3
 # Rowwise: 
   id    Question1 Question2 Question3 Question4  Mean
   &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
-1 A             1         3         3         3  2.5 
-2 B             2         4         4         4  3.5 
-3 C             1         3         3         2  2.25
-4 D             1         2         1         3  1.75
-5 E             1         1         1         1  1   
-6 F             2         1         2         1  1.5 </code></pre>
+1 A             4         3         1         2  2.5 
+2 B             2         2         3         3  2.5 
+3 C             3         2         1         2  2   
+4 D             3         1         2         2  2   
+5 E             1         2         1         1  1.25
+6 F             2         2         4         3  2.75</code></pre>
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 30px"><em>We could of course do everything in a single pipe.</em></span></span></p>
+<aside class="notes">
+<p>scroll down!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <aside class="notes">
 <p>here the responses were factors so need to transform them in numeric to take the mean</p>
 <p>show in 2 separate pipe to avoid confusion</p>
@@ -2253,11 +2367,24 @@ $sample3
 <h2>The <span style="color:indianred;">apply</span> family</h2>
 <div class="columns">
 <div class="column" style="width:65%;">
-<p>The <span style="color:indianred;">apply</span> family in base R is an alternative way to perform functional programming,using a different syntax than <span style="color:indianred;">map</span> and <span style="color:indianred;">across</span>.</p>
+<p>The <span style="color:indianred;">apply</span> family in base R is an alternative way to perform functional programming, using a different syntax than <span style="color:indianred;">map</span> and <span style="color:indianred;">across</span>.</p>
 <p><span style="font-size: 30px">To know more about the <span style="color:indianred;">apply</span> family, see <a href="https://www.r-bloggers.com/2024/04/exploring-apply-sapply-lapply-and-map-functions-in-r/" data-preview-link="false">here</a></span></p>
 </div><div class="column" style="width:35%;">
 <p><img data-src="apply_map.png"></p>
 </div></div>
+<aside class="notes">
+<p>for some who are familiar with R, may have heard of the apply family =&gt; won’t cover them here as equivalent to the function we have seen</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="when-not-to-use-a-loop" class="slide level2">
 <h2>When not to use a loop?</h2>
@@ -2295,6 +2422,7 @@ $sample3
 <p><span class="fragment"><span style="font-size: 25px"><em>But remember that the best code is the code you can write and understand. Loops are fine, especially if you’re not chasing efficiency.</em></span></span></p>
 </div></div>
 <aside class="notes">
+<p>to finish:</p>
 <p>as seen, many of our loops could be written with accross or map</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {

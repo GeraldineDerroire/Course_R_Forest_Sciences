@@ -89,6 +89,10 @@ The command [if]{style="color:indianred;"} is used with:
 
 * a block of code (in curly brackets) that is executed only if the condition is TRUE
 
+::: notes
+how does that work?
+:::
+
 
 ## if / else
 
@@ -286,6 +290,8 @@ mean_diam(new_circ, digits = 2)
 
 ::: notes
 function mean_diam seen in the previous session: change the units of diameter, take the mean and round it
+
+before, your default for digits was 2, so we would have had the same results for both
 :::
 
 ## Another example 
@@ -344,6 +350,14 @@ graph_var(vec_logical)
 [[and combine them using [&&]{style="color:indianred;"} and [||]{style="color:indianred;"}]{style="font-size: 30px"}]{.fragment}
 
 [[💡 [&&]{style="color:indianred;"} and [||]{style="color:indianred;"} are equivalent to [&]{style="color:indianred;"} and [|]{style="color:indianred;"} but only work for vector of length one. There are therefore safer to use in if/else conditions, as they need to return only one value.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+these is important for writing code with conditional execution
+
+any is true if at least one is true
+
+all is true if at least all are true
+:::
 
 ## More complex conditions
 
@@ -542,6 +556,8 @@ try(mean_diam(vec_char))
 
 ::: notes
 warning can be used independently of return, in this case the execution continues
+
+a stop give an error, this is very different. For example with Quarto, the document would not compiled
 :::
 
 ## Using [if/else]{style="color:indianred;"} outside a function
@@ -550,7 +566,7 @@ We have seen many examples of use of [if/else]{style="color:indianred;"} inside 
 
 * at the beginning of a script, together with a warning or a stop, to check if the data are valid
 
-* in a Quarto or R Markdown document, to adapt the output of a chunk depending on it result
+* in a Quarto or R Markdown document, to adapt the output of a chunk depending on its result
 
 * ...
 
@@ -701,6 +717,8 @@ summary(iris_sub_scaled)
 ```
 
 ::: notes
+! if you apply the function scale over a dataframe with only numeric variables, it would actually work without doing a for loop
+
 subset of iris: keep only 1 species and only numerical columns
 
 note that here we modify an existing object (iris_sub_scaled)
@@ -787,6 +805,10 @@ seq_along(vec_null)
 ```
 :::
 
+::: notes
+answer after!
+:::
+
 ## Iterating over numeric indices {.scrollable}
 
 [Iterating over numeric indices is the most common form. It is useful when we want to use the index (the iterator) for more than one purpose within the loop:]{style="font-size: 30px"}
@@ -830,7 +852,7 @@ fib
 
 ## Output of a loop 
 
-[When a loop generates data, it is important to pre-allocate the output to the required size rather than grow it inside a loop, because pre-allocation avoids repeated memory copying and is significantly **faster** and **more efficient**, especially for large outputs]{style="font-size: 30px"}
+[When a loop generates data, it is important to **pre-allocate the output to the required size rather than grow it inside a loop**, because pre-allocation avoids repeated memory copying and is significantly **faster** and **more efficient**, especially for large outputs]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -876,7 +898,12 @@ out
 
 ## [while]{style="color:indianred;"} loops
 
-Let's take an example of a [while]{style="color:indianred;"} loop that simulate flipping a coin util we obtain a head:
+Let's take an example of a [while]{style="color:indianred;"} loop that simulate flipping a coin until we obtain a head:
+
+```{r, echo=FALSE}
+set.seed(23)
+```
+
 
 ```{r}
 res <- ""
@@ -897,6 +924,10 @@ while (res != "head") {
     print(res)
 }
 ```
+:::
+
+::: notes
+other type of loop
 :::
 
 ## [while]{style="color:indianred;"} loops
@@ -983,7 +1014,7 @@ As for a function, a loop needs to be write **step by step**:
 
 
 
-# Functional programmingwith the [tidyverse]{style="color:indianred;"}
+# Functional programming with the [tidyverse]{style="color:indianred;"}
 
 **Functional programming** is a way of writing code based on the use of small functions.
 
@@ -1080,7 +1111,9 @@ vec_num %>% map_lgl(sup_5)
 
 
 ::: notes 
-ex to do the same thing than in the two example before but returning a vector
+these ex to do the same thing than in the two examples before but returning a vector
+
+map_chr on next slide
 :::
 
 
@@ -1108,6 +1141,10 @@ for (i in seq_along(desserts)) {
 }
 out_dessert
 ```
+:::
+
+::: notes
+the loop is slightly different than the loop that we created before with desserts
 :::
 
 
@@ -1155,9 +1192,10 @@ vec_name %>% # vector of names created earlier
 [[across]{style="color:indianred;"} is a function of the package [dplyr]{style="color:indianred;"} used to apply a function to several columns of a tibble.]{style="font-size: 30px"}
 [[[across]{style="color:indianred;"} takes 2 arguments: the definition of the columns to transform, and the function to apply:]{style="font-size: 30px"}]{.fragment}
 
-[[Let's use our function [recode_Likert]{style="color:indianred;"} to recode *dt_Likert*:]{style="font-size: 30px"}]{.fragment}
-
 ::: fragment
+
+[Let's use our function [recode_Likert]{style="color:indianred;"} to recode *dt_Likert*:]{style="font-size: 30px"}
+
 ```{r}
 #| warning: FALSE
 dt_Likert %>% 
@@ -1170,6 +1208,16 @@ dt_Likert %>%
 :::
 
 ::: notes
+In the previous session, we had to write the name of the function everytime...
+
+dt_Likert %>% 
+  mutate(Question1 = recode_Likert(Question1),
+         Question2 = recode_Likert(Question2),
+         Question3 = recode_Likert(Question3),
+         Question4 = recode_Likert(Question4),
+         )
+
+
 the warning just tell us that some of the column don't have all the levels that we try to recode => OK
 :::
 
@@ -1239,6 +1287,10 @@ iris_sub %>%
 
 [[💡 Note that here we have used [across]{style="color:indianred;"} with [summarise]{style="color:indianred;"}]{style="font-size: 30px"}]{.fragment}
 
+::: notes
+before, it was with mutate
+:::
+
 ## [across]{style="color:indianred;"}: apply a function to tibble {.scrollable}
 
 [We can also use [where]{style="color:indianred;"} to specify the columns with a condition:]{style="font-size: 30px"}
@@ -1277,7 +1329,7 @@ dt_Likert %>%
   mutate(across(
          starts_with("Question"), # columns to transform
          recode_Likert, # function to apply
-         .names = "{.col}_recoded")
+         .names = "{.col}_recoded") # how to name the new columns
   )
 ```
 
@@ -1352,7 +1404,11 @@ dt_sim %>%
 :::
 :::::
 
-[[🥴 This didn't work... [mutate]{style="color:indianred;"} was applied on all rows using Min and Max of the first row... ]{style="font-size: 30px"}]{.fragment}
+[[🥴 This didn't work... [mutate]{style="color:indianred;"} was applied only once using Min and Max of the first row... ]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+example doesn't work
+:::
 
 ## [rowwise]{style="color:indianred;"}: apply a transformation line by line 
 
@@ -1384,6 +1440,10 @@ dt_Likert_num %>%
 [[*We could of course do everything in a single pipe.*]{style="font-size: 30px"}]{.fragment}
 
 ::: notes
+scroll down!
+:::
+
+::: notes
 here the responses were factors so need to transform them in numeric to take the mean
 
 show in 2 separate pipe to avoid confusion
@@ -1394,7 +1454,7 @@ show in 2 separate pipe to avoid confusion
 ::::: columns
 ::: {.column width="65%"}
 
-The [apply]{style="color:indianred;"} family in base R is an alternative way to perform functional programming,using a different syntax than [map]{style="color:indianred;"} and [across]{style="color:indianred;"}.
+The [apply]{style="color:indianred;"} family in base R is an alternative way to perform functional programming, using a different syntax than [map]{style="color:indianred;"} and [across]{style="color:indianred;"}.
 
 [To know more about the [apply]{style="color:indianred;"} family, see [here](https://www.r-bloggers.com/2024/04/exploring-apply-sapply-lapply-and-map-functions-in-r/){preview-link="false"}]{style="font-size: 30px"}
 
@@ -1404,6 +1464,10 @@ The [apply]{style="color:indianred;"} family in base R is an alternative way to 
 ![](apply_map.png)
 :::
 :::::
+
+::: notes
+for some who are familiar with R, may have heard of the apply family => won't cover them here as equivalent to the function we have seen
+:::
 
 
 ## When not to use a loop?
@@ -1446,6 +1510,8 @@ vec_num + 10
 :::::
 
 ::: notes
+to finish:
+
 as seen, many of our loops could be written with accross or map
 
 :::

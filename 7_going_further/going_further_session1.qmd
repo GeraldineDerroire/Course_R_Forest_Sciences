@@ -26,7 +26,7 @@ editor:
 
 # 
 
-Let's load the package we will use:
+Let's load the packages we will use:
 
 ```{r}
 #| message: false
@@ -35,7 +35,7 @@ library(tidyverse)
 
 
 ```{r, echo=FALSE}
-set.seed(14)
+# set.seed(14)
 ```
 
 # Vector creation
@@ -43,7 +43,7 @@ set.seed(14)
 ::: notes
 some reminders of things already seen + some new things
 
-these will be usefull if you need to simulate data (for exemple for predictions using a model)
+these will be useful if you need to simulate data (for example for predictions using a model)
 :::
 
 ## Combine elements into a vector
@@ -108,7 +108,7 @@ rep(c("A", "B", "C"), length.out = 5)
 1:10
 ```
 
-[[We can also use [seq]{style="color:indianred;"}, which allow selecting]{style="font-size: 30px"}]{.fragment}
+[[We can also use [seq]{style="color:indianred;"}, which allow specifying]{style="font-size: 30px"}]{.fragment}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -148,6 +148,27 @@ seq(from = 10,
 :::
 :::::
 
+## Create numeric sequences
+
+[[seq_along]{style="color:indianred;"} is a variant of [seq]{style="color:indianred;"} that creates sequences of a length equal to the length of its arguments:]{style="font-size: 30px"}
+
+```{r}
+v <- c("A", "I", "D")
+seq_along(v)
+```
+
+::: fragment
+```{r}
+v <- c("A", "I", "D", "Q", "P")
+seq_along(v)
+```
+:::
+
+
+::: notes
+seq_along will be very usefull for the next session
+:::
+
 ## Predefined letter vectors
 
 ::::: columns
@@ -178,7 +199,7 @@ str(month.abb)
 :::
 :::::
 
-[[They can be used with other functions:]{style="font-size: 30px"}]{.fragment}
+[[They can be used with functions:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
@@ -374,13 +395,13 @@ rpois(n = 10,
 
 ## What is a function?
 
-As previously seen, a function take one or several **arguments** (data, parameters, options) as in put, performs some code, and returns a result:
+As previously seen, a function take one or several **arguments** (data, parameters, options) as input, performs some code, and returns a result:
 
 ![](function_1.png)
 
 ## Why writing functions?
 
-[When you need to repeat the same actions more than twice, it is recommanded to write a function. This helps:]{style="font-size: 30px"}
+[When you need to repeat the same actions **more than twice**, it is recommended to **write a function**. This helps:]{style="font-size: 30px"}
 
 * [Avoid code duplication]{style="font-size: 30px"}
 
@@ -393,6 +414,10 @@ As previously seen, a function take one or several **arguments** (data, paramete
 * [If you want to modify/update/correct the code, you have to modify it everywhere manually]{style="font-size: 30px"}
 
 ::: notes
+* avoid code dulplication (make the code shorter)
+
+* 
+
 a package can be written for oneself
 :::
 
@@ -423,6 +448,10 @@ my_first_function <- function() {
 ```
 
 [[⚠️ Be careful not to give the name of an already existing function to your function. This would replace the existing function until you restart your session.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+explain that a function is an object that is loaded in the enviro
+:::
 
 ## Structure of a function - result
 
@@ -499,6 +528,10 @@ my_sum(2, 8)
 
 [[or none (see our very first function)...]{style="font-size: 30px"}]{.fragment}
 
+::: notes
+The first function says only Hello!
+:::
+
 ::: fragment
 
 [⚠️Passing an incorrect number of values to the arguments of a function will result in an error:]{style="font-size: 30px"}
@@ -522,6 +555,10 @@ To do this, we execute the code of the function (*i.e.* the code that creates th
 
 [⚠️ After updating a function, you must execute the code again to load the updated version.]{.fragment}
 
+::: notes
+when you load a package with library(), you load all the function of the package
+:::
+
 
 
 ## Writing a function step by step {.smaller}
@@ -542,6 +579,9 @@ Let's start identifying the arguments and planning the operations (without runni
   # Return the diameter
 ```
 
+::: notes
+for small function you wouldn't necessarly need to plan it before, but for a longer/more complicated one, this is usefull
+:::
 
 ## Writing a function step by step {.smaller}
 
@@ -558,6 +598,8 @@ test_circ <- c(runif(n = 9,
 test_circ
 ```
 ::: notes
+Don't code blind! 
+
 test data don't necessarily need to be created from scratch, they can be a subset of our real data
 :::
 
@@ -604,6 +646,12 @@ mean_diam
 
 [*Because of the NA, the mean is not calculated... How do we want to handle this? We can let the user decide...*]{.fragment}
 
+::: notes
+argh, NA...
+
+how do we want to handle this? Calculate by removing the NA, or returning a NA?
+:::
+
 ## Writing a function step by step {.smaller}
 
 **Step 3: develop the code... and add arguments if needed**
@@ -628,6 +676,8 @@ mean_diam
 
 ::: notes
 all good
+
+BUT we have a lot of decimals...
 :::
 
 ## Writing a function step by step {.smaller}
@@ -715,7 +765,7 @@ mean_diam(circ = new_circ, digits = 3, na_act = FALSE)
 :::
 
 ::: notes 
-we will see later why removing the test arguments
+why removing the test arguments? because if you forgot some arguments in (), your function should not run, but it will because the argument is still in your environement
 
 here we really decompose the writing, when you get more confident, the code can be more compact (and use pipe if we want)
 :::
@@ -770,6 +820,10 @@ my_sum3(11, 3)
 
 :::
 
+::: notes
+these functions don't return a result that can be stored in an object, they just perform an action
+:::
+
 ## Message
 
 [We can also include a [message]{style="color:indianred;"} in a function:]{style="font-size: 30px"}
@@ -822,6 +876,12 @@ median(vec_num, na.rm = TRUE)
 :::::
 
 [[💡 Usually the data are passed by position, and the rest by name.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+This is not specific to function that you create your self...
+
+passing arguments by position can be confussing!
+:::
 
 ## Default values of arguments {.smaller}
 
@@ -886,6 +946,13 @@ my_hist2(new_circ,
 :::
 :::::
 
+::: notes
+with a function that makes an histogram, we can pass argument to customise the graph
+
+we put ... as an argument in our function, and in the function used inside our function
+
+:::
+
 ## Result of a function
 
 [We don't necessary have to use [return]{style="color:indianred;"} to return the result of a function:]{style="font-size: 30px"}
@@ -921,7 +988,7 @@ my_sum <- function(x, y) {
 ::::: columns
 ::: {.column width="50%"}
 
-[The instruction [return]{style="color:indianred;"} ends the execution of a function, **so we cannot use [return]{style="color:indianred;"} twice:**]{style="font-size: 30px"}
+[The instruction [return]{style="color:indianred;"} **ends the execution** of a function, **so we cannot use [return]{style="color:indianred;"} twice:**]{style="font-size: 30px"}
 
 ```{r}
 my_summary <- function(v) {
@@ -957,9 +1024,9 @@ res
 
 ::: fragment
 
-[Splitting a big function into smaller nested ones makes each step clearer and easier to maintain.]{style="font-size: 30px"} 
+[**Splitting a big function into smaller nested ones** makes each step clearer and easier to maintain.]{style="font-size: 30px"} 
 
-[In addition, these small functions can potentially be reused in other parts of your code.]{style="font-size: 30px"}
+[In addition, these small functions can potentially be **reused** in other parts of your code.]{style="font-size: 30px"}
 
 :::
 
@@ -978,7 +1045,9 @@ source("R/my_function.R")
 :::
 
 ::: notes
-about the organisation of a project, see the second lesson
+remember in one of the first session, we add this R folder in the template of Rstudio project?
+
+sourcing for your own function is equivalent to loading a package (loading all the function of the package), this put them in your environement
 :::
 
 ## Using our own functions with [dplyr]{style="color:indianred;"} {.smaller}
@@ -997,6 +1066,10 @@ dt_Likert
 ```
 
 [[We want to recode the responses to make them more explicit. We could recode each variables manually using [mutate]{style="color:indianred;"} and [fct_recode]{style="color:indianred;"} but this would be very tedious...]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+let's illustrate this, first create a data set
+:::
 
 ## Using our own functions with [dplyr]{style="color:indianred;"} {.smaller}
 
@@ -1041,11 +1114,21 @@ we will see in the next session a even more concise way of doing this
 :::
 
 
-# Scope of variables
+# Scope of objects
 
-Objects created in a script are **global variables**, they can be accessed at any point of a session.
+Objects created in a script are **global objects**, they can be accessed at any point of a session.
 
-Objects created in a function are **local variables**.
+Objects created in a function are **local objects**, they don't exist outside of the function.
+
+::: notes
+the scope of an object is where the object "lives", where it is stored
+
+important to understand this when creating functions
+
+global object are stored in the global enviro
+
+local object are store in a local enviro, such as the enviro of a function
+:::
 
 ## Scope of variables - Rule 1
 
@@ -1155,6 +1238,8 @@ obj
 [In R, almost everything is an object (including vectors, lists, data frames, functions, models, and plots). This makes it possible to save and reload them exactly as they were.]{style="font-size: 30px"}
 
 ::: notes
+to finsih this session..
+
 so what we are going to see works with any type of object
 :::
 
@@ -1179,7 +1264,7 @@ readRDS("data/my_vec.rds")
 
 ::: fragment
 
-This only reads the object, so we would need to assign it to an object to load it into the environment.
+This only reads the object, so we would need to assign it to an object to keep it into the environment.
 
 The name of an object is **not preserved** when saved as *.rds*.
 
@@ -1244,7 +1329,7 @@ this can be usefull to save time, but can cause problem of reproductability is t
 
 * Barnier J. *Introduction à R et au tidyverse* [in French](https://juba.github.io/tidyverse/){preview-link="false"}
 
-* *Introduction à l’analyse d’enquêtes avec R et RStudio* - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette [in French](https://larmarange.github.io/analyse-R/){preview-link="false"} 
+* Barnier J., Biaudet J., Briatte F., Bouchet-Valat M., Gallic E., Giraud F., Gombin J., Kauffmann M., Lalanne C., Larmarange J., Robette N. *Introduction à l’analyse d’enquêtes avec R et RStudio* -  [in French](https://larmarange.github.io/analyse-R/){preview-link="false"} 
 
 :::
 
