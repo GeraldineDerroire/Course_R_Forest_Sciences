@@ -580,7 +580,7 @@ Géraldine Derroire
 </section>
 <section id="create-numeric-sequences-1" class="slide level2">
 <h2>Create numeric sequences</h2>
-<p><span style="font-size: 30px"><span style="color:indianred;">seq_along</span> is a variant of <span style="color:indianred;">seq</span> that creates sequences of a length equal to the length of its arguments:</span></p>
+<p><span style="font-size: 30px"><span style="color:indianred;">seq_along</span> is a variant of <span style="color:indianred;">seq</span> that creates sequences of a length equal to the length of its argument:</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a>v <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"I"</span>, <span class="st">"D"</span>)</span>
 <span id="cb22-2"><a href=""></a><span class="fu">seq_along</span>(v)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -937,6 +937,19 @@ Levels: blue green red</code></pre>
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>don’t spend too long on this, not so important for the moment</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="writing-your-own-functions" class="title-slide slide level1 center">
@@ -1044,6 +1057,19 @@ Levels: blue green red</code></pre>
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>you have written a function! easy!</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="structure-of-a-function---argument-and-body" class="slide level2">
 <h2>Structure of a function - argument and body</h2>
@@ -1081,19 +1107,6 @@ Levels: blue green red</code></pre>
 </div>
 </div>
 </div>
-<aside class="notes">
-<p>you have written a function! easy!</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 <section id="structure-of-a-function-1" class="slide level2">
 <h2>Structure of a function</h2>
@@ -1915,7 +1928,7 @@ $median
 <section id="scope-of-objects" class="title-slide slide level1 center">
 <h1>Scope of objects</h1>
 <p>Objects created in a script are <strong>global objects</strong>, they can be accessed at any point of a session.</p>
-<p>Objects created in a function are <strong>local objects</strong>, they don’t exist outside of the function.</p>
+<p>Objects created in a function are <strong>local objects</strong>, they don’t exist outside the function.</p>
 <aside class="notes">
 <p>the scope of an object is where the object “lives”, where it is stored</p>
 <p>important to understand this when creating functions</p>

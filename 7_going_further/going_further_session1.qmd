@@ -150,7 +150,7 @@ seq(from = 10,
 
 ## Create numeric sequences
 
-[[seq_along]{style="color:indianred;"} is a variant of [seq]{style="color:indianred;"} that creates sequences of a length equal to the length of its arguments:]{style="font-size: 30px"}
+[[seq_along]{style="color:indianred;"} is a variant of [seq]{style="color:indianred;"} that creates sequences of a length equal to the length of its argument:]{style="font-size: 30px"}
 
 ```{r}
 v <- c("A", "I", "D")
@@ -388,7 +388,9 @@ rpois(n = 10,
 :::
 
 
-
+::: notes
+don't spend too long on this, not so important for the moment
+:::
 
 
 # Writing your own functions
@@ -474,6 +476,10 @@ my_first_function()
 ```
 :::
 
+::: notes
+you have written a function! easy!
+:::
+
 ## Structure of a function - argument and body
 
 [We now want to personalise our greeting...]{style="font-size: 30px"}
@@ -507,9 +513,7 @@ my_first_function(name = vec_name)
 :::
 
 
-::: notes
-you have written a function! easy!
-:::
+
 
 ## Structure of a function
 
@@ -1118,7 +1122,7 @@ we will see in the next session a even more concise way of doing this
 
 Objects created in a script are **global objects**, they can be accessed at any point of a session.
 
-Objects created in a function are **local objects**, they don't exist outside of the function.
+Objects created in a function are **local objects**, they don't exist outside the function.
 
 ::: notes
 the scope of an object is where the object "lives", where it is stored
