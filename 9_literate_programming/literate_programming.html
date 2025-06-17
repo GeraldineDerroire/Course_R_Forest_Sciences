@@ -615,6 +615,8 @@ Géraldine Derroire
 <div class="column" style="width:60%;">
 <p><span style="font-size: 30px">To add a figure with a caption:</span></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href=""></a><span class="al">![Caption](quarto_logo.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span style="font-size: 25px">⚠️ The file with the figure needs to be in the same folder than the quarto document.</span></p>
+<div class="fragment">
 <p><span style="font-size: 30px">Formatting options:</span></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href=""></a>Figure size</span>
 <span id="cb2-2"><a href=""></a>  <span class="al">![Caption](quarto_logo.png)</span>{width=300}</span>
@@ -623,6 +625,7 @@ Géraldine Derroire
 <span id="cb2-5"><a href=""></a>Figure Alignment</span>
 <span id="cb2-6"><a href=""></a>  <span class="al">![Caption](quarto_logo.png)</span>{fig-align="left"}</span>
 <span id="cb2-7"><a href=""></a>  <span class="al">![Caption](quarto_logo.png)</span>{fig-align="center"}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div><div class="column" style="width:20%;">
 
 </div><div class="column" style="width:20%;">
@@ -632,8 +635,10 @@ Géraldine Derroire
 <figcaption>Caption</figcaption>
 </figure>
 </div>
-</div><p><span style="font-size: 30px">Combines option with a space between arguments:</span></p>
+</div><div class="fragment">
+<p><span style="font-size: 30px">Combines option with a space between arguments:</span></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href=""></a><span class="al">![Caption](quarto_logo.png)</span>{height=80% fig-align="right"}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="tables" class="slide level2">
 <h2>Tables</h2>
@@ -666,7 +671,8 @@ Géraldine Derroire
 </tbody>
 </table>
 </div>
-</div><p><span style="font-size: 30px">To add a caption and change the width of columns:</span></p>
+</div><div class="fragment">
+<p><span style="font-size: 30px">To add a caption and change the width of columns:</span></p>
 <div class="column" style="width:50%;">
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href=""></a>| First Header | Second Header |</span>
 <span id="cb5-2"><a href=""></a>|--------------|---------------|</span>
@@ -702,7 +708,8 @@ Géraldine Derroire
 </tbody>
 </table>
 </div>
-</div><aside class="notes">
+</div></div>
+<aside class="notes">
 <p>This is however not very practical for big table, we will see alternative later</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -722,10 +729,12 @@ Géraldine Derroire
 <p><span style="font-size: 30px">Equations can be place in a separate line, with</span><span style="color:lightgreen;">$$…$$</span>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href=""></a>$$y \sim \mathcal N(\alpha + \sum_{i=1}^n\beta_n \times x_n, \sigma^2)$$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><span style="font-size: 30px"><span class="math display">\[y \sim \mathcal N(\alpha + \sum_{i=1}^n\beta_n \times x_n,\sigma^2)\]</span></span></p>
+<div class="fragment">
 <p><span style="font-size: 30px">They can also be displayed inline, with</span><span style="color:lightgreen;">$…$</span>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href=""></a><span class="an">This equation is displayed inline:</span><span class="co"> $y = e^{\alpha}$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><span style="font-size: 25px"><em>This equation is displayed inline:</em> <span class="math inline">\(y = e^{\alpha}\)</span></span></p>
 <p><span style="font-size: 22px"><a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">More about LaTex equations</a></span></p>
+</div>
 <aside class="notes">
 <p>This is slighly more advanced but make the equation very clean</p>
 <style type="text/css">
@@ -767,9 +776,11 @@ Figure&nbsp;1: Caption
 </figcaption>
 </figure>
 </div>
-</div><p><span style="font-size: 30px">We can then refer to it with <span style="color:indianred;">@</span>:</span></p>
+</div><div class="fragment">
+<p><span style="font-size: 30px">We can then refer to it with <span style="color:indianred;">@</span>:</span></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href=""></a>@fig-quarto shows the logo of quarto.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><span style="font-size: 30px"><a href="#/cross-references" class="quarto-xref">Figure&nbsp;1</a> shows the logo of quarto.</span></p>
+</div>
 </section>
 <section id="cross-references-1" class="slide level2">
 <h2>Cross-references</h2>
@@ -1097,7 +1108,7 @@ Table&nbsp;1: Iris data
 <h2>Caching</h2>
 <p><span style="font-size: 30px">All code chunks are executed every time you render your document.</span></p>
 <p><span style="font-size: 30px">This ensures reproducibility, but can slow things down, especially when chunks take a long time to run. In this case, you can use <strong>caching</strong> for specific chunks.</span></p>
-<p><img data-src="cache.png" style="height:80.0%"></p>
+<p><img data-src="caching.png" style="height:80.0%"></p>
 <p><span style="font-size: 30px">Caching saves the results of a chunk in a specific file in the <em>document_name_cache</em> folder (the name of the folder starts with the name of your document). On subsequent render, cached chunks are only re-run if their code has changed.</span></p>
 </section>
 <section id="caching-1" class="slide level2">

@@ -190,6 +190,9 @@ on the right, what you will see in the rendered document
 ``` markdown
 ![Caption](quarto_logo.png)
 ```
+[⚠️ The file with the figure needs to be in the same folder than the quarto document.]{style="font-size: 25px"}
+
+::: fragment
 
 [Formatting options:]{style="font-size: 30px"}
 
@@ -203,6 +206,7 @@ Figure Alignment
   ![Caption](quarto_logo.png){fig-align="center"}
 ```
 :::
+:::
 
 ::: {.column width="20%"}
 :::
@@ -211,11 +215,14 @@ Figure Alignment
 ![Caption](quarto_logo.png){fig-align="center"}
 :::
 
+::: fragment
+
 [Combines option with a space between arguments:]{style="font-size: 30px"}
 
 ``` markdown
 ![Caption](quarto_logo.png){height=80% fig-align="right"}
 ```
+:::
 
 ## Tables
 
@@ -242,6 +249,8 @@ Figure Alignment
 :::
 ::::
 
+::: fragment
+
 [To add a caption and change the width of columns:]{style="font-size: 30px"}
 
 ::: {.column width="50%"}
@@ -267,7 +276,9 @@ Figure Alignment
 
 : Caption {tbl-colwidths="\[75,25\]"}
 :::
+:::
 ::::
+
 
 ::: notes
 This is however not very practical for big table, we will see alternative later
@@ -285,6 +296,8 @@ $$y \sim \mathcal N(\alpha + \sum_{i=1}^n\beta_n \times x_n, \sigma^2)$$
 
 [$$y \sim \mathcal N(\alpha + \sum_{i=1}^n\beta_n \times x_n,\sigma^2)$$]{style="font-size: 30px"}
 
+::: fragment
+
 [They can also be displayed inline, with]{style="font-size: 30px"}[\$...\$]{style="color:lightgreen;"}:
 
 ``` markdown
@@ -294,6 +307,8 @@ This equation is displayed inline: $y = e^{\alpha}$
 [*This equation is displayed inline:* $y = e^{\alpha}$]{style="font-size: 25px"}
 
 [[More about LaTex equations](https://en.wikibooks.org/wiki/LaTeX/Mathematics)]{style="font-size: 22px"}
+
+:::
 
 ::: notes
 This is slighly more advanced but make the equation very clean
@@ -319,7 +334,7 @@ This is slighly more advanced but make the equation very clean
 
 ## Cross-references
 
-[To be able to add a reference to a figure, table, equation, section... in another part of the document, we need to give them an **identifier** in ]{style="font-size: 30px"}[{#....}]{style="color:indianred;"}:
+[To be able to add a reference to a figure, table, equation, section... in another part of the document, we need to give them an **identifier** in ]{style="font-size: 30px"}[ {#....}]{style="color:indianred;"}:
 
 ::: {.column width="65%"}
 ``` markdown
@@ -334,6 +349,8 @@ This is slighly more advanced but make the equation very clean
 ![Caption](quarto_logo.png){#fig-quarto width="50%"}
 :::
 
+::: fragment
+
 [We can then refer to it with [\@]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ``` markdown
@@ -341,6 +358,8 @@ This is slighly more advanced but make the equation very clean
 ```
 
 [@fig-quarto shows the logo of quarto.]{style="font-size: 30px"}
+
+:::
 
 ## Cross-references
 
@@ -572,7 +591,7 @@ what on the left gives what on the right
 
 [This ensures reproducibility, but can slow things down, especially when chunks take a long time to run. In this case, you can use **caching** for specific chunks.]{style="font-size: 30px"}
 
-![](cache.png){height=80%}
+![](caching.png){height=80%}
 
 [Caching saves the results of a chunk in a specific file in the *document_name_cache* folder (the name of the folder starts with the name of your document). On subsequent render, cached chunks are only re-run if their code has changed.]{style="font-size: 30px"}
 

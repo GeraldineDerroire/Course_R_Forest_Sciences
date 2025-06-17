@@ -116,7 +116,7 @@ You already set up [git]{style="color:indianred;"} and [GitHub]{style="color:ind
 You should now have:
 
 ::: nonincremental
--   [git]{style="color:indianred;"} installed, configurated
+-   [git]{style="color:indianred;"} installed and configured
 
 -   a [GitHub]{style="color:indianred;"} account and a ssh key
 :::
@@ -421,7 +421,7 @@ Let's NOT do this together
 
 ::: fragment
 ```{r, eval = FALSE}
-git remote add origin https://github.com/MonCompte/MonDepot.git
+git remote add origin https://github.com/my_account/my_repo.git
 git push -u origin main
 ```
 :::
@@ -516,7 +516,7 @@ data/raw-data/raw-data.csv
 ::: fragment
 [⚠️️️Files listed in [.gitignore]{style="color:indianred;"} will **not** be versioned or uploaded to GitHub.]{style="font-size: 30px"}
 
-[You can edit the [.gitignore]{style="color:indianred;} at any time, but this won't untrack files that are already tracked.]{style="font-size: 30px"}
+[You can edit the [.gitignore]{style="color:indianred;"} at any time, but this won't untrack files that are already tracked.]{style="font-size: 30px"}
 :::
 
 
