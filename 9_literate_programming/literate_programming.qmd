@@ -931,7 +931,7 @@ here problem that there are two : in the YAML
 
 ## To avoid big problems
 
-💡 Render often, so that you can quickly indetify the cause of the problem!
+💡 Render often, so that you can quickly identify the cause of the problem and solve it!
 
 
 ## Acknowledgments {.smaller}
