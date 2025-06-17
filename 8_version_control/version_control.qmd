@@ -33,7 +33,7 @@ first the principle but then mostly practicing
 
 ::::: columns
 ::: {.column width="60%"}
-[git]{style="color:indianred;"} is a free and open source software that runs **on you computer**
+[git]{style="color:indianred;"} is a free and open source software that runs **on your computer**
 
 [git]{style="color:indianred;"} is a **Version Control System** that helps track changes to files over time.
 It allows you to
@@ -56,7 +56,11 @@ It allows you to
 
 -   always know what the current version is
 
--   know what are the difference between versions
+-   know what are the differences between versions
+
+::: notes
+=> reproducibility
+:::
 
 ## What is [GitHub]{style="color:indianred;"}?
 
@@ -114,11 +118,13 @@ You should now have:
 ::: nonincremental
 -   [git]{style="color:indianred;"} installed, configurated
 
--   a [GitHub]{style="color:indianred;"} and a ssh key
+-   a [GitHub]{style="color:indianred;"} account and a ssh key
 :::
 
 ::: notes
 all good for everyone?
+
+SSH key is a cryptographic key pair used to securely authenticate to remote servers without using a password
 :::
 
 ## A few definitions
@@ -133,7 +139,7 @@ all good for everyone?
 
 -   [the [staging area]{style="color:indianred;"} contains selected files that will be added to the next version]{style="font-size: 30px"}
 
--   [a [repository]{style="color:indianred;"} is an area containing all the versions]{style="font-size: 30px"}
+-   [the [local repository]{style="color:indianred;"} is an area containing all the versions]{style="font-size: 30px"}
 :::
 
 ::: {.column width="45%"}
@@ -156,6 +162,8 @@ all good for everyone?
 [Staged files are now in the **staging area**.]{style="font-size: 30px"}
 
 ::: notes
+for now, we don't practice, we will do it in a few minutes
+
 you may decide to commit some files later because they related to a separate task, or you may never commit then (see later gitignore)
 :::
 
@@ -173,6 +181,8 @@ you may decide to commit some files later because they related to a separate tas
 
 [A [Commit]{style="color:indianred;"} records:]{style="font-size: 30px"}
 
+::: nonincremental
+
 -   [**WHAT**: the specific changes (line-by-line differences) in the files that you staged]{style="font-size: 30px"}
 
 -   [**WHO**: the person who made the changes]{style="font-size: 30px"}
@@ -180,6 +190,8 @@ you may decide to commit some files later because they related to a separate tas
 -   [**WHEN**: the date of the commit]{style="font-size: 30px"}
 
 -   [**WHY**: a manually added message stating the reason of the commit (what has been done since the last version)]{style="font-size: 30px"}
+
+:::
 
 ::: notes
 go to the line often when typing text
@@ -205,6 +217,8 @@ go to the line often when typing text
 ::: {.column width="70%"}
 When to [commit]{style="color:indianred;"}?
 
+::: nonincremental
+
 -   [Commit often (make small commits)]{style="font-size: 30px"}
 
 -   [Commit when you reach a milestone]{style="font-size: 30px"}
@@ -214,6 +228,7 @@ When to [commit]{style="color:indianred;"}?
 -   [Commit at the end of a work session]{style="font-size: 30px"}
 
 -   [Commit files that actually work]{style="font-size: 30px"}
+:::
 :::
 
 ::: {.column width="30%"}
@@ -501,12 +516,16 @@ data/raw-data/raw-data.csv
 ::: fragment
 [⚠️️️Files listed in [.gitignore]{style="color:indianred;"} will **not** be versioned or uploaded to GitHub.]{style="font-size: 30px"}
 
-[You can edit n [.gitignore]{style="color:indianred;} at any time, but this won't untrack files that are already tracked.]{style="font-size: 30px"}
+[You can edit the [.gitignore]{style="color:indianred;} at any time, but this won't untrack files that are already tracked.]{style="font-size: 30px"}
 :::
 
 
 ::: notes
 html or pdf files can be easily recreated
+
+obviously files in the git ignore will not be tracked, so select them carefully
+
+if a file is already track, you won't be able to remove them from the repo, so think ahead for sensitive files (they could actually be removed but this is a tricky operation)
 :::
 
 # Basic workflow from RStudio
@@ -611,8 +630,16 @@ as we want to do a commit per task, it can be usefull not to commit all recent c
 
 [This will synchronize your local repository with the remote one, downloading any new commits made by you or your collaborators directly on GitHub.]{style="font-size: 30px"}
 
+::: notes
+This is it, this is the basic workflow that you will need to repeat very often
+:::
+
 
 # Looking back
+
+::: notes
+now that you are familiar with the basic workflow, let's see how we can navigate the project history
+::: 
 
 ## Seeing past changes in Rstudio
 
@@ -685,6 +712,10 @@ as we want to do a commit per task, it can be usefull not to commit all recent c
 
 [[*The two last options are more advanced and must be done in the terminal. We won't cover them here.*]{style="font-size: 30px"}]{.fragment}
 
+::: notes 
+The two last options are more advanced and must be done in the terminal. We won't cover them here.
+:::
+
 
 # Collaborate with GitHub
 
@@ -703,6 +734,10 @@ On GitHub:
 * [type the GitHub user name of the collaborator you want to invite]{style="font-size: 30px"}
 
 * [click on *Add*]{style="font-size: 30px"}
+:::
+
+::: notes
+let's do it together
 :::
 
 ## Invite a collaborator
@@ -733,6 +768,10 @@ to be able to accept the invitation, you need to b signed in
 
 [It happens when the remote repository has changed since your last pull.]{style="font-size: 30px"}
 
+::: notes
+collaborating is one of the main objectives of Github, but can also complicate things a bit...
+:::
+
 
 ## Why can't I push ?
 
@@ -759,6 +798,14 @@ to be able to accept the invitation, you need to b signed in
 
 * [*pull before pushing again*]{style="font-size: 30px"}
 
+:::
+
+::: notes
+if time, let's practice this together
+
+you can also test with a colleagues
+
+It's important to experience this on a test repo
 :::
 
 
@@ -799,6 +846,10 @@ to be able to accept the invitation, you need to b signed in
 
 :::
 
+::: notes
+explain cases when Git can merge (changes on two different files)
+:::
+
 ## How to solve a conflict?
 
 * [open the conflicted file (its name is in the error message)]{style="font-size: 30px"}
@@ -829,11 +880,11 @@ to be able to accept the invitation, you need to b signed in
     
     * [*Try to push: you can't*]{style="font-size: 30px"}
     
-    * [*Try to pull: this generate a conflict*]{style="font-size: 30px"}
+    * [*Try to pull: this generate a conflict...*]{style="font-size: 30px"}
 
 :::
     
-[*You can know solve this conflict!*]{style="font-size: 30px"}
+[*You can now solve this conflict!*]{style="font-size: 30px"}
 
 
 ## How to avoid conflicts?
@@ -854,6 +905,9 @@ to be able to accept the invitation, you need to b signed in
 ![](solving_conflict_cartoon.png){fig-align="center" height="70%"}
 :::
 
+::: notes
+we are going to talk more about branches in a few minutes
+:::
 
 ## Using issues on a collaborative project
 
@@ -864,7 +918,7 @@ to be able to accept the invitation, you need to b signed in
 [It works like a forum. You can:]{style="font-size: 30px"}
 
 ::: nonincremental
-* [create to do list]{style="font-size: 30px"}
+* [create a to do list]{style="font-size: 30px"}
 
 * [assign tasks to team members]{style="font-size: 30px"}
 
@@ -890,6 +944,10 @@ to be able to accept the invitation, you need to b signed in
 ![](project.png)
 
 [[More on GitHub projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects){preview-link="false"}]{style="font-size: 30px"}
+
+::: notes
+issues are a way to collaborate
+::: 
 
 
 # More advanced use
@@ -917,7 +975,7 @@ Here we won't go in depth, just for you to be aware that this exists
 
 [To create a new branch from RStudio, click on ![](new_branch.png) in the git pane.]{style="font-size: 30px"}
 
-[You can select the branch you want to work on:]{style="font-size: 30px"}
+[You can then select the branch you want to work on:]{style="font-size: 30px"}
 
 ![](branches_rstudio.png)
 

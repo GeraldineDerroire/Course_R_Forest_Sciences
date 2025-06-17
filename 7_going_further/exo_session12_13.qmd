@@ -189,7 +189,7 @@ test_weather(temp= "blue", rain = TRUE)
 
 # Loop
 
-Write a `for` loop that calculate the cumulative sum of a vector. In other words: the first element of the output is the first element of the input, the second element of the output is the sum of the first two elements of the input, ... the n^th^ element of the output is the sum of the n^th^ first element of the input.
+Write a `for` loop that calculates the cumulative sum of a vector. In other words: the first element of the output is the first element of the input, the second element of the output is the sum of the first two elements of the input, ... the n^th^ element of the output is the sum of the n^th^ first element of the input.
 *There is a function called `cumsum` that does this, but let's forget about it for now...*
 To run this loop, make a vector of 10 random draws between 0 and 4.
 
@@ -229,7 +229,7 @@ map_int(H_list, max)
 # or but less usefull
 map(H_list, max)
 ```
-* Use the function `across` with the function function you have created in the first section to standardise all the numerical variables of the data set iris
+* Use the function `across` with the function you have created in the first section to standardise all the numerical variables of the data set iris
 
 ```{r}
 data("iris")
@@ -240,6 +240,7 @@ iris_sd <- iris %>% mutate(
 )
 summary(iris_sd)
 ```
+
 * Do the same thing but only for the variables related to sepals
 
 ```{r}

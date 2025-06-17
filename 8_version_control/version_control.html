@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2025-06-06">
+  <meta name="dcterms.date" content="2025-06-17">
   <title>Introduction to Version Control with Git and GitHub</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -407,7 +407,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2025-06-06</p>
+  <p class="date">2025-06-17</p>
 </section>
 <section>
 <section id="principle" class="title-slide slide level1 center">
@@ -430,7 +430,7 @@ Géraldine Derroire
 <h2>What is <span style="color:indianred;">git</span>?</h2>
 <div class="columns">
 <div class="column" style="width:60%;">
-<p><span style="color:indianred;">git</span> is a free and open source software that runs <strong>on you computer</strong></p>
+<p><span style="color:indianred;">git</span> is a free and open source software that runs <strong>on your computer</strong></p>
 <p><span style="color:indianred;">git</span> is a <strong>Version Control System</strong> that helps track changes to files over time. It allows you to</p>
 <ul>
 <li class="fragment"><p>keep the full history of a file and a project</p></li>
@@ -446,8 +446,21 @@ Géraldine Derroire
 <ul>
 <li class="fragment"><p>keep your project clean by avoiding saving multiple versions of each file: <em>no more <span style="color:gray;">script_v1_final_final_OK.R</span></em></p></li>
 <li class="fragment"><p>always know what the current version is</p></li>
-<li class="fragment"><p>know what are the difference between versions</p></li>
+<li class="fragment"><p>know what are the differences between versions</p></li>
 </ul>
+<aside class="notes">
+<p>=&gt; reproducibility</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-is-github" class="slide level2">
 <h2>What is <span style="color:indianred;">GitHub</span>?</h2>
@@ -490,11 +503,12 @@ Géraldine Derroire
 <div>
 <ul>
 <li><p><span style="color:indianred;">git</span> installed, configurated</p></li>
-<li><p>a <span style="color:indianred;">GitHub</span> and a ssh key</p></li>
+<li><p>a <span style="color:indianred;">GitHub</span> account and a ssh key</p></li>
 </ul>
 </div>
 <aside class="notes">
 <p>all good for everyone?</p>
+<p>SSH key is a cryptographic key pair used to securely authenticate to remote servers without using a password</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -516,7 +530,7 @@ Géraldine Derroire
 <ul>
 <li class="fragment"><p><span style="font-size: 30px">the <span style="color:indianred;">working copy</span> is the current state of the directory (what you actually see)</span></p></li>
 <li class="fragment"><p><span style="font-size: 30px">the <span style="color:indianred;">staging area</span> contains selected files that will be added to the next version</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">a <span style="color:indianred;">repository</span> is an area containing all the versions</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">the <span style="color:indianred;">local repository</span> is an area containing all the versions</span></p></li>
 </ul>
 </div><div class="column" style="width:45%;">
 <p><img data-src="local_remote.png"></p>
@@ -535,6 +549,7 @@ Géraldine Derroire
 </div>
 <p><span style="font-size: 30px">Staged files are now in the <strong>staging area</strong>.</span></p>
 <aside class="notes">
+<p>for now, we don’t practice, we will do it in a few minutes</p>
 <p>you may decide to commit some files later because they related to a separate task, or you may never commit then (see later gitignore)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -562,12 +577,14 @@ Géraldine Derroire
 <section id="basic-workflow-2" class="slide level2">
 <h2>Basic workflow</h2>
 <p><span style="font-size: 30px">A <span style="color:indianred;">Commit</span> records:</span></p>
+<div>
 <ul>
-<li class="fragment"><p><span style="font-size: 30px"><strong>WHAT</strong>: the specific changes (line-by-line differences) in the files that you staged</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px"><strong>WHO</strong>: the person who made the changes</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px"><strong>WHEN</strong>: the date of the commit</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px"><strong>WHY</strong>: a manually added message stating the reason of the commit (what has been done since the last version)</span></p></li>
+<li><p><span style="font-size: 30px"><strong>WHAT</strong>: the specific changes (line-by-line differences) in the files that you staged</span></p></li>
+<li><p><span style="font-size: 30px"><strong>WHO</strong>: the person who made the changes</span></p></li>
+<li><p><span style="font-size: 30px"><strong>WHEN</strong>: the date of the commit</span></p></li>
+<li><p><span style="font-size: 30px"><strong>WHY</strong>: a manually added message stating the reason of the commit (what has been done since the last version)</span></p></li>
 </ul>
+</div>
 <aside class="notes">
 <p>go to the line often when typing text</p>
 <style type="text/css">
@@ -606,13 +623,15 @@ Géraldine Derroire
 <div class="columns">
 <div class="column" style="width:70%;">
 <p>When to <span style="color:indianred;">commit</span>?</p>
+<div>
 <ul>
-<li class="fragment"><p><span style="font-size: 30px">Commit often (make small commits)</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">Commit when you reach a milestone</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">Put separate tasks/problems in separate commits</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">Commit at the end of a work session</span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">Commit files that actually work</span></p></li>
+<li><p><span style="font-size: 30px">Commit often (make small commits)</span></p></li>
+<li><p><span style="font-size: 30px">Commit when you reach a milestone</span></p></li>
+<li><p><span style="font-size: 30px">Put separate tasks/problems in separate commits</span></p></li>
+<li><p><span style="font-size: 30px">Commit at the end of a work session</span></p></li>
+<li><p><span style="font-size: 30px">Commit files that actually work</span></p></li>
 </ul>
+</div>
 </div><div class="column" style="width:30%;">
 <p><img data-src="fire.png"></p>
 </div></div>
@@ -884,10 +903,12 @@ Géraldine Derroire
 </div></div>
 <div class="fragment">
 <p><span style="font-size: 30px">⚠️️️Files listed in <span style="color:indianred;">.gitignore</span> will <strong>not</strong> be versioned or uploaded to GitHub.</span></p>
-<p><span style="font-size: 30px">You can edit n <span style="&quot;color:indianred;">.gitignore</span> at any time, but this won’t untrack files that are already tracked.</span></p>
+<p><span style="font-size: 30px">You can edit the <span style="&quot;color:indianred;">.gitignore</span> at any time, but this won’t untrack files that are already tracked.</span></p>
 </div>
 <aside class="notes">
 <p>html or pdf files can be easily recreated</p>
+<p>obviously files in the git ignore will not be tracked, so select them carefully</p>
+<p>if a file is already track, you won’t be able to remove them from the repo, so think ahead for sensitive files (they could actually be removed but this is a tricky operation)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -986,11 +1007,36 @@ Géraldine Derroire
 <h2>Pull</h2>
 <p><span style="font-size: 30px">To update your local repository with the latest changes from GitHub, click on <em>Pull</em>.</span></p>
 <p><span style="font-size: 30px">This will synchronize your local repository with the remote one, downloading any new commits made by you or your collaborators directly on GitHub.</span></p>
+<aside class="notes">
+<p>This is it, this is the basic workflow that you will need to repeat very often</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="looking-back" class="title-slide slide level1 center">
 <h1>Looking back</h1>
-
+<aside class="notes">
+<p>now that you are familiar with the basic workflow, let’s see how we can navigate the project history</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="seeing-past-changes-in-rstudio" class="slide level2">
 <h2>Seeing past changes in Rstudio</h2>
@@ -1034,6 +1080,19 @@ Géraldine Derroire
 <li class="fragment"><p><span style="font-size: 30px">use <em>git reset</em> to remove commits from history: <span style="color:red;">risky option</span></span></p></li>
 </ul>
 <p><span class="fragment"><span style="font-size: 30px"><em>The two last options are more advanced and must be done in the terminal. We won’t cover them here.</em></span></span></p>
+<aside class="notes">
+<p>The two last options are more advanced and must be done in the terminal. We won’t cover them here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="collaborate-with-github" class="title-slide slide level1 center">
@@ -1052,6 +1111,19 @@ Géraldine Derroire
 <li><p><span style="font-size: 30px">click on <em>Add</em></span></p></li>
 </ul>
 </div>
+<aside class="notes">
+<p>let’s do it together</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="invite-a-collaborator-1" class="slide level2">
 <h2>Invite a collaborator</h2>
@@ -1082,6 +1154,19 @@ Géraldine Derroire
 <p><span style="font-size: 30px">You may get the following error message when trying to push:</span></p>
 <p><img data-src="pb_push.png" style="height:80.0%"></p>
 <p><span style="font-size: 30px">It happens when the remote repository has changed since your last pull.</span></p>
+<aside class="notes">
+<p>collaborating is one of the main objectives of Github, but can also complicate things a bit…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="why-cant-i-push-1" class="slide level2">
 <h2>Why can’t I push ?</h2>
@@ -1105,6 +1190,21 @@ Géraldine Derroire
 <li><p><span style="font-size: 30px"><em>pull before pushing again</em></span></p></li>
 </ul>
 </div>
+<aside class="notes">
+<p>if time, let’s practice this together</p>
+<p>you can also test with a colleagues</p>
+<p>It’s important to experience this on a test repo</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="why-cant-i-pull" class="slide level2">
 <h2>Why can’t I pull?</h2>
@@ -1131,6 +1231,19 @@ Géraldine Derroire
 <p><span style="font-size: 30px">Remote version:</span></p>
 <p><img data-src="readme_github.png" height="50"></p>
 </div></div>
+<aside class="notes">
+<p>explain cases when Git can merge (changes on two different files)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="how-to-solve-a-conflict" class="slide level2">
 <h2>How to solve a conflict?</h2>
@@ -1161,11 +1274,11 @@ Géraldine Derroire
 <li><p><span style="font-size: 30px"><em>Don’t pull</em></span></p></li>
 <li><p><span style="font-size: 30px"><em>Modify the same file on the same line</em></span></p></li>
 <li><p><span style="font-size: 30px"><em>Try to push: you can’t</em></span></p></li>
-<li><p><span style="font-size: 30px"><em>Try to pull: this generate a conflict</em></span></p></li>
+<li><p><span style="font-size: 30px"><em>Try to pull: this generate a conflict…</em></span></p></li>
 </ul></li>
 </ul>
 </div>
-<p><span style="font-size: 30px"><em>You can know solve this conflict!</em></span></p>
+<p><span style="font-size: 30px"><em>You can now solve this conflict!</em></span></p>
 </section>
 <section id="how-to-avoid-conflicts" class="slide level2">
 <h2>How to avoid conflicts?</h2>
@@ -1182,7 +1295,20 @@ Géraldine Derroire
 <p><img data-src="solving_conflict_cartoon.png" class="quarto-figure quarto-figure-center" style="height:70.0%"></p>
 </figure>
 </div>
-</div></section>
+</div><aside class="notes">
+<p>we are going to talk more about branches in a few minutes</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="using-issues-on-a-collaborative-project" class="slide level2">
 <h2>Using issues on a collaborative project</h2>
 <p><span style="font-size: 30px">A GitHub Issue is a way to track and discuss tasks, bugs, or ideas in a project. This helps a team to organize work and collaborate efficiently.</span></p>
@@ -1190,7 +1316,7 @@ Géraldine Derroire
 <p><span style="font-size: 30px">It works like a forum. You can:</span></p>
 <div>
 <ul>
-<li><p><span style="font-size: 30px">create to do list</span></p></li>
+<li><p><span style="font-size: 30px">create a to do list</span></p></li>
 <li><p><span style="font-size: 30px">assign tasks to team members</span></p></li>
 <li><p><span style="font-size: 30px">post an answer or a comment</span></p></li>
 <li><p><span style="font-size: 30px">close the issue once completed or solved</span></p></li>
@@ -1206,6 +1332,19 @@ Géraldine Derroire
 <p><span style="font-size: 30px">It organises issues on a visual board.</span></p>
 
 <img data-src="project.png" class="r-stretch"><p><span style="font-size: 30px"><a href="https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects" data-preview-link="false">More on GitHub projects</a></span></p>
+<aside class="notes">
+<p>issues are a way to collaborate</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="more-advanced-use" class="title-slide slide level1 center">
@@ -1236,7 +1375,7 @@ Géraldine Derroire
 <section id="create-a-branch" class="slide level2">
 <h2>Create a branch</h2>
 <p><span style="font-size: 30px">To create a new branch from RStudio, click on <img data-src="new_branch.png"> in the git pane.</span></p>
-<p><span style="font-size: 30px">You can select the branch you want to work on:</span></p>
+<p><span style="font-size: 30px">You can then select the branch you want to work on:</span></p>
 <p><img data-src="branches_rstudio.png"></p>
 <p><span style="font-size: 30px">You can now work on this new branch: <em>pull, work, commit, push…pull, work, commit, push…</em></span></p>
 </section>

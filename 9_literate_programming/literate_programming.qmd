@@ -48,6 +48,8 @@ Literate programming mixes **code** with **natural language**.
 -   For a wider audience: **communicate** results clearly while ensuring reproducibility and easy updates
 
 ::: notes
+ex for the last point : a report that is updated after each measurment campain
+
 Strongly encourage to do a quarto document for a paper, or your thesis
 :::
 
@@ -56,6 +58,11 @@ Strongly encourage to do a quarto document for a paper, or your thesis
 [Quarto]{style="color:indianred;"} is an open-source tool for creating **dynamic documents** that combine code, results and text to produce **reproducible outputs in multiple formats** (reports, websites, slides...).
 
 ![](quarto.png){fig-align="center"}
+
+::: notes
+these slides, and the exercices are done with quarto
+:::
+
 
 # Getting started
 
@@ -67,14 +74,14 @@ Strongly encourage to do a quarto document for a paper, or your thesis
 To create a new document: *File/New File/Quarto Document*
 
 You can choose between different types of document.
-Choose *Document*, fill in a title and a author name and *Create*
+Choose *Document*, fill in a title and a author name and click on *Create*
 :::
 
 ::: {.column width="40%"}
 ![](new_qmd.png)
 :::
 
-This open a document containing plant text and R code.
+This open a document containing plain text and R code.
 
 ## Rendering
 
@@ -105,6 +112,9 @@ The **Visual editor** is an interface where you can use buttons to easily format
 The **Visual editor** save the content of your document in Markdown format.
 
 ::: notes
+There are two ways of working on a document:
+from the visual editor, or from the source editor
+
 try to add text, format it, play with it
 :::
 
@@ -113,6 +123,10 @@ try to add text, format it, play with it
 You can view and edit the plain Markdown document in the **Source editor**:
 
 ![](source.png){fig-align="center"}
+
+::: notes
+this is markdown langauge, we will talk about it in a few minutes
+:::
 
 ## Content of a Quarto document
 
@@ -160,6 +174,12 @@ But totally ok to use the Visual editor
 
 ::: {.column width="40%"}
 ![](syntax_rendered.png)
+:::
+
+::: notes
+On the left, what you type
+
+on the right, what you will see in the rendered document
 :::
 
 ## Figures
@@ -249,6 +269,10 @@ Figure Alignment
 :::
 ::::
 
+::: notes
+This is however not very practical for big table, we will see alternative later
+:::
+
 ## Equations
 
 [To write equations in Quarto, we have to use the **LaTex syntax**.]{style="font-size: 30px"}
@@ -271,6 +295,10 @@ This equation is displayed inline: $y = e^{\alpha}$
 
 [[More about LaTex equations](https://en.wikibooks.org/wiki/LaTeX/Mathematics)]{style="font-size: 22px"}
 
+::: notes
+This is slighly more advanced but make the equation very clean
+:::
+
 ## Links
 
 [To add a link:]{style="font-size: 30px"}
@@ -291,7 +319,7 @@ This equation is displayed inline: $y = e^{\alpha}$
 
 ## Cross-references
 
-[To be able to add a reference to a figure, table, equation, section... in another part of the document, we need to give them an **identifier** in]{style="font-size: 30px"}[{#....}]{style="color:indianred;"}:
+[To be able to add a reference to a figure, table, equation, section... in another part of the document, we need to give them an **identifier** in ]{style="font-size: 30px"}[{#....}]{style="color:indianred;"}:
 
 ::: {.column width="65%"}
 ``` markdown
@@ -331,6 +359,10 @@ Identifiers start with the type of item:
 
 # Comptute with R
 
+::: notes
+now that we have seen how to write, we are going to talk about code chunks
+:::
+
 ## Insert R code
 
 [**Chunks of R code are executed by Quarto when you render the document.**]{style="font-size: 30px"}
@@ -361,6 +393,8 @@ Identifiers start with the type of item:
 [You can use ![](run_up.png) to run all previous chunks, and ![](run.png) to run the current chunk.]{style="font-size: 30px"}
 
 [💡Start your document with a chunk that loads the necessary packages.]{style="font-size: 30px"}
+
+[💡Keep the chunks small.]{style="font-size: 30px"}
 :::
 
 ## Chunk labels
@@ -392,6 +426,10 @@ Identifiers start with the type of item:
 :::
 
 [[More about chunk options](https://yihui.org/knitr/options/)]{style="font-size: 22px"}
+
+::: notes
+let's not discuss them all...
+:::
 
 ## Chunk options
 
@@ -623,7 +661,7 @@ we are not going to see all of them...
 
 [You can specify parameters in the YAML, that will be used in the chunks.]{style="font-size: 30px"}
 
-[For example, This is useful if you want to produce the same document for different subset of your data. *Here, we can rapidly produce the same report for the different species of Iris.*]{style="font-size: 30px"}
+[For example, this is useful if you want to produce the same document for different subset of your data. *Here, we can rapidly produce the same report for the different species of Iris.*]{style="font-size: 30px"}
 
 ::: {.column width="50%"}
 
@@ -633,6 +671,10 @@ we are not going to see all of them...
 ::: {.column width="50%"}
 
 ![](params_2.png)
+:::
+
+::: notes
+a bit more advanced
 :::
 
 # Bibliography
@@ -645,6 +687,10 @@ we are not going to see all of them...
 [You can search an new reference with its **DOI**, or by searching bibliographic platforms (Crossref, PubMed...).]{style="font-size: 30px"}
 
 ![](biblio_doi.png)
+
+::: notes
+this is the easiest way
+:::
 
 ## Citing references in the Visual editor
 
@@ -710,6 +756,10 @@ we are not going to see all of them...
 
 # Quarto formats
 
+::: notes
+so far we only have seen how to make html documents but
+:::
+
 ## Quarto formats
 
 [Quarto supports many different formats, including:]{style="font-size: 30px"}
@@ -749,6 +799,11 @@ We have seen how to do pdf,
 :::
 
 [We have seen how to produce HTML documents, other documents can be produced in a similar way.]{style="font-size: 30px"}
+
+
+::: notes
+the pdf format is what is going to be asked for the assessment
+:::
 
 
 ## Presentation formats
@@ -818,6 +873,10 @@ first solution, this is how we created an html document
 
 # Troubleshooting
 
+::: notes
+to finish, let's talk about common problems
+:::
+
 ## When rendering fails
 
 [Check the *Background Jobs* tab:]{style="font-size: 30px"}
@@ -834,7 +893,7 @@ here problem that there are two : in the YAML
 
 [Common errors:]{style="font-size: 30px"}
 
-* [Missing R packages(packages non installed)]{style="font-size: 30px"}
+* [Missing R packages(packages non installed, or not loaded in the quarto document)]{style="font-size: 30px"}
 
 * [Problem with file paths and working directory: ⚠️ the default working directory of a Quarto document is the directory where the Quarto document is]{style="font-size: 30px"}
 
@@ -850,6 +909,10 @@ here problem that there are two : in the YAML
 * [If you cannot see the outputs: check the chunk output options as some options prevent outputs from being displayed ]{style="font-size: 30px"}
 
 * [If you get unexpected values/results: can this be a problem with the use f the cache?]{style="font-size: 30px"}
+
+## To avoid big problems
+
+💡 Render often, so that you can quickly indetify the cause of the problem!
 
 
 ## Acknowledgments {.smaller}
