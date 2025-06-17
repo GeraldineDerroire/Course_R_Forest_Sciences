@@ -1,5 +1,3 @@
-*WORK IN PROGRESS*
-
 Course material for the module *Using R for reproducible data management and
 analyses in Forest Sciences*
 of the Univerity of Brasilia - Post-graduate program in Forest Sciences,
