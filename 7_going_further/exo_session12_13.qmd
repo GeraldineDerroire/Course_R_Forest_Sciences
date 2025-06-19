@@ -14,7 +14,7 @@ library(tidyverse)
 ```
 
 
-# Writing a function
+ # Writing a function
 
 We are going to write a function to standardise a variable to mean 0 and standard deviation 1.
 *There is already an existing function to do this (the function `scale`), so let's forget that this function exists.*
@@ -114,11 +114,11 @@ head(my_scale(v_test1, decim = 4))
     
 ```{r}
 test_weather <- function(temp, rain) {
-  if (temp > 25 & rain == FALSE) {
+  if (temp >= 25 && rain == FALSE) {
     message("Go to the beach")
-  } else if (temp > 25 & rain == TRUE) {
+  } else if (temp > 25 && rain == TRUE) {
     message("Take your umbrella") 
-  } else if (temp < 25 & rain == FALSE) {
+  } else if (temp < 25 && rain == FALSE) {
     message("Take your jumper") 
   } else {
     message("Stay home")
@@ -239,6 +239,23 @@ iris_sd <- iris %>% mutate(
          )
 )
 summary(iris_sd)
+
+
+# if we want to pass arguments to the function my_scale
+iris_sd <- iris %>% mutate(
+  across(where(is.numeric), 
+         my_scale,
+         decim = 4
+         )
+)
+head(iris_sd)
+# This work but is depreciated, so better to do it the alternative way, by creating an anonymous function
+iris_sd <- iris %>% mutate(
+  across(where(is.numeric), 
+         \(x) my_scale(x,decim = 4)
+         )
+)
+head(iris_sd)
 ```
 
 * Do the same thing but only for the variables related to sepals
