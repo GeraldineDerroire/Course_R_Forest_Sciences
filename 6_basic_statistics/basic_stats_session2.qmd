@@ -125,7 +125,7 @@ $$y = \alpha + \beta \times x + \epsilon$$
 ::: {.column width="50%"}
 
 ::: fragment
-[$\alpha$, $\beta$ and $\epsilon$ are the **parameters** of the model]{style="font-size: 30px"}
+[$\alpha$, $\beta$ and $\sigma$ are the **parameters** of the model]{style="font-size: 30px"}
 
 [The model can also be written:]{style="font-size: 30px"}
 
