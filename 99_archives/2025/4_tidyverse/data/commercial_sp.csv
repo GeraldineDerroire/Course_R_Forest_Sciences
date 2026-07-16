@@ -1,0 +1,97 @@
+"CommercialName","Genus","Species","CommercialLevel","MinFD","UpMinFD","MaxFD","Aggregative"
+"st martin rouge","Andira","spp",2,55,60,120,FALSE
+"bamba apici","Aniba","spp",2,55,60,120,FALSE
+"bagasse","Bagassa","guianensis",2,55,60,120,FALSE
+"assao","Balizia","pedicellaris",2,55,60,120,FALSE
+"dokali","Brosimum","parinarioides",2,55,60,120,FALSE
+"satiné rubané","Brosimum","rubescens",2,55,60,120,FALSE
+"dokali mapa","Brosimum","utile",2,55,60,120,FALSE
+"bushi amanda","Buchenavia","spp",2,55,60,120,FALSE
+"carapa","Carapa","guiansensis",2,55,60,120,FALSE
+"carapa","Carapa","surinamensis",2,55,60,120,FALSE
+"chawari","Caryocar","glabrum",2,55,60,120,FALSE
+"chawari","Caryocar","microcarpum",2,55,60,120,FALSE
+"balata pomme","Chrysophyllum","pomiferum",2,55,60,120,FALSE
+"balata pomme","Chrysophyllum","sanguinolentum",2,55,60,120,FALSE
+"baaka mapa","Couma","guianensis",2,55,60,120,FALSE
+"maho cigare","Couratari","spp",2,55,60,120,FALSE
+"angélique","Dicorynia","guianensis",1,55,60,120,TRUE
+"coeur dehors","Diplotropis","purpurea",2,55,60,120,FALSE
+"gaiac de cayenne","Dipteryx","odorata",2,55,60,120,FALSE
+"gaiac de cayenne","Dipteryx","punctata",2,55,60,120,FALSE
+"acacia franc","Enterolobium","oldemanii",2,55,60,120,FALSE
+"acacia franc","Enterolobium","schomburgkii",2,55,60,120,FALSE
+"wapa","Eperua","falcata",2,55,60,120,FALSE
+"wapa courbaril","Eperua","grandiflora",2,55,60,120,FALSE
+"maho coton","Eriotheca","spp",2,55,60,120,FALSE
+"jaboty","Erisma","spp",2,55,60,120,FALSE
+"maho noir","Eschweilera","spp",2,55,60,120,FALSE
+"wandékolé","Glycydendron","amazonicum",2,55,60,120,FALSE
+"goupi","Goupia","glabra",1,55,60,120,FALSE
+"ebène rouge","Handroanthus","impetiginosus",2,55,60,120,FALSE
+"ebène verte","Handroanthus","serratifolius",2,55,60,120,FALSE
+"courbaril","Hymenaea","courbaril",2,55,60,120,FALSE
+"courbaril","Hymenaea","oblongifolia",2,55,60,120,FALSE
+"st martin jaune","Hymenolobium","spp",2,55,60,120,FALSE
+"bougouni","Inga","alba",2,55,60,120,FALSE
+"bougouni","Inga","huberi",2,55,60,120,FALSE
+"cèdre gris","Lauraceae","spp",2,55,60,120,FALSE
+"maho rouge","Lecythis","spp",2,55,60,120,FALSE
+"canari macaque","Lecythis","zabucajo",2,55,60,120,FALSE
+"cèdres durs","Licaria","spp",2,55,60,120,FALSE
+"balata franc","Manilkara","bidentata",1,55,60,120,FALSE
+"balata franc","Manilkara","huberi",1,55,60,120,FALSE
+"mamantin","Micropholis","egensis",2,55,60,120,FALSE
+"mamantin","Micropholis","melinoniana",2,55,60,120,FALSE
+"balata blanc","Micropholis","spp",2,55,60,120,FALSE
+"manil montagne","Moronobea","coccinea",2,55,60,120,FALSE
+"cèdre blanc","Ocotea","argyrophylla",2,55,60,120,FALSE
+"cèdre blanc","Ocotea","canaliculata",2,55,60,120,FALSE
+"cèdre noir","Ocotea","ceanothifolia",2,55,60,120,FALSE
+"cèdre noir","Ocotea","glomerata",2,55,60,120,FALSE
+"cèdre blanc","Ocotea","guianensis",2,55,60,120,FALSE
+"cèdre blanc","Ocotea","oblonga",2,55,60,120,FALSE
+"cèdre noir","Ocotea","schomburgkiana",2,55,60,120,FALSE
+"cèdre noir","Ocotea","tomentella",2,55,60,120,FALSE
+"dodomissinga","Parkia","decussata",2,55,60,120,FALSE
+"dodomissinga","Parkia","gigantocarpa",2,55,60,120,FALSE
+"dodomissinga","Parkia","nitida",2,55,60,120,FALSE
+"dodomissinga","Parkia","reticulata",2,55,60,120,FALSE
+"dodomissinga","Parkia","ulei",2,55,60,120,FALSE
+"dodomissinga","Parkia","velutina",2,55,60,120,FALSE
+"amarante","Peltogyne","spp",1,55,60,120,FALSE
+"parcouri","Platonia","insignis",2,55,60,120,FALSE
+"kimboto","Pradosia","spp",2,55,60,120,FALSE
+"alimiao","Pseudopiptadenia","psilostachya",2,55,60,120,FALSE
+"alimiao","Pseudopiptadenia","suaveolens",2,55,60,120,FALSE
+"gonfolo rose","Qualea","rosea",1,55,60,120,TRUE
+"wacapou guittin","Recordoxylon","speciosum",2,55,60,120,FALSE
+"cèdre jaune","Rhodostemonodaphne","spp",2,55,60,120,FALSE
+"gonfolo gris","Ruizterania","albiflora",1,55,60,120,FALSE
+"grignon franc","Sextonia","rubra",1,55,60,120,FALSE
+"simarouba","Simarouba","amara",2,55,60,120,FALSE
+"kobé","Sterculia","spp",2,55,60,120,FALSE
+"manil marécage","Symphonia","globulifera",2,55,60,120,FALSE
+"manil marécage","Symphonia","sp.1",2,55,60,120,FALSE
+"anangossi","Terminalia","spp",2,55,60,120,FALSE
+"sali","Tetragastris","spp",2,55,60,120,FALSE
+"inkassa tiabici","Vatairea","eritrocarpa",2,55,60,120,FALSE
+"inkassa","Vataireopsis","spp",2,55,60,120,FALSE
+"yayamadou kwatae","Virola","kwatae",2,55,60,120,FALSE
+"yayamadou montagne","Virola","michelii",2,55,60,120,FALSE
+"yayamadou montagne","Virola","multicostata",2,55,60,120,FALSE
+"yayamadou montagne","Virola","sebifera",2,55,60,120,FALSE
+"moutende kouali","Vochysia","guianensis",2,55,60,120,FALSE
+"achiwa kouali","Vochysia","neyratii",2,55,60,120,FALSE
+"kopi kouali","Vochysia","surinamensis",2,55,60,120,FALSE
+"wana kouali","Vochysia","tomentosa",2,55,60,120,FALSE
+"wacapou","Vouacapoua","americana",1,55,60,120,FALSE
+NA,"Lecythis","poiteaui",0,NA,NA,NA,NA
+NA,"Lecythis","praeclara",0,NA,NA,NA,NA
+NA,"Lecythis","holcogyne",0,NA,NA,NA,NA
+NA,"Lecythis","pneumatophora",0,NA,NA,NA,NA
+NA,"Lecythis","chartacea",0,NA,NA,NA,NA
+NA,"Micropholis","cayennensis",0,NA,NA,NA,NA
+NA,"Micropholis","obscura",0,NA,NA,NA,NA
+NA,"Pradosia","cochlearia",0,NA,NA,NA,NA
+NA,"Pradosia","huberi",0,NA,NA,NA,NA

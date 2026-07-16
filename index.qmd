@@ -7,58 +7,58 @@ institute: Cirad - UnB
 
 This is the course material for the module *Using R for reproducible data management and analyses in Forest Sciences* of the University of Brasilia - Post-graduate program in Forest Sciences, delivered by Géraldine Derroire (Cirad-University of Brasilia).
 
-Course syllabus in English is [here](EFL360457_R_for_Forest_Sciences_2025.pdf), and in Portuguese [here](EFL360457_R_para_Ciencias_Florestais_2025.pdf).
+Course syllabus in English is [here](99_archives/2025/EFL360457_R_for_Forest_Sciences_2025.pdf), and in Portuguese [here](99_archives/2025/EFL360457_R_para_Ciencias_Florestais_2025.pdf).
 
-The course material has been created using quarto and R version 4.4.3.
+**This is the version of 2025**. The course material has been created using quarto and R version 4.4.3.
 
--   [Course introduction](0_course_introduction/index.html)
+-   [Course introduction](99_archives/2025/0_course_introduction/course_intro.html)
 
--   [Set up the working environment](0_installing_enviro/index.html)
+-   [Set up the working environment](99_archives/2025/0_installing_enviro/install_enviro.html)
 
--   [Principles of reproductible science](1_reproducible_science/index.html)
+-   [Principles of reproductible science](99_archives/2025/1_reproducible_science/repro_science.html)
 
--   [Getting started with R](2_getting_started/index.html)
+-   [Getting started with R](99_archives/2025/2_getting_started/getting_started.html)
 
-    -   [Exercices on session 2/3](2_getting_started/exo_session_3.pdf)
+    -   [Exercices on session 2/3](99_archives/2025/2_getting_started/exo_getting_started_1.pdf)
 
-    -   [Exercices on session 3/3](2_getting_started/exo_session_4.pdf)
+    -   [Exercices on session 3/3](99_archives/2025/2_getting_started/exo_getting_started_2.pdf)
 
--   [Working with data](3_manip_data/index.html)
+-   [Working with data](99_archives/2025/3_manip_data/manip_data.html)
 
-    -   [Exercices](3_manip_data/exo_session_5.pdf)
+    -   [Exercices](99_archives/2025/3_manip_data/exo_manip_data.pdf)
 
--   [Introduction to the tidyverse](4_tidyverse/index.html)
+-   [Introduction to the tidyverse](99_archives/2025/4_tidyverse/tidyverse.html)
 
-    -   [Exercice on session 1/2](4_tidyverse/exo_session_6.pdf)
+    -   [Exercice on session 1/2](99_archives/2025/4_tidyverse/exo_tidyverse_1.pdf)
 
-    -   [Exercices on session 2/2](4_tidyverse/exo_session_7.pdf)
+    -   [Exercices on session 2/2](99_archives/2025/4_tidyverse/exo_tidyverse_2.pdf)
 
--   [Data visualisation with ggplot](5_graph/index.html)
+-   [Data visualisation with ggplot](99_archives/2025/5_graph/graph_ggplot.html)
 
-    -   [Exercices](5_graph/exo_session_8.pdf)
+    -   [Exercices](99_archives/2025/5_graph/exo_graph.pdf)
 
 -   Statistics with R
 
-    -   [Statistics with R session 1/3](6_basic_statistics/basic_stats_session1.html)
+    -   [Statistics with R session 1/3](99_archives/2025/6_basic_statistics/basic_stats_session1.html)
 
-        -   [Exercices on session 1/3](6_basic_statistics/exo_session9.pdf)
+        -   [Exercices on session 1/3](99_archives/2025/6_basic_statistics/exo_stats_session_1.pdf)
 
-    -   [Statistics with R session 2/3](6_basic_statistics/basic_stats_session2.html)
+    -   [Statistics with R session 2/3](99_archives/2025/6_basic_statistics/basic_stats_session2.html)
 
-        -   [Exercices on session 2/3](6_basic_statistics/exo_session10.pdf)
+        -   [Exercices on session 2/3](99_archives/2025/6_basic_statistics/exo_stats_session_2.pdf)
 
-    -   [Statistics with R session 3/3](6_basic_statistics/basic_stats_session3.html)
+    -   [Statistics with R session 3/3](99_archives/2025/6_basic_statistics/basic_stats_session3.html)
 
-        -   [Exercices on session 3/3](6_basic_statistics/exo_session11.pdf)
+        -   [Exercices on session 3/3](99_archives/2025/6_basic_statistics/exo_stats_session_3.pdf)
 
 -   Going further with R
 
-    -   [Going further with R session 1/2](7_going_further/going_further_session1.html)
+    -   [Going further with R session 1/2](99_archives/2025/7_going_further/going_further_session1.html)
 
-    -   [Going further with R session 2/2](7_going_further/going_further_session2.html)
+    -   [Going further with R session 2/2](99_archives/2025/7_going_further/going_further_session2.html)
 
-    -   [Exercices](7_going_further/exo_session12_13.pdf)
+    -   [Exercices](99_archives/2025/7_going_further/going_further.pdf)
 
--   [Introduction to Version Control with Git and GitHub](8_version_control/version_control.html)
+-   [Introduction to Version Control with Git and GitHub](99_archives/2025/8_version_control/version_control.html)
 
--   [Literate programming with quarto](9_literate_programming/literate_programming.html)
+-   [Literate programming with quarto](99_archives/2025/9_literate_programming/literate_programming.html)

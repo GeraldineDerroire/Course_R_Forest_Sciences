@@ -1,0 +1,86 @@
+---
+title: "Going further with R - session 2/2"
+author: Géraldine Derroire
+institute: Cirad - UnB
+date: last-modified
+format: 
+  revealjs:
+    theme: solarized
+    output-location: fragment 
+    slide-number: true
+    preview-links: true
+    chalkboard: true
+    link-external-icon: true
+    link-external-newwindow: true
+    incremental: true
+execute:
+  echo: true   
+  warning: true
+  message: true 
+  cache: true
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+
+
+## When to use a loop?
+
+[when each iteration depends on the result of the previous one.]{style="font-size: 30px"}
+
+::: fragment
+
+::::: columns
+::: {.column width="80%"}
+
+[Let's build a [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence){preview-link="false"}, defined as:]{style="font-size: 30px"} 
+
+[$F_0 = 0$, $F_1 = 1$ and for $n>1$ $F_n = F_{n-1} + F_{n-2}$]{style="font-size: 30px"} 
+:::
+
+::: {.column width="20%"}
+![](fibonacci.png)
+:::
+:::::
+
+```{r}
+n = 20 # length of the sequence
+fib <- numeric(n) # Fibonacci sequence
+fib[1] <- 0 # F0
+fib[2] <- 1 # F1
+
+for (i in seq_along(fib)[3:n]) {
+  fib[i] <- fib[i - 1] + fib[i - 2]
+}
+
+fib
+```
+
+:::
+
+
+
+
+# Debugging
+
+![](debugging.png){width=90%}
+
+::: notes
+what is important is how happy you feel when you manage!
+::: 
+
+##
+
+a good start: avoid having to debug by checking the code (especially in function and loops) carrefully => select some sensible test data, try to anticipate potential problem...
+
+but we cannot think of everything...
+Here just some basic way of debugging
+
+if not too long, run a function or a loop line by one with the problematic dataset, to see where it buggs
+
+otherwise : use print
+
+et débuggage basique avec print (cf Juba https://juba.github.io/tidyverse/20-debuggage-performance.html) mais le faire à la fin de session 2 car possible aussi dans une boucle hors function
+
+there are more advanced debugging tools...

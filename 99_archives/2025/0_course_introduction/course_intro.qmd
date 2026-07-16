@@ -1,0 +1,158 @@
+---
+title: "Using R for reproductible data management and analyses in Forest Sciences"
+subtitle: "PPG Ciências florestais - Universidade de Brasilia"
+author: Géraldine Derroire
+institute: Cirad - UnB
+date: last-modified
+format: 
+  revealjs:
+    theme: solarized
+    output-location: fragment # to have results of a chunck displayed after a click
+    slide-number: true
+    preview-links: true
+    chalkboard: true
+    link-external-icon: true
+    link-external-newwindow: true
+execute:
+  echo: true    
+---
+
+
+# Introduction and expectations toward this module
+
+::: {.notes}
+introducing everyone: 
+* who
+* topic of Msc/PhD project, with whomm?
+* expectations / interest in the class?
+:::
+
+## Practical information
+
+- **Discipline** *Transferência de informações florestais* (Code: EFL360457)
+- **Credits** 4
+- **Workload** 60h (30h presential + 30h of personal work)
+- **Schedule** First semester - Wednesday 14-16h
+
+You will work on your own laptop
+
+<span style="color:indianred;">**Please make sure you have all the programs and packages installed before the class.**</span>
+
+::: notes
+Students are expected to work between the classes : review and make sure they understand everything we have seen + exercices.
+
+I will send a tuto for installing R and everything + email between the class to tell which packages need to be installed for the next session.
+:::
+
+## Targeted audiance
+
+- **Areas de concentração** 
+  * *Conservação da natureza*
+  * *Manejo florestal*
+  * *Tecnologia e utilização de recursos florestais*
+- No previous experience with R
+
+::: {.notes}
+aks about any previous exp in R, Python, other prog language
+:::
+
+## Learning outcomes
+
+::: {.incremental}
+- Define the concept of reproducible research and cite the main tools that it requires
+- Understand the basis of R and R studio (interface, packages, basic functions...)
+- Import, manipulate and export data in R
+- Apply good practices in data management
+- Organise the work in a R studio project
+:::
+
+
+## Learning outcomes
+
+::: {.incremental}
+- Use the main packages of the Tidyverse for tidy analyses
+- Choose the appropriate graphics to explore the data and create them using ggplot
+- Implement basic statistical tests in R
+- Understand and implement more advanced programming techniques (loops,
+functions...)
+- Use the tool Quarto to produce a report or a presentation with text and code
+:::
+
+::: {.notes}
+Not a statistics course
+:::
+
+# Let's make the class interactive... *não importa o idioma* 
+
+::: {.notes}
+presentation in English
+i'll talk mostly in English, don't hesitate to ask me to repeat/rephrase
+you can ask questions in portuguese
+:::
+
+## Course program
+
+- Principles of reproducible science
+- Getting started with R (3 sessions)
+- Manipulating data
+- Tidyverse (2 sessions)
+- Basic statistics with R (2 sessions)
+- Going further with R (2 sessions)
+- Version control with git and GitHub
+- Literate programming using quarto 
+
+::: notes
+May change a bit as this is the first time that I teach this class.
+
+There will be weeks when I will be travelling, we'll talk in advance how to reschedule.
+:::
+
+## Assessment
+
+- **1/3 of the final mark** Short exercises given at the end of each class
+
+- **2/3 of the final mark** A personal work using the tools covered in class
+
+## About the personal work
+
+Objective: assessing your ability to implement a reproducible workflow in R
+to explore and test your hypotheses. <!--The relevance of the scientific question is **not** assessed.-->
+
+- Using the tools covered during the class
+
+- Doing some data exploration and basic analyses
+
+::: notes
+As this is the first time teaching in the PPG, I'm still checking the requirements for marking and I will adapt accordingly.
+:::
+
+## About the personal work
+
+<!--- You are encourage to work on your own data, but I can provide some if needed-->
+
+- You will work on a dataset that will be provided
+
+- The project will be submitted as a pdf file and a GitHub repository
+
+<span style="color:indianred;">**Let's talk about it as we go along!**</span>
+
+::: notes
+This is the most likely assigment, but this may still change and we will discuss it together.
+I will let you know as well when the work will be due.
+:::
+
+## Mean of communication between the class
+
+Communication about exercices to do for the next session, and packages to install.
+<span style="color:indianred;">**Please make sure you check the messages!**</span>
+
+*email or SIGAA?*
+
+## 
+
+The course material has been created using R V4.4.3 and quarto, and the code is available on [GitHub](https://github.com/GeraldineDerroire/Course_R_Forest_Sciences/tree/main){preview-link="false"}.
+
+
+  
+
+
