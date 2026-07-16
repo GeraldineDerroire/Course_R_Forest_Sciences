@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="literate_programming_files/libs/clipboard/clipboard.min.js"></script>
+<script src="literate_programming_files/libs/quarto-html/tabby.min.js"></script>
+<script src="literate_programming_files/libs/quarto-html/popper.min.js"></script>
+<script src="literate_programming_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="literate_programming_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="literate_programming_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="literate_programming_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="literate_programming_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.5.57">
+
+  <meta name="author" content="Géraldine Derroire">
+  <meta name="dcterms.date" content="2025-06-17">
+  <title>Literate programming with quarto</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="literate_programming_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="literate_programming_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="literate_programming_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="literate_programming_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="literate_programming_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="literate_programming_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="literate_programming_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="literate_programming_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="literate_programming_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Literate programming with quarto</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Géraldine Derroire 
+</div>
+        <p class="quarto-title-affiliation">
+            Cirad - UnB
+          </p>
+    </div>
+</div>
+
+  <p class="date">2025-06-17</p>
+</section>
+<section>
+<section id="introduction-to-quarto" class="title-slide slide level1 center">
+<h1>Introduction to <span style="color:indianred;">Quarto</span></h1>
+
+</section>
+<section id="literate-programming" class="slide level2">
+<h2>Literate programming</h2>
+<div class="column" style="width:70%;">
+<p><span style="font-size: 30px"><em>Literate programming is a programming paradigm introduced in 1984 by Donald Knuth in which a computer program is given as an explanation of how it works in a natural language, such as English, interspersed (embedded) with snippets of macros and traditional source code, from which compilable source code can be generated.</em></span></p>
+</div><div class="column" style="width:30%;">
+<p><img data-src="litt_prog.png"></p>
+</div><p>Literate programming mixes <strong>code</strong> with <strong>natural language</strong>.</p>
+<p><span style="font-size: 22px">Source: <a href="https://en.wikipedia.org/wiki/Literate_programming#cite_note-TCJ_LP-1" data-preview-link="false">Wikipedia</a></span></p>
+</section>
+<section id="why-use-literate-programming" class="slide level2">
+<h2>Why use literate programming?</h2>
+<ul>
+<li class="fragment"><p>For yourself: a <strong>modern-day lab notebook</strong> : keep track of what you did, how you did it and why</p></li>
+<li class="fragment"><p>For <strong>collaborating</strong> with other scientists: share results and the code that produced them</p></li>
+<li class="fragment"><p>For a wider audience: <strong>communicate</strong> results clearly while ensuring reproducibility and easy updates</p></li>
+</ul>
+<aside class="notes">
+<p>ex for the last point : a report that is updated after each measurment campain</p>
+<p>Strongly encourage to do a quarto document for a paper, or your thesis</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-is-quarto" class="slide level2">
+<h2>What is <span style="color:indianred;">Quarto</span>?</h2>
+<p><span style="color:indianred;">Quarto</span> is an open-source tool for creating <strong>dynamic documents</strong> that combine code, results and text to produce <strong>reproducible outputs in multiple formats</strong> (reports, websites, slides…).</p>
+
+<img data-src="quarto.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>these slides, and the exercices are done with quarto</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="getting-started" class="title-slide slide level1 center">
+<h1>Getting started</h1>
+
+</section>
+<section id="creating-a-new-quarto-document" class="slide level2">
+<h2>Creating a new Quarto document</h2>
+<p><span style="color:indianred;">Quarto</span> is pre-installed with RStudio.</p>
+<div class="column" style="width:60%;">
+<p>To create a new document: <em>File/New File/Quarto Document</em></p>
+<p>You can choose between different types of document. Choose <em>Document</em>, fill in a title and a author name and click on <em>Create</em></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="new_qmd.png"></p>
+</div><p>This open a document containing plain text and R code.</p>
+</section>
+<section id="rendering" class="slide level2">
+<h2>Rendering</h2>
+<ul>
+<li class="fragment">Click on <img data-src="setting.png"> and choose <em>Preview in Viewer Pane</em></li>
+</ul>
+<div class="fragment">
+<div>
+<ul>
+<li>Click on <img data-src="render.png"></li>
+</ul>
+</div>
+<p><img data-src="rstudio-render.png"></p>
+</div>
+<p><span class="fragment">When <strong>rendering</strong>, Quarto generates a new file that contains selected text, code, and results from the .qmd file. <em>Note that you now have a .html file in the Files pane.</em></span></p>
+</section>
+<section id="rendering-1" class="slide level2">
+<h2>Rendering</h2>
+<p>You can view the rendered document in the Viewer pane:</p>
+
+<img data-src="viewer.png" class="r-stretch"></section>
+<section id="visual-editor" class="slide level2">
+<h2>Visual editor</h2>
+<p>The <strong>Visual editor</strong> is an interface where you can use buttons to easily format text, insert images , tables..</p>
+
+<img data-src="visual.png" class="quarto-figure quarto-figure-center r-stretch"><p>The <strong>Visual editor</strong> save the content of your document in Markdown format.</p>
+<aside class="notes">
+<p>There are two ways of working on a document: from the visual editor, or from the source editor</p>
+<p>try to add text, format it, play with it</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="source-editor" class="slide level2">
+<h2>Source editor</h2>
+<p>You can view and edit the plain Markdown document in the <strong>Source editor</strong>:</p>
+
+<img data-src="source.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>this is markdown langauge, we will talk about it in a few minutes</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="content-of-a-quarto-document" class="slide level2">
+<h2>Content of a Quarto document</h2>
+<ul>
+<li class="fragment"><p>A YAML header: metadata and output settings</p></li>
+<li class="fragment"><p>Text in Markdown format</p></li>
+<li class="fragment"><p>Chunks of R code</p></li>
+</ul>
+
+<img data-src="content.png" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
+<p>in the YAML title and author + output format</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="write-with-markdown-syntax" class="title-slide slide level1 center">
+<h1>Write with markdown syntax</h1>
+
+</section>
+<section id="markdown-syntax" class="slide level2">
+<h2>Markdown syntax</h2>
+<p>If you write text in the Visual editor, you can use the buttons and drop-down menu to format the text.</p>
+<p>You can also write using the <span style="color:indianred;">markdown syntax</span> in the Source editor.</p>
+<p><em>Markdown in a markup language used to format plain text in a simple and intuitive way.</em></p>
+<aside class="notes">
+<p>A markup language is a way to annotate text to describe its structure and formatting, using special symbols or tags, so that computers can display it properly.</p>
+<p>html is another markup languages</p>
+<p>why would we use markdown?</p>
+<ul>
+<li><p>easy when used to</p></li>
+<li><p>exaclty as saved so easier to debug, easier with version control</p></li>
+</ul>
+<p>But totally ok to use the Visual editor</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="text-formating" class="slide level2">
+<h2>Text formating</h2>
+<div class="column" style="width:60%;">
+<p><img data-src="syntax_raw.png"></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="syntax_rendered.png"></p>
+</div><aside class="notes">
+<p>On the left, what you type</p>
+<p>on the right, what you will see in the rendered document</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="figures" class="slide level2">
+<h2>Figures</h2>
+<div class="column" style="width:60%;">
+<p><span style="font-size: 30px">To add a figure with a caption:</span></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href=""></a><span class="al">![Caption](quarto_logo.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span style="font-size: 25px">⚠️ The file with the figure needs to be in the same folder than the quarto document.</span></p>
+<div class="fragment">
+<p><span style="font-size: 30px">Formatting options:</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href=""></a>Figure size</span>
+<span id="cb2-2"><a href=""></a>  <span class="al">![Caption](quarto_logo.png)</span>{width=300}</span>
+<span id="cb2-3"><a href=""></a>  <span class="al">![Caption](quarto_logo.png)</span>{height=80%}</span>
+<span id="cb2-4"><a href=""></a></span>
+<span id="cb2-5"><a href=""></a>Figure Alignment</span>
+<span id="cb2-6"><a href=""></a>  <span class="al">![Caption](quarto_logo.png)</span>{fig-align="left"}</span>
+<span id="cb2-7"><a href=""></a>  <span class="al">![Caption](quarto_logo.png)</span>{fig-align="center"}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:20%;">
+
+</div><div class="column" style="width:20%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="quarto_logo.png"></p>
+<figcaption>Caption</figcaption>
+</figure>
+</div>
+</div><div class="fragment">
+<p><span style="font-size: 30px">Combines option with a space between arguments:</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href=""></a><span class="al">![Caption](quarto_logo.png)</span>{height=80% fig-align="right"}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="tables" class="slide level2">
+<h2>Tables</h2>
+<p><span style="font-size: 30px">To add a table with markdown:</span></p>
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href=""></a>| First Header | Second Header |</span>
+<span id="cb4-2"><a href=""></a>|--------------|---------------|</span>
+<span id="cb4-3"><a href=""></a>| Content Cell | Content Cell  |</span>
+<span id="cb4-4"><a href=""></a>| Content Cell | Content Cell  |</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<div style="font-size: 28px">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>First Header</th>
+<th>Second Header</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr class="even">
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div><div class="fragment">
+<p><span style="font-size: 30px">To add a caption and change the width of columns:</span></p>
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href=""></a>| First Header | Second Header |</span>
+<span id="cb5-2"><a href=""></a>|--------------|---------------|</span>
+<span id="cb5-3"><a href=""></a>| Content Cell | Content Cell  |</span>
+<span id="cb5-4"><a href=""></a>| Content Cell | Content Cell  |</span>
+<span id="cb5-5"><a href=""></a></span>
+<span id="cb5-6"><a href=""></a>: Caption {tbl-colwidths="<span class="co">[</span><span class="ot">75,25</span><span class="co">]</span>"}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:5%;">
+
+</div><div class="column" style="width:45%;">
+<div style="font-size: 28px">
+<table class="caption-top">
+<caption>Caption</caption>
+<colgroup>
+<col style="width: 75%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>First Header</th>
+<th>Second Header</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+<tr class="even">
+<td>Content Cell</td>
+<td>Content Cell</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></div>
+<aside class="notes">
+<p>This is however not very practical for big table, we will see alternative later</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="equations" class="slide level2">
+<h2>Equations</h2>
+<p><span style="font-size: 30px">To write equations in Quarto, we have to use the <strong>LaTex syntax</strong>.</span></p>
+<p><span style="font-size: 30px">Equations can be place in a separate line, with</span><span style="color:lightgreen;">$$…$$</span>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href=""></a>$$y \sim \mathcal N(\alpha + \sum_{i=1}^n\beta_n \times x_n, \sigma^2)$$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span style="font-size: 30px"><span class="math display">\[y \sim \mathcal N(\alpha + \sum_{i=1}^n\beta_n \times x_n,\sigma^2)\]</span></span></p>
+<div class="fragment">
+<p><span style="font-size: 30px">They can also be displayed inline, with</span><span style="color:lightgreen;">$…$</span>:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href=""></a><span class="an">This equation is displayed inline:</span><span class="co"> $y = e^{\alpha}$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span style="font-size: 25px"><em>This equation is displayed inline:</em> <span class="math inline">\(y = e^{\alpha}\)</span></span></p>
+<p><span style="font-size: 22px"><a href="https://en.wikibooks.org/wiki/LaTeX/Mathematics">More about LaTex equations</a></span></p>
+</div>
+<aside class="notes">
+<p>This is slighly more advanced but make the equation very clean</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="links" class="slide level2">
+<h2>Links</h2>
+<p><span style="font-size: 30px">To add a link:</span></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href=""></a><span class="ot">&lt;https://quarto.org/docs/get-started/hello/rstudio.html&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span style="font-size: 30px"><a href="https://quarto.org/docs/get-started/hello/rstudio.html" class="uri">https://quarto.org/docs/get-started/hello/rstudio.html</a></span></p>
+<p><span style="font-size: 30px">To add a named link:</span></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href=""></a><span class="co">[</span><span class="ot">Quarto tutorial</span><span class="co">](https://quarto.org/docs/get-started/hello/rstudio.html)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span style="font-size: 30px"><a href="https://quarto.org/docs/get-started/hello/rstudio.html">Quarto tutorial</a></span></p>
+</section>
+<section id="cross-references" class="slide level2">
+<h2>Cross-references</h2>
+<p><span style="font-size: 30px">To be able to add a reference to a figure, table, equation, section… in another part of the document, we need to give them an <strong>identifier</strong> in</span><span style="color:indianred;">{#….}</span>:</p>
+<div class="column" style="width:65%;">
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href=""></a><span class="al">![Caption](quarto_logo.png)</span>{#fig-quarto}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:25%;">
+<div id="fig-quarto" class="quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="quarto_logo.png" style="width:50.0%">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Caption
+</figcaption>
+</figure>
+</div>
+</div><div class="fragment">
+<p><span style="font-size: 30px">We can then refer to it with <span style="color:indianred;">@</span>:</span></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href=""></a>@fig-quarto shows the logo of quarto.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span style="font-size: 30px"><a href="#/cross-references" class="quarto-xref">Figure&nbsp;1</a> shows the logo of quarto.</span></p>
+</div>
+</section>
+<section id="cross-references-1" class="slide level2">
+<h2>Cross-references</h2>
+<p>Identifiers start with the type of item:</p>
+<div>
+<ul>
+<li><p>for a figure: <span style="color:indianred;">fig-</span></p></li>
+<li><p>for a table: <span style="color:indianred;">tbl-</span></p></li>
+<li><p>for an equation: <span style="color:indianred;">eq-</span></p></li>
+<li><p>for a section: <span style="color:indianred;">sec-</span></p></li>
+</ul>
+</div>
+</section></section>
+<section>
+<section id="comptute-with-r" class="title-slide slide level1 center">
+<h1>Comptute with R</h1>
+<aside class="notes">
+<p>now that we have seen how to write, we are going to talk about code chunks</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="insert-r-code" class="slide level2">
+<h2>Insert R code</h2>
+<p><span style="font-size: 30px"><strong>Chunks of R code are executed by Quarto when you render the document.</strong></span></p>
+<div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">To add a chunk of R code:</span></p>
+<div>
+<ul>
+<li><p><span style="font-size: 30px">click on <img data-src="add_chunck.png"> and select <em>R</em></span></p></li>
+<li><p><span style="font-size: 30px">or use the shortcut <span style="color:indianred;">Ctrl + Alt + I</span></span></p></li>
+</ul>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">This inserts a code chunk where you can write R code:</span></p>
+<p><img data-src="chunck.png"></p>
+<p><span style="font-size: 30px">Code chunks are surrounded by<span style="color:indianred;">```{r}….```</span>.</span></p>
+</div>
+</div><div class="fragment">
+<p><span style="font-size: 30px">You can use <img data-src="run_up.png"> to run all previous chunks, and <img data-src="run.png"> to run the current chunk.</span></p>
+<p><span style="font-size: 30px">💡Start your document with a chunk that loads the necessary packages.</span></p>
+<p><span style="font-size: 30px">💡Keep the chunks small.</span></p>
+</div>
+</section>
+<section id="chunk-labels" class="slide level2">
+<h2>Chunk labels</h2>
+<p><span style="font-size: 30px">You can add a label to a chunk:</span></p>
+<p><img data-src="chunk_label_1.png"></p>
+<p><span style="font-size: 30px">This helps you navigate to a specific chunk using the drop down navigator:</span></p>
+<p><img data-src="chunk_label.png" style="height:80.0%"></p>
+<p><span style="font-size: 30px">⚠️ Each chunk label must be unique.</span></p>
+</section>
+<section id="chunk-options" class="slide level2">
+<h2>Chunk options</h2>
+<p><span style="font-size: 30px">Chunk options control how the code will be rendered. The most important are:</span></p>
+<div style="font-size: 50%;">
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Option</th>
+<th>Run code</th>
+<th>Show code</th>
+<th>Show output</th>
+<th>Show plots</th>
+<th>Show messages</th>
+<th>Show warnings</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>eval: false</td>
+<td>🚫</td>
+<td>✅</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>🚫</td>
+</tr>
+<tr class="even">
+<td>include: false</td>
+<td>✅</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>🚫</td>
+<td>🚫</td>
+</tr>
+<tr class="odd">
+<td>echo: false</td>
+<td>✅</td>
+<td>🚫</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>results: hide</td>
+<td>✅</td>
+<td>✅</td>
+<td>🚫</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>fig-show: hide</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>🚫</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>message: false</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>🚫</td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>warning: false</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>🚫</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><span style="font-size: 22px"><a href="https://yihui.org/knitr/options/">More about chunk options</a></span></p>
+<aside class="notes">
+<p>let’s not discuss them all…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="chunk-options-1" class="slide level2">
+<h2>Chunk options</h2>
+<p><span style="font-size: 30px">Chunk options are added one by one within the chunk:</span></p>
+<p><img data-src="chunk_option2.png"></p>
+<p><span style="font-size: 30px">Some chunk options can also be selected using the <img data-src="setting.png"> button:</span></p>
+<p><img data-src="chunk_option1.png" style="height:75.0%"></p>
+</section>
+<section id="inline-code" class="slide level2">
+<h2>Inline code</h2>
+<p><span style="font-size: 32px">Small R codes can be embedded directly in the text by surrounding them with <span style="color:indianred;">`r… `</span> .</span></p>
+<p><span style="font-size: 30px">This is very useful to present your data or your results, as this will be updated if the data change:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">data</span>(<span class="st">"iris"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource text number-lines code-with-copy"><code class="sourceCode"><span id="cb13-1"><a href=""></a>The iris data have `r nrow(iris)` observations. </span>
+<span id="cb13-2"><a href=""></a>The mean sepal length is `r mean(iris$Sepal.Length)`.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span style="font-size: 25px"><em>The iris data have 150 observations. The mean sepal length is 5.8433333.</em></span></p>
+</section>
+<section id="figures-1" class="slide level2">
+<h2>Figures</h2>
+<p><span style="font-size: 30px">Figures can be generated with a code chunk. Chunk options control the layout of the figure:</span></p>
+<p><img data-src="figure.png"></p>
+<div class="column" style="width:60%;">
+<div class="cell" data-layout-align="left">
+<div class="cell-output-display">
+<div id="fig-iris" class="quarto-float quarto-figure quarto-figure-left" data-fig-align="left">
+<figure class="quarto-float quarto-float-fig">
+<div aria-describedby="fig-iris-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img data-src="literate_programming_files/figure-revealjs/fig-iris-1.png" class="quarto-figure quarto-figure-left" width="384">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-iris-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Relationship between sepal length and width.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p><span style="font-size: 30px">💡 <em>Figures can then be cross-referenced using their label.</em></span></p>
+</div></section>
+<section id="figure-options" class="slide level2">
+<h2>Figure options</h2>
+<div>
+<ul>
+<li><p><span style="font-size: 30px"><code>fig-cap</code>: add a caption</span></p></li>
+<li><p><span style="font-size: 30px"><code>fig-width</code> and <code>fig-height</code>: set figure size (in inches)</span></p></li>
+<li><p><span style="font-size: 30px"><code>fig-asp</code>: control the aspect ratio (the width/height ratio)</span></p></li>
+<li><p><span style="font-size: 30px"><code>out-width</code> and <code>out-height</code>: control display size in output (in %)</span></p></li>
+<li><p><span style="font-size: 30px"><code>fig-align</code>: figure alignment (“left”, “right”, “center”)</span></p></li>
+<li><p><span style="font-size: 30px"><code>layout-col</code>: place multiple plots in the same row</span></p></li>
+<li><p><span style="font-size: 30px"><code>fig-format</code>: choose output format (“png”, “jpeg”, “svg”, “pdf”). The default depends on output format.</span></p></li>
+</ul>
+</div>
+</section>
+<section id="tables-1" class="slide level2">
+<h2>Tables</h2>
+<p><span style="font-size: 30px">Tables can be generated with a code chunk:</span></p>
+<p><img data-src="table.png" style="height:80.0%"></p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length
+1          5.1         3.5          1.4
+2          4.9         3.0          1.4
+3          4.7         3.2          1.3</code></pre>
+</div>
+</div>
+</section>
+<section id="tables-with-kable" class="slide level2">
+<h2>Tables with kable</h2>
+<p><span style="font-size: 30px">The function <span style="color:indianred;">knitr::kable</span> propose a nicer layout, and additional formatting options (see the help of the function:)</span></p>
+<p><img data-src="kable.png" style="height:80.0%"></p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Sepal.Length</th>
+<th style="text-align: right;">Sepal.Width</th>
+<th style="text-align: right;">Petal.Length</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">5.1</td>
+<td style="text-align: right;">3.5</td>
+<td style="text-align: right;">1.4</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4.9</td>
+<td style="text-align: right;">3.0</td>
+<td style="text-align: right;">1.4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4.7</td>
+<td style="text-align: right;">3.2</td>
+<td style="text-align: right;">1.3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><span style="font-size: 30px">The packages <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">kableExtra</a> and <a href="https://ardata-fr.github.io/flextable-book/">flextable</a> proposes additional formating options.</span></p>
+</section>
+<section id="cross-references-2" class="slide level2">
+<h2>Cross-references</h2>
+<p><span style="font-size: 30px">The figures and table produced with a code chunk can be cross-referenced by their labels. For that, you need to add a label at the beginning of a code chunk:</span></p>
+<div class="column" style="width:45%;">
+<p><img data-src="table_label.png"></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href=""></a>See @tb.iris</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<div class="fragment">
+<div id="tbl-iris" class="cell quarto-float quarto-figure quarto-figure-center">
+<figure class="quarto-float quarto-float-tbl">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-iris-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Iris data
+</figcaption>
+<div aria-describedby="tbl-iris-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Sepal.Length Sepal.Width Petal.Length
+1          5.1         3.5          1.4
+2          4.9         3.0          1.4
+3          4.7         3.2          1.3</code></pre>
+</div>
+</div>
+</figure>
+</div>
+<p><span style="font-size: 30px">See <a href="#/cross-references-2" class="quarto-xref">Table&nbsp;1</a></span></p>
+</div>
+</div><aside class="notes">
+<p>what on the left gives what on the right</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="caching" class="slide level2">
+<h2>Caching</h2>
+<p><span style="font-size: 30px">All code chunks are executed every time you render your document.</span></p>
+<p><span style="font-size: 30px">This ensures reproducibility, but can slow things down, especially when chunks take a long time to run. In this case, you can use <strong>caching</strong> for specific chunks.</span></p>
+<p><img data-src="caching.png" style="height:80.0%"></p>
+<p><span style="font-size: 30px">Caching saves the results of a chunk in a specific file in the <em>document_name_cache</em> folder (the name of the folder starts with the name of your document). On subsequent render, cached chunks are only re-run if their code has changed.</span></p>
+</section>
+<section id="caching-1" class="slide level2">
+<h2>Caching</h2>
+<p><span style="font-size: 30px">⚠️ <strong>Use caching with caution</strong>: if you change the data in a chunk, this chunk will be run, but the chunks using the data will NOT.</span></p>
+<p><span style="font-size: 30px">💡It is recommended to <strong>regularly clear the cache</strong> by deleting the cache folder manually.</span></p>
+</section></section>
+<section>
+<section id="yaml-header" class="title-slide slide level1 center">
+<h1>YAML header</h1>
+
+</section>
+<section id="yaml-header-1" class="slide level2">
+<h2>YAML header</h2>
+<p><span style="font-size: 30px">The YAML header is surrounded by <span style="color:indianred;">---</span></span></p>
+<p><span style="font-size: 30px">It controls many <strong>settings</strong> for the entire document.</span></p>
+<p><span style="font-size: 30px">It is also recommended to write <strong>metadata</strong> in the YAML that will appear in the rendered document. This includes:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px"><strong>title</strong>: the title of the document</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px"><strong>author</strong>: your name (and the names of your collaborators)</span></p></li>
+</ul>
+<div class="fragment">
+<div>
+<ul>
+<li><span style="font-size: 30px"><strong>date</strong>: either the creation date, or automatically show the last modification date with:</span></li>
+</ul>
+</div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href=""></a><span class="an">date:</span><span class="co"> last-modified</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>we are not going to see all of them…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="global-option" class="slide level2">
+<h2>Global option</h2>
+<p><span style="font-size: 30px">You can define the default options of all code chunks of a document in the YAML, under <span style="color:indianred;">execute</span>:</span></p>
+<div class="column" style="width:40%;">
+<p><img data-src="YAML.png"></p>
+</div><div class="column" style="width:60%;">
+<p><span style="font-size: 30px"><em>With this YAML, all code chunks will be executed but not shown in the output, and their results will be cached.</em></span></p>
+</div><p><span style="font-size: 30px">💡You can override these defaults for individual chunks using chunk-specific options.</span></p>
+</section>
+<section id="section-numbers-and-table-of-content" class="slide level2">
+<h2>Section numbers and table of content</h2>
+<div class="column" style="width:40%;">
+<p><span style="font-size: 30px">You can use a <strong>table of contents</strong> (<span style="color:indianred;">toc</span> option) and/or <strong>section numbering</strong> (<span style="color:indianred;">number-sections</span> option) to make it easier for readers to navigate your document:</span></p>
+<p><img data-src="YAML_toc.png"></p>
+</div><div class="column" style="width:60%;">
+<p><img data-src="toc.png"></p>
+</div></section>
+<section id="self-contained-documents" class="slide level2">
+<h2>Self-contained documents</h2>
+<p><span style="font-size: 30px">A HTML file created with quarto has several external dependencies that are placed in the <em>document_name_files</em> folder (for examples, figures created by code chunks).</span></p>
+<p><span style="font-size: 30px">If you want to share the html in an email or a USB drive, you will need to share the HTML file and the <em>document_name_files</em> folder.</span></p>
+<p><span style="font-size: 30px">To avoid this, you can created <strong>self-contained documents</strong> specifying the <span style="color:indianred;">embed_resources</span> option:</span></p>
+
+<img data-src="YAML_embed.png" class="r-stretch"></section>
+<section id="parameters" class="slide level2">
+<h2>Parameters</h2>
+<p><span style="font-size: 30px">You can specify parameters in the YAML, that will be used in the chunks.</span></p>
+<p><span style="font-size: 30px">For example, this is useful if you want to produce the same document for different subset of your data. <em>Here, we can rapidly produce the same report for the different species of Iris.</em></span></p>
+<div class="column" style="width:50%;">
+<p><img data-src="params_1.png"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="params_2.png"></p>
+</div><aside class="notes">
+<p>a bit more advanced</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="bibliography" class="title-slide slide level1 center">
+<h1>Bibliography</h1>
+
+</section>
+<section id="citing-references-in-the-visual-editor" class="slide level2">
+<h2>Citing references in the Visual editor</h2>
+<p><span style="font-size: 30px">To add bibliographic references to a quarto document, you can use the Visual editor: <em>Insert / Citation</em>.</span></p>
+<p><span style="font-size: 30px">You can search an new reference with its <strong>DOI</strong>, or by searching bibliographic platforms (Crossref, PubMed…).</span></p>
+
+<img data-src="biblio_doi.png" class="r-stretch"><aside class="notes">
+<p>this is the easiest way</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="citing-references-in-the-visual-editor-1" class="slide level2">
+<h2>Citing references in the Visual editor</h2>
+<p><span style="font-size: 30px">When inserting the first reference of a document, this will:</span></p>
+<div>
+<ul>
+<li><p><span style="font-size: 30px">create a new <em>.bib</em> file in your project and add the reference to it. This file will be updated every time you add a new reference</span></p></li>
+<li><p><span style="font-size: 30px">add a bibliography field in the YAML, giving the name of the <em>.bib</em> file</span></p></li>
+</ul>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="biblio_YAML.png" class="quarto-figure quarto-figure-center" style="height:60.0%"></p>
+</figure>
+</div>
+</section>
+<section id="citing-references-in-the-visual-editor-2" class="slide level2">
+<h2>Citing references in the Visual editor</h2>
+<p><span style="font-size: 30px">When you have an existing <em>.bib</em> file, you can also add a reference from this file, using the Visual editor: <em>Insert / Citation</em></span></p>
+
+<img data-src="biblio_bib.png" class="r-stretch"></section>
+<section id="citing-references-in-the-source-editor" class="slide level2">
+<h2>Citing references in the Source editor</h2>
+<p><span style="font-size: 30px">To add a citation using the Source editor, you need to have an existing bibliography file (<em>.bib</em> file imported from a reference manager or created with the Visual editor).</span></p>
+<p><span style="font-size: 30px">You can add the reference using <span style="color:indianred;">@</span> followed by the reference <strong>key</strong> (the reference identifier from the bibliography file).</span></p>
+<div class="column" style="width:30%;">
+<p><img data-src="citation_source.png"></p>
+</div><div class="column" style="width:70%;">
+<p><img data-src="citation_source2.png" style="width:150.0%"></p>
+</div></section>
+<section id="rendered" class="slide level2">
+<h2>Rendered</h2>
+<p><span style="font-size: 30px">When rendering your file, quarto will add a bibliography at the end of the document.</span></p>
+<p><span style="font-size: 30px">You will need to manually add a title for this section.</span></p>
+<div class="column" style="width:50%;">
+<p><img data-src="biblio_md.png"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="biblio_rendered.png"></p>
+</div></section>
+<section id="bibliographic-styles" class="slide level2">
+<h2>Bibliographic styles</h2>
+<p><span style="font-size: 30px">To change the style of the citations and the bibliography, you can reference the CSL (<em>citation style language</em>) that you want to use in the <code>csl</code> field of the YAML:</span></p>
+
+<img data-src="csl.png" class="r-stretch"><p><span style="font-size: 30px">This file will need to be added in the same directory than your <em>.qmd</em> file (or you can specify an alternative path).</span></p>
+<p><span style="font-size: 30px">You can search for CSL styles <a href="https://citationstyles.org/authors/">here</a>. They may as well be provided by scientific journals.</span></p>
+</section></section>
+<section>
+<section id="quarto-formats" class="title-slide slide level1 center">
+<h1>Quarto formats</h1>
+<aside class="notes">
+<p>so far we only have seen how to make html documents but</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="quarto-formats-1" class="slide level2">
+<h2>Quarto formats</h2>
+<p><span style="font-size: 30px">Quarto supports many different formats, including:</span></p>
+<div>
+<ul>
+<li><p><span style="font-size: 30px"><strong>Documents</strong> formats: HTML, PDF, OpenDocument Text, Microsoft Word…</span></p></li>
+<li><p><span style="font-size: 30px"><strong>Presentations</strong> formats: PowerPoint, Revealjs, Beamer</span></p></li>
+<li><p><span style="font-size: 30px"><strong>Books</strong>: combinations of multiple documents (chapters) into a single manuscript (in HTML, PDF, EPUB…) <a href="https://quarto.org/docs/books/"></a></span></p></li>
+<li><p><span style="font-size: 30px"><strong>Websites</strong> <a href="https://quarto.org/docs/websites/"></a></span></p></li>
+<li><p><span style="font-size: 30px"><strong>Quarto projects</strong>: centralised structure for managing multi-document outputs <a href="https://rdatatoolbox.github.io/course-quarto/#/quarto-projects"></a></span></p></li>
+<li><p><span style="font-size: 30px">…</span></p></li>
+</ul>
+</div>
+<p><span style="font-size: 22px">More about Quarto formats <a href="https://quarto.org/docs/output-formats/all-formats.html">here</a> and <a href="https://quarto.org/docs/guide/">here</a></span></p>
+<aside class="notes">
+<p>We have seen how to do pdf,</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="document-formats" class="slide level2">
+<h2>Document formats</h2>
+<div>
+<ul>
+<li><p><span style="font-size: 30px">HTML (<code>html</code>)</span></p></li>
+<li><p><span style="font-size: 30px">PDF (<code>pdf</code>): rendered with LaTex (requires a Latex installation such as <a href="https://yihui.org/tinytex/">TinyTex</a>)</span></p></li>
+<li><p><span style="font-size: 30px">OpenDocument Text (<code>odt</code>)</span></p></li>
+<li><p><span style="font-size: 30px">Microsoft Word (<code>docx</code>)</span></p></li>
+<li><p><span style="font-size: 30px">…</span></p></li>
+</ul>
+</div>
+<p><span style="font-size: 30px">We have seen how to produce HTML documents, other documents can be produced in a similar way.</span></p>
+<aside class="notes">
+<p>the pdf format is what is going to be asked for the assessment</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="presentation-formats" class="slide level2">
+<h2>Presentation formats</h2>
+<div>
+<ul>
+<li><p><span style="font-size: 30px"><code>revealjs</code>: HTML presentation with Reveal.js (these slides are generated with Reveal.js)</span></p></li>
+<li><p><span style="font-size: 30px"><code>pptx</code>: Microsoft PowerPoint</span></p></li>
+<li><p><span style="font-size: 30px"><code>beamer</code>: PDF presentation with LaTeX Beamer</span></p></li>
+</ul>
+</div>
+<div class="fragment">
+<p><span style="font-size: 30px">Title slides start with <span style="color:indianred;">#</span> and all other slide starts with <span style="color:indianred;">##</span>.</span></p>
+<p><span style="font-size: 22px"><a href="https://quarto.org/docs/presentations/">More about presentations with quarto</a></span></p>
+</div>
+<aside class="notes">
+<p>The title of this slide is written ## Presentation formats</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="define-quarto-format" class="slide level2">
+<h2>Define quarto format</h2>
+<div class="column" style="width:50%;">
+<p><span style="font-size: 30px">The format can be chosen when you create a new quarto document:</span></p>
+<p><img data-src="new_qmd.png"></p>
+</div><div class="column" style="width:50%;">
+<p><span style="font-size: 30px">Or you can specify it into the YAML:</span></p>
+<p><img data-src="formats3.png"></p>
+</div><aside class="notes">
+<p>first solution, this is how we created an html document</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="multiple-formats-and-options" class="slide level2">
+<h2>Multiple formats and options</h2>
+<p><span style="font-size: 30px">You can render to multiple output formats by specifying more than one format in the YAML. Different options can be specify for the different format:</span></p>
+<div class="column" style="width:60%;">
+<p><span style="font-size: 25px">For example, the following will add a table of content and number the sections in the html format, and keep the default options in pdf and docx.</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="formats1.png"></p>
+</div><div class="column" style="width:60%;">
+<p><span style="font-size: 30px">To select the format in which to render:</span></p>
+</div><div class="column" style="width:40%;">
+<p><img data-src="formats2.png"></p>
+</div><p><span style="font-size: 30px">⚠️ Some options are available in all formats, but other are not (see <a href="https://quarto.org/docs/output-formats/all-formats.html">here</a> for the option available for each format)</span></p>
+</section></section>
+<section>
+<section id="troubleshooting" class="title-slide slide level1 center">
+<h1>Troubleshooting</h1>
+<aside class="notes">
+<p>to finish, let’s talk about common problems</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="when-rendering-fails" class="slide level2">
+<h2>When rendering fails</h2>
+<p><span style="font-size: 30px">Check the <em>Background Jobs</em> tab:</span></p>
+
+<img data-src="background_job.png" class="r-stretch"><aside class="notes">
+<p>Sometimes (but not always) explicit error messages</p>
+<p>here problem that there are two : in the YAML</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="when-rendering-fails-1" class="slide level2">
+<h2>When rendering fails</h2>
+<p><span style="font-size: 30px">Common errors:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">Missing R packages(packages non installed, or not loaded in the quarto document)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Problem with file paths and working directory: ⚠️ the default working directory of a Quarto document is the directory where the Quarto document is</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Error of syntax in the YAML</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Duplicated code chunks labels =&gt; check the drop-down chunk navigator</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Errors due to the R code itself =&gt; run all code chunks in the console (<em>Code/Run Region/Run all</em>) or run chunks one by one to identify the problem</span></p></li>
+</ul>
+</section>
+<section id="when-rendering-works-but-the-document-has-problems" class="slide level2">
+<h2>When rendering works but the document has problems</h2>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">If you cannot see the outputs: check the chunk output options as some options prevent outputs from being displayed</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">If you get unexpected values/results: can this be a problem with the use f the cache?</span></p></li>
+</ul>
+</section>
+<section id="to-avoid-big-problems" class="slide level2">
+<h2>To avoid big problems</h2>
+<p>💡 Render often, so that you can quickly indetify the cause of the problem!</p>
+</section>
+<section id="acknowledgments" class="slide level2 smaller">
+<h2>Acknowledgments</h2>
+<div>
+<ul>
+<li><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> - Chapter on Quarto <a href="https://r4ds.hadley.nz/quarto.html">in English</a> and <a href="https://pt.r4ds.hadley.nz/quarto.html" data-preview-link="false">in Portuguese</a></p></li>
+<li><p>Guilhaumon F. <em>An introduction to Quarto</em> <a href="https://rdatatoolbox.github.io/course-quarto">here</a></p></li>
+<li><p>Quarto <em>Get started</em> tutorial <a href="https://quarto.org/docs/get-started/">here</a></p></li>
+<li><p>Quarto guide <a href="https://quarto.org/docs/guide/">here</a></p></li>
+</ul>
+</div>
+</section>
+<section id="ressources" class="slide level2 smaller">
+<h2>Ressources</h2>
+<div>
+<ul>
+<li><p>Wickham H., Cetinkaya-Rundel M., Grolemund G. <em>R for Data Science</em> - Chapter on Quarto <a href="https://r4ds.hadley.nz/quarto.html">in English</a> and <a href="https://pt.r4ds.hadley.nz/quarto.html" data-preview-link="false">in Portuguese</a></p></li>
+<li><p>Guilhaumon F. <em>An introduction to Quarto</em> <a href="https://rdatatoolbox.github.io/course-quarto">here</a></p></li>
+<li><p>Quarto <em>Get started</em> tutorial <a href="https://quarto.org/docs/get-started/">here</a></p></li>
+<li><p>Quarto guide <a href="https://quarto.org/docs/guide/">here</a></p></li>
+</ul>
+</div>
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div>
+</section></section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="literate_programming_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="literate_programming_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="literate_programming_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="literate_programming_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="literate_programming_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="literate_programming_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="literate_programming_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="literate_programming_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="literate_programming_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="literate_programming_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="literate_programming_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+              // target, if specified
+              link.setAttribute("target", "_blank");
+              if (link.getAttribute("rel") === null) {
+                link.setAttribute("rel", "noopener");
+              }
+              // default icon
+              link.classList.add("external");
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

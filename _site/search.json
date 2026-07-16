@@ -1,0 +1,9 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Using R for reproductible data management and analyses in Forest Sciences",
+    "section": "",
+    "text": "This is the course material for the module Using R for reproducible data management and analyses in Forest Sciences of the Univerity of Brasilia - Post-graduate program in Forest Sciences, delivered by Géraldine Derroire (Cirad-University of Brasilia).\nCourse syllabus in English is here, and in Portuguese here.\nThe course material has been created using quarto and R version 4.4.3.\n\nCourse introduction\nSet up the working environment\nPrinciples of reproductible science\nGetting started with R\n\nExercices on session 2/3\nExercices on session 3/3\n\nWorking with data\n\nExercices\n\nIntroduction to the tidyverse\n\nExercice on session 1/2\nExercices on session 2/2\n\nData visualisation with ggplot\n\nExercices\n\nStatistics with R\n\nStatistics with R session 1/3\n\nExercices on session 1/3\n\nStatistics with R session 2/3\n\nExercices on session 2/3\n\nStatistics with R session 3/3\n\nExercices on session 3/3\n\n\nGoing further with R\n\nGoing further with R session 1/2\nGoing further with R session 2/2\nExercices\n\nIntroduction to Version Control with Git and GitHub\nLiterate programming with quarto"
+  }
+]
