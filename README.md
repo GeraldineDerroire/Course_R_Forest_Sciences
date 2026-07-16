@@ -1,4 +1,4 @@
-Course material for the module *Using R for reproducible data management and
+[Course material](https://geraldinederroire.github.io/Course_R_Forest_Sciences/) for the module *Using R for reproducible data management and
 analyses in Forest Sciences*
 of the University of Brasilia - Post-graduate program in Forest Sciences,
 delivered by Géraldine Derroire (Cirad-University of Brasilia).
@@ -8,6 +8,5 @@ and in Portuguese [here](https://geraldinederroire.github.io/Course_R_Forest_Sci
 
 The course material has been created using quarto and R version 4.4.3.
 
-It is available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/)
 
 
