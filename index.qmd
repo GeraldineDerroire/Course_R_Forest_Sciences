@@ -5,7 +5,7 @@ author: Géraldine Derroire
 institute: Cirad - UnB
 ---
 
-This is the course material for the module *Using R for reproducible data management and analyses in Forest Sciences* of the Univerity of Brasilia - Post-graduate program in Forest Sciences, delivered by Géraldine Derroire (Cirad-University of Brasilia).
+This is the course material for the module *Using R for reproducible data management and analyses in Forest Sciences* of the University of Brasilia - Post-graduate program in Forest Sciences, delivered by Géraldine Derroire (Cirad-University of Brasilia).
 
 Course syllabus in English is [here](EFL360457_R_for_Forest_Sciences_2025.pdf), and in Portuguese [here](EFL360457_R_para_Ciencias_Florestais_2025.pdf).
 
