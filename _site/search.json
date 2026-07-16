@@ -5,5 +5,1048 @@
     "title": "Using R for reproductible data management and analyses in Forest Sciences",
     "section": "",
     "text": "This is the course material for the module Using R for reproducible data management and analyses in Forest Sciences of the Univerity of Brasilia - Post-graduate program in Forest Sciences, delivered by Géraldine Derroire (Cirad-University of Brasilia).\nCourse syllabus in English is here, and in Portuguese here.\nThe course material has been created using quarto and R version 4.4.3.\n\nCourse introduction\nSet up the working environment\nPrinciples of reproductible science\nGetting started with R\n\nExercices on session 2/3\nExercices on session 3/3\n\nWorking with data\n\nExercices\n\nIntroduction to the tidyverse\n\nExercice on session 1/2\nExercices on session 2/2\n\nData visualisation with ggplot\n\nExercices\n\nStatistics with R\n\nStatistics with R session 1/3\n\nExercices on session 1/3\n\nStatistics with R session 2/3\n\nExercices on session 2/3\n\nStatistics with R session 3/3\n\nExercices on session 3/3\n\n\nGoing further with R\n\nGoing further with R session 1/2\nGoing further with R session 2/2\nExercices\n\nIntroduction to Version Control with Git and GitHub\nLiterate programming with quarto"
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "Using R for reproducible data management and analyses in Forest Sciences",
+    "section": "",
+    "text": "Attribution-NonCommercial 4.0 International\n=======================================================================\nCreative Commons Corporation (“Creative Commons”) is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an “as-is” basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.\nUsing Creative Commons Public Licenses\nCreative Commons public licenses provide a standard set of terms and conditions that creators and other rights holders may use to share original works of authorship and other material subject to copyright and certain other rights specified in the public license below. The following considerations are for informational purposes only, are not exhaustive, and do not form part of our licenses.\n Considerations for licensors: Our public licenses are\n intended for use by those authorized to give the public\n permission to use material in ways otherwise restricted by\n copyright and certain other rights. Our licenses are\n irrevocable. Licensors should read and understand the terms\n and conditions of the license they choose before applying it.\n Licensors should also secure all rights necessary before\n applying our licenses so that the public can reuse the\n material as expected. Licensors should clearly mark any\n material not subject to the license. This includes other CC-\n licensed material, or material used under an exception or\n limitation to copyright. More considerations for licensors:\nwiki.creativecommons.org/Considerations_for_licensors\n\n Considerations for the public: By using one of our public\n licenses, a licensor grants the public permission to use the\n licensed material under specified terms and conditions. If\n the licensor's permission is not necessary for any reason--for\n example, because of any applicable exception or limitation to\n copyright--then that use is not regulated by the license. Our\n licenses grant only permissions under copyright and certain\n other rights that a licensor has authority to grant. Use of\n the licensed material may still be restricted for other\n reasons, including because others have copyright or other\n rights in the material. A licensor may make special requests,\n such as asking that all changes be marked or described.\n Although not required by our licenses, you are encouraged to\n respect those requests where reasonable. More considerations\n for the public:\nwiki.creativecommons.org/Considerations_for_licensees\n=======================================================================\nCreative Commons Attribution-NonCommercial 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-NonCommercial 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nNonCommercial means not primarily intended for or directed towards commercial advantage or monetary compensation. For purposes of this Public License, the exchange of the Licensed Material for other material subject to Copyright and Similar Rights by digital file-sharing or similar means is NonCommercial provided there is no payment of monetary compensation in connection with the exchange.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\n\nreproduce and Share the Licensed Material, in whole or in part, for NonCommercial purposes only; and\nproduce, reproduce, and Share Adapted Material for NonCommercial purposes only.\n\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)\n\nnever produces Adapted Material.\n\nDownstream recipients.\n\nOffer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nNo downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\n\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties, including when the Licensed Material is used other than for NonCommercial purposes.\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\n\nretain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nindicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nindicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\n\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\nIf You Share Adapted Material You produce, the Adapter’s License You apply must not prevent recipients of the Adapted Material from complying with this Public License.\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database for NonCommercial purposes only;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material; and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.\nTO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION, NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES, COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n=======================================================================\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html",
+    "href": "9_literate_programming/literate_programming.html",
+    "title": "Literate programming with quarto",
+    "section": "",
+    "text": "Literate programming is a programming paradigm introduced in 1984 by Donald Knuth in which a computer program is given as an explanation of how it works in a natural language, such as English, interspersed (embedded) with snippets of macros and traditional source code, from which compilable source code can be generated.\n\n\n\n\nLiterate programming mixes code with natural language.\nSource: Wikipedia\n\n\n\n\nFor yourself: a modern-day lab notebook : keep track of what you did, how you did it and why\nFor collaborating with other scientists: share results and the code that produced them\nFor a wider audience: communicate results clearly while ensuring reproducibility and easy updates\n\n\nex for the last point : a report that is updated after each measurment campain\nStrongly encourage to do a quarto document for a paper, or your thesis\n\n\n\n\nQuarto is an open-source tool for creating dynamic documents that combine code, results and text to produce reproducible outputs in multiple formats (reports, websites, slides…).\n\n\n\n\n\n\nthese slides, and the exercices are done with quarto"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#literate-programming",
+    "href": "9_literate_programming/literate_programming.html#literate-programming",
+    "title": "Literate programming with quarto",
+    "section": "",
+    "text": "Literate programming is a programming paradigm introduced in 1984 by Donald Knuth in which a computer program is given as an explanation of how it works in a natural language, such as English, interspersed (embedded) with snippets of macros and traditional source code, from which compilable source code can be generated.\n\n\n\n\nLiterate programming mixes code with natural language.\nSource: Wikipedia"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#why-use-literate-programming",
+    "href": "9_literate_programming/literate_programming.html#why-use-literate-programming",
+    "title": "Literate programming with quarto",
+    "section": "",
+    "text": "For yourself: a modern-day lab notebook : keep track of what you did, how you did it and why\nFor collaborating with other scientists: share results and the code that produced them\nFor a wider audience: communicate results clearly while ensuring reproducibility and easy updates\n\n\nex for the last point : a report that is updated after each measurment campain\nStrongly encourage to do a quarto document for a paper, or your thesis"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#what-is-quarto",
+    "href": "9_literate_programming/literate_programming.html#what-is-quarto",
+    "title": "Literate programming with quarto",
+    "section": "",
+    "text": "Quarto is an open-source tool for creating dynamic documents that combine code, results and text to produce reproducible outputs in multiple formats (reports, websites, slides…).\n\n\n\n\n\n\nthese slides, and the exercices are done with quarto"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#creating-a-new-quarto-document",
+    "href": "9_literate_programming/literate_programming.html#creating-a-new-quarto-document",
+    "title": "Literate programming with quarto",
+    "section": "Creating a new Quarto document",
+    "text": "Creating a new Quarto document\nQuarto is pre-installed with RStudio.\n\nTo create a new document: File/New File/Quarto Document\nYou can choose between different types of document. Choose Document, fill in a title and a author name and click on Create\n\n\n\n\nThis open a document containing plain text and R code."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#rendering",
+    "href": "9_literate_programming/literate_programming.html#rendering",
+    "title": "Literate programming with quarto",
+    "section": "Rendering",
+    "text": "Rendering\n\nClick on  and choose Preview in Viewer Pane\n\n\n\n\nClick on \n\n\n\n\nWhen rendering, Quarto generates a new file that contains selected text, code, and results from the .qmd file. Note that you now have a .html file in the Files pane."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#rendering-1",
+    "href": "9_literate_programming/literate_programming.html#rendering-1",
+    "title": "Literate programming with quarto",
+    "section": "Rendering",
+    "text": "Rendering\nYou can view the rendered document in the Viewer pane:"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#visual-editor",
+    "href": "9_literate_programming/literate_programming.html#visual-editor",
+    "title": "Literate programming with quarto",
+    "section": "Visual editor",
+    "text": "Visual editor\nThe Visual editor is an interface where you can use buttons to easily format text, insert images , tables..\n\n\n\n\n\nThe Visual editor save the content of your document in Markdown format.\n\nThere are two ways of working on a document: from the visual editor, or from the source editor\ntry to add text, format it, play with it"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#source-editor",
+    "href": "9_literate_programming/literate_programming.html#source-editor",
+    "title": "Literate programming with quarto",
+    "section": "Source editor",
+    "text": "Source editor\nYou can view and edit the plain Markdown document in the Source editor:\n\n\n\n\n\n\nthis is markdown langauge, we will talk about it in a few minutes"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#content-of-a-quarto-document",
+    "href": "9_literate_programming/literate_programming.html#content-of-a-quarto-document",
+    "title": "Literate programming with quarto",
+    "section": "Content of a Quarto document",
+    "text": "Content of a Quarto document\n\nA YAML header: metadata and output settings\nText in Markdown format\nChunks of R code\n\n\n\n\n\n\n\nin the YAML title and author + output format"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#markdown-syntax",
+    "href": "9_literate_programming/literate_programming.html#markdown-syntax",
+    "title": "Literate programming with quarto",
+    "section": "Markdown syntax",
+    "text": "Markdown syntax\nIf you write text in the Visual editor, you can use the buttons and drop-down menu to format the text.\nYou can also write using the markdown syntax in the Source editor.\nMarkdown in a markup language used to format plain text in a simple and intuitive way.\n\nA markup language is a way to annotate text to describe its structure and formatting, using special symbols or tags, so that computers can display it properly.\nhtml is another markup languages\nwhy would we use markdown?\n\neasy when used to\nexaclty as saved so easier to debug, easier with version control\n\nBut totally ok to use the Visual editor"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#text-formating",
+    "href": "9_literate_programming/literate_programming.html#text-formating",
+    "title": "Literate programming with quarto",
+    "section": "Text formating",
+    "text": "Text formating\n\n\n\n\n\n\n\nOn the left, what you type\non the right, what you will see in the rendered document"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#figures",
+    "href": "9_literate_programming/literate_programming.html#figures",
+    "title": "Literate programming with quarto",
+    "section": "Figures",
+    "text": "Figures\n\nTo add a figure with a caption:\n![Caption](quarto_logo.png)\n⚠️ The file with the figure needs to be in the same folder than the quarto document.\n\nFormatting options:\nFigure size\n  ![Caption](quarto_logo.png){width=300}\n  ![Caption](quarto_logo.png){height=80%}\n\nFigure Alignment\n  ![Caption](quarto_logo.png){fig-align=\"left\"}\n  ![Caption](quarto_logo.png){fig-align=\"center\"}\n\n\n\n\n\n\n\n\n\nCaption\n\n\n\n\nCombines option with a space between arguments:\n![Caption](quarto_logo.png){height=80% fig-align=\"right\"}"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#tables",
+    "href": "9_literate_programming/literate_programming.html#tables",
+    "title": "Literate programming with quarto",
+    "section": "Tables",
+    "text": "Tables\nTo add a table with markdown:\n\n| First Header | Second Header |\n|--------------|---------------|\n| Content Cell | Content Cell  |\n| Content Cell | Content Cell  |\n\n\n\n\n\n\n\n\n\nFirst Header\nSecond Header\n\n\n\n\nContent Cell\nContent Cell\n\n\nContent Cell\nContent Cell\n\n\n\n\n\n\nTo add a caption and change the width of columns:\n\n| First Header | Second Header |\n|--------------|---------------|\n| Content Cell | Content Cell  |\n| Content Cell | Content Cell  |\n\n: Caption {tbl-colwidths=\"[75,25]\"}\n\n\n\n\n\n\n\nCaption\n\n\n\n\n\n\nFirst Header\nSecond Header\n\n\n\n\nContent Cell\nContent Cell\n\n\nContent Cell\nContent Cell\n\n\n\n\n\n\n\nThis is however not very practical for big table, we will see alternative later"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#equations",
+    "href": "9_literate_programming/literate_programming.html#equations",
+    "title": "Literate programming with quarto",
+    "section": "Equations",
+    "text": "Equations\nTo write equations in Quarto, we have to use the LaTex syntax.\nEquations can be place in a separate line, with$$…$$:\n$$y \\sim \\mathcal N(\\alpha + \\sum_{i=1}^n\\beta_n \\times x_n, \\sigma^2)$$\n\\[y \\sim \\mathcal N(\\alpha + \\sum_{i=1}^n\\beta_n \\times x_n,\\sigma^2)\\]\n\nThey can also be displayed inline, with$…$:\nThis equation is displayed inline: $y = e^{\\alpha}$\nThis equation is displayed inline: \\(y = e^{\\alpha}\\)\nMore about LaTex equations\n\n\nThis is slighly more advanced but make the equation very clean"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#links",
+    "href": "9_literate_programming/literate_programming.html#links",
+    "title": "Literate programming with quarto",
+    "section": "Links",
+    "text": "Links\nTo add a link:\n&lt;https://quarto.org/docs/get-started/hello/rstudio.html&gt;\nhttps://quarto.org/docs/get-started/hello/rstudio.html\nTo add a named link:\n[Quarto tutorial](https://quarto.org/docs/get-started/hello/rstudio.html)\nQuarto tutorial"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#cross-references",
+    "href": "9_literate_programming/literate_programming.html#cross-references",
+    "title": "Literate programming with quarto",
+    "section": "Cross-references",
+    "text": "Cross-references\nTo be able to add a reference to a figure, table, equation, section… in another part of the document, we need to give them an identifier in{#….}:\n\n![Caption](quarto_logo.png){#fig-quarto}\n\n\n\n\n\n\n\n\n\n\n\nFigure 1: Caption\n\n\n\n\n\nWe can then refer to it with @:\n@fig-quarto shows the logo of quarto.\nFigure 1 shows the logo of quarto."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#cross-references-1",
+    "href": "9_literate_programming/literate_programming.html#cross-references-1",
+    "title": "Literate programming with quarto",
+    "section": "Cross-references",
+    "text": "Cross-references\nIdentifiers start with the type of item:\n\n\nfor a figure: fig-\nfor a table: tbl-\nfor an equation: eq-\nfor a section: sec-"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#insert-r-code",
+    "href": "9_literate_programming/literate_programming.html#insert-r-code",
+    "title": "Literate programming with quarto",
+    "section": "Insert R code",
+    "text": "Insert R code\nChunks of R code are executed by Quarto when you render the document.\n\n\nTo add a chunk of R code:\n\n\nclick on  and select R\nor use the shortcut Ctrl + Alt + I\n\n\n\n\n\n\nThis inserts a code chunk where you can write R code:\n\nCode chunks are surrounded by```{r}….```.\n\n\n\nYou can use  to run all previous chunks, and  to run the current chunk.\n💡Start your document with a chunk that loads the necessary packages.\n💡Keep the chunks small."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#chunk-labels",
+    "href": "9_literate_programming/literate_programming.html#chunk-labels",
+    "title": "Literate programming with quarto",
+    "section": "Chunk labels",
+    "text": "Chunk labels\nYou can add a label to a chunk:\n\nThis helps you navigate to a specific chunk using the drop down navigator:\n\n⚠️ Each chunk label must be unique."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#chunk-options",
+    "href": "9_literate_programming/literate_programming.html#chunk-options",
+    "title": "Literate programming with quarto",
+    "section": "Chunk options",
+    "text": "Chunk options\nChunk options control how the code will be rendered. The most important are:\n\n\n\n\n\n\n\n\n\n\n\n\n\nOption\nRun code\nShow code\nShow output\nShow plots\nShow messages\nShow warnings\n\n\n\n\neval: false\n🚫\n✅\n🚫\n🚫\n🚫\n🚫\n\n\ninclude: false\n✅\n🚫\n🚫\n🚫\n🚫\n🚫\n\n\necho: false\n✅\n🚫\n✅\n✅\n✅\n✅\n\n\nresults: hide\n✅\n✅\n🚫\n✅\n✅\n✅\n\n\nfig-show: hide\n✅\n✅\n✅\n🚫\n✅\n✅\n\n\nmessage: false\n✅\n✅\n✅\n✅\n🚫\n✅\n\n\nwarning: false\n✅\n✅\n✅\n✅\n✅\n🚫\n\n\n\n\nMore about chunk options\n\nlet’s not discuss them all…"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#chunk-options-1",
+    "href": "9_literate_programming/literate_programming.html#chunk-options-1",
+    "title": "Literate programming with quarto",
+    "section": "Chunk options",
+    "text": "Chunk options\nChunk options are added one by one within the chunk:\n\nSome chunk options can also be selected using the  button:"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#inline-code",
+    "href": "9_literate_programming/literate_programming.html#inline-code",
+    "title": "Literate programming with quarto",
+    "section": "Inline code",
+    "text": "Inline code\nSmall R codes can be embedded directly in the text by surrounding them with `r… ` .\nThis is very useful to present your data or your results, as this will be updated if the data change:\n\ndata(\"iris\")\n\n.\n\nThe iris data have `r nrow(iris)` observations. \nThe mean sepal length is `r mean(iris$Sepal.Length)`.\n\nThe iris data have 150 observations. The mean sepal length is 5.8433333."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#figures-1",
+    "href": "9_literate_programming/literate_programming.html#figures-1",
+    "title": "Literate programming with quarto",
+    "section": "Figures",
+    "text": "Figures\nFigures can be generated with a code chunk. Chunk options control the layout of the figure:\n\n\n\n\n\n\n\n\n\n\nFigure 2: Relationship between sepal length and width.\n\n\n\n\n\n\n\n💡 Figures can then be cross-referenced using their label."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#figure-options",
+    "href": "9_literate_programming/literate_programming.html#figure-options",
+    "title": "Literate programming with quarto",
+    "section": "Figure options",
+    "text": "Figure options\n\n\nfig-cap: add a caption\nfig-width and fig-height: set figure size (in inches)\nfig-asp: control the aspect ratio (the width/height ratio)\nout-width and out-height: control display size in output (in %)\nfig-align: figure alignment (“left”, “right”, “center”)\nlayout-col: place multiple plots in the same row\nfig-format: choose output format (“png”, “jpeg”, “svg”, “pdf”). The default depends on output format."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#tables-1",
+    "href": "9_literate_programming/literate_programming.html#tables-1",
+    "title": "Literate programming with quarto",
+    "section": "Tables",
+    "text": "Tables\nTables can be generated with a code chunk:\n\n\n\n  Sepal.Length Sepal.Width Petal.Length\n1          5.1         3.5          1.4\n2          4.9         3.0          1.4\n3          4.7         3.2          1.3"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#tables-with-kable",
+    "href": "9_literate_programming/literate_programming.html#tables-with-kable",
+    "title": "Literate programming with quarto",
+    "section": "Tables with kable",
+    "text": "Tables with kable\nThe function knitr::kable propose a nicer layout, and additional formatting options (see the help of the function:)\n\n\n\n\n\n\nSepal.Length\nSepal.Width\nPetal.Length\n\n\n\n\n5.1\n3.5\n1.4\n\n\n4.9\n3.0\n1.4\n\n\n4.7\n3.2\n1.3\n\n\n\n\n\nThe packages kableExtra and flextable proposes additional formating options."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#cross-references-2",
+    "href": "9_literate_programming/literate_programming.html#cross-references-2",
+    "title": "Literate programming with quarto",
+    "section": "Cross-references",
+    "text": "Cross-references\nThe figures and table produced with a code chunk can be cross-referenced by their labels. For that, you need to add a label at the beginning of a code chunk:\n\n\nSee @tb.iris\n\n\n\n\n\n\n\n\n\nTable 1: Iris data\n\n\n\n  Sepal.Length Sepal.Width Petal.Length\n1          5.1         3.5          1.4\n2          4.9         3.0          1.4\n3          4.7         3.2          1.3\n\n\n\n\nSee Table 1\n\n\n\nwhat on the left gives what on the right"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#caching",
+    "href": "9_literate_programming/literate_programming.html#caching",
+    "title": "Literate programming with quarto",
+    "section": "Caching",
+    "text": "Caching\nAll code chunks are executed every time you render your document.\nThis ensures reproducibility, but can slow things down, especially when chunks take a long time to run. In this case, you can use caching for specific chunks.\n\nCaching saves the results of a chunk in a specific file in the document_name_cache folder (the name of the folder starts with the name of your document). On subsequent render, cached chunks are only re-run if their code has changed."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#caching-1",
+    "href": "9_literate_programming/literate_programming.html#caching-1",
+    "title": "Literate programming with quarto",
+    "section": "Caching",
+    "text": "Caching\n⚠️ Use caching with caution: if you change the data in a chunk, this chunk will be run, but the chunks using the data will NOT.\n💡It is recommended to regularly clear the cache by deleting the cache folder manually."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#yaml-header-1",
+    "href": "9_literate_programming/literate_programming.html#yaml-header-1",
+    "title": "Literate programming with quarto",
+    "section": "YAML header",
+    "text": "YAML header\nThe YAML header is surrounded by ---\nIt controls many settings for the entire document.\nIt is also recommended to write metadata in the YAML that will appear in the rendered document. This includes:\n\ntitle: the title of the document\nauthor: your name (and the names of your collaborators)\n\n\n\n\ndate: either the creation date, or automatically show the last modification date with:\n\n\ndate: last-modified\n\n\nwe are not going to see all of them…"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#global-option",
+    "href": "9_literate_programming/literate_programming.html#global-option",
+    "title": "Literate programming with quarto",
+    "section": "Global option",
+    "text": "Global option\nYou can define the default options of all code chunks of a document in the YAML, under execute:\n\n\n\n\nWith this YAML, all code chunks will be executed but not shown in the output, and their results will be cached.\n\n💡You can override these defaults for individual chunks using chunk-specific options."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#section-numbers-and-table-of-content",
+    "href": "9_literate_programming/literate_programming.html#section-numbers-and-table-of-content",
+    "title": "Literate programming with quarto",
+    "section": "Section numbers and table of content",
+    "text": "Section numbers and table of content\n\nYou can use a table of contents (toc option) and/or section numbering (number-sections option) to make it easier for readers to navigate your document:"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#self-contained-documents",
+    "href": "9_literate_programming/literate_programming.html#self-contained-documents",
+    "title": "Literate programming with quarto",
+    "section": "Self-contained documents",
+    "text": "Self-contained documents\nA HTML file created with quarto has several external dependencies that are placed in the document_name_files folder (for examples, figures created by code chunks).\nIf you want to share the html in an email or a USB drive, you will need to share the HTML file and the document_name_files folder.\nTo avoid this, you can created self-contained documents specifying the embed_resources option:"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#parameters",
+    "href": "9_literate_programming/literate_programming.html#parameters",
+    "title": "Literate programming with quarto",
+    "section": "Parameters",
+    "text": "Parameters\nYou can specify parameters in the YAML, that will be used in the chunks.\nFor example, this is useful if you want to produce the same document for different subset of your data. Here, we can rapidly produce the same report for the different species of Iris.\n\n\n\n\n\n\n\na bit more advanced"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#citing-references-in-the-visual-editor",
+    "href": "9_literate_programming/literate_programming.html#citing-references-in-the-visual-editor",
+    "title": "Literate programming with quarto",
+    "section": "Citing references in the Visual editor",
+    "text": "Citing references in the Visual editor\nTo add bibliographic references to a quarto document, you can use the Visual editor: Insert / Citation.\nYou can search an new reference with its DOI, or by searching bibliographic platforms (Crossref, PubMed…).\n\n\nthis is the easiest way"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#citing-references-in-the-visual-editor-1",
+    "href": "9_literate_programming/literate_programming.html#citing-references-in-the-visual-editor-1",
+    "title": "Literate programming with quarto",
+    "section": "Citing references in the Visual editor",
+    "text": "Citing references in the Visual editor\nWhen inserting the first reference of a document, this will:\n\n\ncreate a new .bib file in your project and add the reference to it. This file will be updated every time you add a new reference\nadd a bibliography field in the YAML, giving the name of the .bib file"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#citing-references-in-the-visual-editor-2",
+    "href": "9_literate_programming/literate_programming.html#citing-references-in-the-visual-editor-2",
+    "title": "Literate programming with quarto",
+    "section": "Citing references in the Visual editor",
+    "text": "Citing references in the Visual editor\nWhen you have an existing .bib file, you can also add a reference from this file, using the Visual editor: Insert / Citation"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#citing-references-in-the-source-editor",
+    "href": "9_literate_programming/literate_programming.html#citing-references-in-the-source-editor",
+    "title": "Literate programming with quarto",
+    "section": "Citing references in the Source editor",
+    "text": "Citing references in the Source editor\nTo add a citation using the Source editor, you need to have an existing bibliography file (.bib file imported from a reference manager or created with the Visual editor).\nYou can add the reference using @ followed by the reference key (the reference identifier from the bibliography file)."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#rendered",
+    "href": "9_literate_programming/literate_programming.html#rendered",
+    "title": "Literate programming with quarto",
+    "section": "Rendered",
+    "text": "Rendered\nWhen rendering your file, quarto will add a bibliography at the end of the document.\nYou will need to manually add a title for this section."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#bibliographic-styles",
+    "href": "9_literate_programming/literate_programming.html#bibliographic-styles",
+    "title": "Literate programming with quarto",
+    "section": "Bibliographic styles",
+    "text": "Bibliographic styles\nTo change the style of the citations and the bibliography, you can reference the CSL (citation style language) that you want to use in the csl field of the YAML:\n\nThis file will need to be added in the same directory than your .qmd file (or you can specify an alternative path).\nYou can search for CSL styles here. They may as well be provided by scientific journals."
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#quarto-formats-1",
+    "href": "9_literate_programming/literate_programming.html#quarto-formats-1",
+    "title": "Literate programming with quarto",
+    "section": "Quarto formats",
+    "text": "Quarto formats\nQuarto supports many different formats, including:\n\n\nDocuments formats: HTML, PDF, OpenDocument Text, Microsoft Word…\nPresentations formats: PowerPoint, Revealjs, Beamer\nBooks: combinations of multiple documents (chapters) into a single manuscript (in HTML, PDF, EPUB…) \nWebsites \nQuarto projects: centralised structure for managing multi-document outputs \n…\n\n\nMore about Quarto formats here and here\n\nWe have seen how to do pdf,"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#document-formats",
+    "href": "9_literate_programming/literate_programming.html#document-formats",
+    "title": "Literate programming with quarto",
+    "section": "Document formats",
+    "text": "Document formats\n\n\nHTML (html)\nPDF (pdf): rendered with LaTex (requires a Latex installation such as TinyTex)\nOpenDocument Text (odt)\nMicrosoft Word (docx)\n…\n\n\nWe have seen how to produce HTML documents, other documents can be produced in a similar way.\n\nthe pdf format is what is going to be asked for the assessment"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#presentation-formats",
+    "href": "9_literate_programming/literate_programming.html#presentation-formats",
+    "title": "Literate programming with quarto",
+    "section": "Presentation formats",
+    "text": "Presentation formats\n\n\nrevealjs: HTML presentation with Reveal.js (these slides are generated with Reveal.js)\npptx: Microsoft PowerPoint\nbeamer: PDF presentation with LaTeX Beamer\n\n\n\nTitle slides start with # and all other slide starts with ##.\nMore about presentations with quarto\n\n\nThe title of this slide is written ## Presentation formats"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#define-quarto-format",
+    "href": "9_literate_programming/literate_programming.html#define-quarto-format",
+    "title": "Literate programming with quarto",
+    "section": "Define quarto format",
+    "text": "Define quarto format\n\nThe format can be chosen when you create a new quarto document:\n\n\n\nOr you can specify it into the YAML:\n\n\n\nfirst solution, this is how we created an html document"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#multiple-formats-and-options",
+    "href": "9_literate_programming/literate_programming.html#multiple-formats-and-options",
+    "title": "Literate programming with quarto",
+    "section": "Multiple formats and options",
+    "text": "Multiple formats and options\nYou can render to multiple output formats by specifying more than one format in the YAML. Different options can be specify for the different format:\n\nFor example, the following will add a table of content and number the sections in the html format, and keep the default options in pdf and docx.\n\n\n\n\n\nTo select the format in which to render:\n\n\n\n\n⚠️ Some options are available in all formats, but other are not (see here for the option available for each format)"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#when-rendering-fails",
+    "href": "9_literate_programming/literate_programming.html#when-rendering-fails",
+    "title": "Literate programming with quarto",
+    "section": "When rendering fails",
+    "text": "When rendering fails\nCheck the Background Jobs tab:\n\n\nSometimes (but not always) explicit error messages\nhere problem that there are two : in the YAML"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#when-rendering-fails-1",
+    "href": "9_literate_programming/literate_programming.html#when-rendering-fails-1",
+    "title": "Literate programming with quarto",
+    "section": "When rendering fails",
+    "text": "When rendering fails\nCommon errors:\n\nMissing R packages(packages non installed, or not loaded in the quarto document)\nProblem with file paths and working directory: ⚠️ the default working directory of a Quarto document is the directory where the Quarto document is\nError of syntax in the YAML\nDuplicated code chunks labels =&gt; check the drop-down chunk navigator\nErrors due to the R code itself =&gt; run all code chunks in the console (Code/Run Region/Run all) or run chunks one by one to identify the problem"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#when-rendering-works-but-the-document-has-problems",
+    "href": "9_literate_programming/literate_programming.html#when-rendering-works-but-the-document-has-problems",
+    "title": "Literate programming with quarto",
+    "section": "When rendering works but the document has problems",
+    "text": "When rendering works but the document has problems\n\nIf you cannot see the outputs: check the chunk output options as some options prevent outputs from being displayed\nIf you get unexpected values/results: can this be a problem with the use f the cache?"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#to-avoid-big-problems",
+    "href": "9_literate_programming/literate_programming.html#to-avoid-big-problems",
+    "title": "Literate programming with quarto",
+    "section": "To avoid big problems",
+    "text": "To avoid big problems\n💡 Render often, so that you can quickly identify the cause of the problem and solve it!"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#acknowledgments",
+    "href": "9_literate_programming/literate_programming.html#acknowledgments",
+    "title": "Literate programming with quarto",
+    "section": "Acknowledgments",
+    "text": "Acknowledgments\n\n\nWickham H., Cetinkaya-Rundel M., Grolemund G. R for Data Science - Chapter on Quarto in English and in Portuguese\nGuilhaumon F. An introduction to Quarto here\nQuarto Get started tutorial here\nQuarto guide here"
+  },
+  {
+    "objectID": "9_literate_programming/literate_programming.html#ressources",
+    "href": "9_literate_programming/literate_programming.html#ressources",
+    "title": "Literate programming with quarto",
+    "section": "Ressources",
+    "text": "Ressources\n\n\nWickham H., Cetinkaya-Rundel M., Grolemund G. R for Data Science - Chapter on Quarto in English and in Portuguese\nGuilhaumon F. An introduction to Quarto here\nQuarto Get started tutorial here\nQuarto guide here"
+  },
+  {
+    "objectID": "7_going_further/exo_session12_13.html",
+    "href": "7_going_further/exo_session12_13.html",
+    "title": "Exercices on sessions 1 and 2 of Going further with R",
+    "section": "",
+    "text": "Load the package tidyverse.\n# Writing a function\nWe are going to write a function to standardise a variable to mean 0 and standard deviation 1. There is already an existing function to do this (the function scale), so let’s forget that this function exists. Remember that to standardise a variable in this way, we need to do the following operation for each value x of the variable:\n\\[ \\frac{x - mean}{sd}\\] In addition to the variable to standardise, we want this function to take a second argument being the number of decimal we want the standardised values to be rounded to. We will give a default value of 2 to this argument.\n\nplan the function: identify the arguments and the steps\n\n\ncreate a test vector by randomly drawing 10 values in a normal distribution of mean 16 and standard deviation of 3\n\n\nwrite the code of the function (for keeping thing simple, this function will always remove the NA)\n\n\ncreate the function\n\n\ntest the function\n\n\nConditional execution\n\nWrite a function using conditional execution that take 2 arguments: the temperature (numerical) and the rain (boolean). This function will tell the user to:\n\ngo to the beach is the temperature is above 25°C and it’s not raining\ntake their umbrella if the temperature is above 25°C and it’s raining\ntake their jumper if the temperature is below 25°C and it’s not raining\nstay home otherwise\n\n\n\nTest this function\n\n\nAdd two tests at the beginning of function to check that the arguments are of the correct mode, and stop the execution of the function otherwise\n\n\n\nLoop\nWrite a for loop that calculates the cumulative sum of a vector. In other words: the first element of the output is the first element of the input, the second element of the output is the sum of the first two elements of the input, … the nth element of the output is the sum of the nth first element of the input. There is a function called cumsum that does this, but let’s forget about it for now… To run this loop, make a vector of 10 random draws between 0 and 4.\n\n\nAdvanced tidyverse\n\nCreate the following list and use one of the map functions from the package purr to get the maximum value of H for each plot.\n\n\n\n$plot1\n[1]  8 25 12 16 14\n\n$plot2\n[1] 31 25 18 19 29 24 16\n\n$plot3\n[1] 15 12 13 17 19 11\n\n\n\nUse the function across with the function you have created in the first section to standardise all the numerical variables of the data set iris\n\n\nDo the same thing but only for the variables related to sepals\n\n\n\nFor next time\n\nMake sure that git is properly installed on your computer and that git and Github are configurated (see the setting up instructions here)\nInstall TinyTex by running the following R commands:\n\n\ninstall.packages('tinytex')\ntinytex::install_tinytex()\n\nand checking that it is installed:\n\ntinytex::is_tinytex() # should be TRUE"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_slides_not_used.html",
+    "href": "6_basic_statistics/basic_stats_slides_not_used.html",
+    "title": "Statistics with R - slides not used",
+    "section": "",
+    "text": "library(ggplot2)"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_slides_not_used.html#log-normal-distribution",
+    "href": "6_basic_statistics/basic_stats_slides_not_used.html#log-normal-distribution",
+    "title": "Statistics with R - slides not used",
+    "section": "Log-normal distribution",
+    "text": "Log-normal distribution\n\\(x \\sim log\\mathcal{N}(\\mu, \\sigma^2)\\) if \\(log(x) \\sim \\mathcal{N}(\\mu, \\sigma^2)\\)\nWe use the function rnorm to randomly draw data from a normal distribution:\n\n\n\ndt1 &lt;- data.frame(x = rlnorm(n = 100000, mean = 0, sd = 1))\ndt2 &lt;- data.frame(x = rlnorm(n = 100000, mean = 1, sd = 1))\n\nggplot() + \n  geom_density(data = dt1, aes(x = x), \n               color = \"blue\") + \n  geom_density(data = dt2, aes(x = x), \n               color = \"green\") + \n  scale_x_continuous(limits =c(0,20)) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\nThe values are stricty positive.\nThe variance increases when the mean increases."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_slides_not_used.html#bernoulli-and-binomial-distribution",
+    "href": "6_basic_statistics/basic_stats_slides_not_used.html#bernoulli-and-binomial-distribution",
+    "title": "Statistics with R - slides not used",
+    "section": "Bernoulli and Binomial distribution",
+    "text": "Bernoulli and Binomial distribution\n\\[\\mathcal{B}(n, p)\\]\nThe binomial distribution represent the number of successes when performing n independent experiment having a constant probability of success p.\n[It is a discrete distribution taking only positive integer values.{style=“font-size: 30px”}\n\nIt can be use for proportion: eg proportion of trees browsed in a plot.\n\n\nThe Bernoulli distribution is a special case of the binomial distribution where n=1.\nIt is a discrete distribution taking only the values 0 (failure) or 1 (success).]{style=“font-size: 30px”}\n\n\nIt can be use for presence/abscence and success/failure data: eg probability that a tree is browsed.]{.fragment}"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_slides_not_used.html#bernoulli-and-binomial-distribution-1",
+    "href": "6_basic_statistics/basic_stats_slides_not_used.html#bernoulli-and-binomial-distribution-1",
+    "title": "Statistics with R - slides not used",
+    "section": "Bernoulli and binomial distribution",
+    "text": "Bernoulli and binomial distribution\nWe use the function rbinom to randomly draw data from a binomial or a Bernoulli distribution:\n\n\n\ndt1 &lt;- data.frame(x = \n          rbinom(n = 100000, \n                 size  = 20, \n                 p = 0.5))\nggplot() + \n  geom_bar(data = dt1, \n           aes(x = x)) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\ndt2 &lt;- data.frame(x = \n          rbinom(n = 100000, \n                 size = 20, \n                 p = 0.7))\nggplot() + \n  geom_bar(data = dt2, \n           aes(x = x)) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n# Bernoulli distribution\ndt3 &lt;- data.frame(x = \n          rbinom(n = 100000, \n                 size = 1, \n                 p = 0.5))\nggplot() +\n  geom_bar(data = dt3, \n           aes(x = x)) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_slides_not_used.html#poisson",
+    "href": "6_basic_statistics/basic_stats_slides_not_used.html#poisson",
+    "title": "Statistics with R - slides not used",
+    "section": "Poisson",
+    "text": "Poisson\nTO DO OR TO MOVE TO SESSION 2\ndiscrete\ncf Eric: 1 slide et Marchand"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_slides_not_used.html#to-go-further-on-distribution",
+    "href": "6_basic_statistics/basic_stats_slides_not_used.html#to-go-further-on-distribution",
+    "title": "Statistics with R - slides not used",
+    "section": "To go further on distribution",
+    "text": "To go further on distribution\nTO PUT IN THE RESOURCES OF SESSION 2/3\ndistribution zoo + wikipedia pages (in english)"
+  },
+  {
+    "objectID": "5_graph/exo_session_8.html",
+    "href": "5_graph/exo_session_8.html",
+    "title": "Exercices on session *Data visualisation",
+    "section": "",
+    "text": "Graphical exploration on wood density data\nFor this part, there is no need to improve the appearance of the plots.\nLet’s work with the wdData from a previous version of the package BIOMASS (v 2.1.11). These data are available here, and the metadata here.\n\nRead these data as a tibble\n\n\nMake a histogram of wood density for each of the following three regions, using facets: South_America_(tropical), Australia/PNG_(tropical), Africa_(tropical)\n\n\nRepresent the same data but with a single density plot\n\n\nCompare the distribution of wood density for the 10 more common family on a single graph\n\n\nShow the number of observation per family and regionId for the 10 most abundant families\n\n\n\nIris data\nLet’s now work with the iris dataset (available from datasets, which is a package automatically loaded with R, your don’t need to install it).\n“This famous (Fisher’s or Anderson’s) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. The species are Iris setosa, versicolor, and virginica.”\nReproduce the following graph made with the iris dataset.\nThe colours are steelblue3, plum and darkolivegreen3 and the theme bw.\n\n\n\n\n\n\n\n\n\n\n\nFor next time\n\nMake sure you remember what we saw on descriptive statistics in the session Working with data\nInstall the following packages from CRAN: multcompView, GGally\nMake sure you have the following packages: questionr, tidyverse, BIOMASS\nDownload the RData file available here and store them in your raw data folder."
+  },
+  {
+    "objectID": "4_tidyverse/data/description _KarnatakaForest.html",
+    "href": "4_tidyverse/data/description _KarnatakaForest.html",
+    "title": "Metadata on KarnatakaForest data",
+    "section": "",
+    "text": "This is the description of the data KarnatakaForest, that were available in a previous version of the package BIOMASS (v 2.1.11). You can access these data in a csv file here."
+  },
+  {
+    "objectID": "4_tidyverse/data/description _KarnatakaForest.html#description",
+    "href": "4_tidyverse/data/description _KarnatakaForest.html#description",
+    "title": "Metadata on KarnatakaForest data",
+    "section": "Description",
+    "text": "Description\nDataset from 96 forest plots (1 ha) established in the central Western Ghats of India by Ramesh et al. (2010)."
+  },
+  {
+    "objectID": "4_tidyverse/data/description _KarnatakaForest.html#usage",
+    "href": "4_tidyverse/data/description _KarnatakaForest.html#usage",
+    "title": "Metadata on KarnatakaForest data",
+    "section": "Usage",
+    "text": "Usage\n\ndata(\"KarnatakaForest\")"
+  },
+  {
+    "objectID": "4_tidyverse/data/description _KarnatakaForest.html#format",
+    "href": "4_tidyverse/data/description _KarnatakaForest.html#format",
+    "title": "Metadata on KarnatakaForest data",
+    "section": "Format",
+    "text": "Format\nA data frame with 65889 observations on the following 8 variables :\n\nplotId: Names of the plots\ntreeId: Tree Id, contains a letter (A, B, C…) when an individual has multiple stems\nfamily: Family\ngenus: Genus\nspecies: Species\nD: Diameter (cm)\nlat: Latitude\nlong: Longitude"
+  },
+  {
+    "objectID": "4_tidyverse/data/description _KarnatakaForest.html#references",
+    "href": "4_tidyverse/data/description _KarnatakaForest.html#references",
+    "title": "Metadata on KarnatakaForest data",
+    "section": "References",
+    "text": "References\nRamesh, B. R. et al. (2010). Forest stand structure and composition in 96 sites along environmental gradients in the central Western Ghats of India Ecological Archives E091-216. Ecology, 91(10), 3118-3118."
+  },
+  {
+    "objectID": "4_tidyverse/data/description _KarnatakaForest.html#examples",
+    "href": "4_tidyverse/data/description _KarnatakaForest.html#examples",
+    "title": "Metadata on KarnatakaForest data",
+    "section": "Examples",
+    "text": "Examples\n\ndata(KarnatakaForest)\nstr(KarnatakaForest)"
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html",
+    "href": "3_manip_data/codebook_BCI.env.html",
+    "title": "Codebook for BCI.env",
+    "section": "",
+    "text": "The dataset examined has the following dimensions:\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nNumber of observations\n50\n\n\nNumber of variables\n10"
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#utm.ew",
+    "href": "3_manip_data/codebook_BCI.env.html#utm.ew",
+    "title": "Codebook for BCI.env",
+    "section": "UTM.EW",
+    "text": "UTM.EW\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nVariable type\nnumeric\n\n\nNumber of missing obs.\n0 (0 %)\n\n\nNumber of unique values\n10\n\n\nMedian\n626203.97\n\n\n1st and 3rd quartiles\n625953.97; 626453.97\n\n\nMin. and max.\n625753.97; 626653.97"
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#utm.ns",
+    "href": "3_manip_data/codebook_BCI.env.html#utm.ns",
+    "title": "Codebook for BCI.env",
+    "section": "UTM.NS",
+    "text": "UTM.NS\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nVariable type\nnumeric\n\n\nNumber of missing obs.\n0 (0 %)\n\n\nNumber of unique values\n5\n\n\nMedian\n1011768.98\n\n\n1st and 3rd quartiles\n1011668.98; 1011868.98\n\n\nMin. and max.\n1011568.98; 1011968.98"
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#precipitation",
+    "href": "3_manip_data/codebook_BCI.env.html#precipitation",
+    "title": "Codebook for BCI.env",
+    "section": "Precipitation",
+    "text": "Precipitation\n\nThe variable only takes one (non-missing) value: \"2530\". The variable contains 0 % missing observations."
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#elevation",
+    "href": "3_manip_data/codebook_BCI.env.html#elevation",
+    "title": "Codebook for BCI.env",
+    "section": "Elevation",
+    "text": "Elevation\n\nThe variable only takes one (non-missing) value: \"120\". The variable contains 0 % missing observations."
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#age.cat",
+    "href": "3_manip_data/codebook_BCI.env.html#age.cat",
+    "title": "Codebook for BCI.env",
+    "section": "Age.cat",
+    "text": "Age.cat\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nVariable type\nfactor\n\n\nNumber of missing obs.\n0 (0 %)\n\n\nNumber of unique values\n2\n\n\nMode\n“c3”\n\n\nReference category\nc2\n\n\n\n\n\n\n\n\n\n\n\n\n\nObserved factor levels: \"c2\", \"c3\"."
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#geology",
+    "href": "3_manip_data/codebook_BCI.env.html#geology",
+    "title": "Codebook for BCI.env",
+    "section": "Geology",
+    "text": "Geology\n\nThe variable only takes one (non-missing) value: \"Tb\". The variable contains 0 % missing observations."
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#habitat",
+    "href": "3_manip_data/codebook_BCI.env.html#habitat",
+    "title": "Codebook for BCI.env",
+    "section": "Habitat",
+    "text": "Habitat\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nVariable type\nfactor\n\n\nNumber of missing obs.\n0 (0 %)\n\n\nNumber of unique values\n5\n\n\nMode\n“OldLow”\n\n\nReference category\nOldHigh\n\n\n\n\n\n\n\n\n\n\n\n\n\nObserved factor levels: \"OldHigh\", \"OldLow\", \"OldSlope\", \"Swamp\", \"Young\"."
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#stream",
+    "href": "3_manip_data/codebook_BCI.env.html#stream",
+    "title": "Codebook for BCI.env",
+    "section": "Stream",
+    "text": "Stream\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nVariable type\nfactor\n\n\nNumber of missing obs.\n0 (0 %)\n\n\nNumber of unique values\n2\n\n\nMode\n“No”\n\n\nReference category\nNo\n\n\n\n\n\n\n\n\n\n\n\n\n\nObserved factor levels: \"No\", \"Yes\"."
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#envhet",
+    "href": "3_manip_data/codebook_BCI.env.html#envhet",
+    "title": "Codebook for BCI.env",
+    "section": "EnvHet",
+    "text": "EnvHet\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nVariable type\nnumeric\n\n\nNumber of missing obs.\n0 (0 %)\n\n\nNumber of unique values\n26\n\n\nMedian\n0.35\n\n\n1st and 3rd quartiles\n0.08; 0.48\n\n\nMin. and max.\n0; 0.73"
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#site",
+    "href": "3_manip_data/codebook_BCI.env.html#site",
+    "title": "Codebook for BCI.env",
+    "section": "Site",
+    "text": "Site\n\nThe variable only takes one (non-missing) value: \"BCI\". The variable contains 0 % missing observations.\n\nReport generation information:\n\nCreated by: Geraldine Derroire (username: derroire).\nReport creation time: sam. avr. 12 2025 17:07:26\nReport was run from directory: D:/my_R_remote/00_My_Courses/Course_R_Forest_Sciences/3_manip_data\ndataMaid v1.4.1 [Pkg: 2021-10-08 from CRAN (R 4.4.3)]\nR version 4.4.3 (2025-02-28 ucrt).\nPlatform: x86_64-w64-mingw32/x64(America/Sao_Paulo).\nFunction call: dataMaid::makeDataReport(data = BCI.env, mode = c(\"summarize\",  \"visualize\", \"check\"), smartNum = FALSE, file = \"codebook_BCI.env.Rmd\",      checks = list(character = \"showAllFactorLevels\", factor = \"showAllFactorLevels\",          labelled = \"showAllFactorLevels\", haven_labelled = \"showAllFactorLevels\",          numeric = NULL, integer = NULL, logical = NULL, Date = NULL),      listChecks = FALSE, maxProbVals = Inf, codebook = TRUE, reportTitle = \"Codebook for BCI.env\")"
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html",
+    "href": "5_graph/data/description_wdData.html",
+    "title": "Description of the wdData",
+    "section": "",
+    "text": "This is the description of the data wdData, that were available in a previous version of the package BIOMASS (v 2.1.11). You can access these data in a csv file here."
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#description",
+    "href": "5_graph/data/description_wdData.html#description",
+    "title": "Description of the wdData",
+    "section": "Description",
+    "text": "Description\nThe global wood density database (Chave et al. 2009, Zanne et al. 2009)."
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#usage",
+    "href": "5_graph/data/description_wdData.html#usage",
+    "title": "Description of the wdData",
+    "section": "Usage",
+    "text": "Usage\n\ndata(\"wdData\")"
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#format",
+    "href": "5_graph/data/description_wdData.html#format",
+    "title": "Description of the wdData",
+    "section": "Format",
+    "text": "Format\nA data frame with 16467 observations on the following 7 variables.\n\nfamily: a character vector indicating the family\ngenus: a character vector indicating the genus\nspecies: a character vector indicating the species\nwd: a numeric vector of wood densities (g/cm^3)\nregion: a character vector of regions (see getWoodDensity())\nreferenceNumber: a numeric vector of reference numbers (bibliography)\nregionId: a character vector of region ids"
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#details",
+    "href": "5_graph/data/description_wdData.html#details",
+    "title": "Description of the wdData",
+    "section": "Details",
+    "text": "Details\nThis dataset is used in the function getWoodDensity(), to estimate a taxon-average wood density value."
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#source",
+    "href": "5_graph/data/description_wdData.html#source",
+    "title": "Description of the wdData",
+    "section": "Source",
+    "text": "Source\nZanne et al. Global wood density database. Dryad. Identifier: http://datadryad.org/handle/10255/dryad.235 (2009)."
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#references",
+    "href": "5_graph/data/description_wdData.html#references",
+    "title": "Description of the wdData",
+    "section": "References",
+    "text": "References\nChave et al. (2009) Towards a worldwide wood economics spectrum. Ecology letters 12:4, 351-366."
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#examples",
+    "href": "5_graph/data/description_wdData.html#examples",
+    "title": "Description of the wdData",
+    "section": "Examples",
+    "text": "Examples\n\ndata(wdData)\nstr(wdData)"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html",
+    "href": "6_basic_statistics/basic_stats_session2.html",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "",
+    "text": "Let’s load the packages that we will use today\n\nlibrary(tidyverse)\nlibrary(ggeffects)\nlibrary(gtsummary)\nlibrary(ggstats)\nlibrary(lindia)\nlibrary(car)\nlibrary(AICcmodavg)\n\n\n\n\nStudy the relationship between several variables (without assuming causality)\nStudy the effect of numerical or categorical variables on another variables\nUse these relationships to predict the values of the modelled variable for new observations.\n\n\n\n\nA linear regression is a mathematical model of the relationship between:\n\nA response variable, also called dependent variable\nOne or several explanatory variables, also called predictors or independent variables"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#uses-of-regressions",
+    "href": "6_basic_statistics/basic_stats_session2.html#uses-of-regressions",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "",
+    "text": "Study the relationship between several variables (without assuming causality)\nStudy the effect of numerical or categorical variables on another variables\nUse these relationships to predict the values of the modelled variable for new observations."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#structure-of-a-linear-regression",
+    "href": "6_basic_statistics/basic_stats_session2.html#structure-of-a-linear-regression",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "",
+    "text": "A linear regression is a mathematical model of the relationship between:\n\nA response variable, also called dependent variable\nOne or several explanatory variables, also called predictors or independent variables"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#nouragues-tree-data",
+    "href": "6_basic_statistics/basic_stats_session2.html#nouragues-tree-data",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Nouragues tree data",
+    "text": "Nouragues tree data\nWe will work on a modified version of Nouragues tree data from the package BIOMASS (available here). These data have been modified to exclude the non fully determined trees, and add the family.\nHeights and diameters of trees in two 1-ha plots from the Nouragues forest (French Guiana)\n\nload(\"data/data_statistics_2.RData\")\ndt_nou\n\n# A tibble: 454 × 8\n   plotId genus      species         D     H   lat  long family          \n   &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;           \n 1 Plot1  Qualea     rosea        11.6    16  4.07 -52.7 Vochysiaceae    \n 2 Plot1  Dicorynia  guianensis   83.9    40  4.07 -52.7 Fabaceae        \n 3 Plot1  Ocotea     guianensis   36.8    27  4.07 -52.7 Lauraceae       \n 4 Plot1  Cordia     sagotii      13.5    20  4.07 -52.7 Boraginaceae    \n 5 Plot1  Cecropia   obtusa       17.8    24  4.07 -52.7 Urticaceae      \n 6 Plot1  Licania    membranacea  17.8    21  4.07 -52.7 Chrysobalanaceae\n 7 Plot1  Ocotea     guianensis   15.9    22  4.07 -52.7 Lauraceae       \n 8 Plot1  Qualea     rosea        17.8    24  4.07 -52.7 Vochysiaceae    \n 9 Plot1  Oenocarpus bataua       20.5    23  4.07 -52.7 Arecaceae       \n10 Plot1  Licania    latistipula  11.1    15  4.07 -52.7 Chrysobalanaceae\n# ℹ 444 more rows"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#relationship-between-d-and-h",
+    "href": "6_basic_statistics/basic_stats_session2.html#relationship-between-d-and-h",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Relationship between D and H",
+    "text": "Relationship between D and H\nLet’s explore the relationship between tree diameter and height graphically:\n\ng &lt;- ggplot(dt_nou, aes(x = D, y = H)) + \n  geom_point() \ng + geom_smooth(method = \"lm\", se = FALSE)"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#relationship-between-d-and-h-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#relationship-between-d-and-h-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Relationship between D and H",
+    "text": "Relationship between D and H\nWe want to model the relationship between D (the explanatory variable) and H (the response variable).\nAs our model has only one explanatory variable, it is called simple linear regression.\nWe want to model a tree dimension by another tree dimension. This is an allometric model. Allometric models are often used to predict a variable difficult to measure from a variable more broadly available.\n\nex of an allometric model"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#theory",
+    "href": "6_basic_statistics/basic_stats_session2.html#theory",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Theory",
+    "text": "Theory\n\n\\[y = \\alpha + \\beta \\times x + \\epsilon\\]\n\n\n\n\ny is the response variable\nx is the explanatory variable\n\\(\\alpha\\) is the intercept (the mean of Y when X = 0)\n\\(\\beta\\) is the slope of the relationship between X and Y\n\\(\\epsilon\\) is the residual of the model. \\(\\epsilon \\sim \\mathcal N(0, \\sigma^2)\\)\n\n\n\n\\(\\alpha\\), \\(\\beta\\) and \\(\\sigma\\) are the parameters of the model\nThe model can also be written:\n\\[y \\sim \\mathcal N(\\alpha + \\beta \\times x,  \\sigma^2)\\]\n\n\n\n\nwho want to write the equation of the model we want to fit on the blackboard?"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#theory-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#theory-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Theory",
+    "text": "Theory\n\\[y \\sim \\mathcal N(\\alpha + \\beta \\times x,  \\sigma^2)\\]\nThe model predicts a probability density of Y for any value of X normally distributed around the regression line.\n\n\n Source: E. Marcon\n\n\nThe mean value of Y for any value of X is the black line : \\(\\mu = \\alpha + \\beta \\times x\\)\nThe predicted probability density of Y are represented by the red dots: they are normally distributed around the mean with a variance \\(\\sigma^2\\)\n\n\n\n\nread the fig as in 3D"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#fitting-a-simple-linear-regression",
+    "href": "6_basic_statistics/basic_stats_session2.html#fitting-a-simple-linear-regression",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Fitting a simple linear regression",
+    "text": "Fitting a simple linear regression\nWe use the function lm to fit a linear regression:\n\nmod_dh_1 &lt;- lm(H ~ D, # formula\n               data = dt_nou)\n\nSyntax of the formula:\n\nresponse variable ~ explanatory variable(s)\nthe intercept is implicit so H ~ D is equivalent to H ~ 1 + D\n\nIf we don’t want an intercept, we have to write H ~ 0 + D. The regression will go through the origin (0,0)."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#interpreting-the-output",
+    "href": "6_basic_statistics/basic_stats_session2.html#interpreting-the-output",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Interpreting the output",
+    "text": "Interpreting the output\n\n\n\\[y = \\alpha + \\beta \\times x + \\epsilon\\]\n\nsummary(mod_dh_1)\n\n\nCall:\nlm(formula = H ~ D, data = dt_nou)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-27.4910  -2.8950   0.1666   3.0275  11.4801 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 13.25635    0.43974   30.15   &lt;2e-16 ***\nD            0.34067    0.01415   24.07   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 4.777 on 389 degrees of freedom\n  (63 observations deleted due to missingness)\nMultiple R-squared:  0.5983,    Adjusted R-squared:  0.5972 \nF-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16\n\n\n\n\nCoefficients give the estimates of intercept (\\(\\alpha\\)) and the slope (\\(\\beta\\)).\n\nintercept: the value of H for D=0 is 13.26\nslope: for every increase of 1 cm DBH, increase of 0.34 m in height\nA t-test is performed to see if there are significant (significantly different from 0).\n\nResidual standard error is the estimate of the standard deviation of the residuals (\\(\\sigma\\)).\n\n\n\n\nBUT don’t use that to predict outside of the range of observed data"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#interpreting-the-output-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#interpreting-the-output-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Interpreting the output",
+    "text": "Interpreting the output\n\n\n\\[y = \\alpha + \\beta \\times x + \\epsilon\\]\n\nsummary(mod_dh_1)\n\n\nCall:\nlm(formula = H ~ D, data = dt_nou)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-27.4910  -2.8950   0.1666   3.0275  11.4801 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) 13.25635    0.43974   30.15   &lt;2e-16 ***\nD            0.34067    0.01415   24.07   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 4.777 on 389 degrees of freedom\n  (63 observations deleted due to missingness)\nMultiple R-squared:  0.5983,    Adjusted R-squared:  0.5972 \nF-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16\n\n\n\n\nR2 (discussed after)\nThe F-statistic test if the model is significantly different from a null model, i.e. if it explains a significant amount of the variation on the response variable.\n\n\n\n\nNull model : a model without explanatory variable F-test for only one single explanatory variable is the same as the test for the explanatory variable"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#coefficient-of-determination",
+    "href": "6_basic_statistics/basic_stats_session2.html#coefficient-of-determination",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Coefficient of determination",
+    "text": "Coefficient of determination\nR2 is the coefficient of determination: it represents the proportion of variance of the response variable explained by the model. The closer R2 is to 1, the greater the explanatory power of the model. R2 therefore reflects the goodness of fit of the model.\nAdjusted R2 penalise R2 by the number of explanatory variables (not relevant when there is just one explanatory variable)."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#r2-and-p-value",
+    "href": "6_basic_statistics/basic_stats_session2.html#r2-and-p-value",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "R2 and p-value",
+    "text": "R2 and p-value\n\nThe p-value indicates the significance of the effect of the explanatory variable: this effect can be small yet highly significant =&gt; a small p-value is particularly important for hypothesis testing.\nThe R2 indicates the goodness of fit (how well the model fits the observed data) =&gt; a high R2 is particularly important for prediction."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#confidence-interval",
+    "href": "6_basic_statistics/basic_stats_session2.html#confidence-interval",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Confidence interval",
+    "text": "Confidence interval\nThe confidence interval is the interval of confidence of the mean predicted value of y (so of \\(\\mu\\)).\nTo calculate it, we can use the function ggpredict from the package ggeffects. The default give the confidence interval:\n\n\n# Get the prediction (default arguments gives the confidence interval)\npreds_conf &lt;- ggpredict(mod_dh_1, # model used for the prediction\n                        terms = \"D\") # explanatory variable\nslice_head(as.data.frame(preds_conf), n=3) # visualise the results\n\n   x predicted std.error conf.low conf.high group\n1 10  16.66305 0.3307480 16.01277  17.31333     1\n2 20  20.06975 0.2558984 19.56663  20.57287     1\n3 30  23.47645 0.2482784 22.98832  23.96459     1\n\n\n\n\nhere the object is a dataframe and an object of class ggeffects so to visualise it better, look at it as a dataframe"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#confidence-interval-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#confidence-interval-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Confidence interval",
+    "text": "Confidence interval\nWe can then plot the prediction mean and confidence interval:\n\ngpred_1 &lt;- ggplot(preds_conf, aes(x = x, y = predicted)) +\n  geom_line(colour = \"blue\", linewidth = 1) + # predicted mean\n  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), # confidence interval\n              fill = \"blue\", alpha = 0.2) + \n  geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.6) + # data\n  labs(x = \"D\", y = \"H\", title = \"Predicted H vs D\") +\n  theme_minimal()\ngpred_1"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#prediction-interval",
+    "href": "6_basic_statistics/basic_stats_session2.html#prediction-interval",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Prediction interval",
+    "text": "Prediction interval\nThe prediction interval includes the uncertainty of the predicted mean (like the confidence interval) and the variability of individual prediction by taking into account the residual variance \\(\\sigma^2\\). It is therefore wider than the confidence interval and contains most of the observations.\nTo calculate it, we can use the function ggpredict, with the argument interval = “prediction”:\n\n\n# Get the prediction with prediction interval\npreds_pred &lt;- ggpredict(mod_dh_1, # model used for the prediction\n                        terms = \"D\", # explanatory variable\n                        interval = \"prediction\")\nslice_head(as.data.frame(preds_pred), n=3) # visualise the results\n\n   x predicted std.error  conf.low conf.high group\n1 10  16.66305  4.788758  7.247962  26.07813     1\n2 20  20.06975  4.784171 10.663683  29.47582     1\n3 30  23.47645  4.783769 14.071174  32.88173     1"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#prediction-interval-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#prediction-interval-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Prediction interval",
+    "text": "Prediction interval\nWe can then add the prediction interval to the plot:\n\ngpred_1 &lt;- gpred_1 +\n  geom_ribbon(data = preds_pred, aes(ymin = conf.low, ymax = conf.high), \n              fill = \"lightblue\", alpha = 0.4) +\n  theme_bw()\ngpred_1"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#model-validation",
+    "href": "6_basic_statistics/basic_stats_session2.html#model-validation",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Model validation",
+    "text": "Model validation\nWe need to check the model assumptions:\n\nnormality of the residuals\nindependence of the residuals\nconstant variance of the residuals (homoscedasticity)\nlinearity of the relationship between response and explanatory variables"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#homoscedasticity-and-independence-of-the-residuals",
+    "href": "6_basic_statistics/basic_stats_session2.html#homoscedasticity-and-independence-of-the-residuals",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Homoscedasticity and independence of the residuals",
+    "text": "Homoscedasticity and independence of the residuals\n\n\n\nplot(mod_dh_1, which = 1)\n\n\n\n\n\n\n\n\n\n\n⚠️ Here the residuals depends on the fitted values =&gt; this suggests that the relationship is not linear…\n⚠️ The variance is not constant."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#normality-of-the-residuals",
+    "href": "6_basic_statistics/basic_stats_session2.html#normality-of-the-residuals",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Normality of the residuals",
+    "text": "Normality of the residuals\n\n\n\nplot(mod_dh_1, which = 2)\n\n\n\n\n\n\n\n\n\n✅ Here the residuals are reasonably normality distributed."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#leverage-effect",
+    "href": "6_basic_statistics/basic_stats_session2.html#leverage-effect",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Leverage effect",
+    "text": "Leverage effect\n\n\n\nplot(mod_dh_1, which = 4)\n\n\n\n\n\n\n\n\n\n\n⚠️️ Some observations are highly influential.\n\n\n\n\nfor cook distance, several rule of thumbs\n\nD should be &lt; 1\nD should be &lt;4/n"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#variable-transformation",
+    "href": "6_basic_statistics/basic_stats_session2.html#variable-transformation",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Variable transformation",
+    "text": "Variable transformation\nOur model has problem of linearity and high leverage of some observations.\n\n💡 A transformation of variables may help, let’s try to take the log of D and H:\n\\[log(H) = \\alpha + \\beta \\times log(D)\\]\n\n\nwhich is equivalent to \\(y = \\alpha'x^\\beta\\) with \\(\\alpha' = e^{\\alpha}\\) because\n\\(log\\big (\\alpha'x^\\beta \\big) = log(\\alpha') + \\beta \\times log(D)\\)\n\nThis is a classical allometric model: it predicts that the height of the tree will increase less rapidly for trees with bigger DBH, which is consistent with what we expect."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#fitting-the-log-log-model",
+    "href": "6_basic_statistics/basic_stats_session2.html#fitting-the-log-log-model",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Fitting the log-log model",
+    "text": "Fitting the log-log model\n\nmod_dh_2 &lt;- lm(log(H) ~ log(D), data = dt_nou)\nsummary(mod_dh_2)\n\n\nCall:\nlm(formula = log(H) ~ log(D), data = dt_nou)\n\nResiduals:\n     Min       1Q   Median       3Q      Max \n-0.86914 -0.10668  0.02985  0.14935  0.52921 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)  1.51202    0.06114   24.73   &lt;2e-16 ***\nlog(D)       0.49363    0.01948   25.34   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.2155 on 389 degrees of freedom\n  (63 observations deleted due to missingness)\nMultiple R-squared:  0.6227,    Adjusted R-squared:  0.6217 \nF-statistic:   642 on 1 and 389 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#model-validation-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#model-validation-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Model validation",
+    "text": "Model validation\n\n\n\nplot(mod_dh_2, which = 1)\n\n\n\n\n\n\n\n\n😊 We have improved the independance of residuals and homoscedasticity.\n\n\n\nplot(mod_dh_2, which = 2)\n\n\n\n\n\n\n\n\n\n😊 The residuals are still (reasonably) normally distributed.\n\n\n\nplot(mod_dh_2, which = 4)\n\n\n\n\n\n\n\n\n\n😊 We have considerably reduced the leverage effect."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#which-model-should-we-choose",
+    "href": "6_basic_statistics/basic_stats_session2.html#which-model-should-we-choose",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Which model should we choose?",
+    "text": "Which model should we choose?\nHere we would prefer the log-log model because:\n\nit is better regarding the model assumptions and reduced the leverage effect\nit has a slightly better R2\nit make more sense ecologically\n\n⚠️ We will talk later about the AIC to compare models. We cannot use it here because the response variables are different (D vs log(D)).\n\nit makes more sense ecologically because of the shape of the relationship =&gt; for big trees, the increase in height for unit DBH is less"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#presenting-the-results",
+    "href": "6_basic_statistics/basic_stats_session2.html#presenting-the-results",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Presenting the results",
+    "text": "Presenting the results\nWe have seen how to plot the results, but here we need to back-transform them to their original (non-logged) scale. By default, the function ggpredict back-transform the predictions:\n\n# Get predictions back on original scale\npreds_conf &lt;- ggpredict(mod_dh_2, terms = \"D\") # default gives the confidence interval\n\nModel has log-transformed response. Back-transforming predictions to\n  original response scale. Standard errors are still on the transformed\n  scale.\n\n# plot the results\ng_preds_2 &lt;- ggplot(preds_conf, aes(x = x, y = predicted)) +\n  geom_line(color = \"blue\", linewidth = 1) +\n  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), fill = \"blue\", alpha = 0.2) +\n  geom_point(data = dt_nou, aes(x = D, y = H), alpha = 0.6) +\n  labs(x = \"D\", y = \"H\", title = \"Predicted H vs D (log-log model, back-transformed)\") +\n  theme_minimal()"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Presenting the results",
+    "text": "Presenting the results\n\ng_preds_2"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-2",
+    "href": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-2",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Presenting the results",
+    "text": "Presenting the results\nTo add the prediction interval, we set the argument interval to “prediction”:\n\n# Get predictions back on original scale, with prediction interval\npreds_pred &lt;- ggpredict(mod_dh_2, terms = \"D\", interval = \"prediction\")  \n\nModel has log-transformed response. Back-transforming predictions to\n  original response scale. Standard errors are still on the transformed\n  scale.\n\n# plot the results\ng_preds_2 &lt;- g_preds_2 +\n  geom_ribbon(data = preds_pred,\n              aes(ymin = conf.low, ymax = conf.high), \n              fill = \"lightblue\", alpha = 0.4)"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-3",
+    "href": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-3",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Presenting the results",
+    "text": "Presenting the results\n\ng_preds_2"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#data-transformation",
+    "href": "6_basic_statistics/basic_stats_session2.html#data-transformation",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Data transformation",
+    "text": "Data transformation\nWhy transform the data?\n\nlinearise a non-linear relationship (eg: quadratic relationship \\(y = \\alpha + \\beta_1 \\times x + \\beta_2 \\times x^2\\), square root or log-transformation…)\nimprove normality and homoscedasticity of the residuals (eg: square root of log-transformation…)\nreduce the influence of outliers (eg: log-transformation…)\n\n\nshow on the blackboard the shape of a quadratic and square root (as log)\nalways explore the shape of the relationsing with simulated data, to understand what the transfo does"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#what-if-the-predictor-is-categorical",
+    "href": "6_basic_statistics/basic_stats_session2.html#what-if-the-predictor-is-categorical",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "What if the predictor is categorical?",
+    "text": "What if the predictor is categorical?\nWe now want to model D as a function of the family:\n\\[D \\sim \\mathcal N(\\alpha_{fam},  \\sigma^2)\\]\nLet’s do it on the 3 most abundant families:\n\n\nfam3 &lt;- dt_nou %&gt;% count(family) %&gt;% # get the 3 most abundant families\n  arrange(desc(n)) %&gt;%\n  slice_head(n = 3) \n\ndt_nou_sub &lt;- dt_nou %&gt;% filter(family %in% fam3$family) # select them"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#what-if-the-predictor-is-categorical-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#what-if-the-predictor-is-categorical-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "What if the predictor is categorical?",
+    "text": "What if the predictor is categorical?\nWe can fit the model in the same way as for a numerical variable:\n\n\n\nmod_dfam &lt;- lm(D ~ family, data = dt_nou_sub)\nsummary(mod_dfam)\n\n\nCall:\nlm(formula = D ~ family, data = dt_nou_sub)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-24.553 -10.565  -5.465   8.063  57.747 \n\nCoefficients:\n                    Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)         21.46000    2.66733   8.045 1.44e-13 ***\nfamilyFabaceae      13.09325    3.28794   3.982 0.000101 ***\nfamilyLecythidaceae -0.09455    3.50556  -0.027 0.978515    \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 16.87 on 169 degrees of freedom\nMultiple R-squared:  0.1326,    Adjusted R-squared:  0.1223 \nF-statistic: 12.92 on 2 and 169 DF,  p-value: 6.02e-06\n\n\n\nAs for the Anova, the intercept corresponds to the first level, and the other coefficients show the difference of each levels with the first level.\n⚠️ Don’t forget to check the model assumptions…\n\n\n\nso here the mean D of the Chrysobalanaceae is 21\nThe fabaceae are significantly different with a mean diam of 34\nwe won’t check the model assumption here, done as for a quanti variable"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#what-if-the-predictor-is-categorical-2",
+    "href": "6_basic_statistics/basic_stats_session2.html#what-if-the-predictor-is-categorical-2",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "What if the predictor is categorical?",
+    "text": "What if the predictor is categorical?\nThe simple linear regression with a categorical explanatory variable is equivalent to the ANOVA:\n\naov_dfam &lt;- aov(D ~ family, data = dt_nou_sub)\nsummary(aov_dfam)\n\n             Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nfamily        2   7352    3676   12.92 6.02e-06 ***\nResiduals   169  48095     285                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n⚠️ The t-test performed by lm evaluates if the first level is different from the other ones, whereas the Tukey test on an ANOVA consider all pairs of levels.\n\nsee the value of the f-statistics and the overal p-value"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#equation",
+    "href": "6_basic_statistics/basic_stats_session2.html#equation",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Equation",
+    "text": "Equation\nA multiple linear regression is a regression with several explanatory variables:\n\\[y \\sim \\mathcal N(\\alpha + \\beta_1 \\times x_1 + \\beta_2 \\times x_2 + ... + \\beta_n \\times x_n,  \\sigma^2)\\] which we can also write:\n\\[y \\sim \\mathcal N(\\alpha + \\sum_{i=1}^n\\beta_n \\times x_n ,  \\sigma^2)\\] 💡 Explanatory variables can be numerical or categorical."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#fitting-a-multiple-linear-regression",
+    "href": "6_basic_statistics/basic_stats_session2.html#fitting-a-multiple-linear-regression",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Fitting a multiple linear regression",
+    "text": "Fitting a multiple linear regression\nLet’s predict the best record time in bicycle races in Scotland (time), with the explanatory variables distance (distance) and altitude gained (climb), using the dataset hills from the MASS package:\n\n\n\nlibrary(MASS)\n\n\nAttaching package: 'MASS'\n\n\nThe following object is masked from 'package:gtsummary':\n\n    select\n\n\nThe following object is masked from 'package:dplyr':\n\n    select\n\n\n\n\ndata(hills)\ndetach(\"package:MASS\", unload = TRUE)\n\nWarning: 'MASS' namespace cannot be unloaded:\n  namespace 'MASS' is imported by 'unmarked', 'lindia', 'AICcmodavg' so cannot be unloaded\n\nsummary(hills)\n\n      dist            climb           time       \n Min.   : 2.000   Min.   : 300   Min.   : 15.95  \n 1st Qu.: 4.500   1st Qu.: 725   1st Qu.: 28.00  \n Median : 6.000   Median :1000   Median : 39.75  \n Mean   : 7.529   Mean   :1815   Mean   : 57.88  \n 3rd Qu.: 8.000   3rd Qu.:2200   3rd Qu.: 68.62  \n Max.   :28.000   Max.   :7500   Max.   :204.62  \n\n\n\n\n\nwe detach the package to avoid select being masked\nnote that dist is in miles and varies between 2 and 28\nclimb is in meters and varies between 300 and 7500 feets."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#fitting-a-multiple-linear-regression-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#fitting-a-multiple-linear-regression-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Fitting a multiple linear regression",
+    "text": "Fitting a multiple linear regression\nWe fit a multiple linear regression in the same way than a simple one, adding the explanatory variables with a +:\n\nmod_hills &lt;- lm(time ~ dist + climb, hills)\nsummary(mod_hills)\n\n\nCall:\nlm(formula = time ~ dist + climb, data = hills)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-16.215  -7.129  -1.186   2.371  65.121 \n\nCoefficients:\n             Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept) -8.992039   4.302734  -2.090   0.0447 *  \ndist         6.217956   0.601148  10.343 9.86e-12 ***\nclimb        0.011048   0.002051   5.387 6.45e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 14.68 on 32 degrees of freedom\nMultiple R-squared:  0.9191,    Adjusted R-squared:  0.914 \nF-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#standardising-explanatory-variables",
+    "href": "6_basic_statistics/basic_stats_session2.html#standardising-explanatory-variables",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Standardising explanatory variables",
+    "text": "Standardising explanatory variables\nTo compare the effects of the explanatory variables, we can (but we don’t necessarly need) standardise them using the function scale:\n\nhills &lt;- hills %&gt;% \n  mutate(dist_sd = as.numeric(scale(dist)), # scale return a matrix so need to transform \n         climb_sd = as.numeric(scale(climb)))\n\nVariables are scaled by subtracting the mean to each values and then dividing it by the standard deviation. This brings the variables to the same scale. They now have a mean of 0 and a standard deviation of 1:\n\n\nhills %&gt;% summarise(dist_mean = mean(dist_sd),\n                    dist_sd = sd(dist_sd),\n                    climb_mean = mean(climb_sd),\n                    climb_sd = sd(climb_sd))\n\n     dist_mean dist_sd   climb_mean climb_sd\n1 4.188118e-18       1 1.072741e-17        1"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#standardising-explanatory-variables-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#standardising-explanatory-variables-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Standardising explanatory variables",
+    "text": "Standardising explanatory variables\n\n\n\nmod_hills2 &lt;- lm(time ~ dist_sd + climb_sd, hills)\nsummary(mod_hills2)\n\n\nCall:\nlm(formula = time ~ dist_sd + climb_sd, data = hills)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-16.215  -7.129  -1.186   2.371  65.121 \n\nCoefficients:\n            Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)   57.876      2.481  23.331  &lt; 2e-16 ***\ndist_sd       34.348      3.321  10.343 9.86e-12 ***\nclimb_sd      17.888      3.321   5.387 6.45e-06 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 14.68 on 32 degrees of freedom\nMultiple R-squared:  0.9191,    Adjusted R-squared:  0.914 \nF-statistic: 181.7 on 2 and 32 DF,  p-value: &lt; 2.2e-16\n\n\n\nInterpretation: When the explanatory variable increases by one standard deviation, the response increases by the value of the coefficient.\nWe can therefore compare the effect of explanatory variables.\nThe intercept is the value of the response when all explanatory variables are taken at their mean.\n\nexplain for dist and climb, and show the equation on the blackboard"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#model-validation-2",
+    "href": "6_basic_statistics/basic_stats_session2.html#model-validation-2",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Model validation",
+    "text": "Model validation\n\n\n\nplot(mod_hills2, which = 1)\n\n\n\n\n\n\n\n\n\n\n\nplot(mod_hills2, which = 2)\n\n\n\n\n\n\n\n\n\n\n\n\nplot(mod_hills2, which = 4)\n\n\n\n\n\n\n\n\n\n\n\nHere we see that a few observations have a strong effect, it would be worth inspecting these observations…"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#model-validation-3",
+    "href": "6_basic_statistics/basic_stats_session2.html#model-validation-3",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Model validation",
+    "text": "Model validation\nFor multiple linear regression, it is important to also check the effect of each explanatory variable individually by plotting the residuals against them. We use the function gg_resX of the lindia package:\n\n\ngg_resX(mod_hills2, ncol = 2)\n\nWarning: `fortify(&lt;lm&gt;)` was deprecated in ggplot2 4.0.0.\nℹ Please use `broom::augment(&lt;lm&gt;)` instead.\nℹ The deprecated feature was likely used in the lindia package.\n  Please report the issue at &lt;https://github.com/yeukyul/lindia/issues&gt;.\n\n\nWarning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.\nℹ Please use `linewidth` instead.\nℹ The deprecated feature was likely used in the lindia package.\n  Please report the issue at &lt;https://github.com/yeukyul/lindia/issues&gt;.\n\n\n\n\n\n\n\n\n\n\n💡 the function gg_diagnose does all the diagnostic plots.\n\nHere the diagnostic is reasonably ok, except for the effect of the influential observations"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#collinearity",
+    "href": "6_basic_statistics/basic_stats_session2.html#collinearity",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Collinearity",
+    "text": "Collinearity\nFor multiple linear regression we need to check the absence of collinearity of the explanatory variables.\nIf an explanatory variable is a linear combination of the other, this impedes the model fitting.\n\n\n\nWe can look at the correlation between variables:\n\ncor(hills$dist_sd, hills$climb_sd)\n\n[1] 0.6523461\n\n\n\n\nWe can also check the VIF (variance inflation factor), using the function vif from the package car:\n\nvif(mod_hills2)\n\n dist_sd climb_sd \n1.740812 1.740812 \n\n\n\n\n⚠️ If the VIF of some explanatory variables is above 10 (or even 5), some explanatory variables should be excluded from the regression.\n\n\n\nif the explanatory variables vary together, difficult to estimate their individual effects…\nhere we test the correlation between the standardised variables, but this would be the same for the non standardised…\nthere is some correlation\nno strict rule for the VIF, this is context dependant. Check from 5"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-4",
+    "href": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-4",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Presenting the results",
+    "text": "Presenting the results\nTo represent graphically the effect of an explanatory variable, we can set the values of the other explanatory variables to a constant (for example their mean).\nHere we represent the effect of dist_sd setting climb_sd to its mean. By default, the function ggpredict takes the values of explanatory variables not mentioned in the argument terms to their mean:\n\n\n# Get the prediction (default arguments gives the confidence interval)\npred_dist_conf &lt;- ggpredict(mod_hills2, terms = \"dist_sd\")\n\n# Make the plot\np_modhills2_dist &lt;- ggplot(pred_dist_conf, aes(x = x, y = predicted)) + \n  geom_line(colour = \"blue\", linewidth = 1) + # predicted mean for climb_sd set to its mean\n  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), # confidence interval\n              fill = \"blue\", alpha = 0.2) + \n  geom_point(data = hills, aes(x = dist_sd, y = time), alpha = 0.6) + # data \n  labs(x = \"dist_sd\")\n\n\nWe could also represent climb_sd with dist_sd set to its mean.\n\nWe can obviously do the same for climb_sd"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-5",
+    "href": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-5",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Presenting the results",
+    "text": "Presenting the results\n\np_modhills2_dist"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-6",
+    "href": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-6",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Presenting the results",
+    "text": "Presenting the results\nWe could also represent the effect of dist_sd setting climb_sd at the mean, -1 sd, + 1 sd. For that, we give several explanatory variables to ggpredict. All variables except the first one will be set to meaningful values:\n\n\n# Get the prediction (default arguments gives the confidence interval)\npred_dist_conf &lt;- ggpredict(mod_hills2, \n                            terms = c(\"dist_sd\", # to predict with\n                                      \"climb_sd\")) # will be set to a few meaningfull values\n\n\nThe values taken for climb_sd are factors, in the variable group.\n\n\n\n\npred_dist_conf\n\n# Predicted values of time\n\nclimb_sd: -1\n\ndist_sd | Predicted |         95% CI\n------------------------------------\n  -1.00 |      5.61 |  -1.96,  13.19\n  -0.73 |     14.94 |   7.72,  22.15\n  -0.46 |     24.26 |  16.95,  31.58\n  -0.19 |     33.59 |  25.73,  41.45\n   0.36 |     52.25 |  42.33,  62.17\n   3.71 |    167.28 | 136.93, 197.62\n\nclimb_sd: 0\n\ndist_sd | Predicted |         95% CI\n------------------------------------\n  -1.00 |     23.50 |  15.05,  31.95\n  -0.73 |     32.83 |  25.76,  39.89\n  -0.46 |     42.15 |  36.23,  48.08\n  -0.19 |     51.48 |  46.27,  56.69\n   0.36 |     70.13 |  64.53,  75.73\n   3.71 |    185.17 | 159.59, 210.74\n\nclimb_sd: 1\n\ndist_sd | Predicted |         95% CI\n------------------------------------\n  -1.00 |     41.39 |  28.09,  54.69\n  -0.73 |     50.71 |  38.92,  62.51\n  -0.46 |     60.04 |  49.64,  70.44\n  -0.19 |     69.37 |  60.20,  78.53\n   0.36 |     88.02 |  80.55,  95.49\n   3.71 |    203.05 | 181.18, 224.93\n\n\n\nNot all rows are shown in the output. Use `print(..., n = Inf)` to show\n  all rows.\n\n\n\n\n\n\nslice_head(as.data.frame(pred_dist_conf), n = 15)\n\n            x predicted std.error  conf.low conf.high group\n1  -1.0008392  5.611072  3.718481 -1.963225  13.18537    -1\n2  -1.0008392 23.499302  4.147172 15.051790  31.94681     0\n3  -1.0008392 41.387532  6.528790 28.088823  54.68624     1\n4  -0.9103240  8.720050  3.636175  1.313403  16.12670    -1\n5  -0.9103240 26.608280  3.910431 18.642993  34.57357     0\n6  -0.9103240 44.496510  6.278160 31.708316  57.28470     1\n7  -0.8198089 11.829028  3.577308  4.542290  19.11577    -1\n8  -0.8198089 29.717258  3.683014 22.215203  37.21931     0\n9  -0.8198089 47.605488  6.032096 35.318510  59.89247     1\n10 -0.7292937 14.938006  3.543047  7.721055  22.15496    -1\n11 -0.7292937 32.826236  3.466758 25.764681  39.88779     0\n12 -0.7292937 50.714466  5.791180 38.918218  62.51071     1\n13 -0.6387785 18.046983  3.534108 10.848241  25.24573    -1\n14 -0.6387785 35.935213  3.263880 29.286907  42.58352     0\n15 -0.6387785 53.823443  5.556081 42.506077  65.14081     1\n\n\n\n\n\n\nmeaningfull values: here -1, 0 and 1 sd but we can specify some that we want (look at the help of ggpredic)"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-7",
+    "href": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-7",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Presenting the results",
+    "text": "Presenting the results\n\n# Make the plot\np_modhills2_dist &lt;- ggplot(pred_dist_conf, \n                           aes(x = x, y = predicted)) + \n  geom_line(aes(colour = group), linewidth = 1) +  # a color per set values of climb_sd \n  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, colour = group), alpha = 0.2) + \n  geom_point(data = hills, aes(x = dist_sd, y = time, # data\n                               size = climb_sd), # size proportional to climb_sd\n             alpha = 0.6)  +\n  labs(x = \"dist_sd\")\np_modhills2_dist\n\n\n\n\n\n\n\n\n\nwe add the group (the valus of clim_sd) as a colour for the lines and the ribbons"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-8",
+    "href": "6_basic_statistics/basic_stats_session2.html#presenting-the-results-8",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Presenting the results",
+    "text": "Presenting the results\n\n\nIf we have many explanatory variables, we can plot all the coefficients with their confidence interval, using the function ggcoef_model of the package ggstats:\n\nggcoef_model(mod_hills2)\n\n`height` was translated to `width`.\n\n\n\n\n\n\n\n\n\n\n\nor present a table of the coefficients, using tbl_regression from the package gtsummary\n\ntbl_regression(mod_hills2, \n               intercept = TRUE)\n\n\n\n\n\n\n\nCharacteristic\nBeta\n95% CI\np-value\n\n\n\n\n(Intercept)\n58\n53, 63\n&lt;0.001\n\n\ndist_sd\n34\n28, 41\n&lt;0.001\n\n\nclimb_sd\n18\n11, 25\n&lt;0.001\n\n\n\nAbbreviation: CI = Confidence Interval"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#interaction",
+    "href": "6_basic_statistics/basic_stats_session2.html#interaction",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Interaction",
+    "text": "Interaction\nWe can add an interaction term in the model to test if the effect of an explanatory variable depend of the value taken by another explanatory variable:\n\\[y = \\alpha + \\beta_1 x_1 + \\beta_2  x_2 + \\beta_{12}  x_1 x_2 + \\epsilon\\]\nwhich is equivalent to\n\n\\[y = \\alpha + (\\beta_1+\\beta_{12} x_2) \\times x_1 + \\beta_2  x_2+ \\epsilon\\]\n\nand\n\n\\[y = \\alpha + \\beta_1  x_1+ (\\beta_2+\\beta_{12} x_1) \\times x_2 +  \\epsilon\\]\n\n\\(\\beta_{12}\\) is the coefficient of the interaction. It represent the effect of \\(x_2\\) on the relationship between y and \\(x_1\\), and the effect of \\(x_1\\) on the relationship between y and \\(x_2\\).\n\nhere we carry on with our model with two numerical variables, but could be for 1 cat and one numerical\nas alaways epsilon is N(0, sigma2)"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#interaction-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#interaction-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Interaction",
+    "text": "Interaction\nTo specify an interaction, we use * in the formula:\n\nmod_hills_inter &lt;- lm(time ~ dist_sd * climb_sd, hills)\nsummary(mod_hills_inter)\n\n\nCall:\nlm(formula = time ~ dist_sd * climb_sd, data = hills)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-25.994  -4.968  -2.220   2.381  56.115 \n\nCoefficients:\n                 Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)        52.304      2.793  18.728  &lt; 2e-16 ***\ndist_sd            32.776      2.965  11.053 2.78e-12 ***\nclimb_sd           10.411      3.742   2.782  0.00911 ** \ndist_sd:climb_sd    8.793      2.745   3.203  0.00314 ** \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 12.92 on 31 degrees of freedom\nMultiple R-squared:  0.9392,    Adjusted R-squared:  0.9333 \nF-statistic: 159.6 on 3 and 31 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#visualisation-of-a-model-with-interaction",
+    "href": "6_basic_statistics/basic_stats_session2.html#visualisation-of-a-model-with-interaction",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Visualisation of a model with interaction",
+    "text": "Visualisation of a model with interaction\nWe can make a graph of the predictions as we did for the model without interaction:\n\n# Get the prediction (default arguments gives the confidence interval)\npred_inter_dist_conf &lt;- ggpredict(mod_hills_inter, \n                                  terms = c(\"dist_sd\", # to predict with\n                                            \"climb_sd\")) # will be set to a few meaningfull values\n\n# Make the plot\np_modinter_dist &lt;- ggplot(pred_inter_dist_conf, \n                           aes(x = x, y = predicted)) + \n  geom_line(aes(colour = group), linewidth = 1) +  # a color per set values of climb_sd \n  geom_ribbon(aes(ymin = conf.low, ymax = conf.high, colour = group), alpha = 0.2) + \n  geom_point(data = hills, aes(x = dist_sd, y = time, # data\n                               size = climb_sd), # size proportional to climb_sd\n             alpha = 0.6)  +\n  labs(x = \"dist_sd\")"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#visualisation-of-a-model-with-interaction-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#visualisation-of-a-model-with-interaction-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Visualisation of a model with interaction",
+    "text": "Visualisation of a model with interaction\n\np_modinter_dist\n\n\n\n\n\n\n\n\nThe prediction lines are no longer parallel, because of the interaction term."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#model-comparison",
+    "href": "6_basic_statistics/basic_stats_session2.html#model-comparison",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Model comparison",
+    "text": "Model comparison\nTo compare several models, we can use the AIC (Akaike information criterium).\nThe AIC take into account the likelihood of the model while penalising a more complex model (i.e. a model with more parameters) to avoid over-fitting.\nTo compare models using the AIC, they need to:\n\nhave the same response variable (not possible to compare a model with a transformation of the response variable with a model without transformation)\nbe fitted on the same data (so be careful with NAs)\n\nThe model with the lowest AIC is the best model (we usually consider a model difference of at least 2).\n\nexplain overfitting: when a model fit the data too closely, capturing random noise and fluctuation in addition to the true underlying pattern\nthe value of AIC has no meaning, it needs to be used to compare models"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#model-comparison-1",
+    "href": "6_basic_statistics/basic_stats_session2.html#model-comparison-1",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Model comparison",
+    "text": "Model comparison\nLet’s compare our models with and without interactions, and models with only one explanatory variable. We use the function aictab of the package AICcmodavg:\n\n\n\n# fit two additional simple linear models\nmod_hills_dist &lt;- lm(time ~ dist_sd, data = hills) \nmod_hills_climb &lt;- lm(time ~ climb_sd, data = hills)\n# make a list with all the models\nlist_mod &lt;- list(hills_dist = mod_hills_dist, \n                 hills_climb = mod_hills_climb, \n                 hills2 = mod_hills2, \n                 hills_inter = mod_hills_inter)\n# compare the AIC\naictab(list_mod)\n\n\nModel selection based on AICc:\n\n            K   AICc Delta_AICc AICcWt Cum.Wt      LL\nhills_inter 5 286.29       0.00   0.97   0.97 -137.11\nhills2      4 293.56       7.27   0.03   1.00 -142.11\nhills_dist  3 313.59      27.30   0.00   1.00 -153.41\nhills_climb 3 342.40      56.11   0.00   1.00 -167.81\n\n\n\nThe model with interaction has the lowest AIC, it is therefore the best model.\n\n\n\nhere compute the AICc because we have a small number of observations\nwe get the K: number of paramaters (count them, including the sigma)\nthe LL is the log-likelihood"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#what-if-the-observations-are-not-independent",
+    "href": "6_basic_statistics/basic_stats_session2.html#what-if-the-observations-are-not-independent",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "What if the observations are not independent?",
+    "text": "What if the observations are not independent?\nAn linear regression assumes that all observations are independent.\nWhen observations are grouped, they are not independent (e.g. several observations on a same site, on a same individual, in a same year…).\n\nWe can include the group as a categorical explanatory variable. This evaluate the effect of each group.\nWhen the number of groups is too high and we are not interested in the effect of each group, we can use a linear mixed model."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#linear-mixed-model",
+    "href": "6_basic_statistics/basic_stats_session2.html#linear-mixed-model",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Linear mixed model",
+    "text": "Linear mixed model\nLinear mixed models have a hierarchical structure.\n\nOne or more of their coefficients (the intercept or the response to explanatory variable) varies between groups j:\n\\[y_k \\sim \\mathcal N(\\alpha_{j[k]} + \\beta_1 \\times x_1 + \\beta_2 \\times x_2 + ... ,  \\sigma^2)\\]\n\n\nand this variation is modelled by a distribution:\n\\[\\alpha_j \\sim \\mathcal N(\\mu_{\\alpha}, \\sigma^2_{\\alpha})\\]\nNB: here we represent the effect of the group only on the intercept, but we can include this effect on the other coefficients as well.\n\n💡 See here for a detailed explanation of linear mixed model."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#what-if-the-data-are-not-normally-distributed",
+    "href": "6_basic_statistics/basic_stats_session2.html#what-if-the-data-are-not-normally-distributed",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "What if the data are not normally distributed?",
+    "text": "What if the data are not normally distributed?\nSome data are by nature not normally distributed, so we cannot model them with a normal distribution.\n\ncount data (e.g.: number of individuals of a species in a plot, number of birds heard in a given time) can be modelled with a Poisson distribution\nsuccess/failure data (e.g: presence/absence of a species in a plot, proportion of tree browsed in a plot) can be modelled with a binomial distribution\n\nTo know more about these distributions: see the Wikipedia pages, and the distribution zoo."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#generalised-linear-models",
+    "href": "6_basic_statistics/basic_stats_session2.html#generalised-linear-models",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Generalised linear models",
+    "text": "Generalised linear models\nGeneralised linear models (GLM) are an extension of linear models allowing different distributions of the response variable.\nThey have 3 component:\n\na linear predictor: a linear combination of explanatory variables\na distribution of individual responses around their mean\na link function between the predictor (defined on \\(\\mathbb{R}\\)) and the mean response (not necessarily defined on \\(\\mathbb{R}\\))\n\nIn the linear model seen before, the distribution is Normal and the link function the identity."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#logistic-regression",
+    "href": "6_basic_statistics/basic_stats_session2.html#logistic-regression",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Logistic regression",
+    "text": "Logistic regression\nThe logistic regression is a GLM with a binomial distribution and a logit link function. It models a probability of success.\n\nThe binomial distribution \\(\\mathcal{B}(n, p)\\) represents the number of successes when performing n independent experiment having a constant probability of success p.It is a discrete distribution taking only positive integer values.\nThe logit link function links the modelled probability of success (which is between 0 and 1) to the linear predictor.\n\nThe Bernoulli distribution is a special case of a binomial when n=1.\n💡 See here for a detailed explanation of the logistic regression.\n\nlogit(p) = alpha + beta_1x_1 +… beta_nx_n\navec logit(p) = log (p/ (1-p))"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_session2.html#poisson",
+    "href": "6_basic_statistics/basic_stats_session2.html#poisson",
+    "title": "Statistics with R - session 2 - Linear regressions",
+    "section": "Poisson",
+    "text": "Poisson\nThe Poisson regression is a GLM with a Poisson distribution and a logarithm link function. It models the number of observations of an event in a defined sampling unit.\n\nThe Poisson distribution \\(\\mathcal{P}(\\lambda)\\) represents the mean number of observations \\(\\lambda\\) in a sampling unit.\nThe logarithm link function links \\(\\lambda\\) (which is positive) to the linear predictor.\n\n💡 See here and here for detailed explanations of the Poisson regression.\n\nlog(mu) = alpha + beta_1x_1 +… beta_nx_n"
+  },
+  {
+    "objectID": "6_basic_statistics/exo_session11.html",
+    "href": "6_basic_statistics/exo_session11.html",
+    "title": "Exercices on session *Statistics with R session 3/3",
+    "section": "",
+    "text": "Load the packages vegan and tidyverse.\n\nClimate of the cities\nIn this exercise, you will study the climate of 49 big cities in the world. The data are in the cities_climate.csv file available here.\n\nLoad the data as a tibble and look at their structure. These data have been obtained from WorldClim. They contain:\n\nlong and lat: the longitude and latitude t_mean: Mean annual temperature (°C)\nt_diu: Daily temperature variation, average difference between the maximum and minimum temperature in the same month (°C)\nt_sd: Seasonal temperature variation, standard deviation of the mean temperature between months (°C)\nt_max: Maximum temperature of the warmest month (°C)\nt_min: Minimum temperature of the coldest month (°C)\np_ann: Annual precipitation (mm)\np_max: Precipitation in the wettest month (mm)\np_min: Precipitation of the driest month (mm)\np_cv: Coefficient of variation of precipitation between months\n\n\nWe are going to do a PCA on these data.\n\nRemove the latitude and longitude\n\n\nPut the variable city as a row names and remove the corresponding column (to be able to see the name of the cities in the output of the analysis).\n\n\nDo the PCA (don’t forget to standardise the variables)\n\n\nLook at the output: what is the cumulative proportion of variance explained by the two first axes?\n\n\nDo a screeplot with a broken stick distribution: how many axes do you want to interpret?\n\n\nLet’s first look at similarity between cities: which scaling do we need for the biplot? Do the biplot and interpret it.\n\n\nLet’s now look at correlations between climatic variables: do the corresponding biplot and interpret the axes.\n\n\nLet’s now prepare the data for a clustering: standardise them and compute the distance matrix.\n\n\nDo the hierarchical clustering using the method of Ward.\n\n\nPlot the dendrogram.\n\n\nMake 3 groups and extract them.\n\n\nRepresent the groups on the PCA biplot.\n\n\n\nFor next time\nReview what we have seen about vectors, lists and logical operators in the session Getting started with R."
+  },
+  {
+    "objectID": "7_going_further/slide_not_used.html",
+    "href": "7_going_further/slide_not_used.html",
+    "title": "Going further with R - session 2/2",
+    "section": "",
+    "text": "when each iteration depends on the result of the previous one.\n\n\n\nLet’s build a Fibonacci sequence, defined as:\n\\(F_0 = 0\\), \\(F_1 = 1\\) and for \\(n&gt;1\\) \\(F_n = F_{n-1} + F_{n-2}\\)\n\n\n\n\n\nn = 20 # length of the sequence\nfib &lt;- numeric(n) # Fibonacci sequence\nfib[1] &lt;- 0 # F0\nfib[2] &lt;- 1 # F1\n\nfor (i in seq_along(fib)[3:n]) {\n  fib[i] &lt;- fib[i - 1] + fib[i - 2]\n}\n\nfib\n\n [1]    0    1    1    2    3    5    8   13   21   34   55   89  144  233  377\n[16]  610  987 1597 2584 4181"
+  },
+  {
+    "objectID": "7_going_further/slide_not_used.html#when-to-use-a-loop",
+    "href": "7_going_further/slide_not_used.html#when-to-use-a-loop",
+    "title": "Going further with R - session 2/2",
+    "section": "",
+    "text": "when each iteration depends on the result of the previous one.\n\n\n\nLet’s build a Fibonacci sequence, defined as:\n\\(F_0 = 0\\), \\(F_1 = 1\\) and for \\(n&gt;1\\) \\(F_n = F_{n-1} + F_{n-2}\\)\n\n\n\n\n\nn = 20 # length of the sequence\nfib &lt;- numeric(n) # Fibonacci sequence\nfib[1] &lt;- 0 # F0\nfib[2] &lt;- 1 # F1\n\nfor (i in seq_along(fib)[3:n]) {\n  fib[i] &lt;- fib[i - 1] + fib[i - 2]\n}\n\nfib\n\n [1]    0    1    1    2    3    5    8   13   21   34   55   89  144  233  377\n[16]  610  987 1597 2584 4181"
+  },
+  {
+    "objectID": "7_going_further/slide_not_used.html#section",
+    "href": "7_going_further/slide_not_used.html#section",
+    "title": "Going further with R - session 2/2",
+    "section": "",
+    "text": "a good start: avoid having to debug by checking the code (especially in function and loops) carrefully =&gt; select some sensible test data, try to anticipate potential problem…\nbut we cannot think of everything… Here just some basic way of debugging\nif not too long, run a function or a loop line by one with the problematic dataset, to see where it buggs\notherwise : use print\net débuggage basique avec print (cf Juba https://juba.github.io/tidyverse/20-debuggage-performance.html) mais le faire à la fin de session 2 car possible aussi dans une boucle hors function\nthere are more advanced debugging tools…"
+  },
+  {
+    "objectID": "cheat_sheet.html",
+    "href": "cheat_sheet.html",
+    "title": "Untitled",
+    "section": "",
+    "text": "💡\n⚠️\n✅\n❌\n😊\n🥴\n💣\n\n\n\n\n\n\n\n\n\n\n{style=“color:indianred;”}\n{style=“font-size: 30px”}\n{height=“80%”}\n{fig-align=“center” height=“80%”}\n{preview-link=“false”}"
   }
 ]
