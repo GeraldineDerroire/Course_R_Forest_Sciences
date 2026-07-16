@@ -57,7 +57,7 @@ Course syllabus in English is [here](EFL360457_R_for_Forest_Sciences_2025.pdf), 
 
     -   [Going further with R session 2/2](7_going_further/going_further_session2.html)
 
-    -   [Exercices](7_going_further/going_further.pdf)
+    -   [Exercices](7_going_further/exo_going_further.pdf)
 
 -   [Introduction to Version Control with Git and GitHub](8_version_control/version_control.html)
 
