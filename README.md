@@ -8,6 +8,9 @@ and in Portuguese [here](https://geraldinederroire.github.io/Course_R_Forest_Sci
 
 The course material has been created using quarto and R version 4.4.3.
 
+This repository contains the latest version of the course. 
+Previous editions are archived as GitHub Releases.
+
 # Content
 
 - [Course introduction](https://geraldinederroire.github.io/Course_R_Forest_Sciences)
