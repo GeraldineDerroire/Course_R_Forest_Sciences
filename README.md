@@ -37,4 +37,8 @@ The course material has been created using quarto and R version 4.4.3.
 - [Introduction to Version Control with Git and GitHub](https://geraldinederroire.github.io/Course_R_Forest_Sciences/8_version_control/version_control.html)
 - [Literate programming with quarto](https://geraldinederroire.github.io/Course_R_Forest_Sciences/9_literate_programming/literate_programming.html)
 
+# Archived versions
 
+Previous editions of the course are available as GitHub Releases.
+
+- **2025 edition** ([v2025](https://github.com/geraldinederroire/Course_R_Forest_Sciences/releases/tag/v2025))
