@@ -1,0 +1,2794 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="basic_stats_session1_files/libs/clipboard/clipboard.min.js"></script>
+<script src="basic_stats_session1_files/libs/quarto-html/tabby.min.js"></script>
+<script src="basic_stats_session1_files/libs/quarto-html/popper.min.js"></script>
+<script src="basic_stats_session1_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="basic_stats_session1_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="basic_stats_session1_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="basic_stats_session1_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="basic_stats_session1_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.5.57">
+
+  <meta name="author" content="Géraldine Derroire">
+  <meta name="dcterms.date" content="2025-06-08">
+  <title>Statistics with R - session 1</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="basic_stats_session1_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="basic_stats_session1_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="basic_stats_session1_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="basic_stats_session1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="basic_stats_session1_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="basic_stats_session1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="basic_stats_session1_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="basic_stats_session1_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="basic_stats_session1_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Statistics with R - session 1</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Géraldine Derroire 
+</div>
+        <p class="quarto-title-affiliation">
+            Cirad - UnB
+          </p>
+    </div>
+</div>
+
+  <p class="date">2025-06-08</p>
+</section>
+<section id="section" class="title-slide slide level1 center">
+<h1></h1>
+<p>Let’s load the packages that we will use today</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href=""></a><span class="fu">library</span>(questionr)</span>
+<span id="cb1-3"><a href=""></a><span class="fu">library</span>(BIOMASS)</span>
+<span id="cb1-4"><a href=""></a><span class="fu">library</span>(GGally)</span>
+<span id="cb1-5"><a href=""></a><span class="fu">library</span>(multcompView)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<aside class="notes">
+<p>tidyverse for data manip and graph questionr for usefull function for exploration and visualisation BIOMASS for data GGally to see pair-correlation</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section>
+<section id="univariate-statistics" class="title-slide slide level1 center">
+<h1>Univariate statistics</h1>
+<aside class="notes">
+<p>one variable</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="reminder-on-the-descriptive-statistics" class="slide level2">
+<h2>Reminder on the descriptive statistics</h2>
+<p>For a categorical variable:</p>
+<ul>
+<li class="fragment"><p>Occurrence (count or proportion) per categories</p></li>
+<li class="fragment"><p><strong>visualisation</strong>: <span class="fragment">barplot, Cleveland plot</span></p></li>
+</ul>
+</section>
+<section id="reminder-on-the-descriptive-statistics-1" class="slide level2">
+<h2>Reminder on the descriptive statistics</h2>
+<p>For a quantitative (numerical) variable:</p>
+<ul>
+<li class="fragment"><p><strong>measure of centrality</strong>: <span class="fragment">mean, median</span></p></li>
+<li class="fragment"><p><strong>measure of dispersion</strong>: <span class="fragment">max-min, variance, standard deviation, interquartile distance, coefficient of variation</span></p></li>
+<li class="fragment"><p><strong>visualisation</strong>: histogram, boxplot, density plot</p></li>
+</ul>
+<aside class="notes">
+<p>have them guess</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="reminder-on-the-descriptive-statistics-2" class="slide level2">
+<h2>Reminder on the descriptive statistics</h2>
+<p>The coefficient of variation (CV) is a standardised measure of dispersion, that can be used to compared the dispersion of variables measured in different scale:</p>
+<p><span class="math display">\[CV = \frac{standard\:deviation}{mean}\]</span></p>
+</section>
+<section id="descriptive-statistics-vs-parameters" class="slide level2">
+<h2>Descriptive statistics <em>vs</em> parameters</h2>
+<p><span style="font-size: 30px"><strong>Descriptive statistics</strong> are calculated from the observations (the data).</span></p>
+<blockquote>
+<p><span style="font-size: 30px"><em>eg</em>: The trees that we can measure in a forest plot are a sample of the population of the trees in the considered forest. We can <strong>calculate</strong> the mean diameter of this sample.</span></p>
+</blockquote>
+<p><span style="font-size: 30px">The observations are a sample of a theoretical population that we don’t measure. The theoretical population can be described by its <strong>parameters</strong>, that are not measured.</span></p>
+<blockquote>
+<p><span style="font-size: 30px"><em>eg</em>: The mean diameter of the population of trees in the considered forest is a parameter. It cannot be measured but can be <strong>estimated</strong>.</span></p>
+</blockquote>
+<aside class="notes">
+<p>taht’s what we want to do with the stats, use observations to understand the theoretical population</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="statistical-distributions" class="slide level2">
+<h2>Statistical distributions</h2>
+<p>We can use <strong>statistical distributions</strong> to represent the distribution of the values of the variable in the theoretical population.</p>
+<p>A statistical distribution (also called <em>probability law</em>) is a function that associates a probability with each possible value of a random variable.</p>
+</section>
+<section id="statistical-distributions-1" class="slide level2">
+<h2>Statistical distributions</h2>
+<p>We can visualise a distribution density function (also called density of probability) with a density plot:</p>
+<div class="columns">
+<div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:30%;">
+<p><span class="fragment"><span style="font-size: 30px">Here, the probability that <span class="math inline">\(x \in [-1, 1]\)</span> is equal to the blue area, which is the integral of the density function between -1 and 1.</span></span></p>
+</div></div>
+<aside class="notes">
+<p>The density function does not give the probability of being equal to a value, as for a continuous variable, this probability would be null.</p>
+<p>so here much higher proba of being between -1 and 1, tha between -4 and -2</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<!-- for each law => give examples of how used, show the equation with parameters, show the density (with several values of the param) -->
+</section>
+<section id="uniform-distribution" class="slide level2">
+<h2>Uniform distribution</h2>
+<p><span class="math display">\[\mathcal{U}(a, b)\]</span></p>
+<p><span style="font-size: 30px"><span class="math inline">\([a, b]\)</span> is the range of possible values (so <em>a</em> is the minimum value and <em>b</em> the maximum value)</span></p>
+<div class="columns">
+<div class="column" style="width:30%;">
+<p><span style="font-size: 30px"><em>e.g.</em> for <span class="math inline">\(\mathcal{U}(2, 5)\)</span></span></p>
+</div><div class="column" style="width:70%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>x &lt; a : proba nulle a &lt; x &lt; b : equi proba x &gt; b: proba nulle</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="uniform-distribution-1" class="slide level2">
+<h2>Uniform distribution</h2>
+<p>We use the function <span style="color:indianred;">runif</span> to randomly draw data from a uniform distribution:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="co"># number of value t</span></span>
+<span id="cb2-2"><a href=""></a>      <span class="at">min =</span> <span class="dv">2</span>, <span class="co"># lower limit of the distribution</span></span>
+<span id="cb2-3"><a href=""></a>      <span class="at">max =</span> <span class="dv">5</span>) <span class="co"># upper limit of the distribution</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 3.114180 4.244543 4.658490 3.817215 3.714333 3.489043 3.494237 2.463896
+ [9] 2.395771 3.943445</code></pre>
+</div>
+</div>
+<p><span class="fragment"><em>NB</em>: as we do a random draw, we get different values each time we run the command:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">10</span>, <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">5</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 3.843545 3.022048 3.107850 4.900490 4.217855 3.938573 3.507121 3.544891
+ [9] 2.741952 3.886340</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="law-of-large-numbers" class="slide level2">
+<h2>Law of large numbers</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">hist</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">50</span>,</span>
+<span id="cb6-2"><a href=""></a>           <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a><span class="fu">hist</span>(<span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">100000</span>,</span>
+<span id="cb7-2"><a href=""></a>           <span class="at">min =</span> <span class="dv">2</span>, <span class="at">max =</span> <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><strong>The larger the size of the random sample, the closer the distribution of observed values is to the distribution of the theoretical population.</strong></span></p>
+<aside class="notes">
+<p>if we draw a small number of obs in a uniform, we don’t quite get the expected density</p>
+<p>But if we draw a very large number, we do</p>
+<p>show on the blackboard</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="normal-distribution" class="slide level2">
+<h2>Normal distribution</h2>
+<p><span class="math display">\[\mathcal{N}(\mu, \sigma^2)\]</span></p>
+<ul>
+<li class="fragment"><p><span class="math inline">\(\mu\)</span> is the mean</p></li>
+<li class="fragment"><p><span class="math inline">\(\sigma^2 &gt; 0\)</span> is the variance, so <span class="math inline">\(\sigma\)</span> is the standard deviation</p></li>
+</ul>
+<p><span class="fragment">💡 The normal distribution is also called <em>Gaussian distribution</em>.</span></p>
+</section>
+<section id="normal-distribution-1" class="slide level2 smaller">
+<h2>Normal distribution</h2>
+<p>We use the function <span style="color:indianred;">rnorm</span> to randomly draw data from a normal distribution:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href=""></a>dt1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, </span>
+<span id="cb8-2"><a href=""></a>                            <span class="at">mean =</span> <span class="dv">0</span>, </span>
+<span id="cb8-3"><a href=""></a>                            <span class="at">sd =</span> <span class="dv">1</span>))</span>
+<span id="cb8-4"><a href=""></a>dt2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, </span>
+<span id="cb8-5"><a href=""></a>                            <span class="at">mean =</span> <span class="dv">4</span>, </span>
+<span id="cb8-6"><a href=""></a>                            <span class="at">sd =</span> <span class="fl">0.5</span>))</span>
+<span id="cb8-7"><a href=""></a>dt3 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">100000</span>, </span>
+<span id="cb8-8"><a href=""></a>                            <span class="at">mean =</span> <span class="sc">-</span><span class="dv">2</span>, </span>
+<span id="cb8-9"><a href=""></a>                            <span class="at">sd =</span> <span class="dv">4</span>))</span>
+<span id="cb8-10"><a href=""></a>g <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb8-11"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt1, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb8-12"><a href=""></a>               <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span> </span>
+<span id="cb8-13"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt2, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb8-14"><a href=""></a>               <span class="at">color =</span> <span class="st">"green"</span>) <span class="sc">+</span> </span>
+<span id="cb8-15"><a href=""></a>  <span class="fu">geom_density</span>(<span class="at">data =</span> dt3, <span class="fu">aes</span>(<span class="at">x =</span> x), </span>
+<span id="cb8-16"><a href=""></a>               <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb8-17"><a href=""></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href=""></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>let’s draw values in 3 different normal distribution and put them in a dataframe</p>
+<p>then add them on a plot</p>
+<p>the mean is where the peak (the mode) is the larger the sd, the less peaky</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="centred-reduced-normal-distribution" class="slide level2">
+<h2>Centred reduced normal distribution</h2>
+<p>If <span class="math inline">\(x \sim \mathcal{N}(\mu, \sigma^2)\)</span></p>
+<p>then <span class="math inline">\(z = \frac{x - \mu}{\sigma}\)</span> follows a <strong>centred reduced normal distribution</strong>:</p>
+<p><span class="math inline">\(z \sim \mathcal{N}(0, 1)\)</span></p>
+<p><span class="fragment"><span style="font-size: 30px">💡 When to variable are measured in different scales, it can be usefull to standardise them by centring and reducing them, to be able to compare them.</span></span></p>
+<aside class="notes">
+<p>give an example of things measured in very different units</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="qq-plot" class="slide level2 smaller">
+<h2>QQ-plot</h2>
+<p><span style="font-size: 30px">A <em>quantile-quantile</em> plot is used to visualise the correspondence between two distributions by plotting each percentile of the two distributions.</span></p>
+<p><span style="font-size: 30px">This is very useful to visually assess if a variable is normally-distributed, by comparing its distribution to a normal distribution.</span></p>
+<p><span style="font-size: 30px">We use the function <span style="color:indianred;">qqnorm</span> to draw a normal QQ-plot:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href=""></a>v1 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">99</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="dv">4</span>)</span>
+<span id="cb10-2"><a href=""></a><span class="fu">qqnorm</span>(v1)</span>
+<span id="cb10-3"><a href=""></a><span class="fu">qqline</span>(v1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-10-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href=""></a>v2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100000</span>, <span class="at">mean =</span> <span class="dv">6</span>, <span class="at">sd =</span> <span class="dv">4</span>)</span>
+<span id="cb11-2"><a href=""></a><span class="fu">qqnorm</span>(v2)</span>
+<span id="cb11-3"><a href=""></a><span class="fu">qqline</span>(v2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-11-1.png" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>let’s first draw a small number of obs in a normal distribution and make the Q-Q plot x axis: with a theorical normal distrib y axis: observation =&gt; if parfaitly normally distributed the quantile distribution should be similar so all dots should be on the line</p>
+<p>if we see that they both follow a normal distribution, but the match is better when we increase the sampling size</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="testing-the-association-between-two-categorical-variables-the-chi2-test" class="title-slide slide level1 center">
+<h1>Testing the association between two categorical variables: the <span class="math inline">\(\chi^2\)</span> test</h1>
+
+</section>
+<section id="lets-work-with-the-the-nouragues-tree-data" class="slide level2">
+<h2>Let’s work with the the Nouragues tree data</h2>
+<p><span style="font-size: 30px"><em>Heights and diameters of trees in two 1-ha plots from the Nouragues forest (French Guiana)</em></span></p>
+<p><span style="font-size: 30px">Let’s load them:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href=""></a><span class="fu">data</span>(NouraguesHD) <span class="co"># load the data</span></span>
+<span id="cb12-2"><a href=""></a>dt_HD <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(NouraguesHD) <span class="co"># rename and transform to tibble</span></span>
+<span id="cb12-3"><a href=""></a><span class="fu">rm</span>(NouraguesHD) <span class="co"># remove</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</section>
+<section id="do-the-number-of-occurences-of-several-genus-depends-on-the-plot" class="slide level2 smaller">
+<h2>Do the number of occurences of several genus depends on the plot?</h2>
+<p><span style="font-size: 30px">We are going to work on the 10 most abundant genus in the Nouragues dataset, let’s select them:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="co"># look at the 10 most abundant genus</span></span>
+<span id="cb13-2"><a href=""></a>abd_10 <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">!=</span> <span class="st">"indet"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href=""></a>  <span class="fu">count</span>(genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-5"><a href=""></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href=""></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) </span>
+<span id="cb13-7"><a href=""></a></span>
+<span id="cb13-8"><a href=""></a>abd_10</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+   genus           n
+   &lt;chr&gt;       &lt;int&gt;
+ 1 Licania       128
+ 2 Lecythis       93
+ 3 Protium        49
+ 4 Pouteria       40
+ 5 Inga           35
+ 6 Qualea         30
+ 7 Eschweilera    25
+ 8 Dicorynia      23
+ 9 Eperua         22
+10 Sterculia      22</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a><span class="co"># take a subset of dt_HD containing the 10 most abundant genus</span></span>
+<span id="cb15-2"><a href=""></a>dt_sub10 <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> abd_10<span class="sc">$</span>genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-4"><a href=""></a>  <span class="fu">mutate</span>(<span class="at">genus =</span> <span class="fu">as.factor</span>(genus))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+</div></div>
+</section>
+<section id="contingency-table" class="slide level2">
+<h2>Contingency table</h2>
+<p><span style="font-size: 30px">Let’s start by doing a contingency table, using the function <span style="color:indianred;">table</span>.</span></p>
+<p><span style="font-size: 30px">This gives the number of observations for each pairs of categories.</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>tab_abd <span class="ot">&lt;-</span> <span class="fu">table</span>(dt_sub10<span class="sc">$</span>genus, dt_sub10<span class="sc">$</span>plotId)</span>
+<span id="cb16-2"><a href=""></a>tab_abd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>             
+              Plot1 Plot2
+  Dicorynia      23     0
+  Eperua          0    22
+  Eschweilera     8    17
+  Inga           26     9
+  Lecythis       19    74
+  Licania        33    95
+  Pouteria        5    35
+  Protium        25    24
+  Qualea         30     0
+  Sterculia       7    15</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>contigency table =&gt; very important</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="percentages-per-category" class="slide level2">
+<h2>Percentages per category</h2>
+<p><span style="font-size: 30px">We can look at the percentages per column (<em>here</em> per plot), using the function <span style="color:indianred;">cprop</span> of the package <span style="color:indianred;">questionr</span>:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">cprop</span>(tab_abd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>             
+              Plot1 Plot2 All  
+  Dicorynia    13.1   0.0   4.9
+  Eperua        0.0   7.6   4.7
+  Eschweilera   4.5   5.8   5.4
+  Inga         14.8   3.1   7.5
+  Lecythis     10.8  25.4  19.9
+  Licania      18.8  32.6  27.4
+  Pouteria      2.8  12.0   8.6
+  Protium      14.2   8.2  10.5
+  Qualea       17.0   0.0   6.4
+  Sterculia     4.0   5.2   4.7
+  Total       100.0 100.0 100.0</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><span class="fragment"><span style="font-size: 30px">⚠️ Here we look at the frequency per column because we are interested in the effect of the plot and the plot is in column. The function <span style="color:indianred;">lprop</span> also exists to look at frequency per row.</span></span></p>
+</div></div>
+<aside class="notes">
+<p>We see that the occurence of most genus seems to depend on the plot (remember our buble plots last session!)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<aside class="notes">
+<p>here in columns because…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="graphical-exploration" class="slide level2">
+<h2>Graphical exploration</h2>
+<p><span style="font-size: 30px">We can do a mosaic plot, using the function <span style="color:indianred;">mosaicplot</span> to explore the association graphically:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">mosaicplot</span>(tab_abd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>confirm what we saw with the percentage =&gt; occurence of genus seems to depend on the plot</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="chi2-test" class="slide level2 smaller">
+<h2><span class="math inline">\(\chi^2\)</span> test</h2>
+<p><span style="font-size: 30px">We can then perform a <span class="math inline">\(\chi^2\)</span> test, to test the independence of the two categorical variables. <strong>H0: the variables are independent</strong></span></p>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><span class="fragment"><span style="font-size: 30px">We use the function <span style="color:indianred;">chisq.test</span> on the <strong>contingency table</strong> (not on the percentage):</span></span></p>
+</div><div class="column" style="width:60%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a>res_chi2 <span class="ot">&lt;-</span> <span class="fu">chisq.test</span>(tab_abd)</span>
+<span id="cb21-2"><a href=""></a>res_chi2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's Chi-squared test
+
+data:  tab_abd
+X-squared = 155.6, df = 9, p-value &lt; 2.2e-16</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px">The result shows the following values:</span></span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 28px"><em>X-squared</em> is the value of the <span class="math inline">\(\chi^2\)</span> statistics, which is a “distance” between the observed occurrences and the expected ones if the variables were independent.</span></p></li>
+<li class="fragment"><p><span style="font-size: 28px"><em>df</em> is the number of degrees of freedom</span></p></li>
+<li class="fragment"><p><span style="font-size: 28px"><em>p-value</em> is the probability to get such a <em>X-squared</em> value under the assumption of independence.</span> <span class="fragment"><span style="font-size: 28px"><strong>Here the <em>p-value</em> is very low, so we can reject the null hypothesis of independence.</strong></span></span></p></li>
+</ul>
+<aside class="notes">
+<p>the test concludes that the occurence of these 10 genus depends on the plot</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="chi2-test-1" class="slide level2 smaller">
+<h2><span class="math inline">\(\chi^2\)</span> test</h2>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">The <span class="math inline">\(\chi^2\)</span> needs to be done on contingency tables and not on proportions, as the size of the sample needs to be known.</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">It is less reliable if the sample size is too small. It should not be used if any of the expected frequency under H0 is below 5. Let’s check this:</span></p></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a>res_chi2<span class="sc">$</span>expected</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>             
+                  Plot1    Plot2
+  Dicorynia    8.668094 14.33191
+  Eperua       8.291221 13.70878
+  Eschweilera  9.421842 15.57816
+  Inga        13.190578 21.80942
+  Lecythis    35.049251 57.95075
+  Licania     48.239829 79.76017
+  Pouteria    15.074946 24.92505
+  Protium     18.466809 30.53319
+  Qualea      11.306210 18.69379
+  Sterculia    8.291221 13.70878</code></pre>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Here it is ok</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="residuals" class="slide level2">
+<h2>Residuals</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><span style="font-size: 30px">We can look at the residuals using the function <span style="color:indianred;">chisq.residuals</span> of the package <span style="color:indianred;">questionr</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a><span class="fu">chisq.residuals</span>(tab_abd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>             
+              Plot1 Plot2
+  Dicorynia    4.87 -3.79
+  Eperua      -2.88  2.24
+  Eschweilera -0.46  0.36
+  Inga         3.53 -2.74
+  Lecythis    -2.71  2.11
+  Licania     -2.19  1.71
+  Pouteria    -2.59  2.02
+  Protium      1.52 -1.18
+  Qualea       5.56 -4.32
+  Sterculia   -0.45  0.35</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:&quot;60%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 28px">residuals &lt; -2 indicate <strong>under-representation</strong></span></p></li>
+<li class="fragment"><p><span style="font-size: 28px">residuals &gt; 2 indicate <strong>over-representation</strong></span></p></li>
+<li class="fragment"><p><span style="font-size: 28px">residuals in [-2, 2] indicate <strong>no significant difference</strong> to independence</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px"><em>The threshold of 2 correspond to a 95% confidence interval.</em></span></span></p>
+</div></div>
+<aside class="notes">
+<p>residuals are the difference between observed and predicted under the null hypothesis</p>
+<p>explore the results together</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="residuals-1" class="slide level2">
+<h2>Residuals</h2>
+<p><span style="font-size: 30px">We can also present the residuals graphically with the argument <em>shade = TRUE</em> in the function <span style="color:indianred;">mosaicplot</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href=""></a><span class="fu">mosaicplot</span>(tab_abd, </span>
+<span id="cb27-2"><a href=""></a>           <span class="at">shade =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb27-3"><a href=""></a>           <span class="at">las =</span> <span class="dv">3</span>, <span class="co"># vertical orientation of labels</span></span>
+<span id="cb27-4"><a href=""></a>           <span class="at">main =</span> <span class="st">""</span>) <span class="co"># remove main title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-21-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>take some time to explain the graph</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="testing-if-two-groups-differ-considering-a-quantitative-variable-the-t-test" class="title-slide slide level1 center">
+<h1>Testing if two groups differ considering a quantitative variable: the t-test</h1>
+
+</section>
+<section id="lets-work-with-the-nouragues-tree-data" class="slide level2">
+<h2>Let’s work with the Nouragues tree data</h2>
+<p><span style="font-size: 30px">We will focus on two genus: <em>Dicorynia</em> and <em>Protium</em>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href=""></a><span class="co"># one dataset with both genus</span></span>
+<span id="cb28-2"><a href=""></a>dt_sub <span class="ot">&lt;-</span> dt_HD <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a href=""></a>  <span class="fu">filter</span>(genus <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Dicorynia"</span>, <span class="st">"Protium"</span>))</span>
+<span id="cb28-4"><a href=""></a></span>
+<span id="cb28-5"><a href=""></a><span class="co"># one dataset per genus</span></span>
+<span id="cb28-6"><a href=""></a>d_Dico <span class="ot">&lt;-</span> <span class="fu">filter</span>(dt_sub, genus <span class="sc">==</span> <span class="st">"Dicorynia"</span>)</span>
+<span id="cb28-7"><a href=""></a>d_Prot <span class="ot">&lt;-</span> <span class="fu">filter</span>(dt_sub, genus <span class="sc">==</span> <span class="st">"Protium"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<aside class="notes">
+<p>We do both a common dataset and two dataset per genus</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="do-the-two-genus-differ-in-height" class="slide level2">
+<h2>Do the two genus differ in height?</h2>
+<p><span style="font-size: 30px">Let’s explore this graphically:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href=""></a>dt_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>genus, <span class="at">y=</span>H)) <span class="sc">+</span> </span>
+<span id="cb29-3"><a href=""></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-24-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>yes, it seems so</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="are-the-distribution-of-height-in-both-genus-normal" class="slide level2">
+<h2>Are the distribution of height in both genus normal?</h2>
+<p><span style="font-size: 30px">An assumption of the t-test is that the data are <strong>normally distributed</strong>.</span></p>
+<p><span style="font-size: 30px">To decide which test to use, we first check the normality of the distribution with a Shapiro-Wilk test, using the function <span style="color:indianred;">shapiro.test</span></span></p>
+<p><span style="font-size: 30px"><strong>H0 of the Shapiro-Wilk test: the distribution is normal</strong></span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href=""></a><span class="fu">shapiro.test</span>(d_Dico<span class="sc">$</span>H)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  d_Dico$H
+W = 0.9642, p-value = 0.6307</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href=""></a><span class="fu">shapiro.test</span>(d_Prot<span class="sc">$</span>H)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  d_Prot$H
+W = 0.98494, p-value = 0.8708</code></pre>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px">The tests are non-significant, so they don’t reject the hypothesis of normality. We can consider the two distributions as normal.</span></span></p>
+</section>
+<section id="are-the-distribution-of-height-in-both-genus-normal-1" class="slide level2">
+<h2>Are the distribution of height in both genus normal?</h2>
+<p><span style="font-size: 30px">We could also check the normality graphically with normal Q-Q plot:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href=""></a><span class="fu">qqnorm</span>(d_Dico<span class="sc">$</span>H)</span>
+<span id="cb34-2"><a href=""></a><span class="fu">qqline</span>(d_Dico<span class="sc">$</span>H)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-27-1.png" width="268"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href=""></a><span class="fu">qqnorm</span>(d_Prot<span class="sc">$</span>H)</span>
+<span id="cb35-2"><a href=""></a><span class="fu">qqline</span>(d_Prot<span class="sc">$</span>H)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-28-1.png" width="268"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 25px">The points fall reasonably on the diagonal line, we can consider the data as normally distributed.</span></span></p>
+</section>
+<section id="t-test" class="slide level2 smaller">
+<h2>t-test</h2>
+<p><span style="font-size: 30px">As the two distributions are normal, we can do a t-test using the function <span style="color:indianred;">t.test</span>:</span></p>
+<p><span class="fragment"><span style="font-size: 30px">A t-test test the equality of means of two groups: <strong>H0: equality of the means</strong></span></span></p>
+<div class="columns">
+<div class="column" style="width:65%;">
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href=""></a><span class="fu">t.test</span>(dt_sub<span class="sc">$</span>H <span class="sc">~</span> dt_sub<span class="sc">$</span>genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Welch Two Sample t-test
+
+data:  dt_sub$H by dt_sub$genus
+t = 4.7119, df = 21.786, p-value = 0.0001086
+alternative hypothesis: true difference in means between group Dicorynia and group Protium is not equal to 0
+95 percent confidence interval:
+  6.675884 17.183090
+sample estimates:
+mean in group Dicorynia   mean in group Protium 
+               31.75000                19.82051 </code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:35%;">
+<p><span class="fragment"><span style="font-size: 30px">The result is significant, so we can reject the null hypothesis that the mean of both group are equal and conclude that the two genus differ in height.</span></span></p>
+</div></div>
+<p><span class="fragment"><span style="font-size: 25px">💡 The result indicates that we performed a <em>Welch t-test</em>, which doesn’t assume homoscedasticity (equality of variance). If we want to run a t-test assuming homoscedasticity, we need to use the argument <em>var.equal = TRUE</em>.</span></span></p>
+<aside class="notes">
+<p>the Welch modification is done because it handle better unequal variances and unequal sample size =&gt; here clearly heterosceasticity (non homogeneity of variance)</p>
+<p>the test tell us</p>
+<ul>
+<li><p>the estimated mean per group</p></li>
+<li><p>that the difference between the two is between 6.67 and 17.18 meters (95% confidence)</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="do-the-two-genus-differ-in-diameter" class="slide level2">
+<h2>Do the two genus differ in diameter?</h2>
+<p><span style="font-size: 30px">Let’s explore this graphically:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href=""></a>dt_sub <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href=""></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>genus, <span class="at">y=</span>D)) <span class="sc">+</span> </span>
+<span id="cb38-3"><a href=""></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-30-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>new question</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="are-the-distribution-of-diameter-in-both-genus-normal" class="slide level2">
+<h2>Are the distribution of diameter in both genus normal?</h2>
+<p><span style="font-size: 30px">Let’s first test if the distribution of diameters are normal:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href=""></a><span class="fu">shapiro.test</span>(d_Dico<span class="sc">$</span>D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  d_Dico$D
+W = 0.88346, p-value = 0.01171</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href=""></a><span class="fu">shapiro.test</span>(d_Prot<span class="sc">$</span>D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  d_Prot$D
+W = 0.88607, p-value = 0.0001987</code></pre>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px">The tests are significant, so they reject the hypothesis of normality.</span></span></p>
+</section>
+<section id="are-the-distribution-of-diameter-in-both-genus-normal-1" class="slide level2">
+<h2>Are the distribution of diameter in both genus normal?</h2>
+<p><span style="font-size: 30px">This is how the QQ plots look:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href=""></a><span class="fu">qqnorm</span>(d_Dico<span class="sc">$</span>D)</span>
+<span id="cb43-2"><a href=""></a><span class="fu">qqline</span>(d_Dico<span class="sc">$</span>D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-33-1.png" width="268"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href=""></a><span class="fu">qqnorm</span>(d_Prot<span class="sc">$</span>D)</span>
+<span id="cb44-2"><a href=""></a><span class="fu">qqline</span>(d_Prot<span class="sc">$</span>D)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-34-1.png" width="268"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<p><span class="fragment"><span style="font-size: 30px">The distributions of diameters are not normal, so we cannot use a t-test.</span></span></p>
+<aside class="notes">
+<p>note what a QQ-plot looks like when the distribution is not the one expected</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="wikcoxon-rank-test" class="slide level2">
+<h2>Wikcoxon rank test</h2>
+<p><span style="font-size: 30px">We can do a Wilcoxon rank test, which is the non-parametric equivalent to the t-test, using the function <span style="color:indianred;">wilcox.test</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href=""></a><span class="fu">wilcox.test</span>(dt_sub<span class="sc">$</span>D <span class="sc">~</span>dt_sub<span class="sc">$</span>genus)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in wilcox.test.default(x = DATA[[1L]], y = DATA[[2L]], ...): cannot
+compute exact p-value with ties</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Wilcoxon rank sum test with continuity correction
+
+data:  dt_sub$D by dt_sub$genus
+W = 882, p-value = 0.0001225
+alternative hypothesis: true location shift is not equal to 0</code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">The result is significant, so we can reject the null hypothesis, and conclude that the two genus differ in diameter.</span></span></p>
+<p><span style="font-size: 25px">💡 A non-parametric test is a test that does not make any assumption regarding the distribution of the observations.</span></p>
+<aside class="notes">
+<p>The test assume all values to be different, but there are some ties (equal values) so the p-value is approximates =&gt; here very small so OK</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-if-the-data-are-paired" class="slide level2">
+<h2>What if the data are paired?</h2>
+<p><span style="font-size: 30px">Let’s load some data:(available <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_1.RData" data-preview-link="false">here</a>)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href=""></a><span class="fu">load</span>(<span class="st">"data/data_statistics_1.RData"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment"><span style="font-size: 30px">The data <em>dt_thin</em> is a dummy dataset of the growth (in cm DBH/year) of 100 tree before and after thinning.</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href=""></a><span class="fu">str</span>(dt_thin)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [200 × 3] (S3: tbl_df/tbl/data.frame)
+ $ treeID: Factor w/ 100 levels "1","2","3","4",..: 1 1 2 2 3 3 4 4 5 5 ...
+ $ treat : Factor w/ 2 levels "before","after": 1 2 1 2 1 2 1 2 1 2 ...
+ $ growth: num [1:200] 0.0487 0.4031 0.1384 0.356 0.185 ...</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">These data are <strong>paired</strong>, as each individual tree is measured twice: before and after thinning.</span></span></p>
+</section>
+<section id="growth-before-and-after-thinning" class="slide level2">
+<h2>Growth before and after thinning</h2>
+<p><span style="font-size: 30px">Let’s explore the data graphically:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href=""></a><span class="fu">ggplot</span>(dt_thin, <span class="fu">aes</span>(<span class="at">x=</span>treat, <span class="at">y=</span>growth)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-38-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="growth-before-and-after-thinning-1" class="slide level2">
+<h2>Growth before and after thinning</h2>
+<p><span style="font-size: 30px">First, we pivot the data to a wide format:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href=""></a>dt_thin_w <span class="ot">&lt;-</span> dt_thin <span class="sc">%&gt;%</span> </span>
+<span id="cb52-2"><a href=""></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"treat"</span>, </span>
+<span id="cb52-3"><a href=""></a>              <span class="at">values_from =</span> <span class="st">"growth"</span>)</span>
+<span id="cb52-4"><a href=""></a></span>
+<span id="cb52-5"><a href=""></a><span class="fu">slice_head</span>(dt_thin_w, <span class="at">n =</span> <span class="dv">5</span>) <span class="co"># check the first rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 3
+  treeID before after
+  &lt;fct&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1 1      0.0487 0.403
+2 2      0.138  0.356
+3 3      0.185  0.504
+4 4      0.203  0.311
+5 5      0.296  0.269</code></pre>
+</div>
+</div>
+</section>
+<section id="are-the-distributions-normal" class="slide level2">
+<h2>Are the distributions normal?</h2>
+<p><span style="font-size: 30px">Let’s check the normality graphically:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href=""></a><span class="fu">qqnorm</span>(dt_thin_w<span class="sc">$</span>before)</span>
+<span id="cb54-2"><a href=""></a><span class="fu">qqline</span>(dt_thin_w<span class="sc">$</span>before)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-40-1.png" width="288"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href=""></a><span class="fu">qqnorm</span>(dt_thin_w<span class="sc">$</span>after)</span>
+<span id="cb55-2"><a href=""></a><span class="fu">qqline</span>(dt_thin_w<span class="sc">$</span>after)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-41-1.png" width="288"></p>
+</figure>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>no needs to check with a test because</p>
+<ul>
+<li><p>qq plot are good and visual explo OK</p></li>
+<li><p>t-test is relatively robust to violation of normality assumption</p></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="t-test-for-paired-data" class="slide level2">
+<h2>t-test for paired data</h2>
+<p><span style="font-size: 30px">We can do a t-test for paired data by specifying <strong>paired = TRUE</strong> in the function <span style="color:indianred;">t.test</span>:</span></p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href=""></a>res_paired <span class="ot">&lt;-</span> <span class="fu">t.test</span>(dt_thin_w<span class="sc">$</span>before, </span>
+<span id="cb56-2"><a href=""></a>                     dt_thin_w<span class="sc">$</span>after,</span>
+<span id="cb56-3"><a href=""></a>                     <span class="at">paired=</span>T)</span>
+<span id="cb56-4"><a href=""></a>res_paired</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Paired t-test
+
+data:  dt_thin_w$before and dt_thin_w$after
+t = -13.366, df = 99, p-value &lt; 2.2e-16
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ -0.2822526 -0.2092826
+sample estimates:
+mean difference 
+     -0.2457676 </code></pre>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<p><span class="fragment"><span style="font-size: 30px">The result is significant, so we can conclude that the growths before and after thinning differ.</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">💡 If the data are not normally distributed, we can do a Wikcoxon rank test for paired data in a similar way</span></span></p>
+</div></div>
+<aside class="notes">
+<p>Note that the synthax has changed</p>
+<p>give the 95% confidence interval of the difference (before - after)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-to-report-for-a-t-test" class="slide level2 smaller">
+<h2>What to report for a t-test?</h2>
+<p><span style="font-size: 30px">To retrieve the p-value:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href=""></a>res_paired<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6.719727e-24</code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">A significant p-value indicates that it is highly improbable to have the observed effect if the null hypothesis is true. So we can conclude that the two groups differ. <strong>⚠️ However, this does not inform on the magnitude of the difference.</strong></span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">In addition to the p-value, we need to report:</span></span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px">the magnitude of the difference</span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href=""></a>res_paired<span class="sc">$</span>estimate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>mean difference 
+     -0.2457676 </code></pre>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><span style="font-size: 30px">the confidence interval of the difference</span></li>
+</ul>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href=""></a>res_paired<span class="sc">$</span>conf.int</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.2822526 -0.2092826
+attr(,"conf.level")
+[1] 0.95</code></pre>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<p>the attr 0.95 is the confidence level (95% by default, but this can be changed</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="testing-difference-between-more-than-two-groups-the-anova" class="title-slide slide level1 center">
+<h1>Testing difference between more than two groups: the ANOVA</h1>
+
+</section>
+<section id="analysis-of-variance-anova" class="slide level2">
+<h2>Analysis of variance: ANOVA</h2>
+<p>With the t-test, we tested the difference between two groups.</p>
+<p>If we have more than two groups, we use the <strong>ANOVA</strong>.</p>
+<p>The ANOVA compares the variation within groups with the variation between groups.</p>
+<p><strong>H0: all the observations come from populations with a same mean.</strong></p>
+</section>
+<section id="do-the-height-of-several-genus-differ" class="slide level2 scrollable">
+<h2>Do the height of several genus differ?</h2>
+<p><span style="font-size: 30px">We extent the analysis done on <em>Dicorynia</em> and <em>Protium</em> to more genus: let’s consider the 10 more abundant genus.</span></p>
+<p><span class="fragment"><span style="font-size: 30px">Let’s start with a graphical exploration:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href=""></a><span class="fu">ggplot</span>(dt_sub10, <span class="fu">aes</span>(<span class="at">x=</span>genus, <span class="at">y=</span>H)) <span class="sc">+</span> </span>
+<span id="cb64-2"><a href=""></a>  <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-46-1.png" style="width:70.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="anova" class="slide level2">
+<h2>ANOVA</h2>
+<p><span style="font-size: 30px">We perform the ANOVA using the function <span style="color:indianred;">aov</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href=""></a>H_aov <span class="ot">&lt;-</span> <span class="fu">aov</span>(H <span class="sc">~</span> genus,</span>
+<span id="cb65-2"><a href=""></a>             <span class="at">data =</span> dt_sub10)</span>
+<span id="cb65-3"><a href=""></a><span class="fu">summary</span>(H_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>             Df Sum Sq Mean Sq F value Pr(&gt;F)    
+genus         9   4025   447.2   12.17 &lt;2e-16 ***
+Residuals   386  14183    36.7                   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+71 observations deleted due to missingness</code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px"><strong>The test is significant, meaning that the groups differ.</strong></span></span></p>
+</section>
+<section id="checking-the-model-assumptions" class="slide level2">
+<h2>Checking the model assumptions</h2>
+<p><span style="font-size: 30px">The ANOVA assumes <strong>homoscedasticity</strong>, meaning a constant variance variance of residuals across groups.</span></p>
+<p><span style="font-size: 30px">We check this graphically by plotting the residuals against the fitted values (the estimated mean for each group):</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href=""></a><span class="fu">plot</span>(H_aov, <span class="at">which =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-48-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">There is no strong pattern.</span></p>
+<p><span style="font-size: 30px">The residuals are distributed around 0 in a similar way for each groups.</span></p>
+<p><span style="font-size: 30px"><strong>We can consider that the assumptions of homoscedasticity is respected.</strong></span></p>
+</div>
+</div></div>
+<aside class="notes">
+<p>the function plot, when used on the results of a statistical test, provides several very usefull graphs to diagnose the test</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="checking-the-model-assumptions-1" class="slide level2">
+<h2>Checking the model assumptions</h2>
+<p><span style="font-size: 30px">The ANOVA assumes that the <strong>residuals are normally distributed</strong>.</span></p>
+<p><span style="font-size: 30px">We check this graphically with a Q-Q plot:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href=""></a><span class="fu">plot</span>(H_aov, <span class="at">which =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-49-1.png" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="fragment">
+<p><span style="font-size: 30px">The points are mostly on the diagonal.</span></p>
+<p><span style="font-size: 30px"><strong>We can consider that the assumptions of normality of the distribution of the residuals is respected.</strong></span></p>
+</div>
+</div></div>
+<aside class="notes">
+<p>we don’t check that the values are normally distributed, but the residuals</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="estimated-mean-per-group" class="slide level2">
+<h2>Estimated mean per group</h2>
+<p><span style="font-size: 30px">To get the estimated mean of each group, we use the function <span style="color:indianred;">coef</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href=""></a><span class="fu">coef</span>(H_aov)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>     (Intercept)      genusEperua genusEschweilera        genusInga 
+       31.750000       -11.600000       -13.464286       -12.375000 
+   genusLecythis     genusLicania    genusPouteria     genusProtium 
+      -12.412338       -10.844340        -9.564286       -11.929487 
+     genusQualea   genusSterculia 
+       -6.303571        -4.638889 </code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">The <em>intercept</em> correspond to the first group (here <em>Dicorynia</em>).</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">The other coefficient show the difference of each group with the first group. For instance, the mean of <em>Sterculia</em> is:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href=""></a><span class="fu">coef</span>(H_aov)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(H_aov)[<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>(Intercept) 
+   27.11111 </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="comparing-the-groups" class="slide level2">
+<h2>Comparing the groups</h2>
+<p><span style="font-size: 30px">We know that the means of the groups differ, but we also would like to know which groups significantly differ from the others.</span></p>
+<p><span style="font-size: 30px">We can perform a Tukey test, which compares all pairs of groups, using the function <span style="color:indianred;">TukeyHSD</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href=""></a>H_tukey <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(H_aov)</span>
+<span id="cb73-2"><a href=""></a>H_tukey</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = H ~ genus, data = dt_sub10)
+
+$genus
+                              diff         lwr        upr     p adj
+Eperua-Dicorynia      -11.60000000 -17.7000462 -5.4999538 0.0000002
+Eschweilera-Dicorynia -13.46428571 -19.4912748 -7.4372966 0.0000000
+Inga-Dicorynia        -12.37500000 -17.8735073 -6.8764927 0.0000000
+Lecythis-Dicorynia    -12.41233766 -17.2536002 -7.5710752 0.0000000
+Licania-Dicorynia     -10.84433962 -15.5470742 -6.1416051 0.0000000
+Pouteria-Dicorynia     -9.56428571 -14.9713988 -4.1571727 0.0000016
+Protium-Dicorynia     -11.92948718 -17.2348102 -6.6241642 0.0000000
+Qualea-Dicorynia       -6.30357143 -11.9511168 -0.6560261 0.0154449
+Sterculia-Dicorynia    -4.63888889 -10.9060906  1.6283128 0.3559054
+Eschweilera-Eperua     -1.86428571  -7.8912748  4.1627034 0.9930111
+Inga-Eperua            -0.77500000  -6.2735073  4.7235073 0.9999883
+Lecythis-Eperua        -0.81233766  -5.6536002  4.0289248 0.9999481
+Licania-Eperua          0.75566038  -3.9470742  5.4583949 0.9999641
+Pouteria-Eperua         2.03571429  -3.3713988  7.4428273 0.9723737
+Protium-Eperua         -0.32948718  -5.6348102  4.9758358 1.0000000
+Qualea-Eperua           5.29642857  -0.3511168 10.9439739 0.0873444
+Sterculia-Eperua        6.96111111   0.6939094 13.2283128 0.0163783
+Inga-Eschweilera        1.08928571  -4.3280584  6.5066298 0.9997634
+Lecythis-Eschweilera    1.05194805  -3.6969315  5.8008276 0.9994770
+Licania-Eschweilera     2.61994609  -1.9876288  7.2275210 0.7289207
+Pouteria-Eschweilera    3.90000000  -1.4245568  9.2245568 0.3714200
+Protium-Eschweilera     1.53479853  -3.6863590  6.7559561 0.9952092
+Qualea-Eschweilera      7.16071429   1.5921594 12.7292691 0.0020955
+Sterculia-Eschweilera   8.82539683   2.6292810 15.0215127 0.0003296
+Lecythis-Inga          -0.03733766  -4.0945340  4.0198586 1.0000000
+Licania-Inga            1.53066038  -2.3601919  5.4215127 0.9632090
+Pouteria-Inga           2.81071429  -1.9073246  7.5287531 0.6719383
+Protium-Inga            0.44551282  -4.1555165  5.0465422 0.9999996
+Qualea-Inga             6.07142857   1.0796565 11.0632006 0.0049388
+Sterculia-Inga          7.73611111   2.0527286 13.4194936 0.0007845
+Licania-Lecythis        1.56799804  -1.3204222  4.4564182 0.7791950
+Pouteria-Lecythis       2.84805195  -1.0843939  6.7804978 0.3882296
+Protium-Lecythis        0.48285048  -3.3084172  4.2741182 0.9999952
+Qualea-Lecythis         6.10876623   1.8517687 10.3657637 0.0002837
+Sterculia-Lecythis      7.77344877   2.7231937 12.8237038 0.0000619
+Pouteria-Licania        1.28005391  -2.4805338  5.0406416 0.9861084
+Protium-Licania        -1.08514756  -4.6978475  2.5275524 0.9943730
+Qualea-Licania          4.54076819   0.4419979  8.6395384 0.0168933
+Sterculia-Licania       6.20545073   1.2878328 11.1230686 0.0028335
+Protium-Pouteria       -2.36520147  -6.8566110  2.1262081 0.8085155
+Qualea-Pouteria         3.26071429  -1.6302035  8.1516321 0.5133139
+Sterculia-Pouteria      4.92539683  -0.6696121 10.5204058 0.1395645
+Qualea-Protium          5.62591575   0.8477721 10.4040594 0.0077910
+Sterculia-Protium       7.29059829   1.7938988 12.7872978 0.0012447
+Sterculia-Qualea        1.66468254  -4.1630119  7.4923770 0.9961389</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>We get the comparison of all pairs</p>
+<p>mean difference (and lower and upper 95% confidence interval) p-values telling if the two groups are significantly different</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="graphical-presentation-of-the-results" class="slide level2 smaller">
+<h2>Graphical presentation of the results</h2>
+<p><span style="font-size: 30px">We use the function <span style="color:indianred;">multcompLetters4</span> from the package <span style="color:indianred;">multcompView</span> to get the letters indicating identical groups:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href=""></a>H_letters <span class="ot">&lt;-</span> <span class="fu">multcompLetters4</span>(H_aov, H_tukey)</span>
+<span id="cb75-2"><a href=""></a>H_letters</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>$genus
+  Dicorynia   Sterculia      Qualea    Pouteria     Licania      Eperua 
+        "a"        "ab"        "bc"       "bcd"         "d"        "cd" 
+    Protium        Inga    Lecythis Eschweilera 
+        "d"         "d"         "d"         "d" </code></pre>
+</div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href=""></a><span class="fu">str</span>(H_letters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>List of 1
+ $ genus:List of 3
+  ..$ Letters          : Named chr [1:10] "a" "ab" "bc" "bcd" ...
+  .. ..- attr(*, "names")= chr [1:10] "Dicorynia" "Sterculia" "Qualea" "Pouteria" ...
+  ..$ monospacedLetters: Named chr [1:10] "a   " "ab  " " bc " " bcd" ...
+  .. ..- attr(*, "names")= chr [1:10] "Dicorynia" "Sterculia" "Qualea" "Pouteria" ...
+  ..$ LetterMatrix     : logi [1:10, 1:4] TRUE TRUE FALSE FALSE FALSE FALSE ...
+  .. ..- attr(*, "dimnames")=List of 2
+  .. .. ..$ : chr [1:10] "Dicorynia" "Sterculia" "Qualea" "Pouteria" ...
+  .. .. ..$ : chr [1:4] "a" "b" "c" "d"
+  ..- attr(*, "class")= chr "multcompLetters"</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">This gives a list of list: the letters are in the named vector H_letters$genus$Letters.</span></span></p>
+<aside class="notes">
+<p>we want to make a nice graph showing the results of the anova</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="graphical-presentation-of-the-results-1" class="slide level2">
+<h2>Graphical presentation of the results</h2>
+<p><span style="font-size: 30px">We extract the letters from that vector:</span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href=""></a>H_letters_tb <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb79-2"><a href=""></a>  <span class="at">genus =</span> <span class="fu">names</span>(H_letters<span class="sc">$</span>genus<span class="sc">$</span>Letters),</span>
+<span id="cb79-3"><a href=""></a>  <span class="at">letter =</span> <span class="fu">as.character</span>(H_letters<span class="sc">$</span>genus<span class="sc">$</span>Letters)</span>
+<span id="cb79-4"><a href=""></a>  )</span>
+<span id="cb79-5"><a href=""></a><span class="fu">head</span>(H_letters_tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  genus     letter
+  &lt;chr&gt;     &lt;chr&gt; 
+1 Dicorynia a     
+2 Sterculia ab    
+3 Qualea    bc    
+4 Pouteria  bcd   
+5 Licania   d     
+6 Eperua    cd    </code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="graphical-presentation-of-the-results-2" class="slide level2">
+<h2>Graphical presentation of the results</h2>
+<p><span style="font-size: 30px">We then make a tibble containing the groups, the letters and the 75th percentile (to position the letter above the box):</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href=""></a>H_letters_pos <span class="ot">&lt;-</span> dt_sub10 <span class="sc">%&gt;%</span> </span>
+<span id="cb81-2"><a href=""></a>  <span class="fu">group_by</span>(genus) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-3"><a href=""></a>  <span class="fu">summarise</span>(<span class="at">q_75 =</span> <span class="fu">quantile</span>(H, <span class="at">probs =</span> <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb81-4"><a href=""></a>  <span class="fu">inner_join</span>(H_letters_tb)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><span class="fragment"><span style="font-size: 30px">And we make the plot:</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href=""></a>graph_H <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb82-2"><a href=""></a>  <span class="fu">geom_boxplot</span>(<span class="at">data =</span> dt_sub10, </span>
+<span id="cb82-3"><a href=""></a>               <span class="fu">aes</span>(<span class="at">x =</span> genus, <span class="at">y =</span> H, <span class="at">fill =</span> genus),</span>
+<span id="cb82-4"><a href=""></a>               <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb82-5"><a href=""></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> H_letters_pos,</span>
+<span id="cb82-6"><a href=""></a>            <span class="fu">aes</span>(<span class="at">x =</span> genus, <span class="at">y =</span> q_75, <span class="co"># position of the label</span></span>
+<span id="cb82-7"><a href=""></a>                <span class="at">label =</span> letter), <span class="co"># labels are the letters</span></span>
+<span id="cb82-8"><a href=""></a>            <span class="at">size =</span> <span class="dv">5</span>, <span class="co"># size of the labels</span></span>
+<span id="cb82-9"><a href=""></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">hjust =</span> <span class="sc">-</span><span class="dv">1</span>) <span class="sc">+</span> <span class="co"># adjusts position of the labels</span></span>
+<span id="cb82-10"><a href=""></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>) <span class="sc">+</span> </span>
+<span id="cb82-11"><a href=""></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+
+</div>
+</div>
+</section>
+<section id="graphical-presentation-of-the-results-3" class="slide level2">
+<h2>Graphical presentation of the results</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href=""></a>graph_H</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-58-1.png" style="width:120.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="what-to-do-if-the-assumptions-of-the-anova-are-not-met" class="slide level2">
+<h2>What to do if the assumptions of the ANOVA are not met?</h2>
+<p><span style="font-size: 30px">If the assumption of normality of the residuals is not met, we can:</span></p>
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">Perform a <strong>Kruskal-Wallis test</strong> (non parametric) using the function <span style="color:indianred;">kruskal.test</span></span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Transform the continuous variable (log, sqrt…)</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Perform a <strong>generalised linear model</strong> (GLM)</span></p></li>
+</ul>
+<p><span class="fragment"><span style="font-size: 30px">If the assumption of homoscedasticity is not met, we can perform a <strong>Welch’s ANOVA</strong> using the function <span style="color:indianred;">oneway.test</span></span></span></p>
+<aside class="notes">
+<p>we will talk about data transfo next session</p>
+<p>we will mention GLM, but not in depth</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section id="section-1" class="title-slide slide level1 center">
+<h1></h1>
+<p>So far, we saw how to test for differences between variables.</p>
+<p>Now and in the next session we are going to look at <strong>relationships between variables</strong>.</p>
+</section>
+
+<section>
+<section id="covariance-and-correlation" class="title-slide slide level1 center">
+<h1>Covariance and correlation</h1>
+
+</section>
+<section id="covariance" class="slide level2 scrollable">
+<h2>Covariance</h2>
+<p>We have seen that the variance of a variable <em>x</em> is the mean of squared deviations from the mean:</p>
+<p><span class="math display">\[\sigma^2_x = \frac{\sum_{i=1}^n (x_i-\bar{x})^2}{n}\]</span></p>
+<div class="fragment">
+<p><span style="font-size: 30px">The covariance between two numerical variables <em>x</em> and <em>y</em> is the mean of the product of the deviations of <em>x</em> and <em>y</em> from their respective mean:</span></p>
+<p><span class="math display">\[cov_{xy} = \frac{\sum_{i=1}^n (x_i-\bar{x}) \times (y_i-\bar{y})}{n}\]</span></p>
+</div>
+</section>
+<section id="covariance-1" class="slide level2">
+<h2>Covariance</h2>
+<p>We use the function <span style="color:indianred;">cov</span> to get the covariance between two variables.</p>
+<p>Let’s test this with the iris data set, which you graphically explore in a last exercise. We focus on the species <em>versicolor</em>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href=""></a><span class="fu">data</span>(iris)</span>
+<span id="cb84-2"><a href=""></a>iris <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(iris)</span>
+<span id="cb84-3"><a href=""></a>iris_vers <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Species <span class="sc">==</span> <span class="st">"versicolor"</span>)</span>
+<span id="cb84-4"><a href=""></a><span class="fu">cov</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.07310204</code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px">⚠️ The unit of the covariance is the product of the unit of x and of y…</span></span></p>
+<aside class="notes">
+<p>is this high? low? hard to say…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="correlation-of-pearson" class="slide level2">
+<h2>Correlation of Pearson</h2>
+<p><span style="font-size: 30px">To help with the interpretation of the covariance, we standardise the covariance by the product of the standard deviations.</span></p>
+<p><span style="font-size: 30px">This is the <strong>coefficient of correlation of Pearson</strong>, which is between -1 and 1:</span></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li class="fragment"><p><span style="font-size: 30px">a coefficient = -1 (respectively 1) means that the variables are perfectly negatively (respectively positively) correlated</span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">a coefficient = 0 shows an absence of correlation</span></p></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><span class="fragment"><span style="font-size: 30px">We use the function <span style="color:indianred;">cor</span> to get the correlation between two variables (the default method is Pearson correlation).</span></span></p>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href=""></a><span class="fu">cor</span>(iris_vers<span class="sc">$</span>Petal.Length, </span>
+<span id="cb86-2"><a href=""></a>    iris_vers<span class="sc">$</span>Petal.Width)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7866681</code></pre>
+</div>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px"><em>There is a strong positive correlation.</em></span></span></p>
+</div></div>
+<aside class="notes">
+<p>So here strong positive correlation</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="correlation-of-spearman" class="slide level2">
+<h2>Correlation of Spearman</h2>
+<p><span style="font-size: 30px">Pearson correlation makes the hypothesis that the relationship is linear.</span></p>
+<p><span style="font-size: 30px">If this is not the case, we can use the <em>rank correlation of Spearman</em>, by specifying the method:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a><span class="fu">cor</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width,</span>
+<span id="cb88-2"><a href=""></a>    <span class="at">method =</span> <span class="st">"spearman"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.7870096</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>here, not much difference</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="test-of-correlation" class="slide level2">
+<h2>Test of correlation</h2>
+<p><span style="font-size: 30px">To test if the correlation is significant, we do a test of correlation with the function <span style="color:indianred;">cor.test</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href=""></a><span class="fu">cor.test</span>(iris_vers<span class="sc">$</span>Petal.Length, iris_vers<span class="sc">$</span>Petal.Width,</span>
+<span id="cb90-2"><a href=""></a>         <span class="at">method =</span> <span class="st">"pearson"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Pearson's product-moment correlation
+
+data:  iris_vers$Petal.Length and iris_vers$Petal.Width
+t = 8.828, df = 48, p-value = 1.272e-11
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.6508311 0.8737034
+sample estimates:
+      cor 
+0.7866681 </code></pre>
+</div>
+</div>
+<p><span class="fragment"><span style="font-size: 30px"><em>The correlation is significant.</em></span></span></p>
+<aside class="notes">
+<p>the test gives us the coeff of correlation (and its CI) + its significantivity</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="visualise-correlations" class="slide level2">
+<h2>Visualise correlations</h2>
+<p><span style="font-size: 30px">Pearson correlations between multiple pairs of variables can be visualised using the function <span style="color:indianred;">ggpairs</span> of the package <span style="color:indianred;">GGally</span>:</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href=""></a><span class="fu">ggpairs</span>(iris_vers, <span class="at">columns =</span> <span class="fu">c</span>(<span class="st">"Sepal.Length"</span>, <span class="st">"Sepal.Width"</span>,</span>
+<span id="cb92-2"><a href=""></a>                               <span class="st">"Petal.Length"</span>, <span class="st">"Petal.Width"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell fragment">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="basic_stats_session1_files/figure-revealjs/unnamed-chunk-63-1.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href=""></a><span class="co"># this is equivalent to </span></span>
+<span id="cb93-2"><a href=""></a> <span class="co"># ggpairs(iris_vers, columns = 1:4)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<aside class="notes">
+<p>we get the correlation coef and its significance</p>
+<p>more complicated if we want other type of correlation than Pearson</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section id="acknowledgments" class="title-slide slide level1 smaller center">
+<h1>Acknowledgments</h1>
+<div>
+<ul>
+<li><p>Marchand P. <em>Analyses et modélisation des données écologiques</em> <a href="https://pmarchand1.github.io/ECL7102/" data-preview-link="false">in French</a></p></li>
+<li><p>Marcon E. <em>cours-R-Geeft</em> <a href="https://ericmarcon.github.io/Cours-R-Geeft/" data-preview-link="false">in French</a></p></li>
+<li><p><em>Introduction à l’analyse d’enquêtes avec R et RStudio</em> - Julien Barnier, Julien Biaudet, François Briatte, Milan Bouchet-Valat, Ewen Gallic, Frédérique Giraud, Joël Gombin, Mayeul Kauffmann, Christophe Lalanne, Joseph Larmarange, Nicolas Robette <a href="https://larmarange.github.io/analyse-R/" data-preview-link="false">in French</a></p></li>
+<li><p>Barnier J. <em>Introduction à R et au tidyverse</em> <a href="https://juba.github.io/tidyverse/" data-preview-link="false">in French</a></p></li>
+<li><p>Rech R. <em>One-Way ANOVA and Boxplot in R</em> <a href="https://statdoe.com/one-way-anova-and-box-plot-in-r/" data-preview-link="false">here</a></p></li>
+</ul>
+</div>
+</section>
+
+<section id="ressources" class="title-slide slide level1 center">
+<h1>Ressources</h1>
+<div>
+<ul>
+<li><p>Dytham C. <em>Choosing and using statistics - a biologist’s guide</em>, 3rd Edition. Available <a href="http://ngc.digitallibrary.co.in/bitstream/123456789/2272/1/Choosing%20and%20using%20statistics_A%20Biologist%27s%20Guide%20%283rd%20edition%29%40Dytham.pdf" data-preview-link="false">here</a></p></li>
+<li><p>Rech R. <em>One-Way ANOVA and Boxplot in R</em> <a href="https://statdoe.com/one-way-anova-and-box-plot-in-r/" data-preview-link="false">here</a></p></li>
+<li><p>datacamp tutorials on <a href="https://www.datacamp.com/tutorial/chi-square-test-r" data-preview-link="false">chi-square test</a> and <a href="https://www.datacamp.com/tutorial/t-tests-r-tutorial" data-preview-link="false">t-test</a>, among other…</p></li>
+</ul>
+</div>
+</section>
+
+<section id="ressources-to-go-further" class="title-slide slide level1 center">
+<h1>Ressources to go further</h1>
+<div>
+<ul>
+<li>Lambert B. &amp; Cooper F. <em>The distribution zoo</em> <a href="https://ben18785.shinyapps.io/distribution-zoo/" data-preview-link="false">here</a></li>
+</ul>
+</div>
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="basic_stats_session1_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="basic_stats_session1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="basic_stats_session1_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="basic_stats_session1_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="basic_stats_session1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="basic_stats_session1_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="basic_stats_session1_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="basic_stats_session1_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="basic_stats_session1_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="basic_stats_session1_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="basic_stats_session1_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+
+    <script>
+
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+
+      // slide changes (different for each slide format).
+
+      (function () {
+
+        // dispatch for htmlwidgets
+
+        function fireSlideEnter() {
+
+          const event = window.document.createEvent("Event");
+
+          event.initEvent("slideenter", true, true);
+
+          window.document.dispatchEvent(event);
+
+        }
+
+    
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+
+          fireSlideEnter();
+
+    
+
+          // dispatch for shiny
+
+          if (window.jQuery) {
+
+            if (previousSlide) {
+
+              window.jQuery(previousSlide).trigger("hidden");
+
+            }
+
+            if (currentSlide) {
+
+              window.jQuery(currentSlide).trigger("shown");
+
+            }
+
+          }
+
+        }
+
+    
+
+        // hookup for slidy
+
+        if (window.w3c_slidy) {
+
+          window.w3c_slidy.add_observer(function (slide_num) {
+
+            // slide_num starts at position 1
+
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+
+          });
+
+        }
+
+    
+
+      })();
+
+    </script>
+
+    
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+              // target, if specified
+              link.setAttribute("target", "_blank");
+              if (link.getAttribute("rel") === null) {
+                link.setAttribute("rel", "noopener");
+              }
+              // default icon
+              link.classList.add("external");
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

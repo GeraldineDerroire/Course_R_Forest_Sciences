@@ -3,156 +3,62 @@ title: "Using R for reproductible data management and analyses in Forest Science
 subtitle: "PPG Ciências florestais - Universidade de Brasilia"
 author: Géraldine Derroire
 institute: Cirad - UnB
-date: last-modified
-format: 
-  revealjs:
-    theme: solarized
-    output-location: fragment # to have results of a chunck displayed after a click
-    slide-number: true
-    preview-links: true
-    chalkboard: true
-    link-external-icon: true
-    link-external-newwindow: true
-execute:
-  echo: true    
 ---
 
+This is the course material for the module *Using R for reproducible data management and analyses in Forest Sciences* of the Univerity of Brasilia - Post-graduate program in Forest Sciences, delivered by Géraldine Derroire (Cirad-University of Brasilia).
 
-# Introduction and expectations toward this module
+Course syllabus in English is [here](EFL360457_R_for_Forest_Sciences_2025.pdf), and in Portuguese [here](EFL360457_R_para_Ciencias_Florestais_2025.pdf).
 
-::: {.notes}
-introducing everyone: 
-* who
-* topic of Msc/PhD project, with whomm?
-* expectations / interest in the class?
-:::
+The course material has been created using quarto and R version 4.4.3.
 
-## Practical information
+-   [Course introduction](0_course_introduction/index.html)
 
-- **Discipline** *Transferência de informações florestais* (Code: EFL360457)
-- **Credits** 4
-- **Workload** 60h (30h presential + 30h of personal work)
-- **Schedule** First semester - Wednesday 14-16h
+-   [Set up the working environment](0_installing_enviro/index.html)
 
-You will work on your own laptop
+-   [Principles of reproductible science](1_reproducible_science/index.html)
 
-<span style="color:indianred;">**Please make sure you have all the programs and packages installed before the class.**</span>
+-   [Getting started with R](2_getting_started/index.html)
 
-::: notes
-Students are expected to work between the classes : review and make sure they understand everything we have seen + exercices.
+    -   [Exercices on session 2/3](2_getting_started/exo_session_3.pdf)
 
-I will send a tuto for installing R and everything + email between the class to tell which packages need to be installed for the next session.
-:::
+    -   [Exercices on session 3/3](2_getting_started/exo_session_4.pdf)
 
-## Targeted audiance
+-   [Working with data](3_manip_data/index.html)
 
-- **Areas de concentração** 
-  * *Conservação da natureza*
-  * *Manejo florestal*
-  * *Tecnologia e utilização de recursos florestais*
-- No previous experience with R
+    -   [Exercices](3_manip_data/exo_session_5.pdf)
 
-::: {.notes}
-aks about any previous exp in R, Python, other prog language
-:::
+-   [Introduction to the tidyverse](4_tidyverse/index.html)
 
-## Learning outcomes
+    -   [Exercice on session 1/2](4_tidyverse/exo_session_6.pdf)
 
-::: {.incremental}
-- Define the concept of reproducible research and cite the main tools that it requires
-- Understand the basis of R and R studio (interface, packages, basic functions...)
-- Import, manipulate and export data in R
-- Apply good practices in data management
-- Organise the work in a R studio project
-:::
+    -   [Exercices on session 2/2](4_tidyverse/exo_session_7.pdf)
 
+-   [Data visualisation with ggplot](5_graph/index.html)
 
-## Learning outcomes
+    -   [Exercices](5_graph/exo_session_8.pdf)
 
-::: {.incremental}
-- Use the main packages of the Tidyverse for tidy analyses
-- Choose the appropriate graphics to explore the data and create them using ggplot
-- Implement basic statistical tests in R
-- Understand and implement more advanced programming techniques (loops,
-functions...)
-- Use the tool Quarto to produce a report or a presentation with text and code
-:::
+-   Statistics with R
 
-::: {.notes}
-Not a statistics course
-:::
+    -   [Statistics with R session 1/3](6_basic_statistics/basic_stats_session1.html)
 
-# Let's make the class interactive... *não importa o idioma* 
+        -   [Exercices on session 1/3](6_basic_statistics/exo_session9.pdf)
 
-::: {.notes}
-presentation in English
-i'll talk mostly in English, don't hesitate to ask me to repeat/rephrase
-you can ask questions in portuguese
-:::
+    -   [Statistics with R session 2/3](6_basic_statistics/basic_stats_session2.html)
 
-## Course program
+        -   [Exercices on session 2/3](6_basic_statistics/exo_session10.pdf)
 
-- Principles of reproducible science
-- Getting started with R (3 sessions)
-- Manipulating data
-- Tidyverse (2 sessions)
-- Basic statistics with R (2 sessions)
-- Going further with R (2 sessions)
-- Version control with git and GitHub
-- Literate programming using quarto 
+    -   [Statistics with R session 3/3](6_basic_statistics/basic_stats_session3.html)
 
-::: notes
-May change a bit as this is the first time that I teach this class.
+        -   [Exercices on session 3/3](6_basic_statistics/exo_session11.pdf)
 
-There will be weeks when I will be travelling, we'll talk in advance how to reschedule.
-:::
+-   Going further with R
 
-## Assessment
+    -   [Going further with R session 1/2](7_going_further/going_further_session1.html)
 
-- **1/3 of the final mark** Short exercises given at the end of each class
+    -   [Going further with R session 2/2](7_going_further/going_further_session2.html)
 
-- **2/3 of the final mark** A personal work using the tools covered in class
+    -   [Exercices](7_going_further/exo_session12_13.pdf)
 
-## About the personal work
+-   [Introduction to Version Control with Git and GitHub](8_version_control/version_control.html)
 
-Objective: assessing your ability to implement a reproducible workflow in R
-to explore and test your hypotheses. <!--The relevance of the scientific question is **not** assessed.-->
-
-- Using the tools covered during the class
-
-- Doing some data exploration and basic analyses
-
-::: notes
-As this is the first time teaching in the PPG, I'm still checking the requirements for marking and I will adapt accordingly.
-:::
-
-## About the personal work
-
-<!--- You are encourage to work on your own data, but I can provide some if needed-->
-
-- You will work on a dataset that will be provided
-
-- The project will be submitted as a pdf file and a GitHub repository
-
-<span style="color:indianred;">**Let's talk about it as we go along!**</span>
-
-::: notes
-This is the most likely assigment, but this may still change and we will discuss it together.
-I will let you know as well when the work will be due.
-:::
-
-## Mean of communication between the class
-
-Communication about exercices to do for the next session, and packages to install.
-<span style="color:indianred;">**Please make sure you check the messages!**</span>
-
-*email or SIGAA?*
-
-## 
-
-The course material has been created using R V4.4.3 and quarto, and the code is available on [GitHub](https://github.com/GeraldineDerroire/Course_R_Forest_Sciences/tree/main){preview-link="false"}.
-
-
-  
-
-
+-   [Literate programming with quarto](9_literate_programming/literate_programming.html)

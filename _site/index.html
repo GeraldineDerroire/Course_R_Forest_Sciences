@@ -8,7 +8,7 @@
 
 <meta name="author" content="Géraldine Derroire">
 
-<title>Using R for reproductible data management and analyses in Forest Sciences</title>
+<title>Using R for reproductible data management and analyses in Forest Sciences – Using R for reproducible data management and analyses in Forest Sciences</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,24 +24,63 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="content_files/libs/clipboard/clipboard.min.js"></script>
-<script src="content_files/libs/quarto-html/quarto.js"></script>
-<script src="content_files/libs/quarto-html/popper.min.js"></script>
-<script src="content_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="content_files/libs/quarto-html/anchor.min.js"></script>
-<link href="content_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="content_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="content_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="content_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="content_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
 
 
 </head>
 
-<body class="fullcontent">
+<body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
+<!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -78,57 +117,58 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>This is the course material for the module <em>Using R for reproducible data management and analyses in Forest Sciences</em> of the Univerity of Brasilia - Post-graduate program in Forest Sciences, delivered by Géraldine Derroire (Cirad-University of Brasilia).</p>
-<p>Course syllabus in English is <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/EFL360457_R_for_Forest_Sciences_2025.pdf">here</a>, and in Portuguese <a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/EFL360457_R_para_Ciencias_Florestais_2025.pdf">here</a>.</p>
+<p>Course syllabus in English is <a href="EFL360457_R_for_Forest_Sciences_2025.pdf">here</a>, and in Portuguese <a href="EFL360457_R_para_Ciencias_Florestais_2025.pdf">here</a>.</p>
 <p>The course material has been created using quarto and R version 4.4.3.</p>
 <ul>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences">Course introduction</a></p></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/0_installing_enviro">Set up the working environment</a></p></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/1_reproducible_science">Principles of reproductible science</a></p></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started">Getting started with R</a></p>
+<li><p><a href="0_course_introduction/index.html">Course introduction</a></p></li>
+<li><p><a href="0_installing_enviro/index.html">Set up the working environment</a></p></li>
+<li><p><a href="1_reproducible_science/index.html">Principles of reproductible science</a></p></li>
+<li><p><a href="2_getting_started/index.html">Getting started with R</a></p>
 <ul>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started/exo_session_3.pdf">Exercices on session 2/3</a></p></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started/exo_session_4.pdf">Exercices on session 3/3</a></p></li>
+<li><p><a href="2_getting_started/exo_session_3.pdf">Exercices on session 2/3</a></p></li>
+<li><p><a href="2_getting_started/exo_session_4.pdf">Exercices on session 3/3</a></p></li>
 </ul></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data">Working with data</a></p>
+<li><p><a href="3_manip_data/index.html">Working with data</a></p>
 <ul>
-<li><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/exo_session_5.pdf">Exercices</a></li>
+<li><a href="3_manip_data/exo_session_5.pdf">Exercices</a></li>
 </ul></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse">Introduction to the tidyverse</a></p>
+<li><p><a href="4_tidyverse/index.html">Introduction to the tidyverse</a></p>
 <ul>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/exo_session_6.pdf">Exercice on session 1/2</a></p></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/exo_session_7.pdf">Exercices on session 2/2</a></p></li>
+<li><p><a href="4_tidyverse/exo_session_6.pdf">Exercice on session 1/2</a></p></li>
+<li><p><a href="4_tidyverse/exo_session_7.pdf">Exercices on session 2/2</a></p></li>
 </ul></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph">Data visualisation with ggplot</a></p>
+<li><p><a href="5_graph/index.html">Data visualisation with ggplot</a></p>
 <ul>
-<li><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/exo_session_8.pdf">Exercices</a></li>
+<li><a href="5_graph/exo_session_8.pdf">Exercices</a></li>
 </ul></li>
 <li><p>Statistics with R</p>
 <ul>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/basic_stats_session1.html">Statistics with R session 1/3</a></p>
+<li><p><a href="6_basic_statistics/basic_stats_session1.html">Statistics with R session 1/3</a></p>
 <ul>
-<li><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/exo_session9.pdf">Exercices on session 1/3</a></li>
+<li><a href="6_basic_statistics/exo_session9.pdf">Exercices on session 1/3</a></li>
 </ul></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/basic_stats_session2.html">Statistics with R session 2/3</a></p>
+<li><p><a href="6_basic_statistics/basic_stats_session2.html">Statistics with R session 2/3</a></p>
 <ul>
-<li><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/exo_session10.pdf">Exercices on session 2/3</a></li>
+<li><a href="6_basic_statistics/exo_session10.pdf">Exercices on session 2/3</a></li>
 </ul></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/basic_stats_session3.html">Statistics with R session 3/3</a></p>
+<li><p><a href="6_basic_statistics/basic_stats_session3.html">Statistics with R session 3/3</a></p>
 <ul>
-<li><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/exo_session11.pdf">Exercices on session 3/3</a></li>
+<li><a href="6_basic_statistics/exo_session11.pdf">Exercices on session 3/3</a></li>
 </ul></li>
 </ul></li>
 <li><p>Going further with R</p>
 <ul>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/7_going_further/going_further_session1.html">Going further with R session 1/2</a></p></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/7_going_further/going_further_session2.html">Going further with R session 2/2</a></p></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/7_going_further/exo_session12_13.pdf">Exercices</a></p></li>
+<li><p><a href="7_going_further/going_further_session1.html">Going further with R session 1/2</a></p></li>
+<li><p><a href="7_going_further/going_further_session2.html">Going further with R session 2/2</a></p></li>
+<li><p><a href="7_going_further/exo_session12_13.pdf">Exercices</a></p></li>
 </ul></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/8_version_control/version_control.html">Introduction to Version Control with Git and GitHub</a></p></li>
-<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/9_literate_programming/literate_programming.html">Literate programming with quarto</a></p></li>
+<li><p><a href="8_version_control/version_control.html">Introduction to Version Control with Git and GitHub</a></p></li>
+<li><p><a href="9_literate_programming/literate_programming.html">Literate programming with quarto</a></p></li>
 </ul>
 
-</main>
-<!-- /main column -->
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
