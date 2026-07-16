@@ -5,5 +5,257 @@
     "title": "Using R for reproductible data management and analyses in Forest Sciences",
     "section": "",
     "text": "This is the course material for the module Using R for reproducible data management and analyses in Forest Sciences of the Univerity of Brasilia - Post-graduate program in Forest Sciences, delivered by Géraldine Derroire (Cirad-University of Brasilia).\nCourse syllabus in English is here, and in Portuguese here.\nThe course material has been created using quarto and R version 4.4.3.\n\nCourse introduction\nSet up the working environment\nPrinciples of reproductible science\nGetting started with R\n\nExercices on session 2/3\nExercices on session 3/3\n\nWorking with data\n\nExercices\n\nIntroduction to the tidyverse\n\nExercice on session 1/2\nExercices on session 2/2\n\nData visualisation with ggplot\n\nExercices\n\nStatistics with R\n\nStatistics with R session 1/3\n\nExercices on session 1/3\n\nStatistics with R session 2/3\n\nExercices on session 2/3\n\nStatistics with R session 3/3\n\nExercices on session 3/3\n\n\nGoing further with R\n\nGoing further with R session 1/2\nGoing further with R session 2/2\nExercices\n\nIntroduction to Version Control with Git and GitHub\nLiterate programming with quarto"
+  },
+  {
+    "objectID": "LICENSE.html",
+    "href": "LICENSE.html",
+    "title": "Using R for reproducible data management and analyses in Forest Sciences",
+    "section": "",
+    "text": "Attribution-NonCommercial 4.0 International\n=======================================================================\nCreative Commons Corporation (“Creative Commons”) is not a law firm and does not provide legal services or legal advice. Distribution of Creative Commons public licenses does not create a lawyer-client or other relationship. Creative Commons makes its licenses and related information available on an “as-is” basis. Creative Commons gives no warranties regarding its licenses, any material licensed under their terms and conditions, or any related information. Creative Commons disclaims all liability for damages resulting from their use to the fullest extent possible.\nUsing Creative Commons Public Licenses\nCreative Commons public licenses provide a standard set of terms and conditions that creators and other rights holders may use to share original works of authorship and other material subject to copyright and certain other rights specified in the public license below. The following considerations are for informational purposes only, are not exhaustive, and do not form part of our licenses.\n Considerations for licensors: Our public licenses are\n intended for use by those authorized to give the public\n permission to use material in ways otherwise restricted by\n copyright and certain other rights. Our licenses are\n irrevocable. Licensors should read and understand the terms\n and conditions of the license they choose before applying it.\n Licensors should also secure all rights necessary before\n applying our licenses so that the public can reuse the\n material as expected. Licensors should clearly mark any\n material not subject to the license. This includes other CC-\n licensed material, or material used under an exception or\n limitation to copyright. More considerations for licensors:\nwiki.creativecommons.org/Considerations_for_licensors\n\n Considerations for the public: By using one of our public\n licenses, a licensor grants the public permission to use the\n licensed material under specified terms and conditions. If\n the licensor's permission is not necessary for any reason--for\n example, because of any applicable exception or limitation to\n copyright--then that use is not regulated by the license. Our\n licenses grant only permissions under copyright and certain\n other rights that a licensor has authority to grant. Use of\n the licensed material may still be restricted for other\n reasons, including because others have copyright or other\n rights in the material. A licensor may make special requests,\n such as asking that all changes be marked or described.\n Although not required by our licenses, you are encouraged to\n respect those requests where reasonable. More considerations\n for the public:\nwiki.creativecommons.org/Considerations_for_licensees\n=======================================================================\nCreative Commons Attribution-NonCommercial 4.0 International Public License\nBy exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-NonCommercial 4.0 International Public License (“Public License”). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.\nSection 1 – Definitions.\n\nAdapted Material means material subject to Copyright and Similar Rights that is derived from or based upon the Licensed Material and in which the Licensed Material is translated, altered, arranged, transformed, or otherwise modified in a manner requiring permission under the Copyright and Similar Rights held by the Licensor. For purposes of this Public License, where the Licensed Material is a musical work, performance, or sound recording, Adapted Material is always produced where the Licensed Material is synched in timed relation with a moving image.\nAdapter’s License means the license You apply to Your Copyright and Similar Rights in Your contributions to Adapted Material in accordance with the terms and conditions of this Public License.\nCopyright and Similar Rights means copyright and/or similar rights closely related to copyright including, without limitation, performance, broadcast, sound recording, and Sui Generis Database Rights, without regard to how the rights are labeled or categorized. For purposes of this Public License, the rights specified in Section 2(b)(1)-(2) are not Copyright and Similar Rights.\nEffective Technological Measures means those measures that, in the absence of proper authority, may not be circumvented under laws fulfilling obligations under Article 11 of the WIPO Copyright Treaty adopted on December 20, 1996, and/or similar international agreements.\nExceptions and Limitations means fair use, fair dealing, and/or any other exception or limitation to Copyright and Similar Rights that applies to Your use of the Licensed Material.\nLicensed Material means the artistic or literary work, database, or other material to which the Licensor applied this Public License.\nLicensed Rights means the rights granted to You subject to the terms and conditions of this Public License, which are limited to all Copyright and Similar Rights that apply to Your use of the Licensed Material and that the Licensor has authority to license.\nLicensor means the individual(s) or entity(ies) granting rights under this Public License.\nNonCommercial means not primarily intended for or directed towards commercial advantage or monetary compensation. For purposes of this Public License, the exchange of the Licensed Material for other material subject to Copyright and Similar Rights by digital file-sharing or similar means is NonCommercial provided there is no payment of monetary compensation in connection with the exchange.\nShare means to provide material to the public by any means or process that requires permission under the Licensed Rights, such as reproduction, public display, public performance, distribution, dissemination, communication, or importation, and to make material available to the public including in ways that members of the public may access the material from a place and at a time individually chosen by them.\nSui Generis Database Rights means rights other than copyright resulting from Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, as amended and/or succeeded, as well as other essentially equivalent rights anywhere in the world.\nYou means the individual or entity exercising the Licensed Rights under this Public License. Your has a corresponding meaning.\n\nSection 2 – Scope.\n\nLicense grant.\n\nSubject to the terms and conditions of this Public License, the Licensor hereby grants You a worldwide, royalty-free, non-sublicensable, non-exclusive, irrevocable license to exercise the Licensed Rights in the Licensed Material to:\n\nreproduce and Share the Licensed Material, in whole or in part, for NonCommercial purposes only; and\nproduce, reproduce, and Share Adapted Material for NonCommercial purposes only.\n\nExceptions and Limitations. For the avoidance of doubt, where Exceptions and Limitations apply to Your use, this Public License does not apply, and You do not need to comply with its terms and conditions.\nTerm. The term of this Public License is specified in Section 6(a).\nMedia and formats; technical modifications allowed. The Licensor authorizes You to exercise the Licensed Rights in all media and formats whether now known or hereafter created, and to make technical modifications necessary to do so. The Licensor waives and/or agrees not to assert any right or authority to forbid You from making technical modifications necessary to exercise the Licensed Rights, including technical modifications necessary to circumvent Effective Technological Measures. For purposes of this Public License, simply making modifications authorized by this Section 2(a)\n\nnever produces Adapted Material.\n\nDownstream recipients.\n\nOffer from the Licensor – Licensed Material. Every recipient of the Licensed Material automatically receives an offer from the Licensor to exercise the Licensed Rights under the terms and conditions of this Public License.\nNo downstream restrictions. You may not offer or impose any additional or different terms or conditions on, or apply any Effective Technological Measures to, the Licensed Material if doing so restricts exercise of the Licensed Rights by any recipient of the Licensed Material.\n\nNo endorsement. Nothing in this Public License constitutes or may be construed as permission to assert or imply that You are, or that Your use of the Licensed Material is, connected with, or sponsored, endorsed, or granted official status by, the Licensor or others designated to receive attribution as provided in Section 3(a)(1)(A)(i).\n\nOther rights.\n\nMoral rights, such as the right of integrity, are not licensed under this Public License, nor are publicity, privacy, and/or other similar personality rights; however, to the extent possible, the Licensor waives and/or agrees not to assert any such rights held by the Licensor to the limited extent necessary to allow You to exercise the Licensed Rights, but not otherwise.\nPatent and trademark rights are not licensed under this Public License.\nTo the extent possible, the Licensor waives any right to collect royalties from You for the exercise of the Licensed Rights, whether directly or through a collecting society under any voluntary or waivable statutory or compulsory licensing scheme. In all other cases the Licensor expressly reserves any right to collect such royalties, including when the Licensed Material is used other than for NonCommercial purposes.\n\n\nSection 3 – License Conditions.\nYour exercise of the Licensed Rights is expressly made subject to the following conditions.\n\nAttribution.\n\nIf You Share the Licensed Material (including in modified form), You must:\n\nretain the following if it is supplied by the Licensor with the Licensed Material:\n\nidentification of the creator(s) of the Licensed Material and any others designated to receive attribution, in any reasonable manner requested by the Licensor (including by pseudonym if designated);\na copyright notice;\na notice that refers to this Public License;\na notice that refers to the disclaimer of warranties;\na URI or hyperlink to the Licensed Material to the extent reasonably practicable;\n\nindicate if You modified the Licensed Material and retain an indication of any previous modifications; and\nindicate the Licensed Material is licensed under this Public License, and include the text of, or the URI or hyperlink to, this Public License.\n\nYou may satisfy the conditions in Section 3(a)(1) in any reasonable manner based on the medium, means, and context in which You Share the Licensed Material. For example, it may be reasonable to satisfy the conditions by providing a URI or hyperlink to a resource that includes the required information.\nIf requested by the Licensor, You must remove any of the information required by Section 3(a)(1)(A) to the extent reasonably practicable.\nIf You Share Adapted Material You produce, the Adapter’s License You apply must not prevent recipients of the Adapted Material from complying with this Public License.\n\n\nSection 4 – Sui Generis Database Rights.\nWhere the Licensed Rights include Sui Generis Database Rights that apply to Your use of the Licensed Material:\n\nfor the avoidance of doubt, Section 2(a)(1) grants You the right to extract, reuse, reproduce, and Share all or a substantial portion of the contents of the database for NonCommercial purposes only;\nif You include all or a substantial portion of the database contents in a database in which You have Sui Generis Database Rights, then the database in which You have Sui Generis Database Rights (but not its individual contents) is Adapted Material; and\nYou must comply with the conditions in Section 3(a) if You Share all or a substantial portion of the contents of the database.\n\nFor the avoidance of doubt, this Section 4 supplements and does not replace Your obligations under this Public License where the Licensed Rights include other Copyright and Similar Rights.\nSection 5 – Disclaimer of Warranties and Limitation of Liability.\n\nUNLESS OTHERWISE SEPARATELY UNDERTAKEN BY THE LICENSOR, TO THE EXTENT POSSIBLE, THE LICENSOR OFFERS THE LICENSED MATERIAL AS-IS AND AS-AVAILABLE, AND MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE LICENSED MATERIAL, WHETHER EXPRESS, IMPLIED, STATUTORY, OR OTHER. THIS INCLUDES, WITHOUT LIMITATION, WARRANTIES OF TITLE, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ABSENCE OF LATENT OR OTHER DEFECTS, ACCURACY, OR THE PRESENCE OR ABSENCE OF ERRORS, WHETHER OR NOT KNOWN OR DISCOVERABLE. WHERE DISCLAIMERS OF WARRANTIES ARE NOT ALLOWED IN FULL OR IN PART, THIS DISCLAIMER MAY NOT APPLY TO YOU.\nTO THE EXTENT POSSIBLE, IN NO EVENT WILL THE LICENSOR BE LIABLE TO YOU ON ANY LEGAL THEORY (INCLUDING, WITHOUT LIMITATION, NEGLIGENCE) OR OTHERWISE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL, CONSEQUENTIAL, PUNITIVE, EXEMPLARY, OR OTHER LOSSES, COSTS, EXPENSES, OR DAMAGES ARISING OUT OF THIS PUBLIC LICENSE OR USE OF THE LICENSED MATERIAL, EVEN IF THE LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LOSSES, COSTS, EXPENSES, OR DAMAGES. WHERE A LIMITATION OF LIABILITY IS NOT ALLOWED IN FULL OR IN PART, THIS LIMITATION MAY NOT APPLY TO YOU.\nThe disclaimer of warranties and limitation of liability provided above shall be interpreted in a manner that, to the extent possible, most closely approximates an absolute disclaimer and waiver of all liability.\n\nSection 6 – Term and Termination.\n\nThis Public License applies for the term of the Copyright and Similar Rights licensed here. However, if You fail to comply with this Public License, then Your rights under this Public License terminate automatically.\nWhere Your right to use the Licensed Material has terminated under Section 6(a), it reinstates:\n\nautomatically as of the date the violation is cured, provided it is cured within 30 days of Your discovery of the violation; or\nupon express reinstatement by the Licensor.\n\nFor the avoidance of doubt, this Section 6(b) does not affect any right the Licensor may have to seek remedies for Your violations of this Public License.\nFor the avoidance of doubt, the Licensor may also offer the Licensed Material under separate terms or conditions or stop distributing the Licensed Material at any time; however, doing so will not terminate this Public License.\nSections 1, 5, 6, 7, and 8 survive termination of this Public License.\n\nSection 7 – Other Terms and Conditions.\n\nThe Licensor shall not be bound by any additional or different terms or conditions communicated by You unless expressly agreed.\nAny arrangements, understandings, or agreements regarding the Licensed Material not stated herein are separate from and independent of the terms and conditions of this Public License.\n\nSection 8 – Interpretation.\n\nFor the avoidance of doubt, this Public License does not, and shall not be interpreted to, reduce, limit, restrict, or impose conditions on any use of the Licensed Material that could lawfully be made without permission under this Public License.\nTo the extent possible, if any provision of this Public License is deemed unenforceable, it shall be automatically reformed to the minimum extent necessary to make it enforceable. If the provision cannot be reformed, it shall be severed from this Public License without affecting the enforceability of the remaining terms and conditions.\nNo term or condition of this Public License will be waived and no failure to comply consented to unless expressly agreed to by the Licensor.\nNothing in this Public License constitutes or may be interpreted as a limitation upon, or waiver of, any privileges and immunities that apply to the Licensor or You, including from the legal processes of any jurisdiction or authority.\n\n=======================================================================\nCreative Commons is not a party to its public licenses. Notwithstanding, Creative Commons may elect to apply one of its public licenses to material it publishes and in those instances will be considered the “Licensor.” The text of the Creative Commons public licenses is dedicated to the public domain under the CC0 Public Domain Dedication. Except for the limited purpose of indicating that material is shared under a Creative Commons public license or as otherwise permitted by the Creative Commons policies published at creativecommons.org/policies, Creative Commons does not authorize the use of the trademark “Creative Commons” or any other trademark or logo of Creative Commons without its prior written consent including, without limitation, in connection with any unauthorized modifications to any of its public licenses or any other arrangements, understandings, or agreements concerning use of licensed material. For the avoidance of doubt, this paragraph does not form part of the public licenses.\nCreative Commons may be contacted at creativecommons.org."
+  },
+  {
+    "objectID": "7_going_further/slide_not_used.html",
+    "href": "7_going_further/slide_not_used.html",
+    "title": "Going further with R - session 2/2",
+    "section": "",
+    "text": "when each iteration depends on the result of the previous one.\n\n\n\nLet’s build a Fibonacci sequence, defined as:\n\\(F_0 = 0\\), \\(F_1 = 1\\) and for \\(n&gt;1\\) \\(F_n = F_{n-1} + F_{n-2}\\)\n\n\n\n\n\nn = 20 # length of the sequence\nfib &lt;- numeric(n) # Fibonacci sequence\nfib[1] &lt;- 0 # F0\nfib[2] &lt;- 1 # F1\n\nfor (i in seq_along(fib)[3:n]) {\n  fib[i] &lt;- fib[i - 1] + fib[i - 2]\n}\n\nfib\n\n [1]    0    1    1    2    3    5    8   13   21   34   55   89  144  233  377\n[16]  610  987 1597 2584 4181"
+  },
+  {
+    "objectID": "7_going_further/slide_not_used.html#when-to-use-a-loop",
+    "href": "7_going_further/slide_not_used.html#when-to-use-a-loop",
+    "title": "Going further with R - session 2/2",
+    "section": "",
+    "text": "when each iteration depends on the result of the previous one.\n\n\n\nLet’s build a Fibonacci sequence, defined as:\n\\(F_0 = 0\\), \\(F_1 = 1\\) and for \\(n&gt;1\\) \\(F_n = F_{n-1} + F_{n-2}\\)\n\n\n\n\n\nn = 20 # length of the sequence\nfib &lt;- numeric(n) # Fibonacci sequence\nfib[1] &lt;- 0 # F0\nfib[2] &lt;- 1 # F1\n\nfor (i in seq_along(fib)[3:n]) {\n  fib[i] &lt;- fib[i - 1] + fib[i - 2]\n}\n\nfib\n\n [1]    0    1    1    2    3    5    8   13   21   34   55   89  144  233  377\n[16]  610  987 1597 2584 4181"
+  },
+  {
+    "objectID": "7_going_further/slide_not_used.html#section",
+    "href": "7_going_further/slide_not_used.html#section",
+    "title": "Going further with R - session 2/2",
+    "section": "",
+    "text": "a good start: avoid having to debug by checking the code (especially in function and loops) carrefully =&gt; select some sensible test data, try to anticipate potential problem…\nbut we cannot think of everything… Here just some basic way of debugging\nif not too long, run a function or a loop line by one with the problematic dataset, to see where it buggs\notherwise : use print\net débuggage basique avec print (cf Juba https://juba.github.io/tidyverse/20-debuggage-performance.html) mais le faire à la fin de session 2 car possible aussi dans une boucle hors function\nthere are more advanced debugging tools…"
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html",
+    "href": "5_graph/data/description_wdData.html",
+    "title": "Description of the wdData",
+    "section": "",
+    "text": "This is the description of the data wdData, that were available in a previous version of the package BIOMASS (v 2.1.11). You can access these data in a csv file here."
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#description",
+    "href": "5_graph/data/description_wdData.html#description",
+    "title": "Description of the wdData",
+    "section": "Description",
+    "text": "Description\nThe global wood density database (Chave et al. 2009, Zanne et al. 2009)."
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#usage",
+    "href": "5_graph/data/description_wdData.html#usage",
+    "title": "Description of the wdData",
+    "section": "Usage",
+    "text": "Usage\n\ndata(\"wdData\")"
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#format",
+    "href": "5_graph/data/description_wdData.html#format",
+    "title": "Description of the wdData",
+    "section": "Format",
+    "text": "Format\nA data frame with 16467 observations on the following 7 variables.\n\nfamily: a character vector indicating the family\ngenus: a character vector indicating the genus\nspecies: a character vector indicating the species\nwd: a numeric vector of wood densities (g/cm^3)\nregion: a character vector of regions (see getWoodDensity())\nreferenceNumber: a numeric vector of reference numbers (bibliography)\nregionId: a character vector of region ids"
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#details",
+    "href": "5_graph/data/description_wdData.html#details",
+    "title": "Description of the wdData",
+    "section": "Details",
+    "text": "Details\nThis dataset is used in the function getWoodDensity(), to estimate a taxon-average wood density value."
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#source",
+    "href": "5_graph/data/description_wdData.html#source",
+    "title": "Description of the wdData",
+    "section": "Source",
+    "text": "Source\nZanne et al. Global wood density database. Dryad. Identifier: http://datadryad.org/handle/10255/dryad.235 (2009)."
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#references",
+    "href": "5_graph/data/description_wdData.html#references",
+    "title": "Description of the wdData",
+    "section": "References",
+    "text": "References\nChave et al. (2009) Towards a worldwide wood economics spectrum. Ecology letters 12:4, 351-366."
+  },
+  {
+    "objectID": "5_graph/data/description_wdData.html#examples",
+    "href": "5_graph/data/description_wdData.html#examples",
+    "title": "Description of the wdData",
+    "section": "Examples",
+    "text": "Examples\n\ndata(wdData)\nstr(wdData)"
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html",
+    "href": "3_manip_data/codebook_BCI.env.html",
+    "title": "Codebook for BCI.env",
+    "section": "",
+    "text": "The dataset examined has the following dimensions:\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nNumber of observations\n50\n\n\nNumber of variables\n10"
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#utm.ew",
+    "href": "3_manip_data/codebook_BCI.env.html#utm.ew",
+    "title": "Codebook for BCI.env",
+    "section": "UTM.EW",
+    "text": "UTM.EW\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nVariable type\nnumeric\n\n\nNumber of missing obs.\n0 (0 %)\n\n\nNumber of unique values\n10\n\n\nMedian\n626203.97\n\n\n1st and 3rd quartiles\n625953.97; 626453.97\n\n\nMin. and max.\n625753.97; 626653.97"
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#utm.ns",
+    "href": "3_manip_data/codebook_BCI.env.html#utm.ns",
+    "title": "Codebook for BCI.env",
+    "section": "UTM.NS",
+    "text": "UTM.NS\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nVariable type\nnumeric\n\n\nNumber of missing obs.\n0 (0 %)\n\n\nNumber of unique values\n5\n\n\nMedian\n1011768.98\n\n\n1st and 3rd quartiles\n1011668.98; 1011868.98\n\n\nMin. and max.\n1011568.98; 1011968.98"
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#precipitation",
+    "href": "3_manip_data/codebook_BCI.env.html#precipitation",
+    "title": "Codebook for BCI.env",
+    "section": "Precipitation",
+    "text": "Precipitation\n\nThe variable only takes one (non-missing) value: \"2530\". The variable contains 0 % missing observations."
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#elevation",
+    "href": "3_manip_data/codebook_BCI.env.html#elevation",
+    "title": "Codebook for BCI.env",
+    "section": "Elevation",
+    "text": "Elevation\n\nThe variable only takes one (non-missing) value: \"120\". The variable contains 0 % missing observations."
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#age.cat",
+    "href": "3_manip_data/codebook_BCI.env.html#age.cat",
+    "title": "Codebook for BCI.env",
+    "section": "Age.cat",
+    "text": "Age.cat\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nVariable type\nfactor\n\n\nNumber of missing obs.\n0 (0 %)\n\n\nNumber of unique values\n2\n\n\nMode\n“c3”\n\n\nReference category\nc2\n\n\n\n\n\n\n\n\n\n\n\n\n\nObserved factor levels: \"c2\", \"c3\"."
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#geology",
+    "href": "3_manip_data/codebook_BCI.env.html#geology",
+    "title": "Codebook for BCI.env",
+    "section": "Geology",
+    "text": "Geology\n\nThe variable only takes one (non-missing) value: \"Tb\". The variable contains 0 % missing observations."
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#habitat",
+    "href": "3_manip_data/codebook_BCI.env.html#habitat",
+    "title": "Codebook for BCI.env",
+    "section": "Habitat",
+    "text": "Habitat\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nVariable type\nfactor\n\n\nNumber of missing obs.\n0 (0 %)\n\n\nNumber of unique values\n5\n\n\nMode\n“OldLow”\n\n\nReference category\nOldHigh\n\n\n\n\n\n\n\n\n\n\n\n\n\nObserved factor levels: \"OldHigh\", \"OldLow\", \"OldSlope\", \"Swamp\", \"Young\"."
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#stream",
+    "href": "3_manip_data/codebook_BCI.env.html#stream",
+    "title": "Codebook for BCI.env",
+    "section": "Stream",
+    "text": "Stream\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nVariable type\nfactor\n\n\nNumber of missing obs.\n0 (0 %)\n\n\nNumber of unique values\n2\n\n\nMode\n“No”\n\n\nReference category\nNo\n\n\n\n\n\n\n\n\n\n\n\n\n\nObserved factor levels: \"No\", \"Yes\"."
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#envhet",
+    "href": "3_manip_data/codebook_BCI.env.html#envhet",
+    "title": "Codebook for BCI.env",
+    "section": "EnvHet",
+    "text": "EnvHet\n\n\n\n\n\n\n\nFeature\nResult\n\n\n\n\nVariable type\nnumeric\n\n\nNumber of missing obs.\n0 (0 %)\n\n\nNumber of unique values\n26\n\n\nMedian\n0.35\n\n\n1st and 3rd quartiles\n0.08; 0.48\n\n\nMin. and max.\n0; 0.73"
+  },
+  {
+    "objectID": "3_manip_data/codebook_BCI.env.html#site",
+    "href": "3_manip_data/codebook_BCI.env.html#site",
+    "title": "Codebook for BCI.env",
+    "section": "Site",
+    "text": "Site\n\nThe variable only takes one (non-missing) value: \"BCI\". The variable contains 0 % missing observations.\n\nReport generation information:\n\nCreated by: Geraldine Derroire (username: derroire).\nReport creation time: sam. avr. 12 2025 17:07:26\nReport was run from directory: D:/my_R_remote/00_My_Courses/Course_R_Forest_Sciences/3_manip_data\ndataMaid v1.4.1 [Pkg: 2021-10-08 from CRAN (R 4.4.3)]\nR version 4.4.3 (2025-02-28 ucrt).\nPlatform: x86_64-w64-mingw32/x64(America/Sao_Paulo).\nFunction call: dataMaid::makeDataReport(data = BCI.env, mode = c(\"summarize\",  \"visualize\", \"check\"), smartNum = FALSE, file = \"codebook_BCI.env.Rmd\",      checks = list(character = \"showAllFactorLevels\", factor = \"showAllFactorLevels\",          labelled = \"showAllFactorLevels\", haven_labelled = \"showAllFactorLevels\",          numeric = NULL, integer = NULL, logical = NULL, Date = NULL),      listChecks = FALSE, maxProbVals = Inf, codebook = TRUE, reportTitle = \"Codebook for BCI.env\")"
+  },
+  {
+    "objectID": "4_tidyverse/data/description _KarnatakaForest.html",
+    "href": "4_tidyverse/data/description _KarnatakaForest.html",
+    "title": "Metadata on KarnatakaForest data",
+    "section": "",
+    "text": "This is the description of the data KarnatakaForest, that were available in a previous version of the package BIOMASS (v 2.1.11). You can access these data in a csv file here."
+  },
+  {
+    "objectID": "4_tidyverse/data/description _KarnatakaForest.html#description",
+    "href": "4_tidyverse/data/description _KarnatakaForest.html#description",
+    "title": "Metadata on KarnatakaForest data",
+    "section": "Description",
+    "text": "Description\nDataset from 96 forest plots (1 ha) established in the central Western Ghats of India by Ramesh et al. (2010)."
+  },
+  {
+    "objectID": "4_tidyverse/data/description _KarnatakaForest.html#usage",
+    "href": "4_tidyverse/data/description _KarnatakaForest.html#usage",
+    "title": "Metadata on KarnatakaForest data",
+    "section": "Usage",
+    "text": "Usage\n\ndata(\"KarnatakaForest\")"
+  },
+  {
+    "objectID": "4_tidyverse/data/description _KarnatakaForest.html#format",
+    "href": "4_tidyverse/data/description _KarnatakaForest.html#format",
+    "title": "Metadata on KarnatakaForest data",
+    "section": "Format",
+    "text": "Format\nA data frame with 65889 observations on the following 8 variables :\n\nplotId: Names of the plots\ntreeId: Tree Id, contains a letter (A, B, C…) when an individual has multiple stems\nfamily: Family\ngenus: Genus\nspecies: Species\nD: Diameter (cm)\nlat: Latitude\nlong: Longitude"
+  },
+  {
+    "objectID": "4_tidyverse/data/description _KarnatakaForest.html#references",
+    "href": "4_tidyverse/data/description _KarnatakaForest.html#references",
+    "title": "Metadata on KarnatakaForest data",
+    "section": "References",
+    "text": "References\nRamesh, B. R. et al. (2010). Forest stand structure and composition in 96 sites along environmental gradients in the central Western Ghats of India Ecological Archives E091-216. Ecology, 91(10), 3118-3118."
+  },
+  {
+    "objectID": "4_tidyverse/data/description _KarnatakaForest.html#examples",
+    "href": "4_tidyverse/data/description _KarnatakaForest.html#examples",
+    "title": "Metadata on KarnatakaForest data",
+    "section": "Examples",
+    "text": "Examples\n\ndata(KarnatakaForest)\nstr(KarnatakaForest)"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_slides_not_used.html",
+    "href": "6_basic_statistics/basic_stats_slides_not_used.html",
+    "title": "Statistics with R - slides not used",
+    "section": "",
+    "text": "library(ggplot2)"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_slides_not_used.html#log-normal-distribution",
+    "href": "6_basic_statistics/basic_stats_slides_not_used.html#log-normal-distribution",
+    "title": "Statistics with R - slides not used",
+    "section": "Log-normal distribution",
+    "text": "Log-normal distribution\n\\(x \\sim log\\mathcal{N}(\\mu, \\sigma^2)\\) if \\(log(x) \\sim \\mathcal{N}(\\mu, \\sigma^2)\\)\nWe use the function rnorm to randomly draw data from a normal distribution:\n\n\n\ndt1 &lt;- data.frame(x = rlnorm(n = 100000, mean = 0, sd = 1))\ndt2 &lt;- data.frame(x = rlnorm(n = 100000, mean = 1, sd = 1))\n\nggplot() + \n  geom_density(data = dt1, aes(x = x), \n               color = \"blue\") + \n  geom_density(data = dt2, aes(x = x), \n               color = \"green\") + \n  scale_x_continuous(limits =c(0,20)) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\nThe values are stricty positive.\nThe variance increases when the mean increases."
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_slides_not_used.html#bernoulli-and-binomial-distribution",
+    "href": "6_basic_statistics/basic_stats_slides_not_used.html#bernoulli-and-binomial-distribution",
+    "title": "Statistics with R - slides not used",
+    "section": "Bernoulli and Binomial distribution",
+    "text": "Bernoulli and Binomial distribution\n\\[\\mathcal{B}(n, p)\\]\nThe binomial distribution represent the number of successes when performing n independent experiment having a constant probability of success p.\n[It is a discrete distribution taking only positive integer values.{style=“font-size: 30px”}\n\nIt can be use for proportion: eg proportion of trees browsed in a plot.\n\n\nThe Bernoulli distribution is a special case of the binomial distribution where n=1.\nIt is a discrete distribution taking only the values 0 (failure) or 1 (success).]{style=“font-size: 30px”}\n\n\nIt can be use for presence/abscence and success/failure data: eg probability that a tree is browsed.]{.fragment}"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_slides_not_used.html#bernoulli-and-binomial-distribution-1",
+    "href": "6_basic_statistics/basic_stats_slides_not_used.html#bernoulli-and-binomial-distribution-1",
+    "title": "Statistics with R - slides not used",
+    "section": "Bernoulli and binomial distribution",
+    "text": "Bernoulli and binomial distribution\nWe use the function rbinom to randomly draw data from a binomial or a Bernoulli distribution:\n\n\n\ndt1 &lt;- data.frame(x = \n          rbinom(n = 100000, \n                 size  = 20, \n                 p = 0.5))\nggplot() + \n  geom_bar(data = dt1, \n           aes(x = x)) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\ndt2 &lt;- data.frame(x = \n          rbinom(n = 100000, \n                 size = 20, \n                 p = 0.7))\nggplot() + \n  geom_bar(data = dt2, \n           aes(x = x)) +\n  theme_minimal()\n\n\n\n\n\n\n\n\n\n\n# Bernoulli distribution\ndt3 &lt;- data.frame(x = \n          rbinom(n = 100000, \n                 size = 1, \n                 p = 0.5))\nggplot() +\n  geom_bar(data = dt3, \n           aes(x = x)) +\n  theme_minimal()"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_slides_not_used.html#poisson",
+    "href": "6_basic_statistics/basic_stats_slides_not_used.html#poisson",
+    "title": "Statistics with R - slides not used",
+    "section": "Poisson",
+    "text": "Poisson\nTO DO OR TO MOVE TO SESSION 2\ndiscrete\ncf Eric: 1 slide et Marchand"
+  },
+  {
+    "objectID": "6_basic_statistics/basic_stats_slides_not_used.html#to-go-further-on-distribution",
+    "href": "6_basic_statistics/basic_stats_slides_not_used.html#to-go-further-on-distribution",
+    "title": "Statistics with R - slides not used",
+    "section": "To go further on distribution",
+    "text": "To go further on distribution\nTO PUT IN THE RESOURCES OF SESSION 2/3\ndistribution zoo + wikipedia pages (in english)"
+  },
+  {
+    "objectID": "cheat_sheet.html",
+    "href": "cheat_sheet.html",
+    "title": "Untitled",
+    "section": "",
+    "text": "💡\n⚠️\n✅\n❌\n😊\n🥴\n💣\n\n\n\n\n\n\n\n\n\n\n{style=“color:indianred;”}\n{style=“font-size: 30px”}\n{height=“80%”}\n{fig-align=“center” height=“80%”}\n{preview-link=“false”}"
   }
 ]
