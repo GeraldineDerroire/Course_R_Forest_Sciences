@@ -7,6 +7,12 @@ execute:
   eval: true 
 ---
 
+```{r}
+R.version.string
+.libPaths()
+```
+
+
 For all the following exercises, use functions from the tidyverse, and pipes, whenever possible.
 
 ```{r, message=FALSE}
@@ -210,9 +216,10 @@ BCI_L <- BCI_L %>%
 ```
 
 
-
-
+<!--
 
 # For next time
 
 * Install the following package from CRAN: *patchwork*, *plotly*
+
+-->

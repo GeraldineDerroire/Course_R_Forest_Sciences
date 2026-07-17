@@ -160,6 +160,7 @@ n_75 <- dt_WG %>%
 n_75
 ```
 
+<!--
 
 # For next time
 
@@ -169,4 +170,6 @@ n_75
 
 * Download the *RData* file available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/data_tidyverse_2.RData){preview-link="false"}
 and store them in your raw data folder.
+
+-->
 

@@ -269,6 +269,7 @@ iris_sd2 <- iris %>% mutate(
 summary(iris_sd2)
 ```
 
+<!-- 
 
 # For next time
 
@@ -287,5 +288,5 @@ and checking that it is installed:
 tinytex::is_tinytex() # should be TRUE
 ```
 
-
+--> 
  

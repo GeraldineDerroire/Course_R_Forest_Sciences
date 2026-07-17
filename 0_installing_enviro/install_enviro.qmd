@@ -71,7 +71,7 @@ Accept the default options during installation.
 
 Restart your machine.
 
-Open RStudio and run the code on the following slides.
+Open RStudio and run the code on the following slides in the console.
 
 ## Check R version
 
@@ -205,6 +205,64 @@ ssh -T git@github.com
 You should get a message telling you that you successfully authenticated, but GitHub does not provide shell access. 👍
 
 When you first connect to GitHub, you will be asked if you want to continue connecting, answer *yes*.
+
+
+# Install the needed R packages
+
+Run the code on the following slides in the console:
+
+```{r, eval=FALSE}
+install.packages("vegan",
+                 "questionr",
+                 "tidyverse",
+                 "janitor",
+                 "patchwork",
+                 "plotly", 
+                 "multcompView",
+                 "GGally",
+                 "BIOMASS",
+                 "MASS",
+                 "ggeffects", 
+                 "gtsummary", 
+                 "ggstats", 
+                 "lindia", 
+                 "car", 
+                 "AICcmodavg")
+```
+
+
+# Install the needed R packages
+
+Install TinyTex by running the following R commands:
+
+```{r, eval=FALSE}
+install.packages('tinytex')
+tinytex::install_tinytex()
+```
+
+and checking that it is installed:
+
+```{r, echo = TRUE}
+tinytex::is_tinytex() # should be TRUE
+```
+
+# Download the datasets that we will use: {.smaller}
+
+Store these datasets in an accessible folder on your computer.
+
+* [BCI.env_semicol](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/data/BCI.env_semicol.csv){preview-link="false"}
+
+* [BCI_env.csv](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/data/BCI_env.csv){preview-link="false"}
+
+* [func_traits](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/func_traits.csv){preview-link="false"}
+
+* [commercial_sp](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/commercial_sp.csv){preview-link="false"}
+
+* [data_tidyverse_2](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/data_tidyverse_2.RData){preview-link="false"}
+
+* [data_statistics_1](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_1.RData){preview-link="false"}
+
+* [data_statistics_2](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData){preview-link="false"}
 
 # You are all set!
 

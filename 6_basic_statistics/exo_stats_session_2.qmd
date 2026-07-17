@@ -267,10 +267,14 @@ ggplot(preds4lat, aes(x = x, y = predicted)) +
   theme_minimal()
 ```
 
+<!--
+
 # For next time
 
 -   Make sure the following packages are already installed: *vegan*,
     *tidyverse*
+    
+--> 
 
 # Acknowledgments
 

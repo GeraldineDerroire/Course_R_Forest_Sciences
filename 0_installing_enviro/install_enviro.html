@@ -262,7 +262,7 @@ Géraldine Derroire
 <section id="check-that-the-installation-went-well" class="title-slide slide level1 center">
 <h1>Check that the installation went well</h1>
 <p>Restart your machine.</p>
-<p>Open RStudio and run the code on the following slides.</p>
+<p>Open RStudio and run the code on the following slides in the console.</p>
 </section>
 <section id="check-r-version" class="slide level2">
 <h2>Check R version</h2>
@@ -388,6 +388,59 @@ Géraldine Derroire
 <p>You should get a message telling you that you successfully authenticated, but GitHub does not provide shell access. 👍</p>
 <p>When you first connect to GitHub, you will be asked if you want to continue connecting, answer <em>yes</em>.</p>
 </section></section>
+<section id="install-the-needed-r-packages" class="title-slide slide level1 center">
+<h1>Install the needed R packages</h1>
+<p>Run the code on the following slides in the console:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">"vegan"</span>,</span>
+<span id="cb13-2"><a href=""></a>                 <span class="st">"questionr"</span>,</span>
+<span id="cb13-3"><a href=""></a>                 <span class="st">"tidyverse"</span>,</span>
+<span id="cb13-4"><a href=""></a>                 <span class="st">"janitor"</span>,</span>
+<span id="cb13-5"><a href=""></a>                 <span class="st">"patchwork"</span>,</span>
+<span id="cb13-6"><a href=""></a>                 <span class="st">"plotly"</span>, </span>
+<span id="cb13-7"><a href=""></a>                 <span class="st">"multcompView"</span>,</span>
+<span id="cb13-8"><a href=""></a>                 <span class="st">"GGally"</span>,</span>
+<span id="cb13-9"><a href=""></a>                 <span class="st">"BIOMASS"</span>,</span>
+<span id="cb13-10"><a href=""></a>                 <span class="st">"MASS"</span>,</span>
+<span id="cb13-11"><a href=""></a>                 <span class="st">"ggeffects"</span>, </span>
+<span id="cb13-12"><a href=""></a>                 <span class="st">"gtsummary"</span>, </span>
+<span id="cb13-13"><a href=""></a>                 <span class="st">"ggstats"</span>, </span>
+<span id="cb13-14"><a href=""></a>                 <span class="st">"lindia"</span>, </span>
+<span id="cb13-15"><a href=""></a>                 <span class="st">"car"</span>, </span>
+<span id="cb13-16"><a href=""></a>                 <span class="st">"AICcmodavg"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+
+<section id="install-the-needed-r-packages-1" class="title-slide slide level1 center">
+<h1>Install the needed R packages</h1>
+<p>Install TinyTex by running the following R commands:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href=""></a><span class="fu">install.packages</span>(<span class="st">'tinytex'</span>)</span>
+<span id="cb14-2"><a href=""></a>tinytex<span class="sc">::</span><span class="fu">install_tinytex</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>and checking that it is installed:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href=""></a>tinytex<span class="sc">::</span><span class="fu">is_tinytex</span>() <span class="co"># should be TRUE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE</code></pre>
+</div>
+</div>
+</section>
+
+<section id="download-the-datasets-that-we-will-use" class="title-slide slide level1 smaller center">
+<h1>Download the datasets that we will use:</h1>
+<p>Store these datasets in an accessible folder on your computer.</p>
+<ul>
+<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/data/BCI.env_semicol.csv" data-preview-link="false">BCI.env_semicol</a></p></li>
+<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/data/BCI_env.csv" data-preview-link="false">BCI_env.csv</a></p></li>
+<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/func_traits.csv" data-preview-link="false">func_traits</a></p></li>
+<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/commercial_sp.csv" data-preview-link="false">commercial_sp</a></p></li>
+<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/data_tidyverse_2.RData" data-preview-link="false">data_tidyverse_2</a></p></li>
+<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_1.RData" data-preview-link="false">data_statistics_1</a></p></li>
+<li><p><a href="https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData" data-preview-link="false">data_statistics_2</a></p></li>
+</ul>
+</section>
+
 <section>
 <section id="you-are-all-set" class="title-slide slide level1 center">
 <h1>You are all set!</h1>

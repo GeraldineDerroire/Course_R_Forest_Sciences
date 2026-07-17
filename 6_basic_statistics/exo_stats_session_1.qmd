@@ -284,6 +284,7 @@ cor.test(mammals$body, mammals$brain,
 ```
 <!-- There is a strong significant positive relationship between body and brain mass-->
 
+<!--
 
 # For next time
 
@@ -293,3 +294,5 @@ cor.test(mammals$body, mammals$brain,
 
 * Download the *RData* file available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/6_basic_statistics/data/data_statistics_2.RData){preview-link="false"}
 and store them in your raw data folder.
+
+-->

@@ -156,7 +156,10 @@ ggplot(dt_city_gr, aes(x = PC1, y = PC2, colour = groups)) +
   theme_bw()
 ```
 
+<!-- 
 
 # For next time
 
 Review what we have seen about vectors, lists and logical operators in the session *Getting started with R*.
+
+-->

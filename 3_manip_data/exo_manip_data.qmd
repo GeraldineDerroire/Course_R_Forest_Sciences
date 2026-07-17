@@ -197,6 +197,8 @@ length(unique(table(dt_pb$plot))) ==  1
 length(unique(dt_pb$plot)) == dim(dt_pb)[1]
 ```
 
+
+<!--
 # For next time
 
 * Install the following package from CRAN: *tidyverse*
@@ -206,3 +208,4 @@ length(unique(dt_pb$plot)) == dim(dt_pb)[1]
 
 * Make sure you remember what we saw on factors and logical operators in the session [Getting started with R](https://geraldinederroire.github.io/Course_R_Forest_Sciences/2_getting_started)
 
+-->
