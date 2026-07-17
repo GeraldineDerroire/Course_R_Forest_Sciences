@@ -16,7 +16,7 @@ execute:
   echo: true      
 ---
 
-# What is reproducible science?
+# What is reproducible science? 
 
 ![](lets_talk.png)
 

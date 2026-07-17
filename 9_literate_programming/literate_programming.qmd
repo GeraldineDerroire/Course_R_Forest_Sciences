@@ -111,6 +111,9 @@ The **Visual editor** is an interface where you can use buttons to easily format
 
 The **Visual editor** save the content of your document in Markdown format.
 
+*The **Visual editor**  is convenient for beginners.*
+
+
 ::: notes
 There are two ways of working on a document:
 from the visual editor, or from the source editor
@@ -123,6 +126,8 @@ try to add text, format it, play with it
 You can view and edit the plain Markdown document in the **Source editor**:
 
 ![](source.png){fig-align="center"}
+*The **Source editor** gives full control and is generally preferred for programming and version control*
+
 
 ::: notes
 this is markdown langauge, we will talk about it in a few minutes
@@ -182,7 +187,7 @@ On the left, what you type
 on the right, what you will see in the rendered document
 :::
 
-## Figures
+## Figures {.smaller}
 
 ::: {.column width="60%"}
 [To add a figure with a caption:]{style="font-size: 30px"}
@@ -544,7 +549,7 @@ head(iris[1:3],3)
 knitr::kable(head(iris[1:3],3))
 ```
 
-[The packages [kableExtra](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) and [flextable](https://ardata-fr.github.io/flextable-book/) proposes additional formating options.]{style="font-size: 30px"}
+[The packages [gt](https://gt.rstudio.com/) and [flextable](https://ardata-fr.github.io/flextable-book/) proposes additional formatting options.]{style="font-size: 30px"}
 
 
 ## Cross-references
