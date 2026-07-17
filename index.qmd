@@ -16,9 +16,11 @@ The course material has been created using quarto and R version 4.6.1.
 
 Follow [these instructions](0_installing_enviro/install_enviro.html) to set up the working environment.
 
-<!--
--   [Course introduction](99_archives/2025/0_course_introduction/course_intro.html)
+### Course content:
 
+-   [Course introduction](0_course_introduction/course_intro.html)
+
+<!--
 -   [Principles of reproductible science](99_archives/2025/1_reproducible_science/repro_science.html)
 
 -   [Getting started with R](99_archives/2025/2_getting_started/getting_started.html)

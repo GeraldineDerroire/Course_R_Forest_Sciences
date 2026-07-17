@@ -31,17 +31,20 @@ introducing everyone:
 
 - **Discipline** *Transferência de informações florestais* (Code: EFL360457)
 - **Credits** 4
-- **Workload** 60h (30h presential + 30h of personal work)
-- **Schedule** First semester - Wednesday 14-16h
+- **Workload** 60h (about 42h presential)
+- **Schedule**  Second semester of 2026 in a semi condensed way (**8th to 11 of September** and **5th to 9th of October**)
+
+
+## Practical information
 
 You will work on your own laptop
 
 <span style="color:indianred;">**Please make sure you have all the programs and packages installed before the class.**</span>
 
 ::: notes
-Students are expected to work between the classes : review and make sure they understand everything we have seen + exercices.
-
-I will send a tuto for installing R and everything + email between the class to tell which packages need to be installed for the next session.
+Has the installation worked for everyone ? 
+If not, let's try to sort the problems at the end 
+of this presentation.
 :::
 
 ## Targeted audiance
@@ -50,7 +53,7 @@ I will send a tuto for installing R and everything + email between the class to 
   * *Conservação da natureza*
   * *Manejo florestal*
   * *Tecnologia e utilização de recursos florestais*
-- No previous experience with R
+- No previous experience with R but the course can also be beneficial for more experienced students.
 
 ::: {.notes}
 aks about any previous exp in R, Python, other prog language
@@ -72,10 +75,11 @@ aks about any previous exp in R, Python, other prog language
 ::: {.incremental}
 - Use the main packages of the Tidyverse for tidy analyses
 - Choose the appropriate graphics to explore the data and create them using ggplot
-- Implement basic statistical tests in R
+- Implement common statistical tests in R
 - Understand and implement more advanced programming techniques (loops,
 functions...)
 - Use the tool Quarto to produce a report or a presentation with text and code
+- Use git and GitHub for version control 
 :::
 
 ::: {.notes}
@@ -92,65 +96,47 @@ you can ask questions in portuguese
 
 ## Course program
 
-- Principles of reproducible science
-- Getting started with R (3 sessions)
-- Manipulating data
-- Tidyverse (2 sessions)
-- Basic statistics with R (2 sessions)
-- Going further with R (2 sessions)
-- Version control with git and GitHub
-- Literate programming using quarto 
+![](schedule.png){width=20%}
 
-::: notes
-May change a bit as this is the first time that I teach this class.
-
-There will be weeks when I will be travelling, we'll talk in advance how to reschedule.
+::: {.notes}
+Please check the time of the next session.
+AND BE ON TIME !
 :::
+
 
 ## Assessment
 
-- **1/3 of the final mark** Short exercises given at the end of each class
+**Final home assessment using the skills covered in class**
 
-- **2/3 of the final mark** A personal work using the tools covered in class
+The exam instructions will be released on October 9th and
+the completed assignment must be submitted by **November 9th**.
 
-## About the personal work
-
-Objective: assessing your ability to implement a reproducible workflow in R
-to explore and test your hypotheses. <!--The relevance of the scientific question is **not** assessed.-->
-
-- Using the tools covered during the class
-
-- Doing some data exploration and basic analyses
+Objective: assessing your ability to implement a reproducible workflow in R for a study in forest sciences, using the tools covered during the class.
 
 ::: notes
-As this is the first time teaching in the PPG, I'm still checking the requirements for marking and I will adapt accordingly.
+This takes several hours, don't leave it until the last minutes.
+Don't use ChatGPT (or use it wisely) as I will
+see it and may ask you to come and explain what you have done!!!
 :::
 
 ## About the personal work
 
-<!--- You are encourage to work on your own data, but I can provide some if needed-->
+You are encouraged to work, alone or in group,
+between the classes, 
+especially between the two weeks. 
 
-- You will work on a dataset that will be provided
+I will provide corrected exercises.
 
-- The project will be submitted as a pdf file and a GitHub repository
-
-<span style="color:indianred;">**Let's talk about it as we go along!**</span>
-
-::: notes
-This is the most likely assigment, but this may still change and we will discuss it together.
-I will let you know as well when the work will be due.
-:::
 
 ## Mean of communication between the class
 
-Communication about exercices to do for the next session, and packages to install.
-<span style="color:indianred;">**Please make sure you check the messages!**</span>
+If needed, I will contact you by **email** (using the email provided in Sigaa).
 
-*email or SIGAA?*
 
 ## 
 
-The course material has been created using R V4.4.3 and quarto, and the code is available on [GitHub](https://github.com/GeraldineDerroire/Course_R_Forest_Sciences/tree/main){preview-link="false"}.
+The course material has been created using R V4.6.1 and quarto, and the code is available on [GitHub](https://github.com/GeraldineDerroire/Course_R_Forest_Sciences){preview-link="false"}
+and the course material is online [here](geraldinederroire.github.io/Course_R_Forest_Sciences/){preview-link="false"}.
 
 
   
