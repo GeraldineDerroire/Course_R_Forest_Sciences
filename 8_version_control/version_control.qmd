@@ -58,6 +58,8 @@ It allows you to
 
 -   know what are the differences between versions
 
+-   experiment safely has you can recover from mistakes
+
 ::: notes
 => reproducibility
 :::
@@ -69,6 +71,8 @@ It allows you to
 [GitHub]{style="color:indianred;"} is an **online platform** for hosting and sharing git repositories.
 
 It connects with [git]{style="color:indianred;"} to support backup, collaboration, and project management.
+
+[You can use git without GitHub]{style="font-size: 30px"}
 
 [Other hosting platforms exist: GitLab, BitBucket, SourceForge...]{style="font-size: 30px"}
 :::
@@ -118,7 +122,7 @@ You should now have:
 ::: nonincremental
 -   [git]{style="color:indianred;"} installed and configured
 
--   a [GitHub]{style="color:indianred;"} account and a ssh key
+-   a [GitHub]{style="color:indianred;"} account connected to Git using SSH
 :::
 
 ::: notes
@@ -153,7 +157,7 @@ SSH key is a cryptographic key pair used to securely authenticate to remote serv
 
 ## Basic workflow
 
-**Step1: [Stage]{style="color:indianred;"} the changes**
+**Step1: [Stage your changes]{style="color:indianred;"} the changes**
 
 [After you've created or updated your files: Select the files you want to include in the next version (you can select all or only some modified files)]{style="font-size: 30px"}
 
@@ -268,7 +272,7 @@ When to [push]{style="color:indianred;"}?
 
 ::: fragment
 
-[But we will do most of them from **RStudio**.]{style="font-size: 30px"}
+[But we will do most of them from **RStudio**, which provides an interface for git.]{style="font-size: 30px"}
 
 ![](git_rstudio.png)
 :::
@@ -292,9 +296,10 @@ let's practice
 
 [The best practice is to create a git and GitHub repo when you start a new project.]{style="font-size: 29px"}
 
+[create the GitHub repository first, then clone it.]{style="font-size: 29px"}
 
 ::::: columns
-::: {.column width="65%"}
+::: {.column width="70%"}
 
 ::: {.nonincremental}
 1. [Create a new GitHub repository]{style="font-size: 30px"}
@@ -315,7 +320,7 @@ let's practice
     
 :::
 
-::: {.column width="35%"}
+::: {.column width="30%"}
 ![](new_repo.png) 
 :::
 :::::
@@ -388,12 +393,6 @@ License: see the info if you want to add one (only for public repo)
 
 ## Create a repository from an existing RStudio project
 
-::: notes
-Best to avoid doing this, as we should create it from the beginning for reproductibility
-
-Let's NOT do this together
-:::
-
 ::::: columns
 ::: {.column width="70%"}
 
@@ -427,7 +426,9 @@ git push -u origin main
 :::
 
 ::: notes
-Let's not do this now
+Best to avoid doing this, as we should create it from the beginning for reproductibility
+
+Let's NOT do this together
 
 To stage and commit: see next section
 :::
@@ -453,7 +454,7 @@ To stage and commit: see next section
 * [for project containing sensitive information...]{style="font-size: 30px"}
 :::
 
-[💡 You can still make a repo public is you have information (passwords) or data that you don't want to share, by including them in the *.gitignore*.]{style="font-size: 30px"}
+[💡 You can still make a repo public if you have information (passwords) or data that you don't want to share, by including them in the *.gitignore*, [but only if those files have never been committed]{style="color:red;"}.]{style="font-size: 30px"}
 
 :::
 
@@ -1011,9 +1012,9 @@ A **fork** is your personal copy of someone else's repository that allows you to
 
 [You can then make a **pull request** to propose to the original repository maintainer to merge your work. They can review your changes before merging.]{.fragment}
 
-# GitHub as a social (scientific) network
+# GitHub as a research portfolio
 
-## GitHub as a social (scientific) network
+## GitHub as a research portfolio
 
 ![](wickham.png)
 
@@ -1021,13 +1022,15 @@ A **fork** is your personal copy of someone else's repository that allows you to
 This is the developper of the tidyverse! 26000 followers!
 :::
 
-## GitHub as a social (scientific) network {style="font-size: 30px"}
+## GitHub as a research portfolio {style="font-size: 30px"}
 
 * **Follow** other users
 
 * Follow repository (**Watch**)
 
 * Give visibility to your work (and to yourself!)
+
+* Share code accompanying publications
 
 * Interact and collaborate on projects
 
