@@ -30,13 +30,13 @@ This takes a bit of time, but you will just need to do it once 😉!
 
 ## Install R
 
-[Install R](https://cloud.r-project.org/bin/windows/base/){preview-link="false"}
+[Install R](https://cloud.r-project.org/){preview-link="false"}
 
 ![](R_logo.png){height="150px"}
 
 Accept all the default settings.
 
-For those who already have R installed, please make sure that the version you are using is at least 4.0.0.
+For those who already have R installed, please make sure that the version you are using is at least 4.4.0.
 For this, run the following code:
 
 ```{r}
@@ -58,26 +58,14 @@ R.version.string
 
 ![](git_logo.png){height="150px"}
 
+Accept the default options during installation.
+
 ## Install Quarto
 
 [Install quarto](https://quarto.org/docs/get-started/){preview-link="false"}
 
 ![](quarto_logo.png){height="150px"}
 
-````{=html}
-<!--
-NO NEED, built in Rstudio
-
-then install the R package **quarto** 
-by running the following code in R or RStudio
-
-```{r, eval=FALSE}
-## Install quarto package
-install.packages("quarto")
-```
-
--->
-````
 
 # Check that the installation went well
 
@@ -103,7 +91,7 @@ The path won't be the same for you than here, but this is ok.
 ## Check if quarto is installed
 
 ```{r}
-Sys.which("Quarto")
+Sys.which("quarto")
 ```
 
 The path won't be the same for you than here, but this is ok.
@@ -132,6 +120,8 @@ For this, open the RStudio terminal:
 
 ![](rstudio_terminal.png)
 
+[⚠️ If you cannot see the terminal go on the menu *Tools/Terminal/New Terminal*]{style="font-size: 20px"}
+
 and run:
 
 ```{r, eval=FALSE}
@@ -141,6 +131,7 @@ git config --global user.name  "Your Name"
 ## Tell git your email address 
 git config --global user.email "your.name@mail.com"
 ```
+
 
 ## Configure git
 
@@ -172,6 +163,11 @@ Create an account on GitHub [here](https://github.com/signup){preview-link="fals
 
 ![](github_logo.png){height="200px"}
 
+[*GitHub may ask you to enable two-factor authentication (2FA) during account creation.
+This is a security feature. Follow the instructions provided by GitHub.
+Keep your recovery codes in a safe place.*]{style="font-size: 25px"}
+
+
 ## Create a GitHub SSH key
 
 To communicate with GitHub, you need a SSH key :
@@ -180,7 +176,7 @@ To communicate with GitHub, you need a SSH key :
 ::: {.column width="55%"}
 -   Open RStudio and click on **Tools \> Global options \> Git/SVN**
 -   Click on **Create SSH Key**
--   Select ED25519 and click on **Create**
+-   Choose ED25519 if available and click on **Create**
 -   Click on **View public key** and copy it
 :::
 

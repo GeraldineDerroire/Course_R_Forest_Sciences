@@ -10,13 +10,14 @@ This is the course material for the module *Using R for reproducible data manage
 
 Course syllabus in English is [here](EFL360457_R_for_Forest_Sciences_2026.pdf), and in Portuguese [here](EFL360457_R_para_Ciencias_Florestais_2026.pdf).
 
-**This is the version of 2026**. The material will be added here in the coming weeks.
+**This is the version of 2026**. The material will be progressively added here in the coming weeks.
 
-<!-- The course material has been created using quarto and R version 4.4.3.
+The course material has been created using quarto and R version 4.6.1.
 
+Follow [these instructions](0_installing_enviro/install_enviro.html) to set up the working environment.
+
+<!--
 -   [Course introduction](99_archives/2025/0_course_introduction/course_intro.html)
-
--   [Set up the working environment](99_archives/2025/0_installing_enviro/install_enviro.html)
 
 -   [Principles of reproductible science](99_archives/2025/1_reproducible_science/repro_science.html)
 
