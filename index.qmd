@@ -20,9 +20,9 @@ Follow [these instructions](0_installing_enviro/install_enviro.html) to set up t
 
 -   [Course introduction](0_course_introduction/course_intro.html)
 
--   [Principles of reproductible science](99_archives/2025/1_reproducible_science/repro_science.html)
+-   [Principles of reproductible science](1_reproducible_science/repro_science.html)
 
--   [Getting started with R](99_archives/2025/2_getting_started/getting_started.html)
+-   [Getting started with R](2_getting_started/getting_started.html)
 
 <!--
     -   [Exercices on session 2/3](99_archives/2025/2_getting_started/exo_getting_started_1.pdf)
@@ -45,9 +45,9 @@ Follow [these instructions](0_installing_enviro/install_enviro.html) to set up t
     
 -->
     
--   [Literate programming with quarto](99_archives/2025/9_literate_programming/literate_programming.html)
+-   [Literate programming with quarto](9_literate_programming/literate_programming.html)
 
--   [Introduction to Version Control with Git and GitHub](99_archives/2025/8_version_control/version_control.html)
+-   [Introduction to Version Control with Git and GitHub](8_version_control/version_control.html)
 
 <!-- 
 -   Statistics with R
