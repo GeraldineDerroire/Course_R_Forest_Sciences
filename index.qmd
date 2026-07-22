@@ -20,11 +20,11 @@ Follow [these instructions](0_installing_enviro/install_enviro.html) to set up t
 
 -   [Course introduction](0_course_introduction/course_intro.html)
 
-<!--
 -   [Principles of reproductible science](99_archives/2025/1_reproducible_science/repro_science.html)
 
 -   [Getting started with R](99_archives/2025/2_getting_started/getting_started.html)
 
+<!--
     -   [Exercices on session 2/3](99_archives/2025/2_getting_started/exo_getting_started_1.pdf)
 
     -   [Exercices on session 3/3](99_archives/2025/2_getting_started/exo_getting_started_2.pdf)
@@ -42,7 +42,14 @@ Follow [these instructions](0_installing_enviro/install_enviro.html) to set up t
 -   [Data visualisation with ggplot](99_archives/2025/5_graph/graph_ggplot.html)
 
     -   [Exercices](99_archives/2025/5_graph/exo_graph.pdf)
+    
+-->
+    
+-   [Literate programming with quarto](99_archives/2025/9_literate_programming/literate_programming.html)
 
+-   [Introduction to Version Control with Git and GitHub](99_archives/2025/8_version_control/version_control.html)
+
+<!-- 
 -   Statistics with R
 
     -   [Statistics with R session 1/3](99_archives/2025/6_basic_statistics/basic_stats_session1.html)
@@ -64,10 +71,6 @@ Follow [these instructions](0_installing_enviro/install_enviro.html) to set up t
     -   [Going further with R session 2/2](99_archives/2025/7_going_further/going_further_session2.html)
 
     -   [Exercices](99_archives/2025/7_going_further/going_further.pdf)
-
--   [Introduction to Version Control with Git and GitHub](99_archives/2025/8_version_control/version_control.html)
-
--   [Literate programming with quarto](99_archives/2025/9_literate_programming/literate_programming.html)
 
 ### Exercices
 
