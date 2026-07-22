@@ -39,6 +39,7 @@ Hubbel neutral theory of biodiversity
 
 We will work with data on the environment of the 50 1-ha plots.
 
+::: {style="font-size: 25px"}
 These data are available within the package [vegan]{style="color:indianred;"}.
 
 You should have already installed the package, let's load it:
@@ -46,6 +47,8 @@ You should have already installed the package, let's load it:
 ```{r}
 library(vegan)
 ```
+
+:::
 
 [We use the command [data]{style="color:indianred;"} to open the data:]{.fragment}
 
@@ -57,6 +60,8 @@ data("BCI.env")
 
 [We can now see the data in the *Environment*. What does it say?]{.fragment}
 
+[![](BCI_env.png)]{.fragment}
+
 ::: notes
 in the enviro: 50 obs of 9 variables the object is called BCI.env
 :::
@@ -67,9 +72,11 @@ Let's see what is BCI.env
 
 ::::: columns
 ::: {.column width="70%"}
+::: {style="font-size: 30px"}
 ```{r}
 BCI.env
 ```
+:::
 :::
 
 ::: {.column width="30%"}
@@ -88,6 +95,8 @@ View(BCI.env)
 ```
 
 [or by clicking on the table icon in the environment: ![](view.png){width="80%"}]{.fragment}
+
+# Data frame
 
 ## Data frame
 
@@ -339,7 +348,7 @@ Everyone knows the difference between quantitative (numeric) and qualitative var
 
 ## Descriptive statistics on a quantitative variable
 
-Let's consider the environmental heterogeneity (see the help to know how it was calculated).
+Let's consider the variable *environmental heterogeneity* (EnvHet) (see the help to know how it was calculated).
 
 We can use the functions [min]{style="color:indianred;"}, [max]{style="color:indianred;"} and [range]{style="color:indianred;"} to explore the extreme values of the variable:
 
@@ -503,7 +512,7 @@ str(BCI.env)
 
 ## Descriptive analysis on a qualitative variable
 
-Let's consider the variable habitat:
+Let's consider the variable *Habitat*:
 
 We can use the function [table]{style="color:indianred;"} to count the number of occurrences in each category (each levels of the factor);
 
@@ -711,7 +720,7 @@ Before importing data, it is important to know the structure of the data:
 
 * What is the separator of decimals?
 
-[Let's look at what is in the file *BCI_env.csv*]{.fragment}
+[Let's look at what is in the file [BCI_env.csv](https://geraldinederroire.github.io/Course_R_Forest_Sciences/3_manip_data/data/BCI_env.csv)]{.fragment}
 
 ::: notes
 to view the file, either click on it in Rstudio and click view, or open it directly from the file explorer
@@ -764,6 +773,12 @@ BCI.env <- read.csv(file = "data/BCI_env.csv", # the file name and its relative 
 
 [⚠️ Make sure you put the data in an object (otherwise, they are just displayed).]{.fragment}
 
+[[NB: The function *read_csv* from the **tidyverse** handles encodings more efficienty.]{style="font-size: 25px"}]{.fragment}
+
+::: notes
+We'll see the tidyverse in the next session.
+:::
+
 
 ## Importing data from other formats
 
@@ -771,10 +786,17 @@ You can also import data from a statistics software (SPSS, SAS, Stata...) or fro
 
 But using a universal data format (CSV) is preferred.
 
+## Typing data in a spreadsheet
+
+If you collect data in the field on a paper field sheet,
+you can then use Excel, Google Sheets, LibreOffice Calc... 
+to digitalise them.
+
+::: notes
+ok, but how do we get the data in the text file?
+:::
 
 ## Good practice when typing data in spreadsheet
-
-*You can use Excel, Google Sheets, LibreOffice Calc...*
 
 -   One dataset (one table) per spreadsheet
 
@@ -787,8 +809,6 @@ But using a universal data format (CSV) is preferred.
 -   Use a unique identifier (ID) for each observation
 
 ::: notes
-ok, but how do we get the data in the text file?
-
 unique identifier: unique number for each observation
 :::
 
@@ -804,10 +824,78 @@ unique identifier: unique number for each observation
 
 -   Export as a CSV (Comma-Separated Values), which uses comma [,]{style="color:indianred;"} as delimiter of column
 
+## Using digital field solutions - [KoboCollect]{style="color:indianred;"}
 
-## Writing data to a csv
+::::: columns
+::: {.column width="65%"}
+* Free and easy to use 
+* Forms created via a web interface using **KoboToolbox** and deployed on smartphones/tablets with the **KopoToolbox mobile app**
+* Possible to collect data offline
 
-We can save a data frame from R to a csv file using the function [write.csv]{style="color:indianred;"}:
+[[Tutorial for KoboToolbox](Kohttps://support.kobotoolbox.org/welcome.html)]{style="font-size: 25px"}
+:::
+
+::: {.column width="5%"}
+:::
+
+
+::: {.column width="30%"}
+![](kobo.png)
+:::
+:::
+
+
+
+## Using digital field solutions - [Arena]{style="color:indianred;"}
+
+::::: columns
+::: {.column width="65%"}
+
+* Free and open-source 
+* Developped by the FAO for forest inventories
+* Forms created via a web interface using **Arena** and deployed on smartphones/tablets with **Arena mobile**
+* Possible to collect data offline
+
+:::
+
+::: {.column width="5%"}
+:::
+
+
+::: {.column width="30%"}
+![](arena.png)
+:::
+:::
+
+[[Tutorial for Arena](https://www.youtube.com/watch?v=EIzt4rpi36A&list=PL0Rrgop7D4QAWSJMtRQojzKuhF4vPS6Rs&index=12)]{style="font-size: 25px"}
+
+## Using digital field solutions - [Qfield]{style="color:indianred;"}
+
+::::: columns
+::: {.column width="65%"}
+
+* Free and open-source GIS app
+* All entries are spatialised
+* Forms created in a **QGis** project and deployed on smartphones/tablets with **Qfield**
+* Possible to collect data offline
+
+:::
+
+::: {.column width="5%"}
+:::
+
+
+::: {.column width="30%"}
+![](qfield.png)
+:::
+:::
+
+
+<!-- TO DO --> 
+
+## Writing data from R to a csv
+
+From R, We can save a data frame to a csv file using the function [write.csv]{style="color:indianred;"}:
 
 ```{r, eval=FALSE}
 write.csv(x = BCI.env, # the object to be written
@@ -816,6 +904,11 @@ write.csv(x = BCI.env, # the object to be written
 ```
 
 [By default, the separator of columns is the [,]{style="color:indianred;"} and the separator of decimal the [.]{style="color:indianred;"}]{.fragment}
+
+::: notes
+We can do this either because we have created the data in R
+or because we import them in R and modified them.
+:::
 
 ## Writing data to a csv
 
@@ -853,7 +946,7 @@ What are the raw data?
 
 * by the tablet/computer used in the field
 
-* in paper field sheets (in that case, also save the spreadsheet in which data are first recorded)
+* in paper field sheets (in that case, also save the paper sheet on which data are first recorded)
 
 * ...
 
@@ -889,7 +982,7 @@ Make sure the data are correctly read by checking
 
 * that there are no duplicated column names
 
-* the mode of each variable [*For example, if a numerical data is stored in a character vectors, there must be a typo somewhere.*]{.fragment}
+* the type of each variable [*For example, if a numerical data is stored in a character vectors, there must be a typo somewhere.*]{.fragment}
 
 [The functions [dim]{style="color:indianred;"}, [str]{style="color:indianred;"}, [summary]{style="color:indianred;"} are your best friends!]{.fragment}
 
@@ -932,9 +1025,11 @@ This document uses the following:
 
 * Introductory class of Mélaine Aubry-Kientz, Julien Claude and Marine Zwicke (University of Montpellier)
 
+* Fabrice Bénédet (CIRAD) for digital field solutions
+
 :::
 
-## Ressources
+## Ressources {.smaller}
 
 ::: {.nonincremental}
 
@@ -946,13 +1041,13 @@ This document uses the following:
 
 :::
 
-## Ressources to go further
+## Ressources to go further {.smaller}
 
 ::: {.nonincremental}
 
 **On data format**
 
-* *Data formats* - Nicolas Casajus [Here](https://biodiversitydata.github.io/chapters/files-formats.htmll){preview-link="false"}
+* *Data formats* - Nicolas Casajus [Here](https://biodiversitydata.github.io/chapters/files-formats.html){preview-link="false"}
 
 **On data management**
 
