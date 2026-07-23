@@ -209,7 +209,7 @@ When you first connect to GitHub, you will be asked if you want to continue conn
 
 # Install the needed R packages
 
-Run the code on the following slides in the console:
+Run the code below in the console:
 
 ```{r, eval=FALSE}
 install.packages("vegan",
@@ -218,6 +218,7 @@ install.packages("vegan",
                  "janitor",
                  "patchwork",
                  "plotly", 
+                 "ggspatial",
                  "multcompView",
                  "GGally",
                  "BIOMASS",

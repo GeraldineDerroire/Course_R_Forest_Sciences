@@ -51,14 +51,14 @@ editor:
 
 # Using the package [ggplot2]{style="color:indianred;"} to make plots
 
-## The package [ggplot2]{style="color:indianred;"} {.scrollable}
+## The package [ggplot2]{style="color:indianred;"}{.smaller}
 
 ::::: columns
 ::: {.column width="80%"}
 
-* [ggplot2]{style="color:indianred;"} is a package of the *tidyverse* allowing to make plots using a coherant synthax.
+* [ggplot2]{style="color:indianred;"} is a package of the *tidyverse* allowing to make plots using a coherant syntax.
 
-* [ggplot2]{style="color:indianred;"} requires data to be in a data frame, including a tibble.
+* [ggplot2]{style="color:indianred;"} works with data frames (including tibbles).
 
 * [ggplot2]{style="color:indianred;"} can be use in a pipe after manipulating data.
 
@@ -600,7 +600,7 @@ here we loose the info on the absolute number of indiv per genus, we focus on th
 ```{r}
 #| warning: false
 #| fig-width: 4
-#| fig-height: 6
+#| fig-height: 5
 dt_HD %>% 
   filter(genus %in% c("Licania", "Lecythis", "Inga", 
                       "Dicorynia", "Eperua")) %>% 
@@ -619,7 +619,7 @@ dt_HD %>%
 ```{r}
 #| warning: false
 #| fig-width: 4
-#| fig-height: 6
+#| fig-height: 5
 dt_HD %>% 
   filter(genus %in% c("Licania", "Lecythis", "Inga", 
                       "Dicorynia", "Eperua")) %>% 
@@ -1103,11 +1103,11 @@ the vignette is very good
 
 ## Interactive plots with plotly
 
-[The function [ggplotly]{style="color:indianred;"} of the package [plotly]{style="color:indianred;"} allows to (quite magically...) transform any plot into an interactive plot:]{style="font-size: 30px"}
+[The function [ggplotly]{style="color:indianred;"} of the package [plotly]{style="color:indianred;"} can transform many ggplot2 figures into interactive graphics:]{style="font-size: 30px"}
 
 ```{r}
 #| warning: false
-#| out.width: 65%
+#| out.width: 60%
 library(plotly)
 ggplotly(plot1)
 ```
@@ -1142,22 +1142,47 @@ ggsave(plot = plot1,
 ```
 
 
-# [ggspatial]{style="color:indianred;"} ggplot extension for maps
+# What about maps? 
 
-R can be used as a GIS software... but this is besides the objectives of this module.
+R provides powerful tools for spatial data analysis and mapping, ... but GIS is beyond the scope of this module.
 
-The package [ggspatial]{style="color:indianred;"} can be used to make maps using geographical layers that can be created in R or imported from a GIS software:
+For a full introduction to GIS with R see [Geocomputation with R](https://r.geocompx.org/) and [Spatial Data Science with applications in R](https://r-spatial.org/book/).
 
+
+## [ggspatial]{style="color:indianred;"}: a  ggplot2 extension for maps {.smaller}
+
+
+
+::::: columns
+::: {.column width="40%"}
+The package [ggspatial]{style="color:indianred;"} works with spatial vector data such as shapefiles.
+
+See the [vignette of ggspatial](https://paleolimbot.github.io/ggspatial/index.html) for more.
+:::
+
+::: {.column width="60%"}
 ```{r}
 library(ggspatial)
 load_longlake_data() # load some spatial objects
 
 ggplot() +
   annotation_spatial(longlake_waterdf) +
-  layer_spatial(longlake_depthdf, aes(col = DEPTH_M))
+  layer_spatial(longlake_depthdf, aes(colour = DEPTH_M)) +
+  annotation_scale(location = "br") +
+  annotation_north_arrow(
+    location = "br",
+    which_north = "true",
+    pad_x = unit(0.25, "in"),
+    pad_y = unit(0.8, "in")
+  ) +
+  theme_bw()
 ```
+:::
+:::::
 
-See the [vignette of ggspatial](https://paleolimbot.github.io/ggspatial/index.html) for more.
+
+
+
 
 
 # Acknowledgments
