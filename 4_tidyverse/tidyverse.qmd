@@ -16,7 +16,7 @@ format:
 execute:
   echo: true   
   warning: true
-  message: true 
+  message: true
 editor: 
   markdown: 
     wrap: sentence
@@ -54,9 +54,10 @@ we are going to see in a few minutes what are tidy data and pipe
 :::::
 
 
-## Installing the tidyverse
+## Using tidyverse
 
-We just need to install and load the package tidyverse:
+You should already have installed the package tidyverse,
+so you just need to load it:
 
 ```{r}
 library(tidyverse)
@@ -180,6 +181,9 @@ what did we do?
 The pipe is introduced by the package [magritt ]{style="color:indianred;"}, but is also loaded with the tidyverse.
 
 [It can be accessed using the shortcut [Ctrl + Shift + m]{style="color:indianred;"}]{.fragment}
+
+[[Since R 4.1, base R also includes the native pipe [|>]{style="color:indianred;"}. 
+However, in this course we will use %>%, which remains widely used throughout the tidyverse.]{style="font-size: 30px"}]{.fragment}
 :::
 
 ::: {.column width="50%"}
@@ -215,7 +219,7 @@ In the tidyverse the steps of importing, tidying and transforming data is called
 ::::: columns
 ::: {.column width="70%"}
 These data are available in the package rcontroll (Schmitt *et al* [2023](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.14215)),
-but were are going to import a slighly modified version from a csv file available 
+but were are going to import a modified version from a csv file available 
 [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/func_traits.csv){preview-link="false"}.
 :::
 
@@ -241,6 +245,8 @@ but were are going to import them from a csv file available
 ![](logginglab.png)
 :::
 :::::
+
+[⚠️ These datasets should be placed in the data folder of your RStudio project.]{style="font-size: 30px"}
 
 
 # Import data with the package [readr]{style="color:indianred;"}
@@ -293,6 +299,8 @@ Let's look at the functional trait data:
 traits
 ```
 
+<!--
+
 [[To know more, we can look at the help on the package rcontroll:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
@@ -300,6 +308,8 @@ traits
 ?rcontroll::TROLLv3_species
 ```
 :::
+
+-->
 
 ::: notes
 read the print together
@@ -331,7 +341,7 @@ Let's see another way of getting a tibble
 ! note read.csv and read_csv
 :::
 
-## Transform data frame into tibble {.scrollable}
+## Transform data frame into tibble {.smaller}
 
 ⚠️ Remember that tibbles don't have row names.
 
@@ -345,7 +355,7 @@ as_tibble(rownames_to_column(sp_com))
 here we just look at the results but don't store them
 :::
 
-## Commercial tree species {.scrollable}
+## Commercial tree species {.smaller}
 
 Let's look at the sp_com data :
 
@@ -353,12 +363,16 @@ Let's look at the sp_com data :
 sp_com
 ```
 
-[[To know more, we can look at the help on the package LoggingLab (if you want to install it, see instructions [here](https://vincyanebadouard.github.io/LoggingLab/))]{style="font-size: 30px"}]{.fragment}
+::: {style="font-size: 25px"}
+
+[To know more, we can look at the help on the package LoggingLab (if you want to install it, see instructions [here](https://vincyanebadouard.github.io/LoggingLab/))]{.fragment}
 
 ::: fragment
 ```{r, eval=FALSE}
 ?LoggingLab::SpeciesCriteria
 ```
+:::
+
 :::
 
 ::: notes
@@ -407,13 +421,13 @@ we are not going to see all the functions, but the more common and usefull ones
 The function [slice]{style="color:indianred;"} selects row(s) according to its/their position(s).
 
 ```{r}
-slice(traits, 25)
+slice(traits, 5)
 ```
 [which is equivalent to:]{.fragment}
 
 ::: fragment
 ```{r}
-traits[25,]
+traits[5,]
 ```
 :::
 
@@ -423,15 +437,18 @@ and also equivalent to:
 
 ```{r}
 traits %>% 
-  slice(25)
+  slice(5)
 ```
+
+[From now on, we will adopt this way of writing.]{.fragment}
 
 ## slice
 
 We can also get several rows:
 
 ```{r}
-slice(traits, 2:8)
+traits %>% 
+  slice(2:8)
 ```
 
 ## slice
@@ -439,11 +456,13 @@ slice(traits, 2:8)
 We can select only the first (or last) ones using [slice_head]{style="color:indianred;"} or [slice_tail]{style="color:indianred;"}:
 
 ```{r}
-slice_head(traits, n=3) # n specify the number of rows
+traits %>% 
+  slice_head(n=3) # n specify the number of rows
 ```
 ::: fragment
 ```{r}
-slice_tail(traits, prop=0.1) # prop specify the proportion of rows
+traits %>%
+  slice_tail(prop=0.1) # prop specify the proportion of rows
 ```
 :::
 
@@ -456,7 +475,8 @@ The number of rows can be specify or we can specify a proportion of rows (here 1
 [slice_min]{style="color:indianred;"} and [slice_max]{style="color:indianred;"} selects the row with the smallest or biggest value for a given variable:
 
 ```{r}
-slice_min(traits, s_dbhmax)
+traits %>% 
+  slice_min(s_dbhmax)
 ```
 
 ::: fragment
@@ -479,7 +499,8 @@ Only the rows for which the result of the test is TRUE are selected.
 [Let's select only the aggregative species in the commercial species dataset:]{style="font-size: 30px"}
 
 ```{r}
-filter(sp_com, Aggregative == TRUE)
+sp_com %>% 
+  filter(Aggregative == TRUE)
 ```
 
 ::: notes
@@ -493,14 +514,14 @@ talk about what is an aggregative species
 Or let's select the species that have a wood specific gravity (wsg) lower than 0.4:
 
 ```{r}
-filter(traits, s_wsg < 0.4)
+traits %>%
+  filter(s_wsg < 0.6)
 ```
 
 
 ::: notes
 Remember the logical operators of comparisons that we have seen two sessions ago?
 
-Ask them if they know the cecropia
 :::
 
 ## filter
@@ -508,9 +529,10 @@ Ask them if they know the cecropia
 We can also combine several conditions:
 
 ```{r}
-filter(traits, 
-       s_wsg < 0.4 & # first condition
-         s_LMA > 70) # second condition
+traits %>% 
+  filter(
+    s_wsg < 0.6 & # first condition
+      s_LMA < 90) # second condition
 ```
 [There are no species satisfying these two conditions in our dataset.]{.fragment}
 
@@ -521,14 +543,15 @@ we could write it only on one line, it's just for readability
 :::
 
 
-## filter {.scrollable}
+## filter {.smaller}
 
 We can also use a function to specify the condition.
 
 Let's select species with maximum DBH higher than the median:
 
 ```{r}
-filter(traits, s_dbhmax > median(s_dbhmax))
+traits %>% 
+  filter(s_dbhmax > median(s_dbhmax))
 ```
 
 ::: notes
@@ -536,34 +559,39 @@ in the dataset we have 45 values, so when we get the one above the median we get
 => it makes sense
 :::
 
-## arrange {.scrollable}
+## arrange {.smaller}
 
 The function [arrange]{style="color:indianred;"} reorders the row according to one or several columns:
 
 Let's sort the species by increasing order of WSG, **and then** by decreasing order of hmax:
 
 ```{r}
-arrange(traits, 
-        s_wsg, # increasing
-        desc(s_hmax)) # decreasing
+traits %>% 
+  arrange(s_wsg, # increasing
+          desc(s_hmax)) # decreasing
 ```
 
 ::: notes
 use desc for decreasing
 :::
 
-## distinct {.scrollable}
+## distinct {.smaller}
 
 The function [distinct]{style="color:indianred;"} keep only rows that are distinct.
 
+::::: columns
+::: {.column width="60%"}
 [Let's create a simple dataset with a duplicated row:]{style="font-size: 26px"}
 
 ```{r}
-my_tibble <- tibble(name = c("Lucia", "Lucia", "Anna"),
-                    age = c(21, 21, 23))
+my_tibble <- tibble(
+  name = c("Lucia", "Lucia", "Anna"),
+  age = c(21, 21, 23))
 my_tibble
 ```
+:::
 
+::: {.column width="40%"}
 [[and use [distinct]{style="color:indianred;"} to keep only distinct rows:]{style="font-size: 26px"}]{.fragment}
 
 ::: fragment
@@ -571,8 +599,8 @@ my_tibble
 distinct(my_tibble)
 ```
 :::
-
-
+:::
+:::::
 
 ## Operations on columns
 
@@ -587,27 +615,29 @@ distinct(my_tibble)
 
 :::
 
-## select
+## select {.smaller}
 
 The function [select]{style="color:indianred;"} selects columns:
 
 Let's select the Commercial names, Genus and Species from sp_com:
 
 ```{r}
-select(sp_com, CommercialName, Genus, Species)
+sp_com %>% 
+  select(CommercialName, Genus, Species)
 ```
 
-## select {.scrollable}
+## select {.smaller}
 
 We can also specify the columns we don't want to select using [select]{style="color:indianred;"}.
 
 Let's select all the columns except the commercial name, using [-]{style="color:indianred;"} before the name of the column to exclude:
 
 ```{r}
-select(sp_com, - CommercialName)
+sp_com %>% 
+  select(- CommercialName)
 ```
 
-## select
+## select {.smaller}
 
 We can use functions to express a conditions on the column names: [starts_with]{style="color:indianred;"}, [ends_with]{style="color:indianred;"}, [contains]{style="color:indianred;"}...
 
@@ -615,7 +645,8 @@ We can use functions to express a conditions on the column names: [starts_with]{
 ::: {.column width="50%"}
 ```{r}
 # columns starting with "com"
-select(sp_com, starts_with("Com")) 
+sp_com %>% 
+  select(starts_with("Com")) 
 ```
 :::
 
@@ -624,7 +655,8 @@ select(sp_com, starts_with("Com"))
 ::: fragment
 ```{r}
 # columns containing "FD"
-select(sp_com, contains("FD")) 
+sp_com %>% 
+  select(contains("FD")) 
 ```
 :::
 :::
@@ -638,8 +670,8 @@ select(sp_com, contains("FD"))
 We can rename columns with the function [rename]{style="color:indianred;"}:
 
 ```{r}
-rename(traits, 
-       LMA = s_LMA) # start with the new name
+traits %>% 
+  rename(LMA = s_LMA) # new name = old name
 ```
 
 
@@ -652,9 +684,9 @@ The function [mutate]{style="color:indianred;"} creates new columns, using exist
 
 
 ```{r}
-mutate(traits,
-       dbhmax_cm = s_dbhmax * 100) %>% # add the new column dbhmax_cm
-  select(genus, species, s_dbhmax, dbhmax_cm) %>%  # select only the 4 columns of interest
+traits %>% 
+  mutate(dbhmax_cm = s_dbhmax * 100) %>% # add the new column dbhmax_cm
+  select(genus, species, s_dbhmax, dbhmax_cm) %>%  # select only these 4 columns 
   slice_head(n=5) # just the 5 first rows
 ```
 
@@ -675,7 +707,8 @@ We just need to specify the columns we want to put first (the order of the other
 [Let's move the columns of DBHmax and Hmax first (after the species name) in the trait dataset:]{style="font-size: 25px"}
 
 ```{r}
-relocate(traits, genus, species, s_dbhmax, s_hmax) %>% 
+traits %>% 
+  relocate(genus, species, s_dbhmax, s_hmax) %>% 
   slice_head(n=5) # just the 5 first rows
 ```
 
@@ -695,47 +728,38 @@ show that the number of columns/variables has NOT changed, just the order
 :::
 
 
-## group_by 
+## group_by {.smaller}
 
-The function [group_by]{style="color:indianred;"} allow grouping rows according to the values of a column.
+[The function [group_by]{style="color:indianred;"} allow grouping rows according to the values of a column.]{style="font-size: 30px"}
 
 [Let's group the table of traits by genus]{style="font-size: 25px"}
 
-::::: columns
-::: {.column width="70%"}
 ```{r}
 traits %>% group_by(genus)
 ```
-:::
 
-::: {.column width="30%"}
-[There is no apparent change in the tibble, except the mention of the grouping.]{.fragment}
-:::
-:::::
+[[There is no apparent change in the tibble, except the mention of the grouping.]{.fragment}]{style="font-size: 30px"}
+
 
 ::: notes
 show that the tibble has still the same dimensions
 :::
 
-## group_by with slice
+## group_by with slice {.smaller}
 
-When groups have been defined, we can apply further operations on these groups by using other functions.
+[When groups have been defined, we can apply further operations on these groups by using other functions.]{style="font-size: 25px"}
 
 [Let's select the species with the maximum wsg **for each genus**, using [slice_max]{style="color:indianred;"}:]{style="font-size: 25px"}
 
-::::: columns
-::: {.column width="70%"}
 ```{r}
 traits %>% 
   group_by(genus) %>% 
   slice_max(s_wsg) 
 ```
-:::
 
-::: {.column width="30%"}
-[We see that the resulting tibble has as many rows as there are genus.]{.fragment}
-:::
-:::::
+
+[[We see that the resulting tibble has as many rows as there are genus.]{.fragment}]{style="font-size: 25px"}
+
 
 ::: notes
 note the change of dimension!
@@ -743,52 +767,37 @@ note the change of dimension!
 show them the number of rows and the number of genus
 :::
 
-## group_by with mutate {.scrollable}
+## group_by with mutate {.smaller}
 
-We can also use [group_by]{style="color:indianred;"} with [mutate]{style="color:indianred;"} to do an operation by group.
+[We can also use [group_by]{style="color:indianred;"} with [mutate]{style="color:indianred;"} to do an operation by group.]{style="font-size: 25px"}
 
 [Let's calculate the mean wsg of each genus:]{style="font-size: 25px"}
 
 ::::: columns
-::: {.column width="70%"}
+::: {.column width="65%"}
 ```{r}
 traits %>% 
   group_by(genus) %>%
   mutate(mean_wsg = mean(s_wsg)) %>% 
-  select(genus, species, s_wsg, mean_wsg) # select only the columns of interest
+  select(genus, species, s_wsg, mean_wsg) # show only these colums
 ```
+:::
+
+::: {.column width="5%"}
 :::
 
 ::: {.column width="30%"}
-[Here all rows are kept and species of a same genus have the same value for mean_wsg]{.fragment}
+[[Here all rows are kept and species of a same genus have the same value for mean_wsg]{.fragment}]{style="font-size: 25px"}
 :::
 :::::
 
+
 ::: notes
-Here a lot of values are the same as there are quite often just one species per genus
-
-but let's scroll and look at Couepia
-
 all rows are kept as we didn't do a selection on rows
 :::
 
-## group_by with mutate
 
-We can check this by looking at the *Licania* for instance:
-
-
-```{r}
-traits %>% 
-  group_by(genus) %>%
-  mutate(mean_wsg = mean(s_wsg)) %>% # add the mean wsg
-  select(genus, species, s_wsg, mean_wsg) %>% # select only the columns of interest
-  filter(genus == "Licania") # only the Licania
-```
-::: notes
-Here the beginning of the code is the same, we just filter the genus Licania
-:::
-
-## group_by with filter
+## group_by with filter {.smaller}
 
 We can also use [group_by]{style="color:indianred;"} with [filter]{style="color:indianred;"} to select according to a conditions applied **on each group**.
 
@@ -835,13 +844,13 @@ traits %>%
             mean_wsg = mean(s_wsg))
 ```
 
-[*Note that here only the summary columns are kept.*]{.fragment}
+[*Note that here only the summary columns and only one row are kept.*]{.fragment}
 
 ::: notes
 and only one row of summary
 :::
 
-## summarise {.scrollable}
+## summarise {.smaller}
 
 The function [summarise]{style="color:indianred;"} can be used together with [group_by]{style="color:indianred;"} to summarise *by group*.
 
@@ -879,12 +888,12 @@ traits %>%
 
 
 ::: {.column width="30%"}
-[[We see that the genus *Couepia* has two species.]{style="font-size: 25px"}]{.fragment}
+[[We see that the genus *Couepia* has two species, for instance.]{style="font-size: 25px"}]{.fragment}
 
 :::
 :::::
 
-## Grouping according to several columns {.scrollable}
+## Grouping according to several columns {.smaller}
 
 The functions [group_by]{style="color:indianred;"} and [count]{style="color:indianred;"} can be used to group on several columns.
 
@@ -899,9 +908,9 @@ sp_com %>%
 :::
 
 ::: {.column width="40%"}
-[[We see that the genus *Brosimum* has three species, all with a different commercial name.]{style="font-size: 25px"}]{.fragment}
+[[We see that the genus *Brosimum* has three species all with a different commercial name.]{style="font-size: 25px"}]{.fragment}
 
-[[We see for instance that the genus *Caryocar* has two species for which the commercial name is chawari.]{style="font-size: 25px"}]{.fragment}
+[[We see that the genus *Caryocar* has two species for which the commercial name is chawari.]{style="font-size: 25px"}]{.fragment}
 :::
 :::::
 
@@ -923,7 +932,7 @@ The result of each operation feeds into the next one.
 [The first thing to check is if the dimensions of the tibble have changed, and if you were expecting it to change.]{.fragment}
 
 
-## Using a pipe to chain the different operations  {.scrollable}
+## Using a pipe to chain the different operations  {.smaller}
 
 
 ::::: columns
@@ -970,8 +979,12 @@ gen_dim_max
 This is the end of the session 1/2
 ::: 
 
+# 
 
-## Combining multiple tables
+Let's stop here for today !
+
+
+# Combining multiple tables with the package [dplyr]{style="color:indianred;"}
 
 ::: {.nonincremental}
 * Concatenation
@@ -1000,7 +1013,7 @@ traits1 <- traits %>%
 ```{r}
 traits2 <- traits %>% 
   select(, - s_wsg, - s_hmax) %>% 
-  slice(25:26)
+  slice(7:9)
 ```
 :::
 
@@ -1008,7 +1021,7 @@ traits2 <- traits %>%
 ```{r}
 traits3 <- traits %>% 
   select(, -s_LMA) %>% 
-  slice(25:27)
+  slice(11:12)
 ```
 :::
 :::
@@ -1056,7 +1069,7 @@ so we have our 7 rows and the 13 colums, with missing value
 :::
 
 
-## bind_rows {.scrollable}
+## bind_rows {.smaller}
 
 If we want to keep track of which table the rows came from, we can use the argument [.id]{style="color:indianred;"} and specify the name of the column in which we want to store this information (here *"source"*).
 
@@ -1098,8 +1111,8 @@ show what the cbind does on the blackboard
 
 Several functions allows to join two tibbles (*here x and y*) using a key (or several).
 
-[[A key is a column (or group of columns) that is used to match rows when joining two datasets.]{style="font-size: 30px"}]{.fragment}
-[[⚠️ A key need to uniquely identify observations in one or both datasets (otherwise there will be several combinations of matches).]{style="font-size: 30px"}]{.fragment}
+[[A key is a column (or several of columns) that is used to match rows when joining two datasets.]{style="font-size: 30px"}]{.fragment}
+[[⚠️ A key need to **uniquely identify** observations in one or both datasets (otherwise there will be several combinations of matches).]{style="font-size: 30px"}]{.fragment}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -1125,7 +1138,7 @@ say here that very important to check the dim of the output
 
 
 
-## The joins
+## The joins {.smaller}
 
 We are now going to join the dataset of traits and the dataset of commercial species.
 
@@ -1151,7 +1164,7 @@ colnames(sp_com_sub)
 [Both datasets have a column for the genus and a column for the species, which we can use as *keys*.
 But the columns names are not exactly written in the same way.]{.fragment}
 
-## left_join {.scrollable}
+## left_join {.smaller}
 
 We can join *traits_sub* with *sp_com_sub* using a [left_join]{style="color:indianred;"}.
 
@@ -1255,6 +1268,13 @@ dim(j3)[1]
 :::::
 
 [So there are `r dim(j3)[1]` species common to *traits_sub* and *sp_com_sub*.]{.fragment}
+
+::: fragment
+```{r}
+j3
+```
+
+:::
 
 :::notes
  inner_join keeps only rows from x that have a matching key in y
@@ -1391,7 +1411,7 @@ the columns created have some not very informative names...
 :::
 
 
-## pivot_longer {.scrollable}
+## pivot_longer {.smaller}
 
 We can specify the names of the columns that will be created:
 
@@ -1480,7 +1500,7 @@ dt2 <- dt2 %>%
 dt2
 ```
 
-## separate_rows {.scrollable}
+## separate_rows {.smaller}
 
 We still have the problem of having several DBH in a single column. 🤔 How should we store them? 
 
@@ -1516,7 +1536,7 @@ dt1L <- dt1L %>% bind_rows(
 dt1L
 ```
 
-## complete {.scrollable}
+## complete {.smaller}
 
 To add rows for the two other trees for 2017, we can use the function [complete]{style="color:indianred;"}.
 
@@ -1528,6 +1548,8 @@ dt1L %>% complete(tree, year) # names of the columns for which we want all combi
 
 ::: notes
 use NA for missing values, but we could specify something else
+
+note that this is not needed to make the package tidy
 :::
 
 
@@ -1614,7 +1636,7 @@ levels(dt4$past_landuse)
 ```
 :::
 
-## Recoding levels {.scrollable}
+## Recoding levels {.smaller}
 
 [[fct_recode]{style="color:indianred;"} allows to rename the levels:]{style="font-size: 28px"}
 
@@ -1647,12 +1669,17 @@ as always first we put the new one, and then the old one
 
 fct_other => keep some levels and put the other ones into a level called "other" (or another name)
 
-fct_lump => group levels base on a criteria: ex all the levels that have a too small occurences groupes together
+fct_lump => group levels base on a criteria: ex all the levels that have a too small occurences grouped together
 :::
 
 ## Re-ordering levels
 
 [[fct_relevel]{style="color:indianred;"} allows changing the order of the levels:]{style="font-size: 28px"}
+
+```{r}
+levels(dt4$past_landuse)
+```
+
 
 ::: fragment
 ```{r}
@@ -1673,13 +1700,15 @@ dt4$past_landuse %>% fct_reorder(
 ```
 :::
 
+[[💡 *This is usefull for presenting the categories in a specific order in a graph.*]{style="font-size: 25px"}]{.fragment}
+
 
 ::: notes
 useful for graphs to set the order of the levels
 :::
 
 
-## Function [if_else]{style="color:indianred;"} {.scrollable}
+## Function [if_else]{style="color:indianred;"} {.smaller}
 
 [[if_else]{style="color:indianred;"} from the package [dplyr]{style="color:indianred;"} performs a test on a variable, and give a value if true and another if false:]{style="font-size: 28px"}
 
@@ -1688,8 +1717,8 @@ dt4 %>%
   mutate(age_cat = # add a new column
            if_else(dt4$age > 10, # test
                    "Older than 10yr", # value if test TRUE
-                   "Younger than 10yr")) %>% # value if test  FALSE
-  mutate(age_cat = as.factor(age_cat)) # transform to factor
+                   "Younger than 10yr"), # value if test  FALSE
+         age_cat = as.factor(age_cat)) # transform to factor
 ```
 
 ::: notes
@@ -1698,7 +1727,7 @@ here if_gives a character so we then transform it to a factor
 her we perfom one test => so it created to category, one for the results that are TRUE and one for the ones that are FALSE
 :::
 
-## Function [case_when]{style="color:indianred;"} {.scrollable}
+## Function [case_when]{style="color:indianred;"} {.smaller}
 
 [case_when]{style="color:indianred;"} from the package [dplyr]{style="color:indianred;"} generalises [if_else]{style="color:indianred;"} to allow several conditions:
 
@@ -1717,7 +1746,7 @@ dt4 %>%
 Her we do several tests sequentially => the the created factors can have more than 2 categories
 :::
 
-## Function [case_when]{style="color:indianred;"} {.scrollable}
+## Function [case_when]{style="color:indianred;"} {.smaller}
 
 The tests performed by [case_when]{style="color:indianred;"} and [if_else]{style="color:indianred;"} can be combinations of tests (using operators like [&]{style="color:indianred;"}, [|]{style="color:indianred;"}, and [!]{style="color:indianred;"}):
 
@@ -1780,7 +1809,7 @@ v3
 [[*NB: if we want to concatenate columns of a data frame, we can also use [unite]{style="color:indianred;"}.*]{style="font-size: 30px"}]{.fragment}
 
 
-## Split a character string
+## Split a character string {.smaller}
 
 The opposite is the function [str_split]{style="color:indianred;"} :
 
