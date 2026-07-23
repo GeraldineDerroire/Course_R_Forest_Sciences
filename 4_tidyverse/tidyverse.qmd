@@ -180,7 +180,9 @@ what did we do?
 ::: {.column width="50%"}
 The pipe is introduced by the package [magritt ]{style="color:indianred;"}, but is also loaded with the tidyverse.
 
+<!--
 [It can be accessed using the shortcut [Ctrl + Shift + m]{style="color:indianred;"}]{.fragment}
+-->
 
 [[Since R 4.1, base R also includes the native pipe [|>]{style="color:indianred;"}. 
 However, in this course we will use %>%, which remains widely used throughout the tidyverse.]{style="font-size: 30px"}]{.fragment}

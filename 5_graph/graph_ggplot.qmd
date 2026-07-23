@@ -1142,6 +1142,24 @@ ggsave(plot = plot1,
 ```
 
 
+# [ggspatial]{style="color:indianred;"} ggplot extension for maps
+
+R can be used as a GIS software... but this is besides the objectives of this module.
+
+The package [ggspatial]{style="color:indianred;"} can be used to make maps using geographical layers that can be created in R or imported from a GIS software:
+
+```{r}
+library(ggspatial)
+load_longlake_data() # load some spatial objects
+
+ggplot() +
+  annotation_spatial(longlake_waterdf) +
+  layer_spatial(longlake_depthdf, aes(col = DEPTH_M))
+```
+
+See the [vignette of ggspatial](https://paleolimbot.github.io/ggspatial/index.html) for more.
+
+
 # Acknowledgments
 
 ::: {.nonincremental}
