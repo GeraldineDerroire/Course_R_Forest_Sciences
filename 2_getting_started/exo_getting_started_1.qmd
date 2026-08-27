@@ -10,7 +10,10 @@ execute:
 
 * Create a RStudio project to organise the work we will do during the class. Make sure you organise the project in a clear way.
 
+* Create a raw data folder and put in it all the datasets downloaded during the installation phase.
+
 * Create a new script for these exercises (and save it).
+
 
 # Vectors
 
@@ -42,7 +45,7 @@ names(AGB1_t) <- tree_names
 names(AGB2_t) <- tree_names
 ```
 
-* Create two new vectors that contain the AGB in kg (call them AGB1_kg a,d AGB2_kg)
+* Create two new vectors that contain the AGB in kg (call them AGB1_kg and AGB2_kg)
 
 ```{r}
 AGB1_kg <- AGB1_t * 1000

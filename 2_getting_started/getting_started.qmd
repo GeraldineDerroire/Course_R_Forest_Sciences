@@ -82,10 +82,12 @@ Other things: text mining, GIS...
 ![](R_learning_curve.png){width="120%"}
 
 ::: notes
-discuss a bit with people who laready use R
+discuss a bit with people who already use R
 
 =\> what do they find particularly difficult?
 easy?
+
+we are not going to work directly in R but in RStudio => close R 
 :::
 
 ## Let's open RStudio
@@ -94,7 +96,7 @@ easy?
 
 ![](RStudio_screen.png){width="65%"}
 
-=\> RStudio opens.
+=\> RStudio opens R.
 
 ::: notes
 We are not going to work directly in R but in RStudio, for reason that you will discover in the coming hours, and days.
@@ -719,11 +721,6 @@ This is the core of our work.
 
 Saving all the commands in a script is what makes our work **reproductible**.
 
-```{=html}
-<!--Here section 2.4 juba
-
-26 Mélaine-->
-```
 
 ## Let's create a new script
 
@@ -1101,7 +1098,7 @@ Do you understand the interest of working with RStudio now?
 ::: fragment
 [For next session, create a project for the course.]{style="color:indianred;"}
 
-Create a raw data folder and put in it all the dataset downloaded during the installation phase.
+Create a raw data folder and put in it all the datasets downloaded during the installation phase.
 :::
 
 ::: notes

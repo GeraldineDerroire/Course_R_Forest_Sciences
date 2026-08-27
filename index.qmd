@@ -54,11 +54,13 @@ Follow [these instructions](0_installing_enviro/install_enviro.html) to set up t
 
     -   [Going further with R session 2/2](99_archives/2025/7_going_further/going_further_session2.html)
 
-    
+-->     
 
 ### Exercices
 
-    -   [Exercices on session 2/3](99_archives/2025/2_getting_started/exo_getting_started_1.pdf)
+-   [Exercices on session *Getting started with R* 1/2](2_getting_started/exo_getting_started_1.pdf)
+    
+<!--
 
     -   [Exercices on session 3/3](99_archives/2025/2_getting_started/exo_getting_started_2.pdf)
     
