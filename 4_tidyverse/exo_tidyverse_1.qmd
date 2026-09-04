@@ -21,7 +21,6 @@ These data were available in a previous version of the package BIOMASS (v 2.1.11
 You can access these data in a csv file [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/KarnatakaForest.csv){preview-link="false"}.
 
 * Read the data using the function read.csv (don't forget to look at the metadata in the help available here [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/4_tidyverse/data/description-_KarnatakaForest.pdf){preview-link="false"}). 
-Rename the data to facilitate the writing of the script.
 
 ```{r}
 dt_WG <- read.csv("data/KarnatakaForest.csv")
@@ -42,6 +41,14 @@ dt_WG <- as_tibble(dt_WG)
 str(dt_WG)
 ```
 
+* Now, read the data using the function read_csv. 
+This is a preferred alternative
+as is returns directly a tibble
+
+```{r, message=FALSE}
+dt_WG <- read_csv("data/KarnatakaForest.csv")
+```
+
 * Transform all non-numeric variables to a factor.
 
 ```{r}
@@ -52,7 +59,7 @@ dt_WG <- dt_WG %>%
          genus = as.factor(genus),
          species = as.factor(species))
 
-# alternative solution (not seen in the class)
+# alternative solution (not seen in the class, will be seen later)
 dt_WG <- dt_WG %>% 
   mutate(across(c(plotId, treeId, family, genus, species), as.factor))
 ```
@@ -73,7 +80,11 @@ diam_min <- dt_WG %>%
   select(diam) %>% # keep only the variable diameter
   distinct() # keep only one unique value
 diam_min
+```
 
+<!--
+
+```{r}
 # alternative solution
 diam_min <- dt_WG %>% 
   slice_min(diam, 
@@ -82,6 +93,9 @@ diam_min <- dt_WG %>%
   # to get only one value even when there are ties
   select(diam)
 ```
+
+-->
+
 
 
 * What are the full species names (genus and species) of the 5 biggest trees?
@@ -110,9 +124,12 @@ dt_WG %>%
 * How many different species are amongst these five biggest trees?
 
 ```{r}
-sp_big5 <- big5 %>% 
+big5 %>% 
   distinct() %>% # select unique rows
   count() # count them
+
+# alternative solution that return a value and not a tibble
+n_distinct(big5)
 
 # NB: this is different from
 # big5 %>% count(genus, species)
@@ -154,9 +171,8 @@ view(dt_sub)
 ```{r}
 n_75 <- dt_WG %>% 
   filter(diam > quantile(diam, probs = 0.75)) %>% # trees with diameter in the 4th quartile
-  select(family) %>% # keep only the variable family
-  distinct() %>% # keep only a unique row for each family
-  count() # count the rows
+  distinct(family) %>% # keep only a unique row for each family
+  count() # count the rows 
 n_75
 ```
 

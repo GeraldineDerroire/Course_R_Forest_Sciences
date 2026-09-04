@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2026-07-22">
+  <meta name="dcterms.date" content="2026-09-04">
   <title>Working with data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,7 +212,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2026-07-22</p>
+  <p class="date">2026-09-04</p>
 </section>
 <section id="lets-work-on-barro-colorado-island-data" class="slide level2">
 <h2>Let’s work on Barro Colorado Island data</h2>
@@ -1517,6 +1517,14 @@ Total    50 100  100</code></pre>
 <section id="importing-data-from-other-formats" class="slide level2">
 <h2>Importing data from other formats</h2>
 <p>You can also import data from a statistics software (SPSS, SAS, Stata…) or from Excel.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href=""></a><span class="fu">library</span>(readxl)</span>
+<span id="cb95-2"><a href=""></a>BCI.env <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="at">path =</span> <span class="st">"data/BCI_env.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell fragment">
+
+</div>
+<p><em>NB: the function read_excel returns a tibble, we will see what this is in the next session.</em></p>
 <p>But using a universal data format (CSV) is preferred.</p>
 </section>
 <section id="typing-data-in-a-spreadsheet" class="slide level2">
@@ -1623,9 +1631,9 @@ Total    50 100  100</code></pre>
 <h2>Writing data from R to a csv</h2>
 <p>From R, We can save a data frame to a csv file using the function <span style="color:indianred;">write.csv</span>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href=""></a><span class="fu">write.csv</span>(<span class="at">x =</span> BCI.env, <span class="co"># the object to be written</span></span>
-<span id="cb95-2"><a href=""></a>          <span class="at">file =</span> <span class="st">"data/BCI_env.csv"</span>, <span class="co"># the file to write in (and its relative path)</span></span>
-<span id="cb95-3"><a href=""></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># no row names</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href=""></a><span class="fu">write.csv</span>(<span class="at">x =</span> BCI.env, <span class="co"># the object to be written</span></span>
+<span id="cb96-2"><a href=""></a>          <span class="at">file =</span> <span class="st">"data/BCI_env.csv"</span>, <span class="co"># the file to write in (and its relative path)</span></span>
+<span id="cb96-3"><a href=""></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># no row names</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 
@@ -1650,11 +1658,11 @@ Total    50 100  100</code></pre>
 <p>We can use different separators, <strong>but this is not recommended</strong>.</p>
 <p>If we use different separators with the function <span style="color:indianred;">write.csv</span>, it ignores them:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href=""></a><span class="fu">write.csv</span>(<span class="at">x =</span> BCI.env, <span class="co"># the object to be written</span></span>
-<span id="cb96-2"><a href=""></a>          <span class="at">file =</span> <span class="st">"data/BCI.env_semicol.csv"</span>, <span class="co"># the file to write in (and its relative path)</span></span>
-<span id="cb96-3"><a href=""></a>          <span class="at">sep=</span><span class="st">";"</span>, <span class="co"># the separator of columns</span></span>
-<span id="cb96-4"><a href=""></a>          <span class="at">dec =</span> <span class="st">","</span>, <span class="co"># the separator of decimals</span></span>
-<span id="cb96-5"><a href=""></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># no row names</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href=""></a><span class="fu">write.csv</span>(<span class="at">x =</span> BCI.env, <span class="co"># the object to be written</span></span>
+<span id="cb97-2"><a href=""></a>          <span class="at">file =</span> <span class="st">"data/BCI.env_semicol.csv"</span>, <span class="co"># the file to write in (and its relative path)</span></span>
+<span id="cb97-3"><a href=""></a>          <span class="at">sep=</span><span class="st">";"</span>, <span class="co"># the separator of columns</span></span>
+<span id="cb97-4"><a href=""></a>          <span class="at">dec =</span> <span class="st">","</span>, <span class="co"># the separator of decimals</span></span>
+<span id="cb97-5"><a href=""></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># no row names</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stderr">
@@ -1671,9 +1679,9 @@ Total    50 100  100</code></pre>
 <h2>Writing data to a csv</h2>
 <p>If we really want to change the separators, we need the function <span style="color:indianred;">write.csv2</span>, which uses a <span style="color:indianred;">;</span> to separate the columns and a <span style="color:indianred;">,</span> for the decimals:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href=""></a><span class="fu">write.csv2</span>(<span class="at">x =</span> BCI.env, <span class="co"># the object to be written</span></span>
-<span id="cb99-2"><a href=""></a>          <span class="at">file =</span> <span class="st">"data/BCI.env_semicol.csv"</span>, <span class="co"># the file to write in (and its relative path)</span></span>
-<span id="cb99-3"><a href=""></a>           <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># no row names</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href=""></a><span class="fu">write.csv2</span>(<span class="at">x =</span> BCI.env, <span class="co"># the object to be written</span></span>
+<span id="cb100-2"><a href=""></a>          <span class="at">file =</span> <span class="st">"data/BCI.env_semicol.csv"</span>, <span class="co"># the file to write in (and its relative path)</span></span>
+<span id="cb100-3"><a href=""></a>           <span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="co"># no row names</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 

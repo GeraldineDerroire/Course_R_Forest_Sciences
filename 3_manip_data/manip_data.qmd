@@ -784,6 +784,13 @@ We'll see the tidyverse in the next session.
 
 You can also import data from a statistics software (SPSS, SAS, Stata...) or from Excel.
 
+```{r}
+library(readxl)
+BCI.env <- read_excel(path = "data/BCI_env.xlsx")
+```
+
+*NB: the function read_excel returns a tibble, we will see what this is in the next session.*
+
 But using a universal data format (CSV) is preferred.
 
 ## Typing data in a spreadsheet

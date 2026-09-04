@@ -7,11 +7,6 @@ execute:
   eval: true 
 ---
 
-```{r}
-R.version.string
-.libPaths()
-```
-
 
 For all the following exercises, use functions from the tidyverse, and pipes, whenever possible.
 
@@ -25,6 +20,9 @@ library(tidyverse)
 You are going to work on data from trees in Barro Colorado Island.
 These data are available in the package vegan, and are called 
 *BCI*.
+The dataset is a floristic table.
+It has a row per plot and a column per species.
+The values are the number of trees of a given species in a given plot.
 
 
 * Load the data (don't forget to look at the metadata in the help of the package). 
@@ -34,12 +32,11 @@ library(vegan)
 data(BCI)
 ```
 
-* Get an overview of the data and check their class.
+* Get an overview of the data.
 
 ```{r, eval= FALSE}
 str(BCI)
 summary(BCI)
-class(BCI)
 ```
 
 * Transform the data to a tibble. 
@@ -56,26 +53,15 @@ BCI <- as_tibble(BCI)
 ```{r}
 BCI <- BCI %>% 
   mutate(plot_ID = paste("BCI",
-                         1:nrow(BCI), # so that the code still works 
-                         # if the size of the data changes
+                         1:nrow(BCI), 
                          sep ="_")
   )
-# this solution makes to code generalisable
-
-# a simpler way to do it (but which wouldn't work if 
-# the number of rows is not longuer 50):
-BCI <- BCI %>% 
-  mutate(plot_ID = paste("BCI",
-                         1:50, 
-                         sep ="_"))
 ```
 
-```{r, eval = FALSE}
+```{r, eval=FALSE}
 dim(BCI)
 names(BCI)
 ```
-
-
 
 * Create a tibble with the data in a long format, to have one row per species and plot as follow: 
 
@@ -87,9 +73,9 @@ BCI_L <- BCI %>%
 BCI_L
 ```
 
-* Check the dimension of this new table (try to do it using a test).
+* Check that the dimensions of this new table are correct (try to do it using a test).
 
-```{r, eval = FALSE}
+```{r , eval=FALSE}
 nrow(BCI_L) == # number of row in the long format
   (ncol(BCI) - 1) * nrow(BCI) 
   # number of column (without plot_id) * number of rows in the wide format
@@ -99,7 +85,7 @@ nrow(BCI_L) == # number of row in the long format
 
     * Let's do it with the function *separate* (don't replace the initial data, store the result in a new object).
     
-```{r}
+```{r, warning=FALSE}
 BCI_L_2 <- BCI_L %>% 
   separate(gen_sp,
            c("genus", "species"), # new column names
@@ -113,7 +99,7 @@ BCI_L_2 <- BCI_L %>%
 sp_list <- BCI_L %>% distinct(gen_sp)
 ```
 
-```{r, eval = FALSE}
+```{r}
 view(sp_list)
 # some gen_sp have more than one . (more than 2 parts), 
 # so it cannot be separated in the two columns
@@ -134,7 +120,7 @@ view(mat_name)
 
   * Let's keep only the two first columns of this matrix and bind these columns to the long dataset.
   
-```{r}
+```{r, message=FALSE}
 BCI_L <- bind_cols(BCI_L, mat_name[, 1:2])
 ```
   
@@ -170,8 +156,7 @@ BCI.env <- as_tibble(BCI.env)
 ```{r}
 BCI.env <- BCI.env %>% 
   mutate(plot_ID = paste("BCI",
-                         1:nrow(BCI.env), # so that the code work 
-                         # if the size of the data changes
+                         1:nrow(BCI.env), 
                          sep ="_")
   )
 ```

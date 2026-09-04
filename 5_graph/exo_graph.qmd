@@ -1,5 +1,5 @@
 ---
-title: "Exercices on session *Data visualisation"
+title: "Exercices on session *Data visualisation*"
 format:
   pdf
 execute:
@@ -18,7 +18,7 @@ library(patchwork)
 
 For this part, there is no need to improve the appearance of the plots.
 
-Let's work with the *wdData* from a previous version of the package *BIOMASS* (v 2.1.11). These data are available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/data/wdData.csv){preview-link="false"}, and the metadata [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/data/wdData.csv){preview-link="false"}.
+Let's work with the *wdData* from a previous version of the package *BIOMASS* (v 2.1.11). These data are available [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/data/wdData.csv){preview-link="false"}, and the metadata [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/5_graph/data/description_wdData.pdf){preview-link="false"}.
 
 * Read these data as a tibble
 
@@ -29,7 +29,7 @@ str(wdData)
 
 * Make a histogram of wood density for each of the following three regions, using facets: South_America_(tropical), Australia/PNG_(tropical), Africa_(tropical)
 
-```{r}
+```{r, message=FALSE}
 wdData %>% 
   filter(region %in% c("South_America_(tropical)", 
                        "Australia/PNG_(tropical)", 
@@ -53,8 +53,7 @@ wdData %>%
 * Compare the distribution of wood density for the 10 more common family on a single graph
 
 ```{r}
-# do a boxplot because a density plot would be too much
-
+# we do a boxplot because a density plot would be too much
 abd_10 <- wdData %>% 
   count(family) %>% 
   arrange(desc(n)) %>% 
@@ -65,19 +64,6 @@ wdData %>%
   ggplot(aes(x = family, y = wd)) + 
   geom_boxplot() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-## Alternative
-abd_10 <- wdData %>% 
-  count(family) %>% 
-  arrange(desc(n)) %>% 
-  slice_head(n = 10) %>% 
-  pull(family)
-
-wdData %>% 
-  filter(family %in% abd_10) %>% 
-  ggplot(aes(x = family, y = wd)) + 
-  geom_boxplot() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 
 * Show the number of observation per *family* and *regionId* for the 10 most abundant families
@@ -85,7 +71,7 @@ wdData %>%
 ```{r}
 # 1st possibility: heatmap
 wdData %>% 
-  filter(family %in% abd_10) %>% 
+  filter(family %in% abd_10$family) %>% 
   count(family, regionId) %>% 
   ggplot(aes(x = family, y = regionId)) + 
   geom_tile(aes(fill = n)) +
@@ -96,7 +82,7 @@ wdData %>%
 ```{r}
 # 2nd possibility: bubble plot
 wdData %>% 
-  filter(family %in% abd_10) %>% 
+  filter(family %in% abd_10$family) %>% 
   ggplot(aes(x = family, y = regionId)) + 
   geom_count()
 ```
@@ -104,7 +90,7 @@ wdData %>%
 ```{r}
 # 3rd possibility: a stacked barplot
 wdData %>% 
-  filter(family %in% abd_10) %>% 
+  filter(family %in% abd_10$family) %>% 
   ggplot(aes(x= family, fill = regionId)) + 
   geom_bar(position="stack") 
 # but here difficult to find a palette with so many diverging colors

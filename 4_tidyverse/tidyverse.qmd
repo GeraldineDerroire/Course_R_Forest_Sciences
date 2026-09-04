@@ -1551,7 +1551,7 @@ dt1L %>% complete(tree, year) # names of the columns for which we want all combi
 ::: notes
 use NA for missing values, but we could specify something else
 
-note that this is not needed to make the package tidy
+note that this is not needed to make the data tidy
 :::
 
 

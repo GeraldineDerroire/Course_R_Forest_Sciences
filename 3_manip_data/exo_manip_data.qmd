@@ -9,16 +9,15 @@ execute:
 
 # Working with data from the *Inventário Florestal Nacional*
 
--   Go to the website of the IFN ([here](https://snif.florestal.gov.br/pt-br/inventario-florestal-nacional-ifn/ifn-dados-abertos){preview-link="false"}) and download the data of the Rondônia for trees with a DBH≥10cm (don't forget to look at the metadata!)
+-   Go to the website of the IFN ([here](https://dados.florestal.gov.br/pt_BR/dataset/ifn-dap-10-por-uf_disp-set2025){preview-link="false"}) and download the data of the Rondônia for trees with a DBH $\geq$ 10 cm (don't forget to look at the metadata!)
 
 
 
 - Import these data into R (make sure you look at the data structure before)
 
 ```{r}
-data_Ron <- read.csv(file = "data/IFN-RO_arvores_dap_maior_10cm_20-04-2022.csv",
-                     sep = ";",
-                     dec = ",")
+library(readxl)
+data_Ron <- read_excel(path = "data/ifn_dap10_rondonia_disp-set2025.xlsx")
 ```
 
 - How many variables are there? how many observations?
@@ -35,27 +34,25 @@ dim(data_Ron)
 str(data_Ron)
 ```
 
-- Transform the following variable into factors: *Unidade amostral*, *estado de sanidade do fuste*, *qualidade do fuste*, 
-*posição sociológica*, *hábito da planta* and check the structure again
+- Transform the following variable into factors: *Unidade de amostragem*, *Sanidade do indivíduo*, *Qualidade do fuste do indivíduo*, 
+*Posição sociológica*, *Hábito dos indivíduos* and check the structure again
 
 ```{r}
-data_Ron$UA <- as.factor(data_Ron$UA) # Unidade amostral
-data_Ron$SA <- as.factor(data_Ron$SA) # estado de sanidade do fuste
-data_Ron$QF <- as.factor(data_Ron$QF) # qualidade do fuste
-data_Ron$PS <- as.factor(data_Ron$PS) # posição sociológica
-data_Ron$HAB <- as.factor(data_Ron$HAB) # hábito da planta
+data_Ron$UA <- as.factor(data_Ron$UA) # Unidade de amostragem
+data_Ron$SA <- as.factor(data_Ron$SA) # Sanidade do indivíduo
+data_Ron$QF <- as.factor(data_Ron$QF) # Qualidade do fuste do indivíduo
+data_Ron$PS <- as.factor(data_Ron$PS) # Posição sociológica
+data_Ron$HAB <- as.factor(data_Ron$HAB) # Hábito dos indivíduos
 ```
 
-- Transform the following variable into boleans: *árvore fora da floresta*, *presença ou ausência de lianas*, 
-*indivíduo com ou sem coleta botânica* and check the structure again
+- Transform the following variable into boleans: *Arvore fora da floresta*, *Presença de Lianas*, 
+*Coleta de material botânico* and check the structure again
 
 ```{r}
-data_Ron$AFF <- as.logical(data_Ron$AFF) # árvore fora da floresta
-data_Ron$PL <- as.logical(data_Ron$PL) # presença ou ausência de lianas
-data_Ron$MB <- as.logical(data_Ron$MB) # indivíduo com ou sem coleta botânica
-
-# or
-data_Ron$AFF <- data_Ron$AFF == 1
+data_Ron$AFF <- as.logical(data_Ron$AFF) # Arvore fora da floresta
+data_Ron$PL <- as.logical(data_Ron$PL) # Presença de Lianas
+data_Ron$MB <- as.logical(data_Ron$MB) # Coleta de material botânico
+str(data_Ron)
 ```
 
 - How many *Unidade amostral* is there?
@@ -77,7 +74,7 @@ length(unique(data_Ron$UA))
 data_Ron$DAP_m <- data_Ron$DAP / 100
 ```
 
-- What are the minimum, maximum and median height (*altura total*)
+- What are the minimum, maximum and median height (*Altura total*)
 
 ```{r}
 min(data_Ron$HT)
@@ -97,21 +94,24 @@ summary(data_Ron$HT)
 hist(data_Ron$DAP)
 ```
 
-- How many trees are out of the forest?
+- How many trees are dead standing (*Sanidade do indivíduo* indicates *morta em pé*)?
 
 ```{r}
-table(data_Ron$AFF)
+table(data_Ron$SA)
 
 # alternative not seen in class
-dim(data_Ron[data_Ron$AFF == TRUE,])[1]
+sum(data_Ron$SA == 4)
+# or 
+dim(data_Ron[data_Ron$SA == 4,])[1]
 ```
-- Which percentage of trees have liana?
+
+- Which percentage of trees are dead standing?
 
 ```{r}
-questionr::freq(data_Ron$PL)
+questionr::freq(data_Ron$SA)
 ```
 
-- Make a graphical representation (barplot or Cleveland plot) of the occurrences of health levels (*estado de sanidade do fuste*)
+- Make a graphical representation (barplot or Cleveland plot) of the occurrences of health levels (*Sanidade do indivíduo*)
 
 ```{r}
 tab <- table(data_Ron$SA)

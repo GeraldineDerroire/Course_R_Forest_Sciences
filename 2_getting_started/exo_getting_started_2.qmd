@@ -29,6 +29,7 @@ occ
 ```{r, eval=FALSE}
 str(occ)
 ```
+
 * Calculate the number of species in each site.
 
 ```{r, eval=FALSE}
@@ -40,6 +41,7 @@ rowSums(occ)
 ```{r, eval=FALSE}
 colSums(occ)
 ```
+
 * Transpose the matrix to get the following:
 
 ```{r}
@@ -64,6 +66,7 @@ dt
 ```{r, eval=FALSE}
 sqrt(25)
 ```
+
 * Check that the exponential of the logarithm of 1 is equal to 1.
 *NB: If you try to do it for another number, you will get an unexpected result due to rounding.*
 
@@ -92,12 +95,14 @@ vec
 ```{r, eval=FALSE}
 abs(vec)
 ```
+
 * Get the range of values in *vec* 
 
 ```{r, eval=FALSE}
 range(vec)
 ```
-* Calculate the basal area of a tree of diameter 25 cm (the basal area is the area of a circle of the diameter of a tree), in m^2^
+
+* Calculate the basal area of a tree of diameter 25 cm (the basal area is the area of a circle that has the diameter of the consider tree), in m^2^
 
 ```{r, eval=FALSE}
 pi * (25/200)^2
