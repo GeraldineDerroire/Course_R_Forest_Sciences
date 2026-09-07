@@ -136,7 +136,7 @@ If needed, I will contact you by **email** (using the email provided in Sigaa).
 ## 
 
 The course material has been created using R V4.6.1 and quarto, and the code is available on [GitHub](https://github.com/GeraldineDerroire/Course_R_Forest_Sciences){preview-link="false"}
-and the course material is online [here](geraldinederroire.github.io/Course_R_Forest_Sciences/){preview-link="false"}.
+and the course material is online [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/){preview-link="false"}.
 
 
   

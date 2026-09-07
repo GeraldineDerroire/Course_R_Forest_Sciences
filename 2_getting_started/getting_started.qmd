@@ -428,7 +428,7 @@ Important to try to understand the error messages
 Some good practices when naming an object:
 
 ::: fragment
--   [The case matters (upper and lower cases are not the same)
+-   The case matters (upper and lower cases are not the same)
 :::
 
 ::: fragment
@@ -1113,7 +1113,7 @@ This is important, we will need the data for the future class.
 
 ::: fragment
 ```{r}
-mode(5.3)
+typeof(5.3)
 ```
 :::
 
@@ -1121,7 +1121,7 @@ mode(5.3)
 
 ::: fragment
 ```{r}
-mode("Hello!")
+typeof("Hello!")
 ```
 :::
 
@@ -1129,7 +1129,7 @@ mode("Hello!")
 
 ::: fragment
 ```{r}
-mode(TRUE)
+typeof(TRUE)
 ```
 :::
 
@@ -1177,25 +1177,25 @@ vol
 
 ## Vectors
 
-A vector can contain several values of any mode...
+A vector can contain several values of any type...
 
 ```{r}
 test <- c(TRUE, FALSE, TRUE, TRUE)
-mode(test)
+typeof(test)
 ```
 
-[...but these values need to be **of the same mode**]{.fragment}
+[...but these values need to be **of the same type**]{.fragment}
 
 ::: fragment
 ```{r}
 test2 <- c(2.3, "blue", TRUE)
-mode(test2)
+typeof(test2)
 ```
 :::
 
 [🤔 What happened?]{.fragment}
 
-[R converted all the values into character (the more flexible mode).]{.fragment}
+[R converted all the values into character (the more flexible type).]{.fragment}
 
 ## Vectors
 
@@ -1516,7 +1516,7 @@ The main ones that we are going to use during the class are: vectors and datafra
 
 ![](matrix.png){width="20%"}
 
-A matrix is a **two-dimensional** data structure (rows and columns) where all the element are of the **same mode**.
+A matrix is a **two-dimensional** data structure (rows and columns) where all the element are of the **same type**.
 
 [Let's create a matrix:]{.fragment}
 
@@ -1690,7 +1690,7 @@ M/M
 
 ![](array.png){width="20%"}
 
-An array is a **multi-dimensional** data structure where all the element are of the **same mode**.
+An array is a **multi-dimensional** data structure where all the element are of the **same type**.
 
 It is an extension of a matrix with more than two dimensions.
 

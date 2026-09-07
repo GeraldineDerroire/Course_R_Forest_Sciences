@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2026-08-27">
+  <meta name="dcterms.date" content="2026-09-04">
   <title>Getting started with R</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,7 +212,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2026-08-27</p>
+  <p class="date">2026-09-04</p>
 </section>
 <section>
 <section id="r-and-rstudio" class="title-slide slide level1 center">
@@ -807,7 +807,7 @@ Géraldine Derroire
 <p>Some good practices when naming an object:</p>
 <div class="fragment">
 <ul>
-<li class="fragment">[The case matters (upper and lower cases are not the same)</li>
+<li class="fragment">The case matters (upper and lower cases are not the same)</li>
 </ul>
 </div>
 <div class="fragment">
@@ -1669,11 +1669,11 @@ How to save a script?
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href=""></a><span class="fu">mode</span>(<span class="fl">5.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href=""></a><span class="fu">typeof</span>(<span class="fl">5.3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "numeric"</code></pre>
+<pre><code>[1] "double"</code></pre>
 </div>
 </div>
 </div>
@@ -1682,7 +1682,7 @@ How to save a script?
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href=""></a><span class="fu">mode</span>(<span class="st">"Hello!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href=""></a><span class="fu">typeof</span>(<span class="st">"Hello!"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1695,7 +1695,7 @@ How to save a script?
 </ul>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href=""></a><span class="fu">mode</span>(<span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href=""></a><span class="fu">typeof</span>(<span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1765,21 +1765,21 @@ How to save a script?
 </section>
 <section id="vectors-1" class="slide level2">
 <h2>Vectors</h2>
-<p>A vector can contain several values of any mode…</p>
+<p>A vector can contain several values of any type…</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href=""></a>test <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb110-2"><a href=""></a><span class="fu">mode</span>(test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb110-2"><a href=""></a><span class="fu">typeof</span>(test)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "logical"</code></pre>
 </div>
 </div>
-<p><span class="fragment">…but these values need to be <strong>of the same mode</strong></span></p>
+<p><span class="fragment">…but these values need to be <strong>of the same type</strong></span></p>
 <div class="fragment">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href=""></a>test2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">2.3</span>, <span class="st">"blue"</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb112-2"><a href=""></a><span class="fu">mode</span>(test2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb112-2"><a href=""></a><span class="fu">typeof</span>(test2)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -1788,7 +1788,7 @@ How to save a script?
 </div>
 </div>
 <p><span class="fragment">🤔 What happened?</span></p>
-<p><span class="fragment">R converted all the values into character (the more flexible mode).</span></p>
+<p><span class="fragment">R converted all the values into character (the more flexible type).</span></p>
 </section>
 <section id="vectors-2" class="slide level2">
 <h2>Vectors</h2>
@@ -1887,9 +1887,9 @@ How to save a script?
 <div class="fragment">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 1445.82  601.61 2957.21 2173.79  709.95 2343.78 2492.83 2471.29  768.80
-[10] 1476.96  231.98 1076.76 1760.17 2027.00 2399.96  998.32 2002.58  210.71
-[19]  187.01 1982.90  667.31 1259.05 1955.40 2517.60 1027.17</code></pre>
+<pre><code> [1] 2873.10  711.21 1162.87 1832.66  690.33 2946.40 2494.74 2984.65  801.12
+[10] 2500.53 2342.71 2950.68 1190.79 2987.80 2777.00 2139.27 2831.29 2211.35
+[19]  467.46  323.23  866.12 2129.28  799.79 2253.45 2624.51</code></pre>
 </div>
 </div>
 </div>
@@ -2253,7 +2253,7 @@ have someone show how they did
 <section id="matrices" class="slide level2">
 <h2>Matrices</h2>
 
-<img data-src="matrix.png" style="width:20.0%" class="r-stretch"><p>A matrix is a <strong>two-dimensional</strong> data structure (rows and columns) where all the element are of the <strong>same mode</strong>.</p>
+<img data-src="matrix.png" style="width:20.0%" class="r-stretch"><p>A matrix is a <strong>two-dimensional</strong> data structure (rows and columns) where all the element are of the <strong>same type</strong>.</p>
 <p><span class="fragment">Let’s create a matrix:</span></p>
 <div class="fragment">
 <div class="cell">
@@ -2557,7 +2557,7 @@ row4    1    1</code></pre>
 <section id="arrays" class="slide level2">
 <h2>Arrays</h2>
 
-<img data-src="array.png" style="width:20.0%" class="r-stretch"><p>An array is a <strong>multi-dimensional</strong> data structure where all the element are of the <strong>same mode</strong>.</p>
+<img data-src="array.png" style="width:20.0%" class="r-stretch"><p>An array is a <strong>multi-dimensional</strong> data structure where all the element are of the <strong>same type</strong>.</p>
 <p>It is an extension of a matrix with more than two dimensions.</p>
 <p>.</p>
 <aside class="notes">
