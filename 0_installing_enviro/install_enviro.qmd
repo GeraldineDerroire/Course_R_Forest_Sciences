@@ -212,7 +212,7 @@ When you first connect to GitHub, you will be asked if you want to continue conn
 Run the code below in the console:
 
 ```{r, eval=FALSE}
-install.packages("vegan",
+install.packages(c("vegan",
                  "questionr",
                  "tidyverse",
                  "janitor",
@@ -228,7 +228,7 @@ install.packages("vegan",
                  "ggstats", 
                  "lindia", 
                  "car", 
-                 "AICcmodavg")
+                 "AICcmodavg"))
 ```
 
 

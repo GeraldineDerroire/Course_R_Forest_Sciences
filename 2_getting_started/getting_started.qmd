@@ -1613,13 +1613,13 @@ M[2:3, ] # rows 2 to 3
 :::::
 ::::::::::
 
-::: fragment
+## Matrices
+
 Or we call the row and columns by their names:
 
 ```{r}
 M["row3", "col2"]
 ```
-:::
 
 ## Operations on matrices
 
