@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2026-09-04">
+  <meta name="dcterms.date" content="2026-09-08">
   <title>Introduction to the tidyverse</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,7 +212,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2026-09-04</p>
+  <p class="date">2026-09-08</p>
 </section>
 <section>
 <section id="what-is-the-tidyverse" class="title-slide slide level1 center">
@@ -345,6 +345,7 @@ Géraldine Derroire
 <p><span class="fragment">All the packages of the tidyverse require tidy data.</span></p>
 <aside class="notes">
 <p>we have seen this figure when we talked about data frame. Tidy data are in a data frame, but all data frame are not necessarly tidy. Data frame is a structure, but it is possible to use it in a messy way.</p>
+<p>Ex for one table per obs unit : trees and plots =&gt; 2 tables</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -892,7 +893,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 <aside class="notes">
-<p>The number of rows can be specify or we can specify a proportion of rows (here 10%, we had 45 species)</p>
+<p>The number of rows can be specify or we can specify a proportion of rows (here 10%, we had 18 species =&gt; 1 row)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -937,19 +938,6 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 </div>
-<aside class="notes">
-<p>the two ways of writing it (using the pipe or not) are equivalent</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 </section>
 <section id="filter" class="slide level2">
 <h2>filter</h2>
@@ -985,7 +973,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </section>
 <section id="filter-1" class="slide level2">
 <h2>filter</h2>
-<p>Or let’s select the species that have a wood specific gravity (wsg) lower than 0.4:</p>
+<p>Or let’s select the species that have a wood specific gravity (wsg) lower than 0.6:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href=""></a>traits <span class="sc">%&gt;%</span></span>
 <span id="cb40-2"><a href=""></a>  <span class="fu">filter</span>(s_wsg <span class="sc">&lt;</span> <span class="fl">0.6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1074,7 +1062,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 </div>
 </div>
 <aside class="notes">
-<p>in the dataset we have 45 values, so when we get the one above the median we get 22 =&gt; it makes sense</p>
+<p>in the dataset we have 18 values, so when we get the one above the median we get 9 =&gt; it makes sense</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1591,7 +1579,7 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p><span class="fragment"><span style="font-size: 25px">Here there are 7 species that have a wsg higher than the mean of their genus.</span></span></p>
 </div></div>
 <aside class="notes">
-<p>Here most of the genus have just one species, so their wsg is not stricly &gt; to the mean</p>
+<p>Here some of the genus have just one species, so their wsg is not stricly &gt; to the mean</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -2117,7 +2105,6 @@ dbl (11): s_LMA, s_Nmass, s_Pmass, s_wsg, s_dbhmax, s_hmax, s_ah, s_seedmass...
 <p>left_join keeps all rows in x</p>
 <p>here show what is the 1st data set (traits_sub) and the second (sp_com_sub), so we will keep all the rows in traits_sub =&gt; see the dim</p>
 <p>show tha the coluns have been matches, and that the key is not repeated</p>
-<p>we find the chawari from the previous session</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
