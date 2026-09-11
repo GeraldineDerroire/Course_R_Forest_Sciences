@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2026-07-17">
+  <meta name="dcterms.date" content="2026-09-10">
   <title>Introduction to Version Control with Git and GitHub</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,7 +212,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2026-07-17</p>
+  <p class="date">2026-09-10</p>
 </section>
 <section>
 <section id="principle" class="title-slide slide level1 center">
@@ -252,7 +252,7 @@ Géraldine Derroire
 <li class="fragment"><p>keep your project clean by avoiding saving multiple versions of each file: <em>no more <span style="color:gray;">script_v1_final_final_OK.R</span></em></p></li>
 <li class="fragment"><p>always know what the current version is</p></li>
 <li class="fragment"><p>know what are the differences between versions</p></li>
-<li class="fragment"><p>experiment safely has you can recover from mistakes</p></li>
+<li class="fragment"><p>experiment safely as you can recover from mistakes</p></li>
 </ul>
 <aside class="notes">
 <p>=&gt; reproducibility</p>
@@ -495,7 +495,7 @@ Géraldine Derroire
 <section id="create-a-new-repository-from-scratch" class="slide level2">
 <h2>Create a new repository from scratch</h2>
 <p><span style="font-size: 29px">The best practice is to create a git and GitHub repo when you start a new project.</span></p>
-<p><span style="font-size: 29px">create the GitHub repository first, then clone it.</span></p>
+<p><span style="font-size: 29px">Create the GitHub repository first, then clone it.</span></p>
 <div class="columns">
 <div class="column" style="width:70%;">
 <ol type="1">
@@ -563,20 +563,6 @@ Géraldine Derroire
 </section>
 <section id="create-a-repository-from-an-existing-rstudio-project" class="slide level2">
 <h2>Create a repository from an existing RStudio project</h2>
-<aside class="notes">
-<p>Best to avoid doing this, as we should create it from the beginning for reproductibility</p>
-<p>Let’s NOT do this together</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
 <div class="columns">
 <div class="column" style="width:70%;">
 <ol type="1">
@@ -606,7 +592,8 @@ Géraldine Derroire
 </div>
 </div>
 <aside class="notes">
-<p>Let’s not do this now</p>
+<p>Best to avoid doing this, as we should create it from the beginning for reproductibility</p>
+<p>Let’s NOT do this together</p>
 <p>To stage and commit: see next section</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -792,7 +779,7 @@ Géraldine Derroire
 <section id="pull" class="slide level2">
 <h2>Pull</h2>
 <p><span style="font-size: 30px">To update your local repository with the latest changes from GitHub, click on <em>Pull</em>.</span></p>
-<p><span style="font-size: 30px">This will synchronize your local repository with the remote one, downloading any new commits made by you or your collaborators directly on GitHub.</span></p>
+<p><span style="font-size: 30px">This will synchronize your local repository with the remote one, downloading any new commits made by your collaborators, or by yourself directly on GitHub.</span></p>
 <aside class="notes">
 <p>This is it, this is the basic workflow that you will need to repeat very often</p>
 <style type="text/css">
@@ -961,14 +948,18 @@ Géraldine Derroire
 </ul>
 <p><span class="fragment"><strong>💡 Solution: pull before pushing again</strong></span></p>
 </section>
-<section id="why-cant-i-push-practice" class="slide level2">
-<h2>Why can’t I push ? practice</h2>
+<section id="why-cant-i-push-2" class="slide level2">
+<h2>Why can’t I push ?</h2>
+<p>Let’s make an example to practice together by creating a problem:</p>
 <ul>
 <li><p><span style="font-size: 30px"><em>go on GitHub</em></span></p></li>
 <li><p><span style="font-size: 30px"><em>edit the README (at the bottom of the repo main page) using <img data-src="pen.png"></em></span></p></li>
 <li><p><span style="font-size: 30px"><em>commit this change directly in GitHub <img data-src="commit_github.png"></em></span></p></li>
 <li><p><span style="font-size: 30px"><em>try to push some changes from your local repo, this will generate an error message</em></span></p></li>
-<li><p><span style="font-size: 30px"><em>pull before pushing again</em></span></p></li>
+</ul>
+<p>To resolve this problem:</p>
+<ul>
+<li><span style="font-size: 30px"><em>pull before pushing again</em></span></li>
 </ul>
 <aside class="notes">
 <p>if time, let’s practice this together</p>
@@ -1043,14 +1034,14 @@ Géraldine Derroire
 <li class="fragment"><p><span style="font-size: 30px">commit and push</span></p></li>
 </ul>
 </section>
-<section id="how-to-solve-a-conflict-practice" class="slide level2">
-<h2>How to solve a conflict? practice</h2>
-<p><em>To generate a conflict:</em></p>
+<section id="how-to-solve-a-conflict-1" class="slide level2">
+<h2>How to solve a conflict?</h2>
+<p>Let’s generate a conflict to practice together:</p>
 <ul>
 <li><p><span style="font-size: 30px"><em>Modify a file directly on GitHub (ex: the README) and commit</em></span></p></li>
 <li><p><span style="font-size: 30px"><em>On the local repo</em></span></p>
 <ul>
-<li><p><span style="font-size: 30px"><em>Don’t pull</em></span></p></li>
+<li><p><span style="font-size: 30px"><em>Don’t pull yet</em></span></p></li>
 <li><p><span style="font-size: 30px"><em>Modify the same file on the same line</em></span></p></li>
 <li><p><span style="font-size: 30px"><em>Try to push: you can’t</em></span></p></li>
 <li><p><span style="font-size: 30px"><em>Try to pull: this generate a conflict…</em></span></p></li>
@@ -1064,7 +1055,7 @@ Géraldine Derroire
 <ul>
 <li class="fragment"><p><span style="font-size: 30px">Avoid very long lines of code/text: <em>Git resolves changes line by line — shorter lines reduce the chance of overlap</em></span></p></li>
 <li class="fragment"><p><span style="font-size: 30px">Pull and push <strong>frequently</strong>: <em>The longer you wait, the more likely others have changed the same parts</em></span></p></li>
-<li class="fragment"><p><span style="font-size: 30px">Communicate with collaborators: <em>Know who is working on what — avoid editing the same files</em></span></p></li>
+<li class="fragment"><p><span style="font-size: 30px">Communicate with collaborators: <em>Know who is working on what — avoid editing the same files at the same time</em></span></p></li>
 <li class="fragment"><p><span style="font-size: 30px">Use <strong>branches</strong> for bigger changes: <em>Keeps the main branch clean and easier to merge later</em></span></p></li>
 </ul>
 </div><div class="column" style="width:30%;">

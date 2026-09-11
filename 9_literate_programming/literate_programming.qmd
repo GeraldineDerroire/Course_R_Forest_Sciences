@@ -83,6 +83,10 @@ Choose *Document*, fill in a title and a author name and click on *Create*
 
 This open a document containing plain text and R code.
 
+::: notes
+why did I asked you to install it in the tutorial then ? because the updates of quarto are only made available when there is a new version of RStudio...
+:::
+
 ## Rendering
 
 -   Click on ![](setting.png) and choose *Preview in Viewer Pane*
@@ -121,11 +125,12 @@ from the visual editor, or from the source editor
 try to add text, format it, play with it
 :::
 
-## Source editor
+## Source editor {.smaller}
 
 You can view and edit the plain Markdown document in the **Source editor**:
 
 ![](source.png){fig-align="center"}
+
 *The **Source editor** gives full control and is generally preferred for programming and version control*
 
 
@@ -339,7 +344,7 @@ This is slighly more advanced but make the equation very clean
 
 ## Cross-references
 
-[To be able to add a reference to a figure, table, equation, section... in another part of the document, we need to give them an **identifier** in ]{style="font-size: 30px"}[ {#....}]{style="color:indianred;"}:
+[To be able to add a reference to a figure, table, equation, section... in another part of the document, we need to give them an **identifier** in  ]{style="font-size: 30px"}[ {#....}]{style="color:indianred;"}:
 
 ::: {.column width="65%"}
 ``` markdown

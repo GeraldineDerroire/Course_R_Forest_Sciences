@@ -58,7 +58,7 @@ It allows you to
 
 -   know what are the differences between versions
 
--   experiment safely has you can recover from mistakes
+-   experiment safely as you can recover from mistakes
 
 ::: notes
 => reproducibility
@@ -296,7 +296,7 @@ let's practice
 
 [The best practice is to create a git and GitHub repo when you start a new project.]{style="font-size: 29px"}
 
-[create the GitHub repository first, then clone it.]{style="font-size: 29px"}
+[Create the GitHub repository first, then clone it.]{style="font-size: 29px"}
 
 ::::: columns
 ::: {.column width="70%"}
@@ -629,7 +629,7 @@ as we want to do a commit per task, it can be usefull not to commit all recent c
 
 [To update your local repository with the latest changes from GitHub, click on *Pull*.]{style="font-size: 30px"}
 
-[This will synchronize your local repository with the remote one, downloading any new commits made by you or your collaborators directly on GitHub.]{style="font-size: 30px"}
+[This will synchronize your local repository with the remote one, downloading any new commits made by your collaborators, or by yourself directly on GitHub.]{style="font-size: 30px"}
 
 ::: notes
 This is it, this is the basic workflow that you will need to repeat very often
@@ -786,7 +786,9 @@ collaborating is one of the main objectives of Github, but can also complicate t
 
 [**💡 Solution: pull before pushing again**]{.fragment}
 
-## Why can't I push ? practice
+## Why can't I push ? 
+
+Let's make an example to practice together by creating a problem:
 
 ::: nonincremental
 * [*go on GitHub*]{style="font-size: 30px"}
@@ -796,6 +798,8 @@ collaborating is one of the main objectives of Github, but can also complicate t
 * [*commit this change directly in GitHub ![](commit_github.png)*]{style="font-size: 30px"}
 
 * [*try to push some changes from your local repo, this will generate an error message*]{style="font-size: 30px"}
+
+To resolve this problem:
 
 * [*pull before pushing again*]{style="font-size: 30px"}
 
@@ -866,16 +870,16 @@ explain cases when Git can merge (changes on two different files)
 * [commit and push]{style="font-size: 30px"}
 
 
-## How to solve a conflict? practice
+## How to solve a conflict? 
 
-*To generate a conflict:*
+Let's generate a conflict to practice together:
 
 ::: nonincremental
 * [*Modify a file directly on GitHub (ex: the README) and commit*]{style="font-size: 30px"}
 
 * [*On the local repo*]{style="font-size: 30px"}
 
-    * [*Don't pull*]{style="font-size: 30px"}
+    * [*Don't pull yet*]{style="font-size: 30px"}
     
     * [*Modify the same file on the same line*]{style="font-size: 30px"}
     
@@ -896,7 +900,7 @@ explain cases when Git can merge (changes on two different files)
 
 * [Pull and push **frequently**: *The longer you wait, the more likely others have changed the same parts*]{style="font-size: 30px"}
 
-* [Communicate with collaborators: *Know who is working on what — avoid editing the same files*]{style="font-size: 30px"}
+* [Communicate with collaborators: *Know who is working on what — avoid editing the same files at the same time*]{style="font-size: 30px"}
 
 * [Use **branches** for bigger changes: *Keeps the main branch clean and easier to merge later*]{style="font-size: 30px"}
 
