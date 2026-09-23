@@ -1,5 +1,5 @@
 ---
-title: "Statistics with R - session 1"
+title: "Statistics with R - Distributions and hypothesis testing"
 author: Géraldine Derroire
 institute: Cirad - UnB
 date: last-modified
@@ -16,7 +16,7 @@ format:
 execute:
   echo: true   
   warning: true
-  message: true 
+  message: true
   cache: true
 editor: 
   markdown: 
@@ -41,6 +41,8 @@ tidyverse for data manip and graph
 questionr for usefull function for exploration and visualisation
 BIOMASS for data
 GGally to see pair-correlation
+
+I don't know your level of stats, so please ask when unclear !!!
 :::
 
 
@@ -136,6 +138,8 @@ The density function does not give the probability of being equal to a value, as
 
 so here much higher proba of being between -1 and 1, tha between -4 and -2
 
+Now we are going to see two very common distributions
+
 :::
 
 <!-- for each law => give examples of how used, show the equation with parameters, show the density (with several values of the param) -->
@@ -144,7 +148,7 @@ so here much higher proba of being between -1 and 1, tha between -4 and -2
 
 $$\mathcal{U}(a, b)$$
 
-[$[a, b]$ is the range of possible values (so *a* is the minimum value and *b* the maximum value)]{style="font-size: 30px"}
+[$a$ and $b$ are the two parameters of an uniform distribution. $[a, b]$ is the range of possible values (so *a* is the minimum value and *b* the maximum value)]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="30%"}
@@ -171,7 +175,9 @@ ggplot() + geom_line(data = dt, aes(x=x, y=y), colour = "blue", linetype="dashed
 
 ::: notes
 x < a : proba nulle
+
 a < x < b : equi proba
+
 x > b: proba nulle
 ::: 
 
@@ -180,7 +186,7 @@ x > b: proba nulle
 We use the function [runif]{style="color:indianred;"} to randomly draw data from a uniform distribution:
 
 ```{r}
-runif(n = 10, # number of value t
+runif(n = 10, # number of value to draw in the distribution
       min = 2, # lower limit of the distribution
       max = 5) # upper limit of the distribution
 ```
@@ -223,6 +229,7 @@ show on the blackboard
 ## Normal distribution
 
 $$\mathcal{N}(\mu, \sigma^2)$$
+The two parameters of a normal distribution are:
 
 * $\mu$ is the mean
 
@@ -270,6 +277,7 @@ let's draw values in 3 different normal distribution and put them in a dataframe
 then add them on a plot
 
 the mean is where the peak (the mode) is
+
 the larger the sd, the less peaky
 :::
 
@@ -281,7 +289,7 @@ then $z = \frac{x - \mu}{\sigma}$ follows a **centred reduced normal distributio
 
 $z \sim \mathcal{N}(0, 1)$
 
-[[💡 When to variable are measured in different scales, it can be usefull to standardise them by centring and reducing them, to be able to compare them.]{style="font-size: 30px"}]{.fragment}
+[[💡 When two variables are measured in different scales, it can be usefull to standardise them by centring and reducing them, to be able to compare them.]{style="font-size: 30px"}]{.fragment}
 
 ::: notes
 give an example of things measured in very different units
@@ -340,6 +348,7 @@ if we see that they both follow a normal distribution, but the match is better w
 data(NouraguesHD) # load the data
 dt_HD <- as_tibble(NouraguesHD) # rename and transform to tibble
 rm(NouraguesHD) # remove
+head(dt_HD) # look at the data
 ```
 
 ## Do the number of occurences of several genus depends on the plot? {.smaller}
@@ -365,7 +374,8 @@ abd_10
 ::: {.column width="50%"}
 ::: fragment
 ```{r}
-# take a subset of dt_HD containing the 10 most abundant genus
+# take a subset of dt_HD containing 
+# the 10 most abundant genus
 dt_sub10 <- dt_HD %>% 
   filter(genus %in% abd_10$genus) %>% 
   mutate(genus = as.factor(genus))
@@ -377,7 +387,7 @@ dt_sub10 <- dt_HD %>%
 
 ## Contingency table
 
-[Let's start by doing a contingency table, using the function [table]{style="color:indianred;"}.]{style="font-size: 30px"}
+[Let's start by doing a **contingency table**, using the function [table]{style="color:indianred;"}.]{style="font-size: 30px"}
 
 [This gives the number of observations for each pairs of categories.]{style="font-size: 30px"}
 
@@ -392,7 +402,7 @@ contigency table => very important
 
 ## Percentages per category
 
-[We can look at the percentages per column (*here* per plot), using the function [cprop]{style="color:indianred;"} of the package [questionr]{style="color:indianred;"}:]{style="font-size: 30px"}
+[We can look at the percentages per column (*here* the relative proportion of species in a given plot), using the function [cprop]{style="color:indianred;"} of the package [questionr]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -402,7 +412,13 @@ cprop(tab_abd)
 :::
 
 ::: {.column width="50%"}
-[[⚠️ Here we look at the frequency per column because we are interested in the effect of the plot and the plot is in column. The function [lprop]{style="color:indianred;"} also exists to look at frequency per row.]{style="font-size: 30px"}]{.fragment}
+
+::: fragment
+[⚠️ Here we look at the frequency per column because we are interested in the effect of the plot, and the plot is in column.]{style="font-size: 30px"} 
+
+[The function [lprop]{style="color:indianred;"} also exists to look at frequency per row.]{style="font-size: 30px"}
+:::
+
 :::
 :::::
 
@@ -428,8 +444,9 @@ confirm what we saw with the percentage => occurence of genus seems to depend on
 
 ## $\chi^2$ test {.smaller}
 
-[We can then perform a $\chi^2$ test, to test the independence of the two categorical variables.
-**H0: the variables are independent**]{style="font-size: 30px"}
+[We can then perform a $\chi^2$ test, to test the independence of the two categorical variables.]{style="font-size: 30px"}
+
+[**H0: the variables are independent.**]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="40%"}
@@ -456,6 +473,10 @@ res_chi2
 [[**Here the *p-value* is very low, so we can reject the null hypothesis of independence.**]{style="font-size: 28px"}]{.fragment}
 
 ::: notes
+for a χ² test of independence on a contingency table is:
+
+df = (nb row -1) * (nb col - 1) = (10-1) * (2-1) = 9
+
 the test concludes that the occurence of these 10 genus depends on the plot
 :::
 
@@ -472,28 +493,33 @@ res_chi2$expected
 :::
 
 ::: notes
+classic guideline => Cochran's rule is: no expected cell below 1, and no more than ~20% of cells below 5
+
+Here for instance, considering the total number of Dicorynia, and the number of trees in each plot, if the abundance didn't depend on the plot, we would have 8.66 Dicorynia in plot 1 and 14.33 in plot 2
+
 Here it is ok
 :::
 
-## Residuals 
+## Residuals {.smaller}
 
 ::::: columns
 ::: {.column width="40%"}
 
-[We can look at the residuals using the function [chisq.residuals]{style="color:indianred;"} of the package [questionr]{style="color:indianred;"}:]{style="font-size: 30px"}
+[We can look at the residuals (here the *standardised residuals*) using the function [chisq.residuals]{style="color:indianred;"} of the package [questionr]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ```{r}
-chisq.residuals(tab_abd)
+chisq.residuals(tab_abd,
+                std = TRUE)
 ```
 :::
 
 ::: {.column width="60%}
 
-* [residuals < -2 indicate **under-representation**]{style="font-size: 28px"}
+* [standardised residuals < -2 indicate **under-representation**]{style="font-size: 28px"}
 
-* [residuals > 2 indicate **over-representation**]{style="font-size: 28px"}
+* [standardised residuals > 2 indicate **over-representation**]{style="font-size: 28px"}
 
-* [residuals in [-2, 2] indicate **no significant difference** to independence]{style="font-size: 28px"}
+* [standardised residuals in [-2, 2] indicate **no significant difference** to independence]{style="font-size: 28px"}
 
 [[*The threshold of 2 correspond to a 95% confidence interval.*]{style="font-size: 30px"}]{.fragment}
 :::
@@ -501,12 +527,16 @@ chisq.residuals(tab_abd)
 ::::
 
 ::: notes
-residuals are the difference between observed and predicted under the null hypothesis
+residuals are a measurment of how different are observed from the predicted predicted under the null hypothesis
+
+std residuals = (obs_ij - exp_ij) / squareroot (exp_ij * (1 - pi.) * (1 - p.j))
+
+ex: dicorynia in plot 1 => res = (23 - 8.66) / sqrt(8.66 * (1- (23/467)) * (1 - (208/467)))
 
 explore the results together
 :::
 
-## Residuals
+## Residuals {.smaller}
 
 [We can also present the residuals graphically with the argument *shade = TRUE* in the function [mosaicplot]{style="color:indianred;"}:]{style="font-size: 30px"}
 
@@ -635,7 +665,7 @@ t.test(dt_sub$H ~ dt_sub$genus)
 :::
 
 ::: {.column width="35%"}
-[[The result is significant, so we can reject the null hypothesis that the mean of both group are equal and conclude that the two genus differ in height.]{style="font-size: 30px"}]{.fragment}
+[[The result is significant, so we can reject the null hypothesis that the means of both groups are equal and conclude that the two genus differ in height.]{style="font-size: 30px"}]{.fragment}
 :::
 :::::
 
@@ -722,7 +752,7 @@ note what a QQ-plot looks like when the distribution is not the one expected
 [We can do a Wilcoxon rank test, which is the non-parametric equivalent to the t-test, using the function [wilcox.test]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ```{r}
-wilcox.test(dt_sub$D ~dt_sub$genus)
+wilcox.test(dt_sub$D ~ dt_sub$genus)
 ```
 
 [[The result is significant, so we can reject the null hypothesis, and conclude that the two genus differ in diameter.]{style="font-size: 30px"}]{.fragment}
@@ -825,7 +855,7 @@ res_paired
 ::: {.column width="40%"}
 [[The result is significant, so we can conclude that the growths before and after thinning differ.]{style="font-size: 30px"}]{.fragment}
 
-[[💡 If the data are not normally distributed, we can do a Wikcoxon rank test for paired data in a similar way]{style="font-size: 30px"}]{.fragment}
+[[💡 If the data are not normally distributed, we can do a Wikcoxon rank test for paired data in a similar way.]{style="font-size: 30px"}]{.fragment}
 :::
 :::::
 
@@ -923,7 +953,7 @@ summary(H_aov)
 
 ## Checking the model assumptions
 
-[The ANOVA assumes **homoscedasticity**, meaning a constant variance variance of residuals across groups.]{style="font-size: 30px"}
+[The ANOVA assumes **homoscedasticity**, meaning a constant variance of residuals across groups.]{style="font-size: 30px"}
 
 [We check this graphically by plotting the residuals against the fitted values (the estimated mean for each group):]{style="font-size: 30px"}
 
@@ -951,6 +981,8 @@ plot(H_aov, which = 1)
 
 ::: notes
 the function plot, when used on the results of a statistical test, provides several very usefull graphs to diagnose the test
+
+Here, as the fitted value is the mean of the group (the genus), we have a bar per genus
 :::
 
 ## Checking the model assumptions
@@ -974,7 +1006,7 @@ plot(H_aov, which = 2)
 ::: fragment
 [The points are mostly on the diagonal.]{style="font-size: 30px"}
 
-[**We can consider that the assumptions of normality of the distribution of the residuals is respected.**]{style="font-size: 30px"}
+[**We can consider that the assumption of normality of the distribution of the residuals is respected.**]{style="font-size: 30px"}
 :::
 :::
 :::::
@@ -996,7 +1028,7 @@ coef(H_aov)
 
 [[The *intercept* correspond to the first group (here *Dicorynia*).]{style="font-size: 30px"}]{.fragment}
 
-[[The other coefficient show the difference of each group with the first group. For instance, the mean of *Sterculia* is:]{style="font-size: 30px"}]{.fragment}
+[[The other coefficients show the difference of each group with the first group. For instance, the mean of *Sterculia* is:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
@@ -1071,10 +1103,10 @@ H_letters_pos <- dt_sub10 %>%
   summarise(q_75 = quantile(H, probs = 0.75, na.rm = TRUE)) %>% 
   inner_join(H_letters_tb)
 ```
+## Graphical presentation of the results
 
-[[And we make the plot:]{style="font-size: 30px"}]{.fragment}
+[And we make the plot:]{style="font-size: 30px"}
 
-::: fragment
 ```{r}
 graph_H <- ggplot() +
   geom_boxplot(data = dt_sub10, 
@@ -1085,10 +1117,9 @@ graph_H <- ggplot() +
                 label = letter), # labels are the letters
             size = 5, # size of the labels
             vjust = -1, hjust = -1) + # adjusts position of the labels
-  scale_fill_brewer(palette = "Blues") + 
-  theme_bw()
+  theme_bw() # because it looks nicer !
 ```
-:::
+
 
 ## Graphical presentation of the results
 
@@ -1240,6 +1271,8 @@ ggpairs(iris_vers, columns = c("Sepal.Length", "Sepal.Width",
 we get the correlation coef and its significance
 
 more complicated if we want other type of correlation than Pearson
+
+last slide for today, with the graph we are starting to prepare for linear models => next session
 :::
 
 

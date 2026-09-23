@@ -1,5 +1,5 @@
 ---
-title: "Exercices on session *Statistics with R session 1/3*"
+title: "Exercices on session *Statistics with R - Distributions and hypothesis*"
 format:
   pdf
 execute:
@@ -37,32 +37,34 @@ dt_deptA <- UCBAdmissions[, , 1]
 
 * These data give the number of admitted or rejected people per gender. How is this type of table called?
 
-<!-- a contingency table -->
+```{r}
+# a contingency table
+```
+
 
 * Perform a $\chi^2$ test to see if the admission depends on the gender, and interpret it
 
 ```{r}
 res_chi2 <- chisq.test(dt_deptA)
 res_chi2
+# low p-value => yes the admission depends on the gender
 ```
-
-<!-- low p-value => yes the admission depends on the gender-->
 
 * Check the expected frequency under the null hypothesis. Is the $\chi^2$ test reliable?
 
 ```{r}
 res_chi2$expected
+# yes reliable (all expected > 5)
 ```
 
-<!-- yes reliable (all expected > 5)-->
 
 * Get the residuals and interpret them
 
 ```{r}
-questionr::chisq.residuals(dt_deptA)
+questionr::chisq.residuals(dt_deptA, std = TRUE)
+# over-repressentation of the female in the admitted => female more admitted than male
 ```
 
-<!-- over-repressentation of the female in the admitted => female more admitted than male-->
 
 * Represent the residuals graphically
 
@@ -140,26 +142,25 @@ res_ttest
 
 ```{r}
 res_ttest$p.value
+# The difference is significant
 ```
-
-<!-- The difference is significant-->
 
 ```{r}
 cab_est <- res_ttest$estimate
 abs(cab_est[1] - cab_est[2])
 # or 
 abs(cab_est[2] - cab_est[1])
-# The name of the vector of result is not correct
+# The difference between group is big (compared to the mean per group)
+# Note that the name of the vector of result is not correct
 ```
 
-<!-- The difference between group is big (compared to the mean per group) -->
 
 ```{r}
 res_ttest$conf.int
 # 0.95 is the confidence level
+# big confidence interval (few data points...)
 ```
 
-<!-- big confidence interval -->
 
 # Effect of the planting date on the content of vitamin C in cabbages
 
@@ -184,9 +185,8 @@ dt_cab2 %>%
 ```{r}
 aov_cab <- aov(VitC ~ Date, data = dt_cab2)
 summary(aov_cab)
+# the test is significant => the content of vitamin C depend on the planting date
 ```
-
-<!-- the test is significant => the content of vitamin C depend on the planting date -->
 
 * Check the model assumptions
 
@@ -222,9 +222,9 @@ coef(aov_cab)[1] + coef(aov_cab)[3]
 ```{r}
 tukey_cab <- TukeyHSD(aov_cab)
 tukey_cab
+# d21 differs from the two others
 ```
 
-<!-- d21 differs from the two others --> 
 
 * Represent the results of the ANOVA graphically
 
@@ -252,9 +252,7 @@ ggplot() +
             aes(x = Date, y = q_75, # position of the label
                 label = letter), # labels are the letters
             size = 5, # size of the labels
-            vjust = -1, hjust = -1) + # adjusts position of the labels
-  scale_fill_brewer(palette = "Blues") + 
-  theme_bw()
+            vjust = -1, hjust = -1)  # adjusts position of the labels
 ```
 
 
@@ -273,16 +271,17 @@ str(mammals)
 
 ```{r}
 cor(mammals$body, mammals$brain)
+# very high correlation
 ```
-<!-- very high correlation-->
 
 * Do a Pearson correlation test and interpret it
 
 ```{r}
 cor.test(mammals$body, mammals$brain,
          method = "pearson")
+# There is a strong significant positive relationship between body and brain mass
 ```
-<!-- There is a strong significant positive relationship between body and brain mass-->
+
 
 <!--
 

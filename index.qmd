@@ -34,12 +34,11 @@ Follow [these instructions](0_installing_enviro/install_enviro.html) to set up t
 
 -   [Introduction to Version Control with Git and GitHub](8_version_control/version_control.html)
 
-<!-- 
 -   Statistics with R
 
-    -   [Statistics with R session 1/3](99_archives/2025/6_basic_statistics/basic_stats_session1.html)
+    -   [Distributions and hypothesis testing](6_basic_statistics/basic_stats_session1.html)
 
-        
+<!--        
 
     -   [Statistics with R session 2/3](99_archives/2025/6_basic_statistics/basic_stats_session2.html)
 
@@ -72,9 +71,9 @@ Corrected exercices are available upon request.
 
 -   [Exercices on session *Data visualisation*](5_graph/exo_graph.pdf)
 
-<!--
+-   [Exercices on session *Statistics with R - Distributions and hypothesis*](6_basic_statistics/exo_stats_session_1.pdf)
     
-    -   [Exercices on session 1/3](99_archives/2025/6_basic_statistics/exo_stats_session_1.pdf)
+<!--
     
     -   [Exercices on session 2/3](99_archives/2025/6_basic_statistics/exo_stats_session_2.pdf)
     
