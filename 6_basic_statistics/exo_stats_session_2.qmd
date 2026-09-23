@@ -4,7 +4,7 @@ format:
   pdf
 execute:
   echo: false
-  eval: false 
+  eval: false
 editor: 
   markdown: 
     wrap: 72
@@ -42,6 +42,14 @@ summary(dt)
 The data contains the number of species of vascular plants (variable
 *species*) for different *island*. The other variables give some
 characteristics of these islands, including the *area* in km^2^.
+
+The main island (called *Britain*) is much bigger than the other ones. 
+For the purpose of these exercices, remove this observation from the data.
+
+```{r}
+dt <- dt %>% filter(island != "Britain")
+```
+
 
 # Simple linear regression
 
@@ -97,7 +105,7 @@ plot(mod_1, which = 2)
 plot(mod_1, which = 4)
 
 # interpretation
-  # No strong leverage effect, the values of cook are small
+  # No very influential observations, the distance of Cook are small
 ```
 
 
@@ -117,7 +125,10 @@ explanatory variables in our model.
 dt <- dt %>% 
   mutate(log_area = log(area))
 
-GGally::ggpairs(dt, columns = c("log_area", "elevation", "latitude", "dist_britain"))
+GGally::ggpairs(dt, 
+                columns = c("log_area", "elevation",
+                            "latitude", "dist_britain"),
+                progress = FALSE) # no progress bar
 
 # interpretation
   # log(area) and elevation correlated
@@ -192,12 +203,21 @@ plot(mod_2, which = 2)
 plot(mod_2, which = 4)
 
 # interpretation
-  # No strong leverage effect but three obs concerning
+  # No very influential observations, but some obs concerning
 ```
 
 
 ```{r}
-lindia::gg_resX(mod_2, ncol = 2)
+dt %>%
+  mutate(resid = residuals(mod_2)) %>% # add the residuals
+  pivot_longer(cols = c(log_area, latitude),
+               names_to = "predictor",
+               values_to = "value") %>% # change to long table
+  ggplot(aes(x = value, y = resid)) +
+  geom_point(alpha = 0.6) +
+  geom_hline(yintercept = 0, linetype = "dashed", col = "red") +
+  facet_wrap(~ predictor, scales = "free_x", ncol = 2) +
+  labs(x = NULL, y = "Residuals")
 
 # interpretation
   # ok
@@ -230,13 +250,14 @@ AICcmodavg::aictab(list_mod)
 
 ```{r}
 gtsummary::tbl_regression(mod_2, intercept = TRUE)
+# in the corrected exercice, the table might be above
 ```
 
 -   Present the result graphically: first, represent the predicted
     relationship between A and S, setting the latitude to its mean
 
 ```{r}
-preds4area <- ggpredict(mod_2, terms = "area")
+preds4area <- predict_response(mod_2, terms = "area")
 preds4area
 # str(preds4area)
 ```
@@ -253,7 +274,7 @@ ggplot(preds4area, aes(x = x, y = predicted)) +
     area to its mean
 
 ```{r}
-preds4lat <- ggpredict(mod_2, terms = "latitude")
+preds4lat <- predict_response(mod_2, terms = "latitude")
 preds4lat
 # str(preds4lat)
 ```

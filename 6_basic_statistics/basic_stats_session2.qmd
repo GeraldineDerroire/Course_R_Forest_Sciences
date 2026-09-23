@@ -1,5 +1,5 @@
 ---
-title: "Statistics with R - session 2 - Linear regressions"
+title: "Statistics with R - Linear regressions"
 author: Géraldine Derroire
 institute: Cirad - UnB
 date: last-modified
@@ -33,7 +33,6 @@ library(tidyverse)
 library(ggeffects)
 library(gtsummary)
 library(ggstats)
-library(lindia)
 library(car)
 library(AICcmodavg)
 ```
@@ -41,11 +40,29 @@ library(AICcmodavg)
 
 ## Uses of regressions
 
-* Study the relationship between several variables (without assuming causality)
+::::: nonincremental
+::: fragment
+-   **Hypothesis testing**: identify factors associated with observed patterns
 
-* Study the effect of numerical or categorical variables on another variables 
+*Eg: Does tree growth decrease with drought?*
+:::
 
-* Use these relationships to predict the values of the modelled variable for new observations.
+::: fragment
+-   **Prediction**: forecast responses under given conditions
+
+*Eg: Predict tree growth under a given climate*
+:::
+:::::
+
+::: fragment
+⚠️ Predictions are reliable only if the model remains valid in the considered conditions.
+:::
+
+::: notes
+for prediction : need to think of good validation of the model =\> ex for distribution model do spatial cross-validation
+
+Be careful when applying the model to conditions outside of the range of calibration (eg for climate change)
+:::
 
 
 ## Structure of a linear regression
@@ -143,7 +160,7 @@ who want to write the equation of the model we want to fit on the blackboard?
 
 $$y \sim \mathcal N(\alpha + \beta \times x,  \sigma^2)$$
 
-[The model predicts a probability density of Y  for any value of X normally distributed around the regression line.]{style="font-size: 30px"}
+[The model predicts a probability density of Y  for any value of X (in [red]{style="color:indianred;"}) normally distributed around the regression line (in black).]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="50%"}
@@ -261,12 +278,12 @@ F-test for only one single explanatory variable is the same as the test for the 
 
 The **confidence interval** is the interval of confidence of the mean predicted value of y (so of $\mu$).
 
-[[To calculate it, we can use the function [ggpredict]{style="color:indianred;"} from the package [ggeffects]{style="color:indianred;"}. The default give the confidence interval:]{style="font-size: 30px"}]{.fragment}
+[[To calculate it, we can use the function [predict_response]{style="color:indianred;"} from the package [ggeffects]{style="color:indianred;"}. The default give the confidence interval:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
 # Get the prediction (default arguments gives the confidence interval)
-preds_conf <- ggpredict(mod_dh_1, # model used for the prediction
+preds_conf <- predict_response(mod_dh_1, # model used for the prediction
                         terms = "D") # explanatory variable
 slice_head(as.data.frame(preds_conf), n=3) # visualise the results
 ```
@@ -297,15 +314,15 @@ gpred_1
 
 ## Prediction interval {.scrollable}
 
-The **prediction interval** includes the uncertainty of the predicted mean (like the confidence interval) and the variability of individual prediction by taking into account the residual variance $\sigma^2$.
-[It is therefore wider than the confidence interval and contains most of the observations.]{.fragment}
+[The **prediction interval** includes the uncertainty of the predicted mean (like the confidence interval) and the variability of individual prediction by taking into account the residual variance $\sigma^2$.
+[It is therefore wider than the confidence interval and contains most of the observations.]{.fragment}]{style="font-size: 30px"}
 
-[[To calculate it, we can use the function [ggpredict]{style="color:indianred;"}, with the argument *interval = "prediction"*:]{style="font-size: 30px"}]{.fragment}
+[[To calculate it, we can use the function [predict_response]{style="color:indianred;"}, with the argument *interval = "prediction"*:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
 # Get the prediction with prediction interval
-preds_pred <- ggpredict(mod_dh_1, # model used for the prediction
+preds_pred <- predict_response(mod_dh_1, # model used for the prediction
                         terms = "D", # explanatory variable
                         interval = "prediction")
 slice_head(as.data.frame(preds_pred), n=3) # visualise the results
@@ -333,15 +350,32 @@ gpred_1
 
 We need to check the model assumptions:
 
-* normality of the residuals
+* independence of observations
+
+* linearity of the relationship between response and explanatory variables
 
 * independence of the residuals
 
 * constant variance of the residuals (homoscedasticity)
 
-* linearity of the relationship between response and explanatory variables
+* normality of the residuals
 
-## Homoscedasticity and independence of the residuals
+
+## Independence of observations
+
+An linear regression assumes that all observations are **independent**.
+
+This is related to the study design: when observations are grouped, they are not independent (*e.g.* several observations on a same site, on a same individual, in a same year...).
+
+A graph of residuals against the suspected grouping variable (site, ...) 
+can help detect possible problems.
+
+::: notes
+we'll see later what to do then
+:::
+
+
+## Homoscedasticity of the residuals and linearity 
 
 ::::: columns
 ::: {.column width="50%"}
@@ -387,7 +421,7 @@ plot(mod_dh_1, which = 2)
 :::::
 
 
-## Leverage effect
+## Influential observations (Cook's distance)
 
 ::::: columns
 ::: {.column width="40%"}
@@ -402,6 +436,8 @@ plot(mod_dh_1, which = 4)
 
 
 ::: {.column width="60%"}
+
+[Cook's distance measures how much the fitted values would change if that single observation were removed — combining both its leverage (how extreme its x-value is) and the size of its residual, so it flags observations that are influential.]{style="font-size: 35px"}
 
 ::: fragment
 [⚠️️ Some observations are highly influential.]{style="font-size: 30px"}
@@ -421,27 +457,33 @@ for cook distance, several rule of thumbs
 :::
 
 
-## Variable transformation
+## Variable transformation {.smaller}
 
-[Our model has problem of linearity and high leverage of some observations.]{style="font-size: 30px"}
+[Our model has problem of linearity and high influence of some observations.]{style="font-size: 30px"}
 
 ::: fragment
 [💡 A transformation of variables may help, let's try to take the log of D and H:]{style="font-size: 30px"}
 
-$$log(H) = \alpha + \beta \times log(D)$$
+$$log(H) = \alpha + \beta \times log(D)+ \epsilon$$
 :::
 
 
 ::: fragment
 
-[which is equivalent to
-$y = \alpha'x^\beta$ with $\alpha' = e^{\alpha}$
-because]{style="font-size: 30px"}
+[which is equivalent to ]{style="font-size: 30px"}
 
-[$log\big (\alpha'x^\beta \big) = log(\alpha') + \beta \times log(D)$]{style="font-size: 30px"}
+$$H = \alpha'D^\beta \times e^{\epsilon}$$ 
+[with $\alpha' = e^{\alpha}$]{style="font-size: 30px"}
+
+[Here the error is multiplicative.]{style="font-size: 30px"}
 :::
 
 [[*This is a classical allometric model: it predicts that the height of the tree will increase less rapidly for trees with bigger DBH, which is consistent with what we expect.*]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+equivalent because
+$log\big (\alpha'D^\beta \big) = log(\alpha') + \beta \times log(D)$
+:::
 
 
 ## Fitting the log-log model {.smaller}
@@ -485,7 +527,7 @@ plot(mod_dh_2, which = 4)
 ```
 :::
 
-[[😊 We have considerably reduced the leverage effect.]{style="font-size: 30px"}]{.fragment}
+[[😊 We have considerably reduced the problem of influential observations.]{style="font-size: 30px"}]{.fragment}
 
 :::
 :::::
@@ -496,13 +538,13 @@ plot(mod_dh_2, which = 4)
 
 Here we would prefer the log-log model because:
 
-* it is better regarding the model assumptions and reduced the leverage effect
+* it is better regarding the model assumptions and reduced the problem of influential observations
 
 * it has a slightly better R^2^
 
 * it make more sense ecologically
 
-[[⚠️ We will talk later about the AIC to compare models. We **cannot** use it here because the response variables are different (D *vs* log(D)).]{style="font-size: 30px"}]{.fragment}
+[[⚠️ We will talk later about the AIC to compare models. We **cannot** use it here because the response variables are different (H *vs* log(H)).]{style="font-size: 30px"}]{.fragment}
 
 ::: notes
 it makes more sense ecologically because of the shape of the relationship => for big trees, the increase in height for unit DBH is less
@@ -511,11 +553,12 @@ it makes more sense ecologically because of the shape of the relationship => for
 
 ## Presenting the results
 
-[We have seen how to plot the results, but here we need to back-transform them to their original (non-logged) scale. By default, the function [ggpredict]{style="color:indianred;"} back-transform the predictions:]{style="font-size: 30px"}
+[We have seen how to plot the results, but here we need to back-transform them to their original (non-logged) scale. By default, the function [predict_response]{style="color:indianred;"} back-transform the predictions:]{style="font-size: 30px"}
 
 ```{r}
 # Get predictions back on original scale
-preds_conf <- ggpredict(mod_dh_2, terms = "D") # default gives the confidence interval
+preds_conf <- predict_response(mod_dh_2,
+                               terms = "D") # default gives the confidence interval
 
 # plot the results
 g_preds_2 <- ggplot(preds_conf, aes(x = x, y = predicted)) +
@@ -525,6 +568,10 @@ g_preds_2 <- ggplot(preds_conf, aes(x = x, y = predicted)) +
   labs(x = "D", y = "H", title = "Predicted H vs D (log-log model, back-transformed)") +
   theme_minimal()
 ```
+
+::: notes
+message => no problem with the intervals, as everything is calculated on the transformed scale, than back transform
+:::
 
 ## Presenting the results
 
@@ -540,7 +587,9 @@ g_preds_2
 
 ```{r}
 # Get predictions back on original scale, with prediction interval
-preds_pred <- ggpredict(mod_dh_2, terms = "D", interval = "prediction")  
+preds_pred <- predict_response(mod_dh_2, 
+                               terms = "D", 
+                               interval = "prediction")  
 
 # plot the results
 g_preds_2 <- g_preds_2 +
@@ -548,6 +597,8 @@ g_preds_2 <- g_preds_2 +
               aes(ymin = conf.low, ymax = conf.high), 
               fill = "lightblue", alpha = 0.4)
 ```
+
+
 
 ## Presenting the results
 
@@ -560,7 +611,8 @@ g_preds_2
 
 Why transform the data?
 
-* linearise a non-linear relationship (*eg*: quadratic relationship $y = \alpha + \beta_1 \times x + \beta_2 \times x^2$, square root or log-transformation...)
+* linearise a non-linear relationship (*eg*: quadratic relationship $y = \alpha + \beta_1 \times x + \beta_2 \times x^2$, square root or log-transformation...) 
+which can be meeting our ecological hypothesis better
 
 * improve normality and homoscedasticity of the residuals (*eg*: square root of log-transformation...)
 
@@ -568,6 +620,8 @@ Why transform the data?
 
 
 ::: notes
+To finish on data transformation
+
 show on the blackboard the shape of a quadratic and square root (as log) 
 
 always explore the shape of the relationsing with simulated data, to understand what the transfo does
@@ -670,7 +724,7 @@ library(MASS)
 ::: {.column width="60%"}
 ```{r}
 data(hills)
-detach("package:MASS", unload = TRUE)
+detach("package:MASS")
 summary(hills)
 ```
 
@@ -697,7 +751,7 @@ summary(mod_hills)
 
 ## Standardising explanatory variables
 
-[To compare the effects of the explanatory variables, we can (but we don't necessarly need) standardise them using the function [scale]{style="color:indianred;"}:]{style="font-size: 30px"}
+[To compare the effects of the explanatory variables, we can (but we don't necessarily need to) standardise them using the function [scale]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ```{r}
 hills <- hills %>% 
@@ -736,6 +790,8 @@ summary(mod_hills2)
 [[The intercept is the value of the response when all explanatory variables are taken at their mean.]{style="font-size: 30px"}]{.fragment}
 
 ::: notes
+so dist has a stronger effect than climb
+
 explain for dist and climb, and show the equation on the blackboard
 :::
 :::
@@ -780,21 +836,27 @@ plot(mod_hills2, which = 4)
 
 [[Here we see that a few observations have a strong effect, it would be worth inspecting these observations...]{style="font-size: 30px"}]{.fragment}
 
-## Model validation
+## Model validation {.smaller}
 
 
 [For multiple linear regression, it is important to also check the effect of each explanatory variable individually by plotting the residuals against them.]{style="font-size: 30px"}
-[[We use the function [gg_resX]{style="color:indianred;"} of the [lindia]{style="color:indianred;"} package:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
 #| fig.width: 6
 #| fig.height: 3
-gg_resX(mod_hills2, ncol = 2)
+hills %>%
+  mutate(resid = residuals(mod_hills2)) %>% # add the residuals
+  pivot_longer(cols = c(dist_sd, climb_sd),
+               names_to = "predictor",
+               values_to = "value") %>% # change to long table
+  ggplot(aes(x = value, y = resid)) +
+  geom_point(alpha = 0.6) +
+  geom_hline(yintercept = 0, linetype = "dashed", col = "red") +
+  facet_wrap(~ predictor, scales = "free_x", ncol = 2) +
+  labs(x = NULL, y = "Residuals")
 ```
 :::
-
-[[💡 the function [gg_diagnose]{style="color:indianred;"} does all the diagnostic plots.]{style="font-size: 30px"}]{.fragment}
 
 ::: notes
 Here the diagnostic is reasonably ok, except for the effect of the influential observations
@@ -803,7 +865,7 @@ Here the diagnostic is reasonably ok, except for the effect of the influential o
 
 ## Collinearity
 
-[For multiple linear regression we need to check the absence of collinearity of the explanatory variables.]{style="font-size: 30px"}
+[For multiple linear regression, we need to check the absence of collinearity of the explanatory variables.]{style="font-size: 30px"}
 
 [**If an explanatory variable is a linear combination of the other, this impedes the model fitting.**]{style="font-size: 30px"}
 
@@ -846,16 +908,16 @@ no strict rule for the VIF, this is context dependant. Check from 5
 :::
 
 
-## Presenting the results
+## Presenting the results {.smaller}
 
 [To represent graphically the effect of an explanatory variable, we can set the values of the other explanatory variables to a constant (for example their mean).]{style="font-size: 30px"}
 
-[[Here we represent the effect of *dist_sd* setting *climb_sd* to its mean. By default, the function [ggpredict]{style="color:indianred;"} takes the values of explanatory variables not mentioned in the argument *terms* to their mean:]{style="font-size: 30px"}]{.fragment}
+[[Here we represent the effect of *dist_sd* setting *climb_sd* to its mean. By default, the function [predict_response]{style="color:indianred;"} takes the values of explanatory variables not mentioned in the argument *terms* to their mean:]{style="font-size: 30px"}]{.fragment}
 
 ::: fragment
 ```{r}
 # Get the prediction (default arguments gives the confidence interval)
-pred_dist_conf <- ggpredict(mod_hills2, terms = "dist_sd")
+pred_dist_conf <- predict_response(mod_hills2, terms = "dist_sd")
 
 # Make the plot
 p_modhills2_dist <- ggplot(pred_dist_conf, aes(x = x, y = predicted)) + 
@@ -881,24 +943,27 @@ p_modhills2_dist
 
 ## Presenting the results {.smaller}
 
-[We could also represent the effect of *dist_sd* setting climb_sd at the mean, -1 sd, + 1 sd. For that, we give several explanatory variables to [ggpredict]{style="color:indianred;"}. All variables except the first one will be set to meaningful values:]{style="font-size: 30px"}
+[We could also represent the effect of *dist_sd* setting climb_sd at the mean, -1 sd, + 1 sd. For that, we give several explanatory variables to [predict_response]{style="color:indianred;"}. All variables except the first one will be set to meaningful values:]{style="font-size: 30px"}
 
 ::: fragment
 ```{r}
 # Get the prediction (default arguments gives the confidence interval)
-pred_dist_conf <- ggpredict(mod_hills2, 
+pred_dist_conf <- predict_response(mod_hills2, 
                             terms = c("dist_sd", # to predict with
                                       "climb_sd")) # will be set to a few meaningfull values
 ```
 :::
 
-[[*The values taken for climb_sd are factors, in the variable group.*]{style="font-size: 30px"}]{.fragment}
+## Presenting the results {.smaller}
+
+[*The values taken for climb_sd are factors (in the column group).*]{style="font-size: 30px"}
 
 ::::: columns
 ::: {.column width="40%"}
 
 ::: fragment
 ```{r}
+#| message: false
 pred_dist_conf
 ```
 :::
@@ -967,10 +1032,36 @@ tbl_regression(mod_hills2,
 :::
 :::::
 
+## Interaction
+
+Multiple linear regression can include an **interaction** term to test if the effect of an explanatory variable depend of the value taken by another explanatory variable:
+
+::: {.column width="70%"}
+
+```{r}
+#| echo: FALSE
+data.frame(x1 = -4:10,
+           x2 = c(rep(1,13), 2, 3)) %>% 
+  expand(x1, x2) %>% 
+  mutate(y = 3 + 4*x1 + 2*x2 + 1.5*x1*x2) %>% 
+  ggplot(aes(x = x1, y = y, colour = x2, group = x2)) + 
+  geom_line(linewidth = 1) +  
+  xlim(-4,10) + ylim(-30, 100) + 
+  labs(x = "x1", y = "y", group="x2") + 
+  theme_bw()
+```
+:::
+
+::: {.column width="30%"}
+[[*Here, the effect of $x1$ on $y$ (the slope of the relationship between $x1$ and $y$) depends on the value taken by $x2$.*]{style="font-size: 30px"}]{.fragment}
+:::
+
+
+
 
 ## Interaction {.smaller}
 
-[We can add an **interaction** term in the model to test if the effect of an explanatory variable depend of the value taken by another explanatory variable:]{style="font-size: 30px"}
+[The model with a interaction is:]{style="font-size: 30px"}
 
 $$y = \alpha + \beta_1 x_1 + \beta_2  x_2 + \beta_{12}  x_1 x_2 + \epsilon$$
 
@@ -1000,18 +1091,29 @@ as alaways epsilon is N(0, sigma2)
 
 [To specify an interaction, we use [*]{style="color:indianred;"} in the formula:]{style="font-size: 30px"}
 
+::: {.column width="60%"}
 ```{r}
 mod_hills_inter <- lm(time ~ dist_sd * climb_sd, hills)
 summary(mod_hills_inter)
 ```
+:::
 
-## Visualisation of a model with interaction
+::: {.column width="10%"}
+:::
+
+::: {.column width="30%"}
+[[*Here there is an additional coeffecient for the interaction.*]{style="font-size: 30px"}]{.fragment}
+:::
+
+
+
+## Visualisation of a model with interaction {.smaller}
 
 [We can make a graph of the predictions as we did for the model without interaction:]{style="font-size: 30px"}
 
 ```{r}
 # Get the prediction (default arguments gives the confidence interval)
-pred_inter_dist_conf <- ggpredict(mod_hills_inter, 
+pred_inter_dist_conf <- predict_response(mod_hills_inter, 
                                   terms = c("dist_sd", # to predict with
                                             "climb_sd")) # will be set to a few meaningfull values
 
@@ -1032,13 +1134,13 @@ p_modinter_dist <- ggplot(pred_inter_dist_conf,
 p_modinter_dist
 ```
 
-[[The prediction lines are no longer parallel, because of the interaction term.]{style="font-size: 30px"}]{.fragment}
 
 ## Model comparison
 
 [To compare several models, we can use the AIC (Akaike information criterium).]{style="font-size: 30px"}
 
-[The AIC take into account the likelihood of the model while penalising a more complex model (*i.e.* a model with more parameters) to avoid over-fitting.]{style="font-size: 30px"}
+[The AIC takes
+into account the likelihood of the model while penalising a more complex model (*i.e.* a model with more parameters) to avoid over-fitting.]{style="font-size: 30px"}
 
 [[To compare models using the AIC, they need to:]{style="font-size: 30px"}]{.fragment}
 
@@ -1110,23 +1212,90 @@ When observations are grouped, they are not independent (*e.g.* several observat
 [Linear mixed models have a hierarchical structure.]{style="font-size: 30px"}
 
 ::: fragment
+[One or more of their coefficients (the intercept or the response to explanatory variables) varies between groups *j*:]{style="font-size: 30px"}
 
-[One or more of their coefficients (the intercept or the response to explanatory variable) varies between groups *j*:]{style="font-size: 30px"}
-
-$$y_k \sim \mathcal N(\alpha_{j[k]} + \beta_1 \times x_1 + \beta_2 \times x_2 + ... ,  \sigma^2)$$
+$$y_{ij} \sim \mathcal N(\color{crimson}{\alpha_j} + \beta \times x_{ij} ,  \sigma^2)$$
 :::
 
 ::: fragment
+[and this variation is modelled by a group-level distribution:]{style="font-size: 30px"}
 
-[and this variation is modelled by a distribution:]{style="font-size: 30px"}
+$$\color{crimson}{\alpha_j} \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})$$
+
+[The group-specific intercepts $\color{crimson}{\alpha_j}$ are not independent parameters: they are drawn from a common distribution.]{style="font-size: 30px"}
+
+[*NB: here we represent the effect of the group only on the intercept, but we can include this effect on the other coefficients as well.*]{style="font-size: 22px"}
+:::
+
+## Linear mixed model {.smaller}
+
+$$y_{ij} \sim \mathcal N(\alpha_j + \beta \times x_{ij} ,  \sigma^2)$$
 
 $$\alpha_j \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})$$
 
-[*NB: here we represent the effect of the group only on the intercept, but we can include this effect on the other coefficients as well.*]{style="font-size: 22px"}
+```{r}
+#| echo: false
+#| fig-align: center
 
+# population parameters
+beta0 <- 5
+beta1 <- 1.2
+
+# group intercepts around the population intercept
+groups <- tibble(
+  group = factor(1:6),
+  alpha = beta0 + c(-2, -1, -0.5, 0.5, 1, 2)
+)
+
+# x grid
+x <- seq(0, 10, length.out = 100)
+
+# create regression lines
+dat <- groups %>%
+  crossing(x = x) %>%
+  mutate(y = alpha + beta1 * x)
+
+# plot
+ggplot(dat, aes(x, y, color = group)) +
+  geom_line(linewidth = 1.2) +
+  
+  # population regression
+  geom_abline(
+    intercept = beta0,
+    slope = beta1,
+    linetype = "dashed",
+    linewidth = 1.4,
+    color = "black"
+  ) +
+  
+  # group intercepts on y-axis
+  geom_point(
+    data = groups,
+    aes(x = 0, y = alpha),
+    size = 3,
+    show.legend = FALSE
+  ) +
+  
+  labs(
+    x = "Explanatory variable (x)",
+    y = "Response (y)",
+  ) +
+  
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+::: notes
+one line per group
+
+all parallel as only random intercept
+
+dashed line mean accross groups
 :::
 
-[[💡 See [here](https://meghan.rbind.io/blog/2022-06-28-a-beginners-guide-to-mixed-effects-models/){preview-link="false"} for a detailed explanation of linear mixed model.]{style="font-size: 30px"}]{.fragment}
+## Linear mixed model
+
+[ See [here](https://meghan.rbind.io/blog/2022-06-28-a-beginners-guide-to-mixed-effects-models/){preview-link="false"} for a detailed explanation of linear mixed model, and how to fit it in R.]{style="font-size: 30px"}
 
 
 
@@ -1134,9 +1303,9 @@ $$\alpha_j \sim \mathcal N(\mu_{\alpha}, \sigma^2_{\alpha})$$
 
 Some data are by nature not normally distributed, so we cannot model them with a normal distribution.
 
-* count data (*e.g.*: number of individuals of a species in a plot, number of birds heard in a given time) can be modelled with a **Poisson** distribution
-
 * success/failure data (*e.g*: presence/absence of a species in a plot, proportion of tree browsed in a plot) can be modelled with a **binomial** distribution
+
+* count data (*e.g.*: number of individuals of a species in a plot, number of birds heard in a given time) can be modelled with a **Poisson** distribution
 
 [[To know more about these distributions: see the Wikipedia pages, and the [distribution zoo](https://ben18785.shinyapps.io/distribution-zoo/){preview-link="false"}.]{style="font-size: 25px"}]{.fragment}
 
@@ -1160,7 +1329,7 @@ Some data are by nature not normally distributed, so we cannot model them with a
 
 [The logistic regression is a **GLM** with a **binomial distribution** and a **logit link function**. It models a probability of success.]{style="font-size: 30px"}
 
-* [The binomial distribution $\mathcal{B}(n, p)$ represents the number of successes when performing ***n*** independent experiment having a constant probability of success ***p***. ]{style="font-size: 30px"}[[It is a discrete distribution taking only **positive integer values**.]{style="font-size: 30px"}]{.fragment}
+* [The binomial distribution $\mathcal{B}(n, p)$ represents the number of successes when performing ***n*** independent experiment having a constant probability of success ***p*** (e.g: presence/absence of a species in a plot, proportion of tree browsed in a plot). ]{style="font-size: 30px"}[[It is a discrete distribution taking only **positive integer values**.]{style="font-size: 30px"}]{.fragment}
 
 * [The logit link function links the modelled probability of success (which is between 0 and 1) to the linear predictor.]{style="font-size: 30px"}
 
@@ -1178,7 +1347,7 @@ avec logit(p) = log (p/ (1-p))
 
 [The Poisson regression is a **GLM** with a **Poisson distribution** and a **logarithm link function**. It models the number of observations of an event in a defined sampling unit.]{style="font-size: 30px"}
 
-* [The Poisson distribution $\mathcal{P}(\lambda)$ represents the mean number of observations **$\lambda$** in a sampling unit.]{style="font-size: 30px"}
+* [The Poisson distribution $\mathcal{P}(\lambda)$ represents the mean number of observations **$\lambda$** in a sampling unit (e.g.: number of individuals of a species in a plot, number of birds heard in a given time).]{style="font-size: 30px"}
 
 * [The logarithm link function links **$\lambda$** (which is positive) to the linear predictor.]{style="font-size: 30px"} 
 
@@ -1187,6 +1356,21 @@ avec logit(p) = log (p/ (1-p))
 ::: notes
 log(mu) = alpha + beta_1*x_1 +... beta_n*x_n
 :::
+
+## What about Bayesian models? {.smaller}
+
+All the models we have talked about (and many more!) can be fitted in a [Bayesian framework]{style="color:indianred;"} (as opossed to the frequentist one we used).
+
+What are the advantages of a Bayesian approach?
+
+* it allows to quantify **uncertainty** (and propagate it), as we get a full distribution for each fitted parameters
+
+* it allows to leverage **prior knowledge** (previous studies or expert knowledge)
+
+* it is **flexible** (adapted to heterogeneous or incomplete data, possible to fit complex models)
+
+[[💡 See [here](https://geraldinederroire.github.io/Intro_modelo_cor/#/title-slide){preview-link="false"} for a short introduction to hierarchical Bayesian modeling.]{style="font-size: 30px"}]{.fragment}
+
 
 # Acknowledgments
 
@@ -1214,6 +1398,8 @@ log(mu) = alpha + beta_1*x_1 +... beta_n*x_n
 # Ressources to go further
 
 * DHARMa package (F. Hartig) for model diagnostic with GLM [vignette](https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html){preview-link="false"}
+
+* performance package (easystats) for model diagnostic across lm, glm, and mixed models [vignette](https://easystats.github.io/performance/)
 
 
 
