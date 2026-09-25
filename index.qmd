@@ -40,10 +40,9 @@ Follow [these instructions](0_installing_enviro/install_enviro.html) to set up t
 
     -   [Linear regressions](6_basic_statistics/basic_stats_session2.html)
 
-  <!--      
+    -   [Mutivariate analyses](6_basic_statistics/basic_stats_session3.html)
 
-    -   [Statistics with R session 3/3](99_archives/2025/6_basic_statistics/basic_stats_session3.html)
-
+<!--
 
 -   Going further with R
 
@@ -73,10 +72,9 @@ Corrected exercices are available upon request.
 
 -   [Exercices on session *Statistics with R - Linear regressions*](6_basic_statistics/exo_stats_session_2.pdf)
 
-
+-   [Exercices on session *Statistics with R - Multivariate analyses*](6_basic_statistics/exo_stats_session_3.pdf)
+     
 <!--
-    
-     -   [Exercices on session 3/3](99_archives/2025/6_basic_statistics/exo_stats_session_3.pdf)
      
      -   [Exercices](99_archives/2025/7_going_further/going_further.pdf)
 
