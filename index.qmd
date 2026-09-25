@@ -41,12 +41,16 @@ Follow [these instructions](0_installing_enviro/install_enviro.html) to set up t
     -   [Linear regressions](6_basic_statistics/basic_stats_session2.html)
 
     -   [Mutivariate analyses](6_basic_statistics/basic_stats_session3.html)
+    
+-   Going further with R
+
+    -   [Session 1/2 - Writing functions](7_going_further/going_further_session1.html)
 
 <!--
 
--   Going further with R
 
-    -   [Going further with R session 1/2](99_archives/2025/7_going_further/going_further_session1.html)
+
+    
 
     -   [Going further with R session 2/2](99_archives/2025/7_going_further/going_further_session2.html)
 

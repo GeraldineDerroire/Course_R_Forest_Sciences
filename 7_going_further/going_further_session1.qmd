@@ -43,7 +43,7 @@ library(tidyverse)
 ::: notes
 some reminders of things already seen + some new things
 
-these will be useful if you need to simulate data (for example for predictions using a model)
+these will be useful if you need to simulate data (for example for predictions using a model) + and for loops that we will see in the next session
 :::
 
 ## Combine elements into a vector
@@ -359,8 +359,9 @@ rnorm(n=5, mean = 3, sd = 0.5)
 
 ::: fragment
 ```{r}
-rbinom(n = 4, size = 25, 
-       prob = 0.8) # probability of success
+rbinom(n = 4, 
+       size = 25, 
+       prob = 0.8) # prob. of success
 ```
 :::
 :::
@@ -371,8 +372,9 @@ rbinom(n = 4, size = 25,
 
 ::: fragment
 ```{r}
-rbinom(n = 4, size = 1, 
-       prob = 0.5) # probability of success
+rbinom(n = 4, 
+       size = 1, 
+       prob = 0.5) # prob. of success
 ```
 :::
 :::
@@ -484,7 +486,7 @@ you have written a function! easy!
 
 [We now want to personalise our greeting...]{style="font-size: 30px"}
 
-Let's add an **argument** that we call *name* to our function, and use it in the code that we write in the **body** of the function:
+Let's add an **argument** that we call *name* to our function, and use it in the code in the **body** of the function:
 
 ```{r}
 my_first_function <- function(name) {
@@ -686,7 +688,7 @@ BUT we have a lot of decimals...
 
 ## Writing a function step by step {.smaller}
 
-**Step 3: develop the code... and add arguments if needed**
+**Step 3: develop the code... and add new steps if needed**
 
 *We would like to round the mean diameter, let's add a new operation and an argument giving the number of decimals.*
 
@@ -713,7 +715,19 @@ one of our argument can take the same name as in the function in which we use it
 
 ## Writing a function step by step {.smaller}
 
-**Step 4: create the function**: add a name, add he instruction *function*, put the argument in *()* and the code in *{}*, add *return* (optional) 
+**Step 4: create the function**: 
+
+::: nonincremental
+
+* add a name 
+
+* add the instruction *function*
+
+* put the argument in *()* and the code in *{}*
+
+* add *return* (optional) 
+
+:::
 
 ```{r}
 mean_diam <- function(circ, na_act, digits) {
@@ -727,6 +741,9 @@ mean_diam <- function(circ, na_act, digits) {
     return(mean_diam)
 }
 ```
+
+⚠️ Remember that to be able to use the function, 
+this code needs to be executed.
 
 ## Writing a function step by step {.smaller}
 
@@ -817,7 +834,7 @@ my_sum2(5, 9)
 
 ```{r}
 my_sum3 <- function(x, y) {
-  cat("The sum is", x + y)
+  cat("The sum is ", x + y, ".", sep="")
 }
 my_sum3(11, 3)
 ```
@@ -899,6 +916,8 @@ mean_diam(new_circ)
 try(mean_diam(new_circ))
 ```
 
+::: fragment
+
 [We can specify **default** values that are taken by the arguments if no value is passed :]{style="font-size: 30px"}
 
 ```{r}
@@ -913,6 +932,8 @@ mean_diam <- function(circ,
 
 mean_diam(new_circ)
 ```
+
+:::
 
 [[⚠️ When using a function, providing a value for an argument with a default value is *optional*, but it is *compulsory* for the arguments without default values.]{style="font-size: 30px"}]{.fragment}
 
@@ -1024,7 +1045,7 @@ res
 
 ## Functions within functions
 
-[It is possible to use a function (including a home made one) within a function.]{style="font-size: 30px"}
+[It is possible to use a function (including a home-made one) within a function.]{style="font-size: 30px"}
 
 ::: fragment
 
@@ -1140,7 +1161,7 @@ local object are store in a local enviro, such as the enviro of a function
 
 ```{r, eval = FALSE}
 my_func <- function() {
-  print(obj)
+  print(new_objet)
 }
 
 my_func()
