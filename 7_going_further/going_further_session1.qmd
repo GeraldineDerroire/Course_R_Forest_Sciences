@@ -1362,7 +1362,7 @@ this can be usefull to save time, but can cause problem of reproductability is t
 
 ::: {.nonincremental}
 
-* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*  - Chapter on functions [in English](https://r4ds.had.co.nz/functions.html) and [in Portuguese](https://pt.r4ds.hadley.nz/iteration.html){preview-link="false"}
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*  - Chapter on functions [in English](https://r4ds.hadley.nz//functions.html) and [in Portuguese](https://pt.r4ds.hadley.nz//functions.html){preview-link="false"}
 
 * Wickham H. *Advanced R*  - Chapter on functions [in English](https://adv-r.hadley.nz/control-flow.html){preview-link="false"}
 

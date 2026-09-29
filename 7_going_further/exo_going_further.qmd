@@ -26,6 +26,7 @@ In addition to the variable to standardise, we want this function to take a seco
 * plan the function: identify the arguments and the steps
 
 ```{r}
+#| eval: FALSE
 # Arguments
 v # a vector of numerical value
 decim <- 2 # the number of decimal to round the standardise values
@@ -44,6 +45,7 @@ v_test <- rnorm(n=10, mean = 16, sd=3)
 v_test
 summary(v_test)
 ```
+
 * write the code of the function (for keeping thing simple, this function will always remove the NA)
 
 ```{r}
@@ -134,6 +136,7 @@ test_weather(temp = 32, rain = TRUE)
 test_weather(temp = 15, rain = FALSE)
 test_weather(temp = 15, rain = TRUE)
 ```
+
 * Add two tests at the beginning of function to check that the arguments are of the correct mode, and stop the execution of the function otherwise
 
 ```{r}
@@ -157,8 +160,8 @@ test_weather <- function(temp, rain) {
 
 
 # check          
-test_weather(temp= 28, rain =12)  
-test_weather(temp= "blue", rain = TRUE)
+  # test_weather(temp= 28, rain =12)  
+  # test_weather(temp= "blue", rain = TRUE)
   
 # Alternative
 test_weather <- function(temp, rain) {
@@ -183,8 +186,8 @@ test_weather <- function(temp, rain) {
 }
 
 # check          
-test_weather(temp= 28, rain =12)  
-test_weather(temp= "blue", rain = TRUE)
+  # test_weather(temp= 28, rain =12)  
+  # test_weather(temp= "blue", rain = TRUE)
 ```
 
 # Loop
@@ -269,24 +272,3 @@ iris_sd2 <- iris %>% mutate(
 summary(iris_sd2)
 ```
 
-<!-- 
-
-# For next time
-
--   Make sure that git is properly installed on your computer and that git and Github are configurated (see the setting up instructions [here](https://geraldinederroire.github.io/Course_R_Forest_Sciences/0_installing_enviro){preview-link="false"})  
-
-- Install TinyTex by running the following R commands:
-
-```{r, echo = TRUE}
-install.packages('tinytex')
-tinytex::install_tinytex()
-```
-
-and checking that it is installed:
-
-```{r, echo = TRUE}
-tinytex::is_tinytex() # should be TRUE
-```
-
---> 
- 

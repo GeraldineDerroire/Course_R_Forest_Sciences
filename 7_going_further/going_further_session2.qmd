@@ -54,7 +54,7 @@ set.seed(14)
 ```{r}
 greeting <- function(time) {
   time <- hm(time) 
-  time_limit <- hm("11:59")
+  time_limit <- hm("12:00")
   if (time < time_limit) {
     message("Bom dia !")
   } 
@@ -101,7 +101,7 @@ how does that work?
 ```{r}
 greeting <- function(time) {
   time <- hm(time) 
-  time_limit <- hm("11:59")
+  time_limit <- hm("12:00")
   if (time < time_limit) {
     message("Bom dia !")
   } else {
@@ -140,8 +140,8 @@ An [if]{style="color:indianred;"} instruction can be followed by a [else]{style=
 ```{r}
 greeting <- function(time) {
   time <- hm(time) 
-  time_limit1 <- hm("11:59")
-  time_limit2 <- hm("17:59")
+  time_limit1 <- hm("12:00")
+  time_limit2 <- hm("18:00")
   if (time < time_limit1) {
     message("Bom dia !")
   } else if (time < time_limit2) {
@@ -195,8 +195,8 @@ The second condition is tested only if the 1st condition is FALSE.
 ```{r}
 greeting_wrong <- function(time) {
   time <- hm(time) 
-  time_limit1 <- hm("11:59")
-  time_limit2 <- hm("17:59")
+  time_limit1 <- hm("12:00")
+  time_limit2 <- hm("18:00")
   if (time < time_limit2) {
     message("Boa tarde !")
   } else if (time < time_limit1) {
@@ -226,9 +226,9 @@ explain what happen following the code
 
 ```{r}
 greeting <- function(time) {
-  if (hm(time)  < hm("11:59")) {
+  if (hm(time)  < hm("12:00")) {
     message("Bom dia !")
-  } else if (hm(time)  < hm("17:59")) {
+  } else if (hm(time)  < hm("18:00")) {
     message("Boa tarde !")
   } else {
     message("Boa noite !")
@@ -349,7 +349,7 @@ graph_var(vec_logical)
 
 [[and combine them using [&&]{style="color:indianred;"} and [||]{style="color:indianred;"}]{style="font-size: 30px"}]{.fragment}
 
-[[💡 [&&]{style="color:indianred;"} and [||]{style="color:indianred;"} are equivalent to [&]{style="color:indianred;"} and [|]{style="color:indianred;"} but only work for vector of length one. There are therefore safer to use in if/else conditions, as they need to return only one value.]{style="font-size: 30px"}]{.fragment}
+[[💡 [&&]{style="color:indianred;"} and [||]{style="color:indianred;"} are equivalent to [&]{style="color:indianred;"} and [|]{style="color:indianred;"} but only work for vector of length one (an error is returned otherwise. There are therefore safer to use in if/else conditions, as they return only one value (which is what we need).]{style="font-size: 30px"}]{.fragment}
 
 ::: notes
 these is important for writing code with conditional execution
@@ -433,7 +433,7 @@ check_input(x = c(2,3), valid_val = 1:10)
 :::
 
 ::: notes
-a valid input is in the list of valid input and has a lenght of 1
+a valid input is in the list of valid input and has a length of 1
 :::
 
 
@@ -580,6 +580,15 @@ for quarto => we could either print "the statistical test is significant" or "th
 
 A loop allows to repeatedly executes a block of code.
 
+##
+
+⚠️ In this section, we'll work with deliberately simple examples to focus on how for loops work. 
+For most of them there's a faster, vectorised way to get the same result (that will also be shown).
+
+::: notes
+the goal here is the loop syntax itself, not the fastest way to solve the problem.
+:::
+
 ## [for]{style="color:indianred;"} loop
 
 Let's take a simple example:
@@ -589,11 +598,9 @@ for (item in 1:5) {
     print(item)
 }
 ```
-## [for]{style="color:indianred;"} loop
+## [for]{style="color:indianred;"} loop {.smaller}
 
 ![](for_loop.png){width=350%}
-
-
 
 ::::: columns
 ::: {.column width="60%"}
@@ -616,27 +623,40 @@ For each iteration, the loop sequentially assigns a value from the vector to the
 :::
 :::::
 
-
-## [for]{style="color:indianred;"} loop
-
-The vector can be of any mode, and we can give any name to the  iterator (usually we use *n* or *i*)
-
-```{r}
-vec_name <- c("Lucas", "Gabriel", "Ana")
-for (name in vec_name) {
-  message("Hello ", name, "!")
-}
-```
-[[Here the vector is of type *character* and the iterator is called *name*.]{style="font-size: 30px"}]{.fragment}
-
 ::: fragment
+
 [Note that the iterator is conserved when the loop finishes, with its last value:]{style="font-size: 30px"}
 
 ```{r}
-name
+item
 ```
+
 :::
 
+
+## [for]{style="color:indianred;"} loop
+
+The vector can be of any type, and we can give any name to the  iterator (usually we use *n* or *i*)
+
+```{r}
+vec_name <- c("Lucas", "Gabriel", "Ana")
+for (name_position in 1:3) {
+  message("Hello ", vec_name[name_position], "!")
+}
+```
+[[Here the vector is of type *character* and the iterator is called *name_position*.]{style="font-size: 30px"}]{.fragment}
+
+[[⚠️ Using 1:3 would not work if the vector had a different length.]{style="font-size: 30px"}]{.fragment}
+
+::: notes
+here the name of the iterator is too long!
+
+Also, we wouldn't write 1:3, let's see how to do it properlu
+:::
+
+
+
+<!--
 
 ## Iterating over elements
 
@@ -649,90 +669,20 @@ for (name in vec_name) {
 ```
 
 
+
+
 we iterate over the **elements** (the values) of a vector.
 
-
-## Iterating over names
-
-We can also iterate over **names** :
-
-::::: columns
-::: {.column width="42%"}
-
-* of a named vector:
-
-::: fragment
-```{r}
-# create a named vector
-vec <- c(a = 2, b = 4, c = 3)
-
-for (i in names(vec)) {
-  print(vec[[i]])
-}
-
-```
-:::
-:::
+-->
 
 
-::: {.column width="58%"}
+## Iterating over numeric indices using [seq_along]{style="color:indianred;"}
 
-* of a named list:
-
-::: fragment
-```{r}
-# create a name list
-desserts <- list(Sophia = "banana bread", 
-                 Eliott = "pancakes", 
-                 Karina = "chocolate cake")
-
-for (n in names(desserts)) {
-  message(n, " loves ", desserts[[n]])
-}
-```
-:::
-
-:::
-:::::
-
-## Iterating over names {.scrollable}
-
-[or over names of columns of a data frame:]{style="font-size: 30px"}
-
-```{r}
-# take a subset of iris
-iris_sub <- iris %>%  filter(Species == "setosa") %>% select(-Species) 
-
-# Create a new data frame with the same structure as iris_sub
-  # to store the scale data
-iris_sub_scaled <- iris_sub
-
-# replace the values in each colum by the scaled values
-  # iterating by column names
-for (col in names(iris_sub)) {
-  iris_sub_scaled[[col]] <- as.vector(scale(iris_sub[[col]]))
-}
-
-summary(iris_sub_scaled)
-```
-
-::: notes
-! if you apply the function scale over a dataframe with only numeric variables, it would actually work without doing a for loop
-
-subset of iris: keep only 1 species and only numerical columns
-
-note that here we modify an existing object (iris_sub_scaled)
-
-check: the mean is indeed 0
-:::
-
-## Iterating over numeric indices
-
-We can also iterate over **numeric indices**:
+When we iterate over numeric indices, we use [seq_along]{style="color:indianred;"} to set the iterator.
 
 ```{r}
 for (n in seq_along(vec_name)) {
-  message("Hello ", vec_name[[n]], "!")
+  message("Hello ", vec_name[n], "!")
 }
 ```
 
@@ -745,19 +695,19 @@ seq_along(vec_name)
 ```
 :::
 
-## Iterating over numeric indices
+## Iterating over numeric indices using [seq_along]{style="color:indianred;"}
 
 Instead of *seq_along(vec_name)*, we could also write *1:length(vec_name)*:
 
 ```{r}
 for (n in 1:length(vec_name)) {
-  message("Hello ", vec_name[[n]], "!")
+  message("Hello ", vec_name[n], "!")
 }
 ```
 
 [⚠️ seq_along is safer]{.fragment}
 
-## Iterating over numeric indices {.smaller}
+## Iterating over numeric indices using [seq_along]{style="color:indianred;"} {.smaller}
 
 [Let's take a vector of length 0:]{style="font-size: 30px"}
 
@@ -776,7 +726,7 @@ length(vec_null)
 ::: fragment
 ```{r}
 for (n in 1:length(vec_null)) {
-  message("Hello ", vec_null[[n]], "!")
+  message("Hello ", vec_null[n], "!")
 }
 ```
 :::
@@ -815,7 +765,7 @@ answer after!
 
 ```{r}
 for (m in seq_along(month.name)) {
-  month <- month.name[[m]]
+  month <- month.name[m]
   rank <- m
   message(month, " is the month ", rank)
 }
@@ -850,6 +800,95 @@ fib
 ```
 
 
+## Iterating over names
+
+So far, we have iterated over numeric indices. We can also iterate over **names** :
+
+::::: columns
+::: {.column width="42%"}
+
+* of a named vector:
+
+::: fragment
+```{r}
+# create a named vector
+vec <- c(a = 2, b = 4, c = 3)
+
+for (i in names(vec)) {
+  print(vec[[i]])
+}
+
+```
+:::
+:::
+
+
+::: {.column width="58%"}
+
+* of a named list:
+
+::: fragment
+```{r}
+# create a name list
+desserts <- list(Sophia = "banana bread", 
+                 Eliott = "pancakes", 
+                 Karina = "chocolate cake")
+
+for (n in names(desserts)) {
+  message(n, " loves ", desserts[[n]])
+}
+```
+
+:::
+
+:::
+:::::
+
+::: notes
+Only if there is a question 
+
+on named vector, we could also use : vec[i] but that would give us a named vector of lenght 1, whereas vec[[i]] extracts only the value. 
+But both work
+
+on named list, we have to use the [[]] as this is a list
+
+:::
+
+## Iterating over names {.smaller}
+
+[or over names of columns of a data frame:]{style="font-size: 30px"}
+
+```{r}
+# take a subset of iris
+iris_sub <- iris %>%  filter(Species == "setosa") %>% select(-Species) 
+
+# Create a new data frame with the same structure as iris_sub
+  # to store the scale data
+iris_sub_scaled <- iris_sub
+
+# replace the values in each column by the scaled values
+  # iterating by column names
+for (col in names(iris_sub)) {
+  iris_sub_scaled[[col]] <- as.vector(scale(iris_sub[[col]]))
+}
+
+summary(iris_sub_scaled)
+```
+
+[[NB: The function [scale]{style="color:blue;"} already works column-by-column when given a whole data frame.]{style="font-size: 25px"}]{.fragment}
+
+::: notes
+
+subset of iris: keep only 1 species and only numerical columns
+
+only if question: here iris_sub_scaled[[col]] gives us a vector, while irir_sub_scaled[col] would give a dataframe with one colum
+
+check: the mean is indeed 0
+
+! if you apply the function scale over a dataframe with only numeric variables, it would actually work without doing a for loop
+:::
+
+
 ## Output of a loop 
 
 [When a loop generates data, it is important to **pre-allocate the output to the required size rather than grow it inside a loop**, because pre-allocation avoids repeated memory copying and is significantly **faster** and **more efficient**, especially for large outputs]{style="font-size: 30px"}
@@ -867,7 +906,7 @@ fib
 out <- vector("integer", 
               length = 10)
 for (i in seq_along(out)) {
-  out[[i]] <- i
+  out[i] <- i
 }
 out  
 ```
@@ -894,7 +933,7 @@ out
 :::
 :::::
 
-[[*This is particularly important for especially for large outputs.*]{style="font-size: 25px"}]{.fragment}
+[[*This is especially important for large outputs.*]{style="font-size: 25px"}]{.fragment}
 
 ## [while]{style="color:indianred;"} loops
 
@@ -979,6 +1018,8 @@ for(var in names(starwars)) {
 
 
 ::: notes
+use the [[]] as we subset a column
+
 here we can round it...
 :::
 
@@ -1021,16 +1062,18 @@ As for a function, a loop needs to be write **step by step**:
 It is often used as an alternative to loops. 
 
 ::: notes
-most of the example that we are going to see could have been writen as a loop 
+most of the example that we are going to see could have been written as a loop 
 
-but are faster, but more importantly more concice
+Using functional programming is not necessarily faster, but more concise
 :::
 
 ## [map]{style="color:indianred;"}: apply a function to a vector or a list {.scrollable}
 
-[[map]{style="color:indianred;"} is a function from the package [purr]{style="color:indianred;"} used to apply a function to each element of a vector or a list:]{style="font-size: 30px"}
+[[map]{style="color:indianred;"} is a function from the package [purrr]{style="color:indianred;"} used to apply a function to each element of a vector or a list:]{style="font-size: 30px"}
 
 ::: fragment
+
+<!--
 
 [Let's first create a **vector** and a small function:]{style="font-size: 30px"}
 
@@ -1072,10 +1115,12 @@ vec_num %>% map(sup_5)
 
 ## [map]{style="color:indianred;"}: apply a function to a vector or a list
 
-[Let's use our function mean_diam on a **list** of vectors of circumferences:]{style="font-size: 30px"}
+-->
+
+[Let's use our function mean_diam (that calculates the mean DBH of a vector of tree circumferences) on a **list** of vectors of circumferences:]{style="font-size: 30px"}
 
 ```{r}
-# create the list
+# create the list (3 samples of 250 trees each)
 circ_list <- list(sample1 = runif(n = 35, min = 30, max = 250),
                  sample2 = runif(n = 35, min = 30, max = 250),
                  sample3 = runif(n = 35, min = 30, max = 250))
@@ -1083,7 +1128,7 @@ circ_list <- list(sample1 = runif(n = 35, min = 30, max = 250),
 circ_list %>% map(mean_diam)
 ```
 
-
+:::
 
 ## Variants of [map]{style="color:indianred;"} 
 
@@ -1101,18 +1146,20 @@ circ_list %>% map_dbl(mean_diam)
 
 * [[map_lgl]{style="color:indianred;"} returns a vector of **logical**]{style="font-size: 30px"}
 
+<!--
+
 ::: fragment
 ```{r}
 vec_num %>% map_lgl(sup_5)
 ```
 :::
 
+-->
+
 * [[map_chr]{style="color:indianred;"} returns a vector of **character**]{style="font-size: 30px"}
 
 
 ::: notes 
-these ex to do the same thing than in the two examples before but returning a vector
-
 map_chr on next slide
 :::
 
@@ -1124,11 +1171,12 @@ map_chr on next slide
 ```{r}
 # create a function
 love_dessert <- function(x) {
-  paste("I loves", x,"!")
+  paste("I love", x,"!")
 }
 
 desserts %>% map_chr(love_dessert)
 ```
+
 ::: fragment
 
 [Note that this is an alternative to the following loop:]{style="font-size: 30px"}
@@ -1137,10 +1185,14 @@ desserts %>% map_chr(love_dessert)
 out_dessert <- vector(length = length(desserts), mode = "character") # vector to store the result
 for (i in seq_along(desserts)) {
   names(out_dessert)[i] <- names(desserts)[i]
-  out_dessert[i] <- paste("I loves", desserts[i],"!")
+  out_dessert[i] <- paste("I love", desserts[[i]],"!")
 }
 out_dessert
 ```
+
+[[NB: We could also use the more simple and vectorised alternative 
+[paste("I love", desserts,"!")]{style="color:blue;"}]{style="font-size: 25px"}]{.fragment}
+
 :::
 
 ::: notes
@@ -1154,7 +1206,7 @@ the loop is slightly different than the loop that we created before with dessert
 
 ```{r}
 desserts %>% map_chr(function(x) {
-  paste("I loves", x,"!")
+  paste("I love", x,"!")
 })
 ```
 
@@ -1163,7 +1215,7 @@ desserts %>% map_chr(function(x) {
 [We can also use the abbreviated syntax, where [function(...){}]{style="color:indianred;"} is replaced by [\\(...)]{style="color:indianred;"}:]{style="font-size: 30px"}
 
 ```{r}
-desserts %>% map_chr(\(x) paste("I loves", x,"!"))
+desserts %>% map_chr(\(x) paste("I love", x,"!"))
 ```
 
 :::
@@ -1175,7 +1227,7 @@ this is advanced, not problem if you don't understand / remember
 
 ## [walk]{style="color:indianred;"} for side effects
 
-[The function [walk]{style="color:indianred;"} is used when you want to perform an action for its side effect (e.g., printing a message, creating a plot, or saving a file). It doesn't return a result:]{style="font-size: 30px"}
+[The function [walk]{style="color:indianred;"} is useful when you want to perform an action for each element (e.g., printing a message, creating a plot, or saving a file), which is called a side effect, rather than collecting the results into a new object:]{style="font-size: 30px"}
 
 ```{r}
 vec_name %>% # vector of names created earlier
@@ -1208,7 +1260,7 @@ dt_Likert %>%
 :::
 
 ::: notes
-In the previous session, we had to write the name of the function everytime...
+In the previous session, we had to write the name of the function every time...
 
 dt_Likert %>% 
   mutate(Question1 = recode_Likert(Question1),
@@ -1391,7 +1443,7 @@ dt_sim
 ::: {.column width="60%"}
 
 ::: fragment 
-[We would like to add a random number drawn between Min and Max, for each row:]{style="font-size: 30px"}
+[We would like to add a random number drawn between Min and Max (so in a uniform distribution), for each row:]{style="font-size: 30px"}
 
 ```{r}
 dt_sim %>% 
@@ -1420,14 +1472,15 @@ dt_sim %>%
   mutate(rand_draw = runif(1, min = Min, max = Max))
 ```
 
-## Apply a transformation line by line with [rowwise]{style="color:indianred;"} and [c_accross]{style="color:indianred;"} {.scrollable}
+## Apply a transformation line by line with [rowwise]{style="color:indianred;"} and [c_across]{style="color:indianred;"} {.scrollable}
 
-[When there are many columns, we can use [c_accross]{style="color:indianred;"} with [rowwise]{style="color:indianred;"} to specify the columns:]{style="font-size: 30px"} 
+[When there are many columns, we can use [c_across]{style="color:indianred;"} with [rowwise]{style="color:indianred;"} to specify the columns:]{style="font-size: 30px"} 
 
 ```{r}
 # Let's first make the responses to questions numeric
 dt_Likert_num <- dt_Likert %>% 
-  mutate(across(Question1:Question4, as.numeric)) 
+  mutate(across(Question1:Question4, 
+                function(x) {as.numeric(as.character(x))})) 
 
 # Apply a row-wise transformation
 dt_Likert_num %>% 
@@ -1437,16 +1490,27 @@ dt_Likert_num %>%
   )
 ```
 
-[[*We could of course do everything in a single pipe.*]{style="font-size: 30px"}]{.fragment}
+[[NB: In this case, we could also use the vectorised alternative [rowMeans]{style="color:blue;"}]{style="font-size: 30px"}]{.fragment}
 
 ::: notes
-scroll down!
+
+
+as.numeric(as.character()) => needed because otherwise take the value of the level, not the actual value...
+
+We could of course do everything in a single pipe.
+
 :::
 
 ::: notes
 here the responses were factors so need to transform them in numeric to take the mean
 
 show in 2 separate pipe to avoid confusion
+:::
+
+# Coding styles
+
+::: notes
+several way of coding something, do what works for you (and work...)
 :::
 
 ## The [apply]{style="color:indianred;"} family
@@ -1472,9 +1536,6 @@ for some who are familiar with R, may have heard of the apply family => won't co
 
 ## When not to use a loop?
 
-::::: columns
-::: {.column width="70%"}
-
 * [when a vectorised alternative exists:]{style="font-size: 30px"}
 
 
@@ -1483,7 +1544,7 @@ for some who are familiar with R, may have heard of the apply family => won't co
 ::: fragment
 ```{r}
 for (i in seq_along(vec_num)) {
-    x[i] <- x[i] + 10
+    vec_num[i] <- vec_num[i] + 10
 }
 ```
 :::
@@ -1498,27 +1559,32 @@ vec_num + 10
 :::
 
 
-* [when [across]{style="color:indianred;"} or [map]{style="color:indianred;"} could be used]{style="font-size: 30px"}
+## When not to use a loop?
 
-:::
+* when performing the same operation on several columns => Use [across]{style="color:indianred;"}
 
-::: {.column width="30%"}
-
-[[*But remember that the best code is the code you can write and understand. Loops are fine, especially if you're not chasing efficiency.*]{style="font-size: 25px"}]{.fragment}
-
-:::
-:::::
+* when using a function on each element of a list => Use [map]{style="color:indianred;"}
 
 ::: notes
-to finish:
-
-as seen, many of our loops could be written with accross or map
+as seen, many of our loops could be written with across or map
 
 :::
 
 
+## When to use a loop?
 
-## Acknowledgments {.smaller}
+* for iterations where the result of one iteration is needed to determine the next (*e.g.* the Fibonacci sequence)
+
+* when the length of the output is unknown (*while* loop)
+
+* when we need to use *next* or *break*
+
+
+[*But remember that the best code is the code you can write and understand. Loops are fine, if you understand them better!*]{.fragment}
+
+
+
+## Acknowledgments
 
 ::: {.nonincremental}
 
@@ -1526,11 +1592,11 @@ as seen, many of our loops could be written with accross or map
 
 :::
 
-## Ressources
+## Resources
 
 ::: {.nonincremental}
 
-* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*  - Chapter on iterations [in English](https://r4ds.had.co.nz/iteration.html) and [in Portuguese](https://pt.r4ds.had.co.nz/iteration.html){preview-link="false"}
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*  - Chapter on iterations [in English](https://r4ds.hadley.nz//iteration.html) and [in Portuguese](https://pt.r4ds.hadley.nz//iteration.html){preview-link="false"}
 
 * Wickham H. *Advanced R*  - Chapter on control flow [in English](https://adv-r.hadley.nz/control-flow.html){preview-link="false"}
 

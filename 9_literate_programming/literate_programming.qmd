@@ -959,7 +959,7 @@ here problem that there are two : in the YAML
 ## Ressources {.smaller}
 
 ::: nonincremental
-* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*  - Chapter on Quarto [in English](https://r4ds.hadley.nz/quarto.html) and [in Portuguese](https://pt.r4ds.hadley.nz/quarto.html){preview-link="false"}
+* Wickham H., Cetinkaya-Rundel M., Grolemund G. *R for Data Science*  - Chapter on Quarto [in English](https://r4ds.hadley.nz//quarto.html) and [in Portuguese](https://pt.r4ds.hadley.nz/quarto.html){preview-link="false"}
 
 * Guilhaumon F. *An introduction to Quarto* [here](https://rdatatoolbox.github.io/course-quarto)
 
