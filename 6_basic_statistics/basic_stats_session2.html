@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2026-10-05">
+  <meta name="dcterms.date" content="2026-10-06">
   <title>Statistics with R - Linear regressions</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,7 +212,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2026-10-05</p>
+  <p class="date">2026-10-06</p>
 </section>
 <section>
 <section id="section" class="title-slide slide level1 center">
@@ -643,8 +643,8 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
 <p>We need to check the model assumptions:</p>
 <ul>
 <li class="fragment"><p>independence of observations</p></li>
+<li class="fragment"><p>independence of the residuals from the fitted values</p></li>
 <li class="fragment"><p>linearity of the relationship between response and explanatory variables</p></li>
-<li class="fragment"><p>independence of the residuals</p></li>
 <li class="fragment"><p>constant variance of the residuals (homoscedasticity)</p></li>
 <li class="fragment"><p>normality of the residuals</p></li>
 </ul>
@@ -668,8 +668,8 @@ F-statistic: 579.3 on 1 and 389 DF,  p-value: &lt; 2.2e-16</code></pre>
           display:block!important;
       }</style></aside>
 </section>
-<section id="homoscedasticity-of-the-residuals-and-linearity" class="slide level2">
-<h2>Homoscedasticity of the residuals and linearity</h2>
+<section id="homoscedasticity-of-the-residuals-independence-from-the-fitted-values-and-linearity" class="slide level2">
+<h2>Homoscedasticity of the residuals, independence from the fitted values and linearity</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
@@ -2387,7 +2387,7 @@ hills_climb 3 342.40      56.11   0.00   1.00 -167.81</code></pre>
 </ul>
 <p><span class="fragment"><span style="font-size: 25px">In the linear model seen before, the distribution is <em>Normal</em> and the link function the <em>identity</em>.</span></span></p>
 </section>
-<section id="logistic-regression" class="slide level2">
+<section id="logistic-regression" class="slide level2 smaller">
 <h2>Logistic regression</h2>
 <p><span style="font-size: 30px">The logistic regression is a <strong>GLM</strong> with a <strong>binomial distribution</strong> and a <strong>logit link function</strong>. It models a probability of success.</span></p>
 <ul>

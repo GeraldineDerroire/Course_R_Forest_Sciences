@@ -359,9 +359,9 @@ We need to check the model assumptions:
 
 * independence of observations
 
-* linearity of the relationship between response and explanatory variables
+* independence of the residuals from the fitted values
 
-* independence of the residuals
+* linearity of the relationship between response and explanatory variables
 
 * constant variance of the residuals (homoscedasticity)
 
@@ -382,7 +382,7 @@ we'll see later what to do then
 :::
 
 
-## Homoscedasticity of the residuals and linearity 
+## Homoscedasticity of the residuals, independence from the fitted values and linearity 
 
 ::::: columns
 ::: {.column width="50%"}
@@ -1333,7 +1333,7 @@ Some data are by nature not normally distributed, so we cannot model them with a
 [[In the linear model seen before, the distribution is *Normal* and the link function the *identity*.]{style="font-size: 25px"}]{.fragment}
 
 
-## Logistic regression
+## Logistic regression {.smaller}
 
 [The logistic regression is a **GLM** with a **binomial distribution** and a **logit link function**. It models a probability of success.]{style="font-size: 30px"}
 
