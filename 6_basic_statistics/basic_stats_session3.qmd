@@ -39,6 +39,8 @@ library(tidyverse)
 * **Ordination methods** aim to rearrange the observations in a lower-dimensional space to reduce the dimensionality of the data while preserving the main patterns of variation.
 
 ::: notes
+give the example of soil variables, or climate variables (a lot of correlations)
+
 last session, when more than 2 variables, there was just one univariate response variable, so different 
 
 explain the reduction of dimensionality
@@ -159,7 +161,7 @@ Marchand + Eric -->
 
 [Unconstrained ordination methods are used to **visualise and explore the relationships among variables or observations** without imposing any specific constraints on the relationships.]{style="font-size: 30px"}
 
-[The objective is to **identify a few axes that capture most of the variation** in a multidimensional dataset, allowing for a simplified yet informative representation.]{style="font-size: 30px"}
+[The objective is to **identify a few axes that capture most of the variation** in a multidimensional dataset, allowing for a simplified but informative representation.]{style="font-size: 30px"}
 
 [This allows to **visualise similarities among observations**, as more similar observations will be closer in the reduced-dimensional spaces.]{style="font-size: 30px"}
 
@@ -173,10 +175,10 @@ imagine the obs as points in that multimentional spaces : 2 dim => scatterplot O
 
 :::
 
-## PCA - Principle
+## Principle
 
 Imagine a 3D point cloud (many observations for 3 variables) 
-that has the shape of a rugby ball:
+that has the shape of a rugby ball.
 
 ::: {.column width="50%"}
 ![](rugby_ball.jpg)
@@ -186,7 +188,7 @@ that has the shape of a rugby ball:
 :::
 
 ::: {.column width="45%"}
-These would be the 3 axes allowing us to capture most of the variation in our dataset (*i.e.* that better describe the point cloud).
+[The objective is to find the 3 axes allowing us to capture most of the variation in our dataset (*i.e.* that better describe the point cloud).]{style="font-size: 30px"}
 :::
 
 ::: notes
@@ -419,6 +421,11 @@ ggplot() +
   theme_minimal()
 ```
 :::
+:::
+
+::: notes
+This is the principle, now that we understand,
+let's use that on much more dimension than just 3
 :::
 
 
@@ -688,12 +695,12 @@ plot(veg_ca, scaling = "symmetric",
 
 [[💡 To visualise a CA, we use the function [plot]{style="color:indianred;"}. The use of scaling is similar to a PCA.]{style="font-size: 25px"}]{.fragment}
 
-::: 
+::: notes 
 scaling species to visualise the species
 
 scaling sites for the sites
 
-scaing symetric for both
+scaling symetric for both
 
 :::
 
@@ -784,7 +791,7 @@ explain why triange (as the matrix is symetrical and diagonale not shown (would 
 
 ## PCoA - Running a PCoA
 
-[We use [pco]{style="color:indianred;"} to run a PCoA.]{style="font-size: 30px"}
+[We use [pco]{style="color:indianred;"} to run a PCoA on the distance matrix.]{style="font-size: 30px"}
 
 [When using Bray-Curtis distance, we can get negative eigenvalues (corresponding to distances in an imaginary space). To avoid this, we can do a Lingoes correction.]{style="font-size: 30px"}
 
@@ -861,7 +868,7 @@ results are not far from the one obtained with the CA
 
 * [the number of axes is set *a priori* (usually 2)]{style="font-size: 30px"}
 
-* [an iterative algorithm moves the sites until the distances between sites are the closest possible to the actual multivariate distances (based on the chosen distance metric).]{style="font-size: 30px"}
+* [an iterative algorithm moves the observations until the distances between sites are the closest possible to the actual multivariate distances (based on the chosen distance metric).]{style="font-size: 30px"}
 
 [[NMDS is non-metric as it focussed on the **rank order of distances** rather than on the actual distance, making it very flexible and robust.]{style="font-size: 30px"}]{.fragment}
 
@@ -1339,6 +1346,8 @@ These methods combine the concepts of **ordination** and **regression**.]{style=
 :::
 :::::
 
+[[*Eg: species composition explained by soil variables*]{style="font-size: 25px"}]{.fragment}
+
 
 ## Collinearity {.smaller}
 
@@ -1543,6 +1552,7 @@ summary(vare_cca)
 
 ::: notes 
 here again, big unexplained part compared to explained
+:::
 
 ## CCA - Interpretation
 
