@@ -87,12 +87,12 @@ $$CV = \frac{standard\:deviation}{mean}$$
 
 [**Descriptive statistics** are calculated from the observations (the data). ]{style="font-size: 30px"}
 
-> [*eg*: The trees that we can measure in a forest plot are a sample of the population of the trees in the considered forest. We can **calculate** the mean diameter of this sample.]{style="font-size: 30px"}
+[*eg: The trees that we can measure in a forest plot are a sample of the population of the trees in the considered forest. We can **calculate** the mean diameter of this sample.*]{style="font-size: 25px"}
 
 [The observations are a sample of a theoretical population that we don't measure.
 The theoretical population can be described by its **parameters**, that are not measured.]{style="font-size: 30px"}
 
-> [*eg*: The mean diameter of the population of trees in the considered forest is a parameter. It cannot be measured but can be **estimated**.]{style="font-size: 30px"}
+[*eg: The mean diameter of the population of trees in the considered forest is a parameter. It cannot be measured but can be **estimated**.*]{style="font-size: 25px"}
 
 ::: notes
 taht's what we want to do with the stats, use observations to understand the theoretical population

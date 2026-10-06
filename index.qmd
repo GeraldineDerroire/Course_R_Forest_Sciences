@@ -71,7 +71,7 @@ Corrected exercises are available upon request.
 
 -   [Exercises on session *Statistics with R - Multivariate analyses*](6_basic_statistics/exo_stats_session_3.pdf)
      
--   [Exercises on *Going further with R (both session)](7_going_further/going_further.pdf)
+-   [Exercises on *Going further with R* (both sessions)](7_going_further/going_further.pdf)
 
 
 ### Previous versions:

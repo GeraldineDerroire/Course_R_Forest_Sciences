@@ -222,7 +222,7 @@ summary(mod_dh_1)
   
   * *slope*: for every increase of 1 cm DBH, increase of 0.34 m in height
   
-  * [A t-test is performed to see if there are significant (significantly different from 0).]{style="font-size: 30px"}
+  * [A t-test is performed to see if theese coefficients are significant (significantly different from 0).]{style="font-size: 30px"}
 
 * [*Residual standard error* is the estimate of the **standard deviation** of the residuals ($\sigma$).]{style="font-size: 30px"}
 
@@ -292,6 +292,13 @@ slice_head(as.data.frame(preds_conf), n=3) # visualise the results
 ::: notes
 here the object is a dataframe and an object of class ggeffects
 so to visualise it better, look at it as a dataframe
+
+error sdt.error is the standard error of the mean => spread of the sample mean if you repeated the sampling many times?. 
+It's not the same than the standard deviation of the prediction around this mean.
+Std.error bigger for extreme values (as if the mean line rotates)
+Not used here
+
+group is not used here, it's used for more complex model
 :::
 
 
@@ -472,7 +479,8 @@ $$log(H) = \alpha + \beta \times log(D)+ \epsilon$$
 
 [which is equivalent to ]{style="font-size: 30px"}
 
-$$H = \alpha'D^\beta \times e^{\epsilon}$$ 
+$$H = \alpha'\times D^\beta \times e^{\epsilon}$$ 
+
 [with $\alpha' = e^{\alpha}$]{style="font-size: 30px"}
 
 [Here the error is multiplicative.]{style="font-size: 30px"}
@@ -1034,7 +1042,7 @@ tbl_regression(mod_hills2,
 
 ## Interaction
 
-Multiple linear regression can include an **interaction** term to test if the effect of an explanatory variable depend of the value taken by another explanatory variable:
+Multiple linear regression can include an **interaction** term to test if the effect of an explanatory variable depend on the value taken by another explanatory variable:
 
 ::: {.column width="70%"}
 
@@ -1359,7 +1367,7 @@ log(mu) = alpha + beta_1*x_1 +... beta_n*x_n
 
 ## What about Bayesian models? {.smaller}
 
-All the models we have talked about (and many more!) can be fitted in a [Bayesian framework]{style="color:indianred;"} (as opossed to the frequentist one we used).
+All the models we have talked about (and many more!) can be fitted in a [Bayesian framework]{style="color:indianred;"} (as opposed to the frequentist one we used).
 
 What are the advantages of a Bayesian approach?
 
