@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2026-09-28">
+  <meta name="dcterms.date" content="2026-10-07">
   <title>Going further with R - session 1/2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,7 +212,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2026-09-28</p>
+  <p class="date">2026-10-07</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
@@ -230,7 +230,8 @@ Géraldine Derroire
 <h1>Vector creation</h1>
 <aside class="notes">
 <p>some reminders of things already seen + some new things</p>
-<p>these will be useful if you need to simulate data (for example for predictions using a model) + and for loops that we will see in the next session</p>
+<p>these will be useful if you need to simulate data (for example for predictions using a model) or to test functions that you will create</p>
+<p>and for loops that we will see in the next session</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -282,7 +283,7 @@ Géraldine Derroire
 </section>
 <section id="repeat-elements" class="slide level2">
 <h2>Repeat elements</h2>
-<p><span style="font-size: 30px">We can also use <span style="color:indianred;">rep</span> to repeat individuals values of any mode:</span></p>
+<p><span style="font-size: 30px">We can also use <span style="color:indianred;">rep</span> to repeat individual values of any mode:</span></p>
 <ul>
 <li class="fragment"><span style="font-size: 30px">repeating a vector several <strong>times</strong>:</span></li>
 </ul>
@@ -604,7 +605,7 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Ana"     "Gabriel"</code></pre>
+<pre><code>[1] "Ana"   "Lucas"</code></pre>
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">By default, sampling is done without replacement:</span></span></p>
@@ -629,7 +630,7 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 2 2 3 3 3 3 1 2 2 2</code></pre>
+<pre><code> [1] 2 3 3 1 3 2 2 2 3 2</code></pre>
 </div>
 </div>
 </div>
@@ -655,7 +656,7 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Aug" "May" "Nov" "Sep" "Feb" "Jan" "Jul" "Jun" "Dec" "Mar" "Apr" "Oct"</code></pre>
+<pre><code> [1] "Apr" "Dec" "Jan" "Mar" "Aug" "Jul" "Oct" "Feb" "Jun" "Nov" "Sep" "May"</code></pre>
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">💡 As the sampling is done randomly, the result is different each time:</span></span></p>
@@ -665,7 +666,7 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Apr" "Mar" "Feb" "Jun" "May" "Jan" "Aug" "Dec" "Sep" "Oct" "Jul" "Nov"</code></pre>
+<pre><code> [1] "Apr" "Aug" "Dec" "Sep" "Feb" "May" "Nov" "Mar" "Jan" "Jul" "Oct" "Jun"</code></pre>
 </div>
 </div>
 </div>
@@ -678,7 +679,7 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  0.5449654  2.1521327  0.8424991 -0.2009882  2.7533428</code></pre>
+<pre><code>[1] -2.6552090 -2.1483878  1.2883898 -0.5997187  2.1084097</code></pre>
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">and from a normal distribution:</span></span></p>
@@ -688,7 +689,7 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.247363 2.637097 3.504280 2.387495 3.019454</code></pre>
+<pre><code>[1] 2.768832 3.302008 1.579060 2.986351 3.887046</code></pre>
 </div>
 </div>
 </div>
@@ -709,7 +710,7 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 20 17 18 21</code></pre>
+<pre><code>[1] 18 21 20 16</code></pre>
 </div>
 </div>
 </div>
@@ -725,7 +726,7 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0 1 0 1</code></pre>
+<pre><code>[1] 0 1 1 0</code></pre>
 </div>
 </div>
 </div>
@@ -740,7 +741,7 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 6 5 3 7 3 4 7 2 7 3</code></pre>
+<pre><code> [1] 7 5 5 6 4 6 3 5 8 8</code></pre>
 </div>
 </div>
 </div>
@@ -948,7 +949,7 @@ Levels: blue green red</code></pre>
           display:block!important;
       }</style></aside>
 <div class="fragment">
-<p><span style="font-size: 30px">⚠️Passing an incorrect number of values to the arguments of a function will result in an error:</span></p>
+<p><span style="font-size: 30px">⚠️Passing an incorrect number of objects to the arguments of a function will result in an error:</span></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href=""></a><span class="fu">my_sum</span>(<span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1015,6 +1016,7 @@ Levels: blue green red</code></pre>
 <section id="writing-a-function-step-by-step-1" class="slide level2 smaller">
 <h2>Writing a function step by step</h2>
 <p><strong>Step 2: create test data and argument</strong></p>
+<p>Don’t code blind! you need create objects to test the code of your function as you write it.</p>
 <p>Try to create data as close as possible to the one you will be using.</p>
 <p><em>Here we create a vector of circumference that contain NA:</em></p>
 <div class="cell">
@@ -1025,8 +1027,8 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1]  85.38756 182.87126  49.28006 186.88295  68.06316  93.04952 101.19045
- [8] 154.23976  76.04151        NA</code></pre>
+<pre><code> [1] 231.61424  78.57381  75.90116  80.88604 248.27756 218.56529 127.00459
+ [8] 139.49593 149.11789        NA</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -1062,8 +1064,8 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] 0.2717971 0.5820973 0.1568633 0.5948669 0.2166518 0.2961858 0.3220992
- [8] 0.4909604 0.2420476        NA</code></pre>
+<pre><code> [1] 0.7372510 0.2501082 0.2416009 0.2574683 0.7902920 0.6957149 0.4042682
+ [8] 0.4440293 0.4746570        NA</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -1137,7 +1139,7 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.3526188</code></pre>
+<pre><code>[1] 0.4772655</code></pre>
 </div>
 </div>
 <p><span class="fragment">💡 <em>na.rm</em> is an argument of the function mean. We pass it an argument of our own function.</span></p>
@@ -1178,7 +1180,7 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.35</code></pre>
+<pre><code>[1] 0.48</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -1254,7 +1256,7 @@ Levels: blue green red</code></pre>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4013</code></pre>
+<pre><code>[1] 0.4161</code></pre>
 </div>
 </div>
 </div>
@@ -1295,6 +1297,7 @@ Levels: blue green red</code></pre>
 
 [The following function is an example of a function with side effect:]{style="font-size: 30px"}
 
+
 ::: {.cell}
 
 ```{.r .cell-code}
@@ -1309,6 +1312,7 @@ my_hist(new_circ)
 ![](going_further_session1_files/figure-revealjs/unnamed-chunk-58-1.png){width=384}
 :::
 :::
+
 
 -->
 </section>
@@ -1371,7 +1375,7 @@ my_hist(new_circ)
 <pre><code>Random generation of 100 numbers.</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>The smallest generated number is 0.002115175</code></pre>
+<pre><code>The smallest generated number is 0.002927576</code></pre>
 </div>
 </div>
 </section>
@@ -1468,7 +1472,7 @@ my_hist(new_circ)
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.4</code></pre>
+<pre><code>[1] 0.42</code></pre>
 </div>
 </div>
 </div>
@@ -1656,12 +1660,12 @@ $median
 <pre><code># A tibble: 6 × 5
   id    Question1 Question2 Question3 Question4
   &lt;chr&gt; &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;     &lt;fct&gt;    
-1 A     4         5         3         3        
-2 B     2         3         1         5        
-3 C     5         3         5         3        
-4 D     1         5         2         2        
-5 E     2         3         2         3        
-6 F     3         3         4         1        </code></pre>
+1 A     3         1         5         3        
+2 B     4         3         2         3        
+3 C     1         4         1         3        
+4 D     3         5         4         5        
+5 E     5         4         3         1        
+6 F     4         4         4         2        </code></pre>
 </div>
 </div>
 <p><span class="fragment"><span style="font-size: 30px">We want to recode the responses to make them more explicit. We could recode each variables manually using <span style="color:indianred;">mutate</span> and <span style="color:indianred;">fct_recode</span> but this would be very tedious…</span></span></p>
@@ -1709,14 +1713,14 @@ $median
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 5
-  id    Question1         Question2      Question3         Question4        
-  &lt;chr&gt; &lt;fct&gt;             &lt;fct&gt;          &lt;fct&gt;             &lt;fct&gt;            
-1 A     Agree             Strongly agree Neutral           Neutral          
-2 B     Disagree          Neutral        Strongly disagree Strongly agree   
-3 C     Strongly agree    Neutral        Strongly agree    Neutral          
-4 D     Strongly disagree Strongly agree Disagree          Disagree         
-5 E     Disagree          Neutral        Disagree          Neutral          
-6 F     Neutral           Neutral        Agree             Strongly disagree</code></pre>
+  id    Question1         Question2         Question3         Question4        
+  &lt;chr&gt; &lt;fct&gt;             &lt;fct&gt;             &lt;fct&gt;             &lt;fct&gt;            
+1 A     Neutral           Strongly disagree Strongly agree    Neutral          
+2 B     Agree             Neutral           Disagree          Neutral          
+3 C     Strongly disagree Agree             Strongly disagree Neutral          
+4 D     Neutral           Strongly agree    Agree             Strongly agree   
+5 E     Strongly agree    Agree             Neutral           Strongly disagree
+6 F     Agree             Agree             Agree             Disagree         </code></pre>
 </div>
 </div>
 </div><div class="column" style="width:25%;">
@@ -1763,7 +1767,7 @@ $median
 <p><span style="font-size: 30px">If a function uses a local object that was not created within the function, nor passed as an argument, we get an error:</span></p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb140"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb140-1"><a href=""></a>my_func <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb140-2"><a href=""></a>  <span class="fu">print</span>(new_objet)</span>
+<span id="cb140-2"><a href=""></a>  <span class="fu">print</span>(obj)</span>
 <span id="cb140-3"><a href=""></a>}</span>
 <span id="cb140-4"><a href=""></a></span>
 <span id="cb140-5"><a href=""></a><span class="fu">my_func</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>

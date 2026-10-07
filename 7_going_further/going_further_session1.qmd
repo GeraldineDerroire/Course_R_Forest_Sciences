@@ -43,7 +43,10 @@ library(tidyverse)
 ::: notes
 some reminders of things already seen + some new things
 
-these will be useful if you need to simulate data (for example for predictions using a model) + and for loops that we will see in the next session
+these will be useful if you need to simulate data (for example for predictions using a model) 
+or to test functions that you will create
+
+and for loops that we will see in the next session
 :::
 
 ## Combine elements into a vector
@@ -74,7 +77,7 @@ mode(vec_bool)
 
 ## Repeat elements
 
-[We can also use [rep]{style="color:indianred;"} to repeat individuals values of any mode:]{style="font-size: 30px"}
+[We can also use [rep]{style="color:indianred;"} to repeat individual values of any mode:]{style="font-size: 30px"}
 
 * [repeating a vector several **times**:]{style="font-size: 30px"}
 
@@ -540,7 +543,7 @@ The first function says only Hello!
 
 ::: fragment
 
-[⚠️Passing an incorrect number of values to the arguments of a function will result in an error:]{style="font-size: 30px"}
+[⚠️Passing an incorrect number of objects to the arguments of a function will result in an error:]{style="font-size: 30px"}
 
 ```{r, eval = FALSE}
 my_sum(1)
@@ -592,6 +595,9 @@ for small function you wouldn't necessarly need to plan it before, but for a lon
 ## Writing a function step by step {.smaller}
 
 **Step 2: create test data and argument**
+
+Don't code blind! you need create objects to test the code of your function
+as you write it.
 
 Try to create data as close as possible to the one you will be using.
 
@@ -1161,7 +1167,7 @@ local object are store in a local enviro, such as the enviro of a function
 
 ```{r, eval = FALSE}
 my_func <- function() {
-  print(new_objet)
+  print(obj)
 }
 
 my_func()
