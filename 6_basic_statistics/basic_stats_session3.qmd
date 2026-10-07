@@ -277,11 +277,14 @@ We have a data set with 3 variables of tree size (diameter D, height H and crown
 ```{r}
 str(toy_data)
 ```
+
 ::: fragment
 We want to explore the covariations between these 3 variables of tree size
 by finding axes that capture the maximum of the variance of the dataset. 
 For this, we will use a PCA to identify these axes.
 :::
+
+[*You don't have this dataset, nor any of the toy example dataset.*]{style="font-size: 15px"}
 
 
 ## PCA - Principle (toy example) {.smaller}
@@ -880,7 +883,7 @@ We now work with the [dune]{style="color:indianred;"} data, a floristic table of
 We run the NMDS using [metaMDS]{style="color:indianred;"}. The default number of axes is *2*.
 
 ```{r}
-set.seed(22)
+set.seed(13)
 data(dune)
 dune_nmds <- metaMDS(dune, 
                      distance = "bray", # Bray-Curtis is the default
@@ -1338,7 +1341,7 @@ These methods combine the concepts of **ordination** and **regression**.]{style=
 ::::: columns
 ::: {.column width="50%"}
 
-[*Constrained ordination can be used to identify relationships between the species composition of communities (here *Y*) and environmental variables (here *X*).]{style="font-size: 28px"}
+[*Constrained ordination can be used to identify relationships between the species composition of communities (here *Y*) and environmental variables (here *X**).]{style="font-size: 28px"}
 :::
 
 ::: {.column width="50%"}
