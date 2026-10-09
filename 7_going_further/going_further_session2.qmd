@@ -636,7 +636,7 @@ item
 
 ## [for]{style="color:indianred;"} loop
 
-The vector can be of any type, and we can give any name to the  iterator (usually we use *n* or *i*)
+We can give any name to the  iterator (usually we use *n* or *i*)
 
 ```{r}
 vec_name <- c("Lucas", "Gabriel", "Ana")
@@ -644,14 +644,15 @@ for (name_position in 1:3) {
   message("Hello ", vec_name[name_position], "!")
 }
 ```
-[[Here the vector is of type *character* and the iterator is called *name_position*.]{style="font-size: 30px"}]{.fragment}
+
+[[Here the iterator is called *name_position*.]{style="font-size: 30px"}]{.fragment}
 
 [[⚠️ Using 1:3 would not work if the vector had a different length.]{style="font-size: 30px"}]{.fragment}
 
 ::: notes
 here the name of the iterator is too long!
 
-Also, we wouldn't write 1:3, let's see how to do it properlu
+Also, we wouldn't write 1:3, let's see how to do it properly
 :::
 
 
@@ -1320,6 +1321,12 @@ dt_Likert %>%
 ```
 :::
 
+::: notes
+num_range selects colums which names is a prefix followed by a number in a range
+
+so it selects columns that matches paste0("Question", 1:4)
+:::
+
 ## [across]{style="color:indianred;"}: apply a function to tibble {.scrollable}
 
 [The columns to transform can be specify:]{style="font-size: 30px"}
@@ -1366,6 +1373,11 @@ iris %>%
     )
 ```
 
+
+:::
+
+::: notes
+where(is.numeric) & !Sepal.Length means “numeric columns, except Sepal.Length”
 
 :::
 

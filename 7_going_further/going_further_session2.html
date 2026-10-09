@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.9.38">
 
   <meta name="author" content="Géraldine Derroire">
-  <meta name="dcterms.date" content="2026-09-28">
+  <meta name="dcterms.date" content="2026-10-08">
   <title>Going further with R - session 2/2</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -212,7 +212,7 @@ Géraldine Derroire
     </div>
 </div>
 
-  <p class="date">2026-09-28</p>
+  <p class="date">2026-10-08</p>
 </section>
 <section id="section" class="title-slide slide level1 center">
 <h1></h1>
@@ -1013,7 +1013,7 @@ Géraldine Derroire
 </section>
 <section id="for-loop-2" class="slide level2">
 <h2><span style="color:indianred;">for</span> loop</h2>
-<p>The vector can be of any type, and we can give any name to the iterator (usually we use <em>n</em> or <em>i</em>)</p>
+<p>We can give any name to the iterator (usually we use <em>n</em> or <em>i</em>)</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href=""></a>vec_name <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Lucas"</span>, <span class="st">"Gabriel"</span>, <span class="st">"Ana"</span>)</span>
 <span id="cb67-2"><a href=""></a><span class="cf">for</span> (name_position <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
@@ -1031,11 +1031,11 @@ Géraldine Derroire
 <pre><code>Hello Ana!</code></pre>
 </div>
 </div>
-<p><span class="fragment"><span style="font-size: 30px">Here the vector is of type <em>character</em> and the iterator is called <em>name_position</em>.</span></span></p>
+<p><span class="fragment"><span style="font-size: 30px">Here the iterator is called <em>name_position</em>.</span></span></p>
 <p><span class="fragment"><span style="font-size: 30px">⚠️ Using 1:3 would not work if the vector had a different length.</span></span></p>
 <aside class="notes">
 <p>here the name of the iterator is too long!</p>
-<p>Also, we wouldn’t write 1:3, let’s see how to do it properlu</p>
+<p>Also, we wouldn’t write 1:3, let’s see how to do it properly</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1982,6 +1982,20 @@ vec_num %>% map_lgl(sup_5)
 
 </div>
 </div>
+<aside class="notes">
+<p>num_range selects colums which names is a prefix followed by a number in a range</p>
+<p>so it selects columns that matches paste0(“Question”, 1:4)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="across-apply-a-function-to-tibble-3" class="slide level2 scrollable">
 <h2><span style="color:indianred;">across</span>: apply a function to tibble</h2>
@@ -2050,6 +2064,19 @@ vec_num %>% map_lgl(sup_5)
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>where(is.numeric) &amp; !Sepal.Length means “numeric columns, except Sepal.Length”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="names-of-the-columns-created-by-across-within-mutate" class="slide level2 smaller">
 <h2>Names of the columns created by <span style="color:indianred;">across</span> within <span style="color:indianred;">mutate</span></h2>
